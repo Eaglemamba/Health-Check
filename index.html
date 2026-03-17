@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>半年健康逆轉計畫 — 完整版</title>
+<style>
+:root{--bd:#1B3A5C;--bm:#2E6B9E;--bl:#E8F0F8;--gn:#2D7D46;--gl:#E8F5E9;--rd:#C62828;--rl:#FDECEA;--or:#E65100;--ol:#FFF3E0;--bg:#F7F8FA;--gb:#E0E4E8;--tx:#2C3E50;--tl:#6B7C8D;--wh:#FFF;--sh:0 2px 12px rgba(0,0,0,.08);--r:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"Microsoft JhengHei","Segoe UI",sans-serif;background:var(--bg);color:var(--tx);line-height:1.7}
+.hdr{background:linear-gradient(135deg,var(--bd),var(--bm));color:#fff;padding:24px 16px 16px;text-align:center}
+.hdr h1{font-size:20px;font-weight:700}.hdr p{font-size:12px;opacity:.8}
+.nav-c{background:var(--wh);border-bottom:1px solid var(--gb);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 4px;justify-content:center}
+.nav::-webkit-scrollbar{display:none}
+.nt{flex-shrink:0;padding:10px 12px;font-size:12px;font-weight:600;color:var(--tl);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.nt:hover{color:var(--bm)}.nt.a{color:var(--bm);border-bottom-color:var(--bm)}
+.tc{display:none;padding:16px 12px 40px;max-width:820px;margin:0 auto}.tc.a{display:block}
+.c{background:var(--wh);border-radius:var(--r);box-shadow:var(--sh);padding:18px;margin-bottom:14px}
+.c h2{font-size:16px;color:var(--bd);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--bl)}
+.c h3{font-size:14px;color:var(--bm);margin:14px 0 6px}
+.c p{font-size:13px;margin-bottom:8px}.c ul{padding-left:18px;margin-bottom:8px}.c li{font-size:13px;margin-bottom:5px}
+.co{border-radius:var(--r);padding:14px;margin:10px 0;font-size:12px}
+.cb{background:var(--bl);border-left:4px solid var(--bm)}.cg{background:var(--gl);border-left:4px solid var(--gn)}
+.cr{background:var(--rl);border-left:4px solid var(--rd)}.co-o{background:var(--ol);border-left:4px solid var(--or)}
+.ct{font-weight:700;margin-bottom:4px;font-size:13px}
+.tw{overflow-x:auto;margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:var(--bd);color:#fff;padding:8px 10px;text-align:left;font-weight:600;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var(--bl)}
+.hl td{background:var(--gl)!important;font-weight:600}
+.tg{display:inline-block;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:600;margin-right:3px}
+.tg-g{background:var(--gl);color:var(--gn)}.tg-b{background:var(--bl);color:var(--bm)}
+.tg-o{background:var(--ol);color:var(--or)}.tg-r{background:var(--rl);color:var(--rd)}
+.vd{background:linear-gradient(135deg,var(--bd),var(--bm));color:#fff;border-radius:var(--r);padding:16px;margin:14px 0}
+.vd h3{color:#fff;margin-bottom:6px;font-size:15px}.vd p{font-size:13px;opacity:.95}
+.ft{text-align:center;padding:20px 16px;font-size:11px;color:var(--tl)}
+@media(max-width:600px){.hdr h1{font-size:17px}.nt{padding:8px 10px;font-size:11px}.c{padding:14px}table{font-size:11px}th,td{padding:6px 8px}}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1>半年健康逆轉計畫</h1>
+<p>70 → 65 kg | 四項指標同步回歸正常 | 2026.03 個人化版本</p>
+</div>
+
+<div class="nav-c"><div class="nav" id="nav">
+<div class="nt a" onclick="st('t0')">個人檔案</div>
+<div class="nt" onclick="st('t1')">睡眠修復</div>
+<div class="nt" onclick="st('t2')">飲食計畫</div>
+<div class="nt" onclick="st('t3')">飲水時程</div>
+<div class="nt" onclick="st('t4')">運動計畫</div>
+<div class="nt" onclick="st('t5')">補充品</div>
+<div class="nt" onclick="st('t6')">rTG vs EE</div>
+<div class="nt" onclick="st('t7')">血壓管理</div>
+<div class="nt" onclick="st('t8')">每日作息</div>
+<div class="nt" onclick="st('t9')">里程碑</div>
+<div class="nt" onclick="st('t10')">成本試算</div>
+</div></div>
+
+<!-- ═══ T0: 個人檔案 ═══ -->
+<div id="t0" class="tc a">
+<div class="c">
+<h2>個人基本資料</h2>
+<div class="co cb">
+<p><strong>就寢時間：</strong>20:30</p>
+<p><strong>實際睡眠：</strong>5–6 小時（凌晨 2–4 點因夜尿醒來後常不再入睡）</p>
+<p><strong>Garmin 數據：</strong>Sleep Score 63 / Body Battery 起床 40–50</p>
+<p><strong>血壓型態：</strong>單純收縮期高血壓（ISH）— 收縮壓 135 / 舒張壓 75 mmHg</p>
+<p><strong>其他輕微超標：</strong>三酸甘油酯、膽固醇、尿酸</p>
+<p><strong>現行補充品：</strong>高濃度 Omega-3 魚油（rTG 型式）、枸杞茶 20g/天</p>
+</div>
+</div>
+<div class="c">
+<h2>最高優先級</h2>
+<div class="co cr">
+<div class="ct">先修睡眠，再談其他</div>
+<p>5–6 小時實際睡眠 + Body Battery 僅 40–50，代表睡眠不足正在從底層破壞所有代謝修復能力。如果睡眠不修好，飲食運動做到 100 分也只能發揮 50% 效果。</p>
+<p style="margin-top:8px"><strong>行動排序：</strong>(1) 睡眠修復 + OSA 排查 → (2) 飲水時間前移 → (3) 靠牆深蹲 → (4) 飲食調整 → (5) 補充品</p>
+</div>
+</div>
+</div>
+
+<!-- ═══ T1: 睡眠 ═══ -->
+<div id="t1" class="tc">
+<div class="c">
+<h2>一、睡眠修復（第零步）</h2>
+<h3>1.1 現況分析</h3>
+<p>20:30 躺下 → 凌晨 2–4 點因夜尿醒來 → 上完廁所覺得清醒 → 起來做事不再入睡 → 實際睡眠僅 5–6 小時。</p>
+<p>Sleep Score 63（需改善等級）、Body Battery 起床僅 40–50（正常應 ≥75）。</p>
+<p><strong>5–6 小時睡眠的代謝殺傷力：</strong>高血壓風險增加約 3.5 倍；膽固醇代謝關鍵基因表達受抑制；凌晨皮質醇因醒來活動而維持高檔，刺激肝臟製造更多三酸甘油酯和 VLDL；脫水狀態下尿酸排泄效率降低。</p>
+</div>
+<div class="c">
+<h3>1.2 修復方案：三管齊下</h3>
+<h3>A. 解決夜尿（上游問題）</h3>
+<p>目標：把夜尿時間從凌晨 2–4 點延後到 5:00–5:30，尿完直接起床，睡眠達 8.5–9 小時。</p>
+<ul>
+<li><strong>17:00 後開始減量飲水</strong>，晚餐湯汁盡量少。18:30 之後只能「潤唇」程度的小口水。</li>
+<li><strong>睡前抬腳 15–20 分鐘：</strong>20:00 左右躺在床上，腳靠牆抬高約 45–60 度。白天站坐累積在下肢的水分會加速回流→腎臟在睡前處理掉→上完最後一次廁所→膀胱能多撐幾小時。</li>
+<li><strong>20:00 睡前一定上廁所排空膀胱</strong>，即使沒有尿意也去。</li>
+</ul>
+<h3>B. 萬一半夜醒來，強制回去睡</h3>
+<ul>
+<li>上廁所全程不開大燈，用小夜燈朝地板照（暖色光）。不看手機、不看時間。</li>
+<li>尿完直接躺回去，做 4-7-8 呼吸法（吸 4 秒→屏息 7 秒→吐 8 秒）2–3 個循環。</li>
+<li><strong>硬性規則：5:30 之前不准離開床。</strong>即使睡不著，安靜躺臥（quiet rest）仍能提供約 50% 的深度睡眠恢復效益。</li>
+<li>如果躺了 20 分鐘真的睡不著，可以起來做靠牆深蹲或伸展，但不開電腦、不看手機。</li>
+</ul>
+<h3>C. OSA 睡眠呼吸中止症排查</h3>
+<p>你的風險特徵幾乎全中：男性、BMI 偏高邊緣、高血壓、血脂異常、夜尿頻繁、睡眠時間夠但恢復極差。OSA 單獨一個因素就能同時推高血壓、三酸甘油酯、膽固醇和尿酸。</p>
+<div class="co co-o">
+<div class="ct">立即行動</div>
+<p>1. 今晚開啟 Garmin Pulse Ox 睡眠血氧監測，連續 5–7 晚觀察是否頻繁掉到 90% 以下<br>
+2. 用手機錄音 App 錄一晚，確認是否有打鼾/呼吸暫停<br>
+3. 掛號鄰近醫院睡眠門診（胸腔內科或耳鼻喉科），同時掛泌尿科評估夜尿<br>
+4. 帶 Garmin 數據（Sleep Score、Body Battery、Pulse Ox）給醫生參考</p>
+</div>
+<h3>D. 改善睡姿</h3>
+<ul>
+<li><strong>側睡（左側為佳）：</strong>仰睡讓舌根後墜壓迫呼吸道，側睡可減少呼吸中止次數約 50%。背後放一顆枕頭防止翻回仰躺。</li>
+<li><strong>枕頭墊高或床頭抬高 15–20 度：</strong>減輕重力對呼吸道的壓迫，同時減少胃酸逆流。</li>
+</ul>
+</div>
+<div class="c">
+<h3>1.3 追蹤指標</h3>
+<p>用 Garmin 追蹤：Sleep Score（目標 ≥70→進階≥80）、Body Battery 起床值（目標 ≥65→進階≥75）、深層睡眠佔比（目標 >15%）、Pulse Ox 夜間血氧穩定度。</p>
+<p><strong>2 週實驗：</strong>嚴格執行「5:30 前不離床 + 飲水截止 17:00 + 睡前抬腳」，比較前後 Sleep Score 和 Body Battery 平均值。</p>
+</div>
+</div>
+
+<!-- ═══ T2: 飲食 ═══ -->
+<div id="t2" class="tc">
+<div class="c">
+<h2>二、飲食計畫</h2>
+<h3>2.1 核心策略：改良式地中海-DASH 飲食</h3>
+<p>2025 年研究已證實 DASH 飲食搭配 Omega-3 可一次搞定：LDL −31.7 mg/dL、三酸甘油酯 −45.3 mg/dL、收縮壓 −14.7 mmHg、尿酸 −1.3 mg/dL（基線 ≥6 者）。</p>
+<p><strong>蛋白質的「來源」比「總量」重要：</strong>NHANES III 研究顯示總蛋白攝取量與尿酸無顯著相關（p=0.74）。紅肉高攝取者尿酸高 +0.48 mg/dL，而乳製品反而降低 −0.21 mg/dL。</p>
+</div>
+<div class="c">
+<h3>2.2 每日營養目標</h3>
+<div class="tw"><table>
+<tr><th>項目</th><th>建議值</th><th>說明</th></tr>
+<tr><td>每日熱量</td><td>1,800 大卡</td><td>每月減約 0.8 kg，半年達標</td></tr>
+<tr><td>蛋白質</td><td>70–84g（15–20%）</td><td>蛋→豆腐→雞胸→魚，避免紅肉內臟</td></tr>
+<tr><td>脂肪</td><td>50–65g（25–35%）</td><td>以橄欖油、堅果等單元不飽和脂肪為主</td></tr>
+<tr><td>碳水化合物</td><td>225–250g（50–55%）</td><td>複合碳水、高纖為主，減少精緻澱粉</td></tr>
+<tr><td>鈉</td><td>< 2,000 mg</td><td>ISH 收縮壓對鈉特別敏感，理想 < 1,500 mg</td></tr>
+<tr><td>膳食纖維</td><td>≥ 25g</td><td>燕麥 β-葡聚醣每日 3g 可降 LDL 5–10%</td></tr>
+<tr><td>飲水量</td><td>2.5–3.0 公升</td><td>17:00 前完成主要飲水量</td></tr>
+</table></div>
+</div>
+<div class="c">
+<h3>2.3 三餐實戰指南</h3>
+<h3>早餐（目標 350–400 大卡）</h3>
+<p>現有三明治 + 無糖豆漿基底不錯。微調：煎蛋改水煮蛋減油脂、醬料減半或不加美乃滋。</p>
+<p><strong>每日一杯熱拿鐵：</strong>用低脂牛奶，約 120–150 卡。牛奶酪蛋白促進尿酸排泄，咖啡綠原酸與降低痛風風險相關。若喝拿鐵則把豆漿換掉，控制早餐總量 ≤400 卡。建議 9–10 點喝，先喝 300–400 mL 溫水再喝咖啡。</p>
+<div class="tw"><table>
+<tr><th>輪替組合</th><th>品項</th><th>約熱量</th><th>亮點</th></tr>
+<tr><td>A 地瓜經典</td><td>冰烤地瓜 + 茶葉蛋 + 無糖豆漿</td><td>~350 卡</td><td>低GI + 低普林蛋白</td></tr>
+<tr><td>B 三明治改良</td><td>鮮蔬烤雞三明治（少醬）+ 無糖豆漿</td><td>~360 卡</td><td>烤雞取代煎蛋減油</td></tr>
+<tr><td>C 拿鐵日</td><td>茶葉蛋 ×2 + 低脂熱拿鐵</td><td>~370 卡</td><td>乳製品促尿酸排泄</td></tr>
+<tr><td>D 高纖組</td><td>無糖希臘優格 + 香蕉 + 堅果小包</td><td>~380 卡</td><td>β-葡聚醣降LDL</td></tr>
+</table></div>
+
+<h3>午餐（目標 450–550 大卡）| 超商策略</h3>
+<p>選購原則：看標示選鈉 < 800 mg、選紫米/糙米飯、選烤或蒸的雞胸肉主食、搭配一盒生菜沙拉補蔬菜（醬料減半）。</p>
+<p>7-11 首選：香烤雞胸鮮蔬餐（~400 卡）、雞胸肉花椰菜飯減醣餐（~319 卡）、地瓜雞胸肉沙拉餐（~350 卡）。全家首選：健身 G 肉餐盒（點半飯版 ~470 卡）、美式雞丁餐盒（~466 卡，含豆腐與十八穀米）。</p>
+
+<h3>晚餐（目標 450–550 大卡）| 外送健康餐盒</h3>
+<div class="tw"><table>
+<tr><th>品牌</th><th>特色</th><th>推薦品項</th><th>價位</th></tr>
+<tr><td>輕鬆吃健康餐盒</td><td>4.83星，多樣蛋白質</td><td>舒肥雞胸 532卡 / 薄鹽鯖魚 / 香煎雞腿</td><td>~$100–140</td></tr>
+<tr><td>少點鹽健康餐盒</td><td>4.85星，少油少鹽</td><td>蔥香手撕雞 / 炙燒鮭魚 / 香蒜鯛魚</td><td>~$100–145</td></tr>
+<tr><td>享蒔健康餐盒</td><td>4.9星，橄欖油舒肥</td><td>舒肥雞胸 / 板腱牛 / 泡菜豚，飯可選半量</td><td>~$90–145</td></tr>
+<tr><td>GET POWER 給力盒子</td><td>4.9星，高蛋白</td><td>依當日菜單選雞或魚</td><td>~$100–130</td></tr>
+<tr><td>常常好食（冷凍備用）</td><td>全台配送，3分鐘微波</td><td>控卡方案 ~403卡/鈉444mg</td><td>~$130–150</td></tr>
+</table></div>
+<p><strong>點餐口訣：</strong>搜尋「健康餐盒」→ 選雞或魚 → 點「半飯」→ 避開炸物和勾芡。享蒔和輕鬆吃減飯不減價但多加菜。</p>
+</div>
+<div class="c">
+<h3>2.4 必須避免 vs 積極增加</h3>
+<div class="co cr">
+<div class="ct">嚴格避免</div>
+<p>含糖飲料、啤酒、內臟類、加工肉品（香腸火腿）、油炸食品、泡麵、蝦蟹貝類、過量白飯白麵</p>
+<p><strong>台灣特別注意：</strong>滷味（高鈉+常含內臟）、蚵仔煎（高普林）、豬血糕、珍珠奶茶</p>
+</div>
+<div class="co cg" style="margin-top:10px">
+<div class="ct">積極增加</div>
+<p>低脂乳製品（促尿酸排泄+鈣降血壓）、燕麥（降LDL）、毛豆/豆腐（植物蛋白低尿酸風險）、無調味堅果每天15g</p>
+<p>櫻桃/藍莓（花青素降尿酸）、地瓜取代白飯（低GI+高鉀助排鈉）、黑木耳（高纖降血脂）、綠茶/烏龍茶</p>
+</div>
+<h3>2.5 枸杞茶</h3>
+<p><strong>維持現有習慣：</strong>每日 20g 泡茶一次。唯一改變：泡完把枸杞果實吃掉，攝取脂溶性 β-谷固醇（降 LDL 關鍵成分）。枸杞屬低普林食物，不影響尿酸。定位為「加分項」。</p>
+</div>
+</div>
+
+<!-- ═══ T3: 飲水 ═══ -->
+<div id="t3" class="tc">
+<div class="c">
+<h2>三、飲水時程表</h2>
+<p>從 1.5 公升提升到 2.5–3.0 公升，關鍵是時間分配 — <strong>17:00 後大幅減量</strong>以解決夜尿。</p>
+<div class="tw"><table>
+<tr><th>時間</th><th>飲水量</th><th>說明</th></tr>
+<tr><td>5:30–6:00 起床</td><td>400 mL 溫水</td><td>補充夜間脫水，量血壓前先喝</td></tr>
+<tr><td>6:00–7:00 通勤</td><td>500 mL</td><td>隨身水壺，搭配冥想</td></tr>
+<tr><td>7:30 早餐</td><td>—</td><td>搭配拿鐵或豆漿（計入液體量）</td></tr>
+<tr><td>10:00</td><td>250 mL</td><td>搭配枸杞茶 20g（吃掉果實）</td></tr>
+<tr><td>12:00 午餐</td><td>300 mL</td><td>隨餐</td></tr>
+<tr><td>15:00–17:00</td><td>300 mL</td><td>回程通勤前最後大量補水</td></tr>
+<tr class="hl"><td>17:00 後</td><td>開始減量</td><td>晚餐湯汁盡量少</td></tr>
+<tr class="hl"><td>18:30 後</td><td>僅潤唇程度</td><td>Omega-3 + 酸櫻桃膠囊用一小口水送服</td></tr>
+<tr><td>20:00</td><td>—</td><td>抬腳 15 分鐘 → 上廁所排空 → 20:30 就寢</td></tr>
+</table></div>
+<p><strong>每日總計約 2.3–2.5 公升</strong>（含枸杞茶、拿鐵/豆漿）。充足水分是腎臟排泄尿酸的關鍵，研究顯示飲水 ≥1,920 mL/天可降低痛風發作風險約 46%。</p>
+</div>
+</div>
+
+<!-- ═══ T4: 運動 ═══ -->
+<div id="t4" class="tc">
+<div class="c">
+<h2>四、運動計畫</h2>
+<h3>4.1 為什麼靠牆深蹲是你的血壓特效藥</h3>
+<p>2023 年《BJSM》里程碑級統合分析（270 項 RCT、15,827 人）：等長收縮運動是降血壓最有效的運動類型，降幅 −8.24/−4.00 mmHg，靠牆深蹲排名第一。2024 年 RCT：每週 3 次、每次 4 組 2 分鐘，12 週收縮壓 −12.9 mmHg。</p>
+<p><strong>對你的 ISH 特別有效：</strong>等長運動改善血管內皮功能和動脈順應性，正好針對收縮壓高但舒張壓正常的問題。135 − 13 = 122，直接回到正常範圍。</p>
+<div class="co co-o">
+<div class="ct">尿酸安全警告</div>
+<p>絕對避免高強度劇烈運動（乳酸堆積抑制尿酸排泄）。堅持中等強度（RPE 4–6/10）。運動前先喝 500 mL 水、運動中每 15–20 分鐘補 200 mL。絕不空腹運動（酮體升尿酸）。</p>
+</div>
+</div>
+<div class="c">
+<h3>4.2 第一階段：打基礎（第 1–2 月）</h3>
+<p>每週約 120–150 分鐘。</p>
+<div class="tw"><table>
+<tr><th>日</th><th>內容</th><th>時長</th><th>時機</th></tr>
+<tr><td>一</td><td>快走 + 靠牆深蹲</td><td>20分+14分</td><td>晚間 19:00–19:40</td></tr>
+<tr><td>二</td><td>運動零食 ×3 次</td><td>各 5 分鐘</td><td>分散全天</td></tr>
+<tr><td>三</td><td>快走</td><td>20 分鐘</td><td>通勤途中或晚間</td></tr>
+<tr><td>四</td><td>靠牆深蹲 + 徒手肌力</td><td>14分+10分</td><td>晚間在家</td></tr>
+<tr><td>五</td><td>快走 + 運動零食 ×2</td><td>20分+各5分</td><td>分散</td></tr>
+<tr><td>六</td><td>親子活動日</td><td>30 分鐘</td><td>與家人一起</td></tr>
+<tr><td>日</td><td>休息（輕鬆伸展）</td><td>10 分鐘</td><td>任何時間</td></tr>
+</table></div>
+<p><strong>靠牆深蹲處方（前 4 週）：</strong>4 組 × 30 秒，組間休息 2 分鐘，每週 3 次。不需蹲到 90 度，120 度膝角也有效。全程穩定呼吸，絕對不可憋氣。第 5–8 週進階到 4 組 × 60 秒。</p>
+<p><strong>快走處方：</strong>前兩週每次 15 分鐘，目標 4,000–5,000 步/天。第 3–4 週加到 20 分鐘，5,000–6,000 步/天。</p>
+<p><strong>運動零食：</strong>等車時 30 下墊腳尖、辦公室 10 下靠牆伏地挺身、看電視時棒式 1 分鐘。</p>
+<p><strong>親子運動：</strong>動物行走遊戲（熊爬、青蛙跳、螃蟹走）、親親伏地挺身、抱著孩子深蹲、全家放音樂跳舞 10 分鐘。</p>
+</div>
+<div class="c">
+<h3>4.3 第二階段：累積強度（第 3–4 月）</h3>
+<p>每週約 170–210 分鐘。快走增至每次 30 分鐘，引入間歇步行（3 分鐘輕快 + 1 分鐘加速，不可全速衝刺）。靠牆深蹲達目標處方：4 組 × 2 分鐘。徒手肌力升級 3 回合循環（伏地挺身 10–12 下、深蹲 12–15 下、反向弓箭步 8–10 下/側、棒式 30–45 秒、臀橋 10–12 下），每週 2–3 次。每日目標 7,000–8,500 步。</p>
+<h3>4.4 第三階段：最佳化（第 5–6 月）</h3>
+<p>每週約 250–300 分鐘。快走 35–40 分鐘含間歇，目標 8,500–10,000 步/天。肌力訓練 3–4 回合含進階動作（保加利亞分腿蹲、派克伏地挺身、單腳臀橋）。靠牆深蹲減為每週 2 次維持。週末親子活動延長到 45–60 分鐘。</p>
+</div>
+</div>
+
+<!-- ═══ T5: 補充品 ═══ -->
+<div id="t5" class="tc">
+<div class="c">
+<h2>五、補充品總覽</h2>
+<div class="tw"><table>
+<tr><th>補充品</th><th>主要靶點</th><th>劑量</th><th>服用時間</th></tr>
+<tr><td><strong>大研生醫 Omega-3</strong><br><span class="tg tg-g">rTG 型式</span></td><td>三酸甘油酯 ↓ / 收縮壓 ↓ / 抗發炎</td><td>4 顆/天<br>(EPA 1,152 + DHA 768 = 1,920 mg)</td><td>晚餐隨餐</td></tr>
+<tr><td><strong>NOW Foods 酸櫻桃</strong><br><span class="tg tg-b">CherryPURE</span></td><td>尿酸 ↓ / CRP ↓ / 促進睡眠</td><td>1 顆/天 (500 mg)</td><td>晚餐隨餐</td></tr>
+<tr><td><strong>枸杞茶</strong><br><span class="tg tg-o">食品級</span></td><td>LDL ↓（輔助）/ 血壓 ↓（輔助）</td><td>20g/天 泡茶+吃掉果實</td><td>10:00</td></tr>
+</table></div>
+</div>
+<div class="c">
+<h3>Omega-3 魚油（大研生醫德國頂級）</h3>
+<p>每份 2 顆：EPA 576 + DHA 384 = 960 mg。Omega-3 濃度 84%，rTG 型式，德國 KD Pharma 原料。</p>
+<p><strong>從 2 顆加到 4 顆</strong>：2 顆只有 960 mg（一般保健），你的 ISH + 血脂超標需要 4 顆 = 1,920 mg（治療劑量）。EPA:DHA = 3:2 偏重 EPA，對收縮壓和三酸甘油酯特別有利。</p>
+<p>如果 3 個月追蹤 LDL 上升，考慮換成大研 EPA 1200 那款（80% EPA）。</p>
+<div class="co cb"><div class="ct">台灣法規</div>衛福部公告 EPA+DHA 每日食用量上限 2 克。4 顆 = 1,920 mg，剛好在上限以下。</div>
+</div>
+<div class="c">
+<h3>酸櫻桃膠囊（NOW Foods 500mg）</h3>
+<p><strong>降尿酸：</strong>2025 RCT 顯示 500 mg 膠囊 4 週，尿酸 ↓ 37.4%（−2.62 mg/dL），CRP ↓ 23%。機轉：花青素抑制黃嘌呤氧化酶（同 allopurinol 靶點）+ 促進腎臟尿酸排泄。</p>
+<p><strong>促眠：</strong>不是靠褪黑激素含量（太低），而是抑制 IDO 酶→保留更多色胺酸→血清素→褪黑激素。膠囊睡眠證據較果汁弱，促眠算 bonus。</p>
+<p><strong>為什麼選膠囊不選果汁：</strong>零糖零卡（果汁含 25–30g 果糖，會升尿酸+三酸甘油酯）、劑量標準化、每月僅 NT$200 vs 果汁 NT$1,500–3,000。</p>
+<p>iHerb 約 USD $16–18（~NT$560），90 顆吃 3 個月。CherryPURE 原料（臨床研究同款）、Montmorency 品種、50:1 濃縮。</p>
+</div>
+<div class="c">
+<h3>枸杞茶</h3>
+<p>維持每日 20g 泡茶一次，唯一改變：<strong>泡完把果實吃掉</strong>。泡茶只溶出水溶性成分，脂溶性 β-谷固醇（降 LDL 關鍵）留在果實裡。枸杞屬低普林食物，安全無虞。證據力有限，定位為「加分項」。</p>
+</div>
+</div>
+
+<!-- ═══ T6: rTG vs EE ═══ -->
+<div id="t6" class="tc">
+<div class="c">
+<h2>魚油型式比較：rTG vs EE vs TG</h2>
+<div class="tw"><table>
+<tr><th>型式</th><th>全名</th><th>濃度</th><th>吸收率</th><th>說明</th></tr>
+<tr><td><span class="tg tg-b">TG</span></td><td>天然三酸甘油酯</td><td>低 20-30%</td><td>基準 100%</td><td>原始型態，3 條脂肪酸+甘油骨架</td></tr>
+<tr><td><span class="tg tg-o">EE</span></td><td>乙酯型</td><td>高 50-90%</td><td>~73%</td><td>脂肪酸+乙醇骨架，胰臟酶分解慢 10-50 倍</td></tr>
+<tr><td><span class="tg tg-g">rTG</span></td><td>再酯化三酸甘油酯</td><td>高 80-95%</td><td>~124%</td><td>濃縮後重新裝回甘油骨架，兼具高濃度+高吸收</td></tr>
+</table></div>
+<h3>關鍵數據</h3>
+<ul>
+<li><strong>72 人 RCT（2 週）：</strong>rTG 比天然 TG 高 +24%，EE 低 −27%。rTG 約為 EE 的 1.5–1.7 倍。</li>
+<li><strong>空腹差距更大：</strong>TG 型最高可達 EE 的 3.5 倍。</li>
+<li><strong>長期差距縮小：</strong>6 個月後 rTG 的 Omega-3 Index 仍略高（13.25 vs 12.42），但兩組都達臨床意義。</li>
+<li><strong>關鍵：</strong>不管哪種型式，跟含脂肪食物一起吃都大幅提升吸收。</li>
+</ul>
+<h3>品牌型式比較</h3>
+<div class="tw"><table>
+<tr><th>品牌</th><th>型式</th><th>濃度</th><th>原料商</th><th>吸收率</th><th>每月成本（~2g）</th></tr>
+<tr class="hl"><td>大研生醫</td><td><span class="tg tg-g">rTG</span></td><td>84%</td><td>KD Pharma</td><td>最佳</td><td>NT$2,000–2,250</td></tr>
+<tr><td>Sports Research</td><td><span class="tg tg-g">rTG</span></td><td>80%</td><td>AlaskOmega/KD</td><td>最佳</td><td>NT$500–600</td></tr>
+<tr><td>Solgar Triple</td><td><span class="tg tg-o">EE</span></td><td>~70%</td><td>未公開</td><td>較低</td><td>NT$600–700</td></tr>
+</table></div>
+<div class="vd"><h3>結論</h3><p>大研和 Sports Research 都是 rTG，吸收率同等級。你目前吃大研是正確選擇。唯一要改的是劑量（2→4 顆）。如果將來想省成本，Sports Research 是等效替代。</p></div>
+</div>
+</div>
+
+<!-- ═══ T7: 血壓 ═══ -->
+<div id="t7" class="tc">
+<div class="c">
+<h2>六、血壓管理（ISH 專項）</h2>
+<h3>6.1 你的血壓型態</h3>
+<p>收縮壓 135 / 舒張壓 75 = 脈壓差 60 mmHg（正常 30–40）。這是「單純收縮期高血壓」（ISH），反映大動脈彈性下降。</p>
+<h3>6.2 居家血壓測量（隧道型上臂式血壓計）</h3>
+<ul>
+<li><strong>早上一次：</strong>起床後 1 小時內，上完廁所、吃早餐和喝咖啡之前。約 5:30–6:00 起床後先喝水再馬上量。</li>
+<li><strong>晚上一次：</strong>晚餐後 1–2 小時、睡前。約 19:30–20:00，坐下休息 5 分鐘後測量。</li>
+<li><strong>測量要點：</strong>坐著背靠椅背、雙腳平放不翹腳、安靜坐 5 分鐘再按開始、量的時候不說話。每次連量兩次間隔 1 分鐘，取第二次數值。</li>
+<li><strong>記錄方式：</strong>Google Sheets，每筆記錄日期、時間、收縮壓、舒張壓、心率。累積 2 週帶去看醫生。</li>
+</ul>
+</div>
+<div class="c">
+<h3>6.3 降壓組合拳（針對 ISH）</h3>
+<div class="tw"><table>
+<tr><th>介入方式</th><th>預估收縮壓降幅</th><th>說明</th></tr>
+<tr><td>靠牆深蹲 3次/週</td><td>−10 至 −13 mmHg</td><td>12 週見效，等同一顆降壓藥</td></tr>
+<tr><td>減鈉 < 1,500 mg/天</td><td>−5 至 −8 mmHg</td><td>鈉對收縮壓影響 > 舒張壓</td></tr>
+<tr><td>Omega-3 ~2g/天</td><td>−4 至 −5 mmHg</td><td>偏重降收縮壓</td></tr>
+<tr><td>睡眠修復至 7+ 小時</td><td>−3 至 −5 mmHg</td><td>降低交感神經亢奮</td></tr>
+<tr><td>減重 5 kg</td><td>−3 至 −5 mmHg</td><td>每減 1 kg 約降 1 mmHg</td></tr>
+<tr class="hl"><td>合計潛在降幅</td><td>−25 至 −36 mmHg</td><td>135 → 99–110 範圍</td></tr>
+</table></div>
+<p><strong>重要提醒：</strong>舒張壓已經 75，如果將來需要藥物介入，某些降壓藥會同時降收縮壓和舒張壓，可能讓舒張壓掉到太低（< 60）。先靠生活型態介入是最優策略。</p>
+</div>
+</div>
+
+<!-- ═══ T8: 每日作息 ═══ -->
+<div id="t8" class="tc">
+<div class="c">
+<h2>七、每日作息總覽</h2>
+<div class="tw"><table>
+<tr><th>時間</th><th>活動</th><th>健康計畫相關</th></tr>
+<tr><td>5:30</td><td>起床</td><td>喝 400 mL 溫水</td></tr>
+<tr><td>5:35</td><td>量血壓（第一次）</td><td>起床後、進食前</td></tr>
+<tr><td>5:45–6:00</td><td>個人時間</td><td>閱讀、規劃等</td></tr>
+<tr><td>6:00–7:00</td><td>通勤</td><td>喝水 500 mL + 4-7-8 呼吸或冥想 10 分鐘</td></tr>
+<tr><td>7:00–7:30</td><td>早餐</td><td>三明治/地瓜組合 + 無糖豆漿</td></tr>
+<tr><td>9:00–10:00</td><td>熱拿鐵 + 枸杞茶 20g</td><td>吃掉枸杞果實</td></tr>
+<tr><td>12:00</td><td>午餐（超商）</td><td>鈉 <800mg、選烤雞胸 + 生菜沙拉</td></tr>
+<tr><td>17:00</td><td>飲水截止</td><td>之後僅少量</td></tr>
+<tr><td>17:00–18:00</td><td>回程通勤</td><td>最後補水 200 mL</td></tr>
+<tr class="hl"><td>18:30</td><td>晚餐（健康餐盒外送）</td><td>半飯 + 大研魚油 ×4 + 酸櫻桃 ×1</td></tr>
+<tr><td>19:00–19:40</td><td>運動時段</td><td>靠牆深蹲/快走/親子活動</td></tr>
+<tr><td>19:30–20:00</td><td>量血壓（第二次）</td><td>運動後休息 15 分鐘再量</td></tr>
+<tr><td>20:00</td><td>睡前抬腳 15 分鐘 + 上廁所</td><td>腳靠牆抬高，促進下肢水分回流</td></tr>
+<tr><td>20:30</td><td>就寢</td><td>側睡，背後放枕頭防仰躺</td></tr>
+<tr><td>若凌晨醒來</td><td>上廁所→不開燈→直接躺回</td><td>4-7-8 呼吸法，5:30 前不離床</td></tr>
+</table></div>
+</div>
+</div>
+
+<!-- ═══ T9: 里程碑 ═══ -->
+<div id="t9" class="tc">
+<div class="c">
+<h2>八、半年里程碑與追蹤</h2>
+<h3>8.1 階段目標</h3>
+<div class="tw"><table>
+<tr><th>月份</th><th>目標體重</th><th>運動階段</th><th>關鍵行動</th></tr>
+<tr class="hl"><td>第 0 月（NOW）</td><td>70.0 kg</td><td>—</td><td>立即：睡眠修復 + OSA 排查 + 抽血基線</td></tr>
+<tr><td>第 1 月</td><td>69.2 kg</td><td>基礎期</td><td>建立習慣，步數 5,000+/天</td></tr>
+<tr><td>第 2 月</td><td>68.3 kg</td><td>基礎期完成</td><td>靠牆深蹲達 4×60 秒</td></tr>
+<tr class="hl"><td>第 3 月</td><td>67.5 kg</td><td>累積期開始</td><td>抽血追蹤（血脂、尿酸、血壓）</td></tr>
+<tr><td>第 4 月</td><td>66.7 kg</td><td>累積期</td><td>步數 8,000+/天，間歇步行</td></tr>
+<tr><td>第 5 月</td><td>65.8 kg</td><td>最佳化期</td><td>每週運動 250 分鐘+</td></tr>
+<tr class="hl"><td>第 6 月</td><td>65.0 kg</td><td>全面評估</td><td>完整抽血複檢，比對基線數據</td></tr>
+</table></div>
+</div>
+<div class="c">
+<h3>8.2 Garmin 追蹤設定</h3>
+<p>啟用並每日關注：Sleep Score（目標 ≥70）、Body Battery 起床值（目標 ≥75）、Pulse Ox 睡眠血氧、Stress Score（高壓力時觸發呼吸練習）、HRV Status（戴 3 週建立基線，追蹤是否從 low → balanced）、步數與活躍分鐘。</p>
+<p><strong>每天做一次 2 分鐘 Health Snapshot 靜坐檢測。</strong></p>
+<h3>8.3 Garmin 無法追蹤的項目</h3>
+<p>血壓（用居家血壓計每天早晚各量一次）、血糖、膽固醇、尿酸（靠驗血，第 0、3、6 月各一次）。</p>
+<h3>8.4 追蹤心態</h3>
+<p>每週只量體重一次（固定週日早晨排尿後、進食前），不要每天量。關注你能控制的行為指標：今天喝了多少水？睡了幾小時？走了幾步？靠牆深蹲做了沒？用 Garmin Connect 看 7 天和 30 天趨勢圖，不要糾結單日數據。</p>
+</div>
+<div class="c">
+<h3>8.5 就醫規劃</h3>
+<div class="tw"><table>
+<tr><th>就醫項目</th><th>建議地點</th><th>時機</th></tr>
+<tr><td>睡眠門診（OSA 排查）</td><td>鄰近設有睡眠中心的醫院</td><td>立即預約</td></tr>
+<tr><td>泌尿科（夜尿評估）</td><td>同上或鄰近醫療院所</td><td>可與睡眠門診同天</td></tr>
+<tr><td>抽血基線檢查</td><td>任何醫療院所</td><td>第 0 月</td></tr>
+<tr><td>3 個月追蹤</td><td>同上</td><td>第 3 月</td></tr>
+<tr><td>6 個月全面複檢</td><td>同上</td><td>第 6 月</td></tr>
+</table></div>
+<div class="co cr" style="margin-top:12px">
+<div class="ct">需要立即就醫的警訊</div>
+<p>血壓 >180/120 mmHg、胸口疼痛或壓迫感、突發劇烈頭痛伴隨視覺異常、關節突然劇痛紅腫（痛風發作）、單側肢體麻木無力、居家血壓持續 >160/100 或運動時出現異常不適 → 1–2 天內回診</p>
+</div>
+</div>
+</div>
+
+<!-- ═══ T10: 成本 ═══ -->
+<div id="t10" class="tc">
+<div class="c">
+<h2>每月成本試算</h2>
+<h3>方案 A：維持大研（推薦）</h3>
+<div class="tw"><table>
+<tr><th>品項</th><th>規格</th><th>每月用量</th><th>每月成本</th></tr>
+<tr><td>大研德國頂級魚油</td><td>60 顆/罐</td><td>4 顆/天 = 2 罐</td><td>NT$2,000–2,250</td></tr>
+<tr><td>NOW Foods Tart Cherry</td><td>90 顆/瓶</td><td>1 顆/天 = 0.33 瓶</td><td>~NT$185</td></tr>
+<tr><td>枸杞（乾燥）</td><td>散裝</td><td>~600g</td><td>~NT$200–350</td></tr>
+<tr class="hl"><td colspan="3"><strong>方案 A 每月總計</strong></td><td><strong>NT$2,385–2,785</strong></td></tr>
+</table></div>
+<h3>方案 B：iHerb 全購（省錢版）</h3>
+<div class="tw"><table>
+<tr><th>品項</th><th>規格</th><th>每月用量</th><th>每月成本</th></tr>
+<tr><td>Sports Research Omega-3</td><td>120 顆/瓶</td><td>2–3 顆/天</td><td>NT$390–585</td></tr>
+<tr><td>NOW Foods Tart Cherry</td><td>90 顆/瓶</td><td>1 顆/天</td><td>~NT$185</td></tr>
+<tr><td>枸杞（乾燥）</td><td>散裝</td><td>~600g</td><td>~NT$200–350</td></tr>
+<tr class="hl"><td colspan="3"><strong>方案 B 每月總計</strong></td><td><strong>NT$775–1,120</strong></td></tr>
+</table></div>
+<div class="co cb"><div class="ct">省下的錢可以用在哪？</div>方案 B 每月省 NT$1,400–1,600，一年省近 NT$18,000。足夠支付居家血壓計、睡眠門診掛號費、或一整年的健康餐盒升級。</div>
+<div class="vd"><h3>建議</h3><p>大研品質沒問題，繼續用完全合理。如果成本是考量，Sports Research 是品質相當的 rTG 替代方案。不管選哪個，「從 2 顆加到 4 顆」比「換品牌」重要 100 倍。</p></div>
+</div>
+</div>
+
+<div class="ft">
+<p><strong>這不是四場仗，是一場仗。</strong></p>
+<p>四項超標共享同一個代謝根源。先修睡眠、拉飲水、練靠牆深蹲、換健康晚餐 — 做到這四件事，三個月後抽血就能看到改善。</p>
+<p style="margin-top:12px;font-size:10px">2026 年 3 月更新 | 免責聲明：本計畫為一般性健康建議，不能取代專業醫療診斷與治療。請配合醫師指導執行。</p>
+</div>
+
+<script>
+function st(id){
+document.querySelectorAll('.tc').forEach(e=>e.classList.remove('a'));
+document.querySelectorAll('.nt').forEach(e=>e.classList.remove('a'));
+document.getElementById(id).classList.add('a');
+event.target.classList.add('a');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
