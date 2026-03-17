@@ -1,271 +1,271 @@
-# 我用 AI 當了三個月的私人醫師——一個軟體工程師的健康逆轉實驗
+# I Used AI as My Personal Physician for Three Months — A Software Engineer's Health Reversal Experiment
 
-*當 81% 的醫生都在用 AI 輔助看診，為什麼你不能用 AI 來管理自己的健康？*
-
----
-
-## 一封來自體檢報告的警告信
-
-今年三月，我拿到了一份讓人不太舒服的體檢報告。
-
-收縮壓 135 mmHg（高血壓前期）、三酸甘油酯偏高、膽固醇超標、尿酸逼近警戒線。我 70 公斤，BMI 在超標邊緣。每天實際睡眠只有 5-6 小時——Garmin 手錶冷冰冰地給我打了 63 分。
-
-醫生說了幾句「少吃鹹、多運動、注意睡眠」，然後下一位。
-
-門診三分鐘。
-
-我站在診所門口想：這四項指標各看一個科，掛號四次、等待四次、被告知同樣的「生活型態調整」四次。半年後回來抽血，好了或沒好，再說。
-
-這不是我想要的健康管理。
-
-我是軟體工程師。我想要的是：每天追蹤、即時反饋、數據驅動的決策、一個不會因為門診爆量而只給我三分鐘的「人」。
-
-所以我做了一件事——**我讓 AI 當我的私人健康管理師。**
+*If 81% of doctors are already using AI in their practice, why aren't you using it to manage your own health?*
 
 ---
 
-## 不是取代醫生，是填補那 99% 的空白
+## A Warning Letter from My Lab Results
 
-讓我先把話說清楚：**AI 不是醫生，我也沒有試圖取代醫生。**
+This March, I got a physical exam report that made me uncomfortable.
 
-但現實是這樣的：你一年看醫生幾次？兩次？四次？每次十分鐘？
+Systolic blood pressure 135 mmHg (pre-hypertension). Elevated triglycerides. High cholesterol. Uric acid creeping toward the danger zone. I weighed 70 kg, BMI hovering at the edge of overweight. Actual sleep? Five to six hours — my Garmin watch gave me a cold, hard score of 63 out of 100.
 
-一年 8,760 個小時，你和醫生相處的時間大約 40 分鐘。剩下的 8,759 小時又 20 分鐘，你的健康完全靠自己。
+The doctor said a few words: "Eat less salt, exercise more, watch your sleep." Next patient.
 
-這中間的空白，才是 AI 真正的戰場。
+Three minutes. That was my appointment.
 
-2026 年初，Anthropic 推出了 [Claude for Healthcare](https://www.anthropic.com/news/healthcare-life-sciences)，可以連接 Apple Health、Android Health Connect，讀取你的健康數據。[AMA 調查顯示](https://www.ama-assn.org/practice-management/digital-health/more-80-physicians-use-ai-professionally-ama-survey)，超過 81% 的醫師已經在工作中使用 AI。[NPR 報導](https://www.npr.org/sections/shots-health-news/2026/01/09/nx-s1-5670382/primary-care-doctor-shortage-medical-ai-diagnosis)指出，你的下一個家庭醫師可能完全是線上的、透過 AI 工具來存取。
+Standing outside the clinic, I did the math: four abnormal markers means four different specialists, four separate appointments, four rounds of waiting, four doctors telling me the same thing — "lifestyle adjustment." Come back in six months for blood work. Better or not, we'll see then.
 
-但我做的事情更基礎、更 DIY——也可能更適合像我一樣的普通人。
+That's not health management. That's a coin toss with extra steps.
 
-我沒有用任何付費健康 AI 產品。我用的是 **Claude Code + Markdown 檔案 + Garmin 手錶 + 一個血壓計**。
+I'm a software engineer. What I wanted was: daily tracking, real-time feedback, data-driven decisions, and someone — or *something* — that wouldn't rush me out the door in three minutes because twenty patients were waiting behind me.
+
+So I did something unconventional: **I made AI my personal health manager.**
 
 ---
 
-## 系統架構：極簡但有效
+## Not Replacing Doctors — Filling the 99% Gap
 
-身為工程師，我的第一反應是建系統。但這次我刻意走極簡路線——**沒有 App、沒有資料庫、沒有 Dashboard。只有純文字檔。**
+Let me be absolutely clear: **AI is not a doctor, and I'm not trying to replace mine.**
+
+But here's the reality: how often do you see your doctor? Twice a year? Four times? Ten minutes each?
+
+A year has 8,760 hours. You spend roughly 40 minutes with your doctor. The remaining 8,759 hours and 20 minutes? Your health is entirely in your own hands.
+
+That gap is where AI belongs.
+
+In early 2026, Anthropic launched [Claude for Healthcare](https://www.anthropic.com/news/healthcare-life-sciences), allowing users to connect Apple Health and Android Health Connect data directly. An [AMA survey](https://www.ama-assn.org/practice-management/digital-health/more-80-physicians-use-ai-professionally-ama-survey) found over 81% of physicians now use AI professionally. [NPR reported](https://www.npr.org/sections/shots-health-news/2026/01/09/nx-s1-5670382/primary-care-doctor-shortage-medical-ai-diagnosis) that your next primary care doctor might be entirely online, accessed through an AI tool.
+
+But what I did is more basic, more DIY — and possibly more accessible for regular people.
+
+I didn't use any paid health AI product. My stack: **Claude Code + Markdown files + a Garmin watch + a blood pressure monitor.**
+
+---
+
+## System Architecture: Minimal but Effective
+
+As an engineer, my first instinct was to build something elaborate. But this time I went deliberately minimal — **no app, no database, no dashboard. Just plain text files.**
 
 ```
-templates/          → 模板（每日、每週、每月）
+templates/          → Templates (daily, weekly, monthly)
 reviews/
-  daily/            → 每天一個 .md 檔
-  weekly/           → 每週一份回顧
-  monthly/          → 每月一份趨勢分析
-CLAUDE.md           → AI 的「臨床指引」
-index.html          → 半年計畫總覽
+  daily/            → One .md file per day
+  weekly/           → Weekly review
+  monthly/          → Monthly trend analysis
+CLAUDE.md           → AI's "clinical guidelines"
+index.html          → Six-month plan overview
 ```
 
-核心概念很簡單：
+The core concept is simple:
 
-1. **每天早上 3 分鐘**，回答五個問題：體重、血壓、睡眠、身體哪裡不舒服、今天打算做什麼
-2. **AI 即時記錄**，同步更新到週報表格
-3. **AI 根據規則自動給建議**——不是泛泛的「多喝水」，而是根據我當天的具體數據
-4. **每週日花 10 分鐘回顧**，看趨勢、找模式
-5. **每月底花 20 分鐘**，對照半年計畫的里程碑
+1. **Every morning, 3 minutes**: Answer five questions — weight, blood pressure, sleep, body discomfort, today's plan
+2. **AI records immediately**, syncing data into the weekly review spreadsheet
+3. **AI gives rule-based suggestions** — not generic "drink more water," but advice tailored to *my specific numbers that day*
+4. **Every Sunday, 10 minutes**: Review trends, find patterns
+5. **End of each month, 20 minutes**: Compare against six-month milestone targets
 
-最關鍵的部分是 `CLAUDE.md`——這是我寫給 AI 的「臨床指引手冊」。
+The most critical piece is `CLAUDE.md` — the "clinical guidelines manual" I wrote for the AI.
 
 ---
 
-## 教 AI 當你的物理治療師
+## Teaching AI to Be Your Physical Therapist
 
-CLAUDE.md 裡面不是寫「請幫我追蹤健康」這種空泛指令。我寫的是 **具體的臨床決策規則**，就像醫院裡的 clinical protocol。
+CLAUDE.md doesn't contain vague instructions like "please help me track my health." It contains **specific clinical decision rules**, like the protocols you'd find in a hospital.
 
-舉幾個例子：
+Here's what I mean:
 
-### 身體信號 → 即時 PT 建議
+### Body Signals → Instant PT Advice
 
-每天我會記錄身體哪裡不舒服。AI 不只記下來，還會根據部位和強度給物理治療建議：
+Every day, I log where my body hurts. AI doesn't just record it — it responds with targeted physical therapy recommendations based on the body part and severity:
 
-> **我說：**「左前臂、手腕酸緊，強度 3/10」
+> **Me:** "Left forearm and wrist — tight, aching. Intensity 3/10. Scapula — tight, 4/10."
 >
-> **AI 回：**「💡 PT 建議：前臂伸展——手掌朝上，另一手輕壓手指向下 30 秒 ×2。工作每 50 分鐘休息活動手腕。」
+> **AI:** "💡 PT Advice: Forearm stretch — palm facing up, use other hand to gently press fingers downward, 30 seconds ×2. Take a break every 50 minutes at work to mobilize wrists. Scapular retraction (Y-T-W against wall, 8 reps ×2 sets). Check if screen height is below eye level."
 
-如果同一個部位連續出現三天，AI 會升級建議，提供完整的居家復健菜單。五天以上？它會直接建議我去預約物理治療師。
+If the same body part shows up three days in a row, AI escalates — providing a complete home rehab routine (3-4 exercises). Five consecutive days? It firmly recommends booking a physical therapist.
 
-### 數據異常 → 自動警報
+### Data Anomalies → Automatic Alerts
 
-規則寫得很具體：
+The rules are specific:
 
-- 收縮壓比前一天上升超過 15 mmHg → 問我是不是昨晚沒睡好、壓力大、或吃太鹹
-- 體重一週內掉超過 1.5 公斤 → 警告太快，有痛風發作風險
-- Sleep Score < 65 且 Body Battery < 40 → 建議今天只做輕度伸展，暫停靠牆深蹲
-- 飲水不到 1.5 公升 → 提醒尿酸排泄效率降低
+- Systolic BP jumps >15 mmHg from yesterday → Ask if I slept poorly, was stressed, or ate high-sodium food
+- Weight drops >1.5 kg in one week → Warning: too fast, risk of gout flare and gallstones
+- Sleep Score <65 AND Body Battery <40 → Skip wall squats today, do gentle stretching only
+- Water intake <1.5L → Remind that uric acid excretion efficiency drops
 
-### 運動自動調整
+### Auto-Adjusting Exercise
 
-AI 會根據我的恢復狀態，自動把我分成四級：
+AI classifies my recovery status into four tiers and adjusts accordingly:
 
-| 狀態 | 條件 | 運動建議 |
-|------|------|----------|
-| 恢復充足 | Sleep Score ≥ 70 + 身體無痛 + 主觀 ≥ 4/5 | 按計畫執行，可嘗試進階 |
-| 恢復一般 | Score 65-70 或有輕微不適 | 按計畫但不進階 |
-| 恢復不足 | Score < 65 或 Battery < 40 | 降級：深蹲減量、快走改散步 |
-| 有疼痛 | 任何部位強度 ≥ 5/10 | 避開該部位，提供替代動作 |
+| Status | Criteria | Exercise Recommendation |
+|--------|----------|------------------------|
+| Well Recovered | Sleep Score ≥70 + no pain + subjective ≥4/5 | Follow the plan, try to progress |
+| Moderately Recovered | Score 65-70 or mild discomfort | Follow the plan, don't progress |
+| Under-Recovered | Score <65 or Battery <40 or subjective ≤2 | Downgrade: fewer squat sets, walk instead of brisk walk |
+| Pain Signal | Any body part ≥5/10 | Avoid that body part, provide alternatives |
 
-**這不是什麼黑科技。這就是把一個好的物理治療師會做的判斷，寫成 AI 可以執行的規則。**
-
----
-
-## 那份改變一切的半年計畫
-
-四項指標同時超標，表面上看是四個問題。但深入研究後我發現——**它們共享同一個代謝根源。**
-
-我花了一整個週末，讓 Claude 幫我查文獻、做計算、設計方案。最後產出的是一份完整的半年計畫：
-
-**目標：70 kg → 65 kg，四項指標同步回歸正常。**
-
-這份計畫裡最反直覺的發現：
-
-### 1. 睡眠是一切的起點，不是運動
-
-5-6 小時的睡眠讓高血壓風險增加 3.5 倍，膽固醇代謝基因表達被抑制，尿酸排泄效率降低。**如果睡眠不修好，飲食運動做到 100 分也只能發揮 50% 效果。**
-
-AI 幫我設計了一套「睡眠修復三步驟」：17:00 後減量飲水（解決夜尿）、睡前抬腳 15 分鐘（加速下肢水分回流）、5:30 前不離床的硬性規則。
-
-### 2. 靠牆深蹲是降血壓最強的運動
-
-2023 年《BJSM》統合分析（270 項 RCT、15,827 人）：靠牆深蹲在所有運動類型中降收縮壓排名第一。每週三次、每次 16 分鐘（含休息），12 週可降收縮壓 -12.9 mmHg。
-
-我的收縮壓 135。135 - 13 = 122。**一個動作，可能就讓我從高血壓前期回到正常。**
-
-### 3. 蛋白質的「來源」比「總量」重要
-
-NHANES III 研究顯示總蛋白攝取量與尿酸無顯著相關。但紅肉高攝取者尿酸高 +0.48 mg/dL，乳製品反而降低 -0.21 mg/dL。**所以不是「少吃蛋白質」，而是「換來源」。**
+**This isn't rocket science. It's encoding what a good physical therapist would do into rules an AI can execute.**
 
 ---
 
-## 一個典型的早晨
+## The Six-Month Plan That Changed Everything
 
-5:47，Garmin 震動，我醒了。
+Four abnormal markers look like four problems. But after digging into the research, I discovered — **they share the same metabolic root cause.**
 
-打開終端機，輸入 `/daily-checkin`。Claude 開始問：
+I spent a weekend with Claude, searching literature, running calculations, designing protocols. The result was a comprehensive six-month plan:
 
-> 「早安。體重？」
+**Goal: 70 kg → 65 kg. All four markers back to normal.**
 
-70.5。
+The most counterintuitive findings:
 
-> 「血壓第一次？」
+### 1. Sleep First, Not Exercise
 
-117/70，心率 82。（等一分鐘，量第二次。）
+5-6 hours of sleep increases hypertension risk by 3.5x. Cholesterol metabolism gene expression gets suppressed. Uric acid excretion efficiency drops. **If you don't fix sleep first, diet and exercise at 100% effort will only deliver 50% results.**
 
-> 「睡眠狀態？」
+AI helped me design a three-step sleep repair protocol: cut water intake after 17:00 (to fix nighttime urination), elevate legs against the wall for 15 minutes before bed (to accelerate lower-limb fluid return), and a hard rule — do not leave bed before 5:30, period.
 
-22:28 入睡，05:47 起床，中途醒來 1 次（夜尿）。Score 64，Battery 36。主觀恢復感 2/5。
+### 2. Wall Squats Are the Most Powerful Blood Pressure Exercise
 
-> 「身體信號？」
+A 2023 *British Journal of Sports Medicine* meta-analysis (270 RCTs, 15,827 participants): wall squats ranked #1 among all exercise types for lowering systolic blood pressure. Three times per week, 16 minutes per session (including rest), 12 weeks → systolic BP reduction of -12.9 mmHg.
 
-左前臂酸緊 3 分、手腕酸緊 3 分、肩胛骨酸緊 4 分。
+My systolic is 135. 135 - 13 = 122. **One exercise could take me from pre-hypertension to normal.**
 
-> 「今日運動計畫？」
+### 3. Protein Source Matters More Than Protein Amount
 
-靠牆深蹲。
-
-三分鐘。檔案存好了。然後 AI 自動附上建議：
-
-> 💡 PT 建議：Sleep Score 64 + Body Battery 36，恢復明顯不足。今天靠牆深蹲建議降級為 2 組 × 20 秒，不追求突破。前臂和肩胛骨酸緊提示上交叉症候群前兆——今天工作時每 50 分鐘做一次前臂伸展和肩胛骨 Y-T-W 靠牆動作。
-
-**這就是我的「私人醫師」。不賣保健品、不推療程、不用排隊掛號。每天三分鐘，精準到我當天的具體狀況。**
+NHANES III showed total protein intake has no significant correlation with uric acid. But high red meat consumers had uric acid +0.48 mg/dL higher, while dairy consumers were -0.21 mg/dL *lower*. **So it's not "eat less protein" — it's "switch the source."**
 
 ---
 
-## 這件事為什麼現在才成為可能
+## A Typical Morning
 
-三年前，你沒辦法做到這件事。
+5:47 AM. Garmin vibrates. I'm awake.
 
-不是因為沒有 AI——ChatGPT 在 2022 年底就出來了。而是因為 AI 缺乏三個關鍵能力：
+Open the terminal. Type `/daily-checkin`. Claude starts asking:
 
-**1. 持久記憶與上下文**
+> "Good morning. Weight?"
 
-早期的聊天機器人每次對話都是全新的。它不記得你昨天血壓多少、上週睡眠趨勢、上個月身體哪裡不舒服。我用 CLAUDE.md 和 Markdown 檔案系統解決了這個問題——AI 每次啟動都會讀取完整的規則和歷史數據。
+70.5.
 
-**2. 指令遵循能力**
+> "Blood pressure, first reading?"
 
-你可以試試看叫早期的 AI「只回答我問的問題，不要多說廢話，控制在兩句話以內」——它做不到。現在的模型可以嚴格遵循複雜的臨床決策樹，在正確的時機觸發正確的建議。
+117/70, heart rate 82. (Wait one minute. Take the second reading.)
 
-**3. 工具使用能力**
+> "Sleep status?"
 
-Claude Code 可以直接讀寫檔案、建立目錄結構、執行指令。它不只是「聊天」，而是一個可以操作系統的 agent。這讓整個健康追蹤流程可以自動化——我回答問題，它即時更新所有表格。
+Fell asleep 22:28, woke up 05:47, woke once during the night (bathroom). Score 64, Battery 36. Subjective recovery 2/5.
 
----
+> "Body signals?"
 
-## 真正的風險：你必須知道的事
+Left forearm tight 3/10, wrist tight 3/10, scapula tight 4/10.
 
-我不想寫一篇「AI 拯救了我的健康」的爽文。這件事有真實的風險。
+> "Today's exercise plan?"
 
-### AI 會出錯
+Wall squats.
 
-[史丹佛和哈佛的研究](https://time.com/7382493/ai-healthcare-doctors/)發現，AI 醫療模型在高達 22.2% 的案例中產生了嚴重有害的臨床建議。我的應對方式是：**AI 只處理日常追蹤和自我照護建議，任何異常數據（收縮壓 > 160、關節突然紅腫）都直接就醫。**
+Three minutes. File saved. Then AI automatically appends its advice:
 
-### 數據不等於診斷
+> 💡 PT Advice: Sleep Score 64 + Body Battery 36, recovery clearly insufficient. Today's wall squats — downgrade to 2 sets × 20 seconds, don't push for a breakthrough. Forearm and scapular tightness suggests early upper cross syndrome pattern — do forearm stretches and scapular Y-T-W wall exercises every 50 minutes during work today.
 
-我追蹤的體重、血壓、Sleep Score 都是表面指標。真正的代謝狀況需要抽血才能看到。所以計畫裡有三次抽血追蹤（第 0、3、6 月），這是 AI 無法取代的。
-
-### 自我管理有極限
-
-慢性病管理最需要的不是數據，而是行為改變。AI 可以告訴你「今天要喝 2.5 公升水」，但它沒辦法幫你喝。[正如 TIME 的報導所說](https://time.com/7382493/ai-healthcare-doctors/)：AI 不是在縮減醫療人力的需求——而是在揭露一直存在、卻從未被滿足的巨大需求。
+**That's my "personal physician." No supplement upsells, no treatment packages, no waiting rooms. Three minutes a day, precisely tailored to my exact condition that morning.**
 
 ---
 
-## 三個月後的數字
+## Why This Only Became Possible Now
 
-（以下是計畫中的預期進展，不是保證）
+Three years ago, you couldn't do this.
 
-我的半年計畫預設的第三個月里程碑：
+Not because AI didn't exist — ChatGPT launched in late 2022. It was because AI lacked three critical capabilities:
 
-- **體重：** 70.0 → 67.5 kg
-- **收縮壓：** 135 → 125 以下（靠牆深蹲 12 週 RCT 數據支持）
-- **Sleep Score：** 63 → 70+（如果睡眠修復有執行）
-- **三酸甘油酯：** 預計下降 15-30%（Omega-3 8-12 週效果 + 飲食改善）
+**1. Persistent Memory and Context**
 
-第三個月會做完整抽血。到時候再寫一篇，用數字說話。
+Early chatbots started fresh every conversation. They didn't remember yesterday's blood pressure, last week's sleep trend, or last month's body signals. I solved this with CLAUDE.md and a Markdown file system — every time AI starts, it reads the complete ruleset and historical data.
 
----
+**2. Instruction Following**
 
-## 你也可以這樣做
+Try telling early AI: "Only answer what I ask, no fluff, keep it to two sentences." It couldn't do it. Today's models can strictly follow complex clinical decision trees, triggering the right advice at the right moment.
 
-你不需要會寫程式。你需要的是：
+**3. Tool Use**
 
-1. **一個血壓計**（隧道型上臂式，幾百塊）
-2. **一支有睡眠追蹤的手錶**（Garmin、Apple Watch、甚至小米手環）
-3. **一個 AI 助手**（Claude、ChatGPT 都可以）
-4. **每天三分鐘的紀律**
-
-把你的身體指標告訴 AI，請它幫你追蹤趨勢、在異常時提醒你。你不需要建立我這麼複雜的系統——甚至你只要每天跟 AI 說「今天血壓 135/75、睡了 6 小時、右肩有點痠」，它就能開始幫你建立模式、發現趨勢。
-
-**重點不在工具。重點在你願不願意每天花三分鐘，認真看一眼自己的身體。**
+Claude Code can directly read and write files, create directory structures, execute commands. It's not just "chatting" — it's an agent that can operate a system. This lets the entire health tracking workflow happen automatically — I answer questions, it updates all the spreadsheets in real time.
 
 ---
 
-## 寫在最後
+## The Real Risks: What You Must Know
 
-我不是在宣稱 AI 可以取代醫生。我從第一天就預約了睡眠門診和泌尿科。計畫裡有明確的就醫時間表。
+I don't want to write a "AI saved my health" puff piece. There are real risks here.
 
-但我在宣稱的是：**醫療系統給你的三分鐘門診和半年後再來抽血之間，有一個巨大的空白。AI 可以填補這個空白。**
+### AI Makes Mistakes
 
-它不完美。它會出錯。它不能幫你動手術或開處方。
+A [Stanford and Harvard study](https://time.com/7382493/ai-healthcare-doctors/) found that AI medical models produced severely harmful clinical recommendations in up to 22.2% of cases. My mitigation: **AI only handles daily tracking and self-care advice. Any abnormal data (systolic >160, sudden joint swelling) goes straight to a real doctor.**
 
-但它可以每天早上問你：「今天身體怎麼樣？」然後認真聽完你的回答。
+### Data Is Not Diagnosis
 
-這件事，連很多醫生都做不到。
+Weight, blood pressure, and Sleep Score are surface metrics. True metabolic status requires blood work. That's why the plan includes three blood draws (months 0, 3, and 6). AI can't replace that.
+
+### Self-Management Has Limits
+
+Chronic disease management isn't really about data — it's about behavior change. AI can tell you "drink 2.5 liters of water today," but it can't drink it for you. [As TIME reported](https://time.com/7382493/ai-healthcare-doctors/): AI isn't shrinking the demand for medical professionals — it's revealing how much unmet need was always there.
 
 ---
 
-*這篇文章是「半年健康逆轉計畫」系列的第一篇。我會在第三個月（抽血追蹤後）和第六個月（計畫結束時）各寫一篇更新。如果你對具體的系統設計、模板、或 CLAUDE.md 的寫法有興趣，整個專案是開源的。*
+## The Numbers at Three Months
 
-*免責聲明：本文為個人健康管理經驗分享，不構成醫療建議。所有健康決策請諮詢專業醫療人員。*
+(These are the plan's projected milestones, not guarantees.)
+
+My six-month plan's month-three targets:
+
+- **Weight:** 70.0 → 67.5 kg
+- **Systolic BP:** 135 → below 125 (supported by wall squat 12-week RCT data)
+- **Sleep Score:** 63 → 70+ (if sleep repair protocol is followed)
+- **Triglycerides:** Expected 15-30% reduction (Omega-3 8-12 week effect + dietary changes)
+
+Full blood work at month three. I'll write the next article then — with real numbers.
+
+---
+
+## You Can Do This Too
+
+You don't need to know how to code. You need:
+
+1. **A blood pressure monitor** (upper-arm cuff type, under $30)
+2. **A watch with sleep tracking** (Garmin, Apple Watch, even a Xiaomi band)
+3. **An AI assistant** (Claude, ChatGPT, or similar)
+4. **Three minutes of daily discipline**
+
+Tell the AI your body metrics. Ask it to track trends and alert you on anomalies. You don't need to build a system as elaborate as mine — even just saying "today BP was 135/75, slept 6 hours, right shoulder a bit sore" daily will let AI start finding patterns and spotting trends.
+
+**The tool doesn't matter. What matters is whether you're willing to spend three minutes a day actually paying attention to your body.**
+
+---
+
+## Final Thoughts
+
+I'm not claiming AI can replace doctors. I booked a sleep clinic and a urologist on day one. The plan has a clear medical appointment schedule.
+
+But I am claiming this: **Between your doctor's three-minute appointment and the "come back in six months for blood work," there is an enormous void. AI can fill that void.**
+
+It's not perfect. It makes mistakes. It can't perform surgery or write prescriptions.
+
+But it can ask you every morning: "How's your body today?" And actually listen to your answer.
+
+That's something even many doctors can't do.
+
+---
+
+*This is the first article in the "Six-Month Health Reversal Plan" series. I'll write updates at month three (after blood work follow-up) and month six (plan completion). If you're interested in the specific system design, templates, or how to write a CLAUDE.md for health management, the entire project is open-source.*
+
+*Disclaimer: This article shares a personal health management experience and does not constitute medical advice. All health decisions should be made in consultation with qualified medical professionals.*
 
 ---
 
 **Sources:**
 - [AMA: More than 80% of physicians use AI professionally](https://www.ama-assn.org/practice-management/digital-health/more-80-physicians-use-ai-professionally-ama-survey)
 - [AMA: Physicians' use of AI doubled from 2023 to 2026](https://www.fiercehealthcare.com/ai-and-machine-learning/ama-physicians-use-ai-doubled-2023-2026)
-- [Anthropic: Advancing Claude in healthcare and the life sciences](https://www.anthropic.com/news/healthcare-life-sciences)
+- [Anthropic: Advancing Claude in Healthcare and the Life Sciences](https://www.anthropic.com/news/healthcare-life-sciences)
 - [NPR: Your next primary care doctor could be online only, accessed through an AI tool](https://www.npr.org/sections/shots-health-news/2026/01/09/nx-s1-5670382/primary-care-doctor-shortage-medical-ai-diagnosis)
 - [TIME: Healthcare Is AI's Hardest Test](https://time.com/7382493/ai-healthcare-doctors/)
 - [BCG: How AI Agents and Tech Will Transform Health Care in 2026](https://www.bcg.com/publications/2026/how-ai-agents-will-transform-health-care)
 - [Bessemer Venture Partners: State of Health AI 2026](https://www.bvp.com/atlas/state-of-health-ai-2026)
 - [Medium: Claude Code for Life #1 — Managing my Health and Wellness](https://medium.com/data-science-collective/claude-code-for-life-1-managing-my-health-and-wellness-cae435c77030)
-- [PMC: AI in chronic disease self-management](https://pmc.ncbi.nlm.nih.gov/articles/PMC12675485/)
+- [PMC: AI in Chronic Disease Self-Management](https://pmc.ncbi.nlm.nih.gov/articles/PMC12675485/)
 - [AHA: Hospitals Advance AI-Enabled Prevention at Scale](https://www.aha.org/aha-center-health-innovation-market-scan/2025-11-18-hospitals-advance-ai-enabled-prevention-scale)
