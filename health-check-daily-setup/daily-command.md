@@ -1,7 +1,7 @@
 開始今天的晨間健康紀錄。
 
 1. 在 `reviews/daily/` 建立今日檔案：`YYYY-MM-DD.md`
-2. 複製 `reviews/daily/_template.md` 的內容
+2. 複製 `health-check-daily-setup/_template.md` 的內容
 3. 將 `[DATE]` 替換為今天的日期
 4. 逐項引導我填寫，一次一個問題：
    - 體重（可選填，週日為正式紀錄日）
@@ -16,7 +16,7 @@
    - 將睡眠數據填入睡眠表格對應日期列
    - 將身體信號更新至「身體信號模式」區塊（新增或累加出現天數）
    - 將運動內容填入「本週運動紀錄」表格
-   - 如果該週的 weekly 檔案不存在，先從模板建立
+   - 如果該週的 weekly 檔案不存在，先從 `health-check-daily-setup/_weekly-template.md` 建立，替換日期佔位符
 7. 控制在 3 分鐘內完成 — 簡潔，不討論
 
 注意事項：
