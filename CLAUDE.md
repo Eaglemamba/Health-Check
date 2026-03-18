@@ -10,10 +10,12 @@ templates/                  # 模板與指令
   weekly.md                 # 每週回顧模板
   monthly.md                # 每月回顧模板
   daily-command.md          # 每日 check-in 流程指令
+  food.md                   # 每日飲食紀錄模板
 reviews/
   daily/                    # 每日紀錄（YYYY-MM-DD.md）
   weekly/                   # 每週回顧（YYYY-Wxx.md）
   monthly/                  # 每月回顧（YYYY-MM.md）
+  food/                     # 每日飲食紀錄（YYYY-MM-DD.md）
 ```
 
 ## 每日 Check-in 流程
@@ -36,6 +38,7 @@ reviews/
 - Daily: `reviews/daily/YYYY-MM-DD.md`
 - Weekly: `reviews/weekly/YYYY-Wxx.md`
 - Monthly: `reviews/monthly/YYYY-MM.md`
+- Food: `reviews/food/YYYY-MM-DD.md`
 
 ## 物理治療 & 健康管理建議規則
 
