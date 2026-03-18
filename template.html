@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Reversal Plan — Customizable Template</title>
+<style>
+:root{--bd:#1B3A5C;--bm:#2E6B9E;--bl:#E8F0F8;--gn:#2D7D46;--gl:#E8F5E9;--rd:#C62828;--rl:#FDECEA;--or:#E65100;--ol:#FFF3E0;--bg:#F7F8FA;--gb:#E0E4E8;--tx:#2C3E50;--tl:#6B7C8D;--wh:#FFF;--sh:0 2px 12px rgba(0,0,0,.08);--r:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.7}
+.hdr{background:linear-gradient(135deg,var(--bd),var(--bm));color:#fff;padding:24px 16px 16px;text-align:center}
+.hdr h1{font-size:20px;font-weight:700}.hdr p{font-size:12px;opacity:.8}
+.nav-c{background:var(--wh);border-bottom:1px solid var(--gb);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 4px;justify-content:center}
+.nav::-webkit-scrollbar{display:none}
+.nt{flex-shrink:0;padding:10px 12px;font-size:12px;font-weight:600;color:var(--tl);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.nt:hover{color:var(--bm)}.nt.a{color:var(--bm);border-bottom-color:var(--bm)}
+.tc{display:none;padding:16px 12px 40px;max-width:820px;margin:0 auto}.tc.a{display:block}
+.c{background:var(--wh);border-radius:var(--r);box-shadow:var(--sh);padding:18px;margin-bottom:14px}
+.c h2{font-size:16px;color:var(--bd);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--bl)}
+.c h3{font-size:14px;color:var(--bm);margin:14px 0 6px}
+.c p{font-size:13px;margin-bottom:8px}.c ul{padding-left:18px;margin-bottom:8px}.c li{font-size:13px;margin-bottom:5px}
+.co{border-radius:var(--r);padding:14px;margin:10px 0;font-size:12px}
+.cb{background:var(--bl);border-left:4px solid var(--bm)}.cg{background:var(--gl);border-left:4px solid var(--gn)}
+.cr{background:var(--rl);border-left:4px solid var(--rd)}.co-o{background:var(--ol);border-left:4px solid var(--or)}
+.ct{font-weight:700;margin-bottom:4px;font-size:13px}
+.tw{overflow-x:auto;margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:var(--bd);color:#fff;padding:8px 10px;text-align:left;font-weight:600;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var(--bl)}
+.hl td{background:var(--gl)!important;font-weight:600}
+.tg{display:inline-block;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:600;margin-right:3px}
+.tg-g{background:var(--gl);color:var(--gn)}.tg-b{background:var(--bl);color:var(--bm)}
+.tg-o{background:var(--ol);color:var(--or)}.tg-r{background:var(--rl);color:var(--rd)}
+.vd{background:linear-gradient(135deg,var(--bd),var(--bm));color:#fff;border-radius:var(--r);padding:16px;margin:14px 0}
+.vd h3{color:#fff;margin-bottom:6px;font-size:15px}.vd p{font-size:13px;opacity:.95}
+.ft{text-align:center;padding:20px 16px;font-size:11px;color:var(--tl)}
+@media(max-width:600px){.hdr h1{font-size:17px}.nt{padding:8px 10px;font-size:11px}.c{padding:14px}table{font-size:11px}th,td{padding:6px 8px}}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--bd);margin-bottom:4px}
+.form-group input,.form-group select{width:100%;padding:8px 12px;border:1px solid var(--gb);border-radius:var(--r);font-size:13px;font-family:inherit}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--bm);box-shadow:0 0 0 3px rgba(46,107,158,.15)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{padding:10px 20px;border:none;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--bm);color:#fff}.btn-primary:hover{background:var(--bd)}
+.btn-secondary{background:var(--gb);color:var(--tx)}.btn-secondary:hover{background:#ccc}
+.btn-danger{background:var(--rd);color:#fff}.btn-danger:hover{opacity:.8}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:8px}
+.checkbox-group label{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;cursor:pointer}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--bd);color:#fff;padding:10px 24px;border-radius:var(--r);font-size:13px;font-weight:600;z-index:999;opacity:0;transition:opacity .3s}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="hdr">
+<h1 id="hdr-title">Health Reversal Plan</h1>
+<p id="hdr-sub"></p>
+</div>
+
+<div class="nav-c"><div class="nav" id="nav">
+<div class="nt a" onclick="st(0,this)">Settings</div>
+<div class="nt" onclick="st(1,this)">Overview</div>
+<div class="nt" onclick="st(2,this)">Sleep Repair</div>
+<div class="nt" onclick="st(3,this)">Diet Plan</div>
+<div class="nt" onclick="st(4,this)">Exercise & Wall Sits</div>
+<div class="nt" onclick="st(5,this)">Supplements & Cost</div>
+<div class="nt" onclick="st(6,this)">Daily Routine</div>
+<div class="nt" onclick="st(7,this)">Timeline</div>
+<div class="nt" onclick="st(8,this)">Safety</div>
+</div></div>
+
+<div id="t0" class="tc a"></div>
+<div id="t1" class="tc"></div>
+<div id="t2" class="tc"></div>
+<div id="t3" class="tc"></div>
+<div id="t4" class="tc"></div>
+<div id="t5" class="tc"></div>
+<div id="t6" class="tc"></div>
+<div id="t7" class="tc"></div>
+<div id="t8" class="tc"></div>
+
+<div class="ft" id="footer"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// DEFAULTS CONFIG
+// ═══════════════════════════════════════════════════
+const DEFAULTS = {
+  currentWeight: 70, targetWeight: 65, heightCm: 170, age: 35, gender: 'male',
+  planDurationMonths: 6,
+  bedtime: '20:30', wakeTime: '05:30', actualSleepHours: '5-6',
+  sleepScore: 63, bodyBattery: '40-50',
+  systolicBP: 135, diastolicBP: 75,
+  healthIssues: ['Triglycerides', 'Cholesterol', 'Uric Acid'],
+  supplements: ['Omega-3 Fish Oil (rTG)', 'Goji Berry Tea 20g/day'],
+  wearableDevice: 'Garmin',
+  currency: 'NTD'
+};
+
+const ALL_HEALTH_ISSUES = ['Triglycerides', 'Cholesterol', 'Uric Acid', 'Blood Sugar', 'Fatty Liver', 'Obesity'];
+const STORAGE_KEY = 'healthPlanConfig';
+
+// ═══════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════
+let CFG = loadConfig();
+
+function loadConfig() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (saved) return Object.assign({}, DEFAULTS, saved);
+  } catch(e) {}
+  return Object.assign({}, DEFAULTS);
+}
+
+function saveConfig() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(CFG));
+}
+
+// ═══════════════════════════════════════════════════
+// DERIVED VALUES
+// ═══════════════════════════════════════════════════
+function derived() {
+  const d = {};
+  d.weightToLose = CFG.currentWeight - CFG.targetWeight;
+  d.weightLossPerMonth = d.weightToLose > 0 ? (d.weightToLose / CFG.planDurationMonths) : 0;
+  d.dailyCalories = Math.round(CFG.targetWeight * 26);
+  d.pulsePressure = CFG.systolicBP - CFG.diastolicBP;
+  if (CFG.systolicBP >= 130 && CFG.diastolicBP < 80) d.bpType = 'ISH (Isolated Systolic Hypertension)';
+  else if (CFG.systolicBP >= 130 && CFG.diastolicBP >= 80) d.bpType = 'Combined Hypertension';
+  else if (CFG.systolicBP < 120 && CFG.diastolicBP < 80) d.bpType = 'Normal';
+  else d.bpType = 'Elevated';
+  d.bmi = (CFG.currentWeight / ((CFG.heightCm/100) ** 2)).toFixed(1);
+  d.targetBmi = (CFG.targetWeight / ((CFG.heightCm/100) ** 2)).toFixed(1);
+  d.milestones = [];
+  for (let m = 0; m <= CFG.planDurationMonths; m++) {
+    d.milestones.push({
+      month: m,
+      weight: (CFG.currentWeight - d.weightLossPerMonth * m).toFixed(1)
+    });
+  }
+  d.bpReductions = [
+    { intervention: 'Wall sits 3x/week', min: 10, max: 13, note: 'Visible in 12 weeks; equivalent to one BP medication' },
+    { intervention: 'Sodium < 1,500 mg/day', min: 5, max: 8, note: 'Sodium impacts systolic more than diastolic' },
+    { intervention: 'Omega-3 ~2g/day', min: 4, max: 5, note: 'Preferentially lowers systolic' },
+    { intervention: 'Sleep repair to 7+ hours', min: 3, max: 5, note: 'Reduces sympathetic overactivation' },
+    { intervention: 'Weight loss of ' + d.weightToLose.toFixed(0) + ' kg', min: Math.round(d.weightToLose * 0.6), max: Math.round(d.weightToLose * 1), note: '~1 mmHg per kg lost' }
+  ];
+  d.totalBpMin = d.bpReductions.reduce((s, r) => s + r.min, 0);
+  d.totalBpMax = d.bpReductions.reduce((s, r) => s + r.max, 0);
+  d.projectedBpLow = CFG.systolicBP - d.totalBpMax;
+  d.projectedBpHigh = CFG.systolicBP - d.totalBpMin;
+  d.proteinMin = Math.round(d.dailyCalories * 0.15 / 4);
+  d.proteinMax = Math.round(d.dailyCalories * 0.20 / 4);
+  d.fatMin = Math.round(d.dailyCalories * 0.25 / 9);
+  d.fatMax = Math.round(d.dailyCalories * 0.35 / 9);
+  d.carbMin = Math.round(d.dailyCalories * 0.50 / 4);
+  d.carbMax = Math.round(d.dailyCalories * 0.55 / 4);
+  d.hasIssue = (name) => CFG.healthIssues.includes(name);
+  return d;
+}
+
+// ═══════════════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════════════
+function st(idx, el) {
+  document.querySelectorAll('.tc').forEach(e => e.classList.remove('a'));
+  document.querySelectorAll('.nt').forEach(e => e.classList.remove('a'));
+  document.getElementById('t' + idx).classList.add('a');
+  if (el) el.classList.add('a');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER: Tab 0 — Settings
+// ═══════════════════════════════════════════════════
+function renderSettings() {
+  const issueChecks = ALL_HEALTH_ISSUES.map(h =>
+    `<label><input type="checkbox" value="${h}" ${CFG.healthIssues.includes(h) ? 'checked' : ''}> ${h}</label>`
+  ).join('');
+
+  return `<div class="c">
+<h2>Settings</h2>
+<p>Configure your personal health data. Changes will regenerate all tabs with your values.</p>
+
+<h3>Basic Info</h3>
+<div class="form-row">
+  <div class="form-group"><label>Current Weight (kg)</label><input type="number" id="s-cw" value="${CFG.currentWeight}" step="0.1"></div>
+  <div class="form-group"><label>Target Weight (kg)</label><input type="number" id="s-tw" value="${CFG.targetWeight}" step="0.1"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Height (cm)</label><input type="number" id="s-ht" value="${CFG.heightCm}"></div>
+  <div class="form-group"><label>Age</label><input type="number" id="s-age" value="${CFG.age}"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Gender</label>
+    <select id="s-gender"><option value="male" ${CFG.gender==='male'?'selected':''}>Male</option><option value="female" ${CFG.gender==='female'?'selected':''}>Female</option></select>
+  </div>
+  <div class="form-group"><label>Plan Duration (months)</label><input type="number" id="s-dur" value="${CFG.planDurationMonths}" min="1" max="24"></div>
+</div>
+
+<h3>Blood Pressure</h3>
+<div class="form-row">
+  <div class="form-group"><label>Systolic (mmHg)</label><input type="number" id="s-sys" value="${CFG.systolicBP}"></div>
+  <div class="form-group"><label>Diastolic (mmHg)</label><input type="number" id="s-dia" value="${CFG.diastolicBP}"></div>
+</div>
+<div class="co cb"><p><strong>Pulse Pressure:</strong> ${CFG.systolicBP - CFG.diastolicBP} mmHg (normal 30-40) | <strong>Type:</strong> ${derived().bpType}</p></div>
+
+<h3>Sleep</h3>
+<div class="form-row">
+  <div class="form-group"><label>Bedtime</label><input type="time" id="s-bed" value="${CFG.bedtime}"></div>
+  <div class="form-group"><label>Wake Time</label><input type="time" id="s-wake" value="${CFG.wakeTime}"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Sleep Score</label><input type="number" id="s-ss" value="${CFG.sleepScore}" min="0" max="100"></div>
+  <div class="form-group"><label>Body Battery (range, e.g. 40-50)</label><input type="text" id="s-bb" value="${CFG.bodyBattery}"></div>
+</div>
+<div class="form-group"><label>Actual Sleep Hours (e.g. 5-6)</label><input type="text" id="s-ash" value="${CFG.actualSleepHours}"></div>
+
+<h3>Health Issues</h3>
+<div class="checkbox-group" id="s-issues">${issueChecks}</div>
+
+<h3>Supplements (comma-separated)</h3>
+<div class="form-group"><label>Current Supplements</label><input type="text" id="s-supps" value="${CFG.supplements.join(', ')}"></div>
+
+<h3>Other</h3>
+<div class="form-row">
+  <div class="form-group"><label>Wearable Device</label>
+    <select id="s-wear"><option value="Garmin" ${CFG.wearableDevice==='Garmin'?'selected':''}>Garmin</option><option value="Apple Watch" ${CFG.wearableDevice==='Apple Watch'?'selected':''}>Apple Watch</option><option value="None" ${CFG.wearableDevice==='None'?'selected':''}>None</option></select>
+  </div>
+  <div class="form-group"><label>Currency</label>
+    <select id="s-cur"><option value="NTD" ${CFG.currency==='NTD'?'selected':''}>NTD</option><option value="USD" ${CFG.currency==='USD'?'selected':''}>USD</option><option value="EUR" ${CFG.currency==='EUR'?'selected':''}>EUR</option></select>
+  </div>
+</div>
+
+<div class="btn-row">
+  <button class="btn btn-primary" onclick="applySettings()">Save Settings</button>
+  <button class="btn btn-secondary" onclick="resetDefaults()">Reset to Defaults</button>
+  <button class="btn btn-secondary" onclick="exportJSON()">Export JSON</button>
+  <button class="btn btn-secondary" onclick="document.getElementById('import-file').click()">Import JSON</button>
+  <input type="file" id="import-file" accept=".json" style="display:none" onchange="importJSON(event)">
+</div>
+</div>`;
+}
+
+function applySettings() {
+  CFG.currentWeight = parseFloat(document.getElementById('s-cw').value) || DEFAULTS.currentWeight;
+  CFG.targetWeight = parseFloat(document.getElementById('s-tw').value) || DEFAULTS.targetWeight;
+  CFG.heightCm = parseInt(document.getElementById('s-ht').value) || DEFAULTS.heightCm;
+  CFG.age = parseInt(document.getElementById('s-age').value) || DEFAULTS.age;
+  CFG.gender = document.getElementById('s-gender').value;
+  CFG.planDurationMonths = parseInt(document.getElementById('s-dur').value) || DEFAULTS.planDurationMonths;
+  CFG.systolicBP = parseInt(document.getElementById('s-sys').value) || DEFAULTS.systolicBP;
+  CFG.diastolicBP = parseInt(document.getElementById('s-dia').value) || DEFAULTS.diastolicBP;
+  CFG.bedtime = document.getElementById('s-bed').value || DEFAULTS.bedtime;
+  CFG.wakeTime = document.getElementById('s-wake').value || DEFAULTS.wakeTime;
+  CFG.sleepScore = parseInt(document.getElementById('s-ss').value) || DEFAULTS.sleepScore;
+  CFG.bodyBattery = document.getElementById('s-bb').value || DEFAULTS.bodyBattery;
+  CFG.actualSleepHours = document.getElementById('s-ash').value || DEFAULTS.actualSleepHours;
+  CFG.wearableDevice = document.getElementById('s-wear').value;
+  CFG.currency = document.getElementById('s-cur').value;
+  CFG.healthIssues = Array.from(document.querySelectorAll('#s-issues input:checked')).map(cb => cb.value);
+  CFG.supplements = document.getElementById('s-supps').value.split(',').map(s => s.trim()).filter(Boolean);
+  saveConfig();
+  renderAll();
+  toast('Settings saved and plan updated');
+}
+
+function resetDefaults() {
+  if (!confirm('Reset all settings to defaults?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  CFG = Object.assign({}, DEFAULTS);
+  renderAll();
+  toast('Reset to defaults');
+}
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(CFG, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'health-plan-config.json';
+  a.click();
+}
+
+function importJSON(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      const data = JSON.parse(ev.target.result);
+      CFG = Object.assign({}, DEFAULTS, data);
+      saveConfig();
+      renderAll();
+      toast('Config imported successfully');
+    } catch(err) {
+      toast('Invalid JSON file');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER: Tab 1 — Overview
+// ═══════════════════════════════════════════════════
+function renderOverview() {
+  const d = derived();
+  const issueList = CFG.healthIssues.length ? CFG.healthIssues.join(', ') : 'None specified';
+  const suppList = CFG.supplements.length ? CFG.supplements.join(', ') : 'None';
+
+  let bpRows = d.bpReductions.map(r =>
+    `<tr><td>${r.intervention}</td><td>-${r.min} to -${r.max} mmHg</td><td>${r.note}</td></tr>`
+  ).join('');
+
+  return `<div class="c">
+<h2>Personal Profile</h2>
+<div class="co cb">
+<p><strong>Weight:</strong> ${CFG.currentWeight} kg (target ${CFG.targetWeight} kg, lose ${d.weightToLose.toFixed(1)} kg over ${CFG.planDurationMonths} months)</p>
+<p><strong>BMI:</strong> ${d.bmi} (target ${d.targetBmi}) | <strong>Height:</strong> ${CFG.heightCm} cm | <strong>Age:</strong> ${CFG.age} | <strong>Gender:</strong> ${CFG.gender}</p>
+<p><strong>Bedtime:</strong> ${CFG.bedtime} | <strong>Wake:</strong> ${CFG.wakeTime}</p>
+<p><strong>Actual Sleep:</strong> ${CFG.actualSleepHours} hours</p>
+<p><strong>${CFG.wearableDevice} Data:</strong> Sleep Score ${CFG.sleepScore} / Body Battery waking at ${CFG.bodyBattery}</p>
+<p><strong>Blood Pressure:</strong> ${d.bpType} &mdash; ${CFG.systolicBP}/${CFG.diastolicBP} mmHg, pulse pressure ${d.pulsePressure} (normal 30-40)</p>
+<p><strong>Health Issues:</strong> ${issueList}</p>
+<p><strong>Current Supplements:</strong> ${suppList}</p>
+</div>
+</div>
+
+<div class="c">
+<h2>Top Priority</h2>
+<div class="co cr">
+<div class="ct">Fix Sleep First, Then Address Everything Else</div>
+<p>${CFG.actualSleepHours} hours of actual sleep + Body Battery only ${CFG.bodyBattery} means sleep deprivation is undermining all metabolic repair from the ground up. If sleep isn't fixed, even a perfect diet and exercise regimen will only deliver 50% of its potential.</p>
+<p style="margin-top:8px"><strong>Action Priority:</strong> (1) Sleep repair + OSA screening &rarr; (2) Shift hydration earlier &rarr; (3) Wall sits &rarr; (4) Diet adjustments &rarr; (5) Supplements</p>
+</div>
+</div>
+
+<div class="c">
+<h2>BP-Lowering Combination (All Interventions Combined)</h2>
+<p>Your elevated markers share the same metabolic root. Each intervention below stacks on top of the others:</p>
+<div class="tw"><table>
+<tr><th>Intervention</th><th>Est. Systolic BP Reduction</th><th>Notes</th></tr>
+${bpRows}
+<tr class="hl"><td>Combined Potential</td><td>-${d.totalBpMin} to -${d.totalBpMax} mmHg</td><td>${CFG.systolicBP} &rarr; ${d.projectedBpLow}-${d.projectedBpHigh} range</td></tr>
+</table></div>
+<p><strong>Important:</strong> Your diastolic is already ${CFG.diastolicBP}. Some BP drugs lower both systolic and diastolic, risking diastolic going too low (< 60). Lifestyle intervention first is the optimal strategy.</p>
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER: Tab 2 — Sleep Repair
+// ═══════════════════════════════════════════════════
+function renderSleep() {
+  return `<div class="c">
+<h2>Sleep Repair (Step Zero)</h2>
+<h3>Current Situation</h3>
+<p>Lies down at ${CFG.bedtime} &rarr; Actual sleep only ${CFG.actualSleepHours} hours.</p>
+<p>Sleep Score ${CFG.sleepScore} (needs improvement); Body Battery waking value only ${CFG.bodyBattery} (normal should be &ge;75).</p>
+<p><strong>Metabolic damage from ${CFG.actualSleepHours} hours of sleep:</strong> Hypertension risk increases ~3.5x; gene expression for cholesterol metabolism is suppressed; cortisol stays elevated from early waking activity, stimulating the liver to produce more triglycerides and VLDL; uric acid excretion efficiency drops under dehydration.</p>
+</div>
+<div class="c">
+<h3>Repair Strategy: Three-Pronged Approach</h3>
+<h3>A. Solve Nocturia (Upstream Problem)</h3>
+<p>Goal: Delay nocturia to ${CFG.wakeTime}, then get up directly after urinating, achieving 8.5-9 hours of sleep.</p>
+<ul>
+<li><strong>Reduce fluid intake after 17:00</strong>, minimize soup at dinner. After 18:30, only "lip-moistening" sips.</li>
+<li><strong>Elevate legs for 15-20 minutes before bed:</strong> Around ${subtractMinutes(CFG.bedtime, 30)}, lie on the bed with feet propped against the wall at 45-60 degrees. Fluid accumulated in the lower limbs during the day returns to circulation &rarr; kidneys process it before sleep &rarr; empty bladder one last time &rarr; bladder lasts several more hours.</li>
+<li><strong>Always use the bathroom at ${subtractMinutes(CFG.bedtime, 30)} before bed</strong>, even without urge.</li>
+</ul>
+<h3>B. If You Wake Up at Night, Force Yourself Back to Sleep</h3>
+<ul>
+<li>Keep all lights off during bathroom trips; use a dim warm-toned nightlight aimed at the floor. No phone, no clock-checking.</li>
+<li>Return to bed immediately after urinating. Do 4-7-8 breathing (inhale 4s &rarr; hold 7s &rarr; exhale 8s) for 2-3 cycles.</li>
+<li><strong>Hard rule: Do not leave the bed before ${CFG.wakeTime}.</strong> Even if you can't sleep, quiet rest still provides ~50% of the recovery benefits of deep sleep.</li>
+<li>If you've been lying awake for 20 minutes, you may get up for wall sits or stretching &mdash; but no computer, no phone.</li>
+</ul>
+<h3>C. OSA (Obstructive Sleep Apnea) Screening</h3>
+<p>Risk profile: ${CFG.gender}, age ${CFG.age}, BMI ${derived().bmi}, ${CFG.systolicBP >= 130 ? 'hypertension' : 'elevated BP'}, ${CFG.healthIssues.length > 0 ? 'dyslipidemia' : ''}, nocturia, adequate sleep duration but poor recovery. OSA alone can simultaneously drive up blood pressure, triglycerides, cholesterol, and uric acid.</p>
+<div class="co co-o">
+<div class="ct">Immediate Action Items</div>
+<p>1. Enable ${CFG.wearableDevice !== 'None' ? CFG.wearableDevice + ' Pulse Ox sleep monitoring tonight' : 'pulse oximetry sleep monitoring'}; observe for 5-7 nights whether SpO2 frequently drops below 90%<br>
+2. Use a phone recording app overnight to check for snoring/apnea episodes<br>
+3. Book an appointment at a sleep clinic (pulmonology or ENT), and simultaneously see urology for nocturia evaluation<br>
+4. ${CFG.wearableDevice !== 'None' ? 'Bring ' + CFG.wearableDevice + ' data (Sleep Score, Body Battery, Pulse Ox) to your doctor' : 'Bring any sleep tracking data to your doctor'}</p>
+</div>
+<h3>D. Improve Sleep Position</h3>
+<ul>
+<li><strong>Side sleeping (left side preferred):</strong> Supine sleeping causes the tongue base to fall back and compress the airway. Side sleeping can reduce apnea episodes by ~50%. Place a pillow behind your back to prevent rolling onto your back.</li>
+<li><strong>Elevate pillow or raise the head of the bed 15-20 degrees:</strong> Reduces gravitational pressure on the airway and also reduces acid reflux.</li>
+</ul>
+</div>
+<div class="c">
+<h3>Tracking Metrics</h3>
+<p>Track with ${CFG.wearableDevice !== 'None' ? CFG.wearableDevice : 'your sleep tracker'}: Sleep Score (target &ge;70 &rarr; advanced &ge;80), Body Battery waking value (target &ge;65 &rarr; advanced &ge;75), deep sleep percentage (target >15%), Pulse Ox overnight SpO2 stability.</p>
+<p><strong>2-Week Experiment:</strong> Strictly follow "no leaving bed before ${CFG.wakeTime} + fluid cutoff at 17:00 + pre-bed leg elevation" and compare before/after Sleep Score and Body Battery averages.</p>
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER: Tab 3 — Diet Plan
+// ═══════════════════════════════════════════════════
+function renderDiet() {
+  const d = derived();
+  const lossRate = (d.weightLossPerMonth).toFixed(1);
+  return `<div class="c">
+<h2>Diet Plan</h2>
+<h3>Core Strategy: Modified Mediterranean-DASH Diet</h3>
+<p>2025 research confirms that DASH diet combined with Omega-3 addresses everything at once: LDL -31.7 mg/dL, triglycerides -45.3 mg/dL, systolic BP -14.7 mmHg, uric acid -1.3 mg/dL (in those with baseline &ge;6).</p>
+<p><strong>Protein "source" matters more than "total amount":</strong> NHANES III data shows total protein intake has no significant correlation with uric acid (p=0.74). High red meat consumers have uric acid +0.48 mg/dL higher, while dairy intake actually lowers it by -0.21 mg/dL.</p>
+</div>
+<div class="c">
+<h3>Daily Nutrition Targets</h3>
+<div class="tw"><table>
+<tr><th>Item</th><th>Target</th><th>Notes</th></tr>
+<tr><td>Daily Calories</td><td>${d.dailyCalories} kcal</td><td>~${lossRate} kg loss/month, on target in ${CFG.planDurationMonths} months</td></tr>
+<tr><td>Protein</td><td>${d.proteinMin}-${d.proteinMax}g (15-20%)</td><td>Eggs &rarr; tofu &rarr; chicken breast &rarr; fish; avoid red meat & organ meats</td></tr>
+<tr><td>Fat</td><td>${d.fatMin}-${d.fatMax}g (25-35%)</td><td>Primarily monounsaturated fats (olive oil, nuts)</td></tr>
+<tr><td>Carbohydrates</td><td>${d.carbMin}-${d.carbMax}g (50-55%)</td><td>Complex carbs, high fiber; reduce refined starches</td></tr>
+<tr><td>Sodium</td><td>< 2,000 mg</td><td>${d.bpType.includes('ISH') ? 'ISH systolic BP is especially sodium-sensitive; ideal < 1,500 mg' : 'Ideal < 1,500 mg for BP reduction'}</td></tr>
+<tr><td>Dietary Fiber</td><td>&ge; 25g</td><td>Oat beta-glucan 3g/day can lower LDL 5-10%</td></tr>
+<tr><td>Water Intake</td><td>2.5-3.0 L</td><td>Complete main hydration before 17:00</td></tr>
+</table></div>
+</div>
+<div class="c">
+<h3>Meal Guides</h3>
+<h3>Breakfast (Target ${Math.round(d.dailyCalories * 0.2)}-${Math.round(d.dailyCalories * 0.22)} kcal)</h3>
+<div class="tw"><table>
+<tr><th>Rotation</th><th>Items</th><th>~Calories</th><th>Highlight</th></tr>
+<tr><td>A: Sweet Potato Classic</td><td>Baked sweet potato + tea egg + unsweetened soy milk</td><td>~350 kcal</td><td>Low GI + low-purine protein</td></tr>
+<tr><td>B: Improved Sandwich</td><td>Grilled chicken veggie sandwich (light sauce) + unsweetened soy milk</td><td>~360 kcal</td><td>Grilled chicken replaces fried egg</td></tr>
+<tr><td>C: Latte Day</td><td>Tea eggs x2 + low-fat hot latte</td><td>~370 kcal</td><td>Dairy promotes uric acid excretion</td></tr>
+<tr><td>D: High Fiber</td><td>Unsweetened Greek yogurt + banana + small nut pack</td><td>~380 kcal</td><td>Beta-glucan lowers LDL</td></tr>
+</table></div>
+
+<h3>Lunch (Target ${Math.round(d.dailyCalories * 0.28)}-${Math.round(d.dailyCalories * 0.31)} kcal)</h3>
+<p>Selection principles: Check labels for sodium < 800 mg, choose whole grains, pick grilled or steamed chicken breast, add a side salad for vegetables (use half the dressing).</p>
+
+<h3>Dinner (Target ${Math.round(d.dailyCalories * 0.28)}-${Math.round(d.dailyCalories * 0.31)} kcal)</h3>
+<p><strong>Ordering mantra:</strong> Search "healthy meal box" &rarr; pick chicken or fish &rarr; order "half rice" &rarr; avoid fried items and starchy sauces.</p>
+</div>
+<div class="c">
+<h3>Strictly Avoid vs. Actively Increase</h3>
+<div class="co cr">
+<div class="ct">Strictly Avoid</div>
+<p>Sugary drinks, beer, organ meats, processed meats (sausage, ham), fried foods, instant noodles, excessive white rice and noodles</p>
+</div>
+<div class="co cg" style="margin-top:10px">
+<div class="ct">Actively Increase</div>
+<p>Low-fat dairy (promotes uric acid excretion + calcium lowers BP), oats (lowers LDL), edamame/tofu (plant protein with low uric acid risk), unsalted nuts 15g/day</p>
+<p>Cherries/blueberries (anthocyanins lower uric acid), sweet potato to replace white rice (low GI + high potassium aids sodium excretion), black fungus (high fiber lowers blood lipids), green tea/oolong tea</p>
+</div>
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER: Tab 4 — Exercise & Wall Sits
+// ═══════════════════════════════════════════════════
+function renderExercise() {
+  const d = derived();
+  const projBp = CFG.systolicBP - 13;
+  return `<div class="c">
+<h2>Exercise & Wall Sits</h2>
+<h3>Why Wall Sits Are Your Blood Pressure Medicine</h3>
+<p>2023 BJSM landmark meta-analysis (270 RCTs, 15,827 participants): Isometric exercise is the most effective exercise type for lowering BP, with reductions of -8.24/-4.00 mmHg. Wall sits ranked #1 among all exercise types (90.5% effectiveness). 2024 RCT: 3 sessions/week, 4 sets of 2 minutes each, yielded systolic BP -12.9 mmHg over 12 weeks.</p>
+<p><strong>Especially effective for your ${d.bpType}:</strong> Isometric exercise improves vascular endothelial function and arterial compliance &mdash; directly targeting the pattern of high systolic but normal diastolic pressure. ${CFG.systolicBP} - 13 = ${projBp}, ${projBp < 130 ? 'right back into normal range' : 'a significant improvement'}.</p>
+<p><strong>Mechanism:</strong> During isometric contraction, muscles continuously compress blood vessels, restricting blood flow. Upon release, blood rushes back in, stimulating the vascular endothelium to produce nitric oxide (NO), causing vasodilation. Each "hold &rarr; release" cycle is a vascular training session. This is why rest between sets is just as important as the hold itself.</p>
+${d.hasIssue('Uric Acid') ? `<div class="co co-o">
+<div class="ct">Uric Acid Safety Warning</div>
+<p>Absolutely avoid high-intensity vigorous exercise (lactic acid buildup inhibits uric acid excretion). Stick to moderate intensity (RPE 4-6/10). Drink 500 mL of water before exercise; replenish 200 mL every 15-20 minutes during. Never exercise on an empty stomach (ketones raise uric acid).</p>
+</div>` : ''}
+</div>
+
+<div class="c">
+<h3>Wall Sit Technique: Six Key Points</h3>
+<div class="tw"><table>
+<tr><th>#</th><th>Point</th><th>Description</th><th>Common Mistake</th></tr>
+<tr><td>1</td><td><strong>Back fully against wall</strong></td><td>Head, shoulders, upper back, and lower back all touching the wall. Engage core.</td><td>Lower back arches off wall</td></tr>
+<tr><td>2</td><td><strong>Foot position</strong></td><td>Feet shoulder-width apart, stepped out ~60 cm from the wall.</td><td>Too close or too far</td></tr>
+<tr><td>3</td><td><strong>Knees don't pass toes</strong></td><td>Keep shins as vertical as possible, knees directly above ankles.</td><td>Knees drift forward</td></tr>
+<tr><td>4</td><td><strong>Knee angle (key variable)</strong></td><td>Beginners start at 120 degrees (very shallow squat), deepen weekly. Research target is 90 degrees.</td><td>Going to 90 degrees right away</td></tr>
+<tr><td>5</td><td><strong>Breathing</strong></td><td>Maintain steady breathing: inhale through nose, exhale through mouth. <strong>Never hold your breath.</strong></td><td>Breath-holding causes sudden BP spike</td></tr>
+<tr><td>6</td><td><strong>Center of gravity</strong></td><td>Weight evenly distributed across entire foot, feel center of gravity at heels.</td><td>Weight on toes</td></tr>
+</table></div>
+</div>
+
+<div class="c">
+<h3>Wall Sit 12-Week Progression</h3>
+<p>The research-backed target prescription is <strong>4 sets x 2 minutes, 2-minute rest between sets, 3 times per week</strong>. This is the end goal, not the starting point.</p>
+<div class="co cb">
+<div class="ct">Week 0: Baseline Test</div>
+<p>Find a wall, slide down to about 120 degree knee angle (very shallow squat), and time how long you can hold. That number is your starting point.</p>
+</div>
+<div class="tw"><table>
+<tr><th>Week</th><th>Knee Angle</th><th>Hold Time</th><th>Sets x Rest</th><th>Frequency</th></tr>
+<tr><td>Week 1 Adaptation</td><td>~120 deg</td><td>15 sec</td><td>4 x 2 min rest</td><td>3x/week</td></tr>
+<tr><td>Week 2</td><td>~120 deg</td><td>20-25 sec</td><td>4 x 2 min rest</td><td>3x/week</td></tr>
+<tr><td>Week 3</td><td>~100-110 deg</td><td>25-30 sec</td><td>4 x 2 min rest</td><td>3x/week</td></tr>
+<tr><td>Week 4</td><td>~100 deg</td><td>30 sec</td><td>4 x 2 min rest</td><td>3x/week</td></tr>
+<tr class="hl"><td>Weeks 5-8</td><td>~100 deg</td><td>+5-10 sec/week to 60 sec</td><td>4 x 2 min rest</td><td>3x/week</td></tr>
+<tr class="hl"><td>Weeks 9-12 Target</td><td>Progress to 90 deg</td><td>60-120 sec to 2 min</td><td>4 x 2 min rest</td><td>3x/week</td></tr>
+</table></div>
+<p><strong>Progression principle:</strong> Increase hold time first, then deepen the angle. Only adjust one variable per week.</p>
+<div class="co cg">
+<p><strong>3 times/week x 12-16 min/session (including rest)</strong> &mdash; only 42 min total weekly investment, with 24 min of actual exercise, delivers an effect equivalent to one blood pressure medication.</p>
+</div>
+</div>
+
+<div class="c">
+<h3>Full Weekly Exercise Plan</h3>
+<h3>Phase 1: Build Foundation (Months 1-2) ~120-150 min/week</h3>
+<div class="tw"><table>
+<tr><th>Day</th><th>Activity</th><th>Duration</th><th>Timing</th></tr>
+<tr><td>Mon</td><td>Brisk walking + wall sits</td><td>20 min + 14 min</td><td>Evening</td></tr>
+<tr><td>Tue</td><td>Exercise snacks x3</td><td>5 min each</td><td>Throughout the day</td></tr>
+<tr><td>Wed</td><td>Brisk walking</td><td>20 min</td><td>During commute or evening</td></tr>
+<tr><td>Thu</td><td>Wall sits + bodyweight strength</td><td>14 min + 10 min</td><td>Evening at home</td></tr>
+<tr><td>Fri</td><td>Brisk walking + exercise snacks x2</td><td>20 min + 5 min each</td><td>Spread out</td></tr>
+<tr><td>Sat</td><td>Family activity day</td><td>30 min</td><td>With the family</td></tr>
+<tr><td>Sun</td><td>Rest (light stretching)</td><td>10 min</td><td>Any time</td></tr>
+</table></div>
+
+<h3>Phase 2: Build Intensity (Months 3-4) ~170-210 min/week</h3>
+<p>Extend brisk walks to 30 min/session. Introduce interval walking (3 min moderate + 1 min accelerated). Wall sits at target: 4 sets x 2 min. Bodyweight strength circuits 2-3x/week. Daily target 7,000-8,500 steps.</p>
+
+<h3>Phase 3: Optimization (Months 5-${CFG.planDurationMonths}) ~250-300 min/week</h3>
+<p>Brisk walks 35-40 min with intervals, 8,500-10,000 steps/day. Strength 3-4 rounds with advanced moves. Wall sits reduced to 2x/week for maintenance.</p>
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER: Tab 5 — Supplements & Cost
+// ═══════════════════════════════════════════════════
+function renderSupplements() {
+  const cur = CFG.currency;
+  const cx = cur === 'NTD' ? 'NT$' : (cur === 'USD' ? '$' : cur + ' ');
+  return `<div class="c">
+<h2>Supplements & Cost</h2>
+<div class="tw"><table>
+<tr><th>Supplement</th><th>Primary Target</th><th>Dosage</th><th>Timing</th></tr>
+<tr><td><strong>High-Concentration Omega-3</strong><br><span class="tg tg-g">rTG form</span></td><td>Triglycerides &darr; / Systolic BP &darr; / Anti-inflammatory</td><td>4 capsules/day<br>(EPA ~1,150 + DHA ~770 = ~1,920 mg)</td><td>With dinner</td></tr>
+<tr><td><strong>Tart Cherry Capsules</strong><br><span class="tg tg-b">CherryPURE</span></td><td>Uric acid &darr; / CRP &darr; / Sleep support</td><td>1 capsule/day (500 mg)</td><td>With dinner</td></tr>
+<tr><td><strong>Goji Berry Tea</strong><br><span class="tg tg-o">Food grade</span></td><td>LDL &darr; (adjunct) / BP &darr; (adjunct)</td><td>20g/day brewed + eat berries</td><td>10:00 AM</td></tr>
+</table></div>
+</div>
+
+<div class="c">
+<h3>Omega-3 Fish Oil (rTG Form)</h3>
+<p>Per serving of 2 capsules: EPA 576 + DHA 384 = 960 mg. Omega-3 concentration 84%, rTG form.</p>
+<p><strong>Increase from 2 to 4 capsules:</strong> 2 capsules = 960 mg (general wellness). Your ${derived().bpType} + dyslipidemia requires 4 capsules = 1,920 mg (therapeutic dose). EPA:DHA = 3:2, biased toward EPA &mdash; especially beneficial for systolic BP and triglycerides.</p>
+
+<h3>Why rTG Form Matters</h3>
+<div class="tw"><table>
+<tr><th>Form</th><th>Full Name</th><th>Concentration</th><th>Absorption</th><th>Notes</th></tr>
+<tr><td><span class="tg tg-b">TG</span></td><td>Natural Triglyceride</td><td>Low 20-30%</td><td>Baseline 100%</td><td>Original form, low concentration</td></tr>
+<tr><td><span class="tg tg-o">EE</span></td><td>Ethyl Ester</td><td>High 50-90%</td><td>~73%</td><td>Pancreatic enzymes break it down 10-50x slower</td></tr>
+<tr><td><span class="tg tg-g">rTG</span></td><td>Re-esterified Triglyceride</td><td>High 80-95%</td><td>~124%</td><td>Best of both: high concentration + high absorption</td></tr>
+</table></div>
+<p>In a 72-person RCT, rTG was +24% over natural TG and ~1.5-1.7x more bioavailable than EE. <strong>Key takeaway:</strong> regardless of form, always take with a fat-containing meal.</p>
+</div>
+
+<div class="c">
+<h3>Tart Cherry Capsules (500mg)</h3>
+<p><strong>Uric acid reduction:</strong> A 2025 RCT showed 500 mg capsules for 4 weeks reduced uric acid by 37.4% (-2.62 mg/dL) and CRP by 23%. Mechanism: anthocyanins inhibit xanthine oxidase (same target as allopurinol) + promote renal uric acid excretion.</p>
+<p><strong>Sleep support:</strong> Inhibits the IDO enzyme &rarr; preserving more tryptophan &rarr; serotonin &rarr; melatonin. Consider sleep support a bonus.</p>
+<p><strong>Why capsules over juice:</strong> Zero sugar, zero calories (juice contains 25-30g fructose, which raises uric acid + triglycerides), standardized dosage.</p>
+</div>
+
+<div class="c">
+<h3>Goji Berry Tea</h3>
+<p>Maintain 20g daily brewed once. <strong>Eat the berries after steeping.</strong> Brewing only extracts water-soluble compounds; fat-soluble beta-sitosterol (the key LDL-lowering ingredient) stays in the berries. Evidence is limited &mdash; positioned as a "bonus item."</p>
+</div>
+
+<div class="c">
+<h2>Monthly Cost Estimate</h2>
+<div class="tw"><table>
+<tr><th>Item</th><th>Specification</th><th>Monthly Usage</th><th>Monthly Cost</th></tr>
+<tr><td>Omega-3 Fish Oil (rTG)</td><td>60 capsules/bottle</td><td>4/day = 2 bottles</td><td>${cx}2,000-2,250</td></tr>
+<tr><td>Tart Cherry Capsules</td><td>90 capsules/bottle</td><td>1/day = 0.33 bottles</td><td>~${cx}185</td></tr>
+<tr><td>Goji berries (dried)</td><td>Bulk</td><td>~600g</td><td>~${cx}200-350</td></tr>
+<tr class="hl"><td colspan="3"><strong>Monthly Total</strong></td><td><strong>${cx}2,385-2,785</strong></td></tr>
+</table></div>
+<div class="vd"><h3>Bottom Line</h3><p>"Increasing from 2 to 4 capsules" is 100x more important than "switching brands." Focus on the dose, not the brand.</p></div>
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER: Tab 6 — Daily Routine
+// ═══════════════════════════════════════════════════
+function renderRoutine() {
+  const preBed = subtractMinutes(CFG.bedtime, 30);
+  const suppTime = subtractMinutes(CFG.bedtime, 120);
+  return `<div class="c">
+<h2>Daily Routine & Hydration</h2>
+<p>This schedule integrates hydration timing (front-loaded before 17:00 to prevent nocturia), BP measurements, exercise, and supplement intake into a single daily flow.</p>
+<div class="tw"><table>
+<tr><th>Time</th><th>Activity</th><th>Hydration</th><th>Notes</th></tr>
+<tr><td>${CFG.wakeTime}</td><td>Wake up</td><td>400 mL warm water</td><td>Rehydrate after overnight loss</td></tr>
+<tr><td>${addMinutes(CFG.wakeTime, 5)}</td><td>Measure BP (1st reading)</td><td>&mdash;</td><td>After bathroom, before eating. Sit quietly 5 min, back supported, feet flat. Two readings 1 min apart; use 2nd.</td></tr>
+<tr><td>${addMinutes(CFG.wakeTime, 15)}-${addMinutes(CFG.wakeTime, 30)}</td><td>Personal time</td><td>&mdash;</td><td>Reading, planning</td></tr>
+<tr><td>${addMinutes(CFG.wakeTime, 30)}-${addMinutes(CFG.wakeTime, 90)}</td><td>Commute</td><td>500 mL</td><td>Water bottle + 4-7-8 breathing</td></tr>
+<tr><td>09:00-10:00</td><td>Goji tea 20g</td><td>250 mL</td><td>Eat the goji berries</td></tr>
+<tr><td>12:00</td><td>Lunch</td><td>300 mL</td><td>Sodium <800mg, grilled chicken + side salad</td></tr>
+<tr><td>15:00-17:00</td><td>Afternoon</td><td>300 mL</td><td>Final high-volume hydration</td></tr>
+<tr class="hl"><td>17:00</td><td>Hydration cutoff</td><td>Start reducing</td><td>Minimal soup at dinner</td></tr>
+<tr class="hl"><td>${suppTime}</td><td>Dinner</td><td>Sips only</td><td>Half rice + Omega-3 fish oil x4 + tart cherry x1</td></tr>
+<tr><td>${subtractMinutes(CFG.bedtime, 90)}-${subtractMinutes(CFG.bedtime, 50)}</td><td>Exercise window</td><td>&mdash;</td><td>Wall sits / brisk walk / family activity</td></tr>
+<tr><td>${subtractMinutes(CFG.bedtime, 60)}-${preBed}</td><td>Measure BP (2nd reading)</td><td>&mdash;</td><td>Rest 15 min after exercise before measuring</td></tr>
+<tr><td>${preBed}</td><td>Pre-bed leg elevation 15 min + bathroom</td><td>&mdash;</td><td>Feet propped against wall to drain lower-limb fluid</td></tr>
+<tr><td>${CFG.bedtime}</td><td>Bedtime</td><td>&mdash;</td><td>Side sleeping, pillow behind back</td></tr>
+<tr><td>If waking at night</td><td>Bathroom &rarr; no lights &rarr; back to bed</td><td>&mdash;</td><td>4-7-8 breathing; do not leave bed before ${CFG.wakeTime}</td></tr>
+</table></div>
+<p><strong>Daily hydration total ~2.3-2.5 L</strong> (including goji tea, latte/soy milk). Adequate hydration is critical for renal uric acid excretion &mdash; research shows intake &ge;1,920 mL/day reduces gout flare risk by ~46%.</p>
+</div>
+<div class="c">
+<h3>BP Measurement Tips</h3>
+<p><strong>Recording:</strong> Google Sheets &mdash; log date, time, systolic, diastolic, heart rate each session. Accumulate 2 weeks of data to bring to your doctor.</p>
+<p><strong>Key technique:</strong> Sit with back against chair, feet flat (no crossing), arm supported at heart level. Sit quietly 5 minutes. Don't talk during measurement. Two consecutive readings 1 minute apart; use the second value.</p>
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER: Tab 7 — Timeline
+// ═══════════════════════════════════════════════════
+function renderTimeline() {
+  const d = derived();
+  let milestoneRows = d.milestones.map((m, i) => {
+    const hl = (i === 0 || i === 3 || i === d.milestones.length - 1) ? ' class="hl"' : '';
+    const phases = ['Baseline', 'Foundation', 'Foundation complete', 'Accumulation begins', 'Accumulation', 'Optimization', 'Full evaluation'];
+    const actions = [
+      'Sleep repair + OSA screening + baseline bloodwork',
+      'Build habits, 5,000+ steps/day',
+      'Wall sits reach 4x60 sec',
+      'Follow-up bloodwork (lipids, uric acid, BP)',
+      '8,000+ steps/day, interval walking',
+      '250+ min exercise/week',
+      'Complete bloodwork recheck vs. baseline'
+    ];
+    return `<tr${hl}><td>Month ${m.month}${i===0?' (NOW)':''}</td><td>${m.weight} kg</td><td>${phases[Math.min(i, phases.length-1)]}</td><td>${actions[Math.min(i, actions.length-1)]}</td></tr>`;
+  }).join('');
+
+  return `<div class="c">
+<h2>Timeline & Milestones</h2>
+<p>Your body won't "wait until month ${CFG.planDurationMonths} to change all at once." Every phase has perceptible signals telling you the plan is working.</p>
+<div class="co cb">
+<div class="ct">Important Mindset</div>
+<p>Improvements often "feel it first, then the numbers confirm." Clothes fitting looser, better energy, improved sleep &mdash; these appear before the scale moves. Don't just stare at the number on the scale.</p>
+</div>
+</div>
+
+<div class="c">
+<h3>Phase Targets</h3>
+<div class="tw"><table>
+<tr><th>Month</th><th>Target Weight</th><th>Exercise Phase</th><th>Key Actions</th></tr>
+${milestoneRows}
+</table></div>
+</div>
+
+<div class="c">
+<h3>Week 1: Fluid Redistribution</h3>
+<div class="tw"><table>
+<tr><th>What You'll Notice</th><th>What's Happening Inside</th></tr>
+<tr><td>Weight may drop 0.5-1 kg (don't get too excited)</td><td>Reducing refined carbs and sodium causes the body to release excess water. This is fluid shift, not fat loss.</td></tr>
+<tr><td>More frequent urination</td><td>Kidneys begin flushing accumulated waste (including uric acid) more actively at 2.5 L/day.</td></tr>
+<tr><td>Possible mild headache or fatigue</td><td>Body adjusting to low-sodium diet. Usually passes in 3-5 days.</td></tr>
+<tr><td>Less abdominal bloating</td><td>Eliminating high-sodium foods reduces water retention.</td></tr>
+<tr><td>Thighs sore from first wall sits</td><td>Normal! Soreness significantly decreases after the 3rd-4th session.</td></tr>
+</table></div>
+</div>
+
+<div class="c">
+<h3>Weeks 2-4: Habit Building</h3>
+<div class="tw"><table>
+<tr><th>What You'll Notice</th><th>What's Happening Inside</th></tr>
+<tr><td><strong>Sleep begins to improve</strong></td><td>Nocturia delayed or reduced; Sleep Score and Body Battery start climbing.</td></tr>
+<tr><td>Less tired in the morning</td><td>Extra 1-2 hours of deep sleep restoring cortisol rhythm.</td></tr>
+<tr><td>Clothes slightly looser at waist</td><td>Water retention resolving + early fat loss.</td></tr>
+<tr><td>Wall sits improve from 15 sec to 25-30 sec</td><td>Neuromuscular adaptation.</td></tr>
+<tr><td>More sensitive to salty taste</td><td>Taste buds recalibrate after 2-3 weeks on low sodium.</td></tr>
+</table></div>
+<div class="co cg">
+<div class="ct">Expected ${CFG.wearableDevice !== 'None' ? CFG.wearableDevice : 'Wearable'} Data Changes</div>
+<p>Sleep Score: ${CFG.sleepScore} &rarr; ${CFG.sleepScore + 5}-${CFG.sleepScore + 9} | Body Battery waking: ${CFG.bodyBattery} &rarr; 55-65 | Resting HR: may drop 1-3 bpm</p>
+</div>
+</div>
+
+<div class="c">
+<h3>Months 1-2: Early Metabolic Improvement</h3>
+<div class="tw"><table>
+<tr><th>What You'll Notice</th><th>What's Happening Inside</th></tr>
+<tr><td>Weight steadily declining (~${d.milestones[1]?.weight}-${d.milestones[2]?.weight} kg)</td><td>Losing ~0.2-0.3 kg of real fat/week.</td></tr>
+<tr><td>No more afternoon sleepiness</td><td>Blood sugar fluctuations reduced (low GI diet).</td></tr>
+<tr><td>Home BP monitor starts showing a trend</td><td>Wall sit effects emerge ~4 weeks; systolic may drop from ${CFG.systolicBP} to ${CFG.systolicBP - 3}-${CFG.systolicBP - 5}.</td></tr>
+<tr><td>Omega-3 effects starting to show</td><td>Anti-inflammatory benefits begin by week 4; full triglyceride effect at 8-12 weeks.</td></tr>
+</table></div>
+</div>
+
+<div class="c">
+<h3>Month 3: Mid-Point Breakthrough (Blood Test Time)</h3>
+<div class="tw"><table>
+<tr><th>What You'll Notice</th><th>What's Happening Inside</th></tr>
+<tr><td><strong>Visible difference in the mirror</strong></td><td>~2.5 kg fat lost + water retention resolved + improved posture.</td></tr>
+<tr><td>Wall sits holding at 60 seconds</td><td>Significant muscular endurance gains.</td></tr>
+<tr><td>Walking faster, climbing stairs without getting winded</td><td>Improved cardiovascular fitness + weight loss.</td></tr>
+<tr><td><strong>BP may have dropped significantly</strong></td><td>12-week RCT: systolic -12.9 mmHg. Your ${CFG.systolicBP} may be at ${CFG.systolicBP - 13} or below.</td></tr>
+</table></div>
+<div class="co cg">
+<div class="ct">Month 3 Blood Test Expected Improvements</div>
+<p><strong>Triglycerides:</strong> &darr; 15-30% | <strong>LDL:</strong> &darr; 5-15% | <strong>Uric Acid:</strong> &darr; 10-20% | <strong>HbA1c:</strong> modest improvement | <strong>hsCRP:</strong> &darr; 15-25%</p>
+</div>
+</div>
+
+<div class="c">
+<h3>Month ${CFG.planDurationMonths}: Full Evaluation</h3>
+<div class="tw"><table>
+<tr><th>What You'll Notice</th><th>What's Happening Inside</th></tr>
+<tr><td><strong>Weight at or near ${CFG.targetWeight} kg</strong></td><td>${d.weightToLose.toFixed(0)} kg fat lost = waistline reduced ~${Math.round(d.weightToLose * 0.7)}-${Math.round(d.weightToLose)} cm.</td></tr>
+<tr><td>BP may have fully normalized</td><td>${CFG.systolicBP} &rarr; ${d.projectedBpLow}-${d.projectedBpHigh} range from cumulative lifestyle changes.</td></tr>
+<tr><td>Feeling energetic is the new normal</td><td>Body Battery stable at &ge;75; Sleep Score stable at &ge;75.</td></tr>
+<tr><td>No desire to go back to old habits</td><td>Taste buds and body memory reshaped.</td></tr>
+</table></div>
+<div class="co cg">
+<div class="ct">Month ${CFG.planDurationMonths} Blood Test Targets</div>
+<p><strong>Triglycerides:</strong> < 150 mg/dL | <strong>LDL:</strong> borderline or normal | <strong>Uric Acid:</strong> < 7.0 mg/dL | <strong>Systolic BP:</strong> < 130 (target < 125) | <strong>Weight:</strong> ${CFG.targetWeight} kg</p>
+</div>
+</div>
+
+<div class="c">
+<h3>${CFG.wearableDevice !== 'None' ? CFG.wearableDevice : 'Wearable'} Tracking Setup</h3>
+<p>Enable and monitor daily: Sleep Score (target &ge;70), Body Battery waking value (target &ge;75), Pulse Ox overnight SpO2, Stress Score, HRV Status (wear 3 weeks to establish baseline), steps and active minutes. <strong>Do one 2-minute Health Snapshot seated measurement daily.</strong></p>
+<p><strong>What ${CFG.wearableDevice !== 'None' ? CFG.wearableDevice : 'your wearable'} can't track:</strong> Blood pressure (use home monitor morning/evening), blood sugar, cholesterol, uric acid (blood tests at months 0, 3, ${CFG.planDurationMonths}).</p>
+<p><strong>Tracking mindset:</strong> Weigh only once per week (Sunday morning, after bathroom, before eating). Focus on controllable behavior metrics. Use 7-day and 30-day trend charts &mdash; don't obsess over single-day numbers.</p>
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER: Tab 8 — Safety
+// ═══════════════════════════════════════════════════
+function renderSafety() {
+  const d = derived();
+  return `<div class="c">
+<h2>Safety & Medical</h2>
+<h3>Medical Visit Plan</h3>
+<div class="tw"><table>
+<tr><th>Visit Purpose</th><th>Suggested Location</th><th>Timing</th></tr>
+<tr><td>Sleep clinic (OSA screening)</td><td>Nearby hospital with a sleep center</td><td>Book immediately</td></tr>
+<tr><td>Urology (nocturia assessment)</td><td>Same hospital or nearby clinic</td><td>Same day as sleep clinic if possible</td></tr>
+<tr><td>Baseline bloodwork</td><td>Any medical facility</td><td>Month 0</td></tr>
+<tr><td>3-month follow-up</td><td>Same facility</td><td>Month 3</td></tr>
+<tr><td>${CFG.planDurationMonths}-month comprehensive recheck</td><td>Same facility</td><td>Month ${CFG.planDurationMonths}</td></tr>
+</table></div>
+</div>
+
+<div class="c">
+<h3>Warning Signs - Pause the Plan and See a Doctor</h3>
+<div class="co cr">
+<div class="ct">Seek Immediate Medical Attention</div>
+<p><strong>BP >180/120 mmHg</strong> &mdash; hypertensive emergency.<br>
+<strong>Chest pain, tightness, or pressure</strong> &mdash; cardiac concern.<br>
+<strong>Sudden severe headache with visual disturbance</strong> &mdash; possible stroke warning.<br>
+<strong>One-sided limb numbness or weakness</strong> &mdash; possible stroke warning.</p>
+</div>
+<div class="co co-o" style="margin-top:10px">
+<div class="ct">See a Doctor Within 1-2 Days</div>
+<p><strong>Sudden severe joint pain with redness/swelling</strong> &mdash; may be acute gout. Losing weight too fast or dehydration can trigger it; adjust the pace.<br>
+<strong>Persistent dizziness or blurred vision</strong> &mdash; BP may be dropping too fast or blood sugar too low.<br>
+<strong>Chest tightness or palpitations during exercise</strong> &mdash; intensity may exceed safe range.<br>
+<strong>Urine consistently dark yellow or brown</strong> &mdash; insufficient hydration or kidney function concern.<br>
+<strong>Weight drops >1.5 kg in one week</strong> &mdash; too fast. Rapid loss raises uric acid, increasing gout and gallstone risk.<br>
+<strong>Prolonged loss of appetite or depressed mood</strong> &mdash; caloric restriction may be too aggressive; reassess.<br>
+<strong>Home BP persistently >160/100</strong> &mdash; needs medical evaluation.</p>
+</div>
+</div>
+
+<div class="c">
+<h3>Exercise Safety Reminders</h3>
+<div class="co cr">
+<div class="ct">Wall Sit Safety</div>
+<p><strong>Never hold your breath</strong> &mdash; the single most important rule. Breath-holding causes sudden BP spikes, completely defeating the purpose. Stop immediately if you feel dizzy, chest tightness, or sharp knee pain. Consult your doctor first if you have cardiovascular disease.</p>
+</div>
+${d.hasIssue('Uric Acid') ? `<div class="co co-o" style="margin-top:10px">
+<div class="ct">General Exercise with Elevated Uric Acid</div>
+<p>Avoid high-intensity vigorous exercise (lactic acid inhibits uric acid excretion). Stick to moderate intensity (RPE 4-6/10). Always hydrate before and during exercise. Never exercise on an empty stomach (ketones raise uric acid).</p>
+</div>` : ''}
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// UTILITY: Time helpers
+// ═══════════════════════════════════════════════════
+function parseTime(t) {
+  const [h, m] = t.split(':').map(Number);
+  return h * 60 + m;
+}
+function formatTime(mins) {
+  while (mins < 0) mins += 1440;
+  while (mins >= 1440) mins -= 1440;
+  return String(Math.floor(mins / 60)).padStart(2, '0') + ':' + String(mins % 60).padStart(2, '0');
+}
+function addMinutes(t, n) { return formatTime(parseTime(t) + n); }
+function subtractMinutes(t, n) { return formatTime(parseTime(t) - n); }
+
+// ═══════════════════════════════════════════════════
+// RENDER ALL
+// ═══════════════════════════════════════════════════
+function renderAll() {
+  const d = derived();
+  // Header
+  document.getElementById('hdr-title').textContent = CFG.planDurationMonths + '-Month Health Reversal Plan';
+  document.getElementById('hdr-sub').textContent =
+    CFG.currentWeight + ' \u2192 ' + CFG.targetWeight + ' kg | Normalize ' + CFG.healthIssues.length + ' Key Markers | Personalized Template';
+
+  // Tabs
+  document.getElementById('t0').innerHTML = renderSettings();
+  document.getElementById('t1').innerHTML = renderOverview();
+  document.getElementById('t2').innerHTML = renderSleep();
+  document.getElementById('t3').innerHTML = renderDiet();
+  document.getElementById('t4').innerHTML = renderExercise();
+  document.getElementById('t5').innerHTML = renderSupplements();
+  document.getElementById('t6').innerHTML = renderRoutine();
+  document.getElementById('t7').innerHTML = renderTimeline();
+  document.getElementById('t8').innerHTML = renderSafety();
+
+  // Footer
+  document.getElementById('footer').innerHTML =
+    '<p><strong>This isn\'t ' + CFG.healthIssues.length + ' separate battles \u2014 it\'s one battle.</strong></p>' +
+    '<p>All elevated markers share the same metabolic root. Fix sleep first, front-load hydration, train wall sits, switch to healthy dinners \u2014 do these four things, and you\'ll see improvement in your blood work at three months.</p>' +
+    '<p style="margin-top:12px;font-size:10px">Customizable Template | Disclaimer: This plan is general health guidance and cannot replace professional medical diagnosis and treatment. Please follow your physician\'s recommendations.</p>';
+}
+
+// Initial render
+renderAll();
+</script>
+</body>
+</html>
