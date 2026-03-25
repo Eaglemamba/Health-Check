@@ -11,11 +11,14 @@ templates/                  # 模板與指令
   monthly.md                # 每月回顧模板
   daily-command.md          # 每日 check-in 流程指令
   food.md                   # 每日飲食紀錄模板
+scripts/
+  generate_dashboard.py     # 健康儀表板圖表生成腳本
 reviews/
   daily/                    # 每日紀錄（YYYY-MM-DD.md）
   weekly/                   # 每週回顧（YYYY-Wxx.md）
   monthly/                  # 每月回顧（YYYY-MM.md）
   food/                     # 每日飲食紀錄（YYYY-MM-DD.md）
+  health_dashboard.png      # 健康趨勢儀表板圖表（自動生成）
 ```
 
 ## 每日 Check-in 流程
@@ -23,6 +26,10 @@ reviews/
 執行 `templates/daily-command.md` 中的流程，逐項引導填寫：體重、血壓、睡眠、身體信號、今日計畫。
 
 填寫完成後，同步將當天數據更新至對應的 weekly review 檔案。若該週檔案不存在，從 `templates/weekly.md` 建立。
+
+### 儀表板圖表更新
+
+每次 daily check-in 完成並 commit 前，**必須**執行 `python3 scripts/generate_dashboard.py` 重新生成 `reviews/health_dashboard.png`，將更新後的圖表一併加入同一個 commit。圖表包含體重、血壓/心率、Sleep Score 三組趨勢圖（最多顯示近 14 天）。
 
 ## 重要規則
 
