@@ -27,8 +27,8 @@ def parse_daily_file(filepath):
     m = re.search(r"\*\*今日：([\d.]+)\s*kg\*\*", content)
     data["weight"] = float(m.group(1)) if m else None
 
-    # Sunday official weight
-    data["weight_official"] = "週日正式紀錄" in content or "週日正式值" in content
+    # Sunday official weight — only mark if the record date is actually a Sunday
+    data["weight_official"] = data["date"].weekday() == 6  # 6 = Sunday
 
     # Blood pressure - parse the table for 1st and 2nd readings
     bp_pattern = re.findall(
