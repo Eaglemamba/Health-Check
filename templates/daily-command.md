@@ -19,7 +19,10 @@
    - 將身體信號（部位+性質+強度）更新至「身體信號模式」區塊（新增或累加出現天數、計算平均強度）
    - 將運動內容（含組數/時間）填入「本週運動紀錄」表格
    - 如果該週的 weekly 檔案不存在，先從 `templates/weekly.md` 建立，替換日期佔位符
-8. 控制在 3 分鐘內完成 — 簡潔，不討論
+8. **更新 Dashboard**：執行 `python3 scripts/generate_dashboard.py` 重新生成 `reviews/health_dashboard.png`
+9. **Commit & Push**：將 daily 檔案、weekly 檔案、dashboard PNG 一併 commit 並 push
+10. **開啟 Dashboard 檢查**：執行 `open reviews/health_dashboard.png` 讓使用者確認圖表數據正確
+11. 控制在 3 分鐘內完成 — 簡潔，不討論
 
 注意事項：
 - 如果血壓收縮壓 > 160 或 < 90，提醒就醫
