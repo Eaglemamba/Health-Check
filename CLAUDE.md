@@ -9,6 +9,7 @@ templates/                  # 模板與指令
   daily.md                  # 每日紀錄模板
   weekly.md                 # 每週回顧模板
   monthly.md                # 每月回顧模板
+  annual.md                 # 年度健康評估報告模板
   daily-command.md          # 每日 check-in 流程指令
   food.md                   # 每日飲食紀錄模板
 scripts/
@@ -17,6 +18,7 @@ reviews/
   daily/                    # 每日紀錄（YYYY-MM-DD.md）
   weekly/                   # 每週回顧（YYYY-Wxx.md）
   monthly/                  # 每月回顧（YYYY-MM.md）
+  annual/                   # 年度健康評估報告（YYYY.md）
   food/                     # 每日飲食紀錄（YYYY-MM-DD.md）
   health_dashboard.png      # 健康趨勢儀表板圖表（自動生成）
 ```
@@ -46,6 +48,7 @@ reviews/
 - Daily: `reviews/daily/YYYY-MM-DD.md`
 - Weekly: `reviews/weekly/YYYY-Wxx.md`
 - Monthly: `reviews/monthly/YYYY-MM.md`
+- Annual: `reviews/annual/YYYY.md`
 - Food: `reviews/food/YYYY-MM-DD.md`
 
 ## 物理治療 & 健康管理建議規則
