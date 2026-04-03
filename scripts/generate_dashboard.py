@@ -27,6 +27,14 @@ def parse_daily_file(filepath):
     m = re.search(r"\*\*今日：([\d.]+)\s*kg\*\*", content)
     data["weight"] = float(m.group(1)) if m else None
 
+    # Body fat %
+    m = re.search(r"\*\*體脂率：([\d.]+)\s*%\*\*", content)
+    data["body_fat"] = float(m.group(1)) if m else None
+
+    # Visceral fat level
+    m = re.search(r"\*\*內臟脂肪等級：([\d.]+)\*\*", content)
+    data["visceral_fat"] = float(m.group(1)) if m else None
+
     # Sunday official weight — only mark if the record date is actually a Sunday
     data["weight_official"] = data["date"].weekday() == 6  # 6 = Sunday
 
@@ -75,13 +83,11 @@ def generate_dashboard(data_list, output_path):
 
     # Dark theme
     plt.style.use("dark_background")
-    fig, axes = plt.subplots(3, 1, figsize=(10, 11), dpi=180)
+    fig, axes = plt.subplots(4, 1, figsize=(10, 15), dpi=180)
     fig.patch.set_facecolor("#0d1117")
 
     title = f"Health Tracking Dashboard\n{first_date} ~ {last_date} ({n_days} days)"
-    fig.suptitle(title, fontsize=14, fontweight="bold", color="white", y=0.98)
-
-    date_labels = [d.strftime("%m/%d") for d in dates]
+    fig.suptitle(title, fontsize=14, fontweight="bold", color="white", y=0.99)
 
     # --- Panel 1: Weight ---
     ax = axes[0]
@@ -96,7 +102,7 @@ def generate_dashboard(data_list, output_path):
             label = f"{w}"
             offset = 8
             if d.get("weight_official"):
-                label += "\n(Sun official)"
+                label += "\n(Sun)"
                 ax.plot(dt, w, "o", color="#ffd700", markersize=8, zorder=5)
             ax.annotate(label, (dt, w), textcoords="offset points",
                         xytext=(0, offset), ha="center", fontsize=8, color="#00d4ff")
@@ -107,11 +113,55 @@ def generate_dashboard(data_list, output_path):
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
     ax.grid(axis="y", alpha=0.2)
 
-    # --- Panel 2: Blood Pressure & Heart Rate ---
-    ax = axes[1]
+    # --- Panel 2: Body Fat % & Visceral Fat (dual axis) ---
+    ax2 = axes[1]
+    ax2.set_facecolor("#0d1117")
+    ax2r = ax2.twinx()
+    ax2r.set_facecolor("#0d1117")
+
+    valid_bf = [(d["date"], d["body_fat"]) for d in data_list if d["body_fat"] is not None]
+    valid_vf = [(d["date"], d["visceral_fat"]) for d in data_list if d["visceral_fat"] is not None]
+
+    if valid_bf:
+        bf_dates, bf_vals = zip(*valid_bf)
+        ax2.plot(bf_dates, bf_vals, "o-", color="#ff6b81", linewidth=2, markersize=6, label="Body Fat %")
+        ax2.fill_between(bf_dates, bf_vals, alpha=0.12, color="#ff6b81")
+        for dt, v in zip(bf_dates, bf_vals):
+            ax2.annotate(f"{v}%", (dt, v), textcoords="offset points",
+                         xytext=(0, 8), ha="center", fontsize=8, color="#ff6b81")
+        # Reference lines: healthy range 15–20% for men
+        ax2.axhline(y=20, color="#ff6b81", linestyle=":", alpha=0.4, linewidth=1)
+        bf_margin = 1.0
+        ax2.set_ylim(min(bf_vals) - bf_margin, max(bf_vals) + bf_margin + 2)
+
+    if valid_vf:
+        vf_dates, vf_vals = zip(*valid_vf)
+        ax2r.plot(vf_dates, vf_vals, "s--", color="#ffa502", linewidth=2, markersize=5, label="Visceral Fat")
+        for dt, v in zip(vf_dates, vf_vals):
+            ax2r.annotate(f"{v}", (dt, v), textcoords="offset points",
+                          xytext=(0, -14), ha="center", fontsize=8, color="#ffa502")
+        # Reference line at 10 (borderline high)
+        ax2r.axhline(y=10, color="#ffa502", linestyle=":", alpha=0.4, linewidth=1)
+        vf_margin = 0.5
+        ax2r.set_ylim(min(vf_vals) - vf_margin, max(vf_vals) + vf_margin + 2)
+
+    ax2.set_title("Body Composition", fontsize=12, color="white", pad=8)
+    ax2.set_ylabel("Body Fat %", fontsize=10, color="#ff6b81")
+    ax2r.set_ylabel("Visceral Fat Level", fontsize=10, color="#ffa502")
+    ax2.tick_params(axis="y", colors="#ff6b81")
+    ax2r.tick_params(axis="y", colors="#ffa502")
+    ax2.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
+    ax2.grid(axis="y", alpha=0.2)
+
+    # Combined legend
+    lines1, labels1 = ax2.get_legend_handles_labels()
+    lines2, labels2 = ax2r.get_legend_handles_labels()
+    ax2.legend(lines1 + lines2, labels1 + labels2, loc="upper right", fontsize=8)
+
+    # --- Panel 3: Blood Pressure & Heart Rate ---
+    ax = axes[2]
     ax.set_facecolor("#0d1117")
 
-    # Use 2nd reading if available, otherwise 1st
     bp_data = []
     for d in data_list:
         sys_val = d["bp2_sys"] or d["bp1_sys"]
@@ -138,7 +188,6 @@ def generate_dashboard(data_list, output_path):
             ax.annotate(str(s), (dt, s), textcoords="offset points",
                         xytext=(0, 8), ha="center", fontsize=7, color="#ff4757")
 
-        # Reference line at 140
         ax.axhline(y=140, color="#ff4757", linestyle=":", alpha=0.4, linewidth=1)
 
     ax.set_title("Blood Pressure & Heart Rate", fontsize=12, color="white", pad=8)
@@ -147,8 +196,8 @@ def generate_dashboard(data_list, output_path):
     ax.legend(loc="upper right", fontsize=8)
     ax.grid(axis="y", alpha=0.2)
 
-    # --- Panel 3: Sleep Score ---
-    ax = axes[2]
+    # --- Panel 4: Sleep Score ---
+    ax = axes[3]
     ax.set_facecolor("#0d1117")
 
     sleep_dates = []
@@ -162,15 +211,13 @@ def generate_dashboard(data_list, output_path):
             sleep_colors.append("#555555")
         elif score >= 70:
             sleep_colors.append("#9b59b6")
-        elif score >= 65:
-            sleep_colors.append("#e74c3c")
         else:
             sleep_colors.append("#e74c3c")
 
     bar_scores = [s if s is not None else 0 for s in sleep_scores]
     bars = ax.bar(sleep_dates, bar_scores, width=0.6, color=sleep_colors, alpha=0.85)
 
-    for dt, score, bar in zip(sleep_dates, sleep_scores, bars):
+    for dt, score in zip(sleep_dates, sleep_scores):
         if score is not None:
             ax.annotate(str(score), (dt, score), textcoords="offset points",
                         xytext=(0, 5), ha="center", fontsize=8, color="white")
@@ -178,7 +225,6 @@ def generate_dashboard(data_list, output_path):
             ax.annotate("N/A", (dt, 0), textcoords="offset points",
                         xytext=(0, 5), ha="center", fontsize=7, color="#888888")
 
-    # Reference line at 65
     ax.axhline(y=65, color="#e74c3c", linestyle=":", alpha=0.5, linewidth=1)
     ax.set_title("Sleep Score (Garmin)", fontsize=12, color="white", pad=8)
     ax.set_ylabel("Score", fontsize=10)
@@ -189,8 +235,12 @@ def generate_dashboard(data_list, output_path):
         a.tick_params(colors="white", labelsize=8)
         for spine in a.spines.values():
             spine.set_color("#333333")
+    # ax2r spines
+    for spine in ax2r.spines.values():
+        spine.set_color("#333333")
+    ax2r.tick_params(colors="white", labelsize=8)
 
-    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.tight_layout(rect=[0, 0, 1, 0.97])
     plt.savefig(output_path, facecolor="#0d1117", edgecolor="none", bbox_inches="tight")
     plt.close()
     print(f"Dashboard saved to {output_path}")
