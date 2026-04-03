@@ -83,7 +83,7 @@ def generate_dashboard(data_list, output_path):
 
     # Dark theme
     plt.style.use("dark_background")
-    fig, axes = plt.subplots(4, 1, figsize=(10, 15), dpi=180)
+    fig, axes = plt.subplots(4, 1, figsize=(10, 15), dpi=180, sharex=True)
     fig.patch.set_facecolor("#0d1117")
 
     title = f"Health Tracking Dashboard\n{first_date} ~ {last_date} ({n_days} days)"
@@ -150,7 +150,8 @@ def generate_dashboard(data_list, output_path):
     ax2r.set_ylabel("Visceral Fat Level", fontsize=10, color="#ffa502")
     ax2.tick_params(axis="y", colors="#ff6b81")
     ax2r.tick_params(axis="y", colors="#ffa502")
-    ax2.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
+    ax2r.set_xlim(dates[0], dates[-1])
+    ax2r.xaxis.set_visible(False)
     ax2.grid(axis="y", alpha=0.2)
 
     # Combined legend
