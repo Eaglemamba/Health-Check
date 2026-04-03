@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>健康問題因果圖 — 2025</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"Segoe UI",Roboto,sans-serif;background:#0f1117;color:#e0e0e0;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#1a1f2e,#252b3b);padding:20px;text-align:center;border-bottom:1px solid #2a3045}
+.header h1{font-size:18px;color:#7eb8f7;font-weight:600}
+.header p{font-size:12px;color:#6b7c8d;margin-top:4px}
+
+.legend{display:flex;gap:16px;justify-content:center;padding:12px;background:#151a27;border-bottom:1px solid #2a3045;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:#8a9bb0}
+.leg-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+
+.canvas{padding:20px 12px 40px;max-width:900px;margin:0 auto}
+
+/* Layer labels */
+.layer-label{font-size:10px;font-weight:700;letter-spacing:2px;color:#4a5568;text-transform:uppercase;margin:24px 0 8px;padding:4px 0;border-top:1px dashed #2a3045}
+
+/* Node grid */
+.row{display:flex;gap:10px;justify-content:center;margin-bottom:4px;flex-wrap:wrap}
+
+/* Node */
+.node{
+  border-radius:10px;
+  padding:12px 14px;
+  cursor:pointer;
+  transition:all 0.2s;
+  position:relative;
+  border:1px solid transparent;
+  min-width:140px;
+  flex:1;
+  max-width:200px;
+}
+.node:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.node.active{filter:brightness(1.2);border-color:rgba(255,255,255,0.3)}
+
+.node-title{font-size:12px;font-weight:700;margin-bottom:4px}
+.node-val{font-size:10px;opacity:0.75;margin-bottom:3px}
+.node-badge{
+  display:inline-block;font-size:9px;padding:1px 6px;
+  border-radius:8px;background:rgba(0,0,0,0.25);
+  font-weight:600;margin-top:2px
+}
+
+/* Colors by layer */
+.root{background:#2d1b1b;border-color:#7f2020}
+.root .node-title{color:#ff6b6b}
+.root .node-badge{color:#ff8a80}
+
+.mid{background:#1e2a1a;border-color:#3d5c2a}
+.mid .node-title{color:#81c784}
+.mid .node-badge{color:#a5d6a7}
+
+.marker{background:#1a2035;border-color:#2a4080}
+.marker .node-title{color:#7eb8f7}
+.marker .node-badge{color:#90caf9}
+
+.marker.warn{background:#251e0d;border-color:#6b4a00}
+.marker.warn .node-title{color:#ffa726}
+.marker.warn .node-badge{color:#ffcc80}
+
+.marker.danger{background:#2d1b1b;border-color:#7f2020}
+.marker.danger .node-title{color:#ef5350}
+.marker.danger .node-badge{color:#ff8a80}
+
+.outcome{background:#1d1226;border-color:#4a2870}
+.outcome .node-title{color:#ce93d8}
+.outcome .node-badge{color:#e1bee7}
+
+.outcome.critical{background:#2d1b1b;border-color:#8b0000}
+.outcome.critical .node-title{color:#ff5252}
+.outcome.critical .node-badge{color:#ff8a80}
+
+/* Arrow row */
+.arrows{display:flex;justify-content:center;gap:30px;padding:6px 0;flex-wrap:wrap}
+.arrow{display:flex;flex-direction:column;align-items:center;color:#4a5568;font-size:18px}
+.arrow-label{font-size:9px;color:#4a5568;margin-top:2px}
+
+/* Detail panel */
+.panel{
+  background:#1a2035;border:1px solid #2a3045;border-radius:12px;
+  padding:18px;margin:20px 0;display:none
+}
+.panel.show{display:block;animation:fadeIn 0.2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.panel-title{font-size:15px;font-weight:700;margin-bottom:10px}
+.panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.panel-block{background:#0f1420;border-radius:8px;padding:12px}
+.panel-block h4{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;color:#6b7c8d}
+.panel-block ul{list-style:none;padding:0}
+.panel-block li{font-size:12px;padding:3px 0;border-bottom:1px solid #1a2035;display:flex;align-items:flex-start;gap:6px}
+.panel-block li:last-child{border:none}
+.panel-block li::before{content:"›";color:#7eb8f7;flex-shrink:0}
+.panel-close{float:right;cursor:pointer;font-size:18px;color:#6b7c8d;background:none;border:none;padding:0;margin-top:-4px}
+.panel-close:hover{color:#fff}
+.status-chip{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700;margin-left:8px}
+.chip-r{background:#3d1010;color:#ff6b6b}
+.chip-o{background:#3d2a00;color:#ffa726}
+.chip-g{background:#1a3a1a;color:#81c784}
+
+@media(max-width:600px){
+  .panel-grid{grid-template-columns:1fr}
+  .node{min-width:120px;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>健康問題因果圖 — 2025年健檢</h1>
+  <p>點擊任一節點查看詳細說明與改善方法</p>
+</div>
+
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#ff6b6b"></div>根源問題（上游）</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#81c784"></div>中間機制</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ffa726"></div>警示指標</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ef5350"></div>異常指標（需介入）</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ce93d8"></div>臨床診斷（下游）</div>
+</div>
+
+<div class="canvas">
+
+  <!-- DETAIL PANEL -->
+  <div class="panel" id="detail-panel">
+    <button class="panel-close" onclick="closePanel()">✕</button>
+    <div class="panel-title" id="panel-title"></div>
+    <div class="panel-grid" id="panel-content"></div>
+  </div>
+
+  <!-- LAYER 1: ROOT CAUSES -->
+  <div class="layer-label">上游 — 根源問題</div>
+  <div class="row">
+    <div class="node root" onclick="showDetail('sleep')">
+      <div class="node-title">睡眠品質不足</div>
+      <div class="node-val">Sleep Score 63–73 / BB 22–42</div>
+      <div class="node-badge">夜尿 2–4 次</div>
+    </div>
+    <div class="node root" onclick="showDetail('diet-gap')">
+      <div class="node-title">飲食計劃執行落差</div>
+      <div class="node-val">計劃完整，記錄僅 1 筆</div>
+      <div class="node-badge">熱量 / 食物來源不明</div>
+    </div>
+    <div class="node root" onclick="showDetail('hydration')">
+      <div class="node-title">飲水不足</div>
+      <div class="node-val">目標 2.5L，實際多未達</div>
+      <div class="node-badge">尿酸排泄效率下降</div>
+    </div>
+  </div>
+
+  <div class="arrows">
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+  </div>
+
+  <!-- LAYER 2: MECHANISM -->
+  <div class="layer-label">中游 — 生理機制</div>
+  <div class="row">
+    <div class="node mid" onclick="showDetail('cortisol')">
+      <div class="node-title">皮質醇持續偏高</div>
+      <div class="node-val">睡眠不足 → 交感神經亢進</div>
+      <div class="node-badge">驅動肝臟產生更多 VLDL</div>
+    </div>
+    <div class="node mid" onclick="showDetail('insulin')">
+      <div class="node-title">胰島素阻抗上升</div>
+      <div class="node-val">睡眠不足 + 熱量超標</div>
+      <div class="node-badge">脂肪優先堆積腹部</div>
+    </div>
+    <div class="node mid" onclick="showDetail('liver-fat')">
+      <div class="node-title">肝臟脂肪代謝過載</div>
+      <div class="node-val">多餘熱量 → 肝醣 → 脂質</div>
+      <div class="node-badge">新增輕度脂肪肝</div>
+    </div>
+  </div>
+
+  <div class="arrows">
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+  </div>
+
+  <!-- LAYER 3: LAB MARKERS -->
+  <div class="layer-label">指標層 — 抽血異常</div>
+  <div class="row">
+    <div class="node marker danger" onclick="showDetail('ldl')">
+      <div class="node-title">LDL 膽固醇</div>
+      <div class="node-val">177 → 目標 &lt;130</div>
+      <div class="node-badge">+34 較前次，持續惡化</div>
+    </div>
+    <div class="node marker danger" onclick="showDetail('uricacid')">
+      <div class="node-title">尿酸</div>
+      <div class="node-val">8.6 mg/dL（正常 &lt;7.0）</div>
+      <div class="node-badge">兩次均超標，緩慢惡化</div>
+    </div>
+    <div class="node marker warn" onclick="showDetail('hba1c')">
+      <div class="node-title">HbA1c / 血糖</div>
+      <div class="node-val">HbA1c 6.0%（正常 &lt;5.9）</div>
+      <div class="node-badge">空腹血糖 80 → 89（上升中）</div>
+    </div>
+    <div class="node marker danger" onclick="showDetail('bodyfat')">
+      <div class="node-title">體重 / 體脂</div>
+      <div class="node-val">69.9 kg / 體脂 24.9%</div>
+      <div class="node-badge">+5.8 kg / +6.3% 體脂率</div>
+    </div>
+  </div>
+
+  <div class="arrows">
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+  </div>
+
+  <!-- LAYER 4: CLINICAL OUTCOMES -->
+  <div class="layer-label">下游 — 臨床診斷</div>
+  <div class="row">
+    <div class="node outcome critical" onclick="showDetail('ischemia')">
+      <div class="node-title">心肌缺氧（ECG）</div>
+      <div class="node-val">兩次均存在，LVH 持續</div>
+      <div class="node-badge">需心臟科評估</div>
+    </div>
+    <div class="node outcome" onclick="showDetail('fattyliver')">
+      <div class="node-title">輕度脂肪肝（超音波）</div>
+      <div class="node-val">前次正常 → 本次新增</div>
+      <div class="node-badge">SGOT/SGPT 輕度上升</div>
+    </div>
+    <div class="node outcome" onclick="showDetail('cvdrisk')">
+      <div class="node-title">心血管風險上升</div>
+      <div class="node-val">T-Chol/HDL 5.09（&gt;5 危險）</div>
+      <div class="node-badge">hsCRP 0.302（微超標）</div>
+    </div>
+  </div>
+
+  <!-- IMPROVEMENT NOTE -->
+  <div class="layer-label" style="color:#3d7a3d;border-top-color:#2a4a2a">本次改善（勿放棄）</div>
+  <div class="row">
+    <div class="node mid" onclick="showDetail('pwv')">
+      <div class="node-title">動脈硬化 PWV</div>
+      <div class="node-val">異常 → 正常（&lt;1500 cm/s）</div>
+      <div class="node-badge">最大進步</div>
+    </div>
+    <div class="node mid" onclick="showDetail('hsCRP-imp')">
+      <div class="node-title">hsCRP 發炎指標</div>
+      <div class="node-val">0.561 → 0.302（-46%）</div>
+      <div class="node-badge">有氧運動效果</div>
+    </div>
+    <div class="node mid" onclick="showDetail('bp-imp')">
+      <div class="node-title">血壓 / 脈搏</div>
+      <div class="node-val">137/78 → 129/74，脈搏 81→67</div>
+      <div class="node-badge">心臟效率提升</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- DATA for each node -->
+<script>
+const data = {
+  sleep: {
+    title: "根源問題：睡眠品質不足",
+    problem: ["每日有效睡眠 5–6 小時，夜尿 2–4 次", "Body Battery 起床值 22–42（目標 ≥65）", "Sleep Score 63–73，多日低於 70", "睡眠不足 → 皮質醇↑ → 肝臟合成更多 VLDL → 膽固醇↑", "睡眠不足抑制膽固醇代謝基因表達", "OSA（睡眠呼吸中止）嫌疑仍未排除"],
+    action: ["立即：關閉 17:00 後的飲水（主力）", "每晚睡前 20:00 抬腳靠牆 15–20 分鐘，排出下肢積水", "夜間起床不開大燈，不看手機，回床繼續躺", "安排睡眠門診，排除 OSA"]
+  },
+  "diet-gap": {
+    title: "根源問題：飲食計劃執行落差",
+    problem: ["index.html 飲食計劃完整且科學化（DASH + 地中海）", "近 3 個月僅 1 筆飲食記錄（2026-03-18 午餐）", "體重 +5.8 kg → 代表有熱量盈餘，但來源不明", "不追蹤 = 無法找出問題食物"],
+    action: ["每天至少記錄 1 餐（午餐最容易）", "外食優先選擇 index.html 的「便利商店策略」", "晚餐改用健康餐盒外送（Less Salt / Easy Eat）", "每週日早晨記錄體重作為回饋"]
+  },
+  hydration: {
+    title: "根源問題：飲水不足",
+    problem: ["尿酸 8.6 mg/dL，腎臟排泄尿酸需要充足水分", "日記多日飲水目標 1500 ml（低於建議 2.5L）", "夜間限水必要，但白天應積極補水", "脫水狀態下尿酸結晶風險上升 → 痛風、腎結石"],
+    action: ["08:00–17:00 完成 2.0–2.5L 飲水", "設每小時提醒，每次 200–300 ml", "可用無糖茶取代部分白水（枸杞茶已在計劃中）", "17:00 後僅潤口，不大量飲水（避免夜尿）"]
+  },
+  cortisol: {
+    title: "中間機制：皮質醇偏高",
+    problem: ["睡眠不足 → 下視丘-腦垂體-腎上腺軸持續亢進", "早晨皮質醇過高 → 刺激肝臟產生更多 VLDL", "VLDL 在血中轉化 → LDL↑、TG↑", "長期高皮質醇 → 腹部脂肪優先堆積 → 胰島素阻抗"],
+    action: ["修復睡眠是降皮質醇的根本手段", "靠牆深蹲等無氧運動可降低靜態皮質醇", "魚油（已在補充）有輔助降低皮質醇效果", "避免睡前看手機、電腦（藍光延遲皮質醇下降）"]
+  },
+  insulin: {
+    title: "中間機制：胰島素阻抗上升",
+    problem: ["HbA1c 6.0%（兩次），空腹血糖 80 → 89（上升趨勢）", "體脂 18.6% → 24.9%（腹部脂肪是胰島素阻抗主因）", "睡眠不足本身會在 1 週內產生胰島素阻抗", "若不干預，HbA1c 可能在 1–2 年內突破 6.5%（糖尿病門檻）"],
+    action: ["減重 5 kg 可使胰島素敏感性改善 20–30%", "靠牆深蹲 / 快走：肌肉是葡萄糖的主要消耗器官", "每餐先吃蔬菜和蛋白質，最後吃碳水（降血糖峰值）", "燕麥（β-glucan）有助改善餐後血糖"]
+  },
+  "liver-fat": {
+    title: "中間機制：肝臟代謝過載",
+    problem: ["超音波：前次正常 → 本次輕度脂肪肝（新增）", "SGOT 19 → 27，SGPT 12 → 25（均在正常內，但上升）", "多餘熱量在肝臟轉換為三酸甘油酯儲存", "脂肪肝 → 肝臟代謝 LDL 能力下降 → LDL 進一步累積"],
+    action: ["最有效介入：減重（每減 1 kg 體脂，脂肪肝可見改善）", "戒除精緻碳水（白飯、麵食、含糖飲料）", "增加植物蛋白（豆腐、豆漿）替代部分動物蛋白", "酒精是脂肪肝的強力催化劑，如有飲酒需完全停止"]
+  },
+  ldl: {
+    title: "異常指標：LDL 膽固醇 177 mg/dL",
+    problem: ["目標 &lt;130 mg/dL，超標 47 mg/dL", "前次 143 → 本次 177，增加 34（明顯惡化）", "總膽固醇 234（正常 &lt;200）", "T-Chol/HDL 比值 5.09（正常 &lt;5，心血管風險指標）", "合併心肌缺氧（ECG）→ 需考慮藥物介入"],
+    action: ["燕麥 β-glucan 3g/天可降 LDL 5–10%（已在計劃中）", "增加植物固醇（堅果、豆類）", "減少飽和脂肪（避免紅肉、全脂乳製品、油炸）", "就診討論 statin 藥物必要性（LDL+心肌缺氧組合）", "每週 3 次有氧（快走 30 分鐘）可改善 HDL"]
+  },
+  uricacid: {
+    title: "異常指標：尿酸 8.6 mg/dL",
+    problem: ["正常上限 7.0 mg/dL，已超標 1.6 mg/dL", "前次 8.3 → 本次 8.6，緩慢惡化", "尿酸 &gt;9 mg/dL 痛風發作風險大幅上升", "高尿酸是獨立心血管風險因子（損傷血管內皮）", "飲水不足 + 肉類攝取是主因"],
+    action: ["每日飲水 2.5L（最有效的非藥物介入）", "限制高普林食物：內臟、海鮮（蝦蟹貝）、啤酒、肉汁", "增加低脂乳製品（促進尿酸排泄）", "酸櫻桃（已在補充）有抗炎輔助效果", "討論降尿酸藥物（Allopurinol）必要性"]
+  },
+  hba1c: {
+    title: "警示指標：HbA1c 6.0% / 空腹血糖 89",
+    problem: ["HbA1c 正常上限 5.9%，已超標（糖尿病前期）", "兩次均為 6.0%，但空腹血糖從 80 上升至 89", "若體重繼續增加，下次可能突破 90 mg/dL（空腹）", "糖尿病前期 → 10 年內 15–30% 進展為糖尿病"],
+    action: ["減重是逆轉糖尿病前期最有效手段", "餐序調整：先蔬菜 → 蛋白質 → 碳水化合物", "規律有氧（快走、深蹲）提升胰島素敏感性", "下次健檢重點追蹤：目標 HbA1c &lt;5.7%、空腹血糖 &lt;85"]
+  },
+  bodyfat: {
+    title: "異常指標：體重 69.9 kg / 體脂 24.9%",
+    problem: ["9.5 個月內體重增加 5.8 kg（體脂從 18.6% → 24.9%）", "BMI 22.3 → 24.2（參考值上限 24.0，已超標）", "腰圍 74 → 85.5 cm（增加 11.5 cm）", "腹部脂肪是胰島素阻抗、LDL 惡化、脂肪肝的共同驅動者", "幾乎所有代謝指標惡化均可追溯至體重增加"],
+    action: ["目標：6 個月減 5 kg（每月 0.8 kg，index.html 計劃）", "熱量目標 1,800 kcal（需恢復飲食追蹤）", "靠牆深蹲 × 3/週（增加基礎代謝 + 直接降血壓）", "快走 30 分鐘 × 5/週（脂肪燃燒 + 改善心肺）"]
+  },
+  ischemia: {
+    title: "臨床診斷：心肌缺氧（ECG ×2）",
+    problem: ["2024-12-05 和 2025-09-17 兩次 ECG 均出現心肌缺氧", "左心室肥大（依伏特基準）持續存在", "心肌缺氧 + LDL 177 是高風險組合", "心肌缺氧可能代表冠狀動脈供血不足的早期信號"],
+    action: ["優先安排心臟科門診評估（不應拖延）", "心臟科可安排運動心電圖或冠狀動脈 CT 確認", "在確認前避免突然高強度運動", "控制 LDL 是保護心臟的核心手段"]
+  },
+  fattyliver: {
+    title: "臨床診斷：輕度脂肪肝",
+    problem: ["前次（2024-12-05）超音波：肝臟正常", "本次（2025-09-17）超音波：輕度脂肪肝（新增）", "SGOT 19 → 27，SGPT 12 → 25（肝酵素輕度上升）", "輕度脂肪肝尚可完全逆轉，但需立即行動"],
+    action: ["減重 7–10% 可使輕度脂肪肝消退", "戒除酒精（若有）", "控制精緻碳水攝取量", "每 6–12 個月超音波追蹤"]
+  },
+  cvdrisk: {
+    title: "臨床診斷：心血管風險上升",
+    problem: ["T-Chol/HDL 比值 5.09（超過 5 為心血管高風險）", "hsCRP 0.302（輕微超過 0.300 mg/L 上限）", "動脈硬化雖然 PWV 改善，但 LDL 持續上升", "尿酸高是獨立心血管風險因子"],
+    action: ["以降 LDL 為最優先（目標 &lt;130，理想 &lt;100）", "繼續維持改善動脈硬化的習慣（運動）", "hsCRP 只要 0.002 差距，持續運動可達標", "討論心臟科評估綜合風險"]
+  },
+  pwv: {
+    title: "重大改善：動脈波血流速（PWV）正常化",
+    problem: ["前次：PWV 異常（>1500 cm/s），中度動脈硬化", "本次：PWV 正常（<1500 cm/s）", "這是最值得保留的進步，代表動脈彈性確實改善"],
+    action: ["繼續維持有氧運動習慣（這是 PWV 改善的主因）", "持續控制鈉攝取（&lt;2000 mg/天）", "魚油補充（已在計劃中）支持血管彈性", "下次健檢確認是否維持"]
+  },
+  "hsCRP-imp": {
+    title: "重大改善：hsCRP 發炎指標 -46%",
+    problem: ["前次：0.561 mg/L（明顯超標）", "本次：0.302 mg/L（剛好超標 0.002）", "hsCRP 是全身性發炎的敏感指標", "下降 46% 說明有氧運動、睡眠改善、魚油均有效"],
+    action: ["繼續有氧運動（主力）", "魚油繼續補充（Omega-3 有獨立抗炎作用）", "再降 0.002 mg/L 即可達標（僅需維持現有習慣）", "減重 5 kg 預計可使 hsCRP 進一步下降"]
+  },
+  "bp-imp": {
+    title: "改善：血壓 / 脈搏改善",
+    problem: ["血壓：137/78 → 129/74（收縮壓降 8 mmHg）", "脈搏：81 → 67 次/分鐘（心臟效率提升）", "這說明靠牆深蹲 + 有氧運動有效"],
+    action: ["繼續靠牆深蹲 × 3 組/週（目標 4 組 × 2 分鐘）", "快走維持或增加頻率", "持續控制鈉攝取", "目標：收縮壓穩定在 125 以下"]
+  }
+}
+
+let activeNode = null
+
+function showDetail(key) {
+  const d = data[key]
+  if (!d) return
+
+  const panel = document.getElementById('detail-panel')
+  document.getElementById('panel-title').textContent = d.title
+
+  const content = document.getElementById('panel-content')
+  content.innerHTML = `
+    <div class="panel-block">
+      <h4>問題說明</h4>
+      <ul>${d.problem.map(p=>`<li>${p}</li>`).join('')}</ul>
+    </div>
+    <div class="panel-block">
+      <h4>改善行動</h4>
+      <ul>${d.action.map(a=>`<li>${a}</li>`).join('')}</ul>
+    </div>
+  `
+  panel.classList.add('show')
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'})
+}
+
+function closePanel() {
+  document.getElementById('detail-panel').classList.remove('show')
+}
+</script>
+
+</body>
+</html>
