@@ -6,6 +6,13 @@ import os
 import glob
 from datetime import datetime
 
+import matplotlib
+matplotlib.use('Agg')
+matplotlib.rcParams['font.family'] = [
+    'Noto Sans CJK TC', 'Noto Sans CJK SC',
+    'Microsoft YaHei', 'SimHei', 'PingFang TC', 'Arial Unicode MS', 'sans-serif'
+]
+matplotlib.rcParams['axes.unicode_minus'] = False
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
@@ -23,16 +30,16 @@ def parse_daily_file(filepath):
     date_str = basename.replace(".md", "")
     data["date"] = datetime.strptime(date_str, "%Y-%m-%d")
 
-    # Weight
-    m = re.search(r"\*\*今日：([\d.]+)\s*kg\*\*", content)
+    # Weight — supports both inline (｜) and separate-line formats
+    m = re.search(r"\*\*今日：([\d.]+)\s*kg", content)
     data["weight"] = float(m.group(1)) if m else None
 
-    # Body fat %
-    m = re.search(r"\*\*體脂率：([\d.]+)\s*%\*\*", content)
+    # Body fat % — inline format: 體脂率：XX% or separate line **體脂率：XX %**
+    m = re.search(r"體脂率：([\d.]+)\s*%", content)
     data["body_fat"] = float(m.group(1)) if m else None
 
-    # Visceral fat level
-    m = re.search(r"\*\*內臟脂肪等級：([\d.]+)\*\*", content)
+    # Visceral fat level — inline format: 內臟脂肪：XX or separate **內臟脂肪等級：XX**
+    m = re.search(r"內臟脂肪(?:等級)?[：:]\*{0,2}\s*([\d.]+)", content)
     data["visceral_fat"] = float(m.group(1)) if m else None
 
     # Sunday official weight — only mark if the record date is actually a Sunday
@@ -129,7 +136,6 @@ def generate_dashboard(data_list, output_path):
         for dt, v in zip(bf_dates, bf_vals):
             ax2.annotate(f"{v}%", (dt, v), textcoords="offset points",
                          xytext=(0, 8), ha="center", fontsize=8, color="#ff6b81")
-        # Reference lines: healthy range 15–20% for men
         ax2.axhline(y=20, color="#ff6b81", linestyle=":", alpha=0.4, linewidth=1)
         bf_margin = 1.0
         ax2.set_ylim(min(bf_vals) - bf_margin, max(bf_vals) + bf_margin + 2)
@@ -140,7 +146,6 @@ def generate_dashboard(data_list, output_path):
         for dt, v in zip(vf_dates, vf_vals):
             ax2r.annotate(f"{v}", (dt, v), textcoords="offset points",
                           xytext=(0, -14), ha="center", fontsize=8, color="#ffa502")
-        # Reference line at 10 (borderline high)
         ax2r.axhline(y=10, color="#ffa502", linestyle=":", alpha=0.4, linewidth=1)
         vf_margin = 0.5
         ax2r.set_ylim(min(vf_vals) - vf_margin, max(vf_vals) + vf_margin + 2)
@@ -154,7 +159,6 @@ def generate_dashboard(data_list, output_path):
     ax2r.xaxis.set_visible(False)
     ax2.grid(axis="y", alpha=0.2)
 
-    # Combined legend
     lines1, labels1 = ax2.get_legend_handles_labels()
     lines2, labels2 = ax2r.get_legend_handles_labels()
     ax2.legend(lines1 + lines2, labels1 + labels2, loc="upper right", fontsize=8)
@@ -178,8 +182,7 @@ def generate_dashboard(data_list, output_path):
         hr = [x[3] for x in valid_bp]
 
         ax.plot(bp_dates, sbp, "o-", color="#ff4757", linewidth=2, markersize=5, label="SBP")
-        ax.plot(bp_dates, [d for d in dbp if d is not None] if all(d is not None for d in dbp) else dbp,
-                "s--", color="#ffa502", linewidth=1.5, markersize=4, label="DBP")
+        ax.plot(bp_dates, dbp, "s--", color="#ffa502", linewidth=1.5, markersize=4, label="DBP")
         valid_hr = [(dt, h) for dt, h in zip(bp_dates, hr) if h is not None]
         if valid_hr:
             hr_dates, hr_vals = zip(*valid_hr)
@@ -216,7 +219,7 @@ def generate_dashboard(data_list, output_path):
             sleep_colors.append("#e74c3c")
 
     bar_scores = [s if s is not None else 0 for s in sleep_scores]
-    bars = ax.bar(sleep_dates, bar_scores, width=0.6, color=sleep_colors, alpha=0.85)
+    ax.bar(sleep_dates, bar_scores, width=0.6, color=sleep_colors, alpha=0.85)
 
     for dt, score in zip(sleep_dates, sleep_scores):
         if score is not None:
@@ -236,7 +239,6 @@ def generate_dashboard(data_list, output_path):
         a.tick_params(colors="white", labelsize=8)
         for spine in a.spines.values():
             spine.set_color("#333333")
-    # ax2r spines
     for spine in ax2r.spines.values():
         spine.set_color("#333333")
     ax2r.tick_params(colors="white", labelsize=8)
