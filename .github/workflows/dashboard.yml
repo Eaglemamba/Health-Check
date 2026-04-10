@@ -1,0 +1,44 @@
+name: 每日健康儀表板
+
+on:
+  push:
+    paths:
+      - 'reviews/daily/**.md'   # 有新 daily 記錄時自動觸發
+  schedule:
+    - cron: '0 0 * * *'        # 每天 08:00 台灣時間（UTC+8 = UTC 00:00）
+  workflow_dispatch:            # 支援手動觸發
+
+permissions:
+  contents: write
+
+jobs:
+  generate-dashboard:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Chinese fonts
+        run: |
+          sudo apt-get install -y fonts-noto-cjk
+          fc-cache -fv
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install matplotlib
+
+      - name: Generate dashboard
+        run: python scripts/generate_dashboard.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reviews/health_dashboard.png
+          git diff --staged --quiet || git commit -m "chore: update dashboard $(date +'%Y-%m-%d')"
+          git push
