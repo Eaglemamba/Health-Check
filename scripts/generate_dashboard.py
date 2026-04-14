@@ -230,8 +230,6 @@ def generate_dashboard(data_list, output_path):
             ax.annotate("N/A", (dt, 0), textcoords="offset points",
                         xytext=(0, 5), ha="center", fontsize=7, color="#888888")
 
-    ax.axhline(y=65, color="#e74c3c", linestyle=":", alpha=0.5, linewidth=1)
-
     # --- Weekly average: one horizontal dashed line per week ---
     week_data = {}
     for dt, score in zip(sleep_dates, sleep_scores):
@@ -265,7 +263,7 @@ def generate_dashboard(data_list, output_path):
     ax.set_ylabel("Score", fontsize=10)
     ax.xaxis.set_major_locator(mdates.AutoDateLocator(minticks=6, maxticks=20))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
-    ax.set_ylim(0, 100)
+    ax.set_ylim(20, 100)
 
     for a in axes:
         a.tick_params(colors="white", labelsize=8)
