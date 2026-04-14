@@ -232,7 +232,7 @@ def generate_dashboard(data_list, output_path):
 
     ax.axhline(y=65, color="#e74c3c", linestyle=":", alpha=0.5, linewidth=1)
 
-    # --- Weekly average dashed line ---
+    # --- Weekly average: one horizontal dashed line per week ---
     week_data = {}
     for dt, score in zip(sleep_dates, sleep_scores):
         if score is not None:
@@ -242,24 +242,23 @@ def generate_dashboard(data_list, output_path):
             week_data[wk]["scores"].append(score)
             week_data[wk]["dates"].append(dt)
 
-    if week_data:
-        sorted_weeks = sorted(week_data.keys())
-        wk_plot_dates = []
-        wk_plot_scores = []
-        for wk in sorted_weeks:
-            scores = week_data[wk]["scores"]
-            dates = week_data[wk]["dates"]
-            avg = sum(scores) / len(scores)
-            mid_dt = dates[len(dates) // 2]  # midpoint of available days
-            wk_plot_dates.append(mid_dt)
-            wk_plot_scores.append(avg)
+    legend_added = False
+    for wk in sorted(week_data.keys()):
+        scores = week_data[wk]["scores"]
+        dates  = week_data[wk]["dates"]
+        avg    = sum(scores) / len(scores)
+        x_start = min(dates)
+        x_end   = max(dates)
+        label = "Weekly Avg" if not legend_added else "_nolegend_"
+        ax.hlines(avg, x_start, x_end, colors="#00d4ff", linestyles="--",
+                  linewidth=2.5, alpha=0.92, label=label, zorder=5)
+        # Label at right end of the line
+        ax.annotate(f"{avg:.0f}", (x_end, avg), textcoords="offset points",
+                    xytext=(6, 0), ha="left", va="center", fontsize=9,
+                    color="#00d4ff", fontweight="bold")
+        legend_added = True
 
-        ax.plot(wk_plot_dates, wk_plot_scores, "o--", color="#00d4ff",
-                linewidth=2.5, markersize=8, zorder=5, label="Weekly Avg", alpha=0.92)
-        for dt, avg in zip(wk_plot_dates, wk_plot_scores):
-            ax.annotate(f"{avg:.0f}", (dt, avg), textcoords="offset points",
-                        xytext=(0, 10), ha="center", fontsize=9,
-                        color="#00d4ff", fontweight="bold")
+    if legend_added:
         ax.legend(loc="upper left", fontsize=8)
 
     ax.set_title("Sleep Score (Garmin)", fontsize=12, color="white", pad=8)
