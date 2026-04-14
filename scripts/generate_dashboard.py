@@ -79,18 +79,18 @@ def generate_dashboard(data_list, output_path):
     """Generate the health dashboard PNG."""
     data_list.sort(key=lambda d: d["date"])
 
-    # Filter to last 14 days max for readability
-    if len(data_list) > 14:
-        data_list = data_list[-14:]
-
+    # Show all data — no day cap
     dates = [d["date"] for d in data_list]
     first_date = dates[0].strftime("%Y-%m-%d")
     last_date = dates[-1].strftime("%Y-%m-%d")
     n_days = (dates[-1] - dates[0]).days + 1
 
+    # Responsive figure width: wider for more data points
+    fig_width = max(12, min(len(data_list) * 0.6, 32))
+
     # Dark theme
     plt.style.use("dark_background")
-    fig, axes = plt.subplots(4, 1, figsize=(10, 15), dpi=180, sharex=True)
+    fig, axes = plt.subplots(4, 1, figsize=(fig_width, 16), dpi=160, sharex=True)
     fig.patch.set_facecolor("#0d1117")
 
     title = f"Health Tracking Dashboard\n{first_date} ~ {last_date} ({n_days} days)"
@@ -219,7 +219,8 @@ def generate_dashboard(data_list, output_path):
             sleep_colors.append("#e74c3c")
 
     bar_scores = [s if s is not None else 0 for s in sleep_scores]
-    ax.bar(sleep_dates, bar_scores, width=0.6, color=sleep_colors, alpha=0.85)
+    bar_w = max(0.3, min(0.75, 8.0 / max(len(sleep_dates), 1)))
+    ax.bar(sleep_dates, bar_scores, width=bar_w, color=sleep_colors, alpha=0.85)
 
     for dt, score in zip(sleep_dates, sleep_scores):
         if score is not None:
@@ -232,6 +233,7 @@ def generate_dashboard(data_list, output_path):
     ax.axhline(y=65, color="#e74c3c", linestyle=":", alpha=0.5, linewidth=1)
     ax.set_title("Sleep Score (Garmin)", fontsize=12, color="white", pad=8)
     ax.set_ylabel("Score", fontsize=10)
+    ax.xaxis.set_major_locator(mdates.AutoDateLocator(minticks=6, maxticks=20))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
     ax.set_ylim(0, 100)
 

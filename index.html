@@ -53,6 +53,7 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 <div class="nt" onclick="st('t5')">Daily Routine</div>
 <div class="nt" onclick="st('t6')">Timeline & Milestones</div>
 <div class="nt" onclick="st('t7')">Safety & Medical</div>
+<div class="nt" onclick="st('t8')">Health Dashboard</div>
 </div></div>
 
 <!-- ═══════════════════════════════════════════════════ -->
@@ -682,6 +683,22 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 <div class="ct">General Exercise with Elevated Uric Acid</div>
 <p>Avoid high-intensity vigorous exercise (lactic acid inhibits uric acid excretion). Stick to moderate intensity (RPE 4–6/10). Always hydrate before and during exercise. Never exercise on an empty stomach (ketones raise uric acid).</p>
 </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="t8" class="tc">
+<div class="c">
+<h2>Health Dashboard</h2>
+<p>體重、體組成、血壓、睡眠 Sleep Score 趨勢圖。每次 daily check-in 完成後自動更新。</p>
+<div class="co cb" style="margin-bottom:16px">
+<div class="ct">使用方式</div>
+<p>每日 check-in 後由 <code>python3 scripts/generate_dashboard.py</code> 重新生成。顯示所有自 2026-03-17 起的完整紀錄，不截斷。若圖表未更新，重新整理頁面（Cmd+R）即可。</p>
+</div>
+<div style="overflow-x:auto;text-align:center">
+<img src="reviews/health_dashboard.png" alt="Health Dashboard" style="max-width:100%;height:auto;border-radius:8px;border:1px solid #333">
+</div>
+<p style="font-size:11px;color:#888;margin-top:8px;text-align:center">Dashboard covers all daily records since 2026-03-17 · Updated on each check-in commit</p>
 </div>
 </div>
 
