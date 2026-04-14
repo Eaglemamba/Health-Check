@@ -231,6 +231,37 @@ def generate_dashboard(data_list, output_path):
                         xytext=(0, 5), ha="center", fontsize=7, color="#888888")
 
     ax.axhline(y=65, color="#e74c3c", linestyle=":", alpha=0.5, linewidth=1)
+
+    # --- Weekly average dashed line ---
+    week_data = {}
+    for dt, score in zip(sleep_dates, sleep_scores):
+        if score is not None:
+            wk = dt.isocalendar()[:2]  # (year, week_number)
+            if wk not in week_data:
+                week_data[wk] = {"scores": [], "dates": []}
+            week_data[wk]["scores"].append(score)
+            week_data[wk]["dates"].append(dt)
+
+    if week_data:
+        sorted_weeks = sorted(week_data.keys())
+        wk_plot_dates = []
+        wk_plot_scores = []
+        for wk in sorted_weeks:
+            scores = week_data[wk]["scores"]
+            dates = week_data[wk]["dates"]
+            avg = sum(scores) / len(scores)
+            mid_dt = dates[len(dates) // 2]  # midpoint of available days
+            wk_plot_dates.append(mid_dt)
+            wk_plot_scores.append(avg)
+
+        ax.plot(wk_plot_dates, wk_plot_scores, "o--", color="#00d4ff",
+                linewidth=2.5, markersize=8, zorder=5, label="Weekly Avg", alpha=0.92)
+        for dt, avg in zip(wk_plot_dates, wk_plot_scores):
+            ax.annotate(f"{avg:.0f}", (dt, avg), textcoords="offset points",
+                        xytext=(0, 10), ha="center", fontsize=9,
+                        color="#00d4ff", fontweight="bold")
+        ax.legend(loc="upper left", fontsize=8)
+
     ax.set_title("Sleep Score (Garmin)", fontsize=12, color="white", pad=8)
     ax.set_ylabel("Score", fontsize=10)
     ax.xaxis.set_major_locator(mdates.AutoDateLocator(minticks=6, maxticks=20))
