@@ -263,7 +263,7 @@ def generate_dashboard(data_list, output_path):
     ax.set_ylabel("Score", fontsize=10)
     ax.xaxis.set_major_locator(mdates.AutoDateLocator(minticks=6, maxticks=20))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
-    ax.set_ylim(20, 90)
+    ax.set_ylim(30, 90)
 
     for a in axes:
         a.tick_params(colors="white", labelsize=8)
