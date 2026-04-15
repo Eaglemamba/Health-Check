@@ -1659,8 +1659,8 @@ function renderCards(latest,target){
 const en=isEn();
 const metrics=[
 {key:'weight',label_en:'Weight',label_zh:'體重',unit:'kg',lower:true},
-{key:'bodyFat',label_en:'Body Fat %',label_zh:'體脂率',unit:'%',lower:true},
-{key:'visceralFat',label_en:'Visceral Fat',label_zh:'內臟脂肪',unit:'',lower:true},
+{key:'bodyFat',label_en:'Body Fat %',label_zh:'體脂率',unit:'%',lower:true,dp:1},
+{key:'visceralFat',label_en:'Visceral Fat',label_zh:'內臟脂肪',unit:'',lower:true,dp:1},
 {key:'sleepScore',label_en:'Sleep Score',label_zh:'Sleep Score',unit:'',lower:false},
 {key:'bodyBattery',label_en:'Body Battery',label_zh:'Body Battery',unit:'',lower:false},
 {key:'systolic',label_en:'Systolic BP',label_zh:'收縮壓',unit:' mmHg',lower:true}
@@ -1669,10 +1669,11 @@ let html='<div class="prog-grid">';
 for(const m of metrics){
 const actual=latest[m.key];
 const tgt=target[m.key];
+const fmt=v=>m.dp!=null?v.toFixed(m.dp):v;
 html+='<div class="prog-card">';
 html+='<div class="prog-label">'+(en?m.label_en:m.label_zh)+'</div>';
-html+='<div class="prog-actual">'+(actual!=null?actual+m.unit:'—')+'</div>';
-html+='<div class="prog-target">'+(en?'Target: ':'目標：')+tgt+m.unit+'</div>';
+html+='<div class="prog-actual">'+(actual!=null?fmt(actual)+m.unit:'—')+'</div>';
+html+='<div class="prog-target">'+(en?'Target: ':'目標：')+fmt(tgt)+m.unit+'</div>';
 html+=statusTag(actual,tgt,m.lower);
 html+='</div>';
 }
@@ -1698,12 +1699,13 @@ const vfOk=r.visceralFat!=null&&r.visceralFat<=target.visceralFat;
 const ssOk=r.sleepScore!=null&&r.sleepScore>=target.sleepScore;
 const bbOk=r.bodyBattery!=null&&r.bodyBattery>=target.bodyBattery;
 const sbpOk=r.systolic!=null&&r.systolic<=target.systolic;
-function cell(val,ok,unit){
+function cell(val,ok,unit,dp){
 if(val==null) return '<td style="color:var(--tl)">—</td>';
 const color=ok?'var(--gn)':'var(--rd)';
-return '<td style="color:'+color+';font-weight:600">'+val+(unit||'')+'</td>';
+const display=dp!=null?val.toFixed(dp):val;
+return '<td style="color:'+color+';font-weight:600">'+display+(unit||'')+'</td>';
 }
-html+='<tr><td>'+r.date+'</td>'+cell(r.weight,wOk,' kg')+cell(r.bodyFat,bfOk,'%')+cell(r.visceralFat,vfOk,'')+cell(r.sleepScore,ssOk,'')+cell(r.bodyBattery,bbOk,'')+cell(r.systolic,sbpOk,'')+'</tr>';
+html+='<tr><td>'+r.date+'</td>'+cell(r.weight,wOk,' kg')+cell(r.bodyFat,bfOk,'%',1)+cell(r.visceralFat,vfOk,'',1)+cell(r.sleepScore,ssOk,'')+cell(r.bodyBattery,bbOk,'')+cell(r.systolic,sbpOk,'')+'</tr>';
 }
 html+='</table></div>';
 html+='<p style="font-size:10px;color:var(--tl);margin-top:8px">'+(en?'Green = on/ahead of target; Red = behind target':'綠色 = 達標/超前；紅色 = 未達標')+'</p>';
@@ -1857,8 +1859,8 @@ return;
 }
 const metrics=[
 {key:'weight',label_en:'Weight',label_zh:'體重',unit:'kg',lower:true},
-{key:'bodyFat',label_en:'Body Fat',label_zh:'體脂率',unit:'%',lower:true},
-{key:'visceralFat',label_en:'Visceral Fat',label_zh:'內臟脂肪',unit:'',lower:true},
+{key:'bodyFat',label_en:'Body Fat',label_zh:'體脂率',unit:'%',lower:true,dp:1},
+{key:'visceralFat',label_en:'Visceral Fat',label_zh:'內臟脂肪',unit:'',lower:true,dp:1},
 {key:'systolic',label_en:'Systolic BP',label_zh:'收縮壓',unit:' mmHg',lower:true},
 {key:'sleepScore',label_en:'Sleep Score',label_zh:'Sleep Score',unit:'',lower:false},
 {key:'bodyBattery',label_en:'Body Battery',label_zh:'Body Battery',unit:'',lower:false}
@@ -1886,8 +1888,9 @@ else{stClass='ma-miss';stText=en?'Miss':'✗';}
 }
 html+='<div class="ma-card">';
 html+='<div class="ma-label">'+(en?m.label_en:m.label_zh)+'</div>';
-html+='<div class="ma-val">'+(actual!=null?actual+m.unit:'—')+'</div>';
-html+='<div class="ma-tgt">'+(en?'Target: ':'目標：')+tgt+m.unit+'</div>';
+const fmt=v=>m.dp!=null?v.toFixed(m.dp):v;
+html+='<div class="ma-val">'+(actual!=null?fmt(actual)+m.unit:'—')+'</div>';
+html+='<div class="ma-tgt">'+(en?'Target: ':'目標：')+fmt(tgt)+m.unit+'</div>';
 html+='<div class="ma-st '+stClass+'">'+stText+'</div>';
 html+='</div>';
 }
