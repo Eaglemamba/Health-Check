@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="root">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,30 +36,69 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 .vd h3{color:#fff;margin-bottom:6px;font-size:15px}.vd p{font-size:13px;opacity:.95}
 .ft{text-align:center;padding:20px 16px;font-size:11px;color:var(--tl)}
 @media(max-width:600px){.hdr h1{font-size:17px}.nt{padding:8px 10px;font-size:11px}.c{padding:14px}table{font-size:11px}th,td{padding:6px 8px}}
+.hdr{position:relative}
+.lang-btn{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.25);color:#fff;border:2px solid rgba(255,255,255,.6);border-radius:8px;padding:6px 16px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;z-index:200;letter-spacing:.5px;backdrop-filter:blur(4px)}
+.lang-btn:hover{background:rgba(255,255,255,.45);border-color:#fff}
+body.en .zh{display:none!important}
+body.zh .en{display:none!important}
+.start-date{position:absolute;top:12px;left:12px;display:flex;align-items:center;gap:6px;z-index:200}
+.start-date label{color:rgba(255,255,255,.85);font-size:11px;font-weight:600}
+.start-date input[type="date"]{background:rgba(255,255,255,.2);color:#fff;border:2px solid rgba(255,255,255,.5);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:600;cursor:pointer;backdrop-filter:blur(4px);color-scheme:dark}
+.start-date input[type="date"]:hover{background:rgba(255,255,255,.35);border-color:#fff}
+.prog-month{font-size:13px;font-weight:700;color:var(--bm);margin-bottom:12px;padding:8px 14px;background:var(--bl);border-radius:var(--r);display:inline-block}
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.prog-card{background:var(--wh);border-radius:var(--r);box-shadow:var(--sh);padding:16px;text-align:center}
+.prog-card .prog-label{font-size:11px;color:var(--tl);font-weight:600;margin-bottom:6px}
+.prog-card .prog-actual{font-size:22px;font-weight:700;color:var(--tx)}
+.prog-card .prog-target{font-size:11px;color:var(--tl);margin-top:4px}
+.prog-card .prog-status{margin-top:8px;font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px;display:inline-block}
+.prog-hit{background:var(--gl);color:var(--gn)}.prog-miss{background:var(--rl);color:var(--rd)}.prog-near{background:var(--ol);color:var(--or)}.prog-na{background:var(--gb);color:var(--tl)}
+.ma-wrap{margin-top:18px;padding:16px;background:var(--gb);border-radius:var(--r);border:1px solid rgba(0,0,0,.06)}
+.ma-title{font-size:13px;font-weight:700;color:var(--bm);margin-bottom:10px}
+.ma-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.ma-card{background:var(--wh);border-radius:var(--r);padding:12px;text-align:center;box-shadow:var(--sh)}
+.ma-card .ma-label{font-size:10px;color:var(--tl);font-weight:600;margin-bottom:4px}
+.ma-card .ma-val{font-size:18px;font-weight:700}
+.ma-card .ma-tgt{font-size:10px;color:var(--tl);margin-top:2px}
+.ma-card .ma-st{margin-top:6px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;display:inline-block}
+.ma-hit{background:var(--gl);color:var(--gn)}.ma-miss{background:var(--rl);color:var(--rd)}.ma-near{background:var(--ol);color:var(--or)}.ma-none{background:var(--gb);color:var(--tl)}
+.ma-loading{font-size:12px;color:var(--tl);padding:12px;text-align:center}
+.ma-note{font-size:10px;color:var(--tl);margin-top:8px;text-align:center}
+.prog-trend{margin-top:14px}
+.prog-trend table{font-size:11px}
+.prog-loading{text-align:center;padding:40px;color:var(--tl);font-size:13px}
+.prog-error{text-align:center;padding:20px;color:var(--rd);font-size:13px}
+@media(max-width:600px){.start-date{position:static;justify-content:center;margin-bottom:8px}.hdr{padding-top:16px}}
 </style>
 </head>
-<body>
+<body class="en">
 <div class="hdr">
-<h1>6-Month Health Reversal Plan</h1>
-<p>70 → 65 kg | Normalize 4 Key Markers Simultaneously | March 2026 Personalized Edition</p>
+<div class="start-date">
+<label><span class="en">Start:</span><span class="zh">起始：</span></label>
+<input type="date" id="planStartDate" value="2026-03-17" onchange="onStartDateChange(this.value)">
+</div>
+<button class="lang-btn" onclick="toggleLang()"><span class="en">中文</span><span class="zh">EN</span></button>
+<h1><span class="en">6-Month Health Reversal Plan</span><span class="zh">6 個月健康逆轉計畫</span></h1>
+<p><span class="en">70 → 65 kg | Normalize 4 Key Markers Simultaneously | March 2026 Personalized Edition</span><span class="zh">70 → 65 kg | 同步正常化 4 項關鍵指標 | 2026 年 3 月個人化版</span></p>
 </div>
 
 <div class="nav-c"><div class="nav" id="nav">
-<div class="nt a" onclick="st('t0')">Overview</div>
-<div class="nt" onclick="st('t1')">Sleep Repair</div>
-<div class="nt" onclick="st('t2')">Diet Plan</div>
-<div class="nt" onclick="st('t3')">Exercise & Wall Sits</div>
-<div class="nt" onclick="st('t4')">Supplements & Cost</div>
-<div class="nt" onclick="st('t5')">Daily Routine</div>
-<div class="nt" onclick="st('t6')">Timeline & Milestones</div>
-<div class="nt" onclick="st('t7')">Safety & Medical</div>
-<div class="nt" onclick="st('t8')">Health Dashboard</div>
+<div class="nt a" onclick="st('t0')"><span class="en">Overview</span><span class="zh">總覽</span></div>
+<div class="nt" onclick="st('t1')"><span class="en">Sleep Repair</span><span class="zh">睡眠修復</span></div>
+<div class="nt" onclick="st('t2')"><span class="en">Diet Plan</span><span class="zh">飲食計畫</span></div>
+<div class="nt" onclick="st('t3')"><span class="en">Exercise & Wall Sits</span><span class="zh">運動與靠牆深蹲</span></div>
+<div class="nt" onclick="st('t4')"><span class="en">Supplements & Cost</span><span class="zh">保健品與費用</span></div>
+<div class="nt" onclick="st('t5')"><span class="en">Daily Routine</span><span class="zh">每日作息</span></div>
+<div class="nt" onclick="st('t6')"><span class="en">Timeline & Milestones</span><span class="zh">時程與里程碑</span></div>
+<div class="nt" onclick="st('t7')"><span class="en">Safety & Medical</span><span class="zh">安全與就醫</span></div>
+<div class="nt" onclick="st('t9')"><span class="en">Progress Tracker</span><span class="zh">進度追蹤</span></div>
 </div></div>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- T0: OVERVIEW (Profile + ISH + Priorities)          -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div id="t0" class="tc a">
+<div class="en">
 <div class="c">
 <h2>Personal Profile</h2>
 <div class="co cb">
@@ -93,12 +132,49 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 </table></div>
 <p><strong>Important:</strong> Your diastolic is already 75. Some BP drugs lower both systolic and diastolic, risking diastolic going too low (< 60). Lifestyle intervention first is the optimal strategy.</p>
 </div>
+</div><!-- /en -->
+<div class="zh">
+<div class="c">
+<h2>個人檔案</h2>
+<div class="co cb">
+<p><strong>就寢時間：</strong>20:30</p>
+<p><strong>實際睡眠：</strong>5–6 小時（凌晨 2–4 點因夜尿醒來，常無法再入睡）</p>
+<p><strong>Garmin 數據：</strong>Sleep Score 63 / Body Battery 起床值 40–50</p>
+<p><strong>血壓：</strong>單純收縮期高血壓（ISH）— 135/75 mmHg，脈壓差 60（正常 30–40），反映大動脈彈性下降</p>
+<p><strong>其他輕度異常指標：</strong>三酸甘油酯、膽固醇、尿酸</p>
+<p><strong>目前保健品：</strong>高濃度 Omega-3 魚油（rTG 型）、枸杞茶 20g/天</p>
 </div>
+</div>
+<div class="c">
+<h2>最高優先事項</h2>
+<div class="co cr">
+<div class="ct">先修復睡眠，再處理其他一切</div>
+<p>實際睡眠僅 5–6 小時 + Body Battery 只有 40–50，代表睡眠不足正在從根基破壞所有代謝修復。如果不先修好睡眠，即使完美的飲食和運動計畫也只能發揮 50% 的效果。</p>
+<p style="margin-top:8px"><strong>行動優先順序：</strong>(1) 睡眠修復 + OSA 篩檢 → (2) 提前補水時間 → (3) 靠牆深蹲 → (4) 飲食調整 → (5) 保健品</p>
+</div>
+</div>
+<div class="c">
+<h2>降壓組合效果（所有介入加總）</h2>
+<p>你的四個異常指標共享相同的代謝根源。以下每項介入效果可以疊加：</p>
+<div class="tw"><table>
+<tr><th>介入措施</th><th>預估收縮壓降幅</th><th>備註</th></tr>
+<tr><td>靠牆深蹲 3次/週</td><td>−10 至 −13 mmHg</td><td>12 週可見效；等同一種降壓藥</td></tr>
+<tr><td>鈉攝取 < 1,500 mg/天</td><td>−5 至 −8 mmHg</td><td>鈉對收縮壓影響大於舒張壓</td></tr>
+<tr><td>Omega-3 ~2g/天</td><td>−4 至 −5 mmHg</td><td>優先降低收縮壓</td></tr>
+<tr><td>睡眠修復至 7+ 小時</td><td>−3 至 −5 mmHg</td><td>降低交感神經過度活化</td></tr>
+<tr><td>減重 5 公斤</td><td>−3 至 −5 mmHg</td><td>每減 1 kg 約降 1 mmHg</td></tr>
+<tr class="hl"><td>合併效果</td><td>−25 至 −36 mmHg</td><td>135 → 99–110 範圍</td></tr>
+</table></div>
+<p><strong>重要：</strong>你的舒張壓已經只有 75。部分降壓藥會同時降低收縮壓和舒張壓，可能讓舒張壓過低（< 60）。生活方式介入優先是最佳策略。</p>
+</div>
+</div><!-- /zh -->
+</div><!-- /t0 -->
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- T1: SLEEP REPAIR                                    -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div id="t1" class="tc">
+<div class="en">
 <div class="c">
 <h2>Sleep Repair (Step Zero)</h2>
 <h3>Current Situation</h3>
@@ -154,12 +230,59 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 <p>Track with Garmin: Sleep Score (target ≥70 → advanced ≥80), Body Battery waking value (target ≥65 → advanced ≥75), deep sleep percentage (target >15%), Pulse Ox overnight SpO2 stability.</p>
 <p><strong>2-Week Experiment:</strong> Strictly follow "no leaving bed before 5:30 + fluid cutoff at 17:00 + pre-bed leg elevation" and compare before/after Sleep Score and Body Battery averages.</p>
 </div>
+</div><!-- /en -->
+<div class="zh">
+<div class="c">
+<h2>睡眠修復（第零步）</h2>
+<h3>現狀</h3>
+<p>20:30 躺下 → 凌晨 2–4 點因夜尿醒來 → 上完廁所後精神清醒 → 起床工作而非回去睡 → 實際睡眠僅 5–6 小時。</p>
+<p>Sleep Score 63（需改善）；Body Battery 起床值僅 40–50（正常應 ≥75）。</p>
+<p><strong>5–6 小時睡眠的代謝傷害：</strong>高血壓風險增加約 3.5 倍；膽固醇代謝基因表達被抑制；過早清醒活動使皮質醇持續偏高，刺激肝臟產生更多三酸甘油酯和 VLDL；脫水狀態下尿酸排泄效率下降。</p>
+</div>
+<div class="c">
+<h3>修復策略：三管齊下</h3>
+<h3>A. 解決夜尿（上游問題）</h3>
+<p>目標：將夜尿從凌晨 2–4 點延後至 5:00–5:30，上完廁所直接起床，達成 8.5–9 小時睡眠。</p>
+<ul>
+<li><strong>17:00 後減少液體攝取</strong>，晚餐少喝湯。18:30 後僅「潤唇式」小啜。</li>
+<li><strong>睡前抬腿 15–20 分鐘：</strong>約 20:00 時躺在床上，雙腳靠牆抬高 45–60 度。白天積累在下肢的液體回流至循環系統 → 腎臟在入睡前處理 → 最後一次排空膀胱 → 膀胱可多撐數小時。</li>
+<li><strong>20:00 睡前一定要上廁所</strong>，即使沒有尿意。</li>
+</ul>
+<h3>B. 半夜醒來，強迫自己回去睡</h3>
+<ul>
+<li>上廁所全程不開燈；使用低亮度暖色調夜燈照地板。不碰手機、不看時鐘。</li>
+<li>上完廁所立即回床。做 4-7-8 呼吸法（吸氣 4 秒 → 憋住 7 秒 → 吐氣 8 秒）2–3 個循環。</li>
+<li><strong>硬規則：5:30 之前不離開床。</strong>即使睡不著，安靜休息仍可提供深度睡眠約 50% 的恢復效果。</li>
+<li>如果躺了 20 分鐘仍清醒，可以起來做靠牆深蹲或伸展 — 但不碰電腦、不碰手機。</li>
+</ul>
+<h3>C. OSA（阻塞性睡眠呼吸中止症）篩檢</h3>
+<p>你的風險因子幾乎全中：男性、BMI 偏高、高血壓、血脂異常、頻繁夜尿、睡眠時間足夠但恢復極差。單獨 OSA 就能同時推升血壓、三酸甘油酯、膽固醇和尿酸。</p>
+<div class="co co-o">
+<div class="ct">立即行動事項</div>
+<p>1. 今晚開啟 Garmin Pulse Ox 睡眠監測；觀察 5–7 晚 SpO2 是否頻繁低於 90%<br>
+2. 用手機錄音 app 整夜錄音，檢查打鼾/呼吸暫停<br>
+3. 預約睡眠門診（胸腔科或耳鼻喉科），同時掛泌尿科評估夜尿<br>
+4. 帶 Garmin 數據（Sleep Score、Body Battery、Pulse Ox）給醫師看</p>
+</div>
+<h3>D. 改善睡姿</h3>
+<ul>
+<li><strong>側睡（左側為佳）：</strong>仰睡會使舌根後墜壓迫呼吸道。側睡可減少約 50% 的呼吸暫停次數。背後放枕頭防止翻回仰躺。</li>
+<li><strong>墊高枕頭或抬高床頭 15–20 度：</strong>減少重力對呼吸道的壓力，同時減少胃食道逆流。</li>
+</ul>
+</div>
+<div class="c">
+<h3>追蹤指標</h3>
+<p>用 Garmin 追蹤：Sleep Score（目標 ≥70 → 進階 ≥80）、Body Battery 起床值（目標 ≥65 → 進階 ≥75）、深度睡眠比例（目標 >15%）、Pulse Ox 整夜 SpO2 穩定性。</p>
+<p><strong>2 週實驗：</strong>嚴格執行「5:30 前不離床 + 17:00 停止大量補水 + 睡前抬腿」，比較前後 Sleep Score 和 Body Battery 平均值。</p>
+</div>
+</div><!-- /zh -->
 </div>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- T2: DIET PLAN                                       -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div id="t2" class="tc">
+<div class="en">
 <div class="c">
 <h2>Diet Plan</h2>
 <h3>Core Strategy: Modified Mediterranean-DASH Diet</h3>
@@ -381,12 +504,169 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 </table></div>
 <p><strong>Hidden traps:</strong> (1) Sweetness labels exclude topping sugars — pearls and taro balls are cooked in sugar; (2) Sour drinks contain more sugar (lemon "less sweet" ~51g); (3) "No sugar" brown sugar pearl milk tested at 49g/700cc. WHO ideal: 25g/day, maximum 50g/day.</p>
 </div>
+</div><!-- /en -->
+<div class="zh">
+<div class="c">
+<h2>飲食計畫</h2>
+<h3>核心策略：改良地中海-DASH 飲食</h3>
+<p>2025 年研究證實，DASH 飲食結合 Omega-3 可一次解決：LDL −31.7 mg/dL、三酸甘油酯 −45.3 mg/dL、收縮壓 −14.7 mmHg、尿酸 −1.3 mg/dL（基線 ≥6 者）。</p>
+<p><strong>蛋白質「來源」比「總量」更重要：</strong>NHANES III 數據顯示，總蛋白質攝取與尿酸無顯著相關（p=0.74）。高紅肉攝取者尿酸 +0.48 mg/dL，而乳製品攝取反而降低 −0.21 mg/dL。</p>
+</div>
+<div class="c">
+<h3>每日營養目標</h3>
+<div class="tw"><table>
+<tr><th>項目</th><th>目標</th><th>備註</th></tr>
+<tr><td>每日熱量</td><td>1,800 kcal</td><td>每月減約 0.8 kg，6 個月達標</td></tr>
+<tr><td>蛋白質</td><td>70–84g（15–20%）</td><td>雞蛋 → 豆腐 → 雞胸 → 魚；避免紅肉和內臟</td></tr>
+<tr><td>脂肪</td><td>50–65g（25–35%）</td><td>以單元不飽和脂肪為主（橄欖油、堅果）</td></tr>
+<tr><td>碳水化合物</td><td>225–250g（50–55%）</td><td>複合碳水、高纖維；減少精製澱粉</td></tr>
+<tr><td>鈉</td><td>< 2,000 mg</td><td>ISH 收縮壓對鈉特別敏感；理想 < 1,500 mg</td></tr>
+<tr><td>膳食纖維</td><td>≥ 25g</td><td>燕麥 β-glucan 3g/天可降 LDL 5–10%</td></tr>
+<tr><td>飲水量</td><td>2.5–3.0 L</td><td>主要補水在 17:00 前完成</td></tr>
+</table></div>
+</div>
+<div class="c">
+<h3>餐食指南</h3>
+<h3>早餐（目標 350–400 kcal）</h3>
+<p>現有三明治 + 無糖豆漿的基底很好。微調：將煎蛋換成水煮蛋以減少油脂；醬料減半或不加美乃滋。</p>
+<p><strong>每日一杯熱拿鐵：</strong>使用低脂牛奶，約 120–150 kcal。牛奶酪蛋白促進尿酸排泄；咖啡綠原酸與降低痛風風險相關。若喝拿鐵，則換掉豆漿，控制早餐總量 ≤400 kcal。最佳時間 9–10 點；先喝 300–400 mL 溫水。</p>
+<div class="tw"><table>
+<tr><th>輪替</th><th>品項</th><th>約熱量</th><th>亮點</th></tr>
+<tr><td>A：地瓜經典</td><td>烤地瓜 + 茶葉蛋 + 無糖豆漿</td><td>~350 kcal</td><td>低 GI + 低普林蛋白</td></tr>
+<tr><td>B：改良三明治</td><td>烤雞蔬菜三明治（少醬）+ 無糖豆漿</td><td>~360 kcal</td><td>烤雞取代煎蛋</td></tr>
+<tr><td>C：拿鐵日</td><td>茶葉蛋 ×2 + 低脂熱拿鐵</td><td>~370 kcal</td><td>乳製品促進尿酸排泄</td></tr>
+<tr><td>D：高纖</td><td>無糖希臘優格 + 香蕉 + 小包堅果</td><td>~380 kcal</td><td>β-glucan 降 LDL</td></tr>
+<tr><td>E：燕麥力量</td><td>桂格燕麥片 40g + 水煮蛋 + 無糖豆漿 300ml + 堅果 10g</td><td>~390 kcal</td><td>β-glucan 3g 降 LDL 5–10%；搭配蛋白質減緩血糖波動</td></tr>
+</table></div>
+<div class="co cb" style="margin-top:8px">
+<div class="ct">燕麥早餐要訣（桂格機能燕麥片）</div>
+<p><strong>份量：</strong>乾燥燕麥 40–50g（約 150–180 kcal）。用熱水或熱無糖豆漿沖泡；不加糖 — 用少許肉桂調味。<br>
+<strong>必須搭配蛋白質</strong>（蛋、豆漿或希臘優格）— 單吃燕麥仍會造成中等血糖波動。<br>
+<strong>水分：</strong>β-glucan（可溶性纖維）需要足夠水分才能發揮作用 — 搭配 ≥300 mL 飲品。<br>
+<strong>鈉檢查：</strong>若使用「機能」系列含添加配料的款式，請查看標示鈉含量 — 部分調味包可能超過 200 mg/份。</p>
+</div>
+
+<h3>午餐（目標 450–550 kcal）| 超商策略</h3>
+<p>選購原則：翻背面看鈉 < 800 mg、選紫米/糙米、選烤或蒸雞胸、加購沙拉補菜（醬料用一半）。</p>
+<div class="co cr">
+<div class="ct">消基會調查：75% 超商微波便當鈉超標</div>
+<p>一定要翻到背面看「鈉」那一欄。以下品項已透過實際營養標示驗證，為相對安全的選擇。</p>
+</div>
+
+<h3>7-11 主力便當（Simple Fit 輕食系列優先）</h3>
+<div class="tw"><table>
+<tr><th>品項</th><th>熱量</th><th>鈉</th><th>蛋白質</th><th>備註</th></tr>
+<tr class="hl"><td>香烤雞胸鮮蔬餐</td><td>~374 kcal</td><td>~577mg</td><td>~18.4g</td><td>紫米、花椰菜、紅蘿蔔、杏鮑菇、水煮蛋。~$89。<strong>首選推薦</strong></td></tr>
+<tr><td>雞胸肉花椰菜飯減醣餐</td><td>~319 kcal</td><td>~500-700mg</td><td>~20+g</td><td>花椰菜飯取代白飯，有利三酸甘油酯管理</td></tr>
+<tr><td>豆酥烤魚鮮蔬便當</td><td>~437 kcal</td><td>~600-800mg</td><td>~18g</td><td>紫米、煎魚、花椰菜、毛豆、豆芽</td></tr>
+<tr><td>繽紛鮮蔬烤雞便當</td><td>~370 kcal</td><td>~550-700mg</td><td>~18g</td><td>紫米、去皮烤雞、多種蔬菜</td></tr>
+</table></div>
+<div class="co cr" style="margin-top:8px">
+<div class="ct">避免的便當</div>
+<p>香草烤雞腿時蔬餐 — 鈉 ~987mg，超標。增肌蛋白餐 — 595 kcal 過高且鈉 >900mg。</p>
+</div>
+
+<h3>單品蛋白質與配菜</h3>
+<div class="tw"><table>
+<tr><th>品項</th><th>熱量</th><th>鈉</th><th>蛋白質</th><th>DASH 評級</th></tr>
+<tr><td>即食雞胸肉（原味）</td><td>~104-115 kcal</td><td>~300-450mg</td><td>~22-24g</td><td><span class="tg tg-g">推薦</span></td></tr>
+<tr><td>法式舒肥嫩雞胸</td><td>~104 kcal</td><td>依標示</td><td>~22g</td><td><span class="tg tg-g">推薦</span></td></tr>
+<tr><td>茶葉蛋</td><td>~70-80 kcal</td><td>~200-229mg</td><td>~6.5g</td><td><span class="tg tg-b">可（每餐限 1 顆）</span></td></tr>
+<tr><td>蒸地瓜（約 100-150g）</td><td>~100-150 kcal</td><td><strong>~15-30mg</strong></td><td>~2g</td><td><span class="tg tg-g">最佳碳水</span> 超低鈉、高鉀</td></tr>
+<tr><td>鹽味毛豆</td><td>~97 kcal</td><td>~315mg</td><td>~7.9g</td><td><span class="tg tg-g">推薦</span> 最佳豆類點心</td></tr>
+</table></div>
+
+<h3>豆腐製品：鈉含量真相</h3>
+<div class="tw"><table>
+<tr><th>品項</th><th>鈉/100g</th><th>評級</th><th>備註</th></tr>
+<tr><td>板豆腐（原味）</td><td>~2mg</td><td><span class="tg tg-g">極佳</span></td><td>幾乎零鈉，高鈣 140mg</td></tr>
+<tr><td>嫩豆腐（原味）</td><td>~45mg</td><td><span class="tg tg-g">極佳</span></td><td>低鈉、低卡</td></tr>
+<tr><td>五香豆干</td><td>~445mg</td><td><span class="tg tg-o">少量可</span></td><td>底子已高，控制份量</td></tr>
+<tr><td>涼拌豆腐（加醬）</td><td>~350-650mg</td><td><span class="tg tg-o">醬料用一半</span></td><td>醬包是關鍵變數</td></tr>
+<tr><td>滷豆干</td><td>~600-900+mg</td><td><span class="tg tg-r">避免</span></td><td>吸收滷汁中的大量醬油鈉</td></tr>
+<tr><td>百頁豆腐</td><td>高</td><td><span class="tg tg-r">避免</span></td><td>高油、高鈉 — 最差的豆腐選擇</td></tr>
+<tr><td>雞蛋豆腐</td><td>極高</td><td><span class="tg tg-r">避免</span></td><td>以含鹽醬油製成；鈉是一般豆腐 150 倍</td></tr>
+</table></div>
+
+<h3>飲料選擇</h3>
+<div class="tw"><table>
+<tr><th>品項</th><th>熱量</th><th>鈉</th><th>蛋白質</th><th>備註</th></tr>
+<tr><td>義美無加糖厚濃豆奶</td><td>~228 kcal</td><td>~30-50mg</td><td>~21.2g</td><td>蛋白質最高</td></tr>
+<tr><td>光泉無加糖濃豆漿</td><td>~190 kcal</td><td>~30-50mg</td><td>~19.1g</td><td>高蛋白、低鈉</td></tr>
+<tr><td>光泉無加糖黑豆漿</td><td>~142 kcal</td><td>~30-50mg</td><td>~14g</td><td>低卡選擇；黑豆可能有助尿酸</td></tr>
+<tr><td>健康穀物豆漿（400ml）</td><td>~140 kcal</td><td>~100mg</td><td>~12g</td><td>通過健康食品認證的血脂調節功效</td></tr>
+<tr><td>無糖茶</td><td>0 kcal</td><td>~0mg</td><td>0g</td><td>零負擔</td></tr>
+</table></div>
+
+<h3>推薦午餐組合</h3>
+<div class="co cg">
+<div class="ct">組合 A：完整便當（最方便）</div>
+<p>香烤雞胸鮮蔬餐 + 無糖茶 → <strong>~374 kcal / ~577mg 鈉</strong>。不夠飽加蒸地瓜。</p>
+</div>
+<div class="co cg" style="margin-top:8px">
+<div class="ct">組合 B：DIY 組裝（鈉最低 ★推薦）</div>
+<p>蒸地瓜 + 即食雞胸肉（原味）+ 黑豆漿 → <strong>~372 kcal / ~410mg 鈉</strong>。加一顆茶葉蛋可達 ~450 kcal。</p>
+</div>
+<div class="co cg" style="margin-top:8px">
+<div class="ct">組合 C：減醣便當 + 豆漿</div>
+<p>雞胸肉花椰菜飯減醣餐 + 黑豆漿 → <strong>~461 kcal / ~590mg 鈉</strong>。剛好達到熱量目標。</p>
+</div>
+<div class="co cg" style="margin-top:8px">
+<div class="ct">組合 D：地瓜經典升級（蛋白質最高）</div>
+<p>蒸地瓜 + 舒肥雞胸 + 鹽味毛豆 + 黑豆漿 → <strong>~470 kcal / ~725mg 鈉</strong>。動物性與植物性蛋白都顧到。</p>
+</div>
+<div class="co cb" style="margin-top:8px">
+<div class="ct">組合 E：地瓜蛋沙拉套餐（$156 / ~480-556 kcal）</div>
+<p>烤地瓜（中）+ 茶葉蛋 ×2 + Simple-Fit 繽紛蔬菜沙拉（96 kcal）+ 健康穀物豆漿 → <strong>~530 kcal / ~700mg 鈉</strong>。醬料包用一半可省 ~80 kcal / 200mg 鈉。</p>
+</div>
+<div class="co cg" style="margin-top:8px">
+<div class="ct">組合 F：燕麥 + 雞胸套餐（辦公室友善，免開火）</div>
+<p>桂格燕麥片 50–60g 用熱水或溫低脂牛奶（~200ml）沖泡 + 7-11 即食雞胸肉（原味）撕絲鋪上 + 茶葉蛋 ×1 → <strong>~470 kcal / ~500mg 鈉</strong>。只需一個熱水壺 — 倒熱水等 2–3 分鐘即可。牛奶版增加鈣質和奶香；水版更低卡。β-glucan 3g+ 達到每日降 LDL 目標。每天一餐燕麥就夠 — 保持飲食多樣性。</p>
+</div>
+
+<div class="co co-o" style="margin-top:10px">
+<div class="ct">超商採購 5 原則</div>
+<p>1. <strong>翻背面看鈉</strong> — 永遠先看營養標示的「鈉」欄位<br>
+2. <strong>蒸地瓜是最佳夥伴</strong> — 超低鈉、高鉀促鈉排出、高纖降血脂<br>
+3. <strong>沙拉醬是隱藏鈉彈</strong> — 用一半或不加<br>
+4. <strong>DIY 單品組裝鈉控最佳</strong> — 比現成便當更有彈性<br>
+5. <strong>認明 Simple Fit 系列</strong> — 7-11 專為健康設計的產品線</p>
+</div>
+
+<p style="margin-top:10px">其他超商輪替選項 — 全家：健身雞肉餐盒半飯（~470 kcal）、美式雞肉餐盒（~466 kcal，含豆腐和穀米）。</p>
+
+<h3>晚餐（目標 450–550 kcal）| 健康餐盒外送</h3>
+<div class="tw"><table>
+<tr><th>品牌</th><th>特色</th><th>推薦品項</th><th>價格帶</th></tr>
+<tr><td>Easy Eat 健康餐盒</td><td>4.83 星，蛋白質多元</td><td>舒肥雞胸 532 kcal / 鹽烤鯖魚 / 嫩煎雞腿</td><td>~NT$100–140</td></tr>
+<tr><td>Less Salt 健康餐盒</td><td>4.85 星，少油少鹽</td><td>手撕雞 / 煎鮭魚 / 蒜味鯛魚</td><td>~NT$100–145</td></tr>
+<tr><td>享鮮健康餐盒</td><td>4.9 星，橄欖油舒肥</td><td>舒肥雞 / 板腱牛 / 泡菜豬，可選半飯</td><td>~NT$90–145</td></tr>
+<tr><td>GET POWER 餐盒</td><td>4.9 星，高蛋白</td><td>依每日菜單選雞或魚</td><td>~NT$100–130</td></tr>
+<tr><td>常常好食（冷凍）</td><td>全台宅配，3 分鐘微波</td><td>卡路里控制餐 ~403 kcal / 鈉 444mg</td><td>~NT$130–150</td></tr>
+</table></div>
+<p><strong>點餐口訣：</strong>搜「健康餐盒」→ 選雞或魚 → 點「半飯」→ 避開炸物和勾芡醬汁。</p>
+</div>
+<div class="c">
+<h3>嚴格避免 vs. 積極增加</h3>
+<div class="co cr">
+<div class="ct">嚴格避免</div>
+<p>含糖飲料、啤酒、內臟、加工肉品（香腸、火腿）、油炸食品、泡麵、蝦蟹貝類、過量白飯和麵條</p>
+<p><strong>台灣特別注意：</strong>滷味（高鈉 + 常含內臟）、蚵仔煎（高普林）、豬血糕、珍珠奶茶</p>
+</div>
+<div class="co cg" style="margin-top:10px">
+<div class="ct">積極增加</div>
+<p>低脂乳製品（促進尿酸排泄 + 鈣降血壓）、燕麥（降 LDL）、毛豆/豆腐（植物蛋白，低尿酸風險）、無調味堅果 15g/天</p>
+<p>櫻桃/藍莓（花青素降尿酸）、地瓜取代白飯（低 GI + 高鉀促鈉排出）、黑木耳（高纖降血脂）、綠茶/烏龍茶</p>
+</div>
+</div>
+</div><!-- /zh -->
 </div>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- T3: EXERCISE & WALL SITS                            -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div id="t3" class="tc">
+<div class="en">
 <div class="c">
 <h2>Exercise & Wall Sits</h2>
 <h3>Why Wall Sits Are Your Blood Pressure Medicine</h3>
@@ -473,12 +753,87 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 <h3>Phase 3: Optimization (Months 5–6) ~250–300 min/week</h3>
 <p>Brisk walks 35–40 min with intervals, 8,500–10,000 steps/day. Strength 3–4 rounds with advanced moves (Bulgarian split squats, pike push-ups, single-leg glute bridges). Wall sits reduced to 2×/week for maintenance. Weekend family activities extended to 45–60 minutes.</p>
 </div>
+</div><!-- /en -->
+<div class="zh">
+<div class="c">
+<h2>運動與靠牆深蹲</h2>
+<h3>為什麼靠牆深蹲是你的降壓藥</h3>
+<p>2023 BJSM 指標性統合分析（270 項 RCT，15,827 名參與者）：等長運動是降血壓最有效的運動類型，降幅達 −8.24/−4.00 mmHg。靠牆深蹲在所有運動中排名第一（有效性 90.5%）。2024 RCT：每週 3 次，每次 4 組 ×2 分鐘，12 週收縮壓 −12.9 mmHg。</p>
+<p><strong>特別適合你的 ISH：</strong>等長運動改善血管內皮功能和動脈順應性 — 直接針對收縮壓高但舒張壓正常的模式。135 − 13 = 122，直接回到正常範圍。</p>
+<p><strong>機制：</strong>等長收縮期間，肌肉持續壓迫血管，限制血流。放鬆後血液湧回，刺激血管內皮產生一氧化氮（NO），促進血管舒張。每次「收縮 → 放鬆」循環就是一次血管訓練。因此組間休息與維持時間同樣重要。</p>
+<div class="co co-o">
+<div class="ct">尿酸安全警告</div>
+<p>絕對避免高強度劇烈運動（乳酸堆積會抑制尿酸排泄）。維持中等強度（RPE 4–6/10）。運動前喝 500 mL 水；運動中每 15–20 分鐘補充 200 mL。絕不空腹運動（酮體會升高尿酸）。</p>
+</div>
+</div>
+<div class="c">
+<h3>靠牆深蹲技巧：六大要點</h3>
+<div class="tw"><table>
+<tr><th>#</th><th>要點</th><th>說明</th><th>常見錯誤</th></tr>
+<tr><td>1</td><td><strong>背部完全貼牆</strong></td><td>頭、肩、上背、下背都貼牆。核心收緊 — 肚臍往脊椎方向收。</td><td>下背離開牆面 → 核心未啟動或蹲太深</td></tr>
+<tr><td>2</td><td><strong>腳的位置</strong></td><td>雙腳與肩同寬，離牆約 60 cm（約兩個腳掌長）。</td><td>太近 → 膝蓋超過腳尖；太遠 → 背部離開牆面</td></tr>
+<tr><td>3</td><td><strong>膝蓋不超過腳尖</strong></td><td>小腿盡量保持垂直，膝蓋在腳踝正上方。</td><td>膝蓋前傾 → 膝關節壓力增加</td></tr>
+<tr><td>4</td><td><strong>膝蓋角度（關鍵變數）</strong></td><td>初學者從 120°（非常淺蹲）開始，每週加深。研究目標為 90°。</td><td>一開始就到 90° → 膝關節壓力過大</td></tr>
+<tr><td>5</td><td><strong>呼吸</strong></td><td>保持穩定呼吸：鼻吸口呼。<strong>絕對不要憋氣。</strong></td><td>憋氣 → 血壓瞬間飆升，完全失去降壓目的</td></tr>
+<tr><td>6</td><td><strong>重心</strong></td><td>重量均勻分布在整個腳底，感受重心在腳跟而非腳尖。</td><td>重心在腳尖 → 膝關節壓力增加，容易前傾</td></tr>
+</table></div>
+<div class="co co-o">
+<div class="ct">膝蓋角度科學</div>
+<p>研究顯示膝關節壓力在 0–50 度時最小，60–90 度時顯著增加。初學者既不需要也不應該一開始就嘗試 90°。從淺蹲開始，讓肌肉和關節逐步適應。</p>
+</div>
+</div>
+<div class="c">
+<h3>靠牆深蹲 12 週漸進計畫（從零到達標）</h3>
+<p>研究驗證的目標處方為 <strong>4 組 × 2 分鐘，組間休息 2 分鐘，每週 3 次</strong>。這是終點目標，不是起點。</p>
+<div class="co cb">
+<div class="ct">第 0 週：基準測試</div>
+<p>找一面牆，下滑至約 120° 膝角（非常淺蹲），計時看你能撐多久。這個數字就是你的起點。</p>
+</div>
+<div class="tw"><table>
+<tr><th>週數</th><th>膝蓋角度</th><th>維持時間</th><th>組數 × 休息</th><th>頻率</th><th>每次總時間</th></tr>
+<tr><td><strong>第 1 週</strong> 適應</td><td>~120°（非常淺）</td><td>15 秒</td><td>4 × 2 分鐘休息</td><td>3次/週</td><td>~9 分鐘</td></tr>
+<tr><td><strong>第 2 週</strong> 增加時間</td><td>~120°</td><td>20–25 秒</td><td>4 × 2 分鐘休息</td><td>3次/週</td><td>~10 分鐘</td></tr>
+<tr><td><strong>第 3 週</strong> 加深角度</td><td>~100–110°</td><td>25–30 秒</td><td>4 × 2 分鐘休息</td><td>3次/週</td><td>~11 分鐘</td></tr>
+<tr><td><strong>第 4 週</strong> 建立強度</td><td>~100°</td><td>30 秒</td><td>4 × 2 分鐘休息</td><td>3次/週</td><td>~12 分鐘</td></tr>
+<tr class="hl"><td><strong>第 5–8 週</strong></td><td>~100°</td><td>每週 +5–10 秒 → 60 秒</td><td>4 × 2 分鐘休息</td><td>3次/週</td><td>~14 分鐘</td></tr>
+<tr class="hl"><td><strong>第 9–12 週</strong> 達標</td><td>漸進至 90°</td><td>60–120 秒 → 2 分鐘</td><td>4 × 2 分鐘休息</td><td>3次/週</td><td>~16 分鐘</td></tr>
+</table></div>
+<p><strong>漸進原則：</strong>先增加維持時間，再加深角度。每週只調整一個變數。如果這週太吃力，重複上一週的設定。</p>
+<div class="co cg">
+<p><strong>每週 3 次 × 12–16 分鐘/次（含休息）</strong> — 每週僅投入 42 分鐘，實際運動 24 分鐘，即可達到等同一種降壓藥的效果。</p>
+</div>
+</div>
+<div class="c">
+<h3>完整每週運動計畫</h3>
+<h3>階段一：打基礎（第 1–2 個月）~120–150 分鐘/週</h3>
+<div class="tw"><table>
+<tr><th>日</th><th>活動</th><th>時長</th><th>時間</th></tr>
+<tr><td>一</td><td>快走 + 靠牆深蹲</td><td>20 分 + 14 分</td><td>晚間 19:00–19:40</td></tr>
+<tr><td>二</td><td>運動零食 ×3</td><td>每次 5 分鐘</td><td>分散全天</td></tr>
+<tr><td>三</td><td>快走</td><td>20 分鐘</td><td>通勤或晚間</td></tr>
+<tr><td>四</td><td>靠牆深蹲 + 徒手肌力</td><td>14 分 + 10 分</td><td>晚間在家</td></tr>
+<tr><td>五</td><td>快走 + 運動零食 ×2</td><td>20 分 + 每次 5 分</td><td>分散</td></tr>
+<tr><td>六</td><td>家庭活動日</td><td>30 分鐘</td><td>全家一起</td></tr>
+<tr><td>日</td><td>休息（輕度伸展）</td><td>10 分鐘</td><td>任何時間</td></tr>
+</table></div>
+<p><strong>快走：</strong>前 2 週：每次 15 分鐘，4,000–5,000 步/天。第 3–4 週：20 分鐘，5,000–6,000 步/天。</p>
+<p><strong>運動零食：</strong>等公車做 30 個小腿上提、辦公室 10 個牆壁伏地挺身、看電視做 1 分鐘平板支撐。</p>
+<p><strong>家庭運動：</strong>動物走路遊戲（熊爬、青蛙跳、螃蟹走）、伏地挺身親親、抱小孩深蹲、全家跳舞 10 分鐘。</p>
+
+<h3>階段二：強化強度（第 3–4 個月）~170–210 分鐘/週</h3>
+<p>快走延長至每次 30 分鐘。引入間歇走（3 分鐘中速 + 1 分鐘加速 — 不要全力衝刺）。靠牆深蹲達標：4 組 × 2 分鐘。徒手肌力：3 輪循環（伏地挺身 10–12、深蹲 12–15、反弓步 8–10/側、平板 30–45 秒、臀橋 10–12），2–3 次/週。每日目標 7,000–8,500 步。</p>
+
+<h3>階段三：優化（第 5–6 個月）~250–300 分鐘/週</h3>
+<p>快走 35–40 分鐘含間歇，8,500–10,000 步/天。肌力 3–4 輪含進階動作（保加利亞分腿蹲、pike 伏地挺身、單腿臀橋）。靠牆深蹲減為 2 次/週維持。週末家庭活動延長至 45–60 分鐘。</p>
+</div>
+</div><!-- /zh -->
 </div>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- T4: SUPPLEMENTS & COST                              -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div id="t4" class="tc">
+<div class="en">
 <div class="c">
 <h2>Supplements & Cost</h2>
 <div class="tw"><table>
@@ -585,12 +940,72 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 <div class="co cb"><div class="ct">Where Does the Savings Go?</div>Plan B saves NT$1,400–1,600/month, nearly NT$18,000/year. Enough to cover a home BP monitor, sleep clinic copays, or a year of healthy meal upgrades.</div>
 <div class="vd"><h3>Bottom Line</h3><p>Da Yan and Sports Research are both rTG with equivalent absorption (KD Pharma / AlaskOmega sourced). Your current Da Yan choice is solid. If cost matters, Sports Research is an equivalent alternative. Either way, "increasing from 2 to 4 capsules" is 100× more important than "switching brands."</p></div>
 </div>
+</div><!-- /en -->
+<div class="zh">
+<div class="c">
+<h2>保健品與費用</h2>
+<div class="tw"><table>
+<tr><th>保健品</th><th>主要目標</th><th>劑量</th><th>服用時間</th></tr>
+<tr><td><strong>大研生醫 Omega-3</strong><br><span class="tg tg-g">rTG 型</span></td><td>三酸甘油酯 ↓ / 收縮壓 ↓ / 抗發炎</td><td>4 顆/天<br>（EPA 1,152 + DHA 768 = 1,920 mg）</td><td>隨晚餐服用</td></tr>
+<tr><td><strong>NOW Foods 酸櫻桃</strong><br><span class="tg tg-b">CherryPURE</span></td><td>尿酸 ↓ / CRP ↓ / 助眠</td><td>1 顆/天（500 mg）</td><td>隨晚餐服用</td></tr>
+<tr><td><strong>枸杞茶</strong><br><span class="tg tg-o">食品級</span></td><td>LDL ↓（輔助）/ 血壓 ↓（輔助）</td><td>20g/天沖泡 + 吃枸杞</td><td>上午 10:00</td></tr>
+</table></div>
+</div>
+<div class="c">
+<h3>Omega-3 魚油（大研德國頂級）</h3>
+<p>每份 2 顆：EPA 576 + DHA 384 = 960 mg。Omega-3 濃度 84%，rTG 型，KD Pharma（德國）原料。</p>
+<p><strong>從 2 顆增加到 4 顆：</strong>2 顆 = 960 mg（一般保健）。你的 ISH + 血脂異常需要 4 顆 = 1,920 mg（治療劑量）。EPA:DHA = 3:2，偏重 EPA — 對收縮壓和三酸甘油酯特別有利。</p>
+<p>如果 3 個月複檢 LDL 上升，考慮換成大研 EPA 1200 配方（80% EPA）。</p>
+<div class="co cb"><div class="ct">台灣法規</div>衛福部規定每日 EPA+DHA 上限 2 公克。4 顆 = 1,920 mg，剛好在上限內。</div>
+<h3>為什麼 rTG 型很重要</h3>
+<div class="tw"><table>
+<tr><th>型態</th><th>全名</th><th>濃度</th><th>吸收率</th><th>備註</th></tr>
+<tr><td><span class="tg tg-b">TG</span></td><td>天然三酸甘油酯型</td><td>低 20–30%</td><td>基準 100%</td><td>原始型態，濃度低</td></tr>
+<tr><td><span class="tg tg-o">EE</span></td><td>乙酯型</td><td>高 50–90%</td><td>~73%</td><td>胰酶分解速度慢 10–50 倍</td></tr>
+<tr><td><span class="tg tg-g">rTG</span></td><td>再酯化三酸甘油酯型</td><td>高 80–95%</td><td>~124%</td><td>兼具高濃度 + 高吸收率</td></tr>
+</table></div>
+<p>72 人 RCT 中，rTG 比天然 TG 吸收率 +24%，比 EE 高約 1.5–1.7 倍。空腹差距更大。<strong>重點：</strong>無論何種型態，一定隨含脂肪的餐食服用。</p>
+</div>
+<div class="c">
+<h3>酸櫻桃膠囊（NOW Foods 500mg）</h3>
+<p><strong>降尿酸：</strong>2025 RCT 顯示 500 mg 膠囊服用 4 週，尿酸降低 37.4%（−2.62 mg/dL），CRP 降低 23%。機制：花青素抑制黃嘌呤氧化酶（與 allopurinol 相同靶點）+ 促進腎臟尿酸排泄。</p>
+<p><strong>助眠：</strong>非透過褪黑激素含量（太低），而是抑制 IDO 酵素 → 保留更多色胺酸 → 血清素 → 褪黑激素。膠囊對睡眠的證據比果汁弱 — 視為附加效益。</p>
+<p><strong>為什麼選膠囊而非果汁：</strong>零糖、零熱量（果汁含 25–30g 果糖，反而升高尿酸 + 三酸甘油酯）、標準化劑量、每月約 NT$200 vs. 果汁 NT$1,500–3,000。</p>
+<p>iHerb 價格約 USD $16–18（~NT$560），90 顆可用 3 個月。CherryPURE 萃取（與臨床研究相同），Montmorency 品種，50:1 濃縮。</p>
+</div>
+<div class="c">
+<h3>枸杞茶</h3>
+<p>維持每日 20g 沖泡一次。唯一改變：<strong>泡完後吃掉枸杞</strong>。沖泡只萃取水溶性成分；脂溶性的 β-sitosterol（降 LDL 的關鍵成分）留在果實中。枸杞屬低普林，安全。證據有限 — 定位為「附加品」。</p>
+</div>
+<div class="c">
+<h2>每月費用估算</h2>
+<h3>方案 A：繼續大研（推薦）</h3>
+<div class="tw"><table>
+<tr><th>品項</th><th>規格</th><th>月用量</th><th>月費用</th></tr>
+<tr><td>大研德國頂級魚油</td><td>60 顆/瓶</td><td>4 顆/天 = 2 瓶</td><td>NT$2,000–2,250</td></tr>
+<tr><td>NOW Foods 酸櫻桃</td><td>90 顆/瓶</td><td>1 顆/天 = 0.33 瓶</td><td>~NT$185</td></tr>
+<tr><td>枸杞（乾燥）</td><td>散裝</td><td>~600g</td><td>~NT$200–350</td></tr>
+<tr class="hl"><td colspan="3"><strong>方案 A 月總費用</strong></td><td><strong>NT$2,385–2,785</strong></td></tr>
+</table></div>
+<h3>方案 B：全部 iHerb（省錢方案）</h3>
+<div class="tw"><table>
+<tr><th>品項</th><th>規格</th><th>月用量</th><th>月費用</th></tr>
+<tr><td>Sports Research Omega-3</td><td>120 顆/瓶</td><td>2–3 顆/天</td><td>NT$390–585</td></tr>
+<tr><td>NOW Foods 酸櫻桃</td><td>90 顆/瓶</td><td>1 顆/天</td><td>~NT$185</td></tr>
+<tr><td>枸杞（乾燥）</td><td>散裝</td><td>~600g</td><td>~NT$200–350</td></tr>
+<tr class="hl"><td colspan="3"><strong>方案 B 月總費用</strong></td><td><strong>NT$775–1,120</strong></td></tr>
+</table></div>
+<div class="co cb"><div class="ct">省下的錢去哪？</div>方案 B 每月省 NT$1,400–1,600，一年近 NT$18,000。足夠買一台家用血壓計、睡眠門診掛號費，或一年份的健康餐升級。</div>
+<div class="vd"><h3>結論</h3><p>大研和 Sports Research 同為 rTG 型，吸收率相當（KD Pharma / AlaskOmega 原料）。你目前選大研沒問題。如果在意費用，Sports Research 是同等替代方案。無論如何，「從 2 顆增加到 4 顆」比「換品牌」重要 100 倍。</p></div>
+</div>
+</div><!-- /zh -->
 </div>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- T5: DAILY ROUTINE (+ Hydration + BP measurement)    -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div id="t5" class="tc">
+<div class="en">
 <div class="c">
 <h2>Daily Routine & Hydration</h2>
 <p>This schedule integrates hydration timing (front-loaded before 17:00 to prevent nocturia), BP measurements, exercise, and supplement intake into a single daily flow.</p>
@@ -621,12 +1036,44 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 <p><strong>Recording:</strong> Google Sheets — log date, time, systolic, diastolic, heart rate each session. Accumulate 2 weeks of data to bring to your doctor.</p>
 <p><strong>Key technique:</strong> Sit with back against chair, feet flat (no crossing), arm supported at heart level. Sit quietly 5 minutes. Don't talk during measurement. Two consecutive readings 1 minute apart; use the second value.</p>
 </div>
+</div><!-- /en -->
+<div class="zh">
+<div class="c">
+<h2>每日作息與補水</h2>
+<p>此時程整合了補水時間（17:00 前集中補水以防夜尿）、血壓量測、運動和保健品攝取。</p>
+<div class="tw"><table>
+<tr><th>時間</th><th>活動</th><th>補水</th><th>備註</th></tr>
+<tr><td>5:30</td><td>起床</td><td>400 mL 溫水</td><td>補充整夜流失的水分</td></tr>
+<tr><td>5:35</td><td>量血壓（第 1 次）</td><td>—</td><td>上完廁所後、進食前。靜坐 5 分鐘，背靠椅背，雙腳平放。連量兩次間隔 1 分鐘；取第 2 次。</td></tr>
+<tr><td>5:45–6:00</td><td>個人時間</td><td>—</td><td>閱讀、規劃</td></tr>
+<tr><td>6:00–7:00</td><td>通勤</td><td>500 mL</td><td>水壺 + 4-7-8 呼吸或 10 分鐘冥想</td></tr>
+<tr><td>7:00–7:30</td><td>早餐</td><td>（拿鐵/豆漿）</td><td>三明治/地瓜組合</td></tr>
+<tr><td>9:00–10:00</td><td>熱拿鐵 + 枸杞茶 20g</td><td>250 mL</td><td>記得吃枸杞</td></tr>
+<tr><td>12:00</td><td>午餐（超商）</td><td>300 mL</td><td>鈉 <800mg，烤雞 + 配菜沙拉</td></tr>
+<tr><td>15:00–17:00</td><td>下午 / 回程通勤</td><td>300 mL</td><td>最後大量補水</td></tr>
+<tr class="hl"><td>17:00</td><td>補水截止</td><td>開始減量</td><td>晚餐少喝湯</td></tr>
+<tr class="hl"><td>18:30</td><td>晚餐（健康餐盒外送）</td><td>僅小啜</td><td>半飯 + 大研魚油 ×4 + 酸櫻桃 ×1</td></tr>
+<tr><td>19:00–19:40</td><td>運動時段</td><td>—</td><td>靠牆深蹲 / 快走 / 家庭活動</td></tr>
+<tr><td>19:30–20:00</td><td>量血壓（第 2 次）</td><td>—</td><td>運動後休息 15 分鐘再量</td></tr>
+<tr><td>20:00</td><td>睡前抬腿 15 分 + 上廁所</td><td>—</td><td>雙腳靠牆排出下肢體液</td></tr>
+<tr><td>20:30</td><td>就寢</td><td>—</td><td>側睡，背後放枕頭</td></tr>
+<tr><td>若半夜醒來</td><td>上廁所 → 不開燈 → 回床</td><td>—</td><td>4-7-8 呼吸；5:30 前不離床</td></tr>
+</table></div>
+<p><strong>每日總補水量約 2.3–2.5 L</strong>（含枸杞茶、拿鐵/豆漿）。充足水分對腎臟尿酸排泄至關重要 — 研究顯示攝取 ≥1,920 mL/天可降低約 46% 痛風發作風險。</p>
+</div>
+<div class="c">
+<h3>血壓量測要點</h3>
+<p><strong>記錄：</strong>Google Sheets — 每次記錄日期、時間、收縮壓、舒張壓、心率。累積 2 週數據帶去看醫生。</p>
+<p><strong>關鍵技巧：</strong>背靠椅背坐好，雙腳平放（不翹腳），手臂支撐在心臟高度。安靜坐 5 分鐘。量測期間不說話。連量兩次間隔 1 分鐘；取第 2 次數值。</p>
+</div>
+</div><!-- /zh -->
 </div>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- T6: TIMELINE & MILESTONES                           -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div id="t6" class="tc">
+<div class="en">
 <div class="c">
 <h2>Timeline & Milestones</h2>
 <p>Your body won't "wait until month six to change all at once." Every phase has perceptible signals telling you the plan is working.</p>
@@ -648,6 +1095,7 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 <tr><td>Month 5</td><td>65.8 kg</td><td>~16.5%</td><td>7</td><td>Optimization</td><td>250+ min exercise/week</td></tr>
 <tr class="hl"><td>Month 6</td><td>65.0 kg</td><td>~15.5%</td><td>6–7</td><td>Full evaluation</td><td>Complete bloodwork recheck vs. baseline</td></tr>
 </table></div>
+<div id="monthlyActualsEN"></div>
 <div class="co cb">
 <div class="ct">Body Fat % &amp; Visceral Fat — Methodology</div>
 <p><strong>Body Fat %:</strong> Projected assuming 80% of weight loss from fat mass and 20% from lean mass, consistent with diet + resistance + aerobic exercise protocols (Bellicha et al., <em>Obesity Reviews</em> 2021). Early months may show smaller BF% drops due to initial fluid redistribution. Tanita scale readings are the reference instrument.</p>
@@ -777,12 +1225,119 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 <p><strong>What Garmin can't track:</strong> Blood pressure (use home monitor morning/evening), blood sugar, cholesterol, uric acid (blood tests at months 0, 3, 6).</p>
 <p><strong>Tracking mindset:</strong> Weigh only once per week (Sunday morning, after bathroom, before eating). Focus on controllable behavior metrics. Use Garmin Connect 7-day and 30-day trend charts — don't obsess over single-day numbers.</p>
 </div>
+</div><!-- /en -->
+<div class="zh">
+<div class="c">
+<h2>時程與里程碑</h2>
+<p>你的身體不會「等到第六個月才一次全部改變」。每個階段都有可感知的信號告訴你計畫正在奏效。</p>
+<div class="co cb">
+<div class="ct">重要心態</div>
+<p>改善通常「先感覺到，再由數字確認」。衣服變鬆、精神變好、睡眠改善 — 這些都比體重計先出現。不要只盯著體重數字。</p>
+</div>
+</div>
+<div class="c">
+<h3>階段目標</h3>
+<div class="tw"><table>
+<tr><th>月份</th><th>目標體重</th><th>體脂率</th><th>內臟脂肪</th><th>運動階段</th><th>關鍵行動</th></tr>
+<tr class="hl"><td>第 0 月（現在）</td><td>70.0 kg</td><td>~20.5%</td><td>10</td><td>—</td><td>睡眠修復 + OSA 篩檢 + 基準抽血</td></tr>
+<tr><td>第 1 月</td><td>69.2 kg</td><td>~20.0%</td><td>9–10</td><td>打基礎</td><td>建立習慣，5,000+ 步/天</td></tr>
+<tr><td>第 2 月</td><td>68.3 kg</td><td>~19.0%</td><td>9</td><td>基礎完成</td><td>靠牆深蹲達到 4×60 秒</td></tr>
+<tr class="hl"><td>第 3 月</td><td>67.5 kg</td><td>~18.0%</td><td>8</td><td>累積期開始</td><td>複檢抽血（血脂、尿酸、血壓）</td></tr>
+<tr><td>第 4 月</td><td>66.7 kg</td><td>~17.5%</td><td>7–8</td><td>累積期</td><td>8,000+ 步/天，間歇走</td></tr>
+<tr><td>第 5 月</td><td>65.8 kg</td><td>~16.5%</td><td>7</td><td>優化期</td><td>250+ 分鐘運動/週</td></tr>
+<tr class="hl"><td>第 6 月</td><td>65.0 kg</td><td>~15.5%</td><td>6–7</td><td>全面評估</td><td>完整抽血複檢 vs. 基準值</td></tr>
+</table></div>
+<div id="monthlyActualsZH"></div>
+</div>
+<div class="c">
+<h3>第 1 週：體液重分布</h3>
+<div class="tw"><table>
+<tr><th>你會注意到</th><th>體內正在發生什麼</th></tr>
+<tr><td>體重可能掉 0.5–1 kg（別太興奮）</td><td>減少精製碳水和鈉使身體釋放多餘水分。這是體液轉移，不是脂肪減少。</td></tr>
+<tr><td>排尿更頻繁</td><td>腎臟在 2.5 L/天的水量下開始更積極排出代謝廢物（包括尿酸）。</td></tr>
+<tr><td>可能輕微頭痛或疲勞</td><td>身體適應低鈉飲食。通常 3–5 天消退。</td></tr>
+<tr><td>腹部脹氣減少</td><td>去除高鈉食物減少水分滯留。</td></tr>
+<tr><td>第一次靠牆深蹲後大腿痠痛</td><td>正常！第 3–4 次後痠痛顯著減少。</td></tr>
+</table></div>
+</div>
+<div class="c">
+<h3>第 2–4 週：習慣建立</h3>
+<div class="tw"><table>
+<tr><th>你會注意到</th><th>體內正在發生什麼</th></tr>
+<tr><td><strong>睡眠開始改善</strong></td><td>夜尿延後或減少；Sleep Score 和 Body Battery 開始上升。</td></tr>
+<tr><td>早上不那麼累</td><td>多出 1–2 小時深度睡眠恢復皮質醇節律。</td></tr>
+<tr><td>腰部衣服稍微鬆了</td><td>水分滯留消退 + 早期脂肪減少。腰圍變化比體重先被注意到。</td></tr>
+<tr><td>靠牆深蹲從 15 秒進步到 25–30 秒</td><td>神經肌肉適應 — 大腦學習更有效率地徵召肌纖維。</td></tr>
+<tr><td>對鹹味變敏感</td><td>味蕾在低鈉飲食 2–3 週後重新校準。</td></tr>
+<tr><td>排便變規律</td><td>增加纖維 + 充足水分 = 改善腸道蠕動。</td></tr>
+</table></div>
+<div class="co cg">
+<div class="ct">預期 Garmin 數據變化</div>
+<p>Sleep Score：63 → 68–72 | Body Battery 起床值：40–50 → 55–65 | 靜息心率：可能下降 1–3 bpm</p>
+</div>
+</div>
+<div class="c">
+<h3>第 1–2 月：早期代謝改善</h3>
+<div class="tw"><table>
+<tr><th>你會注意到</th><th>體內正在發生什麼</th></tr>
+<tr><td>體重穩定下降（~69–68.5 kg）</td><td>每週減少約 0.2–0.3 kg 真正脂肪。不快，但非常穩定。</td></tr>
+<tr><td>下午不再昏睡</td><td>血糖波動減少（低 GI 飲食 + 減少精製碳水）。</td></tr>
+<tr><td>家用血壓計開始顯示趨勢</td><td>靠牆深蹲效果約 4 週出現；收縮壓可能從 135 降至 130–132。</td></tr>
+<tr><td>Omega-3 效果開始顯現</td><td>抗發炎效益第 4 週開始；三酸甘油酯完整效果在 8–12 週。</td></tr>
+</table></div>
+</div>
+<div class="c">
+<h3>第 3 月：中期突破（抽血時間）</h3>
+<div class="tw"><table>
+<tr><th>你會注意到</th><th>體內正在發生什麼</th></tr>
+<tr><td><strong>鏡子裡看得出差異</strong></td><td>減去約 2.5 kg 脂肪 + 水分滯留消退 + 改善體態。</td></tr>
+<tr><td>靠牆深蹲可維持 60 秒</td><td>肌肉耐力顯著提升。</td></tr>
+<tr><td>走路變快，爬樓梯不喘</td><td>心肺適能改善 + 體重減輕。</td></tr>
+<tr><td><strong>血壓可能已顯著下降</strong></td><td>12 週 RCT：收縮壓 −12.9 mmHg。你的 135 可能已降至 125 或以下。</td></tr>
+</table></div>
+<div class="co cg">
+<div class="ct">第 3 月抽血預期改善</div>
+<p><strong>三酸甘油酯：</strong>↓ 15–30% | <strong>LDL：</strong>↓ 5–15% | <strong>尿酸：</strong>↓ 10–20% | <strong>HbA1c：</strong>適度改善 | <strong>hsCRP：</strong>↓ 15–25%</p>
+</div>
+</div>
+<div class="c">
+<h3>第 4–5 月：持續優化</h3>
+<div class="tw"><table>
+<tr><th>你會注意到</th><th>體內正在發生什麼</th></tr>
+<tr><td>「健康飲食」已經變成自動模式</td><td>習慣迴路完全建立。不需要刻意思考。</td></tr>
+<tr><td>體力明顯變好</td><td>累積 8,000+ 步/天 + 間歇走 + 肌力訓練的綜合效果。</td></tr>
+<tr><td>抗壓能力變好</td><td>規律運動 + 充足睡眠 + 穩定血糖 = 改善皮質醇調節。</td></tr>
+<tr><td>同事開始注意到</td><td>減去 3–4 kg 加上改善體態 — 開始有人問「你是不是在減肥？」</td></tr>
+</table></div>
+</div>
+<div class="c">
+<h3>第 6 月：全面評估</h3>
+<div class="tw"><table>
+<tr><th>你會注意到</th><th>體內正在發生什麼</th></tr>
+<tr><td><strong>體重達到或接近 65 kg</strong></td><td>減去 5 kg 脂肪 = 腰圍縮小約 3–5 cm。</td></tr>
+<tr><td>血壓可能已完全正常化</td><td>135 → 115–125 範圍，生活方式改變的累積效果。</td></tr>
+<tr><td>精力充沛成為新常態</td><td>Body Battery 穩定 ≥75；Sleep Score 穩定 ≥75。</td></tr>
+<tr><td>不想再回到舊習慣</td><td>味蕾和身體記憶已重塑。高鈉/油炸食物現在會覺得不舒服。</td></tr>
+</table></div>
+<div class="co cg">
+<div class="ct">第 6 月抽血目標</div>
+<p><strong>三酸甘油酯：</strong>< 150 mg/dL | <strong>LDL：</strong>邊緣或正常 | <strong>尿酸：</strong>< 7.0 mg/dL | <strong>收縮壓：</strong>< 130（目標 < 125）| <strong>體重：</strong>65 kg</p>
+</div>
+</div>
+<div class="c">
+<h3>Garmin 追蹤設定</h3>
+<p>每日啟用並監控：Sleep Score（目標 ≥70）、Body Battery 起床值（目標 ≥75）、Pulse Ox 整夜 SpO2、壓力分數、HRV 狀態（佩戴 3 週建立基線）、步數和活動分鐘數。<strong>每天做一次 2 分鐘 Health Snapshot 靜坐量測。</strong></p>
+<p><strong>Garmin 追蹤不到的：</strong>血壓（用家用血壓計早晚量）、血糖、膽固醇、尿酸（第 0、3、6 月抽血）。</p>
+<p><strong>追蹤心態：</strong>每週只量一次體重（週日早上，上完廁所、進食前）。專注於可控制的行為指標。使用 Garmin Connect 7 天和 30 天趨勢圖 — 不要執著於單日數字。</p>
+</div>
+</div><!-- /zh -->
 </div>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- T7: SAFETY & MEDICAL                                -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div id="t7" class="tc">
+<div class="en">
 <div class="c">
 <h2>Safety & Medical</h2>
 <h3>Fatty Liver & GOT/GPT — What the Numbers Mean</h3>
@@ -839,21 +1394,70 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 <p>Avoid high-intensity vigorous exercise (lactic acid inhibits uric acid excretion). Stick to moderate intensity (RPE 4–6/10). Always hydrate before and during exercise. Never exercise on an empty stomach (ketones raise uric acid).</p>
 </div>
 </div>
+</div><!-- /en -->
+<div class="zh">
+<div class="c">
+<h2>安全與就醫</h2>
+<h3>就醫計畫</h3>
+<div class="tw"><table>
+<tr><th>就診目的</th><th>建議地點</th><th>時間</th></tr>
+<tr><td>睡眠門診（OSA 篩檢）</td><td>附近有睡眠中心的醫院</td><td>立即預約</td></tr>
+<tr><td>泌尿科（夜尿評估）</td><td>同一家醫院或附近診所</td><td>盡量跟睡眠門診同天</td></tr>
+<tr><td>基準抽血</td><td>任何醫療機構</td><td>第 0 月</td></tr>
+<tr><td>3 個月追蹤</td><td>同一機構</td><td>第 3 月</td></tr>
+<tr><td>6 個月全面複檢</td><td>同一機構</td><td>第 6 月</td></tr>
+</table></div>
+</div>
+<div class="c">
+<h3>警告信號 — 暫停計畫並就醫</h3>
+<div class="co cr">
+<div class="ct">立即就醫</div>
+<p><strong>血壓 >180/120 mmHg</strong> — 高血壓急症。<br>
+<strong>胸痛、胸悶或壓迫感</strong> — 心臟疑慮。<br>
+<strong>突發劇烈頭痛伴隨視覺異常</strong> — 可能中風前兆。<br>
+<strong>單側肢體麻木或無力</strong> — 可能中風前兆。</p>
+</div>
+<div class="co co-o" style="margin-top:10px">
+<div class="ct">1–2 天內就醫</div>
+<p><strong>突發嚴重關節疼痛伴隨紅腫</strong> — 可能為急性痛風。減重太快或脫水可能誘發；調整速度。<br>
+<strong>持續頭暈或視力模糊</strong> — 血壓可能降太快或血糖過低。<br>
+<strong>運動中胸悶或心悸</strong> — 強度可能超過安全範圍。<br>
+<strong>尿液持續深黃或褐色</strong> — 水分不足或腎功能疑慮。<br>
+<strong>一週體重掉 >1.5 kg</strong> — 太快。急速減重會升高尿酸，增加痛風和膽結石風險。<br>
+<strong>持續食慾不振或情緒低落</strong> — 熱量限制可能太激進；重新評估。<br>
+<strong>居家血壓持續 >160/100</strong> — 需要醫療評估。</p>
+</div>
+</div>
+<div class="c">
+<h3>運動安全提醒</h3>
+<div class="co cr">
+<div class="ct">靠牆深蹲安全</div>
+<p><strong>絕對不要憋氣</strong> — 最重要的一條規則。憋氣會導致血壓瞬間飆升，完全失去降壓目的。如果感到頭暈、胸悶或膝蓋劇痛，立即停止。有心血管疾病者請先諮詢醫師。</p>
+</div>
+<div class="co co-o" style="margin-top:10px">
+<div class="ct">尿酸偏高時的運動注意</div>
+<p>避免高強度劇烈運動（乳酸抑制尿酸排泄）。維持中等強度（RPE 4–6/10）。運動前後都要補水。絕不空腹運動（酮體會升高尿酸）。</p>
+</div>
+</div>
+</div><!-- /zh -->
 </div>
 
 <!-- ═══════════════════════════════════════════════════ -->
-<div id="t8" class="tc">
+<!-- T9: PROGRESS TRACKER                               -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="t9" class="tc">
 <div class="c">
-<h2>Health Dashboard</h2>
-<p>體重、體組成、血壓、睡眠 Sleep Score 趨勢圖。每次 daily check-in 完成後自動更新。</p>
-<div class="co cb" style="margin-bottom:16px">
-<div class="ct">使用方式</div>
-<p>每日 check-in 後由 <code>python3 scripts/generate_dashboard.py</code> 重新生成。顯示所有自 2026-03-17 起的完整紀錄，不截斷。若圖表未更新，重新整理頁面（Cmd+R）即可。</p>
+<h2><span class="en">Progress Tracker</span><span class="zh">進度追蹤</span></h2>
+<p><span class="en">Live comparison of your actual data (from GitHub repo) against phase targets. Change the start date in the header to adjust phase calculations.</span><span class="zh">即時比對你的實際數據（從 GitHub repo 抓取）與階段目標。可在頂部調整計畫起始日以重新計算階段。</span></p>
+<div id="progMonth" class="prog-month"></div>
 </div>
-<div style="overflow-x:auto;text-align:center">
-<img src="reviews/health_dashboard.png" alt="Health Dashboard" style="max-width:100%;height:auto;border-radius:8px;border:1px solid #333">
+<div class="c">
+<h3><span class="en">Current vs. Target</span><span class="zh">實際 vs. 目標</span></h3>
+<div id="progCards" class="prog-loading"><span class="en">Loading data from GitHub...</span><span class="zh">正在從 GitHub 載入數據...</span></div>
 </div>
-<p style="font-size:11px;color:#888;margin-top:8px;text-align:center">Dashboard covers all daily records since 2026-03-17 · Updated on each check-in commit</p>
+<div class="c">
+<h3><span class="en">Recent Records (Current Phase)</span><span class="zh">近期紀錄（當前階段）</span></h3>
+<div id="progTrend" class="prog-loading"><span class="en">Loading...</span><span class="zh">載入中...</span></div>
 </div>
 
 <!-- 六個月進度追蹤 ───────────────────────────────── -->
@@ -906,18 +1510,436 @@ td{padding:8px 10px;border-bottom:1px solid var(--gb)}tr:hover td{background:var
 </div>
 
 <div class="ft">
+<div class="en">
 <p><strong>This isn't four separate battles — it's one battle.</strong></p>
 <p>All four elevated markers share the same metabolic root. Fix sleep first, front-load hydration, train wall sits, switch to healthy dinners — do these four things, and you'll see improvement in your blood work at three months.</p>
 <p style="margin-top:12px;font-size:10px">March 2026 Update | Disclaimer: This plan is general health guidance and cannot replace professional medical diagnosis and treatment. Please follow your physician's recommendations.</p>
 </div>
+<div class="zh">
+<p><strong>這不是四場獨立的戰役 — 而是同一場仗。</strong></p>
+<p>四個異常指標共享相同的代謝根源。先修睡眠、提前補水、練靠牆深蹲、換健康晚餐 — 做好這四件事，三個月後驗血就能看到改善。</p>
+<p style="margin-top:12px;font-size:10px">2026 年 3 月更新 | 免責聲明：本計畫為一般健康指引，不能取代專業醫療診斷與治療。請遵循您的醫師建議。</p>
+</div>
+<p style="margin-top:8px"><a href="analyzer.html" style="color:var(--bm);font-weight:600">Health PE Analyzer &rarr;</a></p>
+</div>
 
 <script>
+/* ── Navigation ── */
 function st(id){
 document.querySelectorAll('.tc').forEach(e=>e.classList.remove('a'));
 document.querySelectorAll('.nt').forEach(e=>e.classList.remove('a'));
 document.getElementById(id).classList.add('a');
 event.target.classList.add('a');
 window.scrollTo({top:0,behavior:'smooth'});
+if(id==='t9') loadProgressTracker();
+if(id==='t6') loadT6Data();
+}
+function toggleLang(){
+const b=document.body;
+const isEn=b.classList.contains('en');
+b.classList.remove('en','zh');
+b.classList.add(isEn?'zh':'en');
+document.getElementById('root').lang=isEn?'zh-TW':'en';
+document.title=isEn?'6 個月健康逆轉計畫 — 完整版':'6-Month Health Reversal Plan — Complete Edition';
+localStorage.setItem('health-lang',isEn?'zh':'en');
+}
+(function(){const s=localStorage.getItem('health-lang');if(s==='zh'){document.body.classList.remove('en');document.body.classList.add('zh');document.getElementById('root').lang='zh-TW';document.title='6 個月健康逆轉計畫 — 完整版';}})();
+
+/* ── Start Date ── */
+const DEFAULT_START='2026-03-17';
+const REPO_OWNER='Eaglemamba';
+const REPO_NAME='Health-Check';
+/* Data is fetched from main branch — records on feature branches won't appear until merged */
+const RAW_BASE='https://raw.githubusercontent.com/'+REPO_OWNER+'/'+REPO_NAME+'/main/reviews/daily/';
+const API_BASE='https://api.github.com/repos/'+REPO_OWNER+'/'+REPO_NAME+'/contents/reviews/daily';
+
+function getStartDate(){
+return localStorage.getItem('health-start-date')||DEFAULT_START;
+}
+function onStartDateChange(val){
+localStorage.setItem('health-start-date',val);
+sessionStorage.removeItem('health-progress-cache');
+sessionStorage.removeItem('health-monthly-cache');
+if(document.getElementById('t9').classList.contains('a')) loadProgressTracker();
+if(document.getElementById('t6').classList.contains('a')) loadT6Data();
+}
+(function(){
+const saved=getStartDate();
+document.getElementById('planStartDate').value=saved;
+})();
+
+/* ── Phase Targets ── */
+/* Phase targets: weight/bodyFat/visceralFat are graduated per the plan's table.
+   sleepScore/bodyBattery/systolic use flat goals from the plan (not graduated). */
+const PHASE_TARGETS=[
+{month:0,weight:70.0,bodyFat:20.5,visceralFat:10,sleepScore:70,bodyBattery:65,systolic:130,label_en:'Month 0 (Baseline)',label_zh:'第 0 月（基線）'},
+{month:1,weight:69.2,bodyFat:20.0,visceralFat:10,sleepScore:70,bodyBattery:65,systolic:130,label_en:'Month 1',label_zh:'第 1 月'},
+{month:2,weight:68.3,bodyFat:19.0,visceralFat:9,sleepScore:70,bodyBattery:65,systolic:130,label_en:'Month 2',label_zh:'第 2 月'},
+{month:3,weight:67.5,bodyFat:18.0,visceralFat:8,sleepScore:70,bodyBattery:65,systolic:130,label_en:'Month 3',label_zh:'第 3 月'},
+{month:4,weight:66.7,bodyFat:17.5,visceralFat:8,sleepScore:70,bodyBattery:65,systolic:130,label_en:'Month 4',label_zh:'第 4 月'},
+{month:5,weight:65.8,bodyFat:16.5,visceralFat:7,sleepScore:70,bodyBattery:65,systolic:130,label_en:'Month 5',label_zh:'第 5 月'},
+{month:6,weight:65.0,bodyFat:15.5,visceralFat:7,sleepScore:75,bodyBattery:75,systolic:125,label_en:'Month 6',label_zh:'第 6 月'}
+];
+
+/* Month 0 = baseline snapshot only. From day 0 onward you are "in Month 1".
+   Month 1: days 0–29, Month 2: days 30–59, … Month 6: days 150–179. */
+function getCurrentMonth(){
+const start=new Date(getStartDate()+'T00:00:00');
+const now=new Date();
+const diff=(now-start)/(1000*60*60*24*30.44);
+return Math.max(1,Math.min(6,Math.floor(diff)+1));
+}
+
+/* ── Markdown Parsing ── */
+function parseDailyMd(text){
+const r={};
+const wm=text.match(/\*\*今日：([\d.]+)\s*kg\*\*/);
+if(wm) r.weight=parseFloat(wm[1]);
+const bfm=text.match(/\*\*體脂率：([\d.]+)\s*%?\*\*/);
+if(bfm) r.bodyFat=parseFloat(bfm[1]);
+const vfm=text.match(/\*\*內臟脂肪等級：(\d+)\*\*/);
+if(vfm) r.visceralFat=parseInt(vfm[1]);
+const ssm=text.match(/Garmin Sleep Score[：:]\*?\*?\s*(\d+)/);
+if(ssm) r.sleepScore=parseInt(ssm[1]);
+const bbm=text.match(/Body Battery 起床值[：:]\*?\*?\s*(\d+)/);
+if(bbm) r.bodyBattery=parseInt(bbm[1]);
+const bpLines=text.match(/\| 第二次 \| (\d+|—) \| (\d+|—) \| (\d+|—) \|/);
+if(bpLines && bpLines[1]!=='—'){
+r.systolic=parseInt(bpLines[1]);
+r.diastolic=parseInt(bpLines[2]);
+r.heartRate=parseInt(bpLines[3]);
+}
+return r;
+}
+
+/* ── Fetch from GitHub ── */
+async function fetchFileList(){
+const cached=sessionStorage.getItem('health-filelist-cache');
+if(cached){
+const c=JSON.parse(cached);
+if(Date.now()-c.ts<300000) return c.data;
+}
+const resp=await fetch(API_BASE);
+if(!resp.ok) throw new Error('GitHub API: '+resp.status);
+const files=await resp.json();
+const names=files.filter(f=>f.name.endsWith('.md')).map(f=>f.name.replace('.md',''));
+sessionStorage.setItem('health-filelist-cache',JSON.stringify({ts:Date.now(),data:names}));
+return names;
+}
+
+async function fetchDailyData(date){
+const cacheKey='health-daily-'+date;
+const cached=sessionStorage.getItem(cacheKey);
+if(cached){
+const c=JSON.parse(cached);
+if(Date.now()-c.ts<300000) return c.data;
+}
+const resp=await fetch(RAW_BASE+date+'.md');
+if(!resp.ok) return null;
+const text=await resp.text();
+const data=parseDailyMd(text);
+data.date=date;
+sessionStorage.setItem(cacheKey,JSON.stringify({ts:Date.now(),data}));
+return data;
+}
+
+/* ── Render Progress ── */
+function isEn(){return document.body.classList.contains('en');}
+
+function statusTag(actual,target,lowerIsBetter){
+if(actual==null) return '<span class="prog-status prog-na">'+(isEn()?'No Data':'無數據')+'</span>';
+const diff=lowerIsBetter?(target-actual):(actual-target);
+const pct=Math.abs(diff)/target*100;
+if(diff>=0) return '<span class="prog-status prog-hit">'+(isEn()?'On Track':'達標')+'</span>';
+if(pct<=5) return '<span class="prog-status prog-near">'+(isEn()?'Close':'接近')+'</span>';
+return '<span class="prog-status prog-miss">'+(isEn()?'Behind':'未達標')+'</span>';
+}
+
+function renderCards(latest,target){
+const en=isEn();
+const metrics=[
+{key:'weight',label_en:'Weight',label_zh:'體重',unit:'kg',lower:true},
+{key:'bodyFat',label_en:'Body Fat %',label_zh:'體脂率',unit:'%',lower:true},
+{key:'visceralFat',label_en:'Visceral Fat',label_zh:'內臟脂肪',unit:'',lower:true},
+{key:'sleepScore',label_en:'Sleep Score',label_zh:'Sleep Score',unit:'',lower:false},
+{key:'bodyBattery',label_en:'Body Battery',label_zh:'Body Battery',unit:'',lower:false},
+{key:'systolic',label_en:'Systolic BP',label_zh:'收縮壓',unit:' mmHg',lower:true}
+];
+let html='<div class="prog-grid">';
+for(const m of metrics){
+const actual=latest[m.key];
+const tgt=target[m.key];
+html+='<div class="prog-card">';
+html+='<div class="prog-label">'+(en?m.label_en:m.label_zh)+'</div>';
+html+='<div class="prog-actual">'+(actual!=null?actual+m.unit:'—')+'</div>';
+html+='<div class="prog-target">'+(en?'Target: ':'目標：')+tgt+m.unit+'</div>';
+html+=statusTag(actual,tgt,m.lower);
+html+='</div>';
+}
+html+='</div>';
+if(latest.date){
+html+='<p style="font-size:11px;color:var(--tl);margin-top:10px;text-align:center">'+(en?'Latest record: ':'最近紀錄：')+latest.date+'</p>';
+}
+document.getElementById('progCards').innerHTML=html;
+}
+
+function renderTrend(records,target){
+const en=isEn();
+if(!records.length){
+document.getElementById('progTrend').innerHTML='<p class="prog-error">'+(en?'No records found for this phase.':'此階段尚無紀錄。')+'</p>';
+return;
+}
+let html='<div class="tw"><table>';
+html+='<tr><th>'+(en?'Date':'日期')+'</th><th>'+(en?'Weight':'體重')+'</th><th>'+(en?'Body Fat':'體脂')+'</th><th>'+(en?'VF':'內脂')+'</th><th>'+(en?'Sleep':'睡眠')+'</th><th>'+(en?'BB':'BB')+'</th><th>'+(en?'SBP':'收縮壓')+'</th></tr>';
+for(const r of records){
+const wOk=r.weight!=null&&r.weight<=target.weight;
+const bfOk=r.bodyFat!=null&&r.bodyFat<=target.bodyFat;
+const vfOk=r.visceralFat!=null&&r.visceralFat<=target.visceralFat;
+const ssOk=r.sleepScore!=null&&r.sleepScore>=target.sleepScore;
+const bbOk=r.bodyBattery!=null&&r.bodyBattery>=target.bodyBattery;
+const sbpOk=r.systolic!=null&&r.systolic<=target.systolic;
+function cell(val,ok,unit){
+if(val==null) return '<td style="color:var(--tl)">—</td>';
+const color=ok?'var(--gn)':'var(--rd)';
+return '<td style="color:'+color+';font-weight:600">'+val+(unit||'')+'</td>';
+}
+html+='<tr><td>'+r.date+'</td>'+cell(r.weight,wOk,' kg')+cell(r.bodyFat,bfOk,'%')+cell(r.visceralFat,vfOk,'')+cell(r.sleepScore,ssOk,'')+cell(r.bodyBattery,bbOk,'')+cell(r.systolic,sbpOk,'')+'</tr>';
+}
+html+='</table></div>';
+html+='<p style="font-size:10px;color:var(--tl);margin-top:8px">'+(en?'Green = on/ahead of target; Red = behind target':'綠色 = 達標/超前；紅色 = 未達標')+'</p>';
+document.getElementById('progTrend').innerHTML=html;
+}
+
+/* ── Main Loader ── */
+let progLoading=false;
+async function loadProgressTracker(){
+if(progLoading) return;
+progLoading=true;
+const en=isEn();
+const month=getCurrentMonth();
+const target=PHASE_TARGETS[month];
+document.getElementById('progMonth').textContent=(en?'Current Phase: '+target.label_en+' (Day '+Math.floor((new Date()-new Date(getStartDate()+'T00:00:00'))/(1000*60*60*24))+')':'目前階段：'+target.label_zh+'（第 '+Math.floor((new Date()-new Date(getStartDate()+'T00:00:00'))/(1000*60*60*24))+' 天）');
+
+try{
+const allDates=await fetchFileList();
+const startD=new Date(getStartDate()+'T00:00:00');
+const monthStart=new Date(startD);
+monthStart.setDate(monthStart.getDate()+(month-1)*30);
+const monthEnd=new Date(startD);
+monthEnd.setDate(monthEnd.getDate()+month*30);
+const now=new Date();
+const end=monthEnd>now?now:monthEnd;
+
+const phaseDates=allDates.filter(d=>{
+const dt=new Date(d+'T00:00:00');
+return dt>=monthStart&&dt<=end;
+}).sort();
+
+const recentDates=phaseDates.slice(-14);
+const records=[];
+const fetches=recentDates.map(d=>fetchDailyData(d));
+const results=await Promise.all(fetches);
+for(const r of results){
+if(r) records.push(r);
+}
+
+let latest={};
+for(let i=records.length-1;i>=0;i--){
+const r=records[i];
+for(const k of ['weight','bodyFat','visceralFat','sleepScore','bodyBattery','systolic','diastolic','heartRate']){
+if(latest[k]==null&&r[k]!=null){latest[k]=r[k];if(!latest.date)latest.date=r.date;}
+}
+}
+if(!latest.date&&records.length) latest.date=records[records.length-1].date;
+
+renderCards(latest,target);
+renderTrend(records,target);
+}catch(err){
+const hint=err.message.includes('Failed to fetch')?(en?' (Open via localhost or GitHub Pages — file:// blocks network requests)':'（請透過 localhost 或 GitHub Pages 開啟，file:// 無法進行網路請求）'):'';
+document.getElementById('progCards').innerHTML='<p class="prog-error">'+(en?'Failed to load data: ':'載入失敗：')+err.message+hint+'</p>';
+document.getElementById('progTrend').innerHTML='';
+}finally{
+progLoading=false;
+}
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* T6: Timeline & Milestones — Dynamic Month Labels + Actuals */
+/* ════════════════════════════════════════════════════════════ */
+
+const RAW_MONTHLY='https://raw.githubusercontent.com/'+REPO_OWNER+'/'+REPO_NAME+'/main/reviews/monthly/';
+
+/* Inject calendar months into Phase Targets table cells + highlight current */
+function injectPhaseMonths(){
+const start=new Date(getStartDate()+'T00:00:00');
+const monthNames_en=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const enTable=document.querySelector('#t6 .en table');
+const zhTable=document.querySelector('#t6 .zh table');
+if(!enTable||!zhTable) return;
+const enRows=enTable.querySelectorAll('tr');
+const zhRows=zhTable.querySelectorAll('tr');
+const cur=getCurrentMonth();
+for(let m=0;m<=6;m++){
+const d=new Date(start);
+d.setMonth(d.getMonth()+m);
+const yyyy=d.getFullYear();
+const mm=d.getMonth();
+const nowTag=m===cur?' ★':'';
+const enLabel='Month '+m+(m===0?' (Baseline)':'')+' — '+monthNames_en[mm]+' '+yyyy+nowTag;
+const zhLabel='第 '+m+' 月'+(m===0?'（基線）':'')+' — '+yyyy+'年'+(mm+1)+'月'+nowTag;
+const enRow=enRows[m+1];
+const zhRow=zhRows[m+1];
+if(enRow){enRow.querySelector('td').textContent=enLabel;if(m===cur)enRow.classList.add('hl');}
+if(zhRow){zhRow.querySelector('td').textContent=zhLabel;if(m===cur)zhRow.classList.add('hl');}
+}
+}
+
+/* Compute YYYY-MM for month offset from start date */
+function getMonthKey(monthOffset){
+const start=new Date(getStartDate()+'T00:00:00');
+const d=new Date(start);
+d.setMonth(d.getMonth()+monthOffset);
+const yyyy=d.getFullYear();
+const mm=String(d.getMonth()+1).padStart(2,'0');
+return yyyy+'-'+mm;
+}
+
+/* Parse monthly review — extract metrics from 〇、半年計畫進度 table.
+   Each row: | 指標 | 計畫目標 | 本月實際 | 達成狀態 |
+   We match each metric row individually for robustness. */
+function parseMonthlyReview(text){
+const r={};
+/* Weight: | 體重... | 69.2 kg | 70.0 kg | ✗ | */
+const wm=text.match(/\|\s*體重[^|]*\|[^|]*\|\s*([\d.]+)\s*kg/);
+if(wm) r.weight=parseFloat(wm[1]);
+/* Body fat: | 體脂率 | ≤ 21% | 21.4%... | △ | */
+const bfm=text.match(/\|\s*體脂率[^|]*\|[^|]*\|\s*([\d.]+)\s*%/);
+if(bfm) r.bodyFat=parseFloat(bfm[1]);
+/* Visceral fat: | 內臟脂肪 | ≤ 10 | 10.5... | △ | */
+const vfm=text.match(/\|\s*內臟脂肪[^|]*\|[^|]*\|\s*([\d.]+)/);
+if(vfm) r.visceralFat=parseFloat(vfm[1]);
+/* Systolic BP: | 收縮壓... | < 130 mmHg | 126.6 mmHg | ✓ | */
+const sbpm=text.match(/\|\s*收縮壓[^|]*\|[^|]*\|\s*([\d.]+)\s*mmHg/);
+if(sbpm) r.systolic=parseFloat(sbpm[1]);
+/* Sleep Score: | Sleep Score... | ≥ 70 | 65.7 | ✗ | */
+const ssm=text.match(/\|\s*Sleep Score[^|]*\|[^|]*\|\s*([\d.]+)/);
+if(ssm) r.sleepScore=parseFloat(ssm[1]);
+/* Body Battery: | Body Battery... | ≥ 65 | 35.9 | ✗ | */
+const bbm=text.match(/\|\s*Body Battery[^|]*\|[^|]*\|\s*([\d.]+)/);
+if(bbm) r.bodyBattery=parseFloat(bbm[1]);
+return r;
+}
+
+/* Fetch a single monthly review */
+async function fetchMonthlyReview(yyyymm){
+const cacheKey='health-monthly-'+yyyymm;
+const cached=sessionStorage.getItem(cacheKey);
+if(cached){
+const c=JSON.parse(cached);
+if(Date.now()-c.ts<300000) return c.data;
+}
+try{
+const resp=await fetch(RAW_MONTHLY+yyyymm+'.md');
+if(!resp.ok) return null;
+const text=await resp.text();
+const data=parseMonthlyReview(text);
+data._month=yyyymm;
+sessionStorage.setItem(cacheKey,JSON.stringify({ts:Date.now(),data}));
+return data;
+}catch(e){return null;}
+}
+
+/* Render monthly actuals card into a container */
+function renderMonthlyActuals(container,allData,en){
+if(!allData.length){
+container.innerHTML='';
+return;
+}
+const metrics=[
+{key:'weight',label_en:'Weight',label_zh:'體重',unit:'kg',lower:true},
+{key:'bodyFat',label_en:'Body Fat',label_zh:'體脂率',unit:'%',lower:true},
+{key:'visceralFat',label_en:'Visceral Fat',label_zh:'內臟脂肪',unit:'',lower:true},
+{key:'systolic',label_en:'Systolic BP',label_zh:'收縮壓',unit:' mmHg',lower:true},
+{key:'sleepScore',label_en:'Sleep Score',label_zh:'Sleep Score',unit:'',lower:false},
+{key:'bodyBattery',label_en:'Body Battery',label_zh:'Body Battery',unit:'',lower:false}
+];
+let html='<div class="ma-wrap">';
+html+='<div class="ma-title">'+(en?'Monthly Review Actuals':'月回顧實際數據')+'</div>';
+
+for(const item of allData){
+const mIdx=item._monthIdx;
+const target=PHASE_TARGETS[mIdx];
+if(!target) continue;
+const monthLabel=en?target.label_en:target.label_zh;
+html+='<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:600;color:var(--tx);margin-bottom:6px">'+monthLabel+' ('+item._month+')</div>';
+html+='<div class="ma-grid">';
+for(const m of metrics){
+const actual=item[m.key];
+const tgt=target[m.key];
+let stClass='ma-none',stText=en?'N/A':'無數據';
+if(actual!=null){
+const diff=m.lower?(tgt-actual):(actual-tgt);
+const pct=Math.abs(diff)/tgt*100;
+if(diff>=0){stClass='ma-hit';stText=en?'Hit':'✓';}
+else if(pct<=5){stClass='ma-near';stText=en?'Close':'△';}
+else{stClass='ma-miss';stText=en?'Miss':'✗';}
+}
+html+='<div class="ma-card">';
+html+='<div class="ma-label">'+(en?m.label_en:m.label_zh)+'</div>';
+html+='<div class="ma-val">'+(actual!=null?actual+m.unit:'—')+'</div>';
+html+='<div class="ma-tgt">'+(en?'Target: ':'目標：')+tgt+m.unit+'</div>';
+html+='<div class="ma-st '+stClass+'">'+stText+'</div>';
+html+='</div>';
+}
+html+='</div></div>';
+}
+html+='<div class="ma-note">'+(en?'Data source: reviews/monthly/ on GitHub (main branch)':'數據來源：GitHub reviews/monthly/（main 分支）')+'</div>';
+html+='</div>';
+container.innerHTML=html;
+}
+
+/* Main T6 loader */
+let t6Loading=false;
+async function loadT6Data(){
+injectPhaseMonths();
+if(t6Loading) return;
+t6Loading=true;
+const enContainer=document.getElementById('monthlyActualsEN');
+const zhContainer=document.getElementById('monthlyActualsZH');
+const en=isEn();
+const loadingHtml='<div class="ma-loading">'+(en?'Loading monthly reviews...':'載入月回顧中...')+'</div>';
+enContainer.innerHTML=loadingHtml;
+zhContainer.innerHTML=loadingHtml;
+
+try{
+const fetches=[];
+const monthIndices=[];
+const currentMonth=getCurrentMonth();
+/* Monthly reviews: Month 1 → getMonthKey(0) = start month YYYY-MM.
+   2026-03.md → Month 1 targets, 2026-04.md → Month 2, etc. */
+for(let m=1;m<=Math.min(6,currentMonth);m++){
+const key=getMonthKey(m-1);
+fetches.push(fetchMonthlyReview(key));
+monthIndices.push(m);
+}
+const results=await Promise.all(fetches);
+const allData=[];
+results.forEach((data,i)=>{
+if(data&&Object.keys(data).length>1){
+data._monthIdx=monthIndices[i];
+allData.push(data);
+}
+});
+renderMonthlyActuals(enContainer,allData,true);
+renderMonthlyActuals(zhContainer,allData,false);
+}catch(err){
+const hint=err.message.includes('Failed to fetch')?(en?' (Open via localhost or GitHub Pages)':'（請透過 localhost 或 GitHub Pages 開啟）'):'';
+const errHtml='<div class="ma-loading" style="color:var(--rd)">'+(en?'Failed to load: ':'載入失敗：')+err.message+hint+'</div>';
+enContainer.innerHTML=errHtml;
+zhContainer.innerHTML=errHtml;
+}finally{
+t6Loading=false;
+}
 }
 </script>
 </body>
