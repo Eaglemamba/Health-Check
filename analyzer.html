@@ -1615,12 +1615,17 @@ const SUPPLEMENTS = [
   // ── Heart & Vascular ���─
   {
     id: 'omega3', name: 'Omega-3 Fish Oil (rTG Form)',
+    nameZh: 'Omega-3 魚油（rTG 型）',
     dose: '1-2 softgels/day with food (EPA+DHA &#8805;1,000mg)',
+    doseZh: '每日 1-2 粒軟膠囊，隨餐服用（EPA+DHA ≥1,000mg）',
     triggers: ['bp_systolic','bp_diastolic','tg','ldl','tc','hscrp','tc_hdl_ratio'],
     mechanism: 'rTG form EPA+DHA: dose-dependent TG reduction (JAHA 2023 meta-analysis, linear at &gt;2g/d). SBP -14.7 mmHg combined with DASH. Anti-inflammatory via EPA-derived resolvins.',
+    mechanismZh: 'rTG 型 EPA+DHA：劑量依賴性降低三酸甘油酯（JAHA 2023 統合分析，>2g/d 線性效應）。與 DASH 飲食合用收縮壓 -14.7 mmHg。透過 EPA 衍生的促消退素發揮抗發炎作用。',
     evidence: 'strong',
     rootCause: 'TG driven by fructose/refined carbs/alcohol; LDL by saturated fat; BP by sodium/obesity/sedentary. Reduce added sugars &lt;25g/d, saturated fat &lt;7% calories, increase omega-3 rich fish 2-3x/week.',
+    rootCauseZh: '三酸甘油酯升高主因：果糖/精製碳水化合物/酒精；LDL 升高主因：飽和脂肪；血壓升高主因：鈉攝取過多/肥胖/久坐。添加糖控制在 &lt;25g/d、飽和脂肪 &lt;7% 總熱量、每週 2-3 次富含 Omega-3 的魚類。',
     bridge: '3-6 months; recheck lipid panel. If dietary changes sustained + TG/LDL normalized, consider step-down to maintenance dose or dietary omega-3 only.',
+    bridgeZh: '3-6 個月後複查血脂。若飲食改善持續且三酸甘油酯/LDL 正常化，可考慮降至維持劑量或純從飲食攝取 Omega-3。',
     products: [
       { name: 'California Gold Nutrition Omega 800', spec: '480mg EPA + 320mg DHA/softgel, kd-p&#363;r TG, IFOS certified, 90ct', url: 'https://www.iherb.com/pr/california-gold-nutrition-omega-800-ultra-concentrated-omega-3-fish-oil-kd-pur-triglyceride-form-90-fish-gelatin-softgels-1-000-mg-per-softgel/85180', top: true },
       { name: 'Sports Research Triple Strength', spec: '~1055mg Omega-3/softgel, rTG form, Norway sourced, 180ct', url: 'https://www.iherb.com/pr/sports-research-omega-3-fish-oil-triple-strength-180-softgels/113871' }
@@ -1628,12 +1633,17 @@ const SUPPLEMENTS = [
   },
   {
     id: 'magnesium', name: 'Magnesium Glycinate',
+    nameZh: '甘胺酸鎂',
     dose: '200-400mg before bed (3 caps)',
+    doseZh: '睡前 200-400mg（3 粒）',
     triggers: ['bp_systolic','bp_diastolic'],
     mechanism: 'Meta-analysis (38 RCTs, n=2709): SBP -2.84, DBP -2.10 mmHg at 365mg/d; at &#8805;400mg/d: SBP -6.38, DBP -3.71 mmHg. Glycinate form has superior bioavailability and minimal GI distress. Also improves sleep quality.',
+    mechanismZh: '統合分析（38 項 RCT，n=2709）：365mg/d 時收縮壓 -2.84、舒張壓 -2.10 mmHg；≥400mg/d 時收縮壓 -6.38、舒張壓 -3.71 mmHg。甘胺酸鎂生物利用率高，腸胃不適少。亦可改善睡眠品質。',
     evidence: 'moderate',
     rootCause: 'BP driven by sodium excess (&gt;2,300mg/d), obesity, sleep deprivation (&lt;6h = 3.5x hypertension risk), chronic stress, sedentary lifestyle. DASH diet + weight loss 5-10% + 150min/wk exercise.',
+    rootCauseZh: '血壓升高根本原因：鈉攝取過多（&gt;2,300mg/d）、肥胖、睡眠不足（&lt;6 小時使高血壓風險增加 3.5 倍）、慢性壓力、久坐。DASH 飲食 + 體重減輕 5-10% + 每週運動 150 分鐘。',
     bridge: '3-6 months; monitor home BP 2x/week. Magnesium may be continued long-term as modern diets are often Mg-deficient.',
+    bridgeZh: '3-6 個月，每週 2 次居家量血壓監測。現代飲食普遍鎂攝取不足，可考慮長期補充。',
     products: [
       { name: 'California Gold Nutrition Magnesium Glycinate', spec: '400mg/3caps, 180 vcaps', url: 'https://www.iherb.com/pr/california-gold-nutrition-magnesium-glycinate-180-veggie-capsules-133-mg-per-capsule/129685', top: true },
       { name: "Doctor's Best High Absorption Magnesium", spec: '100mg/tab chelated, 240 tabs', url: 'https://www.iherb.com/pr/doctor-s-best-high-absorption-magnesium-lysinate-glycinate-chelated-albion-traacs-240-tablets-100-mg-per-tablet/16567' }
@@ -1641,12 +1651,17 @@ const SUPPLEMENTS = [
   },
   {
     id: 'coq10', name: 'CoQ10 / Ubiquinol',
+    nameZh: 'CoQ10 / 泛醌（Ubiquinol）',
     dose: '100-200mg/day with food',
+    doseZh: '每日 100-200mg，隨餐服用',
     triggers: ['bp_systolic','bp_diastolic','pwv'],
     mechanism: 'Meta-analysis (45 RCTs): SBP -3.44 mmHg; at &lt;200mg/d: SBP -6.05 mmHg after &gt;8 weeks. Essential CoQ10 replenishment if taking statins (statins deplete CoQ10).',
+    mechanismZh: '統合分析（45 項 RCT）：收縮壓 -3.44 mmHg；&lt;200mg/d 且持續 &gt;8 週：收縮壓 -6.05 mmHg。服用他汀類藥物者需補充 CoQ10（他汀類會耗竭 CoQ10）。',
     evidence: 'moderate',
     rootCause: 'BP driven by sodium excess, obesity, sedentary lifestyle. CoQ10 declines naturally with age (&gt;40) and is depleted by statin therapy. Address BP root causes first.',
+    rootCauseZh: '血壓升高根本原因：鈉攝取過多、肥胖、久坐。CoQ10 隨年齡（&gt;40 歲）自然下降，他汀類治療亦會耗竭。應優先從根本解決血壓問題。',
     bridge: 'If on statins: ongoing supplementation recommended. If not on statins and BP normalized via lifestyle: reassess after 6 months. Age-related decline may warrant long-term use after 40.',
+    bridgeZh: '服用他汀類：建議持續補充。未使用他汀類且血壓透過生活調整正常化：6 個月後重新評估。40 歲後因年齡相關性下降，可能需長期補充。',
     products: [
       { name: 'Thorne Heart Health Complex', spec: 'CoQ10 + Hawthorn, 90 caps', url: 'https://www.iherb.com/pr/thorne-heart-health-complex-with-coq10-and-hawthorn-90-capsules/18496', top: true }
     ]
@@ -1654,12 +1669,17 @@ const SUPPLEMENTS = [
   // ── Blood / CBC (low values) ──
   {
     id: 'iron', name: 'Iron (Ferrochel Bisglycinate)',
+    nameZh: '鐵（螯合型雙甘胺酸鐵）',
     dose: '18-27mg/day with Vitamin C; take on empty stomach',
+    doseZh: '每日 18-27mg，搭配維生素 C，空腹服用',
     triggers: ['hb','rbc','ht','mcv'],
     mechanism: 'Chelated iron for deficiency anemia; high absorption, non-constipating. Only supplement when values are LOW. Confirm deficiency with physician first.',
+    mechanismZh: '螯合型鐵，吸收率高且不易便秘，適用於缺鐵性貧血。<b>僅在數值偏低時補充</b>，請先由醫師確認缺鐵。',
     evidence: 'strong',
     rootCause: 'Iron deficiency caused by: insufficient dietary iron (red meat, legumes, dark leafy greens), menstrual blood loss, GI bleeding (occult), or poor absorption (celiac, H. pylori). Identify and treat the underlying cause.',
+    rootCauseZh: '缺鐵原因：飲食中鐵質不足（紅肉、豆類、深色葉菜）、月經失血、消化道出血（隱性）、吸收不良（乳糜瀉、幽門螺旋桿菌）。應找出並治療根本原因。',
     bridge: '3-6 months until ferritin &gt;50 ng/mL and Hb normalizes. Stop supplementation once stores replenished — ongoing iron without deficiency causes oxidative damage. Recheck CBC + ferritin at 3 months.',
+    bridgeZh: '3-6 個月直至鐵蛋白 &gt;50 ng/mL 且血紅素正常。儲量恢復後應停止補充——無缺鐵情況下持續補鐵會造成氧化損傷。3 個月後複查 CBC + 鐵蛋白。',
     products: [
       { name: 'Thorne Ferrasorb', spec: 'Iron + B12 + Folate + Vit C, 60 caps', url: 'https://www.iherb.com/pr/thorne-ferrasorb-60-capsules/18582', top: true },
       { name: "Doctor's Best High Absorption Iron 27mg", spec: 'Ferrochel bisglycinate, 120 tabs', url: 'https://www.iherb.com/pr/Doctor-s-Best-High-Absorption-With-Ferrochel-27-mg-120-Tablets/72625' },
@@ -1669,12 +1689,17 @@ const SUPPLEMENTS = [
   // ── Liver ──
   {
     id: 'liver_support', name: 'Milk Thistle + NAC',
+    nameZh: '奶薊 + NAC',
     dose: 'NAC 600mg + Silymarin 150-300mg, twice daily',
+    doseZh: 'NAC 600mg + 水飛薊素 150-300mg，每日兩次',
     triggers: ['ast','alt','direct_bilirubin','total_bilirubin','alp','ultrasound'],
     mechanism: 'Silymarin is hepatoprotective; NAC is a glutathione precursor supporting liver detoxification and enzyme normalization.',
+    mechanismZh: '水飛薊素具護肝作用；NAC 為麩胱甘肽前驅物，支持肝臟解毒及酵素正常化。',
     evidence: 'moderate',
     rootCause: 'Elevated liver enzymes most commonly from: caloric excess &#8594; non-alcoholic fatty liver (NAFLD), alcohol, fructose/sugar overload, medication toxicity. 5-7% body weight loss reverses NAFLD in most cases.',
+    rootCauseZh: '肝酵素升高最常見原因：熱量過剩 &#8594; 非酒精性脂肪肝（NAFLD）、酒精、果糖/糖分過量、藥物毒性。體重減輕 5-7% 在多數情況下可逆轉 NAFLD。',
     bridge: '3-6 months while addressing root cause. Stop when ALT/AST normalize + ultrasound shows reduced fatty infiltration. NAC/silymarin are bridge support, not a substitute for caloric reduction.',
+    bridgeZh: '3-6 個月，同步處理根本原因。待 ALT/AST 正常化且超音波顯示脂肪浸潤減少後停用。NAC/水飛薊素是過渡支援，不能取代熱量控制。',
     products: [
       { name: 'Dr. Mercola NAC with Milk Thistle', spec: '180 caps', url: 'https://www.iherb.com/pr/dr-mercola-nac-with-milk-thistle-180-capsules/123149', top: true },
       { name: "Nature's Craft Liver Support + NAC", spec: 'Milk Thistle + NAC + Chanca Piedra, 60 caps', url: 'https://www.iherb.com/pr/nature-s-craft-liver-support-nac-with-milk-thistle-60-capsules/139638' }
@@ -1683,12 +1708,17 @@ const SUPPLEMENTS = [
   // ── Kidney / Uric Acid ──
   {
     id: 'tart_cherry', name: 'Tart Cherry Extract',
+    nameZh: '酸櫻桃萃取物',
     dose: '1,000mg/day',
+    doseZh: '每日 1,000mg',
     triggers: ['uric_acid','hscrp'],
     mechanism: '2025 RCT (J Dietary Suppl, n=10, crossover): 500mg/d x 28 days &#8594; serum urate -2.62 mg/dL vs placebo +0.24 mg/dL. Mechanism: anthocyanins inhibit xanthine oxidase and promote renal urate excretion.',
+    mechanismZh: '2025 年 RCT（J Dietary Suppl，n=10，交叉設計）：500mg/d × 28 天 &#8594; 血清尿酸 -2.62 mg/dL（安慰劑 +0.24 mg/dL）。機制：花青素抑制黃嘌呤氧化酶並促進腎臟尿酸排泄。',
     evidence: 'strong',
     rootCause: 'Uric acid driven by: fructose intake (fructose &#8594; ATP depletion &#8594; AMP &#8594; xanthine oxidase &#8594; uric acid), purine-rich diet (organ meats, beer), dehydration, visceral fat. Cut added sugars &lt;25g/d, hydrate &#8805;2L/d, reduce alcohol.',
+    rootCauseZh: '尿酸升高根本原因：果糖攝取（果糖 &#8594; ATP 消耗 &#8594; AMP &#8594; 黃嘌呤氧化酶 &#8594; 尿酸）、富含普林飲食（內臟、啤酒）、脫水、內臟脂肪。添加糖控制在 &lt;25g/d、每日飲水 ≥2L、減少飲酒。',
     bridge: '3-6 months while fixing diet. If fructose/purine intake controlled + adequate hydration + uric acid &lt;7.0 mg/dL, discontinue. Uric acid WILL rebound if root causes are not addressed.',
+    bridgeZh: '3-6 個月，同步修正飲食。若果糖/普林攝取控制 + 充足飲水 + 尿酸 &lt;7.0 mg/dL，可停用。根本原因未改善則尿酸必然反彈。',
     products: [
       { name: 'Amazing Nutrition Tart Cherry 1000mg', spec: '120 caps', url: 'https://www.iherb.com/pr/amazing-nutrition-tart-cherry-1-000-mg-120-capsules/108565', top: true },
       { name: 'Eu Natural Uric Acid Purge', spec: 'Celery Seed + Tart Cherry 3-in-1, 60 vcaps', url: 'https://www.iherb.com/pr/eu-natural-uric-acid-purge-celery-seed-tart-cherry-60-vegetarian-capsules/102756' }
@@ -1696,12 +1726,17 @@ const SUPPLEMENTS = [
   },
   {
     id: 'vitamin_c_supp', name: 'Vitamin C',
+    nameZh: '維生素 C',
     dose: '500mg/day',
+    doseZh: '每日 500mg',
     triggers: ['uric_acid'],
     mechanism: 'Meta-analysis (13 RCTs, n=556): 500mg/d &#8594; uric acid -0.35 mg/dL (95% CI: -0.66, -0.03). Individual RCT: -0.5 mg/dL after 2 months. Also promotes renal urate excretion and enhances iron absorption.',
+    mechanismZh: '統合分析（13 項 RCT，n=556）：500mg/d &#8594; 尿酸 -0.35 mg/dL（95% CI：-0.66, -0.03）。個別 RCT：2 個月後 -0.5 mg/dL。亦促進腎臟尿酸排泄並增強鐵質吸收。',
     evidence: 'moderate',
     rootCause: 'Same upstream drivers as uric acid: fructose excess, purine-rich diet, dehydration, visceral fat. Vitamin C promotes renal urate clearance but does not address production. Fix diet first.',
+    rootCauseZh: '與尿酸升高相同的上游驅動因子：果糖過量、富含普林飲食、脫水、內臟脂肪。維生素 C 促進尿酸清除但不抑制生成，應優先修正飲食。',
     bridge: '3 months, then recheck uric acid. If dietary changes sustained and uric acid normalized, discontinue. Vitamin C from whole foods (guava, kiwi, citrus) can maintain the effect.',
+    bridgeZh: '3 個月後複查尿酸。若飲食改善持續且尿酸正常化，可停用。全食物（芭樂、奇異果、柑橘）中的維生素 C 可維持同等效果。',
     products: [
       { name: 'California Gold Nutrition Gold C 500mg', spec: 'USP grade ascorbic acid, 240 vcaps', url: 'https://www.iherb.com/pr/california-gold-nutrition-gold-c-usp-grade-vitamin-c-500-mg-240-veggie-capsules/61866', top: true },
       { name: 'Solgar Ester-C Plus 500mg', spec: 'pH neutral, gentle on stomach, 100 vcaps', url: 'https://www.iherb.com/pr/solgar-ester-c-plus-vitamin-c-500-mg-100-vegetable-capsules/69610' }
@@ -1709,12 +1744,17 @@ const SUPPLEMENTS = [
   },
   {
     id: 'cranberry', name: 'Cranberry Extract (PACs)',
+    nameZh: '蔓越莓萃取物（PACs）',
     dose: 'Per label; standardized to PAC content',
+    doseZh: '依標示服用；應確認 PAC 含量標準化',
     triggers: ['urine_protein','urine_blood'],
     mechanism: 'Proanthocyanidins (PACs) support urinary tract health via anti-adhesion properties against bacteria.',
+    mechanismZh: '原花青素（PACs）透過抗黏附特性抑制細菌附著，支持泌尿道健康。',
     evidence: 'moderate',
     rootCause: 'Urine protein/blood may indicate UTI, kidney disease, or structural issues. Cranberry only addresses recurrent UTI risk. Abnormal urinalysis requires physician evaluation to rule out glomerulonephritis, stones, or malignancy.',
+    rootCauseZh: '尿蛋白/尿血可能為泌尿道感染、腎臟病或結構問題所致。蔓越莓僅針對反覆性泌尿道感染。持續異常尿液分析必須就醫排除腎絲球腎炎、結石或惡性腫瘤。',
     bridge: 'During active UTI risk period or recurrent UTI history. Not a substitute for medical evaluation of persistent proteinuria or hematuria. See physician if findings persist.',
+    bridgeZh: '限於泌尿道感染高風險期或有反覆感染病史者。不能取代持續蛋白尿或血尿的醫療評估。若症狀持續請就醫。',
     products: [
       { name: 'NOW Foods Cranberry with PACs', spec: '1000mg Cranberry + Uva Ursi + Grape Seed, 90 vcaps', url: 'https://www.iherb.com/pr/now-foods-cranberry-with-pacs-90-veg-capsules/505', top: true }
     ]
@@ -1722,12 +1762,17 @@ const SUPPLEMENTS = [
   // ── Glucose Metabolism ──
   {
     id: 'berberine', name: 'Berberine',
+    nameZh: '小檗鹼（Berberine）',
     dose: '500mg 2-3x/day with meals',
+    doseZh: '每次 500mg，每日 2-3 次，隨餐服用',
     triggers: ['glucose','hba1c'],
     mechanism: 'Meta-analysis (37 RCTs): HbA1c -0.63% (95% CI: -0.72, -0.53); FPG -0.82 mmol/L (~-14.8 mg/dL). AMPK activator; 500mg 2-3x/d. Safe profile with no increased hypoglycemia risk.',
+    mechanismZh: '統合分析（37 項 RCT）：HbA1c -0.63%（95% CI：-0.72, -0.53）；空腹血糖 -0.82 mmol/L（約 -14.8 mg/dL）。AMPK 活化劑；500mg 每日 2-3 次。低血糖風險不增加，安全性良好。',
     evidence: 'strong',
     rootCause: 'Insulin resistance driven by: excess body fat (especially visceral), refined carbs/sugar, sedentary lifestyle. DPP trial: 5-7% weight loss + 150min/wk exercise reduces diabetes progression 58%. This is more effective than any supplement or drug.',
+    rootCauseZh: '胰島素阻抗根本原因：體脂過多（尤其內臟脂肪）、精製碳水化合物/糖分、久坐。DPP 試驗：體重減輕 5-7% + 每週運動 150 分鐘可降低糖尿病進展風險 58%，效果優於任何補充品或藥物。',
     bridge: '3-6 months while implementing lifestyle changes. Recheck FPG + HbA1c. If weight loss achieved + exercise sustained + glucose normalized, taper off. Berberine masks the problem if diet unchanged.',
+    bridgeZh: '3-6 個月，同步建立生活習慣。複查空腹血糖 + HbA1c。若體重減輕、運動維持且血糖正常化，可逐步停用。飲食未改善則小檗鹼只是治標不治本。',
     products: [
       { name: 'NOW Foods Berberine Glucose Support', spec: 'MCT oil enhanced absorption, 90 softgels', url: 'https://www.iherb.com/pr/now-foods-berberine-glucose-support-90-softgels/88818', top: true },
       { name: 'Swanson Berberine Complex', spec: '+ Ceylon Cinnamon + Gymnema + Fenugreek, 90 vcaps', url: 'https://www.iherb.com/pr/swanson-berberine-complex-90-veggie-capsules/110994' }
@@ -1736,12 +1781,17 @@ const SUPPLEMENTS = [
   // ── Lipid Panel ──
   {
     id: 'plant_sterols', name: 'Plant Sterols (Beta-Sitosterol)',
+    nameZh: '植物固醇（β-谷甾醇）',
     dose: '800mg-2g/day with meals (split into 2 doses)',
+    doseZh: '每日 800mg-2g，分 2 次隨餐服用',
     triggers: ['ldl','tc'],
     mechanism: 'Meta-analysis (41 RCTs): 2g/d &#8594; LDL -8-10% (-0.31 mmol/L, 95% CI: -0.35 to -0.27). Higher intakes add little. FDA heart health claim at &#8805;800mg/day split into 2 doses with meals.',
+    mechanismZh: '統合分析（41 項 RCT）：2g/d &#8594; LDL -8-10%（-0.31 mmol/L，95% CI：-0.35 to -0.27）。攝取量增加效益有限。每日 ≥800mg 分 2 次隨餐，獲 FDA 心臟健康宣稱認可。',
     evidence: 'strong',
     rootCause: 'LDL/TC elevated by: saturated fat &gt;7% calories, trans fat, excess body weight, genetic predisposition (familial hypercholesterolemia). Reduce saturated fat, increase soluble fiber (oats, beans), exercise 150min/wk.',
+    rootCauseZh: 'LDL/TC 升高原因：飽和脂肪 &gt;7% 總熱量、反式脂肪、體重過重、遺傳因素（家族性高膽固醇血症）。減少飽和脂肪、增加可溶性纖維（燕麥、豆類）、每週運動 150 分鐘。',
     bridge: '3-6 months; recheck lipid panel. If dietary changes sustained + LDL at target, consider discontinuing. Genetic hypercholesterolemia may require ongoing use or statin therapy.',
+    bridgeZh: '3-6 個月後複查血脂。若飲食改善持續且 LDL 達標，可考慮停用。遺傳性高膽固醇血症可能需長期使用或他汀類藥物治療。',
     products: [
       { name: 'NOW Foods Beta-Sitosterol Plant Sterols', spec: 'CardioAid-S blend, 180 softgels', url: 'https://www.iherb.com/pr/now-foods-beta-sitosterol-plant-sterols-180-softgels/44501', top: true },
       { name: 'Nature Made CholestOff Complete', spec: '900mg sterols+stanols/serving, 120 softgels', url: 'https://www.iherb.com/pr/nature-made-cholestoff-complete-120-softgels/70870' }
@@ -1749,12 +1799,17 @@ const SUPPLEMENTS = [
   },
   {
     id: 'red_yeast_rice', name: 'Red Yeast Rice + CoQ10',
+    nameZh: '紅麴 + CoQ10',
     dose: '1,200mg/day red yeast rice + CoQ10',
+    doseZh: '每日紅麴 1,200mg + CoQ10',
     triggers: ['ldl','tc'],
     mechanism: 'Meta-analysis (14 RCTs): LDL -15.6% (95% CI: -9.6% to -21.6%); up to -25% in 6-8 weeks. Contains monacolin K (identical to lovastatin). Comparable to low-dose statin therapy. Add CoQ10 to offset depletion.',
+    mechanismZh: '統合分析（14 項 RCT）：LDL -15.6%（95% CI：-9.6% to -21.6%）；6-8 週可達 -25%。含莫納可林 K（與洛伐他汀相同）。效果相當於低劑量他汀類治療。需加 CoQ10 補充耗竭。',
     evidence: 'strong',
     rootCause: 'Same as LDL/TC: saturated fat, trans fat, obesity, genetics. Red yeast rice is essentially a natural low-dose statin — it treats the number, not the cause. Diet + exercise should be primary intervention.',
+    rootCauseZh: '與 LDL/TC 相同根本原因：飽和脂肪、反式脂肪、肥胖、遺傳。紅麴本質上是天然低劑量他汀——只針對數值，不解決根本。飲食 + 運動應為首要介入。',
     bridge: '3-6 months; recheck lipid panel. If lifestyle changes achieve LDL target, discontinue. Note: monacolin K carries same risks as statins (liver, muscle) — physician monitoring recommended.',
+    bridgeZh: '3-6 個月後複查血脂。若生活調整達到 LDL 目標，停用。注意：莫納可林 K 具有與他汀類相同風險（肝臟、肌肉）——建議醫師監測。',
     products: [
       { name: 'Thorne Red Yeast Rice + CoQ10', spec: '120 caps', url: 'https://www.iherb.com/pr/thorne-red-yeast-rice-coq10-120-capsules/18124', top: true },
       { name: 'Nordic Naturals Cholesterol Support', spec: 'Omega-3 + Red Yeast Rice + CoQ10, 60 softgels', url: 'https://www.iherb.com/pr/nordic-naturals-omega-ldl-with-red-yeast-rice-and-coq10-384-mg-60-soft-gels/29599' }
@@ -1762,24 +1817,34 @@ const SUPPLEMENTS = [
   },
   {
     id: 'psyllium', name: 'Psyllium Husk Fiber',
+    nameZh: '車前子殼纖維',
     dose: '5-10g/day in water, before meals',
+    doseZh: '每日 5-10g，加水，餐前服用',
     triggers: ['ldl','tc','tg'],
     mechanism: 'Meta-analysis (41 RCTs, n=2049): 10g/d &#8594; LDL -7%, TC -4%. Dose- and time-dependent effect. FDA heart health claim at &#8805;7g/d soluble fiber. Mechanism: binds bile acids, forcing hepatic cholesterol conversion.',
+    mechanismZh: '統合分析（41 項 RCT，n=2049）：10g/d &#8594; LDL -7%、TC -4%。效果具劑量和時間依賴性。每日 ≥7g 可溶性纖維獲 FDA 心臟健康宣稱。機制：與膽汁酸結合，迫使肝臟轉換膽固醇。',
     evidence: 'strong',
     rootCause: 'Low dietary fiber intake (&lt;25g/d) is the root issue. Whole food sources: oats, barley, beans, lentils, flaxseed, chia seeds, vegetables. A high-fiber diet achieves the same bile acid binding effect naturally.',
+    rootCauseZh: '根本問題是飲食纖維攝取不足（&lt;25g/d）。全食物來源：燕麥、大麥、豆類、扁豆、亞麻籽、奇亞籽、蔬菜。高纖飲食可達到相同的膽汁酸結合效果。',
     bridge: 'Can replace with whole food fiber once dietary habits change. If eating &#8805;25g fiber/d from food consistently, psyllium supplementation is unnecessary. Easiest supplement to \"graduate\" from.',
+    bridgeZh: '一旦飲食習慣改變，可用全食物纖維取代。若每日穩定從食物攝取 ≥25g 纖維，無需再補充車前子。這是最容易「畢業」的補充品。',
     products: [
       { name: 'NOW Foods Psyllium Husk Powder', spec: '6g soluble fiber/serving, 12oz (340g)', url: 'https://www.iherb.com/pr/now-foods-psyllium-husk-powder-12-oz-340-g/8934', top: true }
     ]
   },
   {
     id: 'niacin', name: 'Niacin (Vitamin B3)',
+    nameZh: '菸鹼酸（維生素 B3）',
     dose: '500mg/day (start at 100mg, titrate up over weeks)',
+    doseZh: '每日 500mg（從 100mg 開始，數週內逐步加量）',
     triggers: ['hdl','tg'],
     mechanism: 'Clinical trial: HDL 35&#8594;42 mg/dL (~+20%) over 2 years. Dose-dependent TG lowering at 1000-2000mg/d. Flushing is normal — start at 100mg, titrate up. Only niacin form (not niacinamide) affects lipids. Note: HDL increase may not reduce CV events when already on statins (AIM-HIGH trial).',
+    mechanismZh: '臨床試驗：2 年後 HDL 從 35 升至 42 mg/dL（約 +20%）。1000-2000mg/d 具劑量依賴性降低三酸甘油酯效果。潮紅反應屬正常——從 100mg 開始逐步加量。只有菸鹼酸（非菸鹼醯胺）才能影響血脂。注意：已服用他汀類時，增加菸鹼酸可能不進一步降低心血管事件（AIM-HIGH 試驗）。',
     evidence: 'strong',
     rootCause: 'Low HDL driven by: sedentary lifestyle (exercise is the #1 HDL booster, +3-6 mg/dL), smoking, excess body fat, high refined carb diet. Aerobic exercise 150min/wk + smoking cessation + weight loss are the primary interventions.',
+    rootCauseZh: 'HDL 偏低原因：久坐（運動是提升 HDL 的首要方法，+3-6 mg/dL）、吸菸、體脂過多、高精製碳水化合物飲食。有氧運動每週 150 分鐘 + 戒菸 + 減重為首要介入。',
     bridge: '3-6 months while establishing exercise habit. If HDL rises with exercise + weight management, discontinue niacin. AIM-HIGH trial showed adding niacin to statins did not reduce CV events — exercise remains superior.',
+    bridgeZh: '3-6 個月，同步建立運動習慣。若 HDL 透過運動 + 體重管理提升，停用菸鹼酸。AIM-HIGH 試驗顯示在他汀類基礎上加用菸鹼酸並未降低心血管事件——運動仍優於藥物。',
     products: [
       { name: 'Life Extension Vitamin B3 Niacin 500mg', spec: '100 caps', url: 'https://www.iherb.com/pr/life-extension-vitamin-b3-niacin-500-mg-100-capsules/16365', top: true }
     ]
@@ -1787,13 +1852,18 @@ const SUPPLEMENTS = [
   // ── Vitamin D ──
   {
     id: 'vitamin_d_supp', name: 'Vitamin D3 + K2 (MK-7)',
+    nameZh: '維生素 D3 + K2（MK-7）',
     dose: 'D3 2,000-4,000 IU + K2 100-200mcg/day with fat-containing meal',
+    doseZh: '每日 D3 2,000-4,000 IU + K2 100-200 mcg，隨含脂肪餐食服用',
     triggers: ['vitamin_d','bone_density'],
     mechanism: 'D3 promotes calcium absorption; K2 (MK-7) directs calcium into bones instead of arteries. Synergistic pair. Target serum 25-OH &#8805;30 ng/mL.',
+    mechanismZh: 'D3 促進鈣質吸收；K2（MK-7）將鈣引導至骨骼而非動脈。協同作用組合。目標血清 25-OH ≥30 ng/mL。',
     evidence: 'strong',
     longTerm: true,
     rootCause: 'Vitamin D deficiency from insufficient sun exposure — especially common in Taiwan (indoor work, sun avoidance). Diet alone cannot meet needs (few natural food sources). 15-20 min midday sun on arms/face = ~10,000 IU, but impractical for most office workers.',
+    rootCauseZh: '維生素 D 缺乏源於日曬不足——在台灣尤為常見（室內工作、避免日曬）。純靠飲食難以達標（天然食物來源稀少）。每日正午在手臂/臉部曬 15-20 分鐘 ≈ 10,000 IU，但對多數上班族不可行。',
     bridge: 'LONG-TERM supplementation recommended. Unlike most supplements here, dietary/lifestyle changes rarely provide adequate vitamin D. Recheck 25-OH-D every 6 months to calibrate dose.',
+    bridgeZh: '建議<b>長期補充</b>。與多數補充品不同，飲食/生活調整很少能提供足夠的維生素 D。每 6 個月複查 25-OH-D 以校正劑量。',
     products: [
       { name: 'California Gold Nutrition D3 + K2 (MK-7)', spec: '180 vcaps', url: 'https://www.iherb.com/pr/california-gold-nutrition-vitamin-d3-k2-as-mk-7-180-veggie-capsules/124745', top: true },
       { name: "Doctor's Best Vitamin D3 + K2 MK-7", spec: '180 softgels', url: 'https://www.iherb.com/pr/doctor-s-best-vitamin-d3-k2-mk-7-180-softgels/155204' }
@@ -1802,12 +1872,17 @@ const SUPPLEMENTS = [
   // ── Thyroid ──
   {
     id: 'thyroid_support', name: 'Selenium + Thyroid Support',
+    nameZh: '硒 + 甲狀腺支援配方',
     dose: 'Selenium 200mcg/day',
+    doseZh: '硒 200 mcg/day',
     triggers: ['tsh'],
     mechanism: 'Selenium supports T4&#8594;T3 conversion; essential cofactor for deiodinase enzymes. Iodine + L-tyrosine support thyroid hormone synthesis.',
+    mechanismZh: '硒支援 T4 &#8594; T3 轉換；為脫碘酶的必需輔因子。碘 + L-酪氨酸支援甲狀腺激素合成。',
     evidence: 'moderate',
     rootCause: 'Thyroid dysfunction usually from: autoimmune (Hashimoto\'s/Graves\'), iodine deficiency/excess, or medication effects. Requires physician diagnosis — supplements alone do NOT treat thyroid disease.',
+    rootCauseZh: '甲狀腺功能異常通常源於：自體免疫（橋本氏/葛瑞夫茲）、碘缺乏/過量、藥物副作用。必須由醫師診斷——補充品<b>無法</b>治療甲狀腺疾病。',
     bridge: 'Ongoing under physician supervision. Selenium may help reduce thyroid antibodies in Hashimoto\'s (Cochrane review), but does not replace thyroid hormone replacement if needed. Never self-treat abnormal TSH.',
+    bridgeZh: '須在醫師指導下進行。硒可能有助於降低橋本氏病的甲狀腺抗體（Cochrane 回顧），但若需要甲狀腺激素補充治療，硒無法取代。<b>切勿自行治療 TSH 異常</b>。',
     products: [
       { name: 'Terry Naturally Thyroid Care Plus', spec: 'Selenium + Iodine + L-Tyrosine, 60 caps', url: 'https://www.iherb.com/pr/terry-naturally-thyroid-care-plus-with-selenium-60-capsules/106210', top: true },
       { name: 'Thorne Thyroid Health Complex', spec: 'Iodine + Selenium cofactors, 120 caps', url: 'https://www.iherb.com/pr/thorne-thyroid-health-complex-with-iodine-and-selenium-120-capsules/33639' }
@@ -1816,12 +1891,17 @@ const SUPPLEMENTS = [
   // ── Inflammation ──
   {
     id: 'curcumin', name: 'Curcumin (Turmeric Extract)',
+    nameZh: '薑黃素（薑黃萃取物）',
     dose: '500-1,000mg/day with piperine (BioPerine)',
+    doseZh: '每日 500-1,000mg，搭配胡椒鹼（BioPerine）',
     triggers: ['hscrp'],
     mechanism: 'Pooled meta-analysis (21 MAs): CRP WMD -0.87 mg/L (95% CI: -1.14, -0.59); hs-CRP SMD -0.65 (p=0.02). Inhibits NF-&#954;B pathway. BioPerine increases bioavailability 2,000%. Dose: 500-1000mg/d for 12+ days.',
+    mechanismZh: '統合統合分析（21 篇 MA）：CRP WMD -0.87 mg/L（95% CI：-1.14, -0.59）；hs-CRP SMD -0.65（p=0.02）。抑制 NF-&#954;B 路徑。BioPerine 提升生物利用率 2,000%。劑量：500-1000mg/d，持續 12 天以上。',
     evidence: 'strong',
     rootCause: 'Chronic inflammation driven by: visceral fat (adipocytes secrete IL-6, TNF-&#945;), chronic stress, poor sleep (&lt;6h), excess sugar/processed food, sedentary lifestyle. Reduce visceral fat + manage stress + sleep &#8805;7h.',
+    rootCauseZh: '慢性發炎根本原因：內臟脂肪（脂肪細胞分泌 IL-6、TNF-&#945;）、慢性壓力、睡眠不足（&lt;6 小時）、過量糖分/加工食品、久坐。優先減少內臟脂肪 + 壓力管理 + 睡眠 ≥7 小時。',
     bridge: '3-6 months while addressing inflammatory drivers. If hs-CRP normalizes with weight loss + lifestyle changes, discontinue. Curcumin treats the downstream signal, not the upstream source.',
+    bridgeZh: '3-6 個月，同步處理發炎驅動因子。若 hs-CRP 透過體重減輕 + 生活改善正常化，停用。薑黃素治療的是下游訊號，非上游根本原因。',
     products: [
       { name: "Doctor's Best High Absorption Curcumin C3 Complex", spec: 'With BioPerine, 120 vcaps', url: 'https://www.iherb.com/pr/doctor-s-best-high-absorption-curcumin-120-veggie-caps/13', top: true },
       { name: 'Sports Research Turmeric Curcumin', spec: '500mg with C3 Complex, 120 softgels', url: 'https://www.iherb.com/pr/sports-research-turmeric-curcumin-500-mg-120-softgels/72054' }
@@ -1830,12 +1910,17 @@ const SUPPLEMENTS = [
   // ── Prostate ──
   {
     id: 'saw_palmetto', name: 'Saw Palmetto',
+    nameZh: '鋸棕櫚',
     dose: '320mg/day standardized extract',
+    doseZh: '每日標準化萃取物 320mg',
     triggers: ['psa'],
     mechanism: 'Traditionally used for BPH. However, CAMUS RCT (NEJM): even at 3x standard dose, no significant benefit over placebo for urinary symptoms or PSA. Does not affect PSA readings. Cochrane 2023: little to no benefit. Consider only as adjunct if physician recommends.',
+    mechanismZh: '傳統用於良性攝護腺增生（BPH）。然而 CAMUS RCT（NEJM）：即使 3 倍標準劑量，對排尿症狀或 PSA 的效果與安慰劑無顯著差異。Cochrane 2023：幾乎無效。若醫師建議方考慮作為輔助使用。',
     evidence: 'weak',
     rootCause: 'Elevated PSA may indicate: BPH (benign, age-related), prostatitis, or prostate cancer. Requires urologist evaluation — PSA is a screening marker, not a diagnosis. No supplement replaces proper medical workup.',
+    rootCauseZh: 'PSA 升高可能代表：良性攝護腺增生（BPH，良性，年齡相關）、攝護腺炎或攝護腺癌。必須由泌尿科醫師評估——PSA 是篩檢指標，不是診斷。任何補充品都無法取代適當的醫療檢查。',
     bridge: 'Physician-directed only. Evidence does not support self-treatment with saw palmetto. If urologist confirms BPH with no malignancy, discuss alpha-blockers or 5-alpha reductase inhibitors as first-line therapy.',
+    bridgeZh: '僅在醫師指導下使用。實證不支持自行服用鋸棕櫚。若泌尿科確認為無惡性腫瘤之 BPH，請與醫師討論 α 阻斷劑或 5-α 還原酶抑制劑作為第一線治療。',
     products: [
       { name: "Doctor's Best Saw Palmetto 320mg", spec: 'Standardized extract, 60 softgels', url: 'https://www.iherb.com/pr/doctor-s-best-saw-palmetto-standardized-extract-320-mg-60-softgels/24', top: true },
       { name: 'Real Health Prostate Formula', spec: 'Saw Palmetto + Zinc + Pomegranate + Quercetin, 270 tabs', url: 'https://www.iherb.com/pr/real-health-the-prostate-formula-with-saw-palmetto-270-tablets/57282' }
@@ -1844,12 +1929,17 @@ const SUPPLEMENTS = [
   // ── Bone Density ──
   {
     id: 'bone_support', name: 'Calcium + D3 + K2 Complex',
+    nameZh: '鈣 + D3 + K2 複合配方',
     dose: 'Calcium 600-1,200mg + D3 + K2 daily, split into 2 doses',
+    doseZh: '每日鈣 600-1,200mg + D3 + K2，分 2 次服用',
     triggers: ['bone_density'],
     mechanism: 'Calcium for bone mineralization; D3 for intestinal absorption; K2 (MK-4) clinically studied for maintaining bone density. Split doses for better absorption.',
+    mechanismZh: '鈣用於骨質礦化；D3 促進腸道吸收；K2（MK-4）在臨床研究中顯示可維持骨密度。分次服用以提升吸收率。',
     evidence: 'strong',
     rootCause: 'Bone loss from: calcium-poor diet, vitamin D deficiency, sedentary lifestyle (weight-bearing exercise stimulates bone), menopause (estrogen decline accelerates loss), smoking, excess alcohol. Weight-bearing exercise + adequate dietary calcium (dairy, tofu, sardines) are primary.',
+    rootCauseZh: '骨質流失原因：鈣質飲食不足、維生素 D 缺乏、久坐（負重運動刺激骨質）、更年期（雌激素下降加速流失）、吸菸、過量飲酒。負重運動 + 充足飲食鈣質（乳製品、豆腐、沙丁魚）為首要介入。',
     bridge: 'Long-term if confirmed osteopenia/osteoporosis. Post-menopausal women and men &gt;70 typically need ongoing supplementation. Younger adults: optimize diet + exercise first, supplement only if intake &lt;1000mg Ca/d.',
+    bridgeZh: '確診骨質疏鬆症/骨量減少者需長期補充。停經後女性及 70 歲以上男性通常需持續補充。年輕成人：優先優化飲食 + 運動，每日鈣攝取 &lt;1000mg 再考慮補充。',
     products: [
       { name: 'Life Extension Bone Restore Elite', spec: 'Ca + D3 + K2(MK-4) + trace minerals, 120 caps', url: 'https://www.iherb.com/pr/life-extension-bone-restore-elite-calcium-supplement-with-super-potent-k2-120-capsules/113499', top: true },
       { name: 'New Chapter Bone Strength Take Care', spec: 'Plant-source calcium + D3 + K2, 240 tiny tabs', url: 'https://www.iherb.com/pr/new-chapter-plant-calcium-bone-strength-take-care-240-vegan-tiny-tablets/39500' }
@@ -1858,13 +1948,18 @@ const SUPPLEMENTS = [
   // ── Eye Health ──
   {
     id: 'eye_support', name: 'Lutein + Zeaxanthin',
+    nameZh: '葉黃素 + 玉米黃質',
     dose: '20-40mg lutein + 2-4mg zeaxanthin/day with food',
+    doseZh: '每日葉黃素 20-40mg + 玉米黃質 2-4mg，隨餐服用',
     triggers: ['iop_l','iop_r'],
     mechanism: 'Macular carotenoids that filter blue light and provide antioxidant protection. Supports overall eye health and recovery from bright light exposure.',
+    mechanismZh: '黃斑部類胡蘿蔔素，可過濾藍光並提供抗氧化保護。支援整體眼部健康及強光照射後的恢復。',
     evidence: 'moderate',
     longTerm: true,
     rootCause: 'Elevated IOP may indicate glaucoma risk — requires ophthalmologist evaluation. Macular degeneration driven by: age, UV/blue light exposure, oxidative stress. Reduce screen time, wear UV-blocking sunglasses, eat dark leafy greens (natural lutein source).',
+    rootCauseZh: '眼壓升高可能表示青光眼風險——需眼科醫師評估。黃斑部退化受：年齡、紫外線/藍光暴露、氧化壓力驅動。減少螢幕時間、佩戴 UV 防護太陽眼鏡、攝取深色葉菜（天然葉黃素來源）。',
     bridge: 'Long-term for screen-intensive workers. AREDS2 formula (lutein + zeaxanthin) showed 25% reduction in advanced AMD progression over 5 years. Dietary sources: kale, spinach, eggs. Annual ophthalmology follow-up essential.',
+    bridgeZh: '螢幕密集工作者宜長期補充。AREDS2 配方（葉黃素 + 玉米黃質）顯示 5 年後晚期老年性黃斑部病變進展降低 25%。飲食來源：羽衣甘藍、菠菜、雞蛋。每年眼科追蹤不可少。',
     products: [
       { name: "Doctor's Best Lutein (Lutemax 2020)", spec: '20mg lutein + zeaxanthin isomers, 180 softgels', url: 'https://www.iherb.com/pr/doctor-s-best-lutein-lutemax-2020-20-mg-180-softgels/58903', top: true },
       { name: 'NOW Foods Lutein & Zeaxanthin', spec: '60 softgels', url: 'https://www.iherb.com/pr/now-foods-lutein-zeaxanthin-60-softgels/70960' }
@@ -2000,8 +2095,8 @@ function buildSupplementSection(flagged) {
     const evLabel = supp.evidence === 'strong' ? T('Strong Evidence','強實證') : supp.evidence === 'moderate' ? T('Moderate Evidence','中等實證') : T('Weak Evidence','初步實證');
 
     html += `<div class="supp-card">`;
-    html += `<div class="supp-hdr"><span class="supp-name">${supp.name}</span><span class="supp-ev ${evCls}">${evLabel}</span></div>`;
-    html += `<div class="supp-dose">${supp.dose}</div>`;
+    html += `<div class="supp-hdr"><span class="supp-name">${T(supp.name, supp.nameZh || supp.name)}</span><span class="supp-ev ${evCls}">${evLabel}</span></div>`;
+    html += `<div class="supp-dose">${T(supp.dose, supp.doseZh || supp.dose)}</div>`;
     html += `<div class="supp-body">`;
 
     // Product links
@@ -2014,7 +2109,7 @@ function buildSupplementSection(flagged) {
     }
 
     // Mechanism
-    html += `<div class="supp-mech">${supp.mechanism}</div>`;
+    html += `<div class="supp-mech">${T(supp.mechanism, supp.mechanismZh || supp.mechanism)}</div>`;
 
     // Indicator pills (which flagged indicators this addresses)
     html += `<div class="supp-tags">`;
@@ -2027,13 +2122,13 @@ function buildSupplementSection(flagged) {
     // Root cause & bridge therapy info
     if (supp.rootCause) {
       if (supp.longTerm) {
-        html += `<div class="supp-long-term"><b>&#128218; ${T('Long-Term Needed','長期使用')}</b><br>${supp.rootCause}</div>`;
+        html += `<div class="supp-long-term"><b>&#128218; ${T('Long-Term Needed','長期使用')}</b><br>${T(supp.rootCause, supp.rootCauseZh || supp.rootCause)}</div>`;
       } else {
-        html += `<div class="supp-root"><b>&#x1F50D; ${T('Root Cause','根本原因')}</b><br>${supp.rootCause}</div>`;
+        html += `<div class="supp-root"><b>&#x1F50D; ${T('Root Cause','根本原因')}</b><br>${T(supp.rootCause, supp.rootCauseZh || supp.rootCause)}</div>`;
       }
     }
     if (supp.bridge) {
-      html += `<div class="supp-bridge">${supp.longTerm ? '&#128337;' : '&#x1F504;'} ${T('Bridge','過渡方案')}: ${supp.bridge}</div>`;
+      html += `<div class="supp-bridge">${supp.longTerm ? '&#128337;' : '&#x1F504;'} ${T('Bridge','過渡方案')}: ${T(supp.bridge, supp.bridgeZh || supp.bridge)}</div>`;
     }
 
     html += `</div></div>`;
