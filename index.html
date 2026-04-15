@@ -53,6 +53,17 @@ body.zh .en{display:none!important}
 .prog-card .prog-target{font-size:11px;color:var(--tl);margin-top:4px}
 .prog-card .prog-status{margin-top:8px;font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px;display:inline-block}
 .prog-hit{background:var(--gl);color:var(--gn)}.prog-miss{background:var(--rl);color:var(--rd)}.prog-near{background:var(--ol);color:var(--or)}.prog-na{background:var(--gb);color:var(--tl)}
+.ma-wrap{margin-top:18px;padding:16px;background:var(--gb);border-radius:var(--r);border:1px solid rgba(0,0,0,.06)}
+.ma-title{font-size:13px;font-weight:700;color:var(--bm);margin-bottom:10px}
+.ma-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.ma-card{background:var(--wh);border-radius:var(--r);padding:12px;text-align:center;box-shadow:var(--sh)}
+.ma-card .ma-label{font-size:10px;color:var(--tl);font-weight:600;margin-bottom:4px}
+.ma-card .ma-val{font-size:18px;font-weight:700}
+.ma-card .ma-tgt{font-size:10px;color:var(--tl);margin-top:2px}
+.ma-card .ma-st{margin-top:6px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;display:inline-block}
+.ma-hit{background:var(--gl);color:var(--gn)}.ma-miss{background:var(--rl);color:var(--rd)}.ma-near{background:var(--ol);color:var(--or)}.ma-none{background:var(--gb);color:var(--tl)}
+.ma-loading{font-size:12px;color:var(--tl);padding:12px;text-align:center}
+.ma-note{font-size:10px;color:var(--tl);margin-top:8px;text-align:center}
 .prog-trend{margin-top:14px}
 .prog-trend table{font-size:11px}
 .prog-loading{text-align:center;padding:40px;color:var(--tl);font-size:13px}
@@ -80,7 +91,6 @@ body.zh .en{display:none!important}
 <div class="nt" onclick="st('t5')"><span class="en">Daily Routine</span><span class="zh">每日作息</span></div>
 <div class="nt" onclick="st('t6')"><span class="en">Timeline & Milestones</span><span class="zh">時程與里程碑</span></div>
 <div class="nt" onclick="st('t7')"><span class="en">Safety & Medical</span><span class="zh">安全與就醫</span></div>
-<div class="nt" onclick="st('t8')"><span class="en">Health Dashboard</span><span class="zh">健康儀表板</span></div>
 <div class="nt" onclick="st('t9')"><span class="en">Progress Tracker</span><span class="zh">進度追蹤</span></div>
 </div></div>
 
@@ -958,6 +968,7 @@ body.zh .en{display:none!important}
 <tr><td>Month 5</td><td>65.8 kg</td><td>~16.5%</td><td>7</td><td>Optimization</td><td>250+ min exercise/week</td></tr>
 <tr class="hl"><td>Month 6</td><td>65.0 kg</td><td>~15.5%</td><td>6–7</td><td>Full evaluation</td><td>Complete bloodwork recheck vs. baseline</td></tr>
 </table></div>
+<div id="monthlyActualsEN"></div>
 <div class="co cb">
 <div class="ct">Body Fat % &amp; Visceral Fat — Methodology</div>
 <p><strong>Body Fat %:</strong> Projected assuming 80% of weight loss from fat mass and 20% from lean mass, consistent with diet + resistance + aerobic exercise protocols (Bellicha et al., <em>Obesity Reviews</em> 2021). Early months may show smaller BF% drops due to initial fluid redistribution. Tanita scale readings are the reference instrument.</p>
@@ -1092,6 +1103,7 @@ body.zh .en{display:none!important}
 <tr><td>第 5 月</td><td>65.8 kg</td><td>~16.5%</td><td>7</td><td>優化期</td><td>250+ 分鐘運動/週</td></tr>
 <tr class="hl"><td>第 6 月</td><td>65.0 kg</td><td>~15.5%</td><td>6–7</td><td>全面評估</td><td>完整抽血複檢 vs. 基準值</td></tr>
 </table></div>
+<div id="monthlyActualsZH"></div>
 </div>
 <div class="c">
 <h3>第 1 週：體液重分布</h3>
@@ -1276,22 +1288,6 @@ body.zh .en{display:none!important}
 </div>
 
 <!-- ═══════════════════════════════════════════════════ -->
-<div id="t8" class="tc">
-<div class="c">
-<h2><span class="en">Health Dashboard</span><span class="zh">健康儀表板</span></h2>
-<p>體重、體組成、血壓、睡眠 Sleep Score 趨勢圖。每次 daily check-in 完成後自動更新。</p>
-<div class="co cb" style="margin-bottom:16px">
-<div class="ct"><span class="en">How to Use</span><span class="zh">使用方式</span></div>
-<p>每日 check-in 後由 <code>python3 scripts/generate_dashboard.py</code> 重新生成。顯示所有自 2026-03-17 起的完整紀錄，不截斷。若圖表未更新，重新整理頁面（Cmd+R）即可。</p>
-</div>
-<div style="overflow-x:auto;text-align:center">
-<img src="reviews/health_dashboard.png" alt="Health Dashboard" style="max-width:100%;height:auto;border-radius:8px;border:1px solid #333">
-</div>
-<p style="font-size:11px;color:#888;margin-top:8px;text-align:center"><span class="en">Dashboard covers all daily records since 2026-03-17 · Updated on each check-in commit</span><span class="zh">儀表板涵蓋 2026-03-17 起所有每日紀錄 · 每次 check-in commit 時更新</span></p>
-</div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════ -->
 <!-- T9: PROGRESS TRACKER                               -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div id="t9" class="tc">
@@ -1333,6 +1329,7 @@ document.getElementById(id).classList.add('a');
 event.target.classList.add('a');
 window.scrollTo({top:0,behavior:'smooth'});
 if(id==='t9') loadProgressTracker();
+if(id==='t6') loadT6Data();
 }
 function toggleLang(){
 const b=document.body;
@@ -1359,7 +1356,9 @@ return localStorage.getItem('health-start-date')||DEFAULT_START;
 function onStartDateChange(val){
 localStorage.setItem('health-start-date',val);
 sessionStorage.removeItem('health-progress-cache');
+sessionStorage.removeItem('health-monthly-cache');
 if(document.getElementById('t9').classList.contains('a')) loadProgressTracker();
+if(document.getElementById('t6').classList.contains('a')) loadT6Data();
 }
 (function(){
 const saved=getStartDate();
@@ -1379,11 +1378,13 @@ const PHASE_TARGETS=[
 {month:6,weight:65.0,bodyFat:15.5,visceralFat:7,sleepScore:75,bodyBattery:75,systolic:125,label_en:'Month 6',label_zh:'第 6 月'}
 ];
 
+/* Month 0 = baseline snapshot only. From day 0 onward you are "in Month 1".
+   Month 1: days 0–29, Month 2: days 30–59, … Month 6: days 150–179. */
 function getCurrentMonth(){
 const start=new Date(getStartDate()+'T00:00:00');
 const now=new Date();
 const diff=(now-start)/(1000*60*60*24*30.44);
-return Math.max(0,Math.min(6,Math.floor(diff)));
+return Math.max(1,Math.min(6,Math.floor(diff)+1));
 }
 
 /* ── Markdown Parsing ── */
@@ -1520,9 +1521,9 @@ try{
 const allDates=await fetchFileList();
 const startD=new Date(getStartDate()+'T00:00:00');
 const monthStart=new Date(startD);
-monthStart.setDate(monthStart.getDate()+month*30);
+monthStart.setDate(monthStart.getDate()+(month-1)*30);
 const monthEnd=new Date(startD);
-monthEnd.setDate(monthEnd.getDate()+(month+1)*30);
+monthEnd.setDate(monthEnd.getDate()+month*30);
 const now=new Date();
 const end=monthEnd>now?now:monthEnd;
 
@@ -1556,6 +1557,185 @@ document.getElementById('progCards').innerHTML='<p class="prog-error">'+(en?'Fai
 document.getElementById('progTrend').innerHTML='';
 }finally{
 progLoading=false;
+}
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* T6: Timeline & Milestones — Dynamic Month Labels + Actuals */
+/* ════════════════════════════════════════════════════════════ */
+
+const RAW_MONTHLY='https://raw.githubusercontent.com/'+REPO_OWNER+'/'+REPO_NAME+'/main/reviews/monthly/';
+
+/* Inject calendar months into Phase Targets table cells + highlight current */
+function injectPhaseMonths(){
+const start=new Date(getStartDate()+'T00:00:00');
+const monthNames_en=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const enTable=document.querySelector('#t6 .en table');
+const zhTable=document.querySelector('#t6 .zh table');
+if(!enTable||!zhTable) return;
+const enRows=enTable.querySelectorAll('tr');
+const zhRows=zhTable.querySelectorAll('tr');
+const cur=getCurrentMonth();
+for(let m=0;m<=6;m++){
+const d=new Date(start);
+d.setMonth(d.getMonth()+m);
+const yyyy=d.getFullYear();
+const mm=d.getMonth();
+const nowTag=m===cur?' ★':'';
+const enLabel='Month '+m+(m===0?' (Baseline)':'')+' — '+monthNames_en[mm]+' '+yyyy+nowTag;
+const zhLabel='第 '+m+' 月'+(m===0?'（基線）':'')+' — '+yyyy+'年'+(mm+1)+'月'+nowTag;
+const enRow=enRows[m+1];
+const zhRow=zhRows[m+1];
+if(enRow){enRow.querySelector('td').textContent=enLabel;if(m===cur)enRow.classList.add('hl');}
+if(zhRow){zhRow.querySelector('td').textContent=zhLabel;if(m===cur)zhRow.classList.add('hl');}
+}
+}
+
+/* Compute YYYY-MM for month offset from start date */
+function getMonthKey(monthOffset){
+const start=new Date(getStartDate()+'T00:00:00');
+const d=new Date(start);
+d.setMonth(d.getMonth()+monthOffset);
+const yyyy=d.getFullYear();
+const mm=String(d.getMonth()+1).padStart(2,'0');
+return yyyy+'-'+mm;
+}
+
+/* Parse monthly review — extract metrics from 〇、半年計畫進度 table.
+   Each row: | 指標 | 計畫目標 | 本月實際 | 達成狀態 |
+   We match each metric row individually for robustness. */
+function parseMonthlyReview(text){
+const r={};
+/* Weight: | 體重... | 69.2 kg | 70.0 kg | ✗ | */
+const wm=text.match(/\|\s*體重[^|]*\|[^|]*\|\s*([\d.]+)\s*kg/);
+if(wm) r.weight=parseFloat(wm[1]);
+/* Body fat: | 體脂率 | ≤ 21% | 21.4%... | △ | */
+const bfm=text.match(/\|\s*體脂率[^|]*\|[^|]*\|\s*([\d.]+)\s*%/);
+if(bfm) r.bodyFat=parseFloat(bfm[1]);
+/* Visceral fat: | 內臟脂肪 | ≤ 10 | 10.5... | △ | */
+const vfm=text.match(/\|\s*內臟脂肪[^|]*\|[^|]*\|\s*([\d.]+)/);
+if(vfm) r.visceralFat=parseFloat(vfm[1]);
+/* Systolic BP: | 收縮壓... | < 130 mmHg | 126.6 mmHg | ✓ | */
+const sbpm=text.match(/\|\s*收縮壓[^|]*\|[^|]*\|\s*([\d.]+)\s*mmHg/);
+if(sbpm) r.systolic=parseFloat(sbpm[1]);
+/* Sleep Score: | Sleep Score... | ≥ 70 | 65.7 | ✗ | */
+const ssm=text.match(/\|\s*Sleep Score[^|]*\|[^|]*\|\s*([\d.]+)/);
+if(ssm) r.sleepScore=parseFloat(ssm[1]);
+/* Body Battery: | Body Battery... | ≥ 65 | 35.9 | ✗ | */
+const bbm=text.match(/\|\s*Body Battery[^|]*\|[^|]*\|\s*([\d.]+)/);
+if(bbm) r.bodyBattery=parseFloat(bbm[1]);
+return r;
+}
+
+/* Fetch a single monthly review */
+async function fetchMonthlyReview(yyyymm){
+const cacheKey='health-monthly-'+yyyymm;
+const cached=sessionStorage.getItem(cacheKey);
+if(cached){
+const c=JSON.parse(cached);
+if(Date.now()-c.ts<300000) return c.data;
+}
+try{
+const resp=await fetch(RAW_MONTHLY+yyyymm+'.md');
+if(!resp.ok) return null;
+const text=await resp.text();
+const data=parseMonthlyReview(text);
+data._month=yyyymm;
+sessionStorage.setItem(cacheKey,JSON.stringify({ts:Date.now(),data}));
+return data;
+}catch(e){return null;}
+}
+
+/* Render monthly actuals card into a container */
+function renderMonthlyActuals(container,allData,en){
+if(!allData.length){
+container.innerHTML='';
+return;
+}
+const metrics=[
+{key:'weight',label_en:'Weight',label_zh:'體重',unit:'kg',lower:true},
+{key:'bodyFat',label_en:'Body Fat',label_zh:'體脂率',unit:'%',lower:true},
+{key:'visceralFat',label_en:'Visceral Fat',label_zh:'內臟脂肪',unit:'',lower:true},
+{key:'systolic',label_en:'Systolic BP',label_zh:'收縮壓',unit:' mmHg',lower:true},
+{key:'sleepScore',label_en:'Sleep Score',label_zh:'Sleep Score',unit:'',lower:false},
+{key:'bodyBattery',label_en:'Body Battery',label_zh:'Body Battery',unit:'',lower:false}
+];
+let html='<div class="ma-wrap">';
+html+='<div class="ma-title">'+(en?'Monthly Review Actuals':'月回顧實際數據')+'</div>';
+
+for(const item of allData){
+const mIdx=item._monthIdx;
+const target=PHASE_TARGETS[mIdx];
+if(!target) continue;
+const monthLabel=en?target.label_en:target.label_zh;
+html+='<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:600;color:var(--tx);margin-bottom:6px">'+monthLabel+' ('+item._month+')</div>';
+html+='<div class="ma-grid">';
+for(const m of metrics){
+const actual=item[m.key];
+const tgt=target[m.key];
+let stClass='ma-none',stText=en?'N/A':'無數據';
+if(actual!=null){
+const diff=m.lower?(tgt-actual):(actual-tgt);
+const pct=Math.abs(diff)/tgt*100;
+if(diff>=0){stClass='ma-hit';stText=en?'Hit':'✓';}
+else if(pct<=5){stClass='ma-near';stText=en?'Close':'△';}
+else{stClass='ma-miss';stText=en?'Miss':'✗';}
+}
+html+='<div class="ma-card">';
+html+='<div class="ma-label">'+(en?m.label_en:m.label_zh)+'</div>';
+html+='<div class="ma-val">'+(actual!=null?actual+m.unit:'—')+'</div>';
+html+='<div class="ma-tgt">'+(en?'Target: ':'目標：')+tgt+m.unit+'</div>';
+html+='<div class="ma-st '+stClass+'">'+stText+'</div>';
+html+='</div>';
+}
+html+='</div></div>';
+}
+html+='<div class="ma-note">'+(en?'Data source: reviews/monthly/ on GitHub (main branch)':'數據來源：GitHub reviews/monthly/（main 分支）')+'</div>';
+html+='</div>';
+container.innerHTML=html;
+}
+
+/* Main T6 loader */
+let t6Loading=false;
+async function loadT6Data(){
+injectPhaseMonths();
+if(t6Loading) return;
+t6Loading=true;
+const enContainer=document.getElementById('monthlyActualsEN');
+const zhContainer=document.getElementById('monthlyActualsZH');
+const en=isEn();
+const loadingHtml='<div class="ma-loading">'+(en?'Loading monthly reviews...':'載入月回顧中...')+'</div>';
+enContainer.innerHTML=loadingHtml;
+zhContainer.innerHTML=loadingHtml;
+
+try{
+const fetches=[];
+const monthIndices=[];
+const currentMonth=getCurrentMonth();
+/* Monthly reviews: Month 1 → getMonthKey(0) = start month YYYY-MM.
+   2026-03.md → Month 1 targets, 2026-04.md → Month 2, etc. */
+for(let m=1;m<=Math.min(6,currentMonth);m++){
+const key=getMonthKey(m-1);
+fetches.push(fetchMonthlyReview(key));
+monthIndices.push(m);
+}
+const results=await Promise.all(fetches);
+const allData=[];
+results.forEach((data,i)=>{
+if(data&&Object.keys(data).length>1){
+data._monthIdx=monthIndices[i];
+allData.push(data);
+}
+});
+renderMonthlyActuals(enContainer,allData,true);
+renderMonthlyActuals(zhContainer,allData,false);
+}catch(err){
+const hint=err.message.includes('Failed to fetch')?(en?' (Open via localhost or GitHub Pages)':'（請透過 localhost 或 GitHub Pages 開啟）'):'';
+const errHtml='<div class="ma-loading" style="color:var(--rd)">'+(en?'Failed to load: ':'載入失敗：')+err.message+hint+'</div>';
+enContainer.innerHTML=errHtml;
+zhContainer.innerHTML=errHtml;
+}finally{
+t6Loading=false;
 }
 }
 </script>
