@@ -98,6 +98,27 @@ details.plan-detail[open]>summary::after{content:'-'}
 details.plan-detail[open]>summary{border-radius:var(--r) var(--r) 0 0;margin-bottom:0}
 details.plan-detail>.plan-detail-body{border:1px solid var(--gb);border-top:none;border-radius:0 0 var(--r) var(--r);padding:14px;background:var(--wh)}
 #pdf-modal .c{max-height:80vh;overflow-y:auto}
+.supp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin:14px 0}
+.supp-card{border-radius:var(--r);background:var(--wh);box-shadow:var(--sh);overflow:hidden;border-top:3px solid var(--bm);display:flex;flex-direction:column}
+.supp-hdr{padding:12px 14px 6px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.supp-name{font-weight:700;font-size:14px;color:var(--bd)}
+.supp-ev{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;white-space:nowrap;flex-shrink:0}
+.supp-ev-strong{background:var(--gl);color:var(--gn)}.supp-ev-moderate{background:var(--yl);color:#7B6B00}.supp-ev-weak{background:var(--rl);color:var(--rd)}
+.supp-dose{font-size:11px;color:var(--tl);padding:0 14px 8px}
+.supp-body{padding:0 14px 14px;flex:1;display:flex;flex-direction:column;gap:6px}
+.supp-product{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--bl);border-radius:6px;text-decoration:none;color:var(--bm);font-size:12px;font-weight:600;transition:background .2s;line-height:1.4}
+.supp-product:hover{background:#c8d9ec}
+.supp-product.top{background:linear-gradient(135deg,var(--bl),#d4e4f4);border:1px solid rgba(46,107,158,.2)}
+.supp-spec{font-weight:400;color:var(--tl);font-size:11px}
+.supp-mech{font-size:11px;color:var(--tx);line-height:1.5;padding-top:6px;border-top:1px solid var(--gb)}
+.supp-root{font-size:11px;line-height:1.5;margin-top:6px;padding:8px 10px;border-radius:6px;background:#FFF3E0;border-left:3px solid var(--or)}
+.supp-root b{color:var(--or);font-size:10px;text-transform:uppercase;letter-spacing:.5px}
+.supp-bridge{font-size:10px;color:var(--tl);margin-top:4px;font-style:italic}
+.supp-tags{margin-top:6px;display:flex;flex-wrap:wrap;gap:3px}
+.supp-long-term{font-size:11px;line-height:1.5;margin-top:6px;padding:8px 10px;border-radius:6px;background:var(--bl);border-left:3px solid var(--bm)}
+.supp-long-term b{color:var(--bm);font-size:10px;text-transform:uppercase;letter-spacing:.5px}
+.supp-disclaimer{font-size:11px;color:var(--tl);padding:12px 16px;background:var(--yl);border-radius:var(--r);margin-top:14px;line-height:1.6;border-left:4px solid var(--yw)}
+@media(max-width:600px){.supp-grid{grid-template-columns:1fr}}
 #pdf-modal table td,#pdf-modal table th{vertical-align:middle}
 @media print{.nav-c,.hdr-controls,.no-print,.expand-btn,#pdf-modal{display:none!important}.tc{display:block!important;max-width:100%}#t0{display:none!important}#t1{display:block!important}.c,.co{box-shadow:none;border:1px solid var(--gb)}body{font-size:12px}.hdr{padding:12px;break-after:avoid}details[open]>summary{break-after:avoid}}
 @media(max-width:600px){.hdr h1{font-size:17px}.nt{padding:8px 10px;font-size:11px}.c{padding:14px}table{font-size:11px}th,td{padding:6px 8px}.form-row,.form-row-3{grid-template-columns:1fr}.summary-grid{grid-template-columns:1fr}.flag-grid{grid-template-columns:1fr}.hdr-controls{gap:8px}}
@@ -1564,6 +1585,270 @@ const MERGED_ACTIONS = [
     match: /recheck.*vitamin\s*D|25.?OH.*3\s*month/i, benefits: ['Vitamin D'] },
 ];
 
+// ═══════════════════════════════════���═══════════════
+// iHerb SUPPLEMENT RECOMMENDATIONS
+// ═══════════════════════════════════════════════════
+const SUPPLEMENTS = [
+  // ── Heart & Vascular ���─
+  {
+    id: 'omega3', name: 'Omega-3 Fish Oil (rTG Form)',
+    dose: '1-2 softgels/day with food (EPA+DHA &#8805;1,000mg)',
+    triggers: ['bp_systolic','bp_diastolic','tg','ldl','tc','hscrp','tc_hdl_ratio'],
+    mechanism: 'rTG form EPA+DHA: dose-dependent TG reduction (JAHA 2023 meta-analysis, linear at &gt;2g/d). SBP -14.7 mmHg combined with DASH. Anti-inflammatory via EPA-derived resolvins.',
+    evidence: 'strong',
+    rootCause: 'TG driven by fructose/refined carbs/alcohol; LDL by saturated fat; BP by sodium/obesity/sedentary. Reduce added sugars &lt;25g/d, saturated fat &lt;7% calories, increase omega-3 rich fish 2-3x/week.',
+    bridge: '3-6 months; recheck lipid panel. If dietary changes sustained + TG/LDL normalized, consider step-down to maintenance dose or dietary omega-3 only.',
+    products: [
+      { name: 'California Gold Nutrition Omega 800', spec: '480mg EPA + 320mg DHA/softgel, kd-p&#363;r TG, IFOS certified, 90ct', url: 'https://www.iherb.com/pr/california-gold-nutrition-omega-800-ultra-concentrated-omega-3-fish-oil-kd-pur-triglyceride-form-90-fish-gelatin-softgels-1-000-mg-per-softgel/85180', top: true },
+      { name: 'Sports Research Triple Strength', spec: '~1055mg Omega-3/softgel, rTG form, Norway sourced, 180ct', url: 'https://www.iherb.com/pr/sports-research-omega-3-fish-oil-triple-strength-180-softgels/113871' }
+    ]
+  },
+  {
+    id: 'magnesium', name: 'Magnesium Glycinate',
+    dose: '200-400mg before bed (3 caps)',
+    triggers: ['bp_systolic','bp_diastolic'],
+    mechanism: 'Meta-analysis (38 RCTs, n=2709): SBP -2.84, DBP -2.10 mmHg at 365mg/d; at &#8805;400mg/d: SBP -6.38, DBP -3.71 mmHg. Glycinate form has superior bioavailability and minimal GI distress. Also improves sleep quality.',
+    evidence: 'moderate',
+    rootCause: 'BP driven by sodium excess (&gt;2,300mg/d), obesity, sleep deprivation (&lt;6h = 3.5x hypertension risk), chronic stress, sedentary lifestyle. DASH diet + weight loss 5-10% + 150min/wk exercise.',
+    bridge: '3-6 months; monitor home BP 2x/week. Magnesium may be continued long-term as modern diets are often Mg-deficient.',
+    products: [
+      { name: 'California Gold Nutrition Magnesium Glycinate', spec: '400mg/3caps, 180 vcaps', url: 'https://www.iherb.com/pr/california-gold-nutrition-magnesium-glycinate-180-veggie-capsules-133-mg-per-capsule/129685', top: true },
+      { name: "Doctor's Best High Absorption Magnesium", spec: '100mg/tab chelated, 240 tabs', url: 'https://www.iherb.com/pr/doctor-s-best-high-absorption-magnesium-lysinate-glycinate-chelated-albion-traacs-240-tablets-100-mg-per-tablet/16567' }
+    ]
+  },
+  {
+    id: 'coq10', name: 'CoQ10 / Ubiquinol',
+    dose: '100-200mg/day with food',
+    triggers: ['bp_systolic','bp_diastolic','pwv'],
+    mechanism: 'Meta-analysis (45 RCTs): SBP -3.44 mmHg; at &lt;200mg/d: SBP -6.05 mmHg after &gt;8 weeks. Essential CoQ10 replenishment if taking statins (statins deplete CoQ10).',
+    evidence: 'moderate',
+    rootCause: 'BP driven by sodium excess, obesity, sedentary lifestyle. CoQ10 declines naturally with age (&gt;40) and is depleted by statin therapy. Address BP root causes first.',
+    bridge: 'If on statins: ongoing supplementation recommended. If not on statins and BP normalized via lifestyle: reassess after 6 months. Age-related decline may warrant long-term use after 40.',
+    products: [
+      { name: 'Thorne Heart Health Complex', spec: 'CoQ10 + Hawthorn, 90 caps', url: 'https://www.iherb.com/pr/thorne-heart-health-complex-with-coq10-and-hawthorn-90-capsules/18496', top: true }
+    ]
+  },
+  // ── Blood / CBC (low values) ──
+  {
+    id: 'iron', name: 'Iron (Ferrochel Bisglycinate)',
+    dose: '18-27mg/day with Vitamin C; take on empty stomach',
+    triggers: ['hb','rbc','ht','mcv'],
+    mechanism: 'Chelated iron for deficiency anemia; high absorption, non-constipating. Only supplement when values are LOW. Confirm deficiency with physician first.',
+    evidence: 'strong',
+    rootCause: 'Iron deficiency caused by: insufficient dietary iron (red meat, legumes, dark leafy greens), menstrual blood loss, GI bleeding (occult), or poor absorption (celiac, H. pylori). Identify and treat the underlying cause.',
+    bridge: '3-6 months until ferritin &gt;50 ng/mL and Hb normalizes. Stop supplementation once stores replenished — ongoing iron without deficiency causes oxidative damage. Recheck CBC + ferritin at 3 months.',
+    products: [
+      { name: 'Thorne Ferrasorb', spec: 'Iron + B12 + Folate + Vit C, 60 caps', url: 'https://www.iherb.com/pr/thorne-ferrasorb-60-capsules/18582', top: true },
+      { name: "Doctor's Best High Absorption Iron 27mg", spec: 'Ferrochel bisglycinate, 120 tabs', url: 'https://www.iherb.com/pr/Doctor-s-Best-High-Absorption-With-Ferrochel-27-mg-120-Tablets/72625' },
+      { name: 'Floradix Iron + Herbs', spec: 'Liquid form, gentle on stomach, 250ml', url: 'https://www.iherb.com/pr/floradix-floradix-iron-herbs-liquid-herbal-supplement-8-5-fl-oz-250-ml/106339' }
+    ]
+  },
+  // ── Liver ──
+  {
+    id: 'liver_support', name: 'Milk Thistle + NAC',
+    dose: 'NAC 600mg + Silymarin 150-300mg, twice daily',
+    triggers: ['ast','alt','direct_bilirubin','total_bilirubin','alp','ultrasound'],
+    mechanism: 'Silymarin is hepatoprotective; NAC is a glutathione precursor supporting liver detoxification and enzyme normalization.',
+    evidence: 'moderate',
+    rootCause: 'Elevated liver enzymes most commonly from: caloric excess &#8594; non-alcoholic fatty liver (NAFLD), alcohol, fructose/sugar overload, medication toxicity. 5-7% body weight loss reverses NAFLD in most cases.',
+    bridge: '3-6 months while addressing root cause. Stop when ALT/AST normalize + ultrasound shows reduced fatty infiltration. NAC/silymarin are bridge support, not a substitute for caloric reduction.',
+    products: [
+      { name: 'Dr. Mercola NAC with Milk Thistle', spec: '180 caps', url: 'https://www.iherb.com/pr/dr-mercola-nac-with-milk-thistle-180-capsules/123149', top: true },
+      { name: "Nature's Craft Liver Support + NAC", spec: 'Milk Thistle + NAC + Chanca Piedra, 60 caps', url: 'https://www.iherb.com/pr/nature-s-craft-liver-support-nac-with-milk-thistle-60-capsules/139638' }
+    ]
+  },
+  // ── Kidney / Uric Acid ──
+  {
+    id: 'tart_cherry', name: 'Tart Cherry Extract',
+    dose: '1,000mg/day',
+    triggers: ['uric_acid','hscrp'],
+    mechanism: '2025 RCT (J Dietary Suppl, n=10, crossover): 500mg/d x 28 days &#8594; serum urate -2.62 mg/dL vs placebo +0.24 mg/dL. Mechanism: anthocyanins inhibit xanthine oxidase and promote renal urate excretion.',
+    evidence: 'strong',
+    rootCause: 'Uric acid driven by: fructose intake (fructose &#8594; ATP depletion &#8594; AMP &#8594; xanthine oxidase &#8594; uric acid), purine-rich diet (organ meats, beer), dehydration, visceral fat. Cut added sugars &lt;25g/d, hydrate &#8805;2L/d, reduce alcohol.',
+    bridge: '3-6 months while fixing diet. If fructose/purine intake controlled + adequate hydration + uric acid &lt;7.0 mg/dL, discontinue. Uric acid WILL rebound if root causes are not addressed.',
+    products: [
+      { name: 'Amazing Nutrition Tart Cherry 1000mg', spec: '120 caps', url: 'https://www.iherb.com/pr/amazing-nutrition-tart-cherry-1-000-mg-120-capsules/108565', top: true },
+      { name: 'Eu Natural Uric Acid Purge', spec: 'Celery Seed + Tart Cherry 3-in-1, 60 vcaps', url: 'https://www.iherb.com/pr/eu-natural-uric-acid-purge-celery-seed-tart-cherry-60-vegetarian-capsules/102756' }
+    ]
+  },
+  {
+    id: 'vitamin_c_supp', name: 'Vitamin C',
+    dose: '500mg/day',
+    triggers: ['uric_acid'],
+    mechanism: 'Meta-analysis (13 RCTs, n=556): 500mg/d &#8594; uric acid -0.35 mg/dL (95% CI: -0.66, -0.03). Individual RCT: -0.5 mg/dL after 2 months. Also promotes renal urate excretion and enhances iron absorption.',
+    evidence: 'moderate',
+    rootCause: 'Same upstream drivers as uric acid: fructose excess, purine-rich diet, dehydration, visceral fat. Vitamin C promotes renal urate clearance but does not address production. Fix diet first.',
+    bridge: '3 months, then recheck uric acid. If dietary changes sustained and uric acid normalized, discontinue. Vitamin C from whole foods (guava, kiwi, citrus) can maintain the effect.',
+    products: [
+      { name: 'California Gold Nutrition Gold C 500mg', spec: 'USP grade ascorbic acid, 240 vcaps', url: 'https://www.iherb.com/pr/california-gold-nutrition-gold-c-usp-grade-vitamin-c-500-mg-240-veggie-capsules/61866', top: true },
+      { name: 'Solgar Ester-C Plus 500mg', spec: 'pH neutral, gentle on stomach, 100 vcaps', url: 'https://www.iherb.com/pr/solgar-ester-c-plus-vitamin-c-500-mg-100-vegetable-capsules/69610' }
+    ]
+  },
+  {
+    id: 'cranberry', name: 'Cranberry Extract (PACs)',
+    dose: 'Per label; standardized to PAC content',
+    triggers: ['urine_protein','urine_blood'],
+    mechanism: 'Proanthocyanidins (PACs) support urinary tract health via anti-adhesion properties against bacteria.',
+    evidence: 'moderate',
+    rootCause: 'Urine protein/blood may indicate UTI, kidney disease, or structural issues. Cranberry only addresses recurrent UTI risk. Abnormal urinalysis requires physician evaluation to rule out glomerulonephritis, stones, or malignancy.',
+    bridge: 'During active UTI risk period or recurrent UTI history. Not a substitute for medical evaluation of persistent proteinuria or hematuria. See physician if findings persist.',
+    products: [
+      { name: 'NOW Foods Cranberry with PACs', spec: '1000mg Cranberry + Uva Ursi + Grape Seed, 90 vcaps', url: 'https://www.iherb.com/pr/now-foods-cranberry-with-pacs-90-veg-capsules/505', top: true }
+    ]
+  },
+  // ── Glucose Metabolism ──
+  {
+    id: 'berberine', name: 'Berberine',
+    dose: '500mg 2-3x/day with meals',
+    triggers: ['glucose','hba1c'],
+    mechanism: 'Meta-analysis (37 RCTs): HbA1c -0.63% (95% CI: -0.72, -0.53); FPG -0.82 mmol/L (~-14.8 mg/dL). AMPK activator; 500mg 2-3x/d. Safe profile with no increased hypoglycemia risk.',
+    evidence: 'strong',
+    rootCause: 'Insulin resistance driven by: excess body fat (especially visceral), refined carbs/sugar, sedentary lifestyle. DPP trial: 5-7% weight loss + 150min/wk exercise reduces diabetes progression 58%. This is more effective than any supplement or drug.',
+    bridge: '3-6 months while implementing lifestyle changes. Recheck FPG + HbA1c. If weight loss achieved + exercise sustained + glucose normalized, taper off. Berberine masks the problem if diet unchanged.',
+    products: [
+      { name: 'NOW Foods Berberine Glucose Support', spec: 'MCT oil enhanced absorption, 90 softgels', url: 'https://www.iherb.com/pr/now-foods-berberine-glucose-support-90-softgels/88818', top: true },
+      { name: 'Swanson Berberine Complex', spec: '+ Ceylon Cinnamon + Gymnema + Fenugreek, 90 vcaps', url: 'https://www.iherb.com/pr/swanson-berberine-complex-90-veggie-capsules/110994' }
+    ]
+  },
+  // ── Lipid Panel ──
+  {
+    id: 'plant_sterols', name: 'Plant Sterols (Beta-Sitosterol)',
+    dose: '800mg-2g/day with meals (split into 2 doses)',
+    triggers: ['ldl','tc'],
+    mechanism: 'Meta-analysis (41 RCTs): 2g/d &#8594; LDL -8-10% (-0.31 mmol/L, 95% CI: -0.35 to -0.27). Higher intakes add little. FDA heart health claim at &#8805;800mg/day split into 2 doses with meals.',
+    evidence: 'strong',
+    rootCause: 'LDL/TC elevated by: saturated fat &gt;7% calories, trans fat, excess body weight, genetic predisposition (familial hypercholesterolemia). Reduce saturated fat, increase soluble fiber (oats, beans), exercise 150min/wk.',
+    bridge: '3-6 months; recheck lipid panel. If dietary changes sustained + LDL at target, consider discontinuing. Genetic hypercholesterolemia may require ongoing use or statin therapy.',
+    products: [
+      { name: 'NOW Foods Beta-Sitosterol Plant Sterols', spec: 'CardioAid-S blend, 180 softgels', url: 'https://www.iherb.com/pr/now-foods-beta-sitosterol-plant-sterols-180-softgels/44501', top: true },
+      { name: 'Nature Made CholestOff Complete', spec: '900mg sterols+stanols/serving, 120 softgels', url: 'https://www.iherb.com/pr/nature-made-cholestoff-complete-120-softgels/70870' }
+    ]
+  },
+  {
+    id: 'red_yeast_rice', name: 'Red Yeast Rice + CoQ10',
+    dose: '1,200mg/day red yeast rice + CoQ10',
+    triggers: ['ldl','tc'],
+    mechanism: 'Meta-analysis (14 RCTs): LDL -15.6% (95% CI: -9.6% to -21.6%); up to -25% in 6-8 weeks. Contains monacolin K (identical to lovastatin). Comparable to low-dose statin therapy. Add CoQ10 to offset depletion.',
+    evidence: 'strong',
+    rootCause: 'Same as LDL/TC: saturated fat, trans fat, obesity, genetics. Red yeast rice is essentially a natural low-dose statin — it treats the number, not the cause. Diet + exercise should be primary intervention.',
+    bridge: '3-6 months; recheck lipid panel. If lifestyle changes achieve LDL target, discontinue. Note: monacolin K carries same risks as statins (liver, muscle) — physician monitoring recommended.',
+    products: [
+      { name: 'Thorne Red Yeast Rice + CoQ10', spec: '120 caps', url: 'https://www.iherb.com/pr/thorne-red-yeast-rice-coq10-120-capsules/18124', top: true },
+      { name: 'Nordic Naturals Cholesterol Support', spec: 'Omega-3 + Red Yeast Rice + CoQ10, 60 softgels', url: 'https://www.iherb.com/pr/nordic-naturals-omega-ldl-with-red-yeast-rice-and-coq10-384-mg-60-soft-gels/29599' }
+    ]
+  },
+  {
+    id: 'psyllium', name: 'Psyllium Husk Fiber',
+    dose: '5-10g/day in water, before meals',
+    triggers: ['ldl','tc','tg'],
+    mechanism: 'Meta-analysis (41 RCTs, n=2049): 10g/d &#8594; LDL -7%, TC -4%. Dose- and time-dependent effect. FDA heart health claim at &#8805;7g/d soluble fiber. Mechanism: binds bile acids, forcing hepatic cholesterol conversion.',
+    evidence: 'strong',
+    rootCause: 'Low dietary fiber intake (&lt;25g/d) is the root issue. Whole food sources: oats, barley, beans, lentils, flaxseed, chia seeds, vegetables. A high-fiber diet achieves the same bile acid binding effect naturally.',
+    bridge: 'Can replace with whole food fiber once dietary habits change. If eating &#8805;25g fiber/d from food consistently, psyllium supplementation is unnecessary. Easiest supplement to \"graduate\" from.',
+    products: [
+      { name: 'NOW Foods Psyllium Husk Powder', spec: '6g soluble fiber/serving, 12oz (340g)', url: 'https://www.iherb.com/pr/now-foods-psyllium-husk-powder-12-oz-340-g/8934', top: true }
+    ]
+  },
+  {
+    id: 'niacin', name: 'Niacin (Vitamin B3)',
+    dose: '500mg/day (start at 100mg, titrate up over weeks)',
+    triggers: ['hdl','tg'],
+    mechanism: 'Clinical trial: HDL 35&#8594;42 mg/dL (~+20%) over 2 years. Dose-dependent TG lowering at 1000-2000mg/d. Flushing is normal — start at 100mg, titrate up. Only niacin form (not niacinamide) affects lipids. Note: HDL increase may not reduce CV events when already on statins (AIM-HIGH trial).',
+    evidence: 'strong',
+    rootCause: 'Low HDL driven by: sedentary lifestyle (exercise is the #1 HDL booster, +3-6 mg/dL), smoking, excess body fat, high refined carb diet. Aerobic exercise 150min/wk + smoking cessation + weight loss are the primary interventions.',
+    bridge: '3-6 months while establishing exercise habit. If HDL rises with exercise + weight management, discontinue niacin. AIM-HIGH trial showed adding niacin to statins did not reduce CV events — exercise remains superior.',
+    products: [
+      { name: 'Life Extension Vitamin B3 Niacin 500mg', spec: '100 caps', url: 'https://www.iherb.com/pr/life-extension-vitamin-b3-niacin-500-mg-100-capsules/16365', top: true }
+    ]
+  },
+  // ── Vitamin D ──
+  {
+    id: 'vitamin_d_supp', name: 'Vitamin D3 + K2 (MK-7)',
+    dose: 'D3 2,000-4,000 IU + K2 100-200mcg/day with fat-containing meal',
+    triggers: ['vitamin_d','bone_density'],
+    mechanism: 'D3 promotes calcium absorption; K2 (MK-7) directs calcium into bones instead of arteries. Synergistic pair. Target serum 25-OH &#8805;30 ng/mL.',
+    evidence: 'strong',
+    longTerm: true,
+    rootCause: 'Vitamin D deficiency from insufficient sun exposure — especially common in Taiwan (indoor work, sun avoidance). Diet alone cannot meet needs (few natural food sources). 15-20 min midday sun on arms/face = ~10,000 IU, but impractical for most office workers.',
+    bridge: 'LONG-TERM supplementation recommended. Unlike most supplements here, dietary/lifestyle changes rarely provide adequate vitamin D. Recheck 25-OH-D every 6 months to calibrate dose.',
+    products: [
+      { name: 'California Gold Nutrition D3 + K2 (MK-7)', spec: '180 vcaps', url: 'https://www.iherb.com/pr/california-gold-nutrition-vitamin-d3-k2-as-mk-7-180-veggie-capsules/124745', top: true },
+      { name: "Doctor's Best Vitamin D3 + K2 MK-7", spec: '180 softgels', url: 'https://www.iherb.com/pr/doctor-s-best-vitamin-d3-k2-mk-7-180-softgels/155204' }
+    ]
+  },
+  // ── Thyroid ──
+  {
+    id: 'thyroid_support', name: 'Selenium + Thyroid Support',
+    dose: 'Selenium 200mcg/day',
+    triggers: ['tsh'],
+    mechanism: 'Selenium supports T4&#8594;T3 conversion; essential cofactor for deiodinase enzymes. Iodine + L-tyrosine support thyroid hormone synthesis.',
+    evidence: 'moderate',
+    rootCause: 'Thyroid dysfunction usually from: autoimmune (Hashimoto\'s/Graves\'), iodine deficiency/excess, or medication effects. Requires physician diagnosis — supplements alone do NOT treat thyroid disease.',
+    bridge: 'Ongoing under physician supervision. Selenium may help reduce thyroid antibodies in Hashimoto\'s (Cochrane review), but does not replace thyroid hormone replacement if needed. Never self-treat abnormal TSH.',
+    products: [
+      { name: 'Terry Naturally Thyroid Care Plus', spec: 'Selenium + Iodine + L-Tyrosine, 60 caps', url: 'https://www.iherb.com/pr/terry-naturally-thyroid-care-plus-with-selenium-60-capsules/106210', top: true },
+      { name: 'Thorne Thyroid Health Complex', spec: 'Iodine + Selenium cofactors, 120 caps', url: 'https://www.iherb.com/pr/thorne-thyroid-health-complex-with-iodine-and-selenium-120-capsules/33639' }
+    ]
+  },
+  // ── Inflammation ──
+  {
+    id: 'curcumin', name: 'Curcumin (Turmeric Extract)',
+    dose: '500-1,000mg/day with piperine (BioPerine)',
+    triggers: ['hscrp'],
+    mechanism: 'Pooled meta-analysis (21 MAs): CRP WMD -0.87 mg/L (95% CI: -1.14, -0.59); hs-CRP SMD -0.65 (p=0.02). Inhibits NF-&#954;B pathway. BioPerine increases bioavailability 2,000%. Dose: 500-1000mg/d for 12+ days.',
+    evidence: 'strong',
+    rootCause: 'Chronic inflammation driven by: visceral fat (adipocytes secrete IL-6, TNF-&#945;), chronic stress, poor sleep (&lt;6h), excess sugar/processed food, sedentary lifestyle. Reduce visceral fat + manage stress + sleep &#8805;7h.',
+    bridge: '3-6 months while addressing inflammatory drivers. If hs-CRP normalizes with weight loss + lifestyle changes, discontinue. Curcumin treats the downstream signal, not the upstream source.',
+    products: [
+      { name: "Doctor's Best High Absorption Curcumin C3 Complex", spec: 'With BioPerine, 120 vcaps', url: 'https://www.iherb.com/pr/doctor-s-best-high-absorption-curcumin-120-veggie-caps/13', top: true },
+      { name: 'Sports Research Turmeric Curcumin', spec: '500mg with C3 Complex, 120 softgels', url: 'https://www.iherb.com/pr/sports-research-turmeric-curcumin-500-mg-120-softgels/72054' }
+    ]
+  },
+  // ── Prostate ──
+  {
+    id: 'saw_palmetto', name: 'Saw Palmetto',
+    dose: '320mg/day standardized extract',
+    triggers: ['psa'],
+    mechanism: 'Traditionally used for BPH. However, CAMUS RCT (NEJM): even at 3x standard dose, no significant benefit over placebo for urinary symptoms or PSA. Does not affect PSA readings. Cochrane 2023: little to no benefit. Consider only as adjunct if physician recommends.',
+    evidence: 'weak',
+    rootCause: 'Elevated PSA may indicate: BPH (benign, age-related), prostatitis, or prostate cancer. Requires urologist evaluation — PSA is a screening marker, not a diagnosis. No supplement replaces proper medical workup.',
+    bridge: 'Physician-directed only. Evidence does not support self-treatment with saw palmetto. If urologist confirms BPH with no malignancy, discuss alpha-blockers or 5-alpha reductase inhibitors as first-line therapy.',
+    products: [
+      { name: "Doctor's Best Saw Palmetto 320mg", spec: 'Standardized extract, 60 softgels', url: 'https://www.iherb.com/pr/doctor-s-best-saw-palmetto-standardized-extract-320-mg-60-softgels/24', top: true },
+      { name: 'Real Health Prostate Formula', spec: 'Saw Palmetto + Zinc + Pomegranate + Quercetin, 270 tabs', url: 'https://www.iherb.com/pr/real-health-the-prostate-formula-with-saw-palmetto-270-tablets/57282' }
+    ]
+  },
+  // ── Bone Density ──
+  {
+    id: 'bone_support', name: 'Calcium + D3 + K2 Complex',
+    dose: 'Calcium 600-1,200mg + D3 + K2 daily, split into 2 doses',
+    triggers: ['bone_density'],
+    mechanism: 'Calcium for bone mineralization; D3 for intestinal absorption; K2 (MK-4) clinically studied for maintaining bone density. Split doses for better absorption.',
+    evidence: 'strong',
+    rootCause: 'Bone loss from: calcium-poor diet, vitamin D deficiency, sedentary lifestyle (weight-bearing exercise stimulates bone), menopause (estrogen decline accelerates loss), smoking, excess alcohol. Weight-bearing exercise + adequate dietary calcium (dairy, tofu, sardines) are primary.',
+    bridge: 'Long-term if confirmed osteopenia/osteoporosis. Post-menopausal women and men &gt;70 typically need ongoing supplementation. Younger adults: optimize diet + exercise first, supplement only if intake &lt;1000mg Ca/d.',
+    products: [
+      { name: 'Life Extension Bone Restore Elite', spec: 'Ca + D3 + K2(MK-4) + trace minerals, 120 caps', url: 'https://www.iherb.com/pr/life-extension-bone-restore-elite-calcium-supplement-with-super-potent-k2-120-capsules/113499', top: true },
+      { name: 'New Chapter Bone Strength Take Care', spec: 'Plant-source calcium + D3 + K2, 240 tiny tabs', url: 'https://www.iherb.com/pr/new-chapter-plant-calcium-bone-strength-take-care-240-vegan-tiny-tablets/39500' }
+    ]
+  },
+  // ── Eye Health ──
+  {
+    id: 'eye_support', name: 'Lutein + Zeaxanthin',
+    dose: '20-40mg lutein + 2-4mg zeaxanthin/day with food',
+    triggers: ['iop_l','iop_r'],
+    mechanism: 'Macular carotenoids that filter blue light and provide antioxidant protection. Supports overall eye health and recovery from bright light exposure.',
+    evidence: 'moderate',
+    longTerm: true,
+    rootCause: 'Elevated IOP may indicate glaucoma risk — requires ophthalmologist evaluation. Macular degeneration driven by: age, UV/blue light exposure, oxidative stress. Reduce screen time, wear UV-blocking sunglasses, eat dark leafy greens (natural lutein source).',
+    bridge: 'Long-term for screen-intensive workers. AREDS2 formula (lutein + zeaxanthin) showed 25% reduction in advanced AMD progression over 5 years. Dietary sources: kale, spinach, eggs. Annual ophthalmology follow-up essential.',
+    products: [
+      { name: "Doctor's Best Lutein (Lutemax 2020)", spec: '20mg lutein + zeaxanthin isomers, 180 softgels', url: 'https://www.iherb.com/pr/doctor-s-best-lutein-lutemax-2020-20-mg-180-softgels/58903', top: true },
+      { name: 'NOW Foods Lutein & Zeaxanthin', spec: '60 softgels', url: 'https://www.iherb.com/pr/now-foods-lutein-zeaxanthin-60-softgels/70960' }
+    ]
+  }
+];
+
 function buildPersonalSummary(flagged) {
   // 1. Collect all triggered plans
   const triggeredPlanKeys = new Set();
@@ -1646,6 +1931,96 @@ function buildPersonalSummary(flagged) {
     });
     html += `</div>`;
   }
+  html += `</div>`;
+  return html;
+}
+
+// ═══════════════════════════════════════════════════
+// SUPPLEMENT RECOMMENDATION ENGINE
+// ═══════════════════════════════════════════════════
+function buildSupplementSection(flagged) {
+  if (flagged.length === 0) return '';
+
+  // Collect all flagged indicator IDs
+  const flaggedIds = new Set(flagged.map(r => r.id));
+
+  // Find matching supplements and count how many flagged indicators each one addresses
+  const matched = [];
+  for (const supp of SUPPLEMENTS) {
+    const hits = supp.triggers.filter(t => flaggedIds.has(t));
+    if (hits.length > 0) {
+      matched.push({ supp, hits, hitCount: hits.length });
+    }
+  }
+
+  if (matched.length === 0) return '';
+
+  // Sort: more indicator hits first, then by evidence strength
+  const evPri = { strong: 3, moderate: 2, weak: 1 };
+  matched.sort((a, b) => {
+    if (b.hitCount !== a.hitCount) return b.hitCount - a.hitCount;
+    return (evPri[b.supp.evidence] || 0) - (evPri[a.supp.evidence] || 0);
+  });
+
+  // Build indicator label map for pills
+  const idToLabel = {};
+  for (const r of flagged) {
+    idToLabel[r.id] = r.def ? r.def.label : r.id;
+  }
+
+  let html = `<div class="c"><h2>&#x1F48A; Recommended Supplements (iHerb)</h2>
+    <p style="font-size:12px;color:var(--tl);margin-bottom:4px">${matched.length} supplements matched to your ${flagged.length} flagged indicators. Sorted by relevance.</p>
+    <div class="supp-grid">`;
+
+  for (const { supp, hits } of matched) {
+    const evCls = supp.evidence === 'strong' ? 'supp-ev-strong' : supp.evidence === 'moderate' ? 'supp-ev-moderate' : 'supp-ev-weak';
+    const evLabel = supp.evidence === 'strong' ? 'Strong Evidence' : supp.evidence === 'moderate' ? 'Moderate Evidence' : 'Weak Evidence';
+
+    html += `<div class="supp-card">`;
+    html += `<div class="supp-hdr"><span class="supp-name">${supp.name}</span><span class="supp-ev ${evCls}">${evLabel}</span></div>`;
+    html += `<div class="supp-dose">${supp.dose}</div>`;
+    html += `<div class="supp-body">`;
+
+    // Product links
+    for (const p of supp.products) {
+      const cls = p.top ? 'supp-product top' : 'supp-product';
+      html += `<a class="${cls}" href="${p.url}" target="_blank" rel="noopener">
+        <span>${p.top ? '&#9733; ' : ''}${p.name}</span>
+        <span class="supp-spec">${p.spec}</span>
+      </a>`;
+    }
+
+    // Mechanism
+    html += `<div class="supp-mech">${supp.mechanism}</div>`;
+
+    // Indicator pills (which flagged indicators this addresses)
+    html += `<div class="supp-tags">`;
+    for (const hid of hits) {
+      const label = idToLabel[hid] || hid;
+      html += `<span class="pill pill-r">${label}</span>`;
+    }
+    html += `</div>`;
+
+    // Root cause & bridge therapy info
+    if (supp.rootCause) {
+      if (supp.longTerm) {
+        html += `<div class="supp-long-term"><b>&#128218; Long-Term Needed</b><br>${supp.rootCause}</div>`;
+      } else {
+        html += `<div class="supp-root"><b>&#x1F50D; Root Cause</b><br>${supp.rootCause}</div>`;
+      }
+    }
+    if (supp.bridge) {
+      html += `<div class="supp-bridge">${supp.longTerm ? '&#128337;' : '&#x1F504;'} Bridge: ${supp.bridge}</div>`;
+    }
+
+    html += `</div></div>`;
+  }
+
+  html += `</div>`;
+
+  // Disclaimer
+  html += `<div class="supp-disclaimer"><strong>&#9888; Disclaimer:</strong> Supplement recommendations are for informational reference only and do not constitute medical advice. Always consult your physician before starting any supplement, especially if you are on medication. Supplements do not replace medical treatment. Product links are to iHerb for convenience; no commercial affiliation.</div>`;
+
   html += `</div>`;
   return html;
 }
@@ -1747,7 +2122,12 @@ function renderResults(flagged, allClassified, patternResults, followUp, totalAn
     html += buildPersonalSummary(flagged);
   }
 
-  // ── Section 6: Follow-Up Schedule ────────────────
+  // ── Section 6: Recommended Supplements (iHerb) ───
+  if (flagged.length > 0) {
+    html += buildSupplementSection(flagged);
+  }
+
+  // ── Section 7: Follow-Up Schedule ────────────────
   if (followUp.length > 0) {
     html += `<div class="c"><h2>Recommended Follow-Up Schedule</h2><div class="tw"><table>
     <tr><th>Test</th><th>When</th><th>Specialist</th></tr>`;
