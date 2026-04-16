@@ -1581,13 +1581,17 @@ const PHASE_TARGETS=[
 {month:6,weight:65.0,bodyFat:15.5,visceralFat:7,sleepScore:75,bodyBattery:75,systolic:125,label_en:'Month 6',label_zh:'第 6 月'}
 ];
 
-/* Month 0 = baseline snapshot only. From day 0 onward you are "in Month 1".
-   Month 1: days 0–29, Month 2: days 30–59, … Month 6: days 150–179. */
+/* Month boundaries aligned to calendar months from start date.
+   Month 1: startDate ~ startDate+1mo, Month 2: startDate+1mo ~ startDate+2mo, … */
 function getCurrentMonth(){
 const start=new Date(getStartDate()+'T00:00:00');
 const now=new Date();
-const diff=(now-start)/(1000*60*60*24*30.44);
-return Math.max(1,Math.min(6,Math.floor(diff)+1));
+for(let m=6;m>=1;m--){
+const boundary=new Date(start);
+boundary.setMonth(boundary.getMonth()+m-1);
+if(now>=boundary) return m;
+}
+return 1;
 }
 
 /* ── Markdown Parsing ── */
@@ -1726,9 +1730,9 @@ try{
 const allDates=await fetchFileList();
 const startD=new Date(getStartDate()+'T00:00:00');
 const monthStart=new Date(startD);
-monthStart.setDate(monthStart.getDate()+(month-1)*30);
+monthStart.setMonth(monthStart.getMonth()+month-1);
 const monthEnd=new Date(startD);
-monthEnd.setDate(monthEnd.getDate()+month*30);
+monthEnd.setMonth(monthEnd.getMonth()+month);
 const now=new Date();
 const end=monthEnd>now?now:monthEnd;
 
@@ -1782,13 +1786,17 @@ const enRows=enTable.querySelectorAll('tr');
 const zhRows=zhTable.querySelectorAll('tr');
 const cur=getCurrentMonth();
 for(let m=0;m<=6;m++){
-const d=new Date(start);
-d.setMonth(d.getMonth()+m);
-const yyyy=d.getFullYear();
-const mm=d.getMonth();
+const dStart=new Date(start);
+if(m>0) dStart.setMonth(dStart.getMonth()+m-1);
+const dEnd=new Date(start);
+dEnd.setMonth(dEnd.getMonth()+m);
+const yyyy1=dStart.getFullYear(),mm1=dStart.getMonth();
+const yyyy2=dEnd.getFullYear(),mm2=dEnd.getMonth();
 const nowTag=m===cur?' ★':'';
-const enLabel='Month '+m+(m===0?' (Baseline)':'')+' — '+monthNames_en[mm]+' '+yyyy+nowTag;
-const zhLabel='第 '+m+' 月'+(m===0?'（基線）':'')+' — '+yyyy+'年'+(mm+1)+'月'+nowTag;
+const rangeEn=m===0?monthNames_en[mm1]+' '+yyyy1:monthNames_en[mm1]+' '+yyyy1+(mm1!==mm2||yyyy1!==yyyy2?' – '+monthNames_en[mm2]+' '+yyyy2:'');
+const rangeZh=m===0?yyyy1+'年'+(mm1+1)+'月':yyyy1+'年'+(mm1+1)+'月'+(mm1!==mm2||yyyy1!==yyyy2?' – '+yyyy2+'年'+(mm2+1)+'月':'');
+const enLabel='Month '+m+(m===0?' (Baseline)':'')+' — '+rangeEn+nowTag;
+const zhLabel='第 '+m+' 月'+(m===0?'（基線）':'')+' — '+rangeZh+nowTag;
 const enRow=enRows[m+1];
 const zhRow=zhRows[m+1];
 if(enRow){enRow.querySelector('td').textContent=enLabel;if(m===cur)enRow.classList.add('hl');}
