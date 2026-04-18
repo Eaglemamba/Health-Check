@@ -1,256 +1,145 @@
-# Handover: Expand Health Indicators — Health Analyzer App
+# Handover: 2026 因果圖 + 5 年睡眠債重構
 
-**Branch:** `claude/expand-health-indicators-ThnjJ`
-**Date:** 2026-04-15
-**Status:** Design complete, implementation pending
-
----
-
-## 1. Background & Goal
-
-The current `index.html` is a **6-Month Health Reversal Plan** focused on 4 key markers: blood pressure (ISH), triglycerides, cholesterol, and uric acid. It includes detailed plans for sleep repair, diet, exercise (wall sits), and supplements.
-
-However, the 2025 annual health report (`reviews/annual/2025.md`) contains **many more abnormal indicators** that are not addressed in the current plan. The user wants to **expand scope** by building a new **Health Analyzer App** (`analyzer.html`) that:
-
-1. Accepts input for **all** PE (physical examination) test indicators
-2. Auto-flags which values are abnormal (red/orange/yellow)
-3. Generates **personalized, evidence-based plans** for each flagged indicator — similar in depth and quality to the plans already in `index.html`
+**Branch:** `claude/review-dashboard-feedback-dJkS1`
+**Date:** 2026-04-18
+**Status:** 討論與架構完成，實作待續
 
 ---
 
-## 2. What Exists Today
+## 1. 本次 Session 的關鍵發現
 
-### `index.html` (721 lines)
-- 6-month plan targeting weight loss (70 → 65 kg) and 4 marker normalization
-- 9 tabs: Overview, Sleep Repair, Diet Plan, Exercise & Wall Sits, Supplements & Cost, Daily Routine, Timeline & Milestones, Safety & Medical, Health Dashboard
-- Styled as a mobile-friendly single-page app with tab navigation
-- CSS variables: `--bd:#1B3A5C; --bm:#2E6B9E; --bl:#E8F0F8; --gn:#2D7D46; --gl:#E8F5E9; --rd:#C62828; --rl:#FDECEA; --or:#E65100; --ol:#FFF3E0;` etc.
+### 🔴 最重要的發現：5 年慢性睡眠剝奪（>3/25 任何紅字）
 
-### `reviews/annual/2025.md` — Full Health Report
-The 2025 report (exam date 2025-09-17) is the **source of truth** for all indicators. Key abnormalities:
+使用者自述：**自 2021 年有 Garmin 資料以來，多數日子睡眠 <6 小時**。
 
-| Indicator | Value | Reference | Priority |
-|-----------|-------|-----------|----------|
-| LDL Cholesterol | 177 mg/dL | <130 | High |
-| Total Cholesterol | 234 mg/dL | <200 | High |
-| Body Fat % | 24.9% | 17–23% | High |
-| Weight / BMI | 69.9 kg / 24.2 | <69.16 / <24.0 | High |
-| Myocardial Ischemia (ECG) | Persistent | — | High (cardiology follow-up) |
-| Uric Acid | 8.6 mg/dL | 3.4–7.0 | Medium |
-| HbA1c | 6.0% | <5.9% | Medium (pre-diabetes) |
-| Fatty Liver (ultrasound) | New finding | None | Medium |
-| T-Chol/HDL Ratio | 5.09 | <5 | Medium |
-| hsCRP | 0.302 mg/L | ≤0.300 | Low |
-| Vitamin D | 28.8 ng/mL | ≥30 | Low |
-
-Improvements noted: PWV normalized, hsCRP down 46%, BP improved, pulse improved, LV strain resolved.
-
-### Other Key Files
-- `template.html` — older/alternative version of the plan (844 lines)
-- `reviews/daily/` — 30 daily records (2026-03-17 to 2026-04-15) tracking weight, BP, sleep score, body battery, body signals
-- `reviews/weekly/` — weekly reviews (W12–W16)
-- `reviews/monthly/2026-03.md` — March monthly review
-- `scripts/generate_dashboard.py` — auto-generates health_dashboard.png from daily records
-- `templates/pt-rules.md` — physical therapy auto-advice rules
-
----
-
-## 3. What Needs to Be Built
-
-### `analyzer.html` — Health Analyzer App
-
-A single-page HTML app (matching `index.html` visual style) with these sections:
-
-#### A. Input Form — All PE Test Indicators
-
-Organized into collapsible sections:
-
-1. **Physical Measurements**
-   - Height (cm), Weight (kg), BMI (auto-calculated), Body Temperature (°C)
-   - Blood Pressure — Systolic/Diastolic (mmHg), Pulse (bpm)
-   - Body Fat % , Visceral Fat Level, Waist (cm), Hip (cm)
-
-2. **Blood — CBC**
-   - Hemoglobin, RBC, Hematocrit, MCV, MCH, MCHC
-   - WBC, Neutrophils %, Eosinophils %, Basophils %, Monocytes %, Lymphocytes %
-   - Platelets, RDW
-
-3. **Blood — Liver Function**
-   - Direct Bilirubin, Total Bilirubin, ALP, AST (SGOT), ALT (SGPT)
-
-4. **Blood — Kidney Function**
-   - BUN, Uric Acid, Creatinine, eGFR
-
-5. **Blood — Glucose Metabolism**
-   - Fasting Glucose, HbA1c
-
-6. **Blood — Lipid Panel**
-   - Total Cholesterol, Triglycerides, LDL, HDL, TC/HDL Ratio (auto-calculated)
-
-7. **Serum & Inflammation**
-   - Vitamin D (25-OH), TSH, hsCRP, HBsAg
-
-8. **Tumor Markers**
-   - PSA, CEA, AFP, CA-199
-
-9. **Cardiovascular Tests**
-   - ABI, PWV (cm/s)
-
-10. **Urinalysis**
-    - Specific Gravity, pH, Protein, Glucose, Ketones, Occult Blood, Urobilinogen
-
-11. **Stool**
-    - Fecal Occult Blood (ng/mL)
-
-12. **Imaging & Special Tests** (qualitative dropdowns)
-    - ECG: Normal / Abnormal (with sub-options: arrhythmia, LVH, ischemia, etc.)
-    - Chest X-ray: Normal / Abnormal
-    - Abdominal Ultrasound: Normal / Fatty Liver (mild/moderate/severe) / Other
-    - Bone Density: Normal / Osteopenia / Osteoporosis
-
-13. **Eye Exam**
-    - Visual Acuity L/R, Intraocular Pressure L/R (mmHg)
-
-#### B. Analysis Engine (JavaScript)
-
-- Gender selector (male/female) for gender-specific reference ranges
-- Auto-calculations: BMI from height+weight, TC/HDL ratio from TC+HDL
-- Real-time color coding as values are entered (green/yellow/red border)
-- "Load Sample Data" button pre-fills with 2025 report values for demo
-- "Analyze" button triggers full analysis
-
-#### C. Results Report
-
-1. **Summary Dashboard** — count of red/orange/yellow flags, overall risk level
-2. **Flagged Indicators** — priority-ranked list (High → Medium → Low), each showing:
-   - Current value vs reference range
-   - What it means (brief explanation)
-   - Risk level badge
-3. **Detailed Plans** — expandable card for each flagged indicator containing:
-   - Explanation of the indicator and why it matters
-   - Specific action items organized by: Diet, Exercise, Supplements, Medical, Lifestyle
-   - Expected improvement timeline
-   - Related indicators to watch
-4. **Cross-Indicator Analysis** — pattern detection:
-   - Metabolic Syndrome (≥3 of: waist, TG, HDL, BP, glucose)
-   - Cardiovascular Risk Cluster (LDL + TC/HDL + hsCRP + BP)
-   - Liver-Metabolic Axis (fatty liver + ALT + body fat)
-   - Kidney-Uric Acid Axis (creatinine + eGFR + uric acid)
-   - Pre-Diabetes Pathway (HbA1c + glucose + body fat + waist)
-5. **Recommended Follow-Up Schedule** — when to retest, which specialists to see
-
-#### D. Plan Depth by Indicator Tier
-
-**Tier 1 — Very Detailed Plans (10+ action items each):**
-- Body composition (BMI / Weight / Body Fat / Waist)
-- Blood Pressure (ISH-aware)
-- LDL / Total Cholesterol
-- Triglycerides
-- Uric Acid
-- HbA1c / Fasting Glucose (pre-diabetes)
-- Fatty Liver
-
-**Tier 2 — Moderate Plans (5–8 action items):**
-- HDL (low), hsCRP, Vitamin D, AST/ALT, eGFR/Creatinine, TSH
-
-**Tier 3 — Brief Notes (2–4 action items):**
-- CBC abnormalities, Bilirubin, BUN, Urinalysis, Tumor markers, Eye findings
-
----
-
-## 4. Design Decisions
-
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Separate file vs new tab in index.html | Separate `analyzer.html` | index.html is the plan (reference); analyzer is a tool (interactive). Different purposes. |
-| Visual style | Reuse index.html CSS variables and component classes | Visual consistency across the project |
-| Language | English with Chinese medical terms in parentheses | Matches index.html style; user is bilingual |
-| Data storage | None (client-side only, no backend) | Simplicity; user can bookmark/print results |
-| Gender handling | Selector at top; adjusts reference ranges for gender-specific indicators | Male/female have different ranges for hemoglobin, body fat %, etc. |
-| Navigation | Cross-links between index.html ↔ analyzer.html | Easy switching between plan and analyzer |
-
----
-
-## 5. Evidence Sources for Plans
-
-The plans should reference the same evidence base as index.html:
-
-- **Wall sits / isometric exercise:** 2023 BJSM meta-analysis (270 RCTs), 2024 RCT (−12.9 mmHg systolic)
-- **DASH diet:** Combined with Omega-3 → LDL −31.7, TG −45.3, SBP −14.7, UA −1.3
-- **Omega-3 (rTG):** 2g/day therapeutic dose for TG and BP
-- **Tart cherry:** 2025 RCT → UA −37.4%, CRP −23%
-- **Oat beta-glucan:** 3g/day → LDL −5–10%
-- **Weight loss:** ~1 mmHg BP reduction per kg lost; 5–10% body weight loss reverses fatty liver
-- **Sleep repair:** Hypertension risk 3.5× with <6h sleep; cortisol/TG/VLDL pathway
-- **HbA1c:** Lifestyle intervention (DPP study) can reduce diabetes progression by 58%
-- **Vitamin D:** D3 2000–4000 IU/day to reach ≥30 ng/mL; pair with K2
-
----
-
-## 6. Sample Data for Testing
-
-Pre-fill "Load Sample Data" with 2025 report values:
-
-```javascript
-const sampleData = {
-  gender: "male",
-  height: 169.8, weight: 69.9,
-  bp_systolic: 129, bp_diastolic: 74, pulse: 67,
-  temperature: 36.4,
-  body_fat: 24.9, waist: 85.5, hip: 94.5,
-  hb: 14.2, rbc: 4.93, ht: 41.2, mcv: 83.5, mch: 28.9, mchc: 34.5,
-  wbc: 8.00, neutrophils: 61.4, eosinophils: 3.5, basophils: 0.5, monocytes: 5.7, lymphocytes: 28.9,
-  platelets: 278, rdw: 13.4,
-  direct_bilirubin: 0.29, total_bilirubin: 0.70, alp: 74, ast: 27, alt: 25,
-  bun: 16, uric_acid: 8.6, creatinine: 1.0, egfr: 89.8,
-  glucose: 89, hba1c: 6.0,
-  total_cholesterol: 234, triglycerides: 125, ldl: 177, hdl: 46,
-  vitamin_d: 28.8, tsh: 2.32, hscrp: 0.302, hbsag: 0.34,
-  psa: 0.94, cea: 2.23, afp: 3.0, ca199: 2.00,
-  ecg: "ischemia", chest_xray: "normal",
-  ultrasound: "fatty_liver_mild", bone_density: "normal",
-  visual_acuity_l: 1.5, visual_acuity_r: 1.2,
-  iop_l: 15.9, iop_r: 17.4,
-  urine_sg: 1.015, urine_ph: 6.0,
-  urine_protein: "negative", urine_glucose: "negative",
-  urine_ketones: "negative", urine_blood: "negative", urine_urobilinogen: 0.2,
-  stool_ob: 7.0
-};
-```
-
----
-
-## 7. Implementation Steps
-
-1. **Create `analyzer.html`** with the full form, CSS, and JS analysis engine
-2. **Add cross-links** between `index.html` and `analyzer.html`
-3. **Test** with sample data — verify all 11 abnormal indicators from 2025 report are correctly flagged
-4. **Verify** personalized plans generate correctly for each flagged indicator
-5. **Test** cross-indicator patterns (metabolic syndrome detection, CV risk cluster, etc.)
-6. **Commit and push** to `claude/expand-health-indicators-ThnjJ`
-
----
-
-## 8. File Map After Implementation
+這重新定義了 2021-2026 所有健檢惡化的**真正上游**：
 
 ```
-Health-Check/
-├── index.html              # Existing 6-month plan (unchanged, add nav link)
-├── analyzer.html           # NEW — Health Analyzer App
-├── handover.md             # This file
-├── template.html           # Legacy template
-├── CLAUDE.md               # Project instructions
-├── .github/workflows/
-├── templates/
-├── scripts/
-└── reviews/
+2021 ────────────────────────────────── 2026
+  連續 5 年，多數日 < 6h 睡眠（睡眠債複利）
+  ↓
+  交感亢奮 + 代謝紊亂 + 發炎累積 + 腦脊液清除失能
+  ↓
+  BP↑ / LDL↑ / 體脂↑ / hs-CRP↑ / ECG 結構變化 / 眼耳新訊號
 ```
+
+所有 2025/2026 報告的紅字幾乎都能被這條因果線解釋。
+
+### 📊 2026-03-25 年度報告的「狀態偏差」分析
+
+比對 `reviews/daily/2026-03-17` 到 `2026-03-25` 的每日紀錄，健檢前 8 天：
+
+| 日期 | Sleep Score | Body Battery | 家中晨間 BP |
+|---|---|---|---|
+| 3/17 | 64 | 36 | 117/70 |
+| 3/18 | 74 | 48 | 130/74 |
+| 3/20 | （僅 2.5h） | — | 141/79 |
+| 3/21 | 63 | 34 | 123/78 |
+| 3/22 | 45 | 47 | 130/84 |
+| 3/23 | 66 | 26 | 126/76 |
+| 3/24 | 41 | 41 | 128/83 |
+| 3/25 當日 | 58 | **21**（歷史最低）| 128/81（家中）**vs 153/88（診間）** |
+
+**結論**：報告中 5 項紅色惡化，其中 3 項（BP、hs-CRP、ECG ST 變化）很可能被健檢前 8 天睡眠/脫水狀態放大；HDL、LDL、LVH 結構、主動脈扭曲、IOP、聽力不受短期狀態影響，仍是真實問題。
 
 ---
 
-## 9. Open Questions
+## 2. 下一步工作
 
-- **Print/export:** Should the results be print-friendly (CSS @media print)? Likely yes.
-- **History:** Should the app save previous analyses to localStorage for trend comparison? Nice-to-have for v2.
-- **Bilingual toggle:** Should the app support full Chinese mode? Current plan is English + Chinese medical terms.
-- **Mobile:** index.html is already mobile-optimized; analyzer.html should match (responsive form layout).
+### 方案 A（先做）：2026 因果圖 `reviews/annual/2026-causal-map.html`
+
+**使用者選擇先做方案 A**，沿用 `2025-causal-map.html` 的 CSS/JS 骨架，資料更新為 2026-03-25 findings。
+
+#### 新結構（最上層加獨立根源節點）
+
+```
+[層 0 — 慢性根源] ← 新增層，黑底紅邊警示
+  🔴 5 年慢性睡眠剝奪（Garmin 2021-）
+
+[層 1 — 近期根源]
+  - 持續睡眠債（3/17-3/25 Sleep Score 41-74 劇烈波動）
+  - 飲水不足（健檢前 3 天 <1500ml）
+  - 健檢前狀態偏差（新節點）
+
+[層 2 — 中游機制]
+  - 交感神經亢奮（Body Battery 21 歷史最低）
+  - 脂蛋白輸出 trade-off（減脂 → HDL↓ 副作用）
+  - 慢性發炎累積（hs-CRP ×4.7）
+
+[層 3 — 指標]
+  改善：LDL 177→154🟠、體脂 24.9→21.5%🟢、HbA1c 6.0→5.9%🟡、TC 234→191🟢
+  惡化：BP 129/74→153/88🔴、hs-CRP 0.03→0.14mg/dL🟠、HDL 46→39🟠
+  持續：尿酸 8.6→8.9🟠
+
+[層 4 — 臨床/新器官]
+  - ECG 結構性變化 pending 心臟超音波（雙心房擴大+前壁 ST 上升）
+  - CXR 主動脈扭曲 + 肺紋路（新）
+  - IOP 雙眼 19（新，接近青光眼閾值）
+  - 聽力左耳 500/4000Hz 未過（新）
+  - 糞便 RBC/WBC 輕度（新）
+
+[層 5 — 改善區]
+  - LDL -23、體脂 -3.4%、HbA1c 鬆動
+  - Anti-HBs 14.54 保護力完整（唯一純好消息）
+```
+
+#### 實作要點
+
+1. 沿用 `2025-causal-map.html` 的 CSS variables 與 `.node` class 結構
+2. 新增 `.chronic-root` class（黑底紅邊、警示圖示）用於 5 年睡眠債節點
+3. `data` 物件大幅改寫：每個節點的 `problem` / `action` 需反映 2026 新語境
+4. 改善區擴大（從 3 項到 5-6 項），突顯代謝線勝利
+5. 臨床層擴充（從 3 個臨床診斷增至 6-7 個，含新器官訊號）
+
+### 方案 B（使用者等 Garmin export 再做）：2021-2026 睡眠趨勢對照圖
+
+- 等使用者從 Garmin Connect 匯出 2021-2026 睡眠資料
+- 預計產出：每月平均總睡眠時數、Sleep Score、深睡%
+- 與同期健檢指標（BP、LDL、體重、hs-CRP）對照
+- 說服力高於教科書推論，可帶去睡眠門診當客觀證據
+
+---
+
+## 3. 最優先的醫療行動（使用者確認中）
+
+重新定位：**睡眠門診轉介 > 心臟科**（原 2026-03-25 報告的🔴1）
+
+理由：若 OSA 是真實原因，CPAP 可逆轉很大比例的 CV 風險，比任何 statin 更根本。使用者符合 OSA 高危險輪廓（37M、BMI 24.5、BP 漂、心肌缺氧、Body Battery 長期低）。
+
+建議順序：
+1. 居家睡眠檢測（HST）或 PSG 排除 OSA
+2. 心臟超音波 + 24h Holter（確認 ECG 結構變化）
+3. 居家 BP 連測 2 週（家中均值 128/79 vs 診間 153/88 → 白袍成分大）
+4. HDL 救援 + 眼科 OCT + 耳鼻喉聽力複檢
+
+---
+
+## 4. 本 Session 相關檔案
+
+**已讀取並分析：**
+- `reviews/annual/2025.md`（2025-09-17 健檢）
+- `reviews/annual/2026-03-25.md`（2026-03-25 年度對比報告）
+- `reviews/annual/2025-causal-map.html`（因果圖原型）
+- `reviews/daily/2026-03-17` 至 `2026-03-25`（健檢前 8 天每日紀錄）
+- `reviews/health_dashboard.png`（33 天趨勢儀表板）
+
+**待建立：**
+- `reviews/annual/2026-causal-map.html`（方案 A）
+- `reviews/annual/2021-2026-sleep-trend.html` 或 `.md`（方案 B，等 Garmin export）
+
+---
+
+## 5. Session 中重要的概念釐清
+
+- **「健檢觀測者悖論」**：正式術語為 **White Coat Effect + Hawthorne Effect**，不是醫學標準術語。指健檢行為本身干擾被測對象（緊張、熬夜、脫水、飲食異常），使單日快照無法代表真實基礎狀態。
+- **ECG「ST 段變化 + 雙心房擴大」可能是狀態偽影**：急性睡眠剝奪 + 脫水 + 交感亢奮（Body Battery 21）可短暫誘發 ECG 讀圖異常；結構性 LVH 則不會 8 天形成。心臟超音波是唯一區分真假的方法。
+- **「雙軌制健檢」概念**：年度健檢（單日快照）+ 家用 BP 2 週均值 + Garmin 3 個月 HRV + 每季自費單項血液追蹤 → 才是完整的「面」而非孤立的「點」。
+
+---
+
+## 6. Open Questions（給下一個 session）
+
+- 方案 A 的因果圖節點文字是否需要中英雙語？（2025 版為純中文）
+- 「慢性根源」層是否要加**可點開展開 5 年演變時序**的互動功能？
+- Garmin export 到手後，方案 B 要用 HTML（含互動圖表）還是純 Markdown（簡報式）？
+- 使用者是否願意把 Garmin 5 年資料也納入 repo（`reviews/garmin/`）？
