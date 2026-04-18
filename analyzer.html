@@ -468,9 +468,9 @@ const INDICATORS = {
   bmi: {
     label: 'BMI', unit: '', cat: 'body', type: 'numeric', dir: 'lower-better', tier: 1, computed: true,
     ranges: {
-      male:   { green: [null, 24.0], yellow: [24.0, 25.0], orange: [25.0, 27.0], red: [27.0, null] },
-      female: { green: [null, 24.0], yellow: [24.0, 25.0], orange: [25.0, 27.0], red: [27.0, null] }
-    }, ref: '18.5 - 24.0'
+      male:   { green: [null, 25.0], yellow: [25.0, 27.0], orange: [27.0, 30.0], red: [30.0, null] },
+      female: { green: [null, 25.0], yellow: [25.0, 27.0], orange: [27.0, 30.0], red: [30.0, null] }
+    }, ref: '18.5 - 24.9 (WHO) / 18.5 - 22.9 (Asia-Pacific)'
   },
   bp_systolic: {
     label: 'Systolic BP (SBP)', unit: 'mmHg', cat: 'body', type: 'numeric', dir: 'lower-better', tier: 1,
@@ -688,11 +688,11 @@ const INDICATORS = {
     }, ref: '0.27 - 4.20 uIU/mL'
   },
   hscrp: {
-    label: 'hsCRP', unit: 'mg/L', cat: 'serum', type: 'numeric', dir: 'lower-better', tier: 2,
+    label: 'hsCRP', unit: 'mg/dL', cat: 'serum', type: 'numeric', dir: 'lower-better', tier: 2,
     ranges: {
-      male:   { green: [null, 0.3], yellow: [0.3, 1.0], orange: [1.0, 3.0], red: [3.0, null] },
-      female: { green: [null, 0.3], yellow: [0.3, 1.0], orange: [1.0, 3.0], red: [3.0, null] }
-    }, ref: '<= 0.300 mg/L'
+      male:   { green: [null, 0.1], yellow: [0.1, 0.2], orange: [0.2, 0.3], red: [0.3, null] },
+      female: { green: [null, 0.1], yellow: [0.1, 0.2], orange: [0.2, 0.3], red: [0.3, null] }
+    }, ref: '< 0.1 mg/dL low CV risk / 0.1-0.3 moderate / > 0.3 high (AHA/CDC 2003)'
   },
   hbsag: {
     label: 'HBsAg', unit: 'COI', cat: 'serum', type: 'numeric', dir: 'lower-better', tier: 3,
@@ -1294,30 +1294,30 @@ const PATTERNS = [
 ];
 
 // ═══════════════════════════════════════════════════
-// SAMPLE DATA (2025 Annual Report)
+// SAMPLE DATA (2026-03-25 Annual Exam)
 // ═══════════════════════════════════════════════════
 const SAMPLE_DATA = {
-  gender: 'male', age: 36,
-  height: 169.8, weight: 69.9, temperature: 36.4,
-  bp_systolic: 129, bp_diastolic: 74, pulse: 67,
-  body_fat: 24.9, waist: 85.5, hip: 94.5,
-  hb: 14.2, rbc: 4.93, ht: 41.2, mcv: 83.5, mch: 28.9, mchc: 34.5,
-  wbc: 8.00, neutrophils: 61.4, eosinophils: 3.5, basophils: 0.5,
-  monocytes: 5.7, lymphocytes: 28.9, platelets: 278, rdw: 13.4,
-  direct_bilirubin: 0.29, total_bilirubin: 0.70, alp: 74, ast: 27, alt: 25,
-  bun: 16, uric_acid: 8.6, creatinine: 1.0,
-  glucose: 89, hba1c: 6.0,
-  tc: 234, tg: 125, ldl: 177, hdl: 46,
-  vitamin_d: 28.8, tsh: 2.32, hscrp: 0.302, hbsag: 0.34,
-  egfr: 89.8,
-  psa: 0.94, cea: 2.23, afp: 3.0, ca199: 2.00,
-  urine_sg: 1.015, urine_ph: 6.0,
+  gender: 'male', age: 37,
+  height: 168.5, weight: 69.6, bmi: 24.5,
+  bp_systolic: 153, bp_diastolic: 88, pulse: 75,
+  body_fat: 21.5, waist: 84.0,
+  hb: 13.8, rbc: 5.04, ht: 42.4, mcv: 84.1, mch: 27.4, mchc: 32.5,
+  wbc: 6.74, neutrophils: 59.7, lymphocytes: 32.6,
+  monocytes: 4.2, eosinophils: 2.8, basophils: 0.7,
+  platelets: 313, rdw: 12.5,
+  direct_bilirubin: 0.2, total_bilirubin: 1.0,
+  alp: 59, ast: 38, alt: 22,
+  bun: 14, uric_acid: 8.9, creatinine: 1.05,
+  glucose: 90, hba1c: 5.9,
+  tc: 191, tg: 103, ldl: 154, hdl: 39, tc_hdl_ratio: 4.9,
+  tsh: 1.956, hscrp: 0.142, hbsag: 0.27,
+  afp: 3.2,
+  urine_sg: 1.018, urine_ph: 6.0,
   urine_protein: 'negative', urine_glucose: 'negative',
   urine_ketones: 'negative', urine_blood: 'negative', urine_urobilinogen: 0.2,
-  stool_ob: 7.0,
-  ecg: 'ischemia', chest_xray: 'normal',
-  ultrasound: 'fatty_liver_mild', bone_density: 'normal',
-  va_l: 1.5, va_r: 1.2, iop_l: 15.9, iop_r: 17.4
+  stool_ob: 49,
+  ecg: 'other_abnormal', chest_xray: 'abnormal',
+  va_l: 1.0, va_r: 1.0, iop_l: 19, iop_r: 19
 };
 
 // ═══════════════════════════════════════════════════
@@ -2381,7 +2381,7 @@ function loadSampleData() {
   // Open all details sections
   toggleAllDetails(true);
 
-  toast(T('Sample data loaded from 2025 Annual Report', '範例資料已載入（2025 年報）'));
+  toast(T('Sample data loaded from 2026-03-25 Annual Exam', '範例資料已載入（2026-03-25 年度體檢）'));
 }
 
 function clearAll() {
