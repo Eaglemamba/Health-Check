@@ -1,28 +1,27 @@
 開始今天的晨間健康紀錄。
 
 1. **確認日期**：執行 `TZ=Asia/Taipei date '+%Y-%m-%d %A %H:%M'` 取得當前台灣時間，向使用者確認日期與星期是否正確，確認後再進行下一步
-2. 在 `reviews/daily/` 建立今日檔案：`YYYY-MM-DD.md`
-3. 複製 `templates/daily.md` 的內容
-4. 將 `[DATE]` 替換為確認後的日期
-5. 逐項引導我填寫，一次一個問題：
+2. **逐項引導使用者填寫，一次一個問題**（此階段**不寫任何檔案**，僅在對話中收集回答，避免 stop hook 中途觸發導致重複提問）：
    - 體重（可選填，週日為正式紀錄日）
    - 血壓：收縮壓 / 舒張壓 / 心率（兩次測量）
    - 睡眠：就寢時間、起床時間、中途醒來（次數+原因）、Garmin Sleep Score、Body Battery
    - 主觀恢復感：1-5 分（1=極度疲憊, 5=精力充沛）
    - 身體信號：部位、性質、強度 (0-10)，或回答「清」
    - 今日計畫：飲水目標、補充品、運動安排、活動度/伸展安排
-6. 每回答完一題，立即寫入檔案
-7. 同步更新 `reviews/weekly/` 對應週次檔案（如 `2026-W12.md`）：
+3. **所有問題回答完畢後**，才一次性執行以下寫檔動作：
+   - 在 `reviews/daily/` 建立今日檔案：`YYYY-MM-DD.md`
+   - 複製 `templates/daily.md` 的內容，將 `[DATE]` 替換為確認後的日期，並填入所有收集到的回答
+4. 同步更新 `reviews/weekly/` 對應週次檔案（如 `2026-W12.md`）：
    - 將今日體重填入體重表格對應欄位
    - 將第二次血壓讀數填入血壓表格對應日期列
    - 將睡眠數據（含主觀恢復感）填入睡眠表格對應日期列
    - 將身體信號（部位+性質+強度）更新至「身體信號模式」區塊（新增或累加出現天數、計算平均強度）
    - 將運動內容（含組數/時間）填入「本週運動紀錄」表格
    - 如果該週的 weekly 檔案不存在，先從 `templates/weekly.md` 建立，替換日期佔位符
-8. **更新 Dashboard**：執行 `python3 scripts/generate_dashboard.py` 重新生成 `reviews/health_dashboard.png`
-9. **Commit & Push**：將 daily 檔案、weekly 檔案、dashboard PNG 一併 commit 並 push
-10. **開啟 Dashboard 檢查**：執行 `open reviews/health_dashboard.png` 讓使用者確認圖表數據正確
-11. 控制在 3 分鐘內完成 — 簡潔，不討論
+5. **更新 Dashboard**：執行 `python3 scripts/generate_dashboard.py` 重新生成 `reviews/health_dashboard.png`
+6. **Commit & Push**：將 daily 檔案、weekly 檔案、dashboard PNG 一併 commit 並 push（在這一步完成後才結束對話，避免 stop hook 抱怨 untracked files）
+7. **開啟 Dashboard 檢查**：執行 `open reviews/health_dashboard.png` 讓使用者確認圖表數據正確
+8. 控制在 3 分鐘內完成 — 簡潔，不討論
 
 注意事項：
 - 如果血壓收縮壓 > 160 或 < 90，提醒就醫
