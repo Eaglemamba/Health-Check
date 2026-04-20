@@ -1,0 +1,27 @@
+# Secrets & tokens
+.env
+.env.local
+.garth/
+*.token
+
+# Garmin raw data (隱私敏感 + 容量大)
+data/garmin/*.json
+data/garmin/*.csv
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log

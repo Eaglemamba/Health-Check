@@ -48,8 +48,14 @@ reviews/
 - Daily: `reviews/daily/YYYY-MM-DD.md`
 - Weekly: `reviews/weekly/YYYY-Wxx.md`
 - Monthly: `reviews/monthly/YYYY-MM.md`
-- Annual: `reviews/annual/YYYY.md`
+- Annual（單次健檢）: `reviews/annual/YYYY-MM-DD.md`（目前生效位於根目錄；過往年度已歸檔至 `reviews/annual/YYYY/` 子資料夾）
+- Annual（年度彙整，歷史遺留）: `reviews/annual/YYYY/YYYY.md`
 - Food: `reviews/food/YYYY-MM-DD.md`
+
+**Annual 資料夾組織原則**（詳見 `reviews/annual/README.md`）：
+- 最新健檢的所有檔案（報告 / pe.json / 補充品指南鏡射 / 因果地圖）**保留在根目錄**
+- 新健檢產出時，將**前一次健檢全部檔案** `git mv` 至以年份命名的子資料夾（如 `reviews/annual/2026/`）
+- 歷史檔案一經歸檔即**不再異動**
 
 ## 物理治療 & 健康管理建議規則
 
