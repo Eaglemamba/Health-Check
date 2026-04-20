@@ -54,3 +54,60 @@ reviews/
 ## 物理治療 & 健康管理建議規則
 
 每日 check-in 完成後，讀取 `templates/pt-rules.md` 中的規則，自動提供簡短建議（2-3 句），以「💡 PT 建議：」開頭附在紀錄尾端。
+
+## 新健檢報告納入規則
+
+每次新增健檢結果（`reviews/annual/YYYY-MM-DD.md` 與 `reviews/annual/YYYY-MM-DD-pe.json`）後，**必須**完成下列調整。**支援同年多次健檢**（採健檢日期前綴命名）。
+
+### 命名慣例（與 `reviews/annual/` 對齊）
+
+| 文件類型 | 檔名格式 |
+|---------|---------|
+| 健檢報告 | `reviews/annual/YYYY-MM-DD.md` + `YYYY-MM-DD-pe.json` |
+| **目前生效**補充品指南 | `articles/YYYY-MM-DD-supplement-guide.md` |
+| **歷史**補充品指南（已被新版取代） | `articles/archive/YYYY-MM-DD-supplement-guide.md` |
+| 補充品指南 filed 鏡射 | `reviews/annual/YYYY-MM-DD-supplement-guide.md` |
+| **目前生效**健檢加測項目 | `articles/YYYY-MM-DD-mackay-checkup-addons.md` |
+| **歷史**健檢加測項目 | `articles/archive/YYYY-MM-DD-mackay-checkup-addons.md` |
+
+「YYYY-MM-DD」必須與該次健檢日期完全一致，1:1 對應。
+
+### 「目前生效 vs 歷史」原則
+
+`articles/` 根目錄**僅保留最新一版**指南檔案，方便讀者立即看到當前策略；前版全部移至 `articles/archive/`。建立新版時：
+
+1. 將前版檔案 `git mv` 至 `articles/archive/`
+2. 在新版 header 與 footer 用相對路徑 `archive/...` 連結到前版
+3. `reviews/annual/` 下的 filed 鏡射不動（其本身即為日期化歷史快照）
+
+### 流程
+
+1. **歸檔前版指南（不得就地修改）**
+   - `git mv articles/{舊日期}-supplement-guide.md articles/archive/{舊日期}-supplement-guide.md`
+   - `git mv articles/{舊日期}-mackay-checkup-addons.md articles/archive/{舊日期}-mackay-checkup-addons.md`（若存在）
+   - `reviews/annual/{舊日期}-supplement-guide.md`（filed 鏡射）保留原位不動
+
+2. **建立新版指南（檔名以新健檢日期命名，置於 articles/ 根目錄）**
+   - 複製最近一版為 `articles/{新日期}-supplement-guide.md`
+   - Header 註明：基準日期、前次基準、前版連結（用 `archive/...` 相對路徑）
+   - 對齊新健檢數值更新各項指標、策略表、預期效果（含趨勢比較欄）
+   - Footer 加註 `*前版保存：articles/archive/{舊日期}-supplement-guide.md*`
+   - 同步鏡射至 `reviews/annual/{新日期}-supplement-guide.md`
+
+3. **更新前瞻性參考文件中的當前狀態**
+   - `articles/{新日期}-mackay-checkup-addons.md`（若需新建）以新值為基準
+   - **`index.html` 必須同步**：
+     - 「Daily Routine & Hydration / 每日作息與補水」表格的補品時程欄位（早餐打包、午餐註記、晚餐後魚油+EGCG、睡前鎂+酸櫻桃）必須與新指南第七節 1:1 一致
+     - 表格上方的「Supplement timing source of truth / 補品時程權威來源」連結改為新指南檔名
+     - 其他引用具體數值的描述（如 UA、LDL 等）更新為最新值
+   - 歷史記錄（`reviews/annual/YYYY.md`、`reviews/annual/YYYY-causal-map.html` 等）**不得修改**
+
+4. **commit 訊息格式**
+   - 標題：`分版：保留 {舊日期} 原指南，{新日期} 改版另存新檔`
+   - 列出新建與保留的檔案清單
+
+5. **判斷原則**
+   - 「前瞻性指南」（articles/、index.html 中的策略描述）→ 改版另存新檔，前版保留
+   - 「歷史紀錄」（reviews/annual/ 中的當時報告與分析）→ 永不修改
+   - 數值更新範圍以「指引性、決策性、未來會被遵循的文字」為準
+   - **同年多次健檢**：每次都以日期建立新檔，前版皆保留為連續 baseline 軌跡
