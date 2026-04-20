@@ -117,9 +117,9 @@
 ## 4. 本 Session 相關檔案
 
 **已讀取並分析：**
-- `reviews/annual/2025.md`（2025-09-17 健檢）
+- `reviews/annual/2025/2025.md`（2025-09-17 健檢）
 - `reviews/annual/2026-03-25.md`（2026-03-25 年度對比報告）
-- `reviews/annual/2025-causal-map.html`（因果圖原型）
+- `reviews/annual/2025/2025-causal-map.html`（因果圖原型）
 - `reviews/daily/2026-03-17` 至 `2026-03-25`（健檢前 8 天每日紀錄）
 - `reviews/health_dashboard.png`（33 天趨勢儀表板）
 
