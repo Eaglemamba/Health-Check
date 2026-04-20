@@ -64,23 +64,34 @@ reviews/
 | 文件類型 | 檔名格式 |
 |---------|---------|
 | 健檢報告 | `reviews/annual/YYYY-MM-DD.md` + `YYYY-MM-DD-pe.json` |
-| 補充品指南 | `articles/YYYY-MM-DD-supplement-guide.md` |
+| **目前生效**補充品指南 | `articles/YYYY-MM-DD-supplement-guide.md` |
+| **歷史**補充品指南（已被新版取代） | `articles/archive/YYYY-MM-DD-supplement-guide.md` |
 | 補充品指南 filed 鏡射 | `reviews/annual/YYYY-MM-DD-supplement-guide.md` |
-| 健檢加測項目 | `articles/YYYY-MM-DD-mackay-checkup-addons.md` |
+| **目前生效**健檢加測項目 | `articles/YYYY-MM-DD-mackay-checkup-addons.md` |
+| **歷史**健檢加測項目 | `articles/archive/YYYY-MM-DD-mackay-checkup-addons.md` |
 
 「YYYY-MM-DD」必須與該次健檢日期完全一致，1:1 對應。
 
+### 「目前生效 vs 歷史」原則
+
+`articles/` 根目錄**僅保留最新一版**指南檔案，方便讀者立即看到當前策略；前版全部移至 `articles/archive/`。建立新版時：
+
+1. 將前版檔案 `git mv` 至 `articles/archive/`
+2. 在新版 header 與 footer 用相對路徑 `archive/...` 連結到前版
+3. `reviews/annual/` 下的 filed 鏡射不動（其本身即為日期化歷史快照）
+
 ### 流程
 
-1. **保留前版指南為歷史快照**
-   - 既有的 `articles/{舊日期}-supplement-guide.md`、`articles/{舊日期}-mackay-checkup-addons.md` **不得就地修改**，作為當時策略的 baseline 留存
-   - `reviews/annual/{舊日期}-supplement-guide.md`（filed 鏡射）一併保留
+1. **歸檔前版指南（不得就地修改）**
+   - `git mv articles/{舊日期}-supplement-guide.md articles/archive/{舊日期}-supplement-guide.md`
+   - `git mv articles/{舊日期}-mackay-checkup-addons.md articles/archive/{舊日期}-mackay-checkup-addons.md`（若存在）
+   - `reviews/annual/{舊日期}-supplement-guide.md`（filed 鏡射）保留原位不動
 
-2. **建立新版指南（檔名以新健檢日期命名）**
+2. **建立新版指南（檔名以新健檢日期命名，置於 articles/ 根目錄）**
    - 複製最近一版為 `articles/{新日期}-supplement-guide.md`
-   - Header 註明：基準日期、前次基準、前版連結（用相對路徑）
+   - Header 註明：基準日期、前次基準、前版連結（用 `archive/...` 相對路徑）
    - 對齊新健檢數值更新各項指標、策略表、預期效果（含趨勢比較欄）
-   - Footer 加註 `*前版保存：articles/{舊日期}-supplement-guide.md*`
+   - Footer 加註 `*前版保存：articles/archive/{舊日期}-supplement-guide.md*`
    - 同步鏡射至 `reviews/annual/{新日期}-supplement-guide.md`
 
 3. **更新前瞻性參考文件中的當前狀態**

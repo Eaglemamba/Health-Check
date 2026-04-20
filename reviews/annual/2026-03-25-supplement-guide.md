@@ -1,7 +1,7 @@
 # 補充品與茶飲指南 — 2026 改版
 
 **基準日期：** 2026-03-25 健檢結果（前次 2025-09-17）
-**前版指南：** [2025-09-17-supplement-guide.md](../../articles/2025-09-17-supplement-guide.md)（2025-09-17 健檢後制訂，作為原始策略保存）
+**前版指南：** [archive/2025-09-17-supplement-guide.md](../../articles/archive/2025-09-17-supplement-guide.md)（2025-09-17 健檢後制訂，作為原始策略保存）
 **優先指標：** LDL 154（177→154 🟠）/ TC 191（234→191 🟢）/ 尿酸 8.9（8.6→8.9 🟠 惡化）/ HbA1c 5.9%（6.0→5.9 🟡）/ hsCRP 0.142 mg/dL = 1.42 mg/L（3.02→1.42 🟡）/ **HDL 39（46→39 🟠 新問題）**
 **最後更新：** 2026-04-20（對齊 2026-03-25 健檢數值；新增 HDL 救援策略）
 
@@ -192,4 +192,4 @@
 *Filed: reviews/annual/2026-03-25-supplement-guide.md*
 *對應健檢：2026-03-25 vs 2025-09-17*
 *查證方式：PubMed RCT 系統性查核，5 個平行 agent，2026-04-04（2026-04-20 對齊最新 PE 數值）*
-*前版保存：articles/2025-09-17-supplement-guide.md（2025-09-17 健檢後原始策略，作為 baseline 對照）*
+*前版保存：articles/archive/2025-09-17-supplement-guide.md（2025-09-17 健檢後原始策略，作為 baseline 對照）*
