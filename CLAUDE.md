@@ -54,3 +54,32 @@ reviews/
 ## 物理治療 & 健康管理建議規則
 
 每日 check-in 完成後，讀取 `templates/pt-rules.md` 中的規則，自動提供簡短建議（2-3 句），以「💡 PT 建議：」開頭附在紀錄尾端。
+
+## 新健檢報告納入規則
+
+每次新增年度健檢結果（`reviews/annual/YYYY-MM-DD.md` 與 `reviews/annual/YYYY-MM-DD-pe.json`）後，**必須**完成下列調整：
+
+1. **保留前版指南為歷史快照**
+   - 既有的 `articles/YYYY-supplement-guide.md` 與 `articles/YYYY-mackay-checkup-addons.md` 等前瞻性文件**不得就地修改**，作為當時策略的 baseline 留存
+   - `reviews/annual/YYYY-supplement-guide.md`（filed 鏡射）一併保留
+
+2. **建立新版指南（檔名以新健檢年份命名）**
+   - 複製前版為 `articles/{新年份}-supplement-guide.md`
+   - Header 註明：基準日期、前次基準、前版連結
+   - 對齊新健檢數值更新各項指標、策略表、預期效果（含趨勢比較欄）
+   - Footer 加註 `*前版保存：articles/{舊年份}-supplement-guide.md*`
+   - 同步鏡射至 `reviews/annual/{新年份}-supplement-guide.md`
+
+3. **更新前瞻性參考文件中的當前狀態**
+   - `articles/{新年份}-mackay-checkup-addons.md`（若需新建）以新值為基準
+   - `index.html` 等公開頁面中引用具體數值的描述（如 UA、LDL 等）更新為最新值
+   - 歷史記錄（`reviews/annual/YYYY.md`、`reviews/annual/YYYY-causal-map.html` 等）**不得修改**
+
+4. **commit 訊息格式**
+   - 標題：`分版：保留 {舊年份} 原指南，{新年份} 改版另存新檔`
+   - 列出新建與還原的檔案清單
+
+5. **判斷原則**
+   - 「前瞻性指南」（articles/、index.html 中的策略描述）→ 改版另存新檔，前版保留
+   - 「歷史紀錄」（reviews/annual/ 中的當時報告與分析）→ 永不修改
+   - 數值更新範圍以「指引性、決策性、未來會被遵循的文字」為準
