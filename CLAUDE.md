@@ -96,7 +96,10 @@ reviews/
 
 3. **更新前瞻性參考文件中的當前狀態**
    - `articles/{新日期}-mackay-checkup-addons.md`（若需新建）以新值為基準
-   - `index.html` 等公開頁面中引用具體數值的描述（如 UA、LDL 等）更新為最新值
+   - **`index.html` 必須同步**：
+     - 「Daily Routine & Hydration / 每日作息與補水」表格的補品時程欄位（早餐打包、午餐註記、晚餐後魚油+EGCG、睡前鎂+酸櫻桃）必須與新指南第七節 1:1 一致
+     - 表格上方的「Supplement timing source of truth / 補品時程權威來源」連結改為新指南檔名
+     - 其他引用具體數值的描述（如 UA、LDL 等）更新為最新值
    - 歷史記錄（`reviews/annual/YYYY.md`、`reviews/annual/YYYY-causal-map.html` 等）**不得修改**
 
 4. **commit 訊息格式**
