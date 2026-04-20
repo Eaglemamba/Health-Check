@@ -172,6 +172,6 @@
 
 ---
 
-*Filed: reviews/annual/2025-supplement-guide.md*
+*Filed: reviews/annual/2025-09-17-supplement-guide.md*
 *對應健檢：2025-09-17 vs 2024-12-05*
 *查證方式：PubMed RCT 系統性查核，5 個平行 agent，2026-04-04*

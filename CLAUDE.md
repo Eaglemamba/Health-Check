@@ -57,29 +57,43 @@ reviews/
 
 ## 新健檢報告納入規則
 
-每次新增年度健檢結果（`reviews/annual/YYYY-MM-DD.md` 與 `reviews/annual/YYYY-MM-DD-pe.json`）後，**必須**完成下列調整：
+每次新增健檢結果（`reviews/annual/YYYY-MM-DD.md` 與 `reviews/annual/YYYY-MM-DD-pe.json`）後，**必須**完成下列調整。**支援同年多次健檢**（採健檢日期前綴命名）。
+
+### 命名慣例（與 `reviews/annual/` 對齊）
+
+| 文件類型 | 檔名格式 |
+|---------|---------|
+| 健檢報告 | `reviews/annual/YYYY-MM-DD.md` + `YYYY-MM-DD-pe.json` |
+| 補充品指南 | `articles/YYYY-MM-DD-supplement-guide.md` |
+| 補充品指南 filed 鏡射 | `reviews/annual/YYYY-MM-DD-supplement-guide.md` |
+| 健檢加測項目 | `articles/YYYY-MM-DD-mackay-checkup-addons.md` |
+
+「YYYY-MM-DD」必須與該次健檢日期完全一致，1:1 對應。
+
+### 流程
 
 1. **保留前版指南為歷史快照**
-   - 既有的 `articles/YYYY-supplement-guide.md` 與 `articles/YYYY-mackay-checkup-addons.md` 等前瞻性文件**不得就地修改**，作為當時策略的 baseline 留存
-   - `reviews/annual/YYYY-supplement-guide.md`（filed 鏡射）一併保留
+   - 既有的 `articles/{舊日期}-supplement-guide.md`、`articles/{舊日期}-mackay-checkup-addons.md` **不得就地修改**，作為當時策略的 baseline 留存
+   - `reviews/annual/{舊日期}-supplement-guide.md`（filed 鏡射）一併保留
 
-2. **建立新版指南（檔名以新健檢年份命名）**
-   - 複製前版為 `articles/{新年份}-supplement-guide.md`
-   - Header 註明：基準日期、前次基準、前版連結
+2. **建立新版指南（檔名以新健檢日期命名）**
+   - 複製最近一版為 `articles/{新日期}-supplement-guide.md`
+   - Header 註明：基準日期、前次基準、前版連結（用相對路徑）
    - 對齊新健檢數值更新各項指標、策略表、預期效果（含趨勢比較欄）
-   - Footer 加註 `*前版保存：articles/{舊年份}-supplement-guide.md*`
-   - 同步鏡射至 `reviews/annual/{新年份}-supplement-guide.md`
+   - Footer 加註 `*前版保存：articles/{舊日期}-supplement-guide.md*`
+   - 同步鏡射至 `reviews/annual/{新日期}-supplement-guide.md`
 
 3. **更新前瞻性參考文件中的當前狀態**
-   - `articles/{新年份}-mackay-checkup-addons.md`（若需新建）以新值為基準
+   - `articles/{新日期}-mackay-checkup-addons.md`（若需新建）以新值為基準
    - `index.html` 等公開頁面中引用具體數值的描述（如 UA、LDL 等）更新為最新值
    - 歷史記錄（`reviews/annual/YYYY.md`、`reviews/annual/YYYY-causal-map.html` 等）**不得修改**
 
 4. **commit 訊息格式**
-   - 標題：`分版：保留 {舊年份} 原指南，{新年份} 改版另存新檔`
-   - 列出新建與還原的檔案清單
+   - 標題：`分版：保留 {舊日期} 原指南，{新日期} 改版另存新檔`
+   - 列出新建與保留的檔案清單
 
 5. **判斷原則**
    - 「前瞻性指南」（articles/、index.html 中的策略描述）→ 改版另存新檔，前版保留
    - 「歷史紀錄」（reviews/annual/ 中的當時報告與分析）→ 永不修改
    - 數值更新範圍以「指引性、決策性、未來會被遵循的文字」為準
+   - **同年多次健檢**：每次都以日期建立新檔，前版皆保留為連續 baseline 軌跡

@@ -141,10 +141,10 @@
 - [ ] 抽血前 48 小時避免劇烈運動
 - [ ] 抽血前 10 小時空腹
 - [ ] 報告拿到後填入 `reviews/annual/2026.md`
-- [ ] 與 2026-03-25 對比，更新 `articles/2026-supplement-guide.md` 策略
+- [ ] 與下次健檢對比，依規則建立新版 `articles/{下次健檢日期}-supplement-guide.md`（前版 `articles/2026-03-25-supplement-guide.md` 保留為 baseline）
 
 ---
 
-*Filed: articles/2026-mackay-checkup-addons.md*
+*Filed: articles/2026-03-25-mackay-checkup-addons.md*
 *對應追蹤：2026-03-25 PE / 2025-09-17 健檢*
 *證據來源：AHA 2026 指引、NLA 2024 共識、PubMed RCT 查證*
