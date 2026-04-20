@@ -141,7 +141,7 @@
 - [ ] 抽血前 48 小時避免劇烈運動
 - [ ] 抽血前 10 小時空腹
 - [ ] 報告拿到後填入 `reviews/annual/2026.md`
-- [ ] 與 2026-03-25 對比，更新 `articles/2025-supplement-guide.md` 策略
+- [ ] 與 2026-03-25 對比，更新 `articles/2026-supplement-guide.md` 策略
 
 ---
 
