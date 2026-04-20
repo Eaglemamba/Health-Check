@@ -38,7 +38,15 @@ def get_client() -> Garmin:
     """登入 Garmin Connect，優先用快取 token。"""
     load_dotenv(ROOT / ".env")
 
-    if TOKEN_DIR.exists():
+    email = os.getenv("GARMIN_EMAIL")
+    password = os.getenv("GARMIN_PASSWORD")
+
+    def prompt_mfa() -> str:
+        return input("輸入 Garmin MFA 驗證碼：").strip()
+
+    TOKEN_DIR.mkdir(parents=True, exist_ok=True)
+
+    if TOKEN_DIR.exists() and any(TOKEN_DIR.iterdir()):
         try:
             client = Garmin()
             client.login(str(TOKEN_DIR))
@@ -46,16 +54,12 @@ def get_client() -> Garmin:
         except (GarminConnectAuthenticationError, FileNotFoundError):
             print("快取 token 失效，改用帳密重新登入")
 
-    email = os.getenv("GARMIN_EMAIL")
-    password = os.getenv("GARMIN_PASSWORD")
     if not email or not password:
         print("錯誤：請在 .env 設定 GARMIN_EMAIL 與 GARMIN_PASSWORD")
         sys.exit(1)
 
-    client = Garmin(email, password)
-    client.login()
-    TOKEN_DIR.mkdir(parents=True, exist_ok=True)
-    client.garth.dump(str(TOKEN_DIR))
+    client = Garmin(email=email, password=password, prompt_mfa=prompt_mfa)
+    client.login(str(TOKEN_DIR))
     print(f"Token 已存入 {TOKEN_DIR}")
     return client
 
@@ -94,20 +98,38 @@ def summarize(payload: dict) -> str:
     d = payload["date"]
     lines = [f"# Garmin 每日摘要 — {d}", ""]
 
+    from datetime import timezone
+    def _hhmm(ms):
+        if not ms:
+            return None
+        return datetime.datetime.fromtimestamp(ms / 1000, tz=timezone.utc).strftime("%H:%M")
+
     sleep = payload.get("sleep") or {}
     dto = sleep.get("dailySleepDTO") or {}
+    wake_ms = None
     if dto:
         dur_s = dto.get("sleepTimeSeconds") or 0
         deep_s = dto.get("deepSleepSeconds") or 0
         rem_s = dto.get("remSleepSeconds") or 0
         score = (dto.get("sleepScores") or {}).get("overall", {}).get("value")
+        bed_ms = dto.get("sleepStartTimestampLocal")
+        wake_ms = dto.get("sleepEndTimestampLocal")
         lines += [
             "## 睡眠",
+            f"- 就寢：{_hhmm(bed_ms) or '—'}｜起床：{_hhmm(wake_ms) or '—'}",
             f"- 總時長：{dur_s // 3600}h {(dur_s % 3600) // 60}m",
             f"- 深眠：{deep_s // 60} 分｜REM：{rem_s // 60} 分",
             f"- Sleep Score：{score if score is not None else '—'}",
-            "",
         ]
+
+        bb_list = payload.get("body_battery") or []
+        if isinstance(bb_list, list) and bb_list and wake_ms:
+            arr = (bb_list[0] or {}).get("bodyBatteryValuesArray") or []
+            valid = [x for x in arr if isinstance(x, list) and len(x) >= 2 and x[0] and x[1] is not None]
+            if valid:
+                closest = min(valid, key=lambda x: abs(x[0] - wake_ms))
+                lines.append(f"- Body Battery 起床值：{closest[1]}")
+        lines.append("")
 
     rhr = payload.get("rhr") or {}
     if rhr:
@@ -137,6 +159,28 @@ def summarize(payload: dict) -> str:
             f"- 最低：{low_sp if low_sp else '—'}%",
             "",
         ]
+
+    hyd = payload.get("hydration") or {}
+    if hyd:
+        val_ml = hyd.get("valueInML")
+        goal_ml = hyd.get("goalInML")
+        sweat_ml = hyd.get("sweatLossInML")
+        if val_ml is not None:
+            lines += [
+                "## 飲水",
+                f"- 實際：{val_ml/1000:.2f} L",
+                f"- 目標：{goal_ml/1000:.2f} L" if goal_ml else "- 目標：—",
+            ]
+            if sweat_ml:
+                lines.append(f"- 運動流汗耗水：{sweat_ml/1000:.2f} L")
+            lines.append("")
+        else:
+            lines += [
+                "## 飲水",
+                "- 實際：— （Garmin Connect 未紀錄，請於 check-in 手動輸入）",
+                f"- 目標：{goal_ml/1000:.2f} L" if goal_ml else "- 目標：—",
+                "",
+            ]
 
     lines.append(f"_Source: data/garmin/{d}.json (gitignored)_")
     return "\n".join(lines)
