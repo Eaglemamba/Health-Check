@@ -34,12 +34,15 @@ _Wkly IMs = weekly intensity minutes (moderate×7 + vigorous×14, WHO formula). 
 
 ## 3. Cross-Reference to PE Findings
 
-### 3.1 Cardiovascular (ECG ischemia 2025 new finding)
+### 3.1 Cardiovascular (ECG abnormalities present since 2015-11-14 age 26)
+
+> **Timeline correction (2026-04)**: Original write-up framed the ECG ischemia as a "2025 new finding". Review of historical PE reports (jimei 2015/2017 archive in `reviews/annual/source-images/2017-jimei/`) confirms **LVH by voltage + ST depression (II/III/AVF) + T-wave inversion (I/AVL/V4-V6) have been present since age 26**, i.e. ~11 years. The 2026-03-25 finding of newly added **biatrial enlargement + anterior ST elevation** is the structural progression, not the ischemia/LVH pattern itself.
 
 - **RHR 12 months before 2025-09 exam**: 62.6 bpm (n=221 days)
 - **RHR 13-24 months before**: 63.0 bpm (n=111 days)
-- **RHR change**: -0.4 bpm in the year before the ischemia finding
+- **RHR change**: -0.4 bpm in the year before the 2025 exam (Garmin does not predate the 2015 ECG finding)
 - **Abnormal HR events 12 months pre-exam**: 0 (of 128 total recorded)
+- **Earliest documented ECG abnormality**: 2015-11-14 (age 26) at H&B jimei health center, predating all Garmin wearable data (Garmin coverage starts 2018-11)
 
 ### 3.2 VO2max / Cardiorespiratory fitness
 
