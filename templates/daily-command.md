@@ -1,7 +1,11 @@
 開始今天的晨間健康紀錄。
 
 1. **確認日期**：執行 `TZ=Asia/Taipei date '+%Y-%m-%d %A %H:%M'` 取得當前台灣時間，向使用者確認日期與星期是否正確，確認後再進行下一步
-2. **抓取昨夜 Garmin 資料**：執行 `python scripts/sync_garmin_daily.py`（預設抓昨日，涵蓋昨夜睡眠）。完成後讀取 `reports/daily-garmin/YYYY-MM-DD.md`（檔名為昨日日期）並在對話中顯示給使用者確認
+2. **抓取昨夜 Garmin 資料**：Garmin `calendarDate` 以「起床日」歸檔，故昨夜睡眠 → calendarDate = 今日。
+   - 先執行 `python scripts/sync_garmin_daily.py`（預設抓今日，即昨夜睡眠 + 今晨 SpO2）
+   - 再執行 `python scripts/sync_garmin_daily.py --days-back 1`（抓昨日，取得昨日全日飲水、步數等 day-level 總量供「昨日回顧」區塊）
+   - 完成後讀取 `reports/daily-garmin/{今日日期}.md`（睡眠與 SpO2 數據源）並在對話中顯示給使用者確認
+   - 「昨日回顧/飲水」請讀 `reports/daily-garmin/{昨日日期}.md`
    - 若 sync 失敗（429 / 網路 / token 過期），改採手動輸入模式，在睡眠步驟向使用者詢問 Sleep Score、Body Battery、就寢/起床時間
 3. **逐項引導使用者填寫，一次一個問題**（此階段**不寫任何檔案**，僅在對話中收集回答，避免 stop hook 中途觸發導致重複提問）：
    - 體重（可選填，週日為正式紀錄日）
