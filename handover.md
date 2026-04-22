@@ -116,7 +116,7 @@ Rewrite `index.html` lines ~1009–1063 to mirror the current EN T4 (lines ~853�
 | HbA1c | 5.9% | Prediabetes platform easing |
 | Uric acid | 8.9 | Worsening; nephrology referral pending |
 | Sleep SpO2 min | **84% ×2 consecutive nights** | 🔴 **OSA red flag** — pulse oximeter or sleep clinic consult recommended |
-| Body Battery | 30 today, 62 yesterday | Low autonomic recovery despite decent Sleep Score 74 |
+| Body Battery | 56 today, 62 yesterday | Acceptable recovery (≥50) paired with Sleep Score 74; REM% 14 remains below optimal 21–31% |
 
 ---
 

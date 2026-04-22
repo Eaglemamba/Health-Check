@@ -114,6 +114,7 @@ def summarize(payload: dict) -> str:
         score = (dto.get("sleepScores") or {}).get("overall", {}).get("value")
         bed_ms = dto.get("sleepStartTimestampLocal")
         wake_ms = dto.get("sleepEndTimestampLocal")
+        wake_ms_gmt = dto.get("sleepEndTimestampGMT")
         lines += [
             "## 睡眠",
             f"- 就寢：{_hhmm(bed_ms) or '—'}｜起床：{_hhmm(wake_ms) or '—'}",
@@ -122,13 +123,25 @@ def summarize(payload: dict) -> str:
             f"- Sleep Score：{score if score is not None else '—'}",
         ]
 
-        bb_list = payload.get("body_battery") or []
-        if isinstance(bb_list, list) and bb_list and wake_ms:
-            arr = (bb_list[0] or {}).get("bodyBatteryValuesArray") or []
-            valid = [x for x in arr if isinstance(x, list) and len(x) >= 2 and x[0] and x[1] is not None]
-            if valid:
-                closest = min(valid, key=lambda x: abs(x[0] - wake_ms))
-                lines.append(f"- Body Battery 起床值：{closest[1]}")
+        # Prefer sleepBodyBattery (per-minute during sleep, GMT) over daily body_battery array.
+        # sleepBodyBattery startGMT is directly comparable to sleepEndTimestampGMT.
+        bb_wake = None
+        sbb = sleep.get("sleepBodyBattery") or []
+        if isinstance(sbb, list) and sbb and wake_ms_gmt:
+            valid_sbb = [e for e in sbb if isinstance(e, dict) and e.get("startGMT") and e.get("value") is not None]
+            if valid_sbb:
+                closest = min(valid_sbb, key=lambda e: abs(e["startGMT"] - wake_ms_gmt))
+                bb_wake = closest["value"]
+        if bb_wake is None:
+            bb_list = payload.get("body_battery") or []
+            if isinstance(bb_list, list) and bb_list and wake_ms_gmt:
+                arr = (bb_list[0] or {}).get("bodyBatteryValuesArray") or []
+                valid = [x for x in arr if isinstance(x, list) and len(x) >= 2 and x[0] and x[1] is not None]
+                if valid:
+                    closest = min(valid, key=lambda x: abs(x[0] - wake_ms_gmt))
+                    bb_wake = closest[1]
+        if bb_wake is not None:
+            lines.append(f"- Body Battery 起床值：{bb_wake}")
         lines.append("")
 
     rhr = payload.get("rhr") or {}
