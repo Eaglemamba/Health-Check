@@ -188,8 +188,8 @@ def summarize(payload: dict) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--date", help="YYYY-MM-DD；預設昨天")
-    ap.add_argument("--days-back", type=int, default=1, help="抓幾天前（預設 1）")
+    ap.add_argument("--date", help="YYYY-MM-DD；預設今日（Garmin calendarDate 以起床日歸檔，今日 = 昨夜睡眠）")
+    ap.add_argument("--days-back", type=int, default=0, help="抓幾天前（預設 0 = 今日；需昨日 day-level 總量用 1）")
     args = ap.parse_args()
 
     target = args.date or (
