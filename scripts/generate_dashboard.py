@@ -120,7 +120,9 @@ def generate_dashboard(data_list, output_path):
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
     ax.grid(axis="y", alpha=0.2)
 
-    # --- Panel 2: Body Fat % & Visceral Fat (dual axis) ---
+    # --- Panel 2: Body Composition ---
+    # Left axis : Body Fat % + Visceral Fat Level (both unitless ratio/index)
+    # Right axis: Net Fat Mass (kg) — distinct physical-mass unit
     ax2 = axes[1]
     ax2.set_facecolor("#0d1117")
     ax2r = ax2.twinx()
@@ -128,6 +130,11 @@ def generate_dashboard(data_list, output_path):
 
     valid_bf = [(d["date"], d["body_fat"]) for d in data_list if d["body_fat"] is not None]
     valid_vf = [(d["date"], d["visceral_fat"]) for d in data_list if d["visceral_fat"] is not None]
+    valid_nf = [(d["date"], d["weight"] * d["body_fat"] / 100.0)
+                for d in data_list
+                if d["weight"] is not None and d["body_fat"] is not None]
+
+    left_vals = []
 
     if valid_bf:
         bf_dates, bf_vals = zip(*valid_bf)
@@ -137,24 +144,34 @@ def generate_dashboard(data_list, output_path):
             ax2.annotate(f"{v}%", (dt, v), textcoords="offset points",
                          xytext=(0, 8), ha="center", fontsize=8, color="#ff6b81")
         ax2.axhline(y=20, color="#ff6b81", linestyle=":", alpha=0.4, linewidth=1)
-        bf_margin = 1.0
-        ax2.set_ylim(min(bf_vals) - bf_margin, max(bf_vals) + bf_margin + 2)
+        left_vals.extend(bf_vals)
 
     if valid_vf:
         vf_dates, vf_vals = zip(*valid_vf)
-        ax2r.plot(vf_dates, vf_vals, "s--", color="#ffa502", linewidth=2, markersize=5, label="Visceral Fat")
+        ax2.plot(vf_dates, vf_vals, "s--", color="#ffa502", linewidth=2, markersize=5, label="Visceral Fat")
         for dt, v in zip(vf_dates, vf_vals):
-            ax2r.annotate(f"{v}", (dt, v), textcoords="offset points",
-                          xytext=(0, -14), ha="center", fontsize=8, color="#ffa502")
-        ax2r.axhline(y=10, color="#ffa502", linestyle=":", alpha=0.4, linewidth=1)
-        vf_margin = 0.5
-        ax2r.set_ylim(min(vf_vals) - vf_margin, max(vf_vals) + vf_margin + 2)
+            ax2.annotate(f"{v}", (dt, v), textcoords="offset points",
+                         xytext=(0, -14), ha="center", fontsize=8, color="#ffa502")
+        ax2.axhline(y=10, color="#ffa502", linestyle=":", alpha=0.4, linewidth=1)
+        left_vals.extend(vf_vals)
+
+    if left_vals:
+        ax2.set_ylim(min(left_vals) - 1.0, max(left_vals) + 2.0)
+
+    if valid_nf:
+        nf_dates, nf_vals = zip(*valid_nf)
+        ax2r.plot(nf_dates, nf_vals, "D-.", color="#00d4ff", linewidth=1.8, markersize=5, label="Net Fat Mass")
+        for dt, v in zip(nf_dates, nf_vals):
+            ax2r.annotate(f"{v:.2f}", (dt, v), textcoords="offset points",
+                          xytext=(8, 0), ha="left", va="center", fontsize=8, color="#00d4ff")
+        nf_margin = 0.3
+        ax2r.set_ylim(min(nf_vals) - nf_margin, max(nf_vals) + nf_margin + 0.5)
 
     ax2.set_title("Body Composition", fontsize=12, color="white", pad=8)
-    ax2.set_ylabel("Body Fat %", fontsize=10, color="#ff6b81")
-    ax2r.set_ylabel("Visceral Fat Level", fontsize=10, color="#ffa502")
-    ax2.tick_params(axis="y", colors="#ff6b81")
-    ax2r.tick_params(axis="y", colors="#ffa502")
+    ax2.set_ylabel("Body Fat % / Visceral Fat Level", fontsize=10, color="white")
+    ax2r.set_ylabel("Net Fat Mass (kg)", fontsize=10, color="#00d4ff")
+    ax2.tick_params(axis="y", colors="white")
+    ax2r.tick_params(axis="y", colors="#00d4ff")
     ax2r.set_xlim(dates[0], dates[-1])
     ax2r.xaxis.set_visible(False)
     ax2.grid(axis="y", alpha=0.2)
