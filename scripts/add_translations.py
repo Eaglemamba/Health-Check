@@ -31,8 +31,8 @@ TRANSLATIONS = {
         '睡眠 7-8 小時 — 睡眠不足會增加飢餓素、皮質醇及胰島素阻抗；不足 6 小時高血壓風險上升 3.5 倍',
     'Stress management: chronic cortisol elevation promotes visceral fat storage and insulin resistance':
         '壓力管理：長期皮質醇升高會促進內臟脂肪囤積及胰島素阻抗',
-    'Weekly official weigh-in (Sunday AM, post-void, fasted) — track trend, not daily fluctuations':
-        '每週正式量體重（週日早晨、排尿後、進食前）— 追蹤趨勢，不糾結單日波動',
+    'Weekly official weigh-in (Saturday AM, post-void, fasted) — track trend, not daily fluctuations':
+        '每週正式量體重（週六早晨、排尿後、進食前；週末大餐前）— 追蹤趨勢，不糾結單日波動',
     'Body composition analysis every 3 months — track fat mass vs lean mass, not just weight':
         '每 3 個月進行一次體組成分析 — 追蹤體脂量與肌肉量，而非僅看體重',
     'If BMI > 27 with comorbidities or > 30: discuss pharmacotherapy (GLP-1 agonists) with physician':
@@ -395,8 +395,8 @@ TRANSLATIONS = {
         '每日至少喝水 2.5 公升（主要飲水量於 17:00 前完成）+ 柑橘水鹼化尿液 — 提升腎臟尿酸清除率',
     'Stress management: chronic cortisol promotes visceral fat storage, raises blood glucose, and drives inflammation':
         '壓力管理：長期皮質醇升高促進內臟脂肪囤積、升高血糖並驅動發炎',
-    'Weekly weigh-in (Sunday AM, post-void, fasted) — track trend, not daily fluctuations':
-        '每週量體重（週日早晨、排尿後、進食前）— 追蹤趨勢，不糾結單日波動',
+    'Weekly weigh-in (Saturday AM, post-void, fasted) — track trend, not daily fluctuations':
+        '每週量體重（週六早晨、排尿後、進食前；週末大餐前）— 追蹤趨勢，不糾結單日波動',
     'Home BP monitoring 2x/week (seated, 5min rest, use 2nd reading) — establishes true baseline':
         '每週在家量血壓 2 次（坐姿、休息 5 分鐘後、取第二次讀數）— 建立真實基線',
     'Cardiology consultation for persistent ECG myocardial ischemia — within 1 month':
