@@ -838,7 +838,7 @@ const PLANS = {
       { type: 'lifestyle', title: 'Lifestyle', items: [
         { pri: 'high', text: 'Sleep 7-8 hours — sleep deprivation increases ghrelin (hunger hormone), cortisol, and insulin resistance; 3.5x hypertension risk with < 6h', textZh: '睡眠 7-8 小時 — 睡眠不足會增加飢餓素、皮質醇及胰島素阻抗；不足 6 小時高血壓風險上升 3.5 倍' },
         { pri: 'medium', text: 'Stress management: chronic cortisol elevation promotes visceral fat storage and insulin resistance', textZh: '壓力管理：長期皮質醇升高會促進內臟脂肪囤積及胰島素阻抗' },
-        { pri: 'low', text: 'Weekly official weigh-in (Sunday AM, post-void, fasted) — track trend, not daily fluctuations', textZh: '每週正式量體重（週日早晨、排尿後、進食前）— 追蹤趨勢，不糾結單日波動' }
+        { pri: 'low', text: 'Weekly official weigh-in (Saturday AM, post-void, fasted) — track trend, not daily fluctuations', textZh: '每週正式量體重（週六早晨、排尿後、進食前；週末大餐前）— 追蹤趨勢，不糾結單日波動' }
       ]},
       { type: 'medical', title: 'Medical', items: [
         { pri: 'high', text: 'Body composition analysis every 3 months — track fat mass vs lean mass, not just weight', textZh: '每 3 個月進行體組成分析 — 追蹤體脂量與肌肉量，而非僅看體重' },
@@ -1587,8 +1587,8 @@ const MERGED_ACTIONS = [
     match: /hydration\s*2\.5|2\.5\s*L.*day/i, benefits: ['Uric Acid'] },
   { type: 'lifestyle', text: 'Stress management: chronic cortisol promotes visceral fat storage, raises blood glucose, and drives inflammation', textZh: '壓力管理：長期皮質醇升高促進內臟脂肪囤積、升高血糖並驅動發炎',
     match: /stress\s*manag|cortisol.*visceral/i, benefits: ['Body Fat', 'HbA1c', 'hsCRP'] },
-  { type: 'lifestyle', text: 'Weekly weigh-in (Sunday AM, post-void, fasted) — track trend, not daily fluctuations', textZh: '每週量體重（週日早晨、排尿後、進食前）— 追蹤趨勢，不糾結單日波動',
-    match: /weekly.*weigh|weigh.?in.*sunday/i, benefits: ['BMI'] },
+  { type: 'lifestyle', text: 'Weekly weigh-in (Saturday AM, post-void, fasted) — track trend, not daily fluctuations', textZh: '每週量體重（週六早晨、排尿後、進食前；週末大餐前）— 追蹤趨勢，不糾結單日波動',
+    match: /weekly.*weigh|weigh.?in.*(saturday|sunday)/i, benefits: ['BMI'] },
   { type: 'lifestyle', text: 'Home BP monitoring 2x/week (seated, 5min rest, use 2nd reading) — establishes true baseline', textZh: '每週在家量血壓 2 次（坐姿、休息 5 分鐘後、取第二次讀數）— 建立真實基線',
     match: /home\s*BP\s*monitor|BP\s*monitor.*2x/i, benefits: ['BP'] },
   // ── Medical ──

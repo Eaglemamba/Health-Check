@@ -1,145 +1,155 @@
-# Handover: 2026 因果圖 + 5 年睡眠債重構
+# Session Handover — 2026-04-21
 
-**Branch:** `claude/review-dashboard-feedback-dJkS1`
-**Date:** 2026-04-18
-**Status:** 討論與架構完成，實作待續
+**Branch:** `claude/add-roselle-tea-rct-BMzxw` (8 commits ahead of main, all pushed)
+**Status:** Supplement guide fully updated; `index.html` partially synced (EN done, ZH pending)
 
----
-
-## 1. 本次 Session 的關鍵發現
-
-### 🔴 最重要的發現：5 年慢性睡眠剝奪（>3/25 任何紅字）
-
-使用者自述：**自 2021 年有 Garmin 資料以來，多數日子睡眠 <6 小時**。
-
-這重新定義了 2021-2026 所有健檢惡化的**真正上游**：
-
-```
-2021 ────────────────────────────────── 2026
-  連續 5 年，多數日 < 6h 睡眠（睡眠債複利）
-  ↓
-  交感亢奮 + 代謝紊亂 + 發炎累積 + 腦脊液清除失能
-  ↓
-  BP↑ / LDL↑ / 體脂↑ / hs-CRP↑ / ECG 結構變化 / 眼耳新訊號
-```
-
-所有 2025/2026 報告的紅字幾乎都能被這條因果線解釋。
-
-### 📊 2026-03-25 年度報告的「狀態偏差」分析
-
-比對 `reviews/daily/2026-03-17` 到 `2026-03-25` 的每日紀錄，健檢前 8 天：
-
-| 日期 | Sleep Score | Body Battery | 家中晨間 BP |
-|---|---|---|---|
-| 3/17 | 64 | 36 | 117/70 |
-| 3/18 | 74 | 48 | 130/74 |
-| 3/20 | （僅 2.5h） | — | 141/79 |
-| 3/21 | 63 | 34 | 123/78 |
-| 3/22 | 45 | 47 | 130/84 |
-| 3/23 | 66 | 26 | 126/76 |
-| 3/24 | 41 | 41 | 128/83 |
-| 3/25 當日 | 58 | **21**（歷史最低）| 128/81（家中）**vs 153/88（診間）** |
-
-**結論**：報告中 5 項紅色惡化，其中 3 項（BP、hs-CRP、ECG ST 變化）很可能被健檢前 8 天睡眠/脫水狀態放大；HDL、LDL、LVH 結構、主動脈扭曲、IOP、聽力不受短期狀態影響，仍是真實問題。
+*Replaces prior handover.md (2026-04-18 causal-map work, completed in commit 0265b46 and no longer current).*
 
 ---
 
-## 2. 下一步工作
+## What this session accomplished
 
-### 方案 A（先做）：2026 因果圖 `reviews/annual/2026-causal-map.html`
+Starting from a single request ("add 洛神花茶 with RCT support to the supplement guide"), the session expanded into a comprehensive overhaul of the 2026-03-25 supplement guide, partial sync of `index.html`, and a behavioral milestone capture in the daily log.
 
-**使用者選擇先做方案 A**，沿用 `2025-causal-map.html` 的 CSS/JS 骨架，資料更新為 2026-03-25 findings。
+### Commit timeline (oldest → newest)
 
-#### 新結構（最上層加獨立根源節點）
-
-```
-[層 0 — 慢性根源] ← 新增層，黑底紅邊警示
-  🔴 5 年慢性睡眠剝奪（Garmin 2021-）
-
-[層 1 — 近期根源]
-  - 持續睡眠債（3/17-3/25 Sleep Score 41-74 劇烈波動）
-  - 飲水不足（健檢前 3 天 <1500ml）
-  - 健檢前狀態偏差（新節點）
-
-[層 2 — 中游機制]
-  - 交感神經亢奮（Body Battery 21 歷史最低）
-  - 脂蛋白輸出 trade-off（減脂 → HDL↓ 副作用）
-  - 慢性發炎累積（hs-CRP ×4.7）
-
-[層 3 — 指標]
-  改善：LDL 177→154🟠、體脂 24.9→21.5%🟢、HbA1c 6.0→5.9%🟡、TC 234→191🟢
-  惡化：BP 129/74→153/88🔴、hs-CRP 0.03→0.14mg/dL🟠、HDL 46→39🟠
-  持續：尿酸 8.6→8.9🟠
-
-[層 4 — 臨床/新器官]
-  - ECG 結構性變化 pending 心臟超音波（雙心房擴大+前壁 ST 上升）
-  - CXR 主動脈扭曲 + 肺紋路（新）
-  - IOP 雙眼 19（新，接近青光眼閾值）
-  - 聽力左耳 500/4000Hz 未過（新）
-  - 糞便 RBC/WBC 輕度（新）
-
-[層 5 — 改善區]
-  - LDL -23、體脂 -3.4%、HbA1c 鬆動
-  - Anti-HBs 14.54 保護力完整（唯一純好消息）
-```
-
-#### 實作要點
-
-1. 沿用 `2025-causal-map.html` 的 CSS variables 與 `.node` class 結構
-2. 新增 `.chronic-root` class（黑底紅邊、警示圖示）用於 5 年睡眠債節點
-3. `data` 物件大幅改寫：每個節點的 `problem` / `action` 需反映 2026 新語境
-4. 改善區擴大（從 3 項到 5-6 項），突顯代謝線勝利
-5. 臨床層擴充（從 3 個臨床診斷增至 6-7 個，含新器官訊號）
-
-### 方案 B（使用者等 Garmin export 再做）：2021-2026 睡眠趨勢對照圖
-
-- 等使用者從 Garmin Connect 匯出 2021-2026 睡眠資料
-- 預計產出：每月平均總睡眠時數、Sleep Score、深睡%
-- 與同期健檢指標（BP、LDL、體重、hs-CRP）對照
-- 說服力高於教科書推論，可帶去睡眠門診當客觀證據
+| # | Commit | Scope |
+|---|--------|-------|
+| 1 | `aced978` | Added 洛神花茶 RCT discussion (Serban 2015 meta SBP −7.58, McKay 2010, Mozaffari-Khosravi 2009) |
+| 2 | `eb44ca3` | Realigned matcha to single lunch latte; cancelled NOW EGCG capsule; added L-Citrulline 2g |
+| 3 | `5667f87` | Added Psyllium husk 5g × 2/day as LDL primary replacement |
+| 4 | `1dbed15` | Added pumpkin seeds 30g afternoon snack + daily-load accounting (§8) addressing 72% chocolate question |
+| 5 | `81c3440` | Captured identity milestone in daily log (no longer wants 珍珠) |
+| 6 | `b0f8ecb` | Added resistance training protocol as §9 ("missing piece" for HDL 39→45 and 65 kg body composition) |
+| 7 | `a0037fc` | index.html Phase 1 — Daily Routine table synced (EN+ZH) with gram-explicit dosing |
+| 8 | `a0dff12` | index.html Phase 2 (EN only) — Matcha/Hibiscus prose + supplements table + cost table |
 
 ---
 
-## 3. 最優先的醫療行動（使用者確認中）
+## Current state of the supplement guide
 
-重新定位：**睡眠門診轉介 > 心臟科**（原 2026-03-25 報告的🔴1）
+**File:** `articles/2026-03-25-supplement-guide.md` (mirrored to `reviews/annual/2026-03-25-supplement-guide.md`)
 
-理由：若 OSA 是真實原因，CPAP 可逆轉很大比例的 CV 風險，比任何 statin 更根本。使用者符合 OSA 高危險輪廓（37M、BMI 24.5、BP 漂、心肌缺氧、Body Battery 長期低）。
+10 sections now:
 
-建議順序：
-1. 居家睡眠檢測（HST）或 PSG 排除 OSA
-2. 心臟超音波 + 24h Holter（確認 ECG 結構變化）
-3. 居家 BP 連測 2 週（家中均值 128/79 vs 診間 153/88 → 白袍成分大）
-4. HDL 救援 + 眼科 OCT + 耳鼻喉聽力複檢
-
----
-
-## 4. 本 Session 相關檔案
-
-**已讀取並分析：**
-- `reviews/annual/2025.md`（2025-09-17 健檢）
-- `reviews/annual/2026-03-25.md`（2026-03-25 年度對比報告）
-- `reviews/annual/2025-causal-map.html`（因果圖原型）
-- `reviews/daily/2026-03-17` 至 `2026-03-25`（健檢前 8 天每日紀錄）
-- `reviews/health_dashboard.png`（33 天趨勢儀表板）
-
-**待建立：**
-- `reviews/annual/2026-causal-map.html`（方案 A）
-- `reviews/annual/2021-2026-sleep-trend.html` 或 `.md`（方案 B，等 Garmin export）
+1. **茶飲選擇** — matcha ✅ + 枸杞 ✅ + **洛神花茶 ✅ 加選 🆕** + corn silk / burdock ☐
+2. **補品組合** — 5 core (fish oil / tart cherry / D3K2 / Mg / probiotics) + **L-Citrulline 2g 🆕** + **Psyllium 5g×2 🆕** + **南瓜籽仁 30g (food) 🆕**
+3. **效果全比較表** (PubMed RCT) + Hibiscus RCT summary + **L-Citrulline RCT summary 🆕** + **Psyllium RCT summary 🆕**
+4. **各指標策略分析** — LDL primary lever reassigned to Psyllium; BP gets hibiscus + citrulline; HDL strategy rewritten around resistance training
+5. **抹茶執行方案** — rewritten for single-lunch-latte; EGCG 48–95 mg/day (sub-RCT); ALT/AST safety rationale for capsule cancellation
+6. **劑量與時機表** — all new items integrated
+7. **建議每日時程** — breakfast no matcha + citrulline; hibiscus ×2 tea windows; psyllium ×2 (11:30 + 16:30); pumpkin seeds 15:00–16:00; dinner fish oil ×4 only
+8. **下午零食盤點與 72% 巧克力決策 🆕** — full-day macro accounting + 3 reasons to NOT stack 72% chocolate
+9. **阻力訓練（缺失拼圖）🆕** — detrained-resume protocol (week 1–2 → 9+); 6 compound movements; integration with NO stack; safety boundaries
+10. **預期效果與時程** — LDL 154 → **135–145** (with psyllium); HDL 39 → **42–48** (conditional on RT ≥12 weeks); body comp 68.6 → **65 kg @ 16–18%** (requires RT for lean mass preservation)
 
 ---
 
-## 5. Session 中重要的概念釐清
+## Current state of `index.html` sync
 
-- **「健檢觀測者悖論」**：正式術語為 **White Coat Effect + Hawthorne Effect**，不是醫學標準術語。指健檢行為本身干擾被測對象（緊張、熬夜、脫水、飲食異常），使單日快照無法代表真實基礎狀態。
-- **ECG「ST 段變化 + 雙心房擴大」可能是狀態偽影**：急性睡眠剝奪 + 脫水 + 交感亢奮（Body Battery 21）可短暫誘發 ECG 讀圖異常；結構性 LVH 則不會 8 天形成。心臟超音波是唯一區分真假的方法。
-- **「雙軌制健檢」概念**：年度健檢（單日快照）+ 家用 BP 2 週均值 + Garmin 3 個月 HRV + 每季自費單項血液追蹤 → 才是完整的「面」而非孤立的「點」。
+### Synced ✅
+- Daily Routine & Hydration table (EN + ZH, lines ~1025–1115) — gram-explicit for every item
+- Daily supplement dose summary list (EN + ZH)
+- Hydration total updated 2.3–2.5 L → **2.5–2.8 L**
+- All-Day Beverage Strategy table (**EN only**, ~387–402)
+- Matcha card (**EN only**, ~404) — EGCG math corrected
+- Breakfast Yogurt Recipe table (**EN only**, ~408–424)
+- T4 Supplements master table (**EN only**, ~858–872)
+- Hibiscus prose section (**EN only**, ~904–940) — split from goji, Serban/McKay/Mozaffari citations added
+- Goji standalone section (**EN only**) — explains move to breakfast blend
+- L-Citrulline dosing rationale (**EN only**) — 2g single-dose justified
+- Creatine caveats (**EN only**) — water retention + eGFR caveats
+- Cost table (**EN only**, ~975–1005) — priorities reordered
+
+### Out of sync ❌ — PENDING
+- **ZH T4 Supplements section (lines ~1009–1063)** — severely outdated, only 3 items in table (Omega-3, tart cherry, goji tea); missing D3K2, Mg, citrulline, psyllium, hibiscus, pumpkin seeds. Full rewrite needed to mirror current EN version.
+- **Current Supplements 總覽** (line 111 EN, line 146 ZH) — still says "Expanding to: L-Citrulline, Creatine, D3K2, Chelated Magnesium, NAC, Whey Protein"; creatine/NAC not active.
+- **ZH T2 matcha/beverage strategy** — searched, does not appear to exist as a mirror of EN T2 (ZH T2 is streamlined to DASH/macros). Likely no update needed; verify.
 
 ---
 
-## 6. Open Questions（給下一個 session）
+## Pending work (priority order)
 
-- 方案 A 的因果圖節點文字是否需要中英雙語？（2025 版為純中文）
-- 「慢性根源」層是否要加**可點開展開 5 年演變時序**的互動功能？
-- Garmin export 到手後，方案 B 要用 HTML（含互動圖表）還是純 Markdown（簡報式）？
-- 使用者是否願意把 Garmin 5 年資料也納入 repo（`reviews/garmin/`）？
+### Phase 2 remainder — ZH T4 rewrite
+Rewrite `index.html` lines ~1009–1063 to mirror the current EN T4 (lines ~853–1005). Specifically:
+- Supplements master table: add D3K2, Mg, L-Citrulline 2g, Psyllium 5g×2, Hibiscus tea 2g×2, probiotics, pumpkin seeds, whey; mark creatine + NAC as 未啟用（灰階）
+- Add ZH detailed prose for Hibiscus tea (copy RCT citations from §3 of the MD guide)
+- Add ZH cost table mirroring EN priority list
+
+### Phase 3 — New standalone `index.html` subsections (both EN + ZH)
+- **Psyllium husk** detailed section (Jovanovski 2018 meta, dosing, safety)
+- **Pumpkin seeds** detailed section (Zn/Mg/phytosterol/tryptophan)
+- **L-Citrulline** — EN done (needs verify); add ZH mirror
+- **Resistance training summary** — brief section linking back to guide §9 (full protocol stays in the MD guide)
+
+### Phase 4 — Overview sync
+- `index.html` line 111 (EN) and line 146 (ZH): rewrite "Current Supplements" one-liner to reflect active stack (fish oil, tart cherry, D3K2, Mg glycinate, probiotics-in-yogurt, L-citrulline 2g, psyllium 5g×2, hibiscus 2g×2, pumpkin seeds 30g; matcha now lunch-latte only)
+- Remove "Expanding to:" language for items that are now active
+- Explicitly note creatine + NAC as NOT in active stack
+
+---
+
+## Key decisions made this session
+
+- **Matcha dose drastically reduced** (270–320 mg EGCG → ~48–95 mg) because user stopped morning matcha + evening capsule on their own. Guide accepts this; LDL responsibility transferred to psyllium. User's rationale stands: feels great, trend is good.
+- **NOW EGCG capsule permanently discontinued** due to AST 27→38 + EFSA >338 mg single-dose hepatotoxicity signal.
+- **72% dark chocolate: NOT recommended to stack** — full daily-load analysis showed +4 g sugar, +4 g sat fat, +70 mg theobromine, near-zero marginal flavanol benefit (morning cacao already saturates). If cravings: 85% 10 g > 72% on every dimension.
+- **Creatine: not added yet**. User curious; recommended to defer until resistance training resumes ≥2×/week. Two caveats documented:
+  - Water retention pollutes 65 kg weight trend
+  - Serum creatinine rise triggers eGFR misread (critical for pending nephrology referral given UA 8.9)
+- **Second bedtime L-Citrulline: No**. Chronic NO adaptation, not acute dosing window. If escalating, single 3 g morning > split 2+2 g.
+- **Resistance training protocol created** because user revealed they used to train 2+/week but ate poorly; now eats well but zero RT — this is the one combination they've never experienced. Protocol is detrained-resume conservative: week 1–2 × 1/week × 15 min, ramping to 2–3×/week × 30 min by week 9.
+
+---
+
+## Observable health state snapshot (2026-04-21)
+
+| Metric | Value | Note |
+|--------|-------|------|
+| Weight | 68.6 kg | Target 65 kg, requires RT for lean mass preservation |
+| Body fat | 19.8% | From 24.9% (−3.4% over 6 months) |
+| Visceral fat | 9.5 | Target <9 |
+| Home BP AM | 121/75 (today), 112/70 (yesterday) | Vs. clinic 153/88 — setting-induced |
+| LDL | 154 | From 177; target <130 |
+| HDL | 39 | From 46 — needs RT (biochemical fingerprint of missing muscle signal) |
+| hsCRP | 1.42 mg/L | From 3.02 (−53%); likely personal lifetime low |
+| HbA1c | 5.9% | Prediabetes platform easing |
+| Uric acid | 8.9 | Worsening; nephrology referral pending |
+| Sleep SpO2 min | **84% ×2 consecutive nights** | 🔴 **OSA red flag** — pulse oximeter or sleep clinic consult recommended |
+| Body Battery | 56 today, 62 yesterday | Acceptable recovery (≥50) paired with Sleep Score 74; REM% 14 remains below optimal 21–31% |
+
+---
+
+## Flagged items user has not yet actioned (each raised ≥3 times)
+
+1. **Home pulse oximeter night recording** or ENT/sleep clinic consult for OSA. The SpO2 data is the one objective signal pointing somewhere concerning and cannot be fixed by supplements.
+2. **Nephrology referral** for febuxostat/allopurinol evaluation — constitutional hyperuricemia (UA 7.8 at age 26, now 8.9) won't respond to supplements/tea alone.
+
+---
+
+## Behavioral / psychological notes
+
+User expressed in this session:
+- "feel so great" on current yogurt + tea + supplement + bed-supplement routine
+- "I never ate like this before…with controlled food and beverage"
+- "I even don't like to eat bubble when order beverage" — captured in daily log as identity transition milestone
+- Looking forward to "65 kg 完全健康" state, potentially "healthier than when young"
+- Acknowledged: used to train 2+/week but ate poorly → current opposite is the missing piece
+
+Captured in `reviews/daily/2026-04-21.md` §心理/行為里程碑 with objective data backing.
+
+---
+
+## Next session suggested opening
+
+If resuming: ask user which is priority:
+- (a) Finish ZH T4 rewrite + Phase 3/4 `index.html` sync
+- (b) Something has come up (new symptoms, SpO2 test results, RT started, etc.)
+
+**Do NOT start more supplement additions without asking.** User's stack is at a good saturation point and the guide now explicitly recommends proving the current system for 4 weeks before further changes. 7 月 (July 2026) blood test will be the next decision point for statin / dose escalation.
+
+---
+
+*File: `handover.md` (root)*
+*Branch: `claude/add-roselle-tea-rct-BMzxw`*
+*Written: 2026-04-21*

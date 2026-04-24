@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>健康問題因果圖 — 2026 / 五年慢性負債</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"Segoe UI",Roboto,sans-serif;background:#0f1117;color:#e0e0e0;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#1a1f2e,#252b3b);padding:20px;text-align:center;border-bottom:1px solid #2a3045}
+.header h1{font-size:18px;color:#7eb8f7;font-weight:600}
+.header p{font-size:12px;color:#6b7c8d;margin-top:4px}
+.header .sub{font-size:11px;color:#ff9a9a;margin-top:6px}
+
+.legend{display:flex;gap:16px;justify-content:center;padding:12px;background:#151a27;border-bottom:1px solid #2a3045;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:#8a9bb0}
+.leg-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,0.15)}
+
+.canvas{padding:20px 12px 40px;max-width:960px;margin:0 auto}
+
+.layer-label{font-size:10px;font-weight:700;letter-spacing:2px;color:#4a5568;text-transform:uppercase;margin:24px 0 8px;padding:4px 0;border-top:1px dashed #2a3045}
+.layer-label.alert-label{color:#ff4d4d;border-top-color:#7f2020}
+
+.row{display:flex;gap:10px;justify-content:center;margin-bottom:4px;flex-wrap:wrap}
+
+.node{
+  border-radius:10px;
+  padding:12px 14px;
+  cursor:pointer;
+  transition:all 0.2s;
+  position:relative;
+  border:1px solid transparent;
+  min-width:140px;
+  flex:1;
+  max-width:210px;
+}
+.node:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.node.active{filter:brightness(1.2);border-color:rgba(255,255,255,0.3)}
+
+.node-title{font-size:12px;font-weight:700;margin-bottom:4px}
+.node-val{font-size:10px;opacity:0.78;margin-bottom:3px;line-height:1.4}
+.node-badge{
+  display:inline-block;font-size:9px;padding:1px 6px;
+  border-radius:8px;background:rgba(0,0,0,0.25);
+  font-weight:600;margin-top:2px
+}
+
+/* LAYER 0 — chronic 5-year sleep debt: black background + red alert border */
+.alert{
+  background:#000;
+  border:2px solid #ff1a1a;
+  box-shadow:0 0 14px rgba(255,30,30,0.35), inset 0 0 12px rgba(255,30,30,0.12);
+  animation:pulse 2.6s ease-in-out infinite;
+  max-width:100%;
+}
+.alert .node-title{color:#ff4d4d;letter-spacing:0.5px}
+.alert .node-val{color:#ffc9c9;opacity:0.9}
+.alert .node-badge{background:#3d0000;color:#ff8a80;border:1px solid #7f0000}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 14px rgba(255,30,30,0.35), inset 0 0 12px rgba(255,30,30,0.12)}
+  50%{box-shadow:0 0 22px rgba(255,30,30,0.6), inset 0 0 18px rgba(255,30,30,0.22)}
+}
+
+.root{background:#2d1b1b;border-color:#7f2020}
+.root .node-title{color:#ff6b6b}
+.root .node-badge{color:#ff8a80}
+
+.mid{background:#1e2a1a;border-color:#3d5c2a}
+.mid .node-title{color:#81c784}
+.mid .node-badge{color:#a5d6a7}
+
+.marker{background:#1a2035;border-color:#2a4080}
+.marker .node-title{color:#7eb8f7}
+.marker .node-badge{color:#90caf9}
+.marker.warn{background:#251e0d;border-color:#6b4a00}
+.marker.warn .node-title{color:#ffa726}
+.marker.warn .node-badge{color:#ffcc80}
+.marker.danger{background:#2d1b1b;border-color:#7f2020}
+.marker.danger .node-title{color:#ef5350}
+.marker.danger .node-badge{color:#ff8a80}
+.marker.good{background:#12241a;border-color:#1f5436}
+.marker.good .node-title{color:#66d19e}
+.marker.good .node-badge{color:#a5d6a7}
+
+/* LAYER 4 — functional warnings */
+.fn{background:#2a1e33;border-color:#573773}
+.fn .node-title{color:#d0a8ff}
+.fn .node-badge{color:#e0c3ff}
+
+/* LAYER 5 — structural/organ damage */
+.organ{background:#24181f;border-color:#6a2a48}
+.organ .node-title{color:#ff9fbe}
+.organ .node-badge{color:#ffc1d4}
+
+.outcome{background:#1d1226;border-color:#4a2870}
+.outcome .node-title{color:#ce93d8}
+.outcome .node-badge{color:#e1bee7}
+.outcome.critical{background:#2d1b1b;border-color:#8b0000}
+.outcome.critical .node-title{color:#ff5252}
+.outcome.critical .node-badge{color:#ff8a80}
+
+.arrows{display:flex;justify-content:center;gap:30px;padding:6px 0;flex-wrap:wrap}
+.arrow{display:flex;flex-direction:column;align-items:center;color:#4a5568;font-size:18px}
+
+.panel{
+  background:#1a2035;border:1px solid #2a3045;border-radius:12px;
+  padding:18px;margin:20px 0;display:none
+}
+.panel.show{display:block;animation:fadeIn 0.2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.panel-title{font-size:15px;font-weight:700;margin-bottom:10px;color:#e0e0e0}
+.panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.panel-block{background:#0f1420;border-radius:8px;padding:12px}
+.panel-block h4{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;color:#6b7c8d}
+.panel-block ul{list-style:none;padding:0}
+.panel-block li{font-size:12px;padding:3px 0;border-bottom:1px solid #1a2035;display:flex;align-items:flex-start;gap:6px;line-height:1.5}
+.panel-block li:last-child{border:none}
+.panel-block li::before{content:"›";color:#7eb8f7;flex-shrink:0}
+.panel-close{float:right;cursor:pointer;font-size:18px;color:#6b7c8d;background:none;border:none;padding:0;margin-top:-4px}
+.panel-close:hover{color:#fff}
+
+.keynote{
+  background:#12241a;border:1px solid #1f5436;border-radius:10px;
+  padding:12px 16px;margin:12px 0;font-size:12px;color:#a5d6a7;line-height:1.6
+}
+.keynote b{color:#66d19e}
+.keynote.alert{background:#2d1b1b;border-color:#7f2020;color:#ff9a9a}
+.keynote.alert b{color:#ff6b6b}
+
+.chart-gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.chart{background:#0f1420;border:1px solid #1a2035;border-radius:10px;padding:10px;margin:0}
+.chart img{width:100%;height:auto;display:block;border-radius:6px;background:#fff}
+.chart figcaption{font-size:11px;color:#8a9bb0;margin-top:8px;line-height:1.5}
+
+@media(max-width:600px){
+  .panel-grid{grid-template-columns:1fr}
+  .chart-gallery{grid-template-columns:1fr}
+  .node{min-width:120px;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>健康問題因果圖 — 2026 / 五年慢性負債重建</h1>
+  <p>點擊任一節點查看詳細說明與改善方法</p>
+  <div class="sub">2026-03-25 健檢 × 2018–2026 Garmin 睡眠資料（1,680 晚） · 七層因果架構</div>
+</div>
+
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#000;border-color:#ff1a1a"></div>五年慢性根源（警示）</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ff6b6b"></div>當前上游根源</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#81c784"></div>生理機制</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ffa726"></div>警示指標</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ef5350"></div>異常指標</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#d0a8ff"></div>功能警示</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ff9fbe"></div>結構損傷</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ce93d8"></div>臨床綜合</div>
+</div>
+
+<div class="canvas">
+
+  <div class="keynote alert">
+    <b>關鍵分析洞察：</b>睡眠門診（OSA 排除）此次優先序升至心臟科之上。診間 BP 153/88 vs 居家 BP 128/79，25 mmHg 白袍落差意味部分急性異常屬狀態假象，但五年慢性睡眠負債是下游惡化的真正上游。
+  </div>
+
+  <!-- DETAIL PANEL -->
+  <div class="panel" id="detail-panel">
+    <button class="panel-close" onclick="closePanel()">✕</button>
+    <div class="panel-title" id="panel-title"></div>
+    <div class="panel-grid" id="panel-content"></div>
+  </div>
+
+  <!-- LAYER 0: CHRONIC 5-YEAR ROOT (NEW) -->
+  <div class="layer-label alert-label">Layer 0 — 最上游 · 五年慢性根源 (2021–2026)</div>
+  <div class="row">
+    <div class="node alert" onclick="showDetail('chronic-sleep-debt')">
+      <div class="node-title">五年慢性睡眠剝奪（2021–2026）</div>
+      <div class="node-val">2020 年 6h44m → 2021 驟降 5h52m → 2024 谷底 4h49m → 2026 回升 5h39m</div>
+      <div class="node-badge">低 SpO2 &lt;90% 佔 90.5% 夜晚 → OSA 近乎確診級證據</div>
+    </div>
+  </div>
+
+  <div class="arrows">
+    <div class="arrow"><span>↓</span></div>
+  </div>
+
+  <!-- LAYER 1: CURRENT ROOT CAUSES -->
+  <div class="layer-label">Layer 1 — 當前上游根源</div>
+  <div class="row">
+    <div class="node root" onclick="showDetail('sleep')">
+      <div class="node-title">睡眠品質不足</div>
+      <div class="node-val">Sleep Score 多日 &lt; 70 / BB 起床 &lt; 50</div>
+      <div class="node-badge">夜尿 2–4 次 / 疑似 OSA</div>
+    </div>
+    <div class="node root" onclick="showDetail('diet-gap')">
+      <div class="node-title">飲食計劃執行落差</div>
+      <div class="node-val">計劃完整，記錄仍不連續</div>
+      <div class="node-badge">熱量 / 食物來源不明</div>
+    </div>
+    <div class="node root" onclick="showDetail('hydration')">
+      <div class="node-title">飲水不足</div>
+      <div class="node-val">日記多日未達 2.5 L</div>
+      <div class="node-badge">尿酸排泄效率下降</div>
+    </div>
+    <div class="node root" onclick="showDetail('stress')">
+      <div class="node-title">慢性壓力 / 交感亢進</div>
+      <div class="node-val">工作強度高 + 睡眠不足疊加</div>
+      <div class="node-badge">白袍血壓落差 25 mmHg</div>
+    </div>
+  </div>
+
+  <div class="arrows">
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+  </div>
+
+  <!-- LAYER 2: MECHANISM -->
+  <div class="layer-label">Layer 2 — 中游 · 生理機制</div>
+  <div class="row">
+    <div class="node mid" onclick="showDetail('cortisol')">
+      <div class="node-title">皮質醇持續偏高</div>
+      <div class="node-val">HPA 軸亢進 → 肝產 VLDL 增</div>
+      <div class="node-badge">腹部脂肪優先堆積</div>
+    </div>
+    <div class="node mid" onclick="showDetail('insulin')">
+      <div class="node-title">胰島素阻抗</div>
+      <div class="node-val">睡眠不足 1 週即可誘發</div>
+      <div class="node-badge">HbA1c 連續兩次 ≥ 5.9%</div>
+    </div>
+    <div class="node mid" onclick="showDetail('liver-fat')">
+      <div class="node-title">肝臟代謝過載</div>
+      <div class="node-val">AST 27 → 38（上升中）</div>
+      <div class="node-badge">脂肪肝未完全消退</div>
+    </div>
+    <div class="node mid" onclick="showDetail('endothelial')">
+      <div class="node-title">血管內皮功能受損</div>
+      <div class="node-val">高尿酸 + 高 LDL + 慢性壓力</div>
+      <div class="node-badge">動脈結構重塑（主動脈迂曲）</div>
+    </div>
+  </div>
+
+  <div class="arrows">
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+  </div>
+
+  <!-- LAYER 3: LAB MARKERS -->
+  <div class="layer-label">Layer 3 — 檢驗指標（2026-03-25）</div>
+  <div class="row">
+    <div class="node marker warn" onclick="showDetail('ldl')">
+      <div class="node-title">LDL 膽固醇</div>
+      <div class="node-val">154 mg/dL（177 → 154，-23）</div>
+      <div class="node-badge">仍 &gt; 130 目標，方向正確</div>
+    </div>
+    <div class="node marker danger" onclick="showDetail('hdl')">
+      <div class="node-title">HDL（逆向惡化）</div>
+      <div class="node-val">39 mg/dL（46 → 39，-7）</div>
+      <div class="node-badge">Trade-off Warning</div>
+    </div>
+    <div class="node marker danger" onclick="showDetail('uricacid')">
+      <div class="node-title">尿酸</div>
+      <div class="node-val">8.9 mg/dL（8.6 → 8.9，+0.3）</div>
+      <div class="node-badge">持續緩慢惡化</div>
+    </div>
+    <div class="node marker warn" onclick="showDetail('hba1c')">
+      <div class="node-title">HbA1c / 空腹血糖</div>
+      <div class="node-val">5.9% / 90 mg/dL（微改善）</div>
+      <div class="node-badge">糖尿病前期邊界持續</div>
+    </div>
+    <div class="node marker warn" onclick="showDetail('ast')">
+      <div class="node-title">AST 肝酵素</div>
+      <div class="node-val">38（27 → 38，+41%）</div>
+      <div class="node-badge">超過 34 上限</div>
+    </div>
+    <div class="node marker warn" onclick="showDetail('bodyfat')">
+      <div class="node-title">體重 / 體脂</div>
+      <div class="node-val">69.6 kg / 體脂 21.5%</div>
+      <div class="node-badge">體脂 -3.4%（半年改善）</div>
+    </div>
+  </div>
+
+  <div class="arrows">
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+  </div>
+
+  <!-- LAYER 4: FUNCTIONAL WARNINGS -->
+  <div class="layer-label">Layer 4 — 功能性警示</div>
+  <div class="row">
+    <div class="node fn" onclick="showDetail('whitecoat')">
+      <div class="node-title">白袍血壓效應</div>
+      <div class="node-val">診間 153/88 vs 居家 128/79</div>
+      <div class="node-badge">落差 25 mmHg（狀態假象）</div>
+    </div>
+    <div class="node fn" onclick="showDetail('ecg-functional')">
+      <div class="node-title">ECG 功能性異常</div>
+      <div class="node-val">前壁 ST 上升 &gt; 0.20 mV V1–V4</div>
+      <div class="node-badge">需與缺氧/早期再極化鑑別</div>
+    </div>
+    <div class="node fn" onclick="showDetail('osa-suspect')">
+      <div class="node-title">OSA 疑似</div>
+      <div class="node-val">夜尿 + BB 低 + 晨間疲倦</div>
+      <div class="node-badge">本次列首優先排除項</div>
+    </div>
+  </div>
+
+  <div class="arrows">
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+  </div>
+
+  <!-- LAYER 5: STRUCTURAL / ORGAN DAMAGE (SIX NEW SIGNALS) -->
+  <div class="layer-label">Layer 5 — 結構性損傷 · 六大新增器官訊號</div>
+  <div class="row">
+    <div class="node organ" onclick="showDetail('ecg-structural')">
+      <div class="node-title">① ECG 結構變化</div>
+      <div class="node-val">LVH + 雙心房擴大（新增）</div>
+      <div class="node-badge">長期血壓負荷 / OSA 後果</div>
+    </div>
+    <div class="node organ" onclick="showDetail('aortic')">
+      <div class="node-title">② 主動脈輕度迂曲</div>
+      <div class="node-val">CXR：mild tortuous aorta</div>
+      <div class="node-badge">動脈老化早期訊號</div>
+    </div>
+    <div class="node organ" onclick="showDetail('lung-markings')">
+      <div class="node-title">③ 雙肺紋增加</div>
+      <div class="node-val">CXR：prominent bilateral lung markings</div>
+      <div class="node-badge">需追蹤鑑別（慢性 vs 發炎）</div>
+    </div>
+    <div class="node organ" onclick="showDetail('iop')">
+      <div class="node-title">④ 眼內壓升高</div>
+      <div class="node-val">IOP 19 / 19 mmHg（接近 21 門檻）</div>
+      <div class="node-badge">青光眼前期風險</div>
+    </div>
+    <div class="node organ" onclick="showDetail('hearing')">
+      <div class="node-title">⑤ 左耳聽力異常</div>
+      <div class="node-val">500 Hz + 4000 Hz 雙頻未通過</div>
+      <div class="node-badge">低+高頻均受損（非典型）</div>
+    </div>
+    <div class="node organ" onclick="showDetail('stool-ob')">
+      <div class="node-title">⑥ 糞便潛血 / 消化道</div>
+      <div class="node-val">Stool OB 49；RBC/WBC 0–5/HPF</div>
+      <div class="node-badge">疑痔瘡但需大腸鏡排除</div>
+    </div>
+  </div>
+
+  <div class="arrows">
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+    <div class="arrow"><span>↓</span></div>
+  </div>
+
+  <!-- LAYER 6: CLINICAL SYNTHESIS -->
+  <div class="layer-label">Layer 6 — 下游 · 臨床綜合結果</div>
+  <div class="row">
+    <div class="node outcome critical" onclick="showDetail('cv-risk')">
+      <div class="node-title">心血管綜合風險</div>
+      <div class="node-val">LDL 154 + HDL 39 + LVH + 尿酸 8.9</div>
+      <div class="node-badge">TC/HDL 4.9（仍接近危險）</div>
+    </div>
+    <div class="node outcome" onclick="showDetail('metabolic-plateau')">
+      <div class="node-title">代謝前期僵局</div>
+      <div class="node-val">HbA1c 5.9% × 兩次</div>
+      <div class="node-badge">減重停滯 → 逆轉空間收斂</div>
+    </div>
+    <div class="node outcome critical" onclick="showDetail('accelerated-aging')">
+      <div class="node-title">加速老化徵兆群</div>
+      <div class="node-val">主動脈、IOP、聽力、LVH 同步出現</div>
+      <div class="node-badge">睡眠負債的典型表型</div>
+    </div>
+    <div class="node outcome" onclick="showDetail('priority-shift')">
+      <div class="node-title">醫療順序重排</div>
+      <div class="node-val">睡眠門診 &gt; 心臟科 &gt; 眼科 &gt; 耳鼻喉科</div>
+      <div class="node-badge">治本優先於治標</div>
+    </div>
+  </div>
+
+  <!-- IMPROVEMENTS -->
+  <div class="layer-label" style="color:#3d7a3d;border-top-color:#2a4a2a">本次改善（勿放棄）</div>
+  <div class="row">
+    <div class="node marker good" onclick="showDetail('hscrp-imp')">
+      <div class="node-title">hs-CRP 再降 53%</div>
+      <div class="node-val">0.302 → 0.142 mg/L（回正常）</div>
+      <div class="node-badge">運動 + 魚油 + 睡眠修復</div>
+    </div>
+    <div class="node marker good" onclick="showDetail('ldl-imp')">
+      <div class="node-title">LDL 下降 23</div>
+      <div class="node-val">177 → 154 mg/dL（-13%）</div>
+      <div class="node-badge">飲食方向正確</div>
+    </div>
+    <div class="node marker good" onclick="showDetail('tc-imp')">
+      <div class="node-title">總膽固醇 -43</div>
+      <div class="node-val">234 → 191 mg/dL</div>
+      <div class="node-badge">回到 &lt; 200 目標</div>
+    </div>
+    <div class="node marker good" onclick="showDetail('bodyfat-imp')">
+      <div class="node-title">體脂率 -3.4%</div>
+      <div class="node-val">24.9% → 21.5%（半年）</div>
+      <div class="node-badge">腰圍 -1.5 cm（85.5→84.0）</div>
+    </div>
+    <div class="node marker good" onclick="showDetail('pwv-legacy')">
+      <div class="node-title">PWV 持續正常</div>
+      <div class="node-val">2025 起維持 &lt; 1500 cm/s</div>
+      <div class="node-badge">有氧運動維持動脈彈性</div>
+    </div>
+  </div>
+
+  <div class="keynote">
+    <b>Plan B 結果（2026-04-18 完成）：</b>
+    <br>① 因果起點確認於 <b>2021 年</b>，睡眠時長從 2020 6h44m 驟降至 5h52m（-52 分鐘），與 LDL、HbA1c、體重上升軌跡起點一致。
+    <br>② 2024 為最深谷底（4h49m / Score 50.1），對應健檢指標最惡化年。
+    <br>③ <b>最低 SpO2 &lt; 90% 夜晚 90.5%（172/190）</b>—— OSA 級生理訊號，為 LVH、雙心房擴大、主動脈迂曲之共同解釋。
+    <br>④ 2026 YTD 已回升（5h39m / Score 60.1），方向正確但未達 7h 健康門檻。
+    <br>完整分析：<code>reports/garmin-sleep-analysis.md</code>
+  </div>
+
+  <!-- GARMIN CHART GALLERY -->
+  <div class="layer-label">Plan B 圖表佐證 · Garmin 2018–2026</div>
+  <div class="chart-gallery">
+    <figure class="chart">
+      <img src="../../reports/garmin-sleep-charts/01_monthly_duration.png" alt="Monthly Average Sleep Duration 2018-2026">
+      <figcaption>月均睡眠時長：2020 年後結構性下滑，2024 谷底，2026 回升未達 7h</figcaption>
+    </figure>
+    <figure class="chart">
+      <img src="../../reports/garmin-sleep-charts/03_score_trend.png" alt="Monthly Sleep Score Trend">
+      <figcaption>月均 Sleep Score：50.1 → 54.7 → 60.1 趨勢回升</figcaption>
+    </figure>
+    <figure class="chart">
+      <img src="../../reports/garmin-sleep-charts/04_spo2_distribution.png" alt="Lowest SpO2 Distribution">
+      <figcaption>最低 SpO2 分布：90.5% 夜晚低於 90%，OSA 級訊號</figcaption>
+    </figure>
+    <figure class="chart">
+      <img src="../../reports/garmin-sleep-charts/09_yoy_2025_2026.png" alt="YoY 2025 vs 2026">
+      <figcaption>2025 vs 2026 YTD：Score +5.3、&lt;6h 夜晚 -8.2pp，修復方向正確</figcaption>
+    </figure>
+    <figure class="chart" style="grid-column:1/-1">
+      <img src="../../reports/garmin-sleep-charts/10_spo2_yearly_trend.png" alt="SpO2 Yearly Trend">
+      <figcaption>SpO2 年趨勢（裝置校正版）：2024 Vivoactive 3 <b>無 Pulse Ox 感測器</b>，該年數值並非真實量測；2024→2025 的 −12.6 完全是換錶效應。<b>2025 為真實基準年</b>（Vivoactive 5 首次得出 Low SpO2 84.4，一開始就 &lt; 90），2025→2026 −1.7 為同裝置同採樣下的真實生理漂移 —— OSA 訊號首次可見即已確立。</figcaption>
+    </figure>
+  </div>
+
+</div>
+
+<!-- DATA for each node -->
+<script>
+const data = {
+  "chronic-sleep-debt": {
+    title: "Layer 0 · 五年慢性睡眠剝奪（2021–2026 已驗證）",
+    problem: [
+      "Garmin GDPR 匯出 1,680 晚分析（2018-11-18 → 2026-04-18）",
+      "年度平均時長：2019 6h51m / 2020 6h44m / <b>2021 5h52m（-52 分，因果起點）</b>",
+      "2022 5h20m / 2023 5h38m / <b>2024 4h49m（谷底，Score 50.1）</b> / 2025 5h26m / 2026 YTD 5h39m",
+      "Poor nights（Score &lt; 50）171 晚（10.2%）；短睡 &lt; 6h 787 晚（46.8%）",
+      "<b>最低 SpO2 &lt; 90% 的夜晚佔 90.5%（172/190）→ OSA 近乎確診級生理訊號</b>（資料自 Vivoactive 5 Pulse Ox，始於 2025）",
+      "相關性：Duration ↔ Score r = 0.817；Bedtime ↔ Score r = -0.362",
+      "長期睡眠 &lt; 6h：LDL↑、HbA1c↑、BP↑、hs-CRP↑、皮質醇↑ 的共同上游",
+      "同時出現 LVH、雙心房擴大、主動脈重塑、IOP、聽力 → 典型「睡眠驅動加速老化」表型"
+    ],
+    action: [
+      "<b>立即預約睡眠門診（本次最高優先）</b>",
+      "申請 HSAT（居家睡眠檢測）縮短等待",
+      "陽性 → 啟動 CPAP 試用（已有 OSA 級 SpO2 證據）",
+      "持續 Garmin Score 追蹤；2026 YTD 60.1 已較 2024 +10，方向正確",
+      "就寢時間目標 22:00（bedtime 22h 群平均 Score 59.8；00:00 後降至 55.8；02:00 38.0）",
+      "在確診前執行：22:30 前就寢、17:00 後限水、睡前 20:00 抬腳、不看手機"
+    ]
+  },
+  sleep: {
+    title: "Layer 1 · 當前睡眠品質不足",
+    problem: [
+      "每日有效睡眠 5–6 小時，夜尿 2–4 次（OSA 典型表現之一）",
+      "Body Battery 起床值 多 &lt; 50（目標 ≥ 65）",
+      "Sleep Score 多日 &lt; 70",
+      "睡眠 → 皮質醇 → VLDL → LDL 鏈條仍在運作"
+    ],
+    action: [
+      "17:00 後關閉飲水（減少夜尿）",
+      "20:00 抬腳靠牆 15–20 分鐘（排下肢積水）",
+      "夜間起床不開大燈、不看手機",
+      "預約睡眠門診，完成 OSA 評估"
+    ]
+  },
+  "diet-gap": {
+    title: "Layer 1 · 飲食計劃執行落差",
+    problem: [
+      "index.html 飲食計劃完整（DASH + 地中海）",
+      "記錄不連續 → 熱量 / 食物來源難以追查",
+      "本期體脂已下降 3.4%，說明方向正確但仍需量化",
+      "AST 從 27 → 38 暗示短期飲食壓力（高脂/酒精/蛋白質過量？需回推）"
+    ],
+    action: [
+      "每天至少記錄 1 餐（午餐最容易）",
+      "外食優先便利商店策略（低鈉、高纖）",
+      "AST 上升的一週內飲食需回查（酒精、紅肉、保健品）",
+      "每週日晨間體重作為回饋點"
+    ]
+  },
+  hydration: {
+    title: "Layer 1 · 飲水不足",
+    problem: [
+      "尿酸 8.9 mg/dL，腎臟排泄需要充足水分",
+      "日記多日未達 2.5 L",
+      "夜間限水必要，但白天應積極補水",
+      "脫水 → 尿酸結晶 → 痛風 / 腎結石風險"
+    ],
+    action: [
+      "08:00–17:00 完成 2.0–2.5 L 飲水",
+      "每小時提醒，每次 200–300 mL",
+      "可以無糖茶（枸杞茶）替代部分白水",
+      "17:00 後僅潤口"
+    ]
+  },
+  stress: {
+    title: "Layer 1 · 慢性壓力 / 交感亢進",
+    problem: [
+      "工作強度高 + 睡眠不足 → 交感神經長期亢進",
+      "白袍血壓 153/88 vs 居家 128/79，落差 25 mmHg 即反映交感反應性過強",
+      "交感亢進同時驅動：BP、心率、皮質醇、胰島素阻抗"
+    ],
+    action: [
+      "靠牆深蹲 / 快走：規律運動降低靜態交感張力",
+      "睡前 5 分鐘箱式呼吸（4-4-4-4）",
+      "將睡眠修復視為「降交感」最根本的手段",
+      "冥想 / HRV 訓練（可用 Garmin Breathwork）"
+    ]
+  },
+  cortisol: {
+    title: "Layer 2 · 皮質醇持續偏高",
+    problem: [
+      "睡眠不足 → HPA 軸持續亢進",
+      "早晨皮質醇過高 → 肝 VLDL ↑ → LDL ↑、TG ↑",
+      "長期高皮質醇 → 腹部脂肪優先堆積 → 胰島素阻抗"
+    ],
+    action: [
+      "修復睡眠是降皮質醇的根本",
+      "無氧運動（靠牆深蹲）可降低靜態皮質醇",
+      "魚油（已補充）有輔助降皮質醇效果",
+      "避免睡前藍光"
+    ]
+  },
+  insulin: {
+    title: "Layer 2 · 胰島素阻抗",
+    problem: [
+      "HbA1c 連兩次 5.9–6.0%，空腹血糖 89 → 90",
+      "腹部脂肪雖減少，阻抗未完全逆轉",
+      "睡眠不足 1 週即可在健康受試者誘發胰島素阻抗（Spiegel 2005）",
+      "若不干預，1–2 年內可能越過 HbA1c 6.5% 門檻"
+    ],
+    action: [
+      "持續減重 3–5 kg 可望改善 20–30% 敏感性",
+      "肌力訓練（肌肉是葡萄糖主要消耗器官）",
+      "餐序：蔬菜 → 蛋白質 → 碳水",
+      "燕麥 β-glucan 持續"
+    ]
+  },
+  "liver-fat": {
+    title: "Layer 2 · 肝臟代謝過載",
+    problem: [
+      "AST 27 → 38（超過 34 上限）、ALT 25 → 22（略降）",
+      "AST/ALT 比值反轉 → 需注意是否有酒精或藥物性肝損",
+      "脂肪肝於 2025 新增，本次尚未完全消退",
+      "肝臟代謝 LDL 能力下降會反向推升血脂"
+    ],
+    action: [
+      "檢視近期是否有飲酒、止痛藥、保健品過量",
+      "戒除精緻碳水與含糖飲料",
+      "每 6 個月追蹤超音波",
+      "若下次 AST 仍高，需完整肝炎排查"
+    ]
+  },
+  endothelial: {
+    title: "Layer 2 · 血管內皮功能受損",
+    problem: [
+      "高尿酸 8.9 + LDL 154 + 慢性皮質醇 → 內皮功能下降",
+      "主動脈輕度迂曲（CXR）= 結構重塑的早期表現",
+      "內皮功能下降 → BP 調節變差、動脈僵硬度上升"
+    ],
+    action: [
+      "降尿酸（飲水、限高普林）",
+      "持續有氧（PWV 已從異常回正常，維持即可）",
+      "Omega-3、Vitamin D3 支持內皮功能",
+      "控鈉 &lt; 2000 mg/日"
+    ]
+  },
+  ldl: {
+    title: "Layer 3 · LDL 膽固醇 154 mg/dL",
+    problem: [
+      "177 → 154（-23），仍高於目標 &lt; 130（一般）/ &lt; 100（心血管高風險）",
+      "合併 LVH + ECG 異常 → 應以心血管高風險標準處理",
+      "飲食 + 運動已使 LDL 下降，但可能觸及生活型態極限"
+    ],
+    action: [
+      "維持燕麥 β-glucan 3 g/日",
+      "植物固醇（堅果、豆類）",
+      "減飽和脂肪（避免紅肉、全脂乳製品、油炸）",
+      "門診討論 statin 介入必要性（低劑量即可）"
+    ]
+  },
+  hdl: {
+    title: "Layer 3 · HDL 39 mg/dL（逆向惡化）",
+    problem: [
+      "46 → 39（-7），跌破 40 男性下限",
+      "出現在體重下降 + LDL 下降的同時 → 典型 Trade-off Warning",
+      "可能原因：有氧不足、飽和脂肪過低、或減重過快"
+    ],
+    action: [
+      "有氧頻率加量（快走 30 分 × 5 次/週 → 加長至 40–45 分）",
+      "適量單元不飽和脂肪：橄欖油、酪梨、堅果",
+      "戒菸 / 避免二手菸",
+      "若 3 個月後未回升 → 下次健檢納入重點追蹤"
+    ]
+  },
+  uricacid: {
+    title: "Layer 3 · 尿酸 8.9 mg/dL",
+    problem: [
+      "8.6 → 8.9（+0.3），持續緩慢惡化",
+      "&gt; 9 時痛風發作風險大幅上升",
+      "高尿酸是獨立心血管風險因子（損傷內皮）",
+      "飲水不足 + 肉類 + 果糖是主因"
+    ],
+    action: [
+      "每日 2.5 L 飲水（最有效非藥物手段）",
+      "限高普林：內臟、海鮮、啤酒、肉汁",
+      "增加低脂乳製品（促排泄）",
+      "討論 Allopurinol 必要性（尿酸 &gt; 9 或痛風發作即啟動）"
+    ]
+  },
+  hba1c: {
+    title: "Layer 3 · HbA1c 5.9% / 空腹 90",
+    problem: [
+      "6.0% → 5.9% 微改善，但已連兩次位於前期邊界",
+      "空腹血糖 89 → 90（方向未反轉）",
+      "糖尿病前期 → 10 年內 15–30% 進展為糖尿病"
+    ],
+    action: [
+      "減重 + 肌力 + 有氧綜合介入",
+      "餐序調整（蔬菜先行）",
+      "下次健檢目標：HbA1c &lt; 5.7%、空腹 &lt; 85"
+    ]
+  },
+  ast: {
+    title: "Layer 3 · AST 38（上升中）",
+    problem: [
+      "27 → 38（+41%），超過 34 上限",
+      "ALT 同時下降（25 → 22）→ AST/ALT 反轉",
+      "需回查：酒精、止痛藥、中藥、保健品、高強度運動後 24h 內抽血？"
+    ],
+    action: [
+      "回溯前 1 週的攝取史",
+      "若無明顯誘因 → 2–4 週後複檢",
+      "必要時加驗 GGT / CK 排除肌肉源性",
+      "持續 B/C 肝追蹤（Anti-HBs 正常、HBsAg 陰）"
+    ]
+  },
+  bodyfat: {
+    title: "Layer 3 · 體重 69.6 kg / 體脂 21.5%",
+    problem: [
+      "69.9 → 69.6（-0.3 kg），體脂 24.9% → 21.5%（-3.4%）",
+      "腰圍 85.5 → 84.0（-1.5 cm）",
+      "BMI 24.2 → 24.5（機器差異或淨肌肉增加）",
+      "改善顯著但距 BMI &lt; 23 / 體脂 &lt; 20% 目標仍有距離"
+    ],
+    action: [
+      "維持 index.html 1,800 kcal / 減重節奏",
+      "肌力訓練加量以避免 HDL 續跌",
+      "下次健檢目標：體脂 &lt; 20%、腰圍 &lt; 82"
+    ]
+  },
+  whitecoat: {
+    title: "Layer 4 · 白袍血壓效應",
+    problem: [
+      "診間：第一次 159/91、複測 153/88；居家兩週平均 128/79",
+      "落差 25 mmHg 屬強烈白袍反應",
+      "部分「急性異常」（如前壁 ST 抬升）可能受當下交感反應影響，屬狀態假象",
+      "但居家 128/79 仍高於最佳 &lt; 120/80，慢性高血壓傾向未消除"
+    ],
+    action: [
+      "持續居家血壓監測 2–4 週（晨 + 晚）",
+      "將居家平均值帶到心臟科門診",
+      "判讀 ECG 時需考慮白袍 + 睡眠不足的疊加",
+      "根本解：睡眠 + 減壓 + 降鈉"
+    ]
+  },
+  "ecg-functional": {
+    title: "Layer 4 · ECG 前壁 ST 上升",
+    problem: [
+      "V1–V4 ST &gt; 0.20 mV",
+      "鑑別：早期再極化（良性）vs 心肌缺氧 vs 急性冠心症後期",
+      "白袍效應 + 睡眠不足會放大 ECG 異常表現",
+      "合併 LVH + 雙心房擴大 → 不可僅視為良性"
+    ],
+    action: [
+      "心臟科門診（非急診）",
+      "安排運動心電圖、心臟超音波",
+      "必要時冠狀動脈 CT 評估",
+      "確認期間避免突發高強度運動"
+    ]
+  },
+  "osa-suspect": {
+    title: "Layer 4 · OSA（睡眠呼吸中止）疑似",
+    problem: [
+      "夜尿 2–4 次 + Body Battery 起床低 + 晨間疲倦 + LVH + 雙心房擴大 + 主動脈重塑",
+      "上述組合在 OSA 病人極為典型",
+      "未排除前，所有 CV 介入效果會被壓抑"
+    ],
+    action: [
+      "預約睡眠門診（本次最高優先）",
+      "可先申請 HSAT 居家檢測",
+      "陽性則啟動 CPAP 試用",
+      "伴侶或親人觀察打鼾 / 呼吸中止"
+    ]
+  },
+  "ecg-structural": {
+    title: "Layer 5 ① · ECG 結構變化（LVH + 雙心房擴大）",
+    problem: [
+      "LVH 由電壓基準持續存在",
+      "本次新增：雙心房擴大（biatrial enlargement）",
+      "長期高血壓 + OSA 皆可造成心房重塑",
+      "雙心房擴大是「長期負荷」的累積徵兆"
+    ],
+    action: [
+      "心臟超音波量化心室壁厚、心房大小",
+      "Holter 24h 監測（排除陣發性房顫）",
+      "解決 OSA 可望逆轉部分心房重塑",
+      "持續降 BP / 降鈉 / 降體重"
+    ]
+  },
+  aortic: {
+    title: "Layer 5 ② · 主動脈輕度迂曲",
+    problem: [
+      "CXR：mild tortuous aorta",
+      "動脈老化早期訊號，對應內皮功能受損",
+      "與高尿酸、慢性高壓力、睡眠負債一致"
+    ],
+    action: [
+      "控制 LDL / BP（迂曲本身無法逆轉，但可停止惡化）",
+      "持續有氧（維持 PWV 正常）",
+      "Omega-3 支持血管彈性",
+      "下次 CXR 比對是否加劇"
+    ]
+  },
+  "lung-markings": {
+    title: "Layer 5 ③ · 雙肺紋增加",
+    problem: [
+      "CXR：prominent bilateral lung markings",
+      "需鑑別：慢性支氣管刺激、輕度肺間質變化、或檢查姿勢 / 呼吸相偽影",
+      "若合併 OSA → 可能與夜間低氧相關"
+    ],
+    action: [
+      "6 個月後 CXR 追蹤",
+      "避免二手菸、空汙天減少戶外運動",
+      "若有慢性咳嗽 → 肺功能檢查",
+      "OSA 排除為前置步驟"
+    ]
+  },
+  iop: {
+    title: "Layer 5 ④ · 眼內壓升高（IOP 19 / 19）",
+    problem: [
+      "雙眼 IOP 均 19 mmHg（青光眼門檻 21）",
+      "高 IOP + 長期睡眠負債 + 高血壓 → 視神經灌流風險",
+      "目前視力 1.0 / 1.0 尚未受影響"
+    ],
+    action: [
+      "半年內眼科完整檢查（視野、OCT、眼底）",
+      "降低 BP 有助降低 IOP",
+      "減少咖啡因 / 酒精 / 一次大量飲水",
+      "每日記錄晨間有無眼脹感"
+    ]
+  },
+  hearing: {
+    title: "Layer 5 ⑤ · 左耳 500 + 4000 Hz 聽力異常",
+    problem: [
+      "左耳 500 Hz（低頻）+ 4000 Hz（高頻）雙頻未通過",
+      "典型雜訊性聽損通常只有高頻 → 此例非典型",
+      "低頻同時受損可能指向 Meniere、內淋巴水腫、或血管性問題",
+      "合併慢性睡眠負債與內皮功能下降不排除為血管源"
+    ],
+    action: [
+      "耳鼻喉科 → 純音聽力圖、聽阻、耳鳴問診",
+      "必要時內耳 MRI 排除聽神經瘤",
+      "減少高音量耳機使用",
+      "追蹤 BP 對聽力的影響"
+    ]
+  },
+  "stool-ob": {
+    title: "Layer 5 ⑥ · 糞便潛血 49 / RBC+WBC 0–5",
+    problem: [
+      "Stool OB 49（超過陰性門檻）",
+      "顯微鏡：RBC 0–5 / WBC 0–5 每高倍視野",
+      "最可能：痔瘡出血；但需排除大腸腺瘤 / 早期癌",
+      "37 歲 + 家族史（需確認）決定大腸鏡急迫性"
+    ],
+    action: [
+      "40 歲建議基線大腸鏡，本次潛血陽性應提前安排",
+      "觀察是否排便時鮮紅血 → 痔瘡",
+      "高纖 + 充足飲水軟化糞便",
+      "3 個月內再驗一次潛血比對"
+    ]
+  },
+  "cv-risk": {
+    title: "Layer 6 · 心血管綜合風險",
+    problem: [
+      "LDL 154 + HDL 39 + LVH + 雙心房擴大 + 尿酸 8.9 + 前壁 ST 抬升",
+      "TC/HDL 4.9（下降但仍接近危險線 5）",
+      "hs-CRP 已回正常（0.142），唯一降低的風險因子",
+      "綜合風險仍需藥物介入討論"
+    ],
+    action: [
+      "心臟科門診（在 OSA 排除後或同步進行）",
+      "Statin 介入評估",
+      "持續 HDL 回升策略",
+      "居家 BP 資料作為門診佐證"
+    ]
+  },
+  "metabolic-plateau": {
+    title: "Layer 6 · 代謝前期僵局",
+    problem: [
+      "HbA1c 5.9% × 兩次（未進、未退）",
+      "空腹血糖 89 → 90",
+      "體脂已降 3.4% 卻未使 HbA1c 明顯下降 → 睡眠可能是天花板",
+      "逆轉時間窗會隨年齡收窄"
+    ],
+    action: [
+      "睡眠修復作為突破點",
+      "加入肌力訓練（增加肌肉葡萄糖吸收能力）",
+      "餐序 + 餐後散步",
+      "下次目標：HbA1c &lt; 5.7%"
+    ]
+  },
+  "accelerated-aging": {
+    title: "Layer 6 · 加速老化徵兆群",
+    problem: [
+      "主動脈迂曲（血管）、LVH + 雙心房擴大（心臟）、IOP 19（眼）、左耳聽損（耳）同時出現",
+      "四系統同步老化 → 單純用年齡解釋不合理",
+      "共同上游：五年慢性睡眠負債 + 慢性高壓力",
+      "睡眠驅動加速老化是近十年研究共識"
+    ],
+    action: [
+      "治本：排除 OSA + 修復睡眠",
+      "全身性抗發炎：已完成一大半（hs-CRP 回正常）",
+      "Omega-3、Vitamin D3、CoQ10 支持",
+      "6 個月後複檢四系統"
+    ]
+  },
+  "priority-shift": {
+    title: "Layer 6 · 醫療順序重排",
+    problem: [
+      "過往優先：心臟科 → 代謝科",
+      "本次重排：睡眠門診 &gt; 心臟科 &gt; 眼科 &gt; 耳鼻喉科 &gt; 消化道",
+      "若不解決 OSA，心臟科與眼科介入效果皆受限",
+      "治本優先於治標"
+    ],
+    action: [
+      "Week 1–2：預約睡眠門診 + HSAT",
+      "Week 2–4：心臟科（帶居家 BP + 心超轉介）",
+      "Month 1–2：眼科 + 耳鼻喉科",
+      "Month 2–3：大腸鏡（基於 Stool OB 49）"
+    ]
+  },
+  "hscrp-imp": {
+    title: "改善 · hs-CRP 再降 53%",
+    problem: [
+      "0.561（2024）→ 0.302（2025）→ 0.142（2026）",
+      "已回到正常（&lt; 0.3 mg/L）",
+      "全身性發炎有效下降",
+      "運動、睡眠、魚油、體脂下降多因子貢獻"
+    ],
+    action: [
+      "維持現有運動量",
+      "魚油持續",
+      "睡眠修復後可望再降",
+      "作為長期追蹤指標"
+    ]
+  },
+  "ldl-imp": {
+    title: "改善 · LDL 下降 23 mg/dL",
+    problem: [
+      "177 → 154（-13%）",
+      "飲食與運動方向正確",
+      "但仍高於目標 &lt; 130"
+    ],
+    action: [
+      "維持現有飲食策略",
+      "燕麥 β-glucan 不中斷",
+      "若 6 個月未達 130 → 討論 statin"
+    ]
+  },
+  "tc-imp": {
+    title: "改善 · 總膽固醇 -43 mg/dL",
+    problem: [
+      "234 → 191（回到 &lt; 200 目標）",
+      "一年內最大單次改善",
+      "TG 103（正常 &lt; 150）"
+    ],
+    action: [
+      "維持現有飲食",
+      "注意 HDL 續跌的 trade-off 風險"
+    ]
+  },
+  "bodyfat-imp": {
+    title: "改善 · 體脂 -3.4% / 腰圍 -1.5 cm",
+    problem: [
+      "體脂 24.9% → 21.5%",
+      "腰圍 85.5 → 84.0 cm",
+      "半年內最具代表的結構性改善"
+    ],
+    action: [
+      "持續 index.html 熱量策略",
+      "加入肌力訓練保護 HDL",
+      "下次目標：體脂 &lt; 20%、腰圍 &lt; 82 cm"
+    ]
+  },
+  "pwv-legacy": {
+    title: "改善歷史 · PWV 持續正常",
+    problem: [
+      "2024 異常 → 2025 回正常（&lt; 1500 cm/s）",
+      "本次未重測，但無惡化臨床訊號",
+      "動脈彈性恢復是有氧運動的核心回報"
+    ],
+    action: [
+      "維持快走 30 分鐘 × 5 次/週",
+      "下次健檢加入 PWV 複測確認"
+    ]
+  }
+}
+
+function showDetail(key) {
+  const d = data[key]
+  if (!d) return
+  const panel = document.getElementById('detail-panel')
+  document.getElementById('panel-title').textContent = d.title
+  const content = document.getElementById('panel-content')
+  content.innerHTML = `
+    <div class="panel-block">
+      <h4>問題說明</h4>
+      <ul>${d.problem.map(p=>`<li>${p}</li>`).join('')}</ul>
+    </div>
+    <div class="panel-block">
+      <h4>改善行動</h4>
+      <ul>${d.action.map(a=>`<li>${a}</li>`).join('')}</ul>
+    </div>
+  `
+  panel.classList.add('show')
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'})
+}
+
+function closePanel() {
+  document.getElementById('detail-panel').classList.remove('show')
+}
+</script>
+
+</body>
+</html>
