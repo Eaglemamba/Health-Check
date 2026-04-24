@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>心電圖判讀圖解 - ECG Observations Bilingual Reference</title>
+
+<!-- Dashboard Index Meta -->
+<meta name="doc-date" content="2026-04-24">
+<meta name="doc-title" content="ECG 心電圖判讀圖解 - 雙語臨床參考">
+<meta name="doc-source" content="Clinical atlas (personal reference)">
+<meta name="doc-source-type" content="">
+<meta name="doc-tags" content="Medical,ECG,Reference,Clinical,Bilingual,Framework">
+<meta name="doc-rating" content="4.5">
+<meta name="doc-summary" content="11 類心電圖觀察與判讀的雙語圖解 - 從波形解剖到特殊症候群的完整參考。">
+<meta name="doc-file" content="2026-04-24_ecg-observations-bilingual.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ========= v1.4.3 MANDATORY PAGE LAYOUT ========= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f8fafc;
+  color: #1e293b;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+}
+.header {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: linear-gradient(135deg, #1e3a5f 0%, #3b5998 50%, #5b7fb5 100%);
+  color: white;
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 2rem;
+}
+@media (max-width: 768px) {
+  .container { padding: 1rem; }
+  .content-grid { grid-template-columns: 1fr; }
+}
+code, pre { font-family: 'Source Code Pro', monospace; }
+
+/* ========= HEADER ========= */
+.header-tags { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.tag-pill { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; }
+.tag-medical { background: #fecdd3; color: #9f1239; }
+.tag-ecg { background: #bfdbfe; color: #1e3a8a; }
+.tag-reference { background: #ddd6fe; color: #4c1d95; }
+.tag-bilingual { background: #a7f3d0; color: #065f46; }
+.tag-framework { background: #fde68a; color: #92400e; }
+.header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+.header .en-subtitle { font-size: 1rem; opacity: 0.85; font-style: italic; margin-bottom: 1rem; font-weight: 400; }
+.header .source-info { font-size: 0.85rem; opacity: 0.75; }
+
+/* ========= EXECUTIVE SUMMARY ========= */
+.exec-summary { background: white; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #3b82f6; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.exec-summary h2 { font-size: 1.25rem; color: #1e3a8a; margin-bottom: 1rem; font-weight: 600; }
+.exec-summary p { color: #334155; margin-bottom: 0.75rem; }
+.exec-summary .en-text { color: #64748b; font-style: italic; font-size: 0.9rem; line-height: 1.7; }
+
+/* Rating Bar */
+.rating-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding: 0.6rem 1rem; background: linear-gradient(135deg, #e0f2fe, #f0f9ff); border-radius: 8px; flex-wrap: wrap; border: 1px solid #bae6fd; }
+.rating-score { font-weight: 700; color: #0c4a6e; font-size: 1rem; }
+.rating-stars { color: #f59e0b; letter-spacing: 1px; }
+.rating-high { font-size: 0.8rem; color: #047857; background: #d1fae5; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.rating-low { font-size: 0.8rem; color: #64748b; background: #f1f5f9; padding: 0.2rem 0.5rem; border-radius: 4px; }
+
+/* ========= LEARNING OBJECTIVES ========= */
+.learning-objectives { margin-bottom: 2rem; }
+.learning-objectives h2 { font-size: 1.5rem; color: #1e3a8a; margin-bottom: 1rem; font-weight: 600; }
+.objectives-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.objective-item { background: white; padding: 1.25rem; border-radius: 8px; border-top: 3px solid #3b82f6; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
+.objective-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.objective-item .obj-number { font-size: 0.8rem; font-weight: 700; color: #3b82f6; margin-bottom: 0.5rem; letter-spacing: 0.1em; }
+.objective-item h3 { font-size: 1rem; color: #1e293b; margin-bottom: 0.5rem; font-weight: 600; }
+.objective-item p { font-size: 0.88rem; color: #64748b; line-height: 1.6; }
+.objective-item .en { font-style: italic; font-size: 0.82rem; color: #94a3b8; margin-top: 0.3rem; }
+
+/* ========= FRAMEWORK VISUAL ========= */
+.framework-visual { background: linear-gradient(135deg, #1e3a5f, #3b5998); border-radius: 1rem; padding: 1.5rem; color: white; margin: 2rem 0; }
+.framework-title { text-align: center; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem; }
+.framework-subtitle { text-align: center; font-size: 0.85rem; opacity: 0.85; font-style: italic; margin-bottom: 1.5rem; }
+.framework-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; }
+.framework-step { text-align: center; padding: 0.75rem; background: rgba(255,255,255,0.08); border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.15); }
+.framework-step-num { font-size: 0.7rem; color: #93c5fd; font-weight: 700; letter-spacing: 0.15em; margin-bottom: 0.3rem; }
+.framework-step-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.2rem; }
+.framework-step-desc { font-size: 0.75rem; opacity: 0.85; line-height: 1.5; }
+
+/* ========= TABS ========= */
+.tab-container { margin: 2rem 0; }
+.tab-nav { display: flex; gap: 0.25rem; background: #f1f5f9; padding: 0.25rem; border-radius: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab-btn { flex: 1; min-width: 120px; padding: 0.75rem 0.5rem; border: none; background: transparent; border-radius: 0.5rem; font-weight: 500; color: #64748b; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.88rem; }
+.tab-btn:hover { color: #334155; }
+.tab-btn.active { background: white; color: #1e3a8a; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-weight: 700; }
+.tab-btn .tab-en { display: block; font-size: 0.7rem; opacity: 0.75; font-style: italic; margin-top: 0.15rem; font-weight: 400; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ========= SECTION HEADERS (inside tabs) ========= */
+.section-block { margin-bottom: 2.5rem; }
+.section-header { border-bottom: 2px solid #e2e8f0; padding-bottom: 0.75rem; margin-bottom: 1.5rem; }
+.section-header .section-num { font-size: 0.75rem; font-weight: 700; color: #3b82f6; letter-spacing: 0.2em; margin-bottom: 0.3rem; }
+.section-header h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 0.25rem; }
+.section-header .en-h2 { font-size: 0.95rem; color: #64748b; font-style: italic; }
+.section-header .section-lede { margin-top: 0.75rem; color: #334155; font-size: 0.95rem; }
+.section-header .section-lede-en { color: #94a3b8; font-size: 0.85rem; font-style: italic; margin-top: 0.3rem; line-height: 1.7; }
+
+/* ========= OBSERVATION CARD (bilingual structure) ========= */
+.obs { background: white; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 1.5rem; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); transition: box-shadow 0.2s; }
+.obs:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.obs.normal { border-left: 4px solid #10b981; }
+.obs.caution { border-left: 4px solid #f59e0b; }
+.obs.abnormal { border-left: 4px solid #ef4444; }
+
+.obs-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; }
+@media (max-width: 900px) { .obs-grid { grid-template-columns: 1fr; } }
+
+/* ECG monitor (dark aesthetic preserved) */
+.ecg-monitor { background: #0a0d10; padding: 1rem; position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 180px; border-right: 1px solid #e2e8f0; }
+@media (max-width: 900px) { .ecg-monitor { border-right: none; border-bottom: 1px solid #e2e8f0; } }
+.ecg-monitor .lead-label { position: absolute; top: 0.6rem; left: 0.9rem; font-family: 'Source Code Pro', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: #6b747d; }
+.ecg-monitor .marker { position: absolute; bottom: 0.6rem; right: 0.9rem; font-family: 'Source Code Pro', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: #d4a574; }
+svg.ecg { width: 100%; height: auto; display: block; }
+.grid-minor { stroke: #3a1f1f; stroke-width: 0.3; }
+.grid-major { stroke: #5a2d2d; stroke-width: 0.6; }
+.trace { fill: none; stroke: #6ce19a; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.trace-abnormal { fill: none; stroke: #e87070; stroke-width: 1.8; stroke-linejoin: round; }
+.label { font-family: 'Source Code Pro', monospace; font-size: 10px; fill: #e8e4dc; letter-spacing: 0.08em; }
+.label-sm { font-family: 'Source Code Pro', monospace; font-size: 8px; fill: #9aa3ac; letter-spacing: 0.08em; }
+.label-accent { fill: #d4a574; }
+.label-abnormal { fill: #e87070; }
+.label-ecg { fill: #6ce19a; }
+.annotation { stroke: #6b747d; stroke-width: 0.6; stroke-dasharray: 2,2; fill: none; }
+.annotation-hi { stroke: #e87070; stroke-width: 0.8; stroke-dasharray: 3,2; fill: none; }
+
+.obs-body { padding: 1.25rem 1.5rem; }
+.obs-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; letter-spacing: 0.1em; margin-bottom: 0.6rem; text-transform: uppercase; }
+.obs-tag.normal { color: #065f46; background: #d1fae5; }
+.obs-tag.caution { color: #92400e; background: #fde68a; }
+.obs-tag.abnormal { color: #9f1239; background: #fecdd3; }
+.obs h3 { font-size: 1.15rem; font-weight: 700; color: #1e293b; margin-bottom: 0.1rem; line-height: 1.3; }
+.obs .en-h3 { font-size: 0.85rem; color: #64748b; font-style: italic; margin-bottom: 0.9rem; }
+
+.finding-block { margin-bottom: 0.75rem; font-size: 0.88rem; color: #334155; line-height: 1.65; }
+.finding-block strong { color: #1e293b; }
+.finding-en { font-size: 0.8rem; color: #94a3b8; font-style: italic; line-height: 1.6; margin-top: 0.2rem; }
+
+.meaning-block { padding: 0.8rem 1rem; background: #f8fafc; border-left: 3px solid #3b82f6; border-radius: 0 6px 6px 0; margin-top: 0.75rem; }
+.meaning-label { display: block; font-size: 0.7rem; font-weight: 700; color: #3b82f6; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.meaning-block.emergency { background: #fef2f2; border-left-color: #ef4444; }
+.meaning-block.emergency .meaning-label { color: #ef4444; }
+.meaning-text { font-size: 0.88rem; color: #334155; line-height: 1.7; }
+.meaning-en { font-size: 0.78rem; color: #94a3b8; font-style: italic; line-height: 1.65; margin-top: 0.3rem; }
+
+/* ========= ANATOMY INTRO (special) ========= */
+.anatomy-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; align-items: start; margin-bottom: 1.5rem; }
+@media (max-width: 900px) { .anatomy-grid { grid-template-columns: 1fr; } }
+.anatomy-monitor { background: #0a0d10; border-radius: 10px; padding: 1.25rem; }
+.wave-table { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1rem; margin-bottom: 1rem; }
+.wave-table .w-name { font-family: 'Source Code Pro', monospace; color: #10b981; font-size: 0.85rem; font-weight: 600; padding-top: 2px; }
+.wave-table .w-desc { font-size: 0.88rem; color: #334155; line-height: 1.55; }
+.wave-table .w-desc .en { display: block; color: #94a3b8; font-size: 0.78rem; font-style: italic; margin-top: 0.15rem; }
+.paper-note { font-size: 0.82rem; color: #334155; line-height: 1.7; background: #f0fdf4; padding: 0.75rem 1rem; border-radius: 6px; border-left: 3px solid #10b981; }
+.paper-note .en { display: block; color: #94a3b8; font-style: italic; margin-top: 0.3rem; font-size: 0.78rem; }
+
+/* ========= 11-STEP CHECKLIST ========= */
+.checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.check-item { background: white; padding: 1rem 1.25rem; border-radius: 8px; border-top: 3px solid #10b981; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.check-item .step { font-size: 0.7rem; font-weight: 700; color: #10b981; letter-spacing: 0.2em; margin-bottom: 0.4rem; }
+.check-item h4 { font-size: 1rem; color: #1e293b; margin-bottom: 0.15rem; font-weight: 600; }
+.check-item .h4-en { font-size: 0.78rem; color: #94a3b8; font-style: italic; margin-bottom: 0.5rem; }
+.check-item p { font-size: 0.85rem; color: #475569; line-height: 1.6; }
+.check-item .p-en { font-size: 0.77rem; color: #94a3b8; font-style: italic; line-height: 1.6; margin-top: 0.3rem; }
+
+/* ========= KEY TAKEAWAYS ========= */
+.takeaways { margin: 2.5rem 0; }
+.takeaways h2 { font-size: 1.5rem; color: #1e3a8a; margin-bottom: 1rem; font-weight: 600; }
+.takeaways-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.summary-card { background: white; padding: 1.25rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); border-top: 4px solid #3b82f6; transition: transform 0.2s, box-shadow 0.2s; }
+.summary-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.summary-card .card-num { font-size: 0.75rem; font-weight: 700; color: #3b82f6; letter-spacing: 0.15em; margin-bottom: 0.5rem; }
+.summary-card h3 { font-size: 1rem; color: #1e293b; margin-bottom: 0.5rem; font-weight: 600; }
+.summary-card p { font-size: 0.85rem; color: #475569; line-height: 1.6; }
+.summary-card .en { font-size: 0.77rem; color: #94a3b8; font-style: italic; line-height: 1.6; margin-top: 0.3rem; display: block; }
+
+/* ========= PRACTICE ACCORDION ========= */
+.practice-section { margin: 2.5rem 0; }
+.practice-section h2 { font-size: 1.5rem; color: #1e3a8a; margin-bottom: 0.5rem; font-weight: 600; }
+.practice-section .practice-lede { color: #64748b; font-size: 0.88rem; margin-bottom: 1.25rem; font-style: italic; }
+.question-accordion { background: white; border-radius: 0.75rem; margin-bottom: 1rem; border: 1px solid #e9d5ff; overflow: hidden; }
+.question-header { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; padding: 1rem 1.25rem; cursor: pointer; list-style: none; }
+.question-header::-webkit-details-marker { display: none; }
+.question-number { font-weight: 700; color: #6d28d9; }
+.question-type { font-size: 0.7rem; font-weight: 700; color: #6d28d9; background: #e9d5ff; padding: 0.2rem 0.5rem; border-radius: 4px; letter-spacing: 0.05em; }
+.question-text { flex: 1; font-size: 0.92rem; color: #374151; min-width: 200px; }
+.accordion-icon { width: 1.1rem; height: 1.1rem; transition: transform 0.2s; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%237c3aed'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E") center/contain no-repeat; }
+details[open] .accordion-icon { transform: rotate(180deg); }
+.question-answer { padding: 1rem 1.25rem; background: #faf5ff; border-top: 1px solid #e9d5ff; }
+.question-answer p { font-size: 0.88rem; line-height: 1.7; color: #374151; margin-bottom: 0.75rem; }
+.question-answer p:last-child { margin-bottom: 0; }
+.question-answer p.en { font-size: 0.8rem; color: #94a3b8; font-style: italic; }
+.question-answer ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+.question-answer li { font-size: 0.88rem; line-height: 1.7; color: #374151; margin-bottom: 0.3rem; }
+
+/* ========= BOTTOM LINE ========= */
+.bottom-line { background: linear-gradient(135deg, #faf5ff, #f0f9ff); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #7c3aed; margin: 2.5rem 0; }
+.bottom-line-header { font-weight: 700; color: #5b21b6; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; }
+.bottom-line-item { margin-bottom: 1rem; }
+.bottom-line-item:last-child { margin-bottom: 0; }
+.bottom-line-label { font-weight: 700; color: #6d28d9; font-size: 0.85rem; margin-bottom: 0.25rem; }
+.bottom-line-text { font-size: 0.93rem; line-height: 1.7; color: #334155; }
+
+/* ========= FOOTER ========= */
+.footer { text-align: center; padding: 2rem 1rem; color: #64748b; font-size: 0.85rem; border-top: 1px solid #e2e8f0; margin-top: 2rem; }
+.footer .suggested { background: white; display: inline-block; padding: 0.75rem 1.25rem; border-radius: 8px; margin-top: 1rem; border: 1px solid #e2e8f0; font-family: 'Source Code Pro', monospace; font-size: 0.8rem; color: #475569; }
+.footer .disclaimer { max-width: 600px; margin: 0 auto 1rem; padding: 1rem; background: #fffbeb; border: 1px solid #fcd34d; border-radius: 6px; color: #92400e; font-size: 0.85rem; }
+.footer .disclaimer-en { font-style: italic; font-size: 0.78rem; color: #b45309; margin-top: 0.3rem; }
+</style>
+</head>
+<body>
+
+<!-- ========= HEADER (full width) ========= -->
+<div class="header">
+  <div class="header-tags">
+    <span class="tag-pill tag-medical">Medical</span>
+    <span class="tag-pill tag-ecg">ECG</span>
+    <span class="tag-pill tag-reference">Reference</span>
+    <span class="tag-pill tag-framework">Framework</span>
+    <span class="tag-pill tag-bilingual">Bilingual</span>
+  </div>
+  <h1>心電圖判讀圖解 - 雙語臨床參考</h1>
+  <div class="en-subtitle">Reading the Electrocardiogram — A Bilingual Clinical Atlas</div>
+  <div class="source-info">Clinical atlas style · 11 類觀察 · 臨床解剖 → 症候群 → 判讀方法</div>
+</div>
+
+<!-- ========= CONTAINER ========= -->
+<div class="container">
+
+  <!-- ========= EXECUTIVE SUMMARY ========= -->
+  <section class="exec-summary">
+    <div class="rating-bar">
+      <span class="rating-score"><span class="rating-stars">★★★★½</span> 4.5/5</span>
+      <span class="rating-high">↑ 實務應用, 學習曲線</span>
+      <span class="rating-low">↓ 時效性（基礎知識）</span>
+    </div>
+    <h2>本文件涵蓋</h2>
+    <p>本文件以臨床圖解方式整理標準十二導程心電圖上可能出現的觀察與判讀，從最基礎的波形解剖，到年度健檢報告中常見的異常型態。適合作為閱讀自己健檢報告時的對照工具。11 大類觀察以 5 大分頁組織，並附 11 步驟系統化判讀法。</p>
+    <p class="en-text">A visual reference to the observations that can appear on a standard 12-lead ECG — what the tracing looks like, what it measures, and what it may imply. Organized from basic waveform anatomy up through abnormalities you may see in an annual health-screening report.</p>
+  </section>
+
+  <!-- ========= LEARNING OBJECTIVES ========= -->
+  <section class="learning-objectives">
+    <h2>🎯 學習目標 / Learning Objectives</h2>
+    <div class="objectives-grid">
+      <div class="objective-item">
+        <div class="obj-number">OBJECTIVE 01</div>
+        <h3>辨認正常波形</h3>
+        <p>理解 P-QRS-T-U 各波的電氣意義、時間參數、正常範圍。</p>
+        <p class="en">Recognize the P-QRS-T-U waves and their normal electrical significance and timing parameters.</p>
+      </div>
+      <div class="objective-item">
+        <div class="obj-number">OBJECTIVE 02</div>
+        <h3>區辨異常模式</h3>
+        <p>從節律、傳導、ST/T 變化、電解質與症候群層面,快速分類常見異常。</p>
+        <p class="en">Distinguish abnormal patterns across rhythm, conduction, ST/T changes, electrolyte, and syndrome categories.</p>
+      </div>
+      <div class="objective-item">
+        <div class="obj-number">OBJECTIVE 03</div>
+        <h3>套用判讀流程</h3>
+        <p>以系統化 11 步驟法,按固定順序檢閱任一份心電圖報告。</p>
+        <p class="en">Apply the 11-step systematic reading method to any ECG report in a fixed, repeatable order.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= FRAMEWORK VISUAL: 11-Step Reading Method ========= -->
+  <div class="framework-visual">
+    <div class="framework-title">系統化判讀流程 · 11 Steps for Reading an ECG</div>
+    <div class="framework-subtitle">固定順序、每次如一 — 防止遺漏的唯一方法</div>
+    <div class="framework-steps">
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 01</div>
+        <div class="framework-step-title">紀錄設定</div>
+        <div class="framework-step-desc">紙速/校準/病人資料</div>
+      </div>
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 02</div>
+        <div class="framework-step-title">心率</div>
+        <div class="framework-step-desc">60-100 為正常</div>
+      </div>
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 03</div>
+        <div class="framework-step-title">節律</div>
+        <div class="framework-step-desc">規則?P-QRS 對應?</div>
+      </div>
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 04</div>
+        <div class="framework-step-title">心電軸</div>
+        <div class="framework-step-desc">I 與 II 導程方向</div>
+      </div>
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 05</div>
+        <div class="framework-step-title">P 波</div>
+        <div class="framework-step-desc">心房肥大篩檢</div>
+      </div>
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 06</div>
+        <div class="framework-step-title">PR 間期</div>
+        <div class="framework-step-desc">120-200 ms</div>
+      </div>
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 07</div>
+        <div class="framework-step-title">QRS 寬度</div>
+        <div class="framework-step-desc">&lt; 120 ms 正常</div>
+      </div>
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 08</div>
+        <div class="framework-step-title">QRS 振幅</div>
+        <div class="framework-step-desc">肥大或低電壓</div>
+      </div>
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 09</div>
+        <div class="framework-step-title">ST 段</div>
+        <div class="framework-step-desc">抬高/壓低/基線</div>
+      </div>
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 10</div>
+        <div class="framework-step-title">T,U,QT</div>
+        <div class="framework-step-desc">再極化與 QTc</div>
+      </div>
+      <div class="framework-step">
+        <div class="framework-step-num">STEP 11</div>
+        <div class="framework-step-title">對照過往</div>
+        <div class="framework-step-desc">新發現最重要</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= TABBED CONTENT ========= -->
+  <div class="tab-container">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab(event, 'tab-basics')">基礎<span class="tab-en">Basics</span></button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-conduction')">傳導<span class="tab-en">Conduction</span></button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-structural')">結構<span class="tab-en">Structural</span></button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-metabolic')">代謝與症候群<span class="tab-en">Metabolic & Syndromes</span></button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-reading')">判讀方法<span class="tab-en">Reading Method</span></button>
+    </div>
+
+    <!-- ========= TAB 1: BASICS (Anatomy + Rate + Rhythm) ========= -->
+    <div id="tab-basics" class="tab-content active">
+
+      <!-- === § 01 ANATOMY === -->
+      <div class="section-block">
+        <div class="section-header">
+          <div class="section-num">§ 01 — 波形解剖</div>
+          <h2>P-QRS-T 複合波</h2>
+          <div class="en-h2">Anatomy of the Waveform</div>
+          <p class="section-lede">所有的心電圖判讀,都是這個「基本波形」的放大、變形或缺失。熟悉正常波形,異常自然顯眼。</p>
+          <p class="section-lede-en">Every ECG observation is a deviation from — or an exaggeration of — this basic shape. Before reading abnormalities, know the normal.</p>
+        </div>
+
+        <div class="anatomy-grid">
+          <div class="anatomy-monitor">
+            <svg viewBox="0 0 600 320" class="ecg">
+              <rect width="600" height="320" fill="url(#gridMajor)"/>
+              <path class="trace" d="M 20 180 L 100 180 Q 130 140, 160 180 L 210 180 L 225 185 L 240 100 L 260 260 L 275 170 L 285 180 L 340 180 Q 380 110, 420 180 L 510 180 Q 525 172, 540 180 L 580 180"/>
+              <line x1="20" y1="180" x2="580" y2="180" class="annotation"/>
+              <line x1="145" y1="150" x2="145" y2="100" class="annotation"/>
+              <text x="122" y="92" class="label label-ecg">P</text>
+              <line x1="230" y1="190" x2="215" y2="225" class="annotation"/>
+              <text x="200" y="240" class="label label-ecg">Q</text>
+              <line x1="250" y1="95" x2="235" y2="50" class="annotation"/>
+              <text x="225" y="42" class="label label-ecg">R</text>
+              <line x1="265" y1="255" x2="285" y2="285" class="annotation"/>
+              <text x="275" y="300" class="label label-ecg">S</text>
+              <line x1="400" y1="120" x2="400" y2="70" class="annotation"/>
+              <text x="386" y="62" class="label label-ecg">T</text>
+              <line x1="520" y1="170" x2="520" y2="140" class="annotation"/>
+              <text x="510" y="132" class="label-sm">U</text>
+              <line x1="120" y1="290" x2="225" y2="290" stroke="#d4a574" stroke-width="0.8"/>
+              <line x1="120" y1="285" x2="120" y2="295" stroke="#d4a574" stroke-width="0.8"/>
+              <line x1="225" y1="285" x2="225" y2="295" stroke="#d4a574" stroke-width="0.8"/>
+              <text x="142" y="286" class="label label-accent">PR interval</text>
+              <line x1="215" y1="20" x2="285" y2="20" stroke="#d4a574" stroke-width="0.8"/>
+              <line x1="215" y1="15" x2="215" y2="25" stroke="#d4a574" stroke-width="0.8"/>
+              <line x1="285" y1="15" x2="285" y2="25" stroke="#d4a574" stroke-width="0.8"/>
+              <text x="228" y="15" class="label label-accent">QRS</text>
+              <line x1="215" y1="310" x2="440" y2="310" stroke="#d4a574" stroke-width="0.8"/>
+              <line x1="215" y1="305" x2="215" y2="315" stroke="#d4a574" stroke-width="0.8"/>
+              <line x1="440" y1="305" x2="440" y2="315" stroke="#d4a574" stroke-width="0.8"/>
+              <text x="300" y="306" class="label label-accent">QT interval</text>
+              <rect x="285" y="175" width="55" height="10" fill="#d4a574" opacity="0.15"/>
+              <text x="298" y="167" class="label-sm label-accent">ST seg</text>
+            </svg>
+          </div>
+
+          <div>
+            <h3 style="font-size:1.05rem;margin-bottom:0.15rem;color:#1e293b;">各波 = 一次電氣事件</h3>
+            <div style="font-size:0.82rem;color:#64748b;font-style:italic;margin-bottom:0.9rem;">Each wave = one electrical event</div>
+            <div class="wave-table">
+              <div class="w-name">P</div>
+              <div class="w-desc">心房去極化 — 心房收縮的電氣訊號<span class="en">Atrial depolarization (contraction)</span></div>
+              <div class="w-name">QRS</div>
+              <div class="w-desc">心室去極化 — 正常寬度 ≤ 120 毫秒<span class="en">Ventricular depolarization. Normal ≤ 0.12 s</span></div>
+              <div class="w-name">T</div>
+              <div class="w-desc">心室再極化 — 恢復靜息狀態<span class="en">Ventricular repolarization (recovery)</span></div>
+              <div class="w-name">U</div>
+              <div class="w-desc">T 波後的小波 — 常見於低血鉀<span class="en">Small wave after T; prominent in hypokalemia</span></div>
+              <div class="w-name">PR</div>
+              <div class="w-desc">房室傳導延遲 — 正常 120-200 ms<span class="en">AV node delay, 0.12-0.20 s</span></div>
+              <div class="w-name">ST</div>
+              <div class="w-desc">QRS 與 T 間的平直段 — 應位於基線<span class="en">Flat segment between QRS and T, on baseline</span></div>
+              <div class="w-name">QT</div>
+              <div class="w-desc">心室去極化 + 再極化總時間 — 校正後為 QTc<span class="en">Total ventricular depol + repol. Corrected = QTc</span></div>
+            </div>
+            <div class="paper-note">
+              <strong>紙速 25 mm/s</strong>:一小格 = 40 ms,一大格 = 200 ms。<strong>振幅 10 mm/mV</strong>:一小格 = 0.1 mV。
+              <span class="en">Paper speed 25 mm/s — 1 small box = 40 ms, 1 large box = 200 ms. Voltage 10 mm/mV — 1 small box = 0.1 mV.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === § 02 RATE === -->
+      <div class="section-block">
+        <div class="section-header">
+          <div class="section-num">§ 02 — 心率</div>
+          <h2>心率判讀</h2>
+          <div class="en-h2">Heart Rate — Fast, Slow, or Just Right</div>
+          <p class="section-lede">靜息正常心率為每分鐘 60-100 下。低於 60 為心搏過緩;高於 100 為心搏過速。運動員常見靜息心搏過緩(40-50 下),屬於正常生理適應。</p>
+          <p class="section-lede-en">Normal resting rate is 60-100 bpm. Below 60 is bradycardia; above 100 is tachycardia. Athletes commonly show resting bradycardia as a normal adaptation.</p>
+        </div>
+
+        <div class="obs normal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">NORMAL · 75 BPM</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 60 70 Q 75 58, 90 70 L 120 70 L 128 74 L 135 40 L 145 105 L 152 68 L 160 70 L 195 70 Q 210 50, 225 70 L 270 70 L 330 70 Q 345 58, 360 70 L 390 70 L 398 74 L 405 40 L 415 105 L 422 68 L 430 70 L 465 70 Q 480 50, 495 70 L 540 70 L 600 70"/></svg>
+              <span class="marker">R-R ~ 800 ms</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag normal">正常 / Normal</span>
+              <h3>正常竇性心率</h3>
+              <div class="en-h3">Normal Sinus Rate</div>
+              <div class="finding-block"><strong>波形特徵:</strong>R-R 間距規則,每個間距約 3-5 大格,每分鐘 60-100 下。<div class="finding-en">What you see: Regular R-R intervals, each ~ 3-5 large boxes. Rate 60-100.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">竇房結以正常速率發動心搏,無需處置。</div>
+                <div class="meaning-en">The heart is firing at rest from the sinus node at a healthy pace. No action needed.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">BRADYCARDIA · 45 BPM</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 100 70 Q 115 58, 130 70 L 165 70 L 173 74 L 180 40 L 190 105 L 197 68 L 205 70 L 240 70 Q 255 50, 270 70 L 350 70 Q 365 58, 380 70 L 410 70 L 418 74 L 425 40 L 435 105 L 442 68 L 450 70 L 485 70 Q 500 50, 515 70 L 600 70"/></svg>
+              <span class="marker">R-R &gt; 1000 ms</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">心搏過緩 / Bradycardia</span>
+              <h3>心搏過緩 — 心率 &lt; 60</h3>
+              <div class="en-h3">Bradycardia — rate &lt; 60</div>
+              <div class="finding-block"><strong>波形特徵:</strong>R-R 間距寬於 5 大格,節律本身常為正常竇性。<div class="finding-en">R-R intervals wider than 5 large boxes. Rhythm may itself be normal sinus.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">常見於運動員、睡眠中、使用 β 阻斷劑時;若伴隨頭暈、昏厥或房室傳導阻滯(見 §06),則需評估。</div>
+                <div class="meaning-en">Common in athletes, during sleep, with beta-blockers. Concerning if symptomatic (dizziness, syncope) or with a block.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">TACHYCARDIA · 130 BPM</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 30 70 Q 40 60, 50 70 L 75 70 L 80 73 L 85 42 L 92 102 L 97 68 L 102 70 L 125 70 Q 135 54, 145 70 L 175 70 Q 185 60, 195 70 L 220 70 L 225 73 L 230 42 L 237 102 L 242 68 L 247 70 L 270 70 Q 280 54, 290 70 L 320 70 Q 330 60, 340 70 L 365 70 L 370 73 L 375 42 L 382 102 L 387 68 L 392 70 L 415 70 Q 425 54, 435 70 L 465 70 Q 475 60, 485 70 L 510 70 L 515 73 L 520 42 L 527 102 L 532 68 L 537 70 L 560 70 Q 570 54, 580 70 L 600 70"/></svg>
+              <span class="marker">R-R &lt; 500 ms</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">心搏過速 / Tachycardia</span>
+              <h3>心搏過速 — 心率 &gt; 100</h3>
+              <div class="en-h3">Tachycardia — rate &gt; 100</div>
+              <div class="finding-block"><strong>波形特徵:</strong>R-R 間距小於 3 大格;心率極快時 P 波可能融入前一個 T 波。<div class="finding-en">R-R intervals narrower than 3 large boxes. P waves may compress into preceding T waves.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">需視情境:焦慮、發燒、脫水、咖啡因所致的竇性心搏過速屬良性;持續性窄 QRS 心搏過速(SVT)或寬 QRS 心搏過速(VT)性質截然不同,見 §03。</div>
+                <div class="meaning-en">Context matters: sinus tachycardia from anxiety, fever, dehydration, caffeine is benign. Sustained SVT or VT is a different matter.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === § 03 RHYTHM === -->
+      <div class="section-block">
+        <div class="section-header">
+          <div class="section-num">§ 03 — 節律</div>
+          <h2>節律觀察</h2>
+          <div class="en-h2">Rhythm Observations</div>
+          <p class="section-lede">節律要回答兩件事:誰在發號施令?節拍規則嗎?竇性節律(竇房結發動、每個 QRS 前有 P 波)為正常。其餘皆為心律不整。</p>
+          <p class="section-lede-en">Rhythm asks: who is pacing the heart, and is the pacing regular? Sinus rhythm is the default. Anything else is an arrhythmia.</p>
+        </div>
+
+        <div class="obs normal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">SINUS RHYTHM</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 60 70 Q 75 58, 90 70 L 120 70 L 128 74 L 135 40 L 145 105 L 152 68 L 160 70 L 195 70 Q 210 50, 225 70 L 270 70 L 330 70 Q 345 58, 360 70 L 390 70 L 398 74 L 405 40 L 415 105 L 422 68 L 430 70 L 465 70 Q 480 50, 495 70 L 540 70 L 600 70"/></svg>
+              <span class="marker">P→QRS 1:1</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag normal">正常 / Normal</span>
+              <h3>正常竇性節律 (NSR)</h3>
+              <div class="en-h3">Normal Sinus Rhythm</div>
+              <div class="finding-block"><strong>判讀條件:</strong>節律規則、心率 60-100、導程 II 的 P 波向上、每個 P 後接一個 QRS。<div class="finding-en">Regular rhythm, rate 60-100, upright P in lead II, each P followed by QRS.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">預期中的正常節律。</div>
+                <div class="meaning-en">The expected, healthy pattern.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs normal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">SINUS ARRHYTHMIA</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 40 70 Q 55 58, 70 70 L 100 70 L 108 74 L 115 40 L 125 105 L 132 68 L 140 70 L 175 70 Q 190 50, 205 70 L 240 70 L 320 70 Q 335 58, 350 70 L 380 70 L 388 74 L 395 40 L 405 105 L 412 68 L 420 70 L 455 70 Q 470 50, 485 70 L 520 70 L 600 70"/></svg>
+              <span class="marker">R-R varies w/ breath</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag normal">正常變異 / Normal variant</span>
+              <h3>竇性心律不整 (呼吸性)</h3>
+              <div class="en-h3">Sinus Arrhythmia</div>
+              <div class="finding-block"><strong>波形特徵:</strong>竇性節律但 R-R 間距隨呼吸週期性變化 — 吸氣加快、吐氣減慢。<div class="finding-en">Sinus rhythm with R-R intervals that speed up with inspiration and slow with expiration.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">自律神經健全的表現,尤其是年輕人。反映良好的 HRV(心率變異)。</div>
+                <div class="meaning-en">A marker of healthy autonomic tone, especially in young people. Reflects good heart-rate variability.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">ATRIAL FIBRILLATION</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 15 72 L 20 68 L 28 71 L 35 67 L 42 73 L 50 69 L 58 72 L 66 68 L 72 70 L 78 73 L 84 67 L 88 70 L 95 74 L 102 40 L 115 105 L 122 68 L 128 70 L 136 73 L 142 68 L 150 72 L 158 67 L 166 71 L 174 74 L 180 70 L 188 73 L 195 40 L 208 105 L 215 68 L 222 70 L 230 72 L 238 68 L 246 73 L 254 68 L 262 71 L 270 74 L 278 69 L 286 72 L 294 67 L 302 71 L 310 75 L 318 68 L 324 70 L 332 73 L 339 40 L 352 105 L 359 68 L 365 70 L 374 73 L 382 68 L 390 72 L 398 68 L 406 71 L 414 74 L 422 70 L 430 74 L 437 40 L 450 105 L 457 68 L 463 70 L 472 73 L 480 68 L 488 72 L 496 67 L 504 71 L 512 74 L 520 68 L 528 71 L 536 74 L 542 68 L 550 73 L 557 40 L 570 105 L 577 68 L 583 70 L 600 70"/></svg>
+              <span class="marker">No P waves · R-R irregular</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">心律不整 / Arrhythmia</span>
+              <h3>心房顫動 (AFib)</h3>
+              <div class="en-h3">Atrial Fibrillation</div>
+              <div class="finding-block"><strong>波形特徵:</strong>P 波消失,取而代之的是雜亂波動的基線;R-R 間距「不規則的不規則」,毫無模式可言。<div class="finding-en">No discernible P waves — chaotic wavy baseline. R-R "irregularly irregular".</div></div>
+              <div class="meaning-block emergency">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">心房顫抖而非收縮,血流滯留於左心耳易形成血栓,中風風險上升。常見於高齡、高血壓、過度飲酒、睡眠呼吸中止。通常需心臟超音波與 CHA₂DS₂-VASc 中風風險評估。</div>
+                <div class="meaning-en">Atria quiver instead of contracting. Stroke risk rises from stagnant blood clotting in LAA. Evaluation: echocardiogram + CHA₂DS₂-VASc score.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">ATRIAL FLUTTER</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 10 55 L 20 85 L 30 55 L 40 85 L 50 55 L 60 85 L 70 55 L 80 85 L 88 70 L 95 74 L 102 40 L 115 105 L 122 68 L 128 70 L 135 55 L 145 85 L 155 55 L 165 85 L 175 55 L 185 85 L 195 55 L 205 85 L 213 70 L 220 74 L 227 40 L 240 105 L 247 68 L 253 70 L 260 55 L 270 85 L 280 55 L 290 85 L 300 55 L 310 85 L 320 55 L 330 85 L 338 70 L 345 74 L 352 40 L 365 105 L 372 68 L 378 70 L 385 55 L 395 85 L 405 55 L 415 85 L 425 55 L 435 85 L 445 55 L 455 85 L 463 70 L 470 74 L 477 40 L 490 105 L 497 68 L 503 70 L 510 55 L 520 85 L 530 55 L 540 85 L 550 55 L 560 85 L 570 55 L 580 85 L 600 70"/></svg>
+              <span class="marker">Sawtooth · 4:1 conduction</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">心律不整 / Arrhythmia</span>
+              <h3>心房撲動</h3>
+              <div class="en-h3">Atrial Flutter</div>
+              <div class="finding-block"><strong>波形特徵:</strong>在 II、III、aVF 導程可見典型「鋸齒狀」撲動波(F 波)約每分鐘 300 次,心室以固定比例下傳(常見 2:1 或 4:1)。<div class="finding-en">Classic "sawtooth" F-waves at ~300/min with ratio conduction (often 2:1 or 4:1).</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">右心房內的折返迴路。中風風險與 AFib 相當;因解剖位置固定,常以導管燒灼術治療。</div>
+                <div class="meaning-en">Re-entrant circuit in right atrium. Stroke risk similar to AFib. Often treated with catheter ablation.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">PVC</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 50 70 Q 65 58, 80 70 L 110 70 L 118 74 L 125 40 L 135 105 L 142 68 L 150 70 L 180 70 Q 195 50, 210 70 L 250 70 L 275 72 L 285 25 L 305 125 L 325 72 L 335 70 L 380 70 Q 395 58, 410 70 L 440 70 L 448 74 L 455 40 L 465 105 L 472 68 L 480 70 L 515 70 Q 530 50, 545 70 L 600 70"/><ellipse cx="305" cy="80" rx="45" ry="60" fill="none" stroke="#e87070" stroke-width="1" stroke-dasharray="3,2"/></svg>
+              <span class="marker">Wide · no P · compensatory pause</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">異位 / Ectopy</span>
+              <h3>心室早期收縮 (PVCs)</h3>
+              <div class="en-h3">Premature Ventricular Contractions</div>
+              <div class="finding-block"><strong>波形特徵:</strong>提早出現的寬大怪異 QRS,前方無 P 波,其後常有代償性停頓。<div class="finding-en">Early, wide, bizarre-looking QRS with no preceding P wave, usually followed by a compensatory pause.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">偶發 PVC 在結構正常的心臟極為常見且良性。但若每日 PVC 負擔 &gt;10% 或運動時出現且有症狀,需進一步心臟檢查。</div>
+                <div class="meaning-en">Occasional PVCs benign in structurally normal hearts. Frequent (&gt;10%/day) or exercise-induced symptomatic PVCs warrant workup.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">PAC</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 50 70 Q 65 58, 80 70 L 110 70 L 118 74 L 125 40 L 135 105 L 142 68 L 150 70 L 180 70 Q 195 50, 210 70 L 250 70 Q 260 60, 270 70 L 278 73 L 285 45 L 295 100 L 302 69 L 308 70 L 345 70 Q 360 58, 375 70 L 405 70 L 413 74 L 420 40 L 430 105 L 437 68 L 445 70 L 480 70 Q 495 50, 510 70 L 600 70"/><ellipse cx="260" cy="62" rx="20" ry="18" fill="none" stroke="#e87070" stroke-width="1" stroke-dasharray="3,2"/><text x="244" y="40" class="label-sm label-abnormal">early P'</text></svg>
+              <span class="marker">Early narrow · abnormal P'</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">異位 / Ectopy</span>
+              <h3>心房早期收縮 (PACs)</h3>
+              <div class="en-h3">Premature Atrial Contractions</div>
+              <div class="finding-block"><strong>波形特徵:</strong>提早出現的窄 QRS,前方有形態異常的 P' 波(與正常竇性 P 波不同)。<div class="finding-en">Early narrow QRS preceded by an abnormally-shaped P' wave.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">極為常見且大多良性 — 咖啡因、壓力、酒精、疲勞皆可誘發。頻繁 PAC 可能是日後 AFib 的前兆。</div>
+                <div class="meaning-en">Very common and usually benign — triggered by caffeine, stress, alcohol, fatigue. Frequent PACs may predispose to AFib.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">VENTRICULAR TACHYCARDIA</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 20 35 L 40 110 L 60 50 L 75 70 L 95 35 L 115 110 L 135 50 L 150 70 L 170 35 L 190 110 L 210 50 L 225 70 L 245 35 L 265 110 L 285 50 L 300 70 L 320 35 L 340 110 L 360 50 L 375 70 L 395 35 L 415 110 L 435 50 L 450 70 L 470 35 L 490 110 L 510 50 L 525 70 L 545 35 L 565 110 L 585 50 L 600 65"/></svg>
+              <span class="marker">Wide QRS · regular · fast</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">急症 / Medical emergency</span>
+              <h3>心室頻脈 (VT)</h3>
+              <div class="en-h3">Ventricular Tachycardia</div>
+              <div class="finding-block"><strong>波形特徵:</strong>連續三個以上寬大怪異的 QRS(&gt;120 ms),心率 &gt;100。P 波消失、分離或逆行。<div class="finding-en">Three or more consecutive wide (&gt;120 ms) QRS complexes at &gt;100 bpm. P waves absent, dissociated, or retrograde.</div></div>
+              <div class="meaning-block emergency">
+                <span class="meaning-label">臨床意義 / Clinical meaning — 急症</span>
+                <div class="meaning-text">可能危及生命。持續性 VT(&gt;30 秒)或合併血流動力學不穩定需立即電擊整流/去顫。健檢中偶發非持續性 VT 罕見,但需立即轉介心臟科。</div>
+                <div class="meaning-en">Potentially life-threatening. Sustained VT (&gt;30 s) or hemodynamic instability requires immediate cardioversion/defibrillation.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========= TAB 2: CONDUCTION (Axis + Intervals + Blocks) ========= -->
+    <div id="tab-conduction" class="tab-content">
+
+      <!-- === § 04 AXIS === -->
+      <div class="section-block">
+        <div class="section-header">
+          <div class="section-num">§ 04 — 心電軸</div>
+          <h2>心電軸</h2>
+          <div class="en-h2">Electrical Axis</div>
+          <p class="section-lede">心室去極化在額狀面上的平均方向。正常範圍為 -30° 至 +90°。偏移可能提示腔室大小、傳導異常或潛在的心肺疾病。</p>
+          <p class="section-lede-en">The mean direction of ventricular depolarization in the frontal plane. Normal is between -30° and +90°.</p>
+        </div>
+
+        <div class="obs normal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">AXIS DIAGRAM</span>
+              <svg viewBox="0 0 400 280" class="ecg">
+                <circle cx="200" cy="140" r="110" fill="none" stroke="#2a343d" stroke-width="1"/>
+                <line x1="90" y1="140" x2="310" y2="140" stroke="#2a343d" stroke-width="0.5"/>
+                <line x1="200" y1="30" x2="200" y2="250" stroke="#2a343d" stroke-width="0.5"/>
+                <path d="M 200 140 L 310 140 A 110 110 0 0 1 295 195 Z" fill="#6ce19a" opacity="0.15"/>
+                <path d="M 200 140 L 295 195 A 110 110 0 0 1 105 195 Z" fill="#6ce19a" opacity="0.15"/>
+                <path d="M 200 140 L 105 195 A 110 110 0 0 1 105 85 Z" fill="#6ce19a" opacity="0.08"/>
+                <path d="M 200 140 L 105 85 A 110 110 0 0 1 200 30 Z" fill="#e8a848" opacity="0.15"/>
+                <path d="M 200 140 L 295 85 A 110 110 0 0 0 200 30 Z" fill="#e8a848" opacity="0.15"/>
+                <path d="M 200 140 L 295 85 A 110 110 0 0 1 310 140 Z" fill="#e87070" opacity="0.15"/>
+                <text x="318" y="144" class="label-sm">0°</text>
+                <text x="195" y="265" class="label-sm">+90°</text>
+                <text x="195" y="25" class="label-sm">-90°</text>
+                <text x="70" y="144" class="label-sm">±180°</text>
+                <text x="210" y="205" class="label label-ecg">NORMAL</text>
+                <text x="170" y="220" class="label-sm label-ecg">-30° to +90°</text>
+                <text x="140" y="70" class="label label-accent">LAD</text>
+                <text x="110" y="85" class="label-sm label-accent">-30° to -90°</text>
+                <text x="240" y="70" class="label label-accent">RAD</text>
+                <text x="260" y="85" class="label-sm label-accent">+90° to +180°</text>
+                <text x="300" y="120" class="label label-abnormal">EXTREME</text>
+                <line x1="200" y1="140" x2="270" y2="180" stroke="#6ce19a" stroke-width="2" marker-end="url(#arrow)"/>
+              </svg>
+              <span class="marker">Frontal plane</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag normal">參考 / Reference</span>
+              <h3>心電軸判讀</h3>
+              <div class="en-h3">Normal Axis &amp; Deviations</div>
+              <div class="finding-block"><strong>快速判讀:</strong>若導程 I 與導程 II 的 QRS 皆為正向,則心電軸正常。<div class="finding-en">Quick rule: If QRS is upright in both lead I and lead II, the axis is normal.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">左偏軸 (LAD) / Left Axis Deviation</span>
+                <div class="meaning-text">導程 I 正向、導程 II 負向。常見原因:左前支傳導阻滯、左心室肥大、下壁心肌梗塞、高血鉀。</div>
+                <div class="meaning-en">I positive, II negative. Causes: LAFB, LVH, inferior MI, hyperkalemia.</div>
+              </div>
+              <div class="meaning-block" style="margin-top:0.6rem;">
+                <span class="meaning-label">右偏軸 (RAD) / Right Axis Deviation</span>
+                <div class="meaning-text">導程 I 負向、導程 II 正向。常見原因:右心室肥大、肺栓塞、慢性阻塞性肺病、側壁心梗、左後支傳導阻滯。</div>
+                <div class="meaning-en">I negative, II positive. Causes: RVH, PE, COPD, lateral MI, LPFB.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === § 05 INTERVALS === -->
+      <div class="section-block">
+        <div class="section-header">
+          <div class="section-num">§ 05 — 間期測量</div>
+          <h2>間期測量</h2>
+          <div class="en-h2">Interval Measurements</div>
+          <p class="section-lede">PR、QRS、QT(校正後為 QTc)是報告上三個關鍵的時間測量,以毫秒為單位。各自反映不同層次的傳導狀況。</p>
+          <p class="section-lede-en">PR, QRS, and QT (corrected as QTc) are the three key time measurements your ECG report will list.</p>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">LONG QT</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 50 70 Q 65 58, 80 70 L 130 70 L 138 74 L 145 40 L 155 105 L 162 68 L 170 70 L 280 70 Q 310 40, 340 70 L 380 70 L 430 70 L 438 74 L 445 40 L 455 105 L 462 68 L 470 70 L 580 70 Q 600 45, 600 55"/><line x1="138" y1="120" x2="340" y2="120" stroke="#e87070" stroke-width="0.8"/><line x1="138" y1="115" x2="138" y2="125" stroke="#e87070" stroke-width="0.8"/><line x1="340" y1="115" x2="340" y2="125" stroke="#e87070" stroke-width="0.8"/><text x="215" y="133" class="label label-abnormal">QT &gt; 480 ms</text></svg>
+              <span class="marker">QTc &gt; 480 ms</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">異常 / Abnormal</span>
+              <h3>QT 延長</h3>
+              <div class="en-h3">Prolonged QT / QTc</div>
+              <div class="finding-block"><strong>波形特徵:</strong>Q 波起點到 T 波終點的距離變長。校正後 QTc(Bazett 公式)男性 &gt; 450 ms、女性 &gt; 460 ms 為延長;&gt; 500 ms 屬高風險。<div class="finding-en">QTc &gt; 450 ms (men) / &gt; 460 ms (women) is prolonged; &gt; 500 ms high-risk.</div></div>
+              <div class="meaning-block emergency">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">易誘發尖端扭轉型心室頻脈(Torsades),可惡化為心室顫動。原因包括先天性長 QT 症候群、低血鉀、低血鎂、低血鈣,以及一長串藥物(某些抗生素、抗黴菌、抗精神病、止吐劑、美沙冬等)。</div>
+                <div class="meaning-en">Predisposes to torsades de pointes → VF. Causes: congenital LQTS, hypo-K/Mg/Ca, many drugs (antibiotics, antifungals, antipsychotics, antiemetics, methadone).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">SHORT QT</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 50 70 Q 65 58, 80 70 L 130 70 L 138 74 L 145 40 L 155 105 L 162 68 L 170 70 Q 185 50, 200 70 L 240 70 L 290 70 L 298 74 L 305 40 L 315 105 L 322 68 L 330 70 Q 345 50, 360 70 L 400 70 L 450 70 L 458 74 L 465 40 L 475 105 L 482 68 L 490 70 Q 505 50, 520 70 L 600 70"/></svg>
+              <span class="marker">QTc &lt; 340 ms</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">異常 / Abnormal</span>
+              <h3>QT 過短</h3>
+              <div class="en-h3">Short QT</div>
+              <div class="finding-block"><strong>波形特徵:</strong>QTc &lt; 340-360 ms,T 波常顯得高聳且緊貼 QRS。<div class="finding-en">QTc &lt; 340-360 ms, T waves often appearing tall and crowded against QRS.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">比長 QT 罕見得多。原因:高血鈣、毛地黃效應、先天性短 QT 症候群(與心律不整及猝死相關)。</div>
+                <div class="meaning-en">Much rarer than long QT. Causes: hypercalcemia, digoxin effect, congenital SQTS (associated with arrhythmia and sudden death).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === § 06 CONDUCTION BLOCKS === -->
+      <div class="section-block">
+        <div class="section-header">
+          <div class="section-num">§ 06 — 傳導阻滯</div>
+          <h2>電路上的障礙</h2>
+          <div class="en-h2">Blocks in the Wiring</div>
+          <p class="section-lede">電氣訊號從心房 → 房室結 → 希氏束 → 左右支分。任一環節阻滯,皆會在心電圖上留下特定指紋。</p>
+          <p class="section-lede-en">The signal travels: atrium → AV node → bundle of His → bundle branches. A block anywhere shows up as a specific pattern.</p>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">1° AV BLOCK</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 40 70 Q 55 58, 70 70 L 165 70 L 173 74 L 180 40 L 190 105 L 197 68 L 205 70 L 240 70 Q 255 50, 270 70 L 320 70 Q 335 58, 350 70 L 445 70 L 453 74 L 460 40 L 470 105 L 477 68 L 485 70 L 520 70 Q 535 50, 550 70 L 600 70"/><line x1="70" y1="120" x2="173" y2="120" stroke="#e8a848" stroke-width="0.8"/><line x1="70" y1="115" x2="70" y2="125" stroke="#e8a848" stroke-width="0.8"/><line x1="173" y1="115" x2="173" y2="125" stroke="#e8a848" stroke-width="0.8"/><text x="95" y="135" class="label-sm" style="fill:#e8a848">PR &gt; 200 ms</text></svg>
+              <span class="marker">PR prolonged · all beats conduct</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">一度 / 1st-degree</span>
+              <h3>一度房室傳導阻滯</h3>
+              <div class="en-h3">First-Degree AV Block</div>
+              <div class="finding-block"><strong>波形特徵:</strong>每個 P 後皆有 QRS,但 PR 間期固定 &gt; 200 ms。<div class="finding-en">Every P followed by QRS, but PR interval consistently &gt; 200 ms.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">大多良性,常見於老化、運動員、迷走神經張力高者。除非極度延長(&gt;300 ms)或有症狀,否則不需處置。</div>
+                <div class="meaning-en">Often benign and common with age, athletic training, or vagal tone. Only significant if very prolonged or symptomatic.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">2° MOBITZ I (Wenckebach)</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 30 70 Q 42 58, 55 70 L 95 70 L 103 74 L 110 40 L 120 105 L 127 68 L 135 70 L 170 70 Q 185 56, 200 70 L 260 70 L 268 74 L 275 40 L 285 105 L 292 68 L 300 70 L 335 70 Q 355 54, 375 70 L 450 70 Q 465 54, 480 70 L 600 70"/><text x="340" y="50" class="label-sm label-abnormal">dropped QRS</text><ellipse cx="465" cy="70" rx="30" ry="25" fill="none" stroke="#e87070" stroke-width="1" stroke-dasharray="3,2"/></svg>
+              <span class="marker">PR lengthens → drop</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">二度 / 2nd-degree</span>
+              <h3>二度房室阻滯 Mobitz I 型 (文氏)</h3>
+              <div class="en-h3">Mobitz Type I (Wenckebach)</div>
+              <div class="finding-block"><strong>波形特徵:</strong>PR 間期逐拍延長,直到某次 P 波無法下傳(QRS 脫落),然後重新開始循環。<div class="finding-en">PR interval lengthens progressively beat by beat until a P wave fails to conduct; cycle resets.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">阻滯位於房室結。多為良性,常見於運動員或迷走神經張力高者。甚少需要節律器。</div>
+                <div class="meaning-en">Block at the AV node. Usually benign. Rarely needs pacing.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">2° MOBITZ II</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 40 70 Q 55 58, 70 70 L 110 70 L 118 74 L 125 40 L 135 105 L 142 68 L 150 70 L 185 70 Q 200 50, 215 70 L 260 70 Q 275 58, 290 70 L 330 70 L 338 74 L 345 40 L 355 105 L 362 68 L 370 70 L 405 70 Q 420 50, 435 70 L 480 70 Q 495 58, 510 70 L 600 70"/><text x="490" y="50" class="label-sm label-abnormal">dropped (constant PR)</text><ellipse cx="555" cy="70" rx="30" ry="25" fill="none" stroke="#e87070" stroke-width="1" stroke-dasharray="3,2"/></svg>
+              <span class="marker">PR constant · random drop</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">二度 / 2nd-degree</span>
+              <h3>二度房室阻滯 Mobitz II 型</h3>
+              <div class="en-h3">Mobitz Type II</div>
+              <div class="finding-block"><strong>波形特徵:</strong>PR 間期固定,但突然某次 P 波無預警地未下傳(QRS 脫落)。<div class="finding-en">PR interval stays constant, but a P wave suddenly fails to conduct without warning.</div></div>
+              <div class="meaning-block emergency">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">阻滯位於房室結下方(希氏-浦金氏系統)。較 Mobitz I 危險,可能惡化為完全性房室阻滯。常需置入節律器。</div>
+                <div class="meaning-en">Block below AV node (His-Purkinje). More dangerous — can progress to complete heart block. Pacemaker often indicated.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">3° AV BLOCK</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 35 70 Q 48 58, 60 70 L 120 70 Q 133 58, 145 70 L 205 70 Q 218 58, 230 70 L 250 70 L 258 74 L 265 40 L 275 105 L 282 68 L 290 70 L 330 70 Q 343 58, 355 70 L 415 70 Q 428 58, 440 70 L 475 70 L 483 74 L 490 40 L 500 105 L 507 68 L 515 70 L 560 70 Q 573 58, 585 70 L 600 70"/><text x="180" y="50" class="label-sm label-abnormal">P's independent of QRS</text></svg>
+              <span class="marker">AV dissociation</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">三度 / 3rd-degree</span>
+              <h3>完全性房室傳導阻滯</h3>
+              <div class="en-h3">Complete Heart Block</div>
+              <div class="finding-block"><strong>波形特徵:</strong>P 波以自己的節奏出現,QRS 以另一個較慢的節奏出現,兩者完全無關(房室分離)。<div class="finding-en">P waves march at their own rate. QRS marches independently. No relationship (AV dissociation).</div></div>
+              <div class="meaning-block emergency">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">心房與心室各自為政,心室依靠「逃逸節律」,慢而不可靠。必須置入節律器。</div>
+                <div class="meaning-en">Atria and ventricles beat independently. Ventricles depend on escape pacemaker. Pacemaker required.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">RBBB · V1</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 75 L 50 75 Q 65 63, 80 75 L 140 75 L 148 80 L 156 60 L 162 90 L 170 40 L 180 80 L 188 75 L 230 75 L 280 75 Q 290 90, 300 75 L 345 75 Q 360 90, 375 75 L 430 75 L 438 80 L 446 60 L 452 90 L 460 40 L 470 80 L 478 75 L 600 75"/><text x="155" y="30" class="label-sm label-ecg">rsR' (M)</text></svg>
+              <span class="marker">QRS &gt; 120 ms · rsR' in V1</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">支分阻滯 / Bundle branch</span>
+              <h3>右束支傳導阻滯 (RBBB)</h3>
+              <div class="en-h3">Right Bundle Branch Block</div>
+              <div class="finding-block"><strong>波形特徵:</strong>QRS ≥ 120 ms;V1-V2 呈 rsR'(M 型);I、aVL、V5、V6 出現拖尾的 S 波。<div class="finding-en">QRS ≥ 120 ms, rsR' ("M-shape") in V1-V2, slurred S wave in I, aVL, V5, V6.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">常見且多為良性,尤其是老年人。可能與肺栓塞、慢阻肺、先天性心臟病(如心房中膈缺損)、右心室負荷有關。單獨存在時通常無需治療。</div>
+                <div class="meaning-en">Often benign and common with age. Can be associated with PE, COPD, ASD, or RV strain.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">LBBB · V6</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 75 L 60 75 Q 75 63, 90 75 L 155 75 Q 170 40, 185 35 Q 200 33, 215 40 Q 228 55, 240 75 L 265 95 L 310 75 L 370 75 Q 385 63, 400 75 L 455 75 Q 470 40, 485 35 Q 500 33, 515 40 Q 528 55, 540 75 L 565 95 L 600 75"/><text x="180" y="30" class="label-sm label-abnormal">broad notched R</text></svg>
+              <span class="marker">QRS &gt; 120 ms · broad R in V6</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">支分阻滯 / Bundle branch</span>
+              <h3>左束支傳導阻滯 (LBBB)</h3>
+              <div class="en-h3">Left Bundle Branch Block</div>
+              <div class="finding-block"><strong>波形特徵:</strong>QRS ≥ 120 ms;I、aVL、V5、V6 出現寬而切跡的 R 波;V1-V2 出現深 S;T 波方向常與 QRS 相反。<div class="finding-en">QRS ≥ 120 ms, broad notched R in I, aVL, V5, V6; deep S in V1-V2. T wave often opposite to QRS.</div></div>
+              <div class="meaning-block emergency">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">幾乎總是異常。常伴隨結構性心臟病、高血壓、缺血性心肌病、主動脈瓣疾病。若合併胸痛且為新發生,臨床上以 STEMI 等級處理。</div>
+                <div class="meaning-en">Almost always abnormal. Associated with structural heart disease, hypertension, ischemic cardiomyopathy, aortic valve disease. New LBBB with chest pain treated as STEMI.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">WPW · DELTA WAVE</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 75 L 50 75 Q 65 63, 80 75 L 118 75 L 125 70 L 140 50 L 150 38 L 165 105 L 175 72 L 183 75 L 220 75 Q 235 50, 250 75 L 290 75 L 338 75 Q 353 63, 368 75 L 406 75 L 413 70 L 428 50 L 438 38 L 453 105 L 463 72 L 471 75 L 508 75 Q 523 50, 538 75 L 600 75"/><text x="120" y="60" class="label-sm label-accent">δ (delta)</text><line x1="128" y1="68" x2="140" y2="55" stroke="#d4a574" stroke-width="0.8"/></svg>
+              <span class="marker">Short PR · delta · wide QRS</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">預激 / Pre-excitation</span>
+              <h3>沃夫-帕金森-懷特症候群 (WPW)</h3>
+              <div class="en-h3">Wolff-Parkinson-White</div>
+              <div class="finding-block"><strong>波形特徵:</strong>PR 縮短(&lt;120 ms)、QRS 起點有模糊的斜坡(delta 波 δ)、QRS 變寬。<div class="finding-en">Short PR (&lt;120 ms), slurred upstroke at start of QRS (delta wave δ), wide QRS.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">存在額外傳導路徑(Kent 束),繞過房室結。可引起折返性心搏過速(AVRT);若合併 AFib 可下傳極快,十分危險。症狀明顯者可藉導管燒灼術根治。</div>
+                <div class="meaning-en">Accessory pathway (bundle of Kent) bypasses AV node. Can cause AVRT; with AFib can conduct dangerously fast. Ablation curative when symptomatic.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========= TAB 3: STRUCTURAL (Chambers + Ischemia) ========= -->
+    <div id="tab-structural" class="tab-content">
+
+      <!-- === § 07 CHAMBERS === -->
+      <div class="section-block">
+        <div class="section-header">
+          <div class="section-num">§ 07 — 腔室肥大</div>
+          <h2>厚重的心壁、擴張的心房</h2>
+          <div class="en-h2">Chamber Enlargement</div>
+          <p class="section-lede">心電圖對腔室肥大僅屬粗篩 — 心臟超音波才是黃金標準。然而某些電壓與形態標準仍可強烈提示。</p>
+          <p class="section-lede-en">ECG is a rough screen for chamber enlargement — echocardiography is the gold standard. Still, certain voltage and shape criteria strongly suggest it.</p>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">LVH · PRECORDIAL</span>
+              <svg viewBox="0 0 600 180" class="ecg"><rect width="600" height="180" fill="url(#gridMajor)"/><text x="10" y="20" class="label-sm">V1</text><path class="trace" d="M 40 70 L 100 70 Q 115 62, 130 70 L 170 70 L 178 75 L 188 78 L 198 160 L 208 68 L 218 70 L 260 70"/><text x="280" y="20" class="label-sm">V5</text><path class="trace" d="M 310 70 L 365 70 Q 378 62, 390 70 L 430 70 L 438 75 L 448 20 L 458 100 L 470 68 L 480 70 L 560 70"/><line x1="260" y1="70" x2="260" y2="160" stroke="#e8a848" stroke-width="0.8"/><text x="225" y="115" class="label-sm" style="fill:#e8a848">S &gt; 25 mm</text><line x1="560" y1="70" x2="560" y2="20" stroke="#e8a848" stroke-width="0.8"/><text x="465" y="40" class="label-sm" style="fill:#e8a848">R &gt; 25 mm</text></svg>
+              <span class="marker">Sokolow-Lyon criterion</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">肥大 / Enlargement</span>
+              <h3>左心室肥大 (LVH)</h3>
+              <div class="en-h3">Left Ventricular Hypertrophy</div>
+              <div class="finding-block"><strong>波形特徵 (Sokolow-Lyon 標準):</strong>V1 之 S 波 + V5 或 V6 之 R 波 ≥ 35 mm。Cornell 標準:aVL 之 R + V3 之 S &gt; 28 mm(男)/ 20 mm(女)。常伴隨側壁導程 ST-T 段「負荷型」變化。<div class="finding-en">Sokolow-Lyon: S in V1 + R in V5 or V6 ≥ 35 mm. Cornell: R in aVL + S in V3 &gt; 28 mm (men) / 20 mm (women).</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">通常源於長期高血壓或主動脈瓣疾病。需以心臟超音波確認。本身即為心血管事件的獨立危險因子。</div>
+                <div class="meaning-en">Usually reflects long-standing hypertension or aortic valve disease. Confirm with echocardiogram. Independent cardiovascular risk factor.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">RVH · V1</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 75 L 60 75 Q 75 65, 90 75 L 145 75 L 153 80 L 163 15 L 175 95 L 185 78 L 193 75 L 235 75 Q 250 55, 265 75 L 320 75 L 380 75 Q 395 65, 410 75 L 465 75 L 473 80 L 483 15 L 495 95 L 505 78 L 513 75 L 555 75 Q 570 55, 585 75 L 600 75"/><text x="160" y="30" class="label-sm label-accent">tall R in V1</text></svg>
+              <span class="marker">R/S &gt; 1 in V1 · RAD</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">肥大 / Enlargement</span>
+              <h3>右心室肥大 (RVH)</h3>
+              <div class="en-h3">Right Ventricular Hypertrophy</div>
+              <div class="finding-block"><strong>波形特徵:</strong>V1 之 R 波高聳(R/S &gt; 1)、V5-V6 深 S 波、右偏軸、右心房肥大(高尖 P)。<div class="finding-en">Tall R in V1 (R/S &gt; 1), deep S in V5-V6, RAD, right atrial enlargement (peaked P).</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">肺動脈高壓、慢阻肺、肺動脈瓣狹窄、慢性肺栓塞。以心臟超音波確認。</div>
+                <div class="meaning-en">Pulmonary hypertension, COPD, pulmonary stenosis, chronic PE. Confirm with echo.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">ATRIAL ABNORMALITIES</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><text x="10" y="20" class="label-sm">LAE (P mitrale)</text><path class="trace" d="M 40 75 L 90 75 Q 100 62, 108 65 Q 116 65, 125 62 Q 133 65, 140 75 L 175 75 L 183 80 L 191 45 L 200 110 L 209 72 L 215 75 L 270 75"/><text x="310" y="20" class="label-sm">RAE (P pulmonale)</text><path class="trace" d="M 340 75 L 385 75 Q 398 40, 412 75 L 450 75 L 458 80 L 466 45 L 475 110 L 484 72 L 490 75 L 560 75"/></svg>
+              <span class="marker">P wave morphology</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">肥大 / Enlargement</span>
+              <h3>心房肥大 (LAE / RAE)</h3>
+              <div class="en-h3">Atrial Enlargement</div>
+              <div class="finding-block"><strong>左心房肥大 (P mitrale):</strong>導程 II 出現寬(&gt;120 ms)且切跡的 P 波;V1 呈雙相 P 波,末端深而負向。<div class="finding-en">LAE: Wide (&gt;120 ms) notched P in lead II; biphasic P in V1 with deep negative terminal.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">右心房肥大 (P pulmonale)</span>
+                <div class="meaning-text">導程 II 出現高尖(&gt;2.5 mm)的 P 波。見於肺動脈高壓、三尖瓣疾病、慢阻肺。</div>
+                <div class="meaning-en">Tall (&gt;2.5 mm) peaked P in lead II. Seen in pulmonary hypertension, tricuspid disease, COPD.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === § 08 ISCHEMIA & INFARCTION === -->
+      <div class="section-block">
+        <div class="section-header">
+          <div class="section-num">§ 08 — 缺血與梗塞</div>
+          <h2>冠狀動脈的訊號</h2>
+          <div class="en-h2">Ischemia &amp; Infarction — The Coronary Story</div>
+          <p class="section-lede">心電圖判讀的核心任務之一。缺血、損傷、梗塞會依序在 ST 段、T 波、Q 波留下痕跡,從數小時演變到數月。</p>
+          <p class="section-lede-en">The single most important reason to read an ECG carefully. Ischemia, injury, infarction leave a trail in ST, T, and Q waves — evolving over hours to months.</p>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">ST ELEVATION</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace-abnormal" d="M 0 75 L 50 75 Q 65 63, 80 75 L 130 75 L 138 80 L 145 45 L 155 110 L 162 73 L 170 70 Q 180 55, 195 50 Q 210 45, 225 50 Q 240 40, 260 50 Q 280 55, 300 60 L 340 75 L 390 75 Q 405 63, 420 75 L 470 75 L 478 80 L 485 45 L 495 110 L 502 73 L 510 70 Q 520 55, 535 50 Q 550 45, 565 50 Q 580 45, 600 55"/><line x1="160" y1="75" x2="300" y2="75" class="annotation-hi"/><text x="200" y="40" class="label-sm label-abnormal">STE · convex "tombstone"</text></svg>
+              <span class="marker">STEMI pattern</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">急性梗塞 / STEMI</span>
+              <h3>ST 段抬高</h3>
+              <div class="en-h3">ST-Segment Elevation</div>
+              <div class="finding-block"><strong>波形特徵:</strong>連續兩個肢體導程 ST 段抬高 ≥ 1 mm,或連續兩個胸前導程抬高 ≥ 2 mm(V2-V3 閾值依性別、年齡而異)。多呈凸起的「墓碑形」。<div class="finding-en">ST elevated ≥ 1 mm in two contiguous limb leads, or ≥ 2 mm in two contiguous precordial leads. Often convex ("tombstone") shape.</div></div>
+              <div class="meaning-block emergency">
+                <span class="meaning-label">臨床意義 — 急症 / EMERGENCY</span>
+                <div class="meaning-text">急性貫壁性心肌損傷(STEMI)。導程分佈可提示罪犯血管:II/III/aVF = 下壁(RCA);V1-V4 = 前壁(LAD);I/aVL/V5/V6 = 側壁(LCx)。分秒必爭:目標 door-to-balloon &lt; 90 分鐘。</div>
+                <div class="meaning-en">Acute transmural myocardial injury. Lead groups tell you which artery: II/III/aVF = inferior (RCA); V1-V4 = anterior (LAD); I/aVL/V5/V6 = lateral (LCx). Door-to-balloon &lt; 90 min.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">ST DEPRESSION</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace-abnormal" d="M 0 70 L 50 70 Q 65 58, 80 70 L 130 70 L 138 75 L 145 40 L 155 105 L 162 68 L 170 85 L 230 95 Q 245 85, 260 85 Q 275 80, 290 85 L 330 70 L 380 70 Q 395 58, 410 70 L 460 70 L 468 75 L 475 40 L 485 105 L 492 68 L 500 85 L 560 95 Q 575 85, 590 85 L 600 80"/><text x="220" y="120" class="label-sm label-abnormal">STD · downsloping</text></svg>
+              <span class="marker">Ischemia pattern</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">缺血 / Ischemia</span>
+              <h3>ST 段壓低</h3>
+              <div class="en-h3">ST-Segment Depression</div>
+              <div class="finding-block"><strong>波形特徵:</strong>ST 段於 J 點後 80 ms 處低於基線 ≥ 0.5 mm。形態重要:水平型或下斜型比上斜型更具診斷意義。<div class="finding-en">ST depressed ≥ 0.5 mm, measured 80 ms after J-point. Horizontal or downsloping is more specific than upsloping.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">心內膜下缺血。運動負荷測試常見的陽性表現。若伴隨胸痛且為新發生 = NSTEMI / 不穩定型心絞痛。亦可能是他處 STEMI 的對側性變化。</div>
+                <div class="meaning-en">Subendocardial ischemia. Common positive finding on treadmill stress test. New STD with chest pain = NSTEMI / unstable angina. May be reciprocal to distant STEMI.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">T WAVE INVERSION</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace-abnormal" d="M 0 70 L 50 70 Q 65 58, 80 70 L 130 70 L 138 75 L 145 40 L 155 105 L 162 68 L 170 70 L 210 70 Q 225 100, 240 100 Q 255 100, 270 70 L 330 70 L 380 70 Q 395 58, 410 70 L 460 70 L 468 75 L 475 40 L 485 105 L 492 68 L 500 70 L 540 70 Q 555 100, 570 100 Q 585 100, 600 75"/><text x="200" y="125" class="label-sm label-abnormal">inverted T</text></svg>
+              <span class="marker">Symmetric · deep</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">再極化異常 / Repolarization</span>
+              <h3>T 波倒置</h3>
+              <div class="en-h3">T Wave Inversion</div>
+              <div class="finding-block"><strong>波形特徵:</strong>T 波在本應向上的導程變為向下。對稱型、深(&gt; 5 mm)、雙相型或「Wellens 型」較令人擔憂。<div class="finding-en">T waves pointing down where they should be upright. Symmetric, deep (&gt;5 mm), biphasic, or Wellens-like are more concerning.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">可能反映缺血、陳舊性梗塞、LVH 負荷、肺栓塞、腦血管事件、心肌病變,或某些導程(III、aVR、V1)的正常變異。Wellens 症候群(V2-V3 對稱深倒 T)= 高度警訊的 LAD 嚴重狹窄。</div>
+                <div class="meaning-en">May reflect ischemia, prior MI, LVH strain, PE, CVA, cardiomyopathy, or normal variant in some leads. Wellens syndrome = critical LAD lesion.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">PATHOLOGIC Q WAVES</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 50 70 Q 65 58, 80 70 L 125 70 L 135 80 L 148 125 L 160 110 L 170 40 L 180 105 L 188 72 L 195 70 L 240 70 Q 255 50, 270 70 L 320 70 L 370 70 Q 385 58, 400 70 L 445 70 L 455 80 L 468 125 L 480 110 L 490 40 L 500 105 L 508 72 L 515 70 L 560 70 Q 575 50, 590 70 L 600 70"/><line x1="135" y1="80" x2="148" y2="125" stroke="#e87070" stroke-width="1.5"/><text x="90" y="135" class="label-sm label-abnormal">wide &amp; deep Q</text></svg>
+              <span class="marker">&gt; 40 ms · &gt; 25% R</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">梗塞疤痕 / Infarction scar</span>
+              <h3>病理性 Q 波</h3>
+              <div class="en-h3">Pathologic Q Waves</div>
+              <div class="finding-block"><strong>波形特徵:</strong>Q 波寬 &gt; 40 ms、或深 &gt; 2 mm、或超過同導程 R 波高度的 25%,且出現於連續兩個導程。<div class="finding-en">Q wave &gt; 40 ms wide OR &gt; 2 mm deep OR &gt; 25% of R amplitude. In two contiguous leads.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">陳舊性心肌梗塞的證據 — 電氣上「沉默」的疤痕組織。即便無症狀,亦改變心血管風險分層。</div>
+                <div class="meaning-en">Evidence of prior MI — electrically "silent" scar tissue. Even without symptoms, this changes cardiovascular risk stratification.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">POOR R WAVE PROGRESSION</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><text x="10" y="20" class="label-sm">V1</text><path class="trace" d="M 20 75 L 50 75 L 58 80 L 65 95 L 75 75 L 120 75"/><text x="135" y="20" class="label-sm">V2</text><path class="trace" d="M 135 75 L 165 75 L 173 80 L 180 90 L 190 75 L 235 75"/><text x="250" y="20" class="label-sm">V3</text><path class="trace" d="M 250 75 L 280 75 L 288 78 L 295 85 L 305 75 L 350 75"/><text x="365" y="20" class="label-sm">V4</text><path class="trace" d="M 365 75 L 395 75 L 403 78 L 410 75 L 420 75 L 465 75"/><text x="480" y="20" class="label-sm">V5</text><path class="trace" d="M 480 75 L 510 75 L 518 78 L 525 65 L 535 75 L 580 75"/></svg>
+              <span class="marker">R fails to grow V1→V6</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">梗塞暗示 / Infarction pattern</span>
+              <h3>R 波進展不良 (PRWP)</h3>
+              <div class="en-h3">Poor R Wave Progression</div>
+              <div class="finding-block"><strong>波形特徵:</strong>R 波振幅從 V1 到 V6 未能正常增長(正常於 V3 應 &gt; 3 mm)。<div class="finding-en">R wave amplitude fails to grow normally from V1 to V6 (should be &gt; 3 mm by V3).</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">可能提示陳舊性前壁梗塞、左心室肥大、LBBB、慢阻肺,或單純導程擺放不當。單獨不具診斷性,需與過往心電圖比較。</div>
+                <div class="meaning-en">Possible prior anterior MI, LVH, LBBB, COPD, or simply lead misplacement. Not diagnostic alone — compare with prior ECGs.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========= TAB 4: METABOLIC & SYNDROMES ========= -->
+    <div id="tab-metabolic" class="tab-content">
+
+      <!-- === § 09 ELECTROLYTE & METABOLIC === -->
+      <div class="section-block">
+        <div class="section-header">
+          <div class="section-num">§ 09 — 電解質與代謝</div>
+          <h2>血液化學的心電印記</h2>
+          <div class="en-h2">Electrolyte &amp; Metabolic Effects</div>
+          <p class="section-lede">心電圖對鉀、鈣與某些藥物敏感。異常的嚴重度,常在波形上有可預測的演進。</p>
+          <p class="section-lede-en">The ECG is sensitive to potassium, calcium, and some drug effects. Patterns evolve predictably with severity.</p>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">HYPERKALEMIA PROGRESSION</span>
+              <svg viewBox="0 0 600 180" class="ecg"><rect width="600" height="180" fill="url(#gridMajor)"/><text x="10" y="25" class="label-sm">Mild · peaked T</text><path class="trace" d="M 10 95 L 50 95 Q 62 85, 73 95 L 108 95 L 115 100 L 122 65 L 130 135 L 137 92 L 143 95 L 170 95 Q 180 55, 190 95 L 200 95"/><text x="215" y="25" class="label-sm">Mod · wide QRS</text><path class="trace-abnormal" d="M 215 95 L 250 95 Q 262 88, 273 95 L 295 95 L 303 80 L 315 55 L 335 135 L 345 108 L 355 95 L 380 95 Q 390 50, 400 95 L 410 95"/><text x="420" y="25" class="label-sm label-abnormal">Severe · sine wave</text><path class="trace-abnormal" d="M 420 95 Q 435 50, 450 95 Q 465 140, 480 95 Q 495 50, 510 95 Q 525 140, 540 95 Q 555 50, 570 95 Q 585 140, 600 95"/></svg>
+              <span class="marker">K+ rising left→right</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">高血鉀 / Hyper-K</span>
+              <h3>高血鉀</h3>
+              <div class="en-h3">Hyperkalemia</div>
+              <div class="finding-block"><strong>演進順序:</strong>高尖對稱 T 波(帳篷型)→ P 波平坦 → QRS 變寬 → 融合為「正弦波」→ 心跳停止。<div class="finding-en">Evolution: Tall peaked symmetric T waves (tent-shaped) → flattening of P → widening of QRS → merger into sine wave → cardiac arrest.</div></div>
+              <div class="meaning-block emergency">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">&gt; ~6.5 mEq/L 可致命。原因:腎衰竭、ACE-I/ARB/保鉀利尿劑、橫紋肌溶解、大量輸血。緊急處置:葡萄糖酸鈣、胰島素+葡萄糖、碳酸氫鈉。</div>
+                <div class="meaning-en">Life-threatening above ~6.5 mEq/L. Causes: renal failure, ACE-I/ARB/spironolactone, rhabdomyolysis, massive transfusion. Emergent: Ca gluconate, insulin+glucose, bicarbonate.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">HYPOKALEMIA</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 75 L 50 75 Q 62 65, 73 75 L 118 75 L 125 80 L 132 45 L 140 110 L 147 72 L 153 75 L 185 75 Q 195 68, 205 75 L 230 75 Q 240 70, 250 75 L 290 75 L 350 75 Q 362 65, 373 75 L 418 75 L 425 80 L 432 45 L 440 110 L 447 72 L 453 75 L 485 75 Q 495 68, 505 75 L 530 75 Q 540 70, 550 75 L 600 75"/><text x="175" y="108" class="label-sm label-accent">flat T · U wave</text></svg>
+              <span class="marker">ST↓ · flat T · U wave</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">低血鉀 / Hypo-K</span>
+              <h3>低血鉀</h3>
+              <div class="en-h3">Hypokalemia</div>
+              <div class="finding-block"><strong>波形特徵:</strong>T 波平坦、U 波明顯、ST 段下移、表面上 QT 看似延長(實為 QU 融合)。<div class="finding-en">Flattened T waves, prominent U waves, ST depression, long "apparent" QT (actually QU fusion).</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">原因:利尿劑、嘔吐/腹瀉、高醛固酮、鹼中毒。易誘發心律不整,併用毛地黃時尤甚。</div>
+                <div class="meaning-en">Causes: diuretics, vomiting/diarrhea, hyperaldosteronism, alkalosis. Predisposes to arrhythmia, especially with digoxin.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">CALCIUM</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><text x="10" y="20" class="label-sm">Hyper-Ca · short QT</text><path class="trace" d="M 10 75 L 50 75 Q 62 65, 73 75 L 115 75 L 123 80 L 130 45 L 138 110 L 145 72 L 152 75 Q 165 55, 178 75 L 220 75 Q 232 65, 243 75 L 285 75"/><text x="310" y="20" class="label-sm">Hypo-Ca · long QT</text><path class="trace-abnormal" d="M 305 75 L 345 75 Q 357 65, 368 75 L 410 75 L 418 80 L 425 45 L 433 110 L 440 72 L 447 75 L 555 75 Q 570 55, 585 75 L 600 75"/></svg>
+              <span class="marker">QT ↔ Ca²⁺ inversely</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">鈣異常 / Calcium</span>
+              <h3>高血鈣與低血鈣</h3>
+              <div class="en-h3">Hyper- and Hypocalcemia</div>
+              <div class="finding-block"><strong>高血鈣:</strong>QT 縮短(ST 段幾乎消失),極高時可見類 Osborn 波。<div class="finding-en">Hypercalcemia: Short QT (short ST segment), possible Osborn-like waves at very high levels.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">低血鈣 / Hypocalcemia</span>
+                <div class="meaning-text">QT 延長(主要為 ST 段拉長,非 T 波加寬)。易誘發尖端扭轉。</div>
+                <div class="meaning-en">Prolonged QT (via long ST segment, not wide T). Predisposes to torsades.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">DIGOXIN EFFECT</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 70 L 50 70 Q 62 60, 73 70 L 115 70 L 123 75 L 130 40 L 138 105 L 145 68 L 152 70 Q 162 85, 175 88 Q 190 88, 200 75 Q 210 65, 218 65 L 275 70 L 325 70 Q 337 60, 348 70 L 390 70 L 398 75 L 405 40 L 413 105 L 420 68 L 427 70 Q 437 85, 450 88 Q 465 88, 475 75 Q 485 65, 493 65 L 600 70"/><text x="155" y="105" class="label-sm label-accent">"scooped" ST</text></svg>
+              <span class="marker">Sagging ST · Salvador Dalí</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">藥物效應 / Drug effect</span>
+              <h3>毛地黃效應</h3>
+              <div class="en-h3">Digoxin Effect</div>
+              <div class="finding-block"><strong>波形特徵:</strong>ST 段呈「勺狀」下移,形似達利翹鬍子;QT 縮短;T 波平坦或倒置。<div class="finding-en">"Scooped" or sagging ST depression with Salvador-Dalí-moustache shape, shortened QT, flattened/inverted T waves.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">治療劑量下的預期變化,不等於中毒。毛地黃中毒另有特徵 — 雙向性 VT、伴阻滯之心房性心搏過速、高度房室阻滯。</div>
+                <div class="meaning-en">Expected finding on therapeutic digoxin, not toxicity. Digoxin toxicity is different — bidirectional VT, PAT with block, high-degree AV block.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === § 10 SPECIAL SYNDROMES === -->
+      <div class="section-block">
+        <div class="section-header">
+          <div class="section-num">§ 10 — 特殊症候群</div>
+          <h2>一眼認出的電氣指紋</h2>
+          <div class="en-h2">Special Syndromes — Distinctive Patterns</div>
+          <p class="section-lede">某些心電圖形態本身即為診斷。快速辨識,往往就是救命的關鍵。</p>
+          <p class="section-lede-en">A handful of ECG appearances are themselves the diagnosis. Recognising them quickly can save lives.</p>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">BRUGADA · V1-V2</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace-abnormal" d="M 0 80 L 50 80 Q 62 70, 73 80 L 115 80 L 123 85 L 130 30 L 140 90 L 145 45 Q 160 42, 175 60 Q 195 80, 215 95 Q 235 105, 260 90 L 340 80 Q 352 70, 363 80 L 405 80 L 413 85 L 420 30 L 430 90 L 435 45 Q 450 42, 465 60 Q 485 80, 505 95 Q 525 105, 550 90 L 600 80"/><text x="150" y="25" class="label-sm label-abnormal">coved ST · inverted T</text></svg>
+              <span class="marker">Type 1 pattern</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">症候群 / Syndrome</span>
+              <h3>布魯格達症候群</h3>
+              <div class="en-h3">Brugada Syndrome</div>
+              <div class="finding-block"><strong>第一型:</strong>V1-V2 出現凸起的 ST 抬高 ≥ 2 mm,後接倒置 T 波,形似鯊魚鰭。<div class="finding-en">Type 1: Coved ST elevation ≥ 2 mm in V1-V2 followed by inverted T wave, resembling a shark fin.</div></div>
+              <div class="meaning-block emergency">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">遺傳性鈉離子通道疾病。有心室顫動致猝死風險,睡眠或發燒時尤其危險。可能需置入心律去顫器(ICD)。</div>
+                <div class="meaning-en">Inherited sodium-channel disorder. Risk of sudden cardiac death from VF, especially during sleep or fever. May need ICD.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">EARLY REPOLARIZATION</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 75 L 50 75 Q 62 65, 73 75 L 115 75 L 123 80 L 130 45 L 138 110 L 145 72 L 150 65 L 160 60 Q 180 55, 200 55 Q 225 55, 245 70 L 290 75 L 340 75 Q 352 65, 363 75 L 405 75 L 413 80 L 420 45 L 428 110 L 435 72 L 440 65 L 450 60 Q 470 55, 490 55 Q 515 55, 535 70 L 600 75"/><text x="150" y="48" class="label-sm label-accent">J-point notch</text></svg>
+              <span class="marker">Benign STE</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">變異型 / Variant</span>
+              <h3>早期再極化</h3>
+              <div class="en-h3">Early Repolarization</div>
+              <div class="finding-block"><strong>波形特徵:</strong>ST 段凹面向上抬高,常伴 J 點小切跡,以 V2-V5 最明顯;T 波高聳向上。<div class="finding-en">Concave-up ST elevation, often with J-point notch or slur, most visible in V2-V5. Tall upright T waves.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">年輕健壯男性常見的良性變異。然而位於下壁/側壁導程的某些早期再極化型態,與輕度增加的心律不整風險有關。</div>
+                <div class="meaning-en">Common benign variant in young fit males. However, certain inferior/lateral patterns linked to small increase in arrhythmia risk.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">PERICARDITIS</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace-abnormal" d="M 0 80 L 50 80 Q 62 70, 73 80 L 103 72 L 115 80 L 123 85 L 130 48 L 138 110 L 145 70 Q 160 60, 180 60 Q 200 60, 225 72 L 275 80 L 325 80 Q 337 70, 348 80 L 378 72 L 390 80 L 398 85 L 405 48 L 413 110 L 420 70 Q 435 60, 455 60 Q 475 60, 500 72 L 600 80"/><text x="50" y="65" class="label-sm label-abnormal">PR↓</text><text x="170" y="48" class="label-sm label-abnormal">diffuse concave STE</text></svg>
+              <span class="marker">Concave STE · PR↓ · all leads</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">發炎 / Inflammation</span>
+              <h3>急性心包炎</h3>
+              <div class="en-h3">Acute Pericarditis</div>
+              <div class="finding-block"><strong>波形特徵:</strong>多數導程呈凹面向上的 ST 抬高(非單一冠脈分佈區),PR 段下移(以 II 最明顯,aVR 反之)。經典分四期演進。<div class="finding-en">Diffuse concave ST elevation across most leads, PR-segment depression (especially in II, reciprocal PR elevation in aVR). Evolves through 4 stages.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">心包發炎 — 病毒性、自體免疫、梗塞後(Dressler)、尿毒性等。需與 STEMI 區分(局灶冠脈分佈、凸起抬高、對側反向變化)。</div>
+                <div class="meaning-en">Inflammation of pericardium — viral, autoimmune, post-MI (Dressler), uremic. Distinguish from STEMI (focal territory, convex STE, reciprocal changes).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs abnormal">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">S1Q3T3 · PE PATTERN</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><text x="10" y="20" class="label-sm">Lead I</text><path class="trace" d="M 20 75 L 70 75 Q 82 68, 93 75 L 135 75 L 143 78 L 150 50 L 158 115 L 168 72 L 175 75 L 200 75"/><text x="222" y="20" class="label-sm">Lead III</text><path class="trace-abnormal" d="M 222 75 L 275 75 Q 287 68, 298 75 L 340 75 L 346 80 L 353 58 L 360 50 L 366 118 L 373 72 L 380 75 L 410 75 Q 425 105, 440 105 Q 455 105, 470 75 L 500 75"/><text x="262" y="55" class="label-sm label-abnormal">deep S in I · Q in III · T↓ in III</text></svg>
+              <span class="marker">PE suggestion</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag abnormal">肺栓塞暗示 / PE</span>
+              <h3>S1Q3T3 (肺栓塞暗示)</h3>
+              <div class="en-h3">S1Q3T3 Pattern (Pulmonary Embolism)</div>
+              <div class="finding-block"><strong>波形特徵:</strong>導程 I 深 S 波、導程 III 出現 Q 波且 T 波倒置。常伴竇性心搏過速、新發 RBBB、右偏軸、V1-V4 T 波倒置。<div class="finding-en">Prominent S in lead I, Q wave and inverted T in lead III. May accompany sinus tachycardia, new RBBB, RAD, or TWI in V1-V4.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">肺栓塞導致右心急性負荷的經典(但敏感度不高)表現。單純竇性心搏過速才是 PE 最常見的心電圖變化。確診仍賴肺動脈 CT 血管攝影。</div>
+                <div class="meaning-en">Classic (though insensitive) sign of acute right-heart strain from PE. Sinus tachycardia alone is the most common ECG finding in PE. CT pulmonary angiogram is diagnostic.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="obs caution">
+          <div class="obs-grid">
+            <div class="ecg-monitor">
+              <span class="lead-label">HYPOTHERMIA · OSBORN</span>
+              <svg viewBox="0 0 600 140" class="ecg"><rect width="600" height="140" fill="url(#gridMajor)"/><path class="trace" d="M 0 75 L 60 75 Q 72 65, 83 75 L 140 75 L 148 80 L 155 45 L 163 110 L 170 55 L 178 55 L 188 75 Q 210 55, 235 75 L 290 75 L 350 75 Q 362 65, 373 75 L 430 75 L 438 80 L 445 45 L 453 110 L 460 55 L 468 55 L 478 75 Q 500 55, 525 75 L 600 75"/><text x="168" y="50" class="label-sm label-accent">J (Osborn) wave</text></svg>
+              <span class="marker">J-wave · &lt; 32°C</span>
+            </div>
+            <div class="obs-body">
+              <span class="obs-tag caution">低體溫 / Hypothermia</span>
+              <h3>Osborn (J) 波</h3>
+              <div class="en-h3">Osborn (J) Wave</div>
+              <div class="finding-block"><strong>波形特徵:</strong>J 點(QRS 與 ST 交界處)出現向上的額外凸起,形成 QRS 後的「駝峰」。振幅與核心體溫約成反比。<div class="finding-en">Positive deflection at J-point creating a "hump" after QRS. Amplitude roughly inversely proportional to core temperature.</div></div>
+              <div class="meaning-block">
+                <span class="meaning-label">臨床意義 / Clinical meaning</span>
+                <div class="meaning-text">典型見於低體溫(&lt; 32°C),亦可見於高血鈣、某些中樞神經疾病,或為正常變異。</div>
+                <div class="meaning-en">Most classic in hypothermia (&lt; 32°C) but also seen with hypercalcemia, certain CNS conditions, or as normal variant.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========= TAB 5: READING METHOD ========= -->
+    <div id="tab-reading" class="tab-content">
+      <h2 style="font-family:'Noto Serif TC',serif;font-size:1.6rem;color:#1e3a5f;margin-bottom:0.5rem;">§11 閱讀報告 — 十一步系統化檢查法</h2>
+      <p style="font-family:'Noto Sans TC',sans-serif;color:#5b6b7f;margin-bottom:0.3rem;">按固定順序掃描，是避免遺漏的唯一方法。以下是檢閱年度健檢心電圖的建議流程。</p>
+      <p class="p-en" style="color:#8a97a8;font-style:italic;font-size:0.9rem;margin-bottom:2rem;">A systematic sweep — always in the same order — prevents missing findings. Use this flow when reading your own annual health-check ECG.</p>
+
+      <div class="checklist">
+        <div class="check-item">
+          <div class="step">STEP 01</div>
+          <h4>病人資料與紀錄設定</h4>
+          <div class="h4-en">Patient &amp; recording setup</div>
+          <p>確認姓名、日期、紙速 25 mm/s、校準 10 mm/mV。錯的設定 → 錯的判讀。</p>
+          <p class="p-en">Confirm name, date, paper speed (25 mm/s), and calibration (10 mm/mV). Wrong setup = wrong reading.</p>
+        </div>
+
+        <div class="check-item">
+          <div class="step">STEP 02</div>
+          <h4>心率</h4>
+          <div class="h4-en">Rate</div>
+          <p>計算 R-R 間的大格數：300 ÷ 大格數 = 每分鐘心率。正常 60–100。</p>
+          <p class="p-en">Count large boxes between R peaks: 300 ÷ (large boxes) = bpm. Normal 60–100.</p>
+        </div>
+
+        <div class="check-item">
+          <div class="step">STEP 03</div>
+          <h4>節律</h4>
+          <div class="h4-en">Rhythm</div>
+          <p>節律是否規則？每個 QRS 前是否有 P？每個 P 後是否接 QRS？</p>
+          <p class="p-en">Is the rhythm regular? Is there a P before every QRS? Is every P followed by a QRS?</p>
+        </div>
+
+        <div class="check-item">
+          <div class="step">STEP 04</div>
+          <h4>心電軸</h4>
+          <div class="h4-en">Axis</div>
+          <p>看導程 I 與 II。兩者 QRS 皆向上 = 正常心電軸。</p>
+          <p class="p-en">Look at leads I and II. Both QRS complexes upright = normal axis.</p>
+        </div>
+
+        <div class="check-item">
+          <div class="step">STEP 05</div>
+          <h4>P 波</h4>
+          <div class="h4-en">P wave morphology</div>
+          <p>看導程 II 與 V1 的 P 波形態與寬度 — 排除心房肥大。</p>
+          <p class="p-en">Check P wave shape and width in lead II and V1 — rules out atrial enlargement.</p>
+        </div>
+
+        <div class="check-item">
+          <div class="step">STEP 06</div>
+          <h4>PR 間期</h4>
+          <div class="h4-en">PR interval</div>
+          <p>正常 120–200 毫秒。延長 = 一度房室阻滯；縮短併 delta 波 = WPW。</p>
+          <p class="p-en">Normal 120–200 ms. Prolonged = 1° AVB. Short with delta wave = WPW.</p>
+        </div>
+
+        <div class="check-item">
+          <div class="step">STEP 07</div>
+          <h4>QRS 寬度</h4>
+          <div class="h4-en">QRS width</div>
+          <p>&lt; 120 毫秒為正常。加寬 = 束支阻滯、高血鉀、或源於心室的節律。</p>
+          <p class="p-en">&lt; 120 ms normal. Wide = bundle branch block, hyperkalemia, or ventricular origin.</p>
+        </div>
+
+        <div class="check-item">
+          <div class="step">STEP 08</div>
+          <h4>QRS 振幅</h4>
+          <div class="h4-en">QRS amplitude</div>
+          <p>V1/V5 高電壓 → LVH；V1 高 R → RVH;全導程電壓低 → 心包積液或慢阻肺。</p>
+          <p class="p-en">High voltage in V1/V5 → LVH. Tall R in V1 → RVH. Low voltage everywhere → pericardial effusion or COPD.</p>
+        </div>
+
+        <div class="check-item">
+          <div class="step">STEP 09</div>
+          <h4>ST 段</h4>
+          <div class="h4-en">ST segment</div>
+          <p>應位於基線。抬高 = STEMI / 心包炎 / 早期再極化 / Brugada;壓低 = 缺血 / 毛地黃 / 低血鉀。</p>
+          <p class="p-en">Should sit on baseline. Elevation = STEMI / pericarditis / early repol / Brugada. Depression = ischemia / digoxin / hypokalemia.</p>
+        </div>
+
+        <div class="check-item">
+          <div class="step">STEP 10</div>
+          <h4>T 波、U 波、QT</h4>
+          <div class="h4-en">T &amp; U waves, QT</div>
+          <p>檢查 T 波方向與深度;留意 U 波(低血鉀);計算 QTc。男 &gt; 450 ms、女 &gt; 460 ms = 延長。</p>
+          <p class="p-en">Check T wave direction and depth. Note U waves (hypokalemia). Calculate QTc; &gt; 450 ms (men) / &gt; 460 ms (women) = prolonged.</p>
+        </div>
+
+        <div class="check-item" style="border-top-color:#d4a574;">
+          <div class="step" style="color:#d4a574;">STEP 11</div>
+          <h4>對照過往、做出結論</h4>
+          <div class="h4-en">Compare with prior &amp; decide</div>
+          <p>與去年 ECG 對照。<strong>新出現的變化遠比慢性變化重要。</strong>這一步等同於 SOP 中的「acceptance criteria 驗收標準」 — 沒有對照就沒有判讀。</p>
+          <p class="p-en">Compare with last year's ECG. <strong>New findings always matter more than chronic ones.</strong> This step is the ECG equivalent of SOP acceptance criteria — no comparison, no valid read.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;padding:1.2rem 1.5rem;background:#fff8e8;border-left:4px solid #d4a574;border-radius:4px;">
+        <div style="font-family:'Noto Serif TC',serif;font-weight:600;color:#8a6a2e;margin-bottom:0.4rem;">關鍵原則 Key Principle</div>
+        <p style="color:#5b6b7f;margin-bottom:0.3rem;">系統化的檢查順序,是對抗「模式偏誤」的唯一武器。看到明顯的 STEMI 就跳過 QTc 測量 — 正是漏診的起點。</p>
+        <p class="p-en" style="color:#8a97a8;font-style:italic;font-size:0.9rem;">Systematic order is your only defense against pattern bias. Skipping QTc because you "see" an obvious STEMI is how diagnoses get missed.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= KEY TAKEAWAYS ========= -->
+  <section class="takeaways">
+    <h2 style="font-family:'Noto Serif TC',serif;font-size:1.8rem;color:#1e3a5f;margin-bottom:0.3rem;">核心要點 Key Takeaways</h2>
+    <p class="p-en" style="color:#8a97a8;font-style:italic;font-size:0.9rem;margin-bottom:1.8rem;">Four things to remember after closing this document.</p>
+
+    <div class="takeaways-grid">
+      <div class="summary-card">
+        <div class="card-num">01</div>
+        <h4>正常是判讀的起點</h4>
+        <div class="h4-en">Know normal first</div>
+        <p>P-QRS-T 每一段都對應一個電氣事件。熟悉正常波形,異常自然顯眼。不先建立基準,任何「異常」都只是焦慮。</p>
+        <p class="p-en">Every segment of P-QRS-T maps to one electrical event. Anomalies are only visible against a known baseline.</p>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-num">02</div>
+        <h4>系統化順序勝過直覺</h4>
+        <div class="h4-en">Systematic beats intuitive</div>
+        <p>11 步固定順序,不是過度工程,而是對抗確認偏誤的 SOP。專家也會跳步 — 然後就漏掉了 QTc 延長。</p>
+        <p class="p-en">The 11-step order isn't over-engineering; it's an SOP against confirmation bias. Experts skip steps too — then miss the long QTc.</p>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-num">03</div>
+        <h4>形態識別是核心技能</h4>
+        <div class="h4-en">Pattern recognition is the core skill</div>
+        <p>STEMI 的墓碑、高血鉀的帳篷 T、WPW 的 delta、S1Q3T3 的肺栓塞指紋 — 這些形態本身就是診斷,認出它們能救命。</p>
+        <p class="p-en">STEMI tombstones, hyper-K tent-T, WPW delta, S1Q3T3 in PE — these shapes ARE the diagnosis. Recognition saves lives.</p>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-num">04</div>
+        <h4>ECG 是篩檢、不是金標準</h4>
+        <div class="h4-en">ECG screens, it doesn't confirm</div>
+        <p>LVH、RVH、陳舊梗塞、心律不整 — 心電圖給的是線索而非結論。確診靠心臟超音波、壓力測試、核磁共振、心導管。別把篩檢工具當終點。</p>
+        <p class="p-en">LVH, RVH, prior MI, arrhythmia — ECG gives clues, not verdicts. Echo / stress / MRI / cath confirm. Don't treat a screen as a destination.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= PRACTICE ========= -->
+  <section class="practice-section">
+    <h2 style="font-family:'Noto Serif TC',serif;font-size:1.8rem;color:#1e3a5f;margin-bottom:0.3rem;">思考練習 Practice Questions</h2>
+    <p class="p-en" style="color:#8a97a8;font-style:italic;font-size:0.9rem;margin-bottom:1.5rem;">Three questions to lock in the concepts.</p>
+
+    <details class="question-accordion">
+      <summary class="question-header">
+        <div>
+          <span class="question-number">Q1</span>
+          <span class="question-type">概念理解 · Concept</span>
+        </div>
+        <span class="question-text">為什麼一度房室阻滯(1° AVB)多為良性,而二度 Mobitz II 型卻可能需要節律器?兩者在解剖位置上有何差異?</span>
+        <span class="accordion-icon">+</span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>解答重點:</strong>差異在於<strong>阻滯的解剖層次</strong>。</p>
+        <p>一度 AVB 的延遲發生在<strong>房室結本身</strong>(AV node),這是一個有自主神經調控的組織,常受迷走神經張力影響。年輕人、運動員、睡眠中皆可見,不代表傳導系統有結構性病變。</p>
+        <p>Mobitz II 則位於<strong>房室結下方的希氏-浦金氏系統</strong>(His-Purkinje),屬於結構性傳導異常 — 一旦脫落,無自主神經緩衝,可能快速惡化為完全性房室阻滯(3° AVB),甚至心跳停止。這就是為何 Mobitz II 常需預防性置入節律器。</p>
+        <p class="p-en" style="color:#8a97a8;font-style:italic;margin-top:0.8rem;">The difference is anatomical level. 1° AVB = delay at the AV node (autonomically modulated, often benign). Mobitz II = block below the AV node in the His-Purkinje system (structural, unpredictable, can progress to complete block).</p>
+      </div>
+    </details>
+
+    <details class="question-accordion">
+      <summary class="question-header">
+        <div>
+          <span class="question-number">Q2</span>
+          <span class="question-type">產業應用 · CDMO Application</span>
+        </div>
+        <span class="question-text">§11 的 11 步判讀法與 GMP SOP 有哪些結構上的相似處?若要把「閱讀 ECG 報告」設計成一份 SOP,驗收標準(acceptance criteria)應放在哪一步?</span>
+        <span class="accordion-icon">+</span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>解答重點:</strong>兩者皆為<strong>固定順序、不可跳步、每步有明確通過/失敗判準的檢查流程</strong>。</p>
+        <p>結構對照:</p>
+        <ul style="margin-left:1.5rem;margin-top:0.5rem;margin-bottom:0.8rem;">
+          <li>Step 01(紙速/校準確認) ≈ SOP 的「設備校驗狀態檢查」</li>
+          <li>Step 02–10(各項參數測量) ≈ 批次紀錄的「critical parameter measurements」</li>
+          <li>Step 11(與過往對照) ≈ SOP 的「acceptance criteria vs. trending data」</li>
+        </ul>
+        <p>驗收標準應放在 <strong>Step 11</strong>。原因:前十步是資料蒐集,最後一步才是「判讀 vs. 歷史基準」的決策節點 — 正如 GMP 中 OOT(out-of-trend)判斷必須對照歷史統計,否則單一數據點無法定義「異常」。</p>
+        <p class="p-en" style="color:#8a97a8;font-style:italic;margin-top:0.8rem;">Both are fixed-sequence, no-skip checklists with pass/fail criteria per step. Acceptance criteria belong at Step 11 — without historical comparison, a single data point cannot define "abnormal," same as OOT analysis in GMP.</p>
+      </div>
+    </details>
+
+    <details class="question-accordion">
+      <summary class="question-header">
+        <div>
+          <span class="question-number">Q3</span>
+          <span class="question-type">批判思考 · Critical Thinking</span>
+        </div>
+        <span class="question-text">若體檢報告上只有「ST 段壓低」四個字,能否直接下「心肌缺血」的診斷?哪些資訊缺失會讓你退回「需進一步評估」?</span>
+        <span class="accordion-icon">+</span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>解答重點:</strong>不能。ST 壓低只是「觀察」,不等於「診斷」。</p>
+        <p>需補充的關鍵資訊:</p>
+        <ul style="margin-left:1.5rem;margin-top:0.5rem;margin-bottom:0.8rem;">
+          <li><strong>形態</strong>:水平型或下斜型比上斜型更具特異性;勺狀壓低可能只是毛地黃效應</li>
+          <li><strong>導程分佈</strong>:集中於冠脈供應區(如下壁 II/III/aVF)比散在分佈更可疑</li>
+          <li><strong>深度</strong>:&lt; 0.5 mm 常為非特異性</li>
+          <li><strong>臨床情境</strong>:有無胸痛?運動時出現還是靜息時?有無冠心病家族史?</li>
+          <li><strong>對照</strong>:新發生還是慢性?</li>
+          <li><strong>其他鑑別診斷</strong>:低血鉀、LVH 負荷型、藥物效應(毛地黃)、束支阻滯的繼發性變化</li>
+        </ul>
+        <p>這正是<strong>「ECG 是篩檢而非金標準」</strong>的體現 — 單一發現不能跳過臨床整合直接下診斷。</p>
+        <p class="p-en" style="color:#8a97a8;font-style:italic;margin-top:0.8rem;">ST depression is an observation, not a diagnosis. Morphology, lead distribution, depth, clinical context, prior comparison, and differentials (hypo-K, LVH strain, digoxin, secondary to BBB) must all be considered before calling it ischemia.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ========= BOTTOM LINE ========= -->
+  <section class="bottom-line">
+    <div class="bottom-line-header">
+      <h2 style="font-family:'Noto Serif TC',serif;font-size:1.6rem;color:#1e3a5f;">Bottom Line</h2>
+      <p class="p-en" style="color:#8a97a8;font-style:italic;font-size:0.9rem;">三句話總結</p>
+    </div>
+
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">核心洞察 Core Insight</div>
+      <p class="bottom-line-text">心電圖判讀是<strong>系統化的形態識別</strong>,不是猜謎。固定順序、熟知正常、對照過往 — 這三件事把 ECG 從「猜」變成「讀」。</p>
+      <p class="p-en" style="color:#8a97a8;font-style:italic;font-size:0.9rem;margin-top:0.3rem;">ECG reading is systematic pattern recognition, not guesswork. Fixed order, known baseline, prior comparison — these three turn "guessing" into "reading."</p>
+    </div>
+
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">立即應用 Immediate Application</div>
+      <p class="bottom-line-text">下次拿到自己的年度健檢 ECG 報告時,用 §11 的 11 步流程親自跑一遍。不是取代醫師判讀,而是學會在診間<strong>問對問題</strong>。</p>
+      <p class="p-en" style="color:#8a97a8;font-style:italic;font-size:0.9rem;margin-top:0.3rem;">Next annual health check: run your own ECG through the 11-step flow from §11. Not to replace the cardiologist, but to ask better questions in the consult.</p>
+    </div>
+
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">需要補充 Caveats</div>
+      <p class="bottom-line-text">ECG 永遠是<strong>第一關的篩檢工具</strong>,不是結構診斷的終點。腔室肥大要靠心臟超音波、缺血要靠壓力測試或心導管、心肌病變要靠心臟 MRI。把 ECG 的線索當終點,是判讀上最危險的錯誤。</p>
+      <p class="p-en" style="color:#8a97a8;font-style:italic;font-size:0.9rem;margin-top:0.3rem;">ECG is always a first-line screen, not a structural verdict. Chambers need echo, ischemia needs stress/cath, cardiomyopathy needs cardiac MRI. Treating an ECG clue as final is the most dangerous reading error.</p>
+    </div>
+  </section>
+
+  <!-- ========= FOOTER ========= -->
+  <footer class="footer">
+    <div style="padding:1.2rem 1.5rem;background:#fff4ed;border-left:4px solid #e8a848;border-radius:4px;margin-bottom:1.5rem;">
+      <strong style="color:#8a5a1e;font-family:'Noto Serif TC',serif;">免責聲明 Disclaimer</strong>
+      <p class="disclaimer" style="color:#5b6b7f;margin-top:0.3rem;">本資料僅供教育參考,不構成醫療建議。實際判讀請由合格心臟科醫師依臨床情境為之。</p>
+      <p class="disclaimer-en" style="color:#8a97a8;font-style:italic;font-size:0.9rem;margin-top:0.2rem;">Educational reference only — not medical advice. Actual interpretation must be performed by a licensed cardiologist in clinical context.</p>
+    </div>
+
+    <div class="suggested">
+      <div style="font-family:'Noto Serif TC',serif;font-weight:600;color:#1e3a5f;margin-bottom:0.5rem;">建議對話標題 Suggested chat title</div>
+      <code style="display:block;padding:0.6rem 0.9rem;background:#1e3a5f;color:#e8d4a8;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;margin-bottom:1rem;">2026-04-24 [Reference] [ECG] Bilingual ECG Observations Atlas</code>
+
+      <div style="font-family:'Noto Serif TC',serif;font-weight:600;color:#1e3a5f;margin-bottom:0.5rem;">建議檔名 Suggested filename</div>
+      <code style="display:block;padding:0.6rem 0.9rem;background:#1e3a5f;color:#e8d4a8;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;">2026-04-24_ecg-observations-bilingual.html</code>
+    </div>
+
+    <div style="text-align:center;margin-top:1.5rem;color:#8a97a8;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">
+      Bilingual ECG Observations · 心電圖判讀圖解 · clinical atlas style · Master Prompt v1.5.0
+    </div>
+  </footer>
+
+</div>
+
+<!-- SVG defs (shared) -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="gridMinor" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 10 0 L 0 0 0 10" class="grid-minor"/>
+    </pattern>
+    <pattern id="gridMajor" width="50" height="50" patternUnits="userSpaceOnUse">
+      <rect width="50" height="50" fill="url(#gridMinor)"/>
+      <path d="M 50 0 L 0 0 0 50" class="grid-major"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#6ce19a"/>
+    </marker>
+  </defs>
+</svg>
+
+<script>
+function switchTab(evt, tabId) {
+  const container = evt.currentTarget.closest('.tab-container');
+  container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  evt.currentTarget.classList.add('active');
+  window.scrollTo({ top: container.offsetTop - 20, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
