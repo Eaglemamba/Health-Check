@@ -58,7 +58,11 @@ def get_client() -> Garmin:
         print("錯誤：請在 .env 設定 GARMIN_EMAIL 與 GARMIN_PASSWORD")
         sys.exit(1)
 
-    client = Garmin(email=email, password=password, prompt_mfa=prompt_mfa)
+    # garminconnect 0.2.8 (Python 3.9 相容最新版) 的 Garmin() 不接受 prompt_mfa；
+    # MFA callback 改在底層 garth.Client.login() 注入。
+    client = Garmin(email=email, password=password)
+    client.garth.login(email, password, prompt_mfa=prompt_mfa)
+    client.garth.dump(str(TOKEN_DIR))
     client.login(str(TOKEN_DIR))
     print(f"Token 已存入 {TOKEN_DIR}")
     return client
