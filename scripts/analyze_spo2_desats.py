@@ -193,7 +193,7 @@ def cmd_chart(date: str, out: Path = None):
     ax.set_ylim(70, 100)
     ax.grid(alpha=0.3)
     ax.legend(loc="lower right", fontsize=8)
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%H:%M", tz=TPE))
     fig.autofmt_xdate()
     fig.tight_layout()
 
