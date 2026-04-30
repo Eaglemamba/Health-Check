@@ -55,6 +55,13 @@
 - 日均 SpO2 < 93% → 排除急性呼吸道症狀；若無症狀，仍需注意
 - 結合 BP 153/88 + BMI 24.5 + 前期糖尿病 → OSA 高風險三角，任何 SpO2 異常都不宜忽略
 
+**SpO2 epoch-level desat events（自 2026-05-01 起追蹤；資料源 `scripts/analyze_spo2_desats.py`）：**
+- T90 ≥ 10% → 🔴 hypoxic burden 重度單晚
+- 任何單一 event 持續 ≥ 15 分鐘 → 重度累積缺氧訊號（比瞬間最低值更臨床有意義）
+- 任何單一 event 最低 < 80% → 重度單點 desat
+- 連續 3 晚 T90 > 10% 或 event > 15 分 → PSG 預約進度追蹤升為當週首要任務
+- 入睡後 < 60 分鐘即出現 ≥ 5 分鐘 < 90% event → 典型 OSA 早期 N1/N2 阻塞 pattern
+
 **Garmin RHR：**
 - RHR > 67 bpm 連續 3 天 → 發炎 / 恢復不足 / 感染前兆警示
 - RHR 在 3 天內上升 ≥ 5 bpm（相比基準 60-62）→ 可能將生病 / 過度訓練 / 壓力累積
