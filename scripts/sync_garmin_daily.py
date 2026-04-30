@@ -42,6 +42,11 @@ def get_client() -> Garmin:
     password = os.getenv("GARMIN_PASSWORD")
 
     def prompt_mfa() -> str:
+        # 優先讀環境變數 GARMIN_MFA（給非 TTY 環境如 Claude Code 用）；無則走互動 input。
+        env_code = os.getenv("GARMIN_MFA", "").strip()
+        if env_code:
+            print(f"使用環境變數 GARMIN_MFA：{env_code}")
+            return env_code
         return input("輸入 Garmin MFA 驗證碼：").strip()
 
     TOKEN_DIR.mkdir(parents=True, exist_ok=True)
@@ -58,11 +63,8 @@ def get_client() -> Garmin:
         print("錯誤：請在 .env 設定 GARMIN_EMAIL 與 GARMIN_PASSWORD")
         sys.exit(1)
 
-    # garminconnect 0.2.8 (Python 3.9 相容最新版) 的 Garmin() 不接受 prompt_mfa；
-    # MFA callback 改在底層 garth.Client.login() 注入。
-    client = Garmin(email=email, password=password)
-    client.garth.login(email, password, prompt_mfa=prompt_mfa)
-    client.garth.dump(str(TOKEN_DIR))
+    # garminconnect 0.3.x：prompt_mfa 在建構式注入，login(tokenstore) 自動處理 MFA 並寫入 token。
+    client = Garmin(email=email, password=password, prompt_mfa=prompt_mfa)
     client.login(str(TOKEN_DIR))
     print(f"Token 已存入 {TOKEN_DIR}")
     return client
