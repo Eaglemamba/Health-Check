@@ -202,11 +202,178 @@ def cmd_chart(date: str, out: Path = None):
     print(f"圖表已存：{out}")
 
 
+def cmd_trend(days: int = 9999, out: Path = None):
+    """多日趨勢圖：每天一個 x 點，顯示 lowest / avg / T90 / longest event。"""
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.dates as mdates
+        from matplotlib import rcParams
+        rcParams["font.sans-serif"] = ["PingFang TC", "PingFang SC", "Heiti TC",
+                                       "Hiragino Sans GB", "Arial Unicode MS",
+                                       "Noto Sans CJK TC", "DejaVu Sans"]
+        rcParams["axes.unicode_minus"] = False
+    except ImportError:
+        print("需先安裝 matplotlib")
+        return
+
+    files = sorted(DATA_DIR.glob("*.json"))[-days:]
+    rows = []
+    for f in files:
+        date = f.stem
+        epochs, summary = load_epochs(date)
+        if not epochs or not summary:
+            continue
+        events = find_events(epochs)
+        pct, below, total = t90(epochs)
+        longest = max((e["duration_min"] for e in events), default=0)
+        # TST 從 dailySleepDTO 取
+        data = json.loads(f.read_text())
+        dto = (data.get("sleep") or {}).get("dailySleepDTO") or {}
+        tst_min = (dto.get("sleepTimeSeconds") or 0) / 60
+        rows.append({
+            "date": datetime.strptime(date, "%Y-%m-%d").date(),
+            "lowest": summary.get("lowestSPO2"),
+            "avg": summary.get("averageSPO2"),
+            "t90": pct,
+            "longest": longest,
+            "events": len(events),
+            "tst": tst_min,
+        })
+
+    if not rows:
+        print("無資料")
+        return
+
+    dates = [r["date"] for r in rows]
+    lowest = [r["lowest"] for r in rows]
+    avg = [r["avg"] for r in rows]
+    t90s = [r["t90"] for r in rows]
+    longest_ev = [r["longest"] for r in rows]
+    tsts = [r["tst"] / 60 for r in rows]  # 小時
+
+    def color_t90(v):
+        if v >= 15: return "#d7301f"
+        if v >= 10: return "#fc8d59"
+        if v >= 5:  return "#fdcc8a"
+        return "#74c476"
+
+    def color_dur(v):
+        if v >= 20: return "#d7301f"
+        if v >= 15: return "#fc8d59"
+        if v >= 10: return "#fdcc8a"
+        return "#74c476"
+
+    def color_tst(v):
+        # 反向：時數越短越紅
+        if v < 6:   return "#d7301f"
+        if v < 7:   return "#fc8d59"
+        if v < 7.5: return "#fdcc8a"
+        return "#74c476"
+
+    width = max(16, len(dates) * 0.32)
+    fig, axes = plt.subplots(4, 1, figsize=(width, 17),
+                              sharex=True, gridspec_kw={"height_ratios": [3, 2, 2, 2]})
+
+    # Panel 1: SpO2 lowest + avg
+    ax = axes[0]
+    ax.plot(dates, avg, color="#2c7fb8", marker="o", markersize=6, linewidth=1.5,
+            label="夜間平均 SpO2")
+    ax.plot(dates, lowest, color="#d7301f", marker="v", markersize=7, linewidth=1.5,
+            label="夜間最低 SpO2")
+    # 標出每點的最低值
+    for d, v in zip(dates, lowest):
+        if v is not None and v < 85:
+            ax.annotate(f"{v}", xy=(d, v), xytext=(0, -14),
+                        textcoords="offset points", ha="center", fontsize=7,
+                        color="darkred" if v < 80 else "darkorange")
+    ax.axhline(90, color="orange", linestyle="--", linewidth=1.0, alpha=0.7, label="OSA 閾值 90%")
+    ax.axhline(88, color="red", linestyle="--", linewidth=0.8, alpha=0.5, label="紅旗 88%")
+    ax.axhline(80, color="darkred", linestyle="--", linewidth=0.8, alpha=0.5, label="重度 80%")
+    ax.set_ylabel("SpO2 (%)", fontsize=11)
+    ax.set_ylim(70, 100)
+    ax.grid(alpha=0.3)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.05), ncol=5, fontsize=9, frameon=False)
+    ax.set_title(f"夜間 SpO2 / OSA 趨勢 — {dates[0]} 至 {dates[-1]}（共 {len(dates)} 晚）",
+                 fontsize=13, pad=12)
+
+    # Panel 2: T90 bar
+    ax = axes[1]
+    colors = [color_t90(v) for v in t90s]
+    ax.bar(dates, t90s, color=colors, edgecolor="#333", linewidth=0.6, width=0.8)
+    ax.axhline(5, color="goldenrod", linestyle=":", linewidth=1.0, alpha=0.6, label="輕度 5%")
+    ax.axhline(10, color="orange", linestyle=":", linewidth=1.0, alpha=0.6, label="中度 10%")
+    ax.axhline(15, color="red", linestyle=":", linewidth=1.0, alpha=0.6, label="重度 15%")
+    ax.set_ylabel("T90 (%)\nSpO2<90% 時間佔比", fontsize=11)
+    ax.grid(alpha=0.3, axis="y")
+    ax.legend(loc="upper right", fontsize=8, ncol=3)
+
+    # Panel 3: Longest event bar
+    ax = axes[2]
+    colors = [color_dur(v) for v in longest_ev]
+    ax.bar(dates, longest_ev, color=colors, edgecolor="#333", linewidth=0.6, width=0.8)
+    ax.axhline(10, color="goldenrod", linestyle=":", linewidth=1.0, alpha=0.6, label="10 分")
+    ax.axhline(15, color="orange", linestyle=":", linewidth=1.0, alpha=0.6, label="15 分")
+    ax.axhline(20, color="red", linestyle=":", linewidth=1.0, alpha=0.6, label="20 分")
+    ax.set_ylabel("最長 desat event\n（連續 SpO2<90% 分鐘）", fontsize=11)
+    ax.grid(alpha=0.3, axis="y")
+    ax.legend(loc="upper right", fontsize=8, ncol=3)
+
+    # Panel 4: TST (Total Sleep Time)
+    ax = axes[3]
+    colors = [color_tst(v) for v in tsts]
+    ax.bar(dates, tsts, color=colors, edgecolor="#333", linewidth=0.6, width=0.8)
+    ax.axhline(6,   color="red",       linestyle=":", linewidth=1.0, alpha=0.6, label="底線 6h")
+    ax.axhline(7,   color="orange",    linestyle=":", linewidth=1.0, alpha=0.6, label="目標 7h")
+    ax.axhline(7.5, color="goldenrod", linestyle=":", linewidth=1.0, alpha=0.6, label="理想 7.5h")
+    # 在每根 bar 上方標出時數
+    for d, v in zip(dates, tsts):
+        ax.annotate(f"{v:.1f}", xy=(d, v), xytext=(0, 2),
+                    textcoords="offset points", ha="center", fontsize=6,
+                    color="darkred" if v < 6 else "#444")
+    ax.set_ylabel("TST 總睡眠時間 (h)\nGarmin dailySleepDTO", fontsize=11)
+    ax.set_ylim(0, max(10, max(tsts) + 0.5))
+    ax.set_xlabel("日期（每根 bar = 一晚睡眠）", fontsize=11)
+    ax.grid(alpha=0.3, axis="y")
+    ax.legend(loc="upper right", fontsize=8, ncol=3)
+
+    # Date formatting — 每天一個 tick（放在最底層 panel）
+    ax.set_xticks(dates)
+    ax.set_xticklabels([d.strftime("%m-%d") for d in dates], rotation=60, ha="right", fontsize=8)
+
+    fig.tight_layout()
+
+    out = out or (ROOT / "reviews" / "spo2_desat_trend.png")
+    fig.savefig(out, dpi=110)
+    print(f"趨勢圖已存：{out}")
+
+    # 摘要統計
+    avg_lowest = sum(lowest) / len(lowest)
+    avg_t90 = sum(t90s) / len(t90s)
+    avg_longest = sum(longest_ev) / len(longest_ev)
+    nights_red_t90 = sum(1 for v in t90s if v >= 10)
+    nights_red_event = sum(1 for v in longest_ev if v >= 15)
+    nights_below_88 = sum(1 for v in lowest if v < 88)
+    nights_below_80 = sum(1 for v in lowest if v < 80)
+    print()
+    print(f"=== {len(rows)} 晚統計 ===")
+    print(f"平均最低 SpO2：{avg_lowest:.1f}%")
+    print(f"平均 T90：{avg_t90:.1f}%")
+    print(f"平均最長 event：{avg_longest:.1f} 分")
+    print(f"最低 SpO2 < 88%：{nights_below_88}/{len(rows)} 晚（{nights_below_88/len(rows)*100:.0f}%）")
+    print(f"最低 SpO2 < 80%：{nights_below_80}/{len(rows)} 晚（{nights_below_80/len(rows)*100:.0f}%）")
+    print(f"T90 ≥ 10%（重度）：{nights_red_t90}/{len(rows)} 晚")
+    print(f"最長 event ≥ 15 分（重度）：{nights_red_event}/{len(rows)} 晚")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--summary", type=int, metavar="N", help="近 N 晚摘要")
+    ap.add_argument("--summary", type=int, metavar="N", help="近 N 晚文字摘要")
     ap.add_argument("--night", help="單晚詳細 events，YYYY-MM-DD")
-    ap.add_argument("--chart", help="產生單晚 chart，YYYY-MM-DD")
+    ap.add_argument("--chart", help="產生單晚 SpO2 chart，YYYY-MM-DD")
+    ap.add_argument("--trend", type=int, nargs="?", const=9999, metavar="N",
+                    help="多日趨勢圖（預設全部，N 限制最近幾天）")
     args = ap.parse_args()
 
     if args.summary:
@@ -215,7 +382,9 @@ def main():
         cmd_night(args.night)
     if args.chart:
         cmd_chart(args.chart)
-    if not (args.summary or args.night or args.chart):
+    if args.trend is not None:
+        cmd_trend(args.trend)
+    if not (args.summary or args.night or args.chart or args.trend is not None):
         ap.print_help()
 
 
