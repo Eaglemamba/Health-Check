@@ -252,6 +252,8 @@ def cmd_trend(days: int = 9999, out: Path = None):
     t90s = [r["t90"] for r in rows]
     longest_ev = [r["longest"] for r in rows]
     tsts = [r["tst"] / 60 for r in rows]  # 小時
+    # ODI 代理（AHI proxy）= 每睡眠小時 desat events 數
+    odi = [r["events"] / (r["tst"] / 60) if r["tst"] > 0 else 0 for r in rows]
 
     def color_t90(v):
         if v >= 15: return "#d7301f"
@@ -272,9 +274,16 @@ def cmd_trend(days: int = 9999, out: Path = None):
         if v < 7.5: return "#fdcc8a"
         return "#74c476"
 
+    def color_odi(v):
+        # AASM 嚴重度切點
+        if v >= 30: return "#d7301f"
+        if v >= 15: return "#fc8d59"
+        if v >= 5:  return "#fdcc8a"
+        return "#74c476"
+
     width = max(16, len(dates) * 0.32)
-    fig, axes = plt.subplots(4, 1, figsize=(width, 17),
-                              sharex=True, gridspec_kw={"height_ratios": [3, 2, 2, 2]})
+    fig, axes = plt.subplots(5, 1, figsize=(width, 20),
+                              sharex=True, gridspec_kw={"height_ratios": [3, 2, 2, 2, 2]})
 
     # Panel 1: SpO2 lowest + avg
     ax = axes[0]
@@ -320,8 +329,30 @@ def cmd_trend(days: int = 9999, out: Path = None):
     ax.grid(alpha=0.3, axis="y")
     ax.legend(loc="upper right", fontsize=8, ncol=3)
 
-    # Panel 4: TST (Total Sleep Time)
+    # Panel 4: ODI (AHI proxy) = events per sleep-hour
     ax = axes[3]
+    colors = [color_odi(v) for v in odi]
+    ax.bar(dates, odi, color=colors, edgecolor="#333", linewidth=0.6, width=0.8)
+    ax.axhline(5,  color="goldenrod", linestyle=":", linewidth=1.0, alpha=0.6, label="輕度 ≥5")
+    ax.axhline(15, color="orange",    linestyle=":", linewidth=1.0, alpha=0.6, label="中度 ≥15")
+    ax.axhline(30, color="red",       linestyle=":", linewidth=1.0, alpha=0.6, label="重度 ≥30")
+    for d, v in zip(dates, odi):
+        if v >= 5:
+            ax.annotate(f"{v:.1f}", xy=(d, v), xytext=(0, 2),
+                        textcoords="offset points", ha="center", fontsize=6,
+                        color="darkred" if v >= 15 else "#444")
+    ax.set_ylabel("ODI 代理 (events/h)\nAHI proxy (非 PSG 診斷)", fontsize=11)
+    ax.grid(alpha=0.3, axis="y")
+    ax.legend(loc="upper right", fontsize=8, ncol=3)
+    # 警示：Garmin 60s epoch 嚴重低估事件數
+    ax.text(0.01, 0.95,
+            "[!] Garmin 60s 取樣會嚴重低估事件數（PSG 1 Hz）；真實 AHI 推估約 5-10× 此值",
+            transform=ax.transAxes, fontsize=8, color="darkred",
+            verticalalignment="top",
+            bbox=dict(boxstyle="round,pad=0.3", fc="#fff3cd", ec="#d7301f", alpha=0.9))
+
+    # Panel 5: TST (Total Sleep Time)
+    ax = axes[4]
     colors = [color_tst(v) for v in tsts]
     ax.bar(dates, tsts, color=colors, edgecolor="#333", linewidth=0.6, width=0.8)
     ax.axhline(6,   color="red",       linestyle=":", linewidth=1.0, alpha=0.6, label="底線 6h")
