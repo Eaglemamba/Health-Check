@@ -560,7 +560,9 @@ function PanelSupps({ lang }) {
           <div key={i} className="card" style={{padding: 18}}>
             <div style={{display: "flex", alignItems: "flex-start", gap: 14}}>
               <div style={{width: 38, height: 38, borderRadius: 12, background: s.color, display: "grid", placeItems: "center", flexShrink: 0, color: "white"}}>
-                <Icon name="drop" size={18} />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2.5s6 7 6 11.5a6 6 0 0 1-12 0c0-4.5 6-11.5 6-11.5z"/>
+                </svg>
               </div>
               <div style={{flex: 1, minWidth: 0}}>
                 <div style={{fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em"}}>{s.name}</div>
