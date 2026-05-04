@@ -204,6 +204,223 @@ function PanelDiet({ lang }) {
           </tbody>
         </table>
       </div>
+
+      {d.breakfast && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(d.breakfast.ttl, lang)}</div>
+          <p className="body">{Tt(d.breakfast.sub, lang)}</p>
+          <table className="t">
+            <thead><tr>{d.breakfast.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {d.breakfast.rows.map(([name, items, kcal, hi], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(name, lang)}</strong></td>
+                  <td>{Tt(items, lang)}</td>
+                  <td className="num-cell">{kcal}</td>
+                  <td>{Tt(hi, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="spacer-12" />
+          <div className="h3" style={{fontSize: 14}}>{Tt(d.breakfast.oatTips.ttl, lang)}</div>
+          <ul className="body" style={{paddingLeft: 18, margin: "4px 0 0"}}>
+            {d.breakfast.oatTips.items[lang].map((it, i) => <li key={i} style={{marginBottom: 4}}>{it}</li>)}
+          </ul>
+        </div>
+      </>)}
+
+      {d.yogurtBlend && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(d.yogurtBlend.ttl, lang)}</div>
+          <table className="t">
+            <thead><tr>{d.yogurtBlend.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {d.yogurtBlend.rows.map(([name, amt, prov], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(name, lang)}</strong></td>
+                  <td>{typeof amt === "string" ? amt : Tt(amt, lang)}</td>
+                  <td>{Tt(prov, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="body" style={{marginTop: 8}}><em>{Tt(d.yogurtBlend.note, lang)}</em></p>
+          <div className="callout" style={{marginTop: 8}}>
+            <strong>{lang === "en" ? "Blending vs juicing: " : "果汁機 vs 榨汁："}</strong>
+            {Tt(d.yogurtBlend.blending, lang)}
+          </div>
+        </div>
+      </>)}
+
+      {d.boxes711 && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(d.boxes711.ttl, lang)}</div>
+          <p className="body">{Tt(d.boxes711.sub, lang)}</p>
+          <table className="t">
+            <thead><tr>{d.boxes711.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {d.boxes711.rows.map(([name, kcal, na, prot, note, best], i) => (
+                <tr key={i}>
+                  <td>
+                    <strong>{Tt(name, lang)}</strong>
+                    {best && <span className="badge" style={{marginLeft: 6}}>{lang === "en" ? "BEST" : "首選"}</span>}
+                  </td>
+                  <td className="num-cell">{kcal}</td>
+                  <td className="num-cell">{na}</td>
+                  <td className="num-cell">{prot}</td>
+                  <td>{Tt(note, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="callout warn" style={{marginTop: 8}}>
+            <strong>{Tt(d.boxes711.avoid.ttl, lang)}：</strong> {Tt(d.boxes711.avoid.body, lang)}
+          </div>
+        </div>
+      </>)}
+
+      {d.proteinSides && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(d.proteinSides.ttl, lang)}</div>
+          <table className="t">
+            <thead><tr>{d.proteinSides.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {d.proteinSides.rows.map(([name, kcal, na, prot, rating, cls], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(name, lang)}</strong></td>
+                  <td className="num-cell">{kcal}</td>
+                  <td className="num-cell">{typeof na === "string" ? na : Tt(na, lang)}</td>
+                  <td className="num-cell">{prot}</td>
+                  <td><span className={"tag " + (cls === "ok" ? "ok" : cls === "bad" ? "bad" : "")}>{Tt(rating, lang)}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>)}
+
+      {d.tofu && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(d.tofu.ttl, lang)}</div>
+          <table className="t">
+            <thead><tr>{d.tofu.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {d.tofu.rows.map(([name, na, cls, note], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(name, lang)}</strong></td>
+                  <td className="num-cell">{typeof na === "string" ? na : Tt(na, lang)}</td>
+                  <td><span className={"tag " + (cls === "ok" ? "ok" : cls === "bad" ? "bad" : "")}>
+                    {cls === "ok" ? (lang === "en" ? "Excellent" : "極佳") : cls === "bad" ? (lang === "en" ? "Avoid" : "避免") : (lang === "en" ? "Limit" : "限量")}
+                  </span></td>
+                  <td>{Tt(note, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>)}
+
+      {d.drinks && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(d.drinks.ttl, lang)}</div>
+          <table className="t">
+            <thead><tr>{d.drinks.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {d.drinks.rows.map(([name, kcal, na, prot, note], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(name, lang)}</strong></td>
+                  <td className="num-cell">{kcal}</td>
+                  <td className="num-cell">{na}</td>
+                  <td className="num-cell">{prot}</td>
+                  <td>{Tt(note, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>)}
+
+      {d.beverage && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(d.beverage.ttl, lang)}</div>
+          <p className="body">{Tt(d.beverage.sub, lang)}</p>
+          <table className="t">
+            <thead><tr>{d.beverage.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {d.beverage.rows.map(([time, drink, target], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(time, lang)}</strong></td>
+                  <td>{Tt(drink, lang)}</td>
+                  <td>{Tt(target, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="callout" style={{marginTop: 8}}>
+            <strong>{Tt(d.beverage.note.ttl, lang)}：</strong> {Tt(d.beverage.note.body, lang)}
+          </div>
+        </div>
+      </>)}
+
+      {d.dinnerBrands && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(d.dinnerBrands.ttl, lang)}</div>
+          <p className="body">{Tt(d.dinnerBrands.familyNote, lang)}</p>
+          <table className="t">
+            <thead><tr>{d.dinnerBrands.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {d.dinnerBrands.rows.map(([brand, feat, rec, price], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(brand, lang)}</strong></td>
+                  <td>{Tt(feat, lang)}</td>
+                  <td>{Tt(rec, lang)}</td>
+                  <td className="num-cell">{price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="body" style={{marginTop: 8}}><strong>{Tt(d.dinnerBrands.mantra, lang)}</strong></p>
+        </div>
+      </>)}
+
+      {d.principles && (<>
+        <div className="spacer-20" />
+        <div className="callout">
+          <div style={{fontWeight: 600, marginBottom: 8}}>{Tt(d.principles.ttl, lang)}</div>
+          <ol style={{paddingLeft: 20, margin: 0}}>
+            {d.principles.items[lang].map((it, i) => <li key={i} style={{marginBottom: 4}}>{it}</li>)}
+          </ol>
+        </div>
+      </>)}
+
+      {d.fruits && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(d.fruits.ttl, lang)}</div>
+          <p className="body">{Tt(d.fruits.sub, lang)}</p>
+          <table className="t">
+            <thead><tr>{d.fruits.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {d.fruits.rows.map(([name, frc, suit, cls], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(name, lang)}</strong></td>
+                  <td className="num-cell">{frc}</td>
+                  <td><span className={"tag " + (cls === "ok" ? "ok" : cls === "bad" ? "bad" : "")}>{Tt(suit, lang)}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>)}
     </div>
   );
 }
@@ -287,6 +504,44 @@ function PanelExercise({ lang }) {
           ? "Avoid high-intensity exercise (lactic acid blocks UA excretion). Stick to RPE 4–6/10. Hydrate 500 mL pre, 200 mL/15 min during."
           : "避免高強度運動（乳酸抑制尿酸排泄）。維持 RPE 4–6/10。運動前 500 mL，運動中每 15 分鐘 200 mL。"}
       </div>
+
+      {e.selfCheck && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(e.selfCheck.ttl, lang)}</div>
+          <table className="t">
+            <thead><tr>{e.selfCheck.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {e.selfCheck.rows.map(([chk, ok, warn, fix], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(chk, lang)}</strong></td>
+                  <td>{Tt(ok, lang)}</td>
+                  <td>{Tt(warn, lang)}</td>
+                  <td>{Tt(fix, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>)}
+
+      {e.phases && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(e.phases.ttl, lang)}</div>
+          <div className="grid-3" style={{marginTop: 10}}>
+            {e.phases.items.map((p, i) => (
+              <div key={i} className="combo">
+                <div className="kicker">{Tt(p.range, lang)} · {p.vol}</div>
+                <div style={{fontFamily: "var(--font-serif)", fontSize: 28, letterSpacing: "-0.02em", lineHeight: 1, marginTop: 4}}>
+                  {lang === "en" ? `Phase ${p.ph}` : `階段 ${p.ph}`}
+                </div>
+                <div style={{fontSize: 13, color: "var(--ink-3)", marginTop: 8, lineHeight: 1.5}}>{Tt(p.body, lang)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </>)}
     </div>
   );
 }
@@ -325,6 +580,150 @@ function PanelSupps({ lang }) {
         <strong>{lang === "en" ? "Monthly total (active stack):" : "月總費用（現用組合）："}</strong>{" "}
         NT$ 4,520–6,590. {lang === "en" ? "Creatine pending RT resumption · NAC removed · NOW EGCG discontinued (AST 27→38)." : "肌酸待重訓恢復後加入 · NAC 已移除 · NOW EGCG 已停用（AST 27→38）。"}
       </div>
+
+      {DD.suppsDetail && DD.suppsDetail.fullStack && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(DD.suppsDetail.fullStack.ttl, lang)}</div>
+          <table className="t">
+            <thead><tr>{DD.suppsDetail.fullStack.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {DD.suppsDetail.fullStack.rows.map(([pri, item, dose, time, cost], i) => (
+                <tr key={i}>
+                  <td className="num-cell"><strong>{pri}</strong></td>
+                  <td>{item}</td>
+                  <td>{dose}</td>
+                  <td>{Tt(time, lang)}</td>
+                  <td className="num-cell" style={{fontFamily: "var(--font-mono)"}}>{cost}</td>
+                </tr>
+              ))}
+              <tr style={{background: "var(--bg-soft)"}}>
+                <td colSpan="4"><strong>{Tt(DD.suppsDetail.fullStack.total, lang)}</strong></td>
+                <td></td>
+              </tr>
+              {DD.suppsDetail.fullStack.pending.map((p, i) => (
+                <tr key={"pend-" + i} style={{opacity: 0.55}}>
+                  <td>—</td>
+                  <td>{p.item}</td>
+                  <td>{p.dose}</td>
+                  <td>{Tt(p.reason, lang)}</td>
+                  <td className="num-cell" style={{fontFamily: "var(--font-mono)"}}>{p.cost}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="callout" style={{marginTop: 8}}>
+            <strong>{Tt(DD.suppsDetail.fullStack.foodForm.ttl, lang)}：</strong>{" "}
+            {Tt(DD.suppsDetail.fullStack.foodForm.body, lang)}
+          </div>
+        </div>
+      </>)}
+
+      {DD.suppsDetail && DD.suppsDetail.rtg && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(DD.suppsDetail.rtg.ttl, lang)}</div>
+          <table className="t">
+            <thead><tr>{DD.suppsDetail.rtg.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {DD.suppsDetail.rtg.rows.map(([form, fname, conc, abs, note], i) => (
+                <tr key={i}>
+                  <td><strong>{form}</strong></td>
+                  <td>{Tt(fname, lang)}</td>
+                  <td className="num-cell">{conc}</td>
+                  <td className="num-cell">{abs}</td>
+                  <td>{Tt(note, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="body" style={{marginTop: 8}}>{Tt(DD.suppsDetail.rtg.note, lang)}</p>
+          <div className="callout" style={{marginTop: 8}}>
+            <strong>{lang === "en" ? "Taiwan regulation: " : "台灣法規："}</strong>{Tt(DD.suppsDetail.rtg.taiwan, lang)}
+          </div>
+        </div>
+      </>)}
+
+      {DD.suppsDetail && DD.suppsDetail.citrulline && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(DD.suppsDetail.citrulline.ttl, lang)}</div>
+          <p className="body">{Tt(DD.suppsDetail.citrulline.intro, lang)}</p>
+          <ol style={{paddingLeft: 20, margin: "8px 0"}}>
+            {DD.suppsDetail.citrulline.points[lang].map((it, i) => <li key={i} style={{marginBottom: 6, fontSize: 13, lineHeight: 1.5}}>{it}</li>)}
+          </ol>
+          <p className="body" style={{marginTop: 8}}><strong>{lang === "en" ? "BP data: " : "血壓數據："}</strong>{Tt(DD.suppsDetail.citrulline.bp, lang)}</p>
+          <div className="callout" style={{marginTop: 8}}>
+            <strong>{lang === "en" ? "Current dosing (2026-04-21): " : "現行劑量（2026-04-21）："}</strong>{Tt(DD.suppsDetail.citrulline.dose, lang)}
+          </div>
+        </div>
+      </>)}
+
+      {DD.suppsDetail && DD.suppsDetail.hibiscus && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(DD.suppsDetail.hibiscus.ttl, lang)}</div>
+          <ul className="body" style={{paddingLeft: 18, margin: "4px 0"}}>
+            {DD.suppsDetail.hibiscus.points[lang].map((it, i) => <li key={i} style={{marginBottom: 6, fontSize: 13, lineHeight: 1.5}}>{it}</li>)}
+          </ul>
+          <div className="callout warn" style={{marginTop: 8}}>
+            <div style={{fontWeight: 600, marginBottom: 6}}>{Tt(DD.suppsDetail.hibiscus.safety.ttl, lang)}</div>
+            <ul style={{paddingLeft: 18, margin: 0}}>
+              {DD.suppsDetail.hibiscus.safety.items[lang].map((it, i) => <li key={i} style={{marginBottom: 4}}>{it}</li>)}
+            </ul>
+          </div>
+        </div>
+      </>)}
+
+      {DD.suppsDetail && DD.suppsDetail.creatine && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(DD.suppsDetail.creatine.ttl, lang)}</div>
+          <p className="body"><strong>{lang === "en" ? "Benefits: " : "好處："}</strong>{Tt(DD.suppsDetail.creatine.benefits, lang)}</p>
+          <div style={{fontWeight: 600, marginTop: 10, fontSize: 13}}>{lang === "en" ? "Two caveats before adding:" : "加入前兩項警示："}</div>
+          <ol style={{paddingLeft: 20, margin: "4px 0"}}>
+            {DD.suppsDetail.creatine.caveats[lang].map((it, i) => <li key={i} style={{marginBottom: 4, fontSize: 13, lineHeight: 1.5}}>{it}</li>)}
+          </ol>
+          <div className="callout" style={{marginTop: 8}}>
+            <strong>{lang === "en" ? "Decision trigger: " : "加入時機："}</strong>{Tt(DD.suppsDetail.creatine.trigger, lang)}
+          </div>
+        </div>
+      </>)}
+
+      {DD.suppsDetail && DD.suppsDetail.plans && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(DD.suppsDetail.plans.ttl, lang)}</div>
+          <div className="grid-2" style={{marginTop: 10}}>
+            {[DD.suppsDetail.plans.planA, DD.suppsDetail.plans.planB].map((plan, idx) => (
+              <div key={idx} style={{padding: 14, border: "1px solid var(--line)", borderRadius: "var(--radius-sm)"}}>
+                <div className="h3" style={{margin: 0, fontSize: 14}}>{Tt(plan.ttl, lang)}</div>
+                <table className="t" style={{marginTop: 8}}>
+                  <tbody>
+                    {plan.rows.map(([item, spec, use, cost], i) => (
+                      <tr key={i}>
+                        <td><strong>{Tt(item, lang)}</strong></td>
+                        <td style={{fontSize: 12}}>{spec}</td>
+                        <td style={{fontSize: 12}}>{Tt(use, lang)}</td>
+                        <td className="num-cell" style={{fontFamily: "var(--font-mono)", fontSize: 12}}>{cost}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div style={{marginTop: 8, fontWeight: 700, fontFamily: "var(--font-mono)"}}>
+                  {idx === 0 ? (lang === "en" ? "Total: " : "月總：") : (lang === "en" ? "Total: " : "月總：")}{plan.total}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="callout" style={{marginTop: 12}}>
+            <strong>{lang === "en" ? "Where does the savings go? " : "省下的錢去哪？"}</strong>{Tt(DD.suppsDetail.plans.savings, lang)}
+          </div>
+          <div className="callout" style={{marginTop: 8}}>
+            <strong>{lang === "en" ? "Bottom line: " : "結論："}</strong>{Tt(DD.suppsDetail.plans.bottom, lang)}
+          </div>
+        </div>
+      </>)}
     </div>
   );
 }
@@ -371,6 +770,52 @@ function PanelRoutine({ lang }) {
           <span className="legend-item"><span className="dot" style={{background:"var(--ink-3)"}}/>{lang === "en" ? "Cutoff" : "停止"}</span>
         </div>
       </div>
+
+      {DD.routineDetail && DD.routineDetail.hourly && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(DD.routineDetail.hourly.ttl, lang)}</div>
+          <table className="t">
+            <thead><tr>{DD.routineDetail.hourly.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {DD.routineDetail.hourly.rows.map(([time, act, hyd, note], i) => (
+                <tr key={i}>
+                  <td><strong style={{fontFamily: "var(--font-mono)"}}>{time}</strong></td>
+                  <td>{Tt(act, lang)}</td>
+                  <td>{typeof hyd === "string" ? hyd : Tt(hyd, lang)}</td>
+                  <td style={{fontSize: 12, lineHeight: 1.5}}>{Tt(note, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="callout" style={{marginTop: 8}}>
+            <strong>{lang === "en" ? "Daily hydration: " : "每日補水："}</strong>{Tt(DD.routineDetail.hourly.hydrationTotal, lang)}
+          </div>
+        </div>
+      </>)}
+
+      {DD.routineDetail && DD.routineDetail.summary && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(DD.routineDetail.summary.ttl, lang)}</div>
+          <ul className="body" style={{paddingLeft: 18, margin: "8px 0 0"}}>
+            {DD.routineDetail.summary.items[lang].map((it, i) => <li key={i} style={{marginBottom: 6, fontSize: 13, lineHeight: 1.5}}>{it}</li>)}
+          </ul>
+          <div className="spacer-12" />
+          <div className="h3" style={{fontSize: 14}}>{lang === "en" ? "Daily extras (added 2026-04-22)" : "每日附加（2026-04-22 新增）"}</div>
+          <ul className="body" style={{paddingLeft: 18, margin: "4px 0 0"}}>
+            {DD.routineDetail.summary.extras[lang].map((it, i) => <li key={i} style={{marginBottom: 4, fontSize: 13, lineHeight: 1.5}}>{it}</li>)}
+          </ul>
+        </div>
+      </>)}
+
+      {DD.routineDetail && DD.routineDetail.bpTips && (<>
+        <div className="spacer-20" />
+        <div className="callout">
+          <div style={{fontWeight: 600, marginBottom: 6}}>{Tt(DD.routineDetail.bpTips.ttl, lang)}</div>
+          <div style={{fontSize: 13, lineHeight: 1.55}}>{Tt(DD.routineDetail.bpTips.body, lang)}</div>
+        </div>
+      </>)}
     </div>
   );
 }
@@ -395,6 +840,7 @@ function PanelTimeline({ lang }) {
 
 /* ===== Safety ===== */
 function PanelSafety({ lang }) {
+  const sd = DD.safetyDetail;
   return (
     <div className="section">
       <div className="kicker">{lang === "en" ? "Read before starting" : "啟動前必讀"}</div>
@@ -407,6 +853,78 @@ function PanelSafety({ lang }) {
           </div>
         ))}
       </div>
+
+      {sd && sd.liver && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(sd.liver.ttl, lang)}</div>
+          <p className="body">{Tt(sd.liver.body, lang)}</p>
+          <table className="t">
+            <thead><tr>{sd.liver.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {sd.liver.rows.map(([m, m0, m3, m6], i) => (
+                <tr key={i}>
+                  <td><strong>{typeof m === "string" ? m : Tt(m, lang)}</strong></td>
+                  <td>{typeof m0 === "string" ? m0 : Tt(m0, lang)}</td>
+                  <td>{typeof m3 === "string" ? m3 : Tt(m3, lang)}</td>
+                  <td className="num-cell">{typeof m6 === "string" ? m6 : Tt(m6, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>)}
+
+      {sd && sd.medicalVisits && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(sd.medicalVisits.ttl, lang)}</div>
+          <table className="t">
+            <thead><tr>{sd.medicalVisits.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {sd.medicalVisits.rows.map(([p, w, when], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(p, lang)}</strong></td>
+                  <td>{Tt(w, lang)}</td>
+                  <td>{typeof when === "string" ? when : Tt(when, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>)}
+
+      {sd && sd.warningSigns && (<>
+        <div className="spacer-20" />
+        <div className="grid-2">
+          <div className="callout bad" style={{padding: 18}}>
+            <div style={{fontWeight: 600, fontSize: 15, marginBottom: 6}}>{Tt(sd.warningSigns.immediate.ttl, lang)}</div>
+            <ul style={{paddingLeft: 18, margin: 0, fontSize: 13, lineHeight: 1.55}}>
+              {sd.warningSigns.immediate.items[lang].map((it, i) => <li key={i} style={{marginBottom: 4}}>{it}</li>)}
+            </ul>
+          </div>
+          <div className="callout warn" style={{padding: 18}}>
+            <div style={{fontWeight: 600, fontSize: 15, marginBottom: 6}}>{Tt(sd.warningSigns.soon.ttl, lang)}</div>
+            <ul style={{paddingLeft: 18, margin: 0, fontSize: 13, lineHeight: 1.55}}>
+              {sd.warningSigns.soon.items[lang].map((it, i) => <li key={i} style={{marginBottom: 4}}>{it}</li>)}
+            </ul>
+          </div>
+        </div>
+      </>)}
+
+      {sd && sd.exerciseSafety && (<>
+        <div className="spacer-20" />
+        <div className="grid-2">
+          <div className="callout bad" style={{padding: 18}}>
+            <div style={{fontWeight: 600, fontSize: 15, marginBottom: 6}}>{Tt(sd.exerciseSafety.wallSit.ttl, lang)}</div>
+            <div style={{fontSize: 13, lineHeight: 1.55}}>{Tt(sd.exerciseSafety.wallSit.body, lang)}</div>
+          </div>
+          <div className="callout warn" style={{padding: 18}}>
+            <div style={{fontWeight: 600, fontSize: 15, marginBottom: 6}}>{Tt(sd.exerciseSafety.ua.ttl, lang)}</div>
+            <div style={{fontSize: 13, lineHeight: 1.55}}>{Tt(sd.exerciseSafety.ua.body, lang)}</div>
+          </div>
+        </div>
+      </>)}
     </div>
   );
 }
