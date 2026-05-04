@@ -1,6 +1,7 @@
 /* ============ Health Reversal Plan — panels ============ */
 const Tt = window.t;
 const DD = window.HC_DATA;
+const Icon = window.Icon;
 
 // Compute "weeks since start" — week 1 = days 1-7 from start
 function weeksSince(startISO) {
