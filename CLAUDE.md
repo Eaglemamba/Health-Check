@@ -1,6 +1,6 @@
 # Health-Check
 
-個人健康追蹤系統，使用 Markdown 檔案記錄每日健康數據並定期回顧。
+個人健康追蹤系統，使用 Markdown 檔案記錄每日健康數據並定期回顧。前端為 React 單頁 PWA（6-Month Health Reversal Plan），可加到 iPhone 桌面當原生 app 用，部署於 GitHub Pages。
 
 ## 專案結構
 
@@ -13,14 +13,34 @@ templates/                  # 模板與指令
   daily-command.md          # 每日 check-in 流程指令
   food.md                   # 每日飲食紀錄模板
 scripts/
-  generate_dashboard.py     # 健康儀表板圖表生成腳本
+  generate_dashboard.py     # 健康儀表板圖表生成腳本（matplotlib PNG）
+  sync_data_js.py           # 從 reviews/daily/*.md 同步最新值至 data.js
+  sync_garmin_daily.py      # 抓取 Garmin 昨夜睡眠 + 今晨 SpO2
+  analyze_spo2_desats.py    # SpO2 epoch-level 全夜圖 + 整體趨勢圖
+  log_hydration.py          # 將昨日飲水量回寫至 Garmin Connect
 reviews/
   daily/                    # 每日紀錄（YYYY-MM-DD.md）
+    spo2/                   # 每日 SpO2 epoch-level 圖 + 趨勢圖
   weekly/                   # 每週回顧（YYYY-Wxx.md）
   monthly/                  # 每月回顧（YYYY-MM.md）
-  annual/                   # 年度健康評估報告（YYYY.md）
+  annual/                   # 年度健康評估報告（YYYY-MM-DD.md，含子資料夾歸檔）
   food/                     # 每日飲食紀錄（YYYY-MM-DD.md）
   health_dashboard.png      # 健康趨勢儀表板圖表（自動生成）
+articles/                   # 前瞻性指南（補充品、健檢加測等）
+  archive/                  # 被新版取代的歷史指南；不再修改
+
+# 前端 PWA — 6-Month Health Reversal Plan（React + Babel-standalone CDN）
+index.html                  # HTML shell（PWA meta、SW 註冊、Babel 編譯 JSX）
+data.js                     # 雙語（EN/ZH）資料層 — hero / markers / panels / tracker
+styles.css                  # 主題 + 密度 + Hero variant CSS
+components-core.jsx         # Hero、Marker、Tabs、Icon
+components-panels.jsx       # 11 個 panel（overview/sleep/diet/exercise/running/supps/routine/timeline/safety/dashboard/tracker）
+tweaks-panel.jsx            # 右下角即時調整面板
+manifest.webmanifest        # PWA manifest
+sw.js                       # Service Worker（cache-first，離線可用）
+icons/                      # PWA icon（apple-touch / 192 / 512 / maskable）
+
+analyzer.html               # 年度健檢數據獨立分析頁（仍為 vanilla JS）
 ```
 
 ## 每日 Check-in 流程
@@ -29,9 +49,31 @@ reviews/
 
 填寫完成後，同步將當天數據更新至對應的 weekly review 檔案。若該週檔案不存在，從 `templates/weekly.md` 建立。
 
-### 儀表板圖表更新
+### 儀表板與 data.js 同步（commit 前**必做**）
 
-每次 daily check-in 完成並 commit 前，**必須**執行 `python3 scripts/generate_dashboard.py` 重新生成 `reviews/health_dashboard.png`，將更新後的圖表一併加入同一個 commit。圖表包含體重、血壓/心率、Sleep Score 三組趨勢圖（最多顯示近 14 天）。
+每次 daily check-in 完成並 commit 前，依序執行：
+
+1. **`python3 scripts/generate_dashboard.py`** — 重新生成 `reviews/health_dashboard.png`（體重、體組成、血壓/心率、Sleep Score 四組趨勢圖）
+2. **`python3 scripts/sync_data_js.py`** — 從 `reviews/daily/*.md` 與最近收盤 ISO 週的 BP 解析最新值，寫回 `data.js` 對應欄位：
+   - `hero.currentWeight` / `currentWeightDate`（最新週六正式體重）
+   - `hero.progressMeta`（Day N · X.X kg）
+   - `hero.startDate`（Last sync M/D）
+   - `markers[heart] / [sleep] / [weight]` 的 val + delta
+   - `tracker.bp / weight / sleep / bb`（last 14 days，缺值 forward-fill）
+   - **idempotent，無變化會印 `data.js: no changes`**
+3. 將 daily / weekly / `health_dashboard.png` / `data.js` 一併 commit & push
+
+PWA 部署於 `https://eaglemamba.github.io/Health-Check/`（GitHub Pages）。Service Worker 在下次開 PWA 時自動拉新版 data.js。SW 邏輯有變動時 bump `sw.js` 內 `VERSION` 字串。
+
+## 重要規則
+
+- **日期確認**：每次使用者輸入「daily」或「health check」啟動 check-in 時，**第一步必須**用 `date` 指令取得當前台灣時間（TZ=Asia/Taipei），確認正確日期後再建立檔案。不依賴系統提供的日期資訊，以台灣時間為準。
+- 語言：所有健康紀錄與模板使用**繁體中文**
+- 每次 check-in 控制在 3 分鐘內，簡潔不討論
+- 體重：以**週六早晨**為正式週記錄（排尿後、進食前）— 週六是連續 5 個工作日執行後、週末大餐尚未開始前的最低真實值；其他日可選填
+- 血壓：連量兩次取第二次；收縮壓 > 160 或 < 90 提醒就醫
+- Sleep Score 連續三天 < 65 → 提醒檢視睡眠修復方案
+- 身體信號連續三天非「清」→ 提醒關注趨勢
 
 ## 重要規則
 
@@ -102,10 +144,12 @@ reviews/
 
 3. **更新前瞻性參考文件中的當前狀態**
    - `articles/{新日期}-mackay-checkup-addons.md`（若需新建）以新值為基準
-   - **`index.html` 必須同步**：
-     - 「Daily Routine & Hydration / 每日作息與補水」表格的補品時程欄位（早餐打包、午餐註記、晚餐後魚油+EGCG、睡前鎂+酸櫻桃）必須與新指南第七節 1:1 一致
-     - 表格上方的「Supplement timing source of truth / 補品時程權威來源」連結改為新指南檔名
-     - 其他引用具體數值的描述（如 UA、LDL 等）更新為最新值
+   - **`data.js` 必須同步**（**新版 React PWA 的資料來源**，舊版單檔 `index.html` 已歸檔至 `articles/archive/`）：
+     - `routineDetail.hourly.rows` 的補品時程欄位（早餐打包、午餐註記、晚餐後魚油+EGCG、睡前鎂+酸櫻桃）必須與新指南第七節 1:1 一致
+     - `suppsDetail.fullStack` 的優先序、劑量、時機、月成本對齊新指南
+     - `markers[]`、`overview.profile`、`hero.progressMeta` 內引用的具體數值（UA / LDL / HbA1c / 體重等）更新為最新值
+     - `data.js` 注釋頭可加 `Source of truth: articles/{新日期}-supplement-guide.md`
+   - 每日數據（hero.currentWeight、markers BP/Sleep/Weight、tracker 14 天）由 `scripts/sync_data_js.py` 自動從 daily reviews 拉取，不需手改
    - 歷史記錄（`reviews/annual/YYYY.md`、`reviews/annual/YYYY-causal-map.html` 等）**不得修改**
 
 4. **commit 訊息格式**

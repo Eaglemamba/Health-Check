@@ -25,3 +25,7 @@ Thumbs.db
 # Logs
 logs/
 *.log
+
+# Node / Bun (used for SSR tests of the React PWA only; not runtime)
+node_modules/
+bun.lock
