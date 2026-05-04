@@ -1,4 +1,4 @@
-const VERSION = 'v4-2026-05-04';
+const VERSION = 'v5-2026-05-04';
 const CORE = './';
 const CORE_FILES = [
   './',
