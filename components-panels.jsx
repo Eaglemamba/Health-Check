@@ -883,6 +883,30 @@ function PanelSafety({ lang }) {
         </div>
       </>)}
 
+      {sd && sd.uricAcidEtiology && (<>
+        <div className="spacer-20" />
+        <div className="card" style={{borderTop: "3px solid var(--uric)"}}>
+          <div className="h3" style={{color: "var(--uric)"}}>{Tt(sd.uricAcidEtiology.ttl, lang)}</div>
+          <p className="body">{Tt(sd.uricAcidEtiology.intro, lang)}</p>
+          <table className="t">
+            <thead><tr>{sd.uricAcidEtiology.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {sd.uricAcidEtiology.rows.map(([phase, age, exp, eff], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(phase, lang)}</strong></td>
+                  <td className="num-cell">{age}</td>
+                  <td style={{fontSize: 12}}>{Tt(exp, lang)}</td>
+                  <td style={{fontSize: 12}}>{Tt(eff, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="callout" style={{marginTop: 8}}>
+            <strong>{lang === "en" ? "Reframed implication: " : "重新框架後的意義："}</strong>{Tt(sd.uricAcidEtiology.implication, lang)}
+          </div>
+        </div>
+      </>)}
+
       {sd && sd.uricAcidProtocol && (<>
         <div className="spacer-20" />
         <div className="card">
