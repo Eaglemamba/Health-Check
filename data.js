@@ -77,23 +77,25 @@ window.HC_DATA = {
   overview: {
     profile: {
       en: [
+        ["ECG LVH", "11-yr chronic (since 2015 age 26) · 2026-03-25 added biatrial enlargement + anterior ST↑ · echo + 24h Holter pending"],
         ["Bedtime", "22:00–22:40 (target 22:30)"],
         ["Actual sleep", "6.0–7.2 h · W17 avg Sleep Score 71.4"],
         ["Garmin (W17)", "Body Battery 56.7 · RHR 56–61"],
-        ["BP (W17 avg)", "122/71 mmHg · ✓ <130 target"],
+        ["BP (W18 avg)", "124/72 mmHg · meets <130 general · LVH-target <125/75 borderline"],
         ["Weight (5/2 Sat)", "67.8 kg · 20.2% BF · VFL 9.5"],
-        ["OSA flag", "T90 18.4% on 5/4 · POSA trial 5/5–5/8"],
+        ["OSA flag", "T90 18.4% on 5/4 · POSA trial 5/5–5/8 · driving LVH/biatrial progression"],
         ["Running", "Started 4/26 — building base"],
         ["Current supps", "Omega-3 4g, hibiscus, D3K2, cherry, Mg, citrulline, psyllium 10g"],
         ["Discontinued", "NOW EGCG (AST 27→38, stopped 4/21)"],
       ],
       zh: [
+        ["ECG LVH", "11 年慢性（2015 age 26 起）· 2026-03-25 新增雙心房擴大 + 前壁 ST↑ · 心臟超音波 + 24h Holter 待安排"],
         ["就寢時間", "22:00–22:40（目標 22:30）"],
         ["實際睡眠", "6.0–7.2 小時 · W17 平均 Sleep Score 71.4"],
         ["Garmin（W17）", "身體電量 56.7 · RHR 56–61"],
-        ["血壓（W17 週均）", "122/71 mmHg · ✓ 已達 <130 目標"],
+        ["血壓（W18 週均）", "124/72 mmHg · 一般 <130 達標 · LVH 目標 <125/75 仍邊緣"],
         ["體重（5/2 週六）", "67.8 公斤 · 體脂 20.2% · 內臟 9.5"],
-        ["OSA 紅旗", "5/4 T90 18.4% · 體位治療試驗 5/5–5/8"],
+        ["OSA 紅旗", "5/4 T90 18.4% · 體位治療試驗 5/5–5/8 · 持續推進 LVH / 雙心房擴大"],
         ["跑步", "4/26 開始，建立基礎中"],
         ["目前保健品", "Omega-3 4g、洛神花、D3K2、酸櫻桃、鎂、瓜胺酸、洋車前子 10g"],
         ["已停用", "NOW EGCG（AST 27→38，4/21 停用）"],
@@ -918,9 +920,9 @@ window.HC_DATA = {
                 zh: "衛福部每日 EPA+DHA 上限 2 公克。4 顆 = 1,920 mg，剛在上限內。" },
     },
     citrulline: {
-      ttl: { en: "L-Citrulline → NO pathway → LVH protection", zh: "L-瓜胺酸 → NO 路徑 → LVH 保護" },
-      intro: { en: "L-Citrulline is converted in kidneys to L-arginine, which eNOS uses to synthesize NO. NO has 5 direct connections to LVH:",
-               zh: "L-瓜胺酸在腎臟轉成 L-精胺酸，eNOS 用之合成 NO。NO 對 LVH 有 5 個直接連結：" },
+      ttl: { en: "L-Citrulline → NO pathway → LVH adjunct (existing 11-yr LVH)", zh: "L-瓜胺酸 → NO 路徑 → LVH 輔助（已有 11 年慢性 LVH）" },
+      intro: { en: "Context: ECG-confirmed LVH since 2015 (age 26), with biatrial enlargement + anterior ST elevation newly added 2026-03-25. Citrulline is NOT the primary tool — RAAS blockade (ARB / ACEi) is first-line for LVH regression (LIFE trial: losartan reduced LV mass index −25 g/m² over 4.8 yr). Citrulline's role is adjunctive: protect the NO pool that UA 8.9 is depleting via peroxynitrite, while ARB / ACEi (or other clinical decisions) catch up. NO has 5 mechanistic links to LVH:",
+               zh: "背景：2015（age 26）起 ECG 確認 LVH，2026-03-25 新增雙心房擴大 + 前壁 ST 抬升。瓜胺酸**不是主力**—RAAS 阻斷（ARB / ACEi）才是 LVH regression 一線（LIFE 試驗：losartan 4.8 年降 LV mass index −25 g/m²）。瓜胺酸是輔助：在 ARB / ACEi 等臨床決策跟上前，先把尿酸 8.9 透過 peroxynitrite 耗損的 NO 池子撐住。NO 對 LVH 有 5 個機制連結：" },
       points: {
         en: [
           "Directly opposes LVH progression. NO is anti-hypertrophic via BP reduction + RAAS/SNS modulation [Ahmad 2018, PMC6164974]. In SHR/LVH rat models, eNOS dropped ~35%; L-arginine 5 weeks → eNOS +27%, heart index −53% [Ahmad et al. 2016, J Physiol Pharmacol, PMID: 27010893].",
@@ -941,6 +943,13 @@ window.HC_DATA = {
             zh: "Luo 2025 meta（15 項 RCT、415 人，含 L-瓜胺酸或西瓜介入）：中老年 SBP −4.02 mmHg [95% CI −6.54 至 −1.50]、DBP −2.54 mmHg [95% CI −4.27 至 −0.81]。瓜胺酸 + 精胺酸組合：SBP −10.44 mmHg [95% CI −13.57 至 −7.31] [PMID: 40789388]。較早的 meta（Barkhidarian 2019，8 項 RCT）：DBP 顯著降低僅 ≥6g/日 [PMID: 30788274]。" },
       dose: { en: "Current: 2g/day at breakfast only. Below RCT 3–6g/day for BP. At 2g contributes ~1–2 mmHg in NO stack. If LDL+HDL+BP stall, escalate to breakfast 3g (single dose above threshold) before splitting. Avoid with PDE5i; pause if home BP <110/70.",
               zh: "現況：早餐 2g（不分次）。低於 RCT 3–6g/日。2g 在 NO 組合中貢獻 ~1–2 mmHg。LDL+HDL+BP 卡關時先升早餐 3g（單次過門檻），不分次。與 PDE5i（威而鋼）併用要小心；家中 BP <110/70 暫停。" },
+      regression: {
+        ttl: { en: "LVH regression — what's actually achievable", zh: "LVH 逆轉 — 實際可達成的範圍" },
+        body: {
+          en: "Yes, LVH can regress (cardiomyocytes shrink via autophagy + ubiquitin-proteasome; some interstitial fibrosis is reversible if not yet calcified). Realistic timeline with this protocol: (a) 6 months — halt progression of biatrial enlargement + prevent further wall thickening (minimum bar); (b) 1–2 yr with ARB / ACEi + sustained BP <125/75 + OSA fixed — echo LV mass starts dropping; (c) 3–5 yr — significant regression possible if fibrosis hasn't calcified. Drug class matters: ARB ~−13% LV mass, ACEi ~−10%, CCB ~−11%, β-blocker ~−6% (Klingbeil 2003 meta). Lifestyle / supplements alone cannot regress established 11-yr LVH — RAAS blockade discussion at next clinic visit is the highest-leverage step.",
+          zh: "LVH 確實可逆轉（心肌細胞透過 autophagy + ubiquitin-proteasome 路徑縮回；間質纖維化若尚未鈣化部分可逆）。本計畫實際時程：(a) 6 個月 — 阻止雙心房擴大進展 + 不再增厚（最低門檻）；(b) 1–2 年配合 ARB / ACEi + BP <125/75 + OSA 修好 — echo LV mass 開始下降；(c) 3–5 年 — 若纖維化未鈣化，可顯著回縮。藥物類別差很多：ARB 約 LV mass −13%、ACEi −10%、CCB −11%、β-blocker −6%（Klingbeil 2003 meta）。**單靠生活方式 / 補品無法逆轉已存在 11 年的 LVH**—下次回診主動討論 ARB / ACEi 是槓桿最大的一步。",
+        },
+      },
     },
     hibiscus: {
       ttl: { en: "Hibiscus tea — strongest herbal BP evidence", zh: "洛神花茶 — 最強草本降壓證據" },
@@ -1127,6 +1136,39 @@ window.HC_DATA = {
 
   // ===== Safety detail =====
   safetyDetail: {
+    triadPriority: {
+      ttl: { en: "LVH + OSA + UA 8.9 — three-factor priority", zh: "LVH + OSA + 尿酸 8.9 — 三因子優先處置" },
+      intro: { en: "These three findings interact and amplify each other. Each has a high-leverage clinical action that no supplement can replace. Order is by leverage on cardiovascular outcome.",
+               zh: "這三項共病彼此放大，各自都有保健品無法取代的臨床高槓桿動作。以心血管預後槓桿排序。" },
+      head: { en: ["Priority", "Action", "Why high-leverage"],
+              zh: ["優先", "動作", "槓桿原因"] },
+      rows: [
+        ["1",
+          { en: "Echo + LV mass index + 24h Holter", zh: "心臟超音波 + LV mass index + 24h Holter" },
+          { en: "11-yr ECG LVH unconfirmed by imaging. Echo decides: true LVH (mass >115 g/m²) vs ECG-voltage false-positive. Sets baseline before any drug discussion. Holter screens for arrhythmia and silent ischemia.",
+            zh: "11 年 ECG LVH 從未影像確診。Echo 決定：真 LVH（mass >115 g/m²）vs ECG 伏特偽陽。是任何藥物討論前的 baseline。Holter 篩心律不整 + 無症狀缺血。" }],
+        ["2",
+          { en: "PSG (sleep study) — POSA trial result by 5/8", zh: "PSG 多項睡眠生理檢查 — POSA 試驗 5/8 收尾" },
+          { en: "T90 18.4% (severe) is independent driver of LVH + biatrial enlargement. Without fixing OSA, no BP target is sustainable; nightly desat keeps re-injuring myocardium. CPAP / MAD / surgery decision needs PSG data.",
+            zh: "T90 18.4%（重度）是 LVH + 雙心房擴大的獨立驅動因子。OSA 不修，BP 怎麼降都不持久；每晚 desat 都重新打擊心肌。CPAP / MAD / 手術選擇靠 PSG 數據。" }],
+        ["3",
+          { en: "Cardiology consult — discuss ARB / ACEi", zh: "心臟科 — 討論 ARB / ACEi" },
+          { en: "RAAS blockade is the proven LVH-regression class (LIFE trial losartan: LV mass −25 g/m² over 4.8 yr; ARB ~−13% in meta vs β-blocker −6%). Lifestyle alone cannot regress 11-yr LVH. Ideally start AFTER echo confirms (so baseline mass is documented).",
+            zh: "RAAS 阻斷是 LVH regression 一線（LIFE 試驗 losartan 4.8 年降 LV mass −25 g/m²；meta ARB −13% vs β-blocker −6%）。單靠生活方式逆轉不了 11 年 LVH。理想於 echo 確診後啟動（讓 baseline mass 有紀錄）。" }],
+        ["4",
+          { en: "Nephrology — UA 8.9 evaluation", zh: "腎臟科 — 尿酸 8.9 評估" },
+          { en: "Constitutional hyperuricemia (UA 7.8 at 26 → 8.9 at 37) won't normalize on diet/supplements alone. Persistent UA depletes NO via peroxynitrite, accelerating endothelial / cardiac damage. Febuxostat / allopurinol decision belongs to specialist. Already referred — book.",
+            zh: "體質性高尿酸（26 歲 7.8 → 37 歲 8.9）不會單靠飲食 / 補品正常化。持續高尿酸透過 peroxynitrite 耗 NO，加速內皮 / 心肌損傷。Febuxostat / allopurinol 決策屬專科。已轉診，預約即可。" }],
+        ["5",
+          { en: "BP target reset to <125/75 (LVH-adjusted)", zh: "BP 目標重設為 <125/75（LVH 調整）" },
+          { en: "General <130 is too lax for LVH patient. ESC / AHA recommend <125/80 for LVH; <120/75 ideal but watch DBP not <70 (current DBP 72 already borderline). Reset cuff target on every BP measurement.",
+            zh: "一般人 <130 對 LVH 患者太寬。ESC / AHA 建議 LVH 患者 <125/80；<120/75 最理想但避免 DBP <70（目前 DBP 72 已邊緣）。每次量測對齊新目標。" }],
+        ["6",
+          { en: "LDL target reset to <100 (LVH + ischemia + UA = ASCVD high-risk)", zh: "LDL 目標重設為 <100（LVH + 心肌缺氧 + 尿酸 = ASCVD 高風險）" },
+          { en: "Standard <130 was framed for primary prevention. Combined LVH + ECG ischemia + UA 8.9 is high-risk; LDL <100 is the appropriate target. If July recheck >130, do not delay statin discussion to month 12.",
+            zh: "原 <130 是初級預防框架。LVH + ECG 心肌缺氧 + 尿酸 8.9 屬高風險；LDL <100 才是合適目標。7 月複檢若 >130，statin 討論不要拖到第 12 月。" }],
+      ],
+    },
     liver: {
       ttl: { en: "Fatty liver & GOT/GPT — what the numbers mean", zh: "脂肪肝與 GOT/GPT — 數字解讀" },
       body: { en: "Visceral fat drives hepatic steatosis via fructose → VLDL pathway. Fatty liver is silent until GOT/GPT elevate. Goji 45-day RCT improved GOT/GPT in metabolic syndrome [PMC5480053]. Include GOT, GPT, GGT in Month 0 baseline bloodwork.",

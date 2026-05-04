@@ -659,6 +659,12 @@ function PanelSupps({ lang }) {
           <div className="callout" style={{marginTop: 8}}>
             <strong>{lang === "en" ? "Current dosing (2026-04-21): " : "現行劑量（2026-04-21）："}</strong>{Tt(DD.suppsDetail.citrulline.dose, lang)}
           </div>
+          {DD.suppsDetail.citrulline.regression && (
+            <div className="callout warn" style={{marginTop: 8}}>
+              <div style={{fontWeight: 600, marginBottom: 6}}>{Tt(DD.suppsDetail.citrulline.regression.ttl, lang)}</div>
+              <div style={{fontSize: 13, lineHeight: 1.55}}>{Tt(DD.suppsDetail.citrulline.regression.body, lang)}</div>
+            </div>
+          )}
         </div>
       </>)}
 
@@ -856,6 +862,26 @@ function PanelSafety({ lang }) {
           </div>
         ))}
       </div>
+
+      {sd && sd.triadPriority && (<>
+        <div className="spacer-20" />
+        <div className="card" style={{borderTop: "3px solid var(--heart)"}}>
+          <div className="h3" style={{color: "var(--heart)"}}>{Tt(sd.triadPriority.ttl, lang)}</div>
+          <p className="body">{Tt(sd.triadPriority.intro, lang)}</p>
+          <table className="t">
+            <thead><tr>{sd.triadPriority.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {sd.triadPriority.rows.map(([pri, action, why], i) => (
+                <tr key={i}>
+                  <td className="num-cell"><strong>{pri}</strong></td>
+                  <td><strong>{Tt(action, lang)}</strong></td>
+                  <td style={{fontSize: 12, lineHeight: 1.5}}>{Tt(why, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>)}
 
       {sd && sd.liver && (<>
         <div className="spacer-20" />
