@@ -2,7 +2,7 @@
 
 *建立日期：2026-05-01*
 *前置文件：[2026-04-30-osa-investigation-deep-dive.md](./2026-04-30-osa-investigation-deep-dive.md)*
-*資料源：58 晚 Garmin SpO2 epoch-level data（`reviews/spo2_desat_trend.png`）*
+*資料源：58 晚 Garmin SpO2 epoch-level data（`reviews/daily/spo2/spo2_desat_trend.png`）*
 
 ---
 
@@ -88,7 +88,7 @@ POSA 在亞洲非肥胖 OSA 族群盛行率 ~50-60%（vs 西方肥胖型 ~25%）
 2. Day 4-6：強制側睡（睡衣縫網球或穿 bumper belt）
 3. 期間其他變數固定：相同就寢時間、無酒精、無 Fexofenadine、相同房間溫度
 
-**判讀（看 `reviews/spo2_desat_*.png` 與 `--summary 7`）：**
+**判讀（看 `reviews/daily/spo2/spo2_desat_*.png` 與 `--summary 7`）：**
 | 結果 | 推論 | 後續行動 |
 |---|---|---|
 | 最低 SpO2 上升 ≥ 3 點 | POSA 確認 | 體位治療為一線方案 |
@@ -135,7 +135,7 @@ POSA 在亞洲非肥胖 OSA 族群盛行率 ~50-60%（vs 西方肥胖型 ~25%）
 ## 七、執行檢查清單
 
 - [ ] 5/1 晚：第一晚側睡測試（後背塞物 + 床頭抬 15 cm）
-- [ ] 5/2 早晨：讀 `reviews/spo2_desat_2026-05-02.png`，與 5/1（最低 79%）對比
+- [ ] 5/2 早晨：讀 `reviews/daily/spo2/spo2_desat_2026-05-02.png`，與 5/1（最低 79%）對比
 - [ ] 5/2-5/4：連 3 晚側睡 + 抬高，每日 daily check-in 記錄
 - [ ] 5/4 晚：執行 `python scripts/analyze_spo2_desats.py --summary 4` 看 4 晚對照
 - [ ] 5/5：依結果決定：（a）正式預約 PSG；（b）長期採用體位治療；（c）兩者並行

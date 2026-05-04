@@ -7,6 +7,7 @@
    - 完成後讀取 `reports/daily-garmin/{今日日期}.md`（睡眠與 SpO2 數據源）並在對話中顯示給使用者確認
    - 「昨日回顧/飲水」請讀 `reports/daily-garmin/{昨日日期}.md`
    - **SpO2 夜間趨勢**：讀取過去 7 晚 `reports/daily-garmin/*.md` 的「最低 SpO2」與「日均 SpO2」（缺檔以 `—` 表示），於對話中顯示連 3 晚 / 7 晚 < 88% 的計數，並在寫檔時填入 daily 檔案的「SpO2 夜間最低 7 晚趨勢」表格
+   - **SpO2 全夜圖表**：執行 `python scripts/analyze_spo2_desats.py --chart {今日日期}` 產生當晚 epoch-level 圖表（自動存於 `reviews/daily/spo2/spo2_desat_{今日日期}.png`），並執行 `python scripts/analyze_spo2_desats.py --trend` 更新整體趨勢圖（`reviews/daily/spo2/spo2_desat_trend.png`）；在 daily 檔案的 SpO2 區塊嵌入相對連結
    - 若 sync 失敗（429 / 網路 / token 過期），改採手動輸入模式，在睡眠步驟向使用者詢問 Sleep Score、Body Battery、就寢/起床時間
 3. **逐項引導使用者填寫，一次一個問題**（此階段**不寫任何檔案**，僅在對話中收集回答，避免 stop hook 中途觸發導致重複提問）：
    - 體重（可選填，**週六**為正式紀錄日）

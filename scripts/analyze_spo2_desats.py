@@ -197,7 +197,8 @@ def cmd_chart(date: str, out: Path = None):
     fig.autofmt_xdate()
     fig.tight_layout()
 
-    out = out or (ROOT / "reviews" / f"spo2_desat_{date}.png")
+    out = out or (ROOT / "reviews" / "daily" / "spo2" / f"spo2_desat_{date}.png")
+    out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out, dpi=110)
     print(f"圖表已存：{out}")
 
@@ -375,7 +376,8 @@ def cmd_trend(days: int = 9999, out: Path = None):
 
     fig.tight_layout()
 
-    out = out or (ROOT / "reviews" / "spo2_desat_trend.png")
+    out = out or (ROOT / "reviews" / "daily" / "spo2" / "spo2_desat_trend.png")
+    out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out, dpi=110)
     print(f"趨勢圖已存：{out}")
 
