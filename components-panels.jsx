@@ -883,6 +883,30 @@ function PanelSafety({ lang }) {
         </div>
       </>)}
 
+      {sd && sd.uricAcidProtocol && (<>
+        <div className="spacer-20" />
+        <div className="card">
+          <div className="h3">{Tt(sd.uricAcidProtocol.ttl, lang)}</div>
+          <p className="body">{Tt(sd.uricAcidProtocol.intro, lang)}</p>
+          <table className="t">
+            <thead><tr>{sd.uricAcidProtocol.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {sd.uricAcidProtocol.rows.map(([action, ev, eff, note], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(action, lang)}</strong></td>
+                  <td style={{fontSize: 12}}>{typeof ev === "string" ? ev : Tt(ev, lang)}</td>
+                  <td style={{fontSize: 12}}>{Tt(eff, lang)}</td>
+                  <td style={{fontSize: 12}}>{Tt(note, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="callout warn" style={{marginTop: 8}}>
+            <strong>{lang === "en" ? "Ceiling note: " : "天花板提醒："}</strong>{Tt(sd.uricAcidProtocol.ceiling, lang)}
+          </div>
+        </div>
+      </>)}
+
       {sd && sd.liver && (<>
         <div className="spacer-20" />
         <div className="card">
