@@ -11,6 +11,10 @@ window.HC_DATA = {
     progressLbl: { en: "Weight progress · 70 → 65 kg", zh: "體重進度 · 70 → 65 公斤" },
     progressMeta: { en: "Day 49 · 67.8 kg · Month-2 target met early", zh: "第 49 天 · 67.8 公斤 · 提前達第 2 月目標" },
     startDate: { en: "Start date · Mar 17, 2026 · Last sync May 4", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/4" },
+    startWeight: 70,
+    targetWeight: 65,
+    currentWeight: 67.8,
+    currentWeightDate: "5/2 Sat official",
   },
 
   markers: [

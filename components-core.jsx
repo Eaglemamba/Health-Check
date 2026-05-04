@@ -73,8 +73,12 @@ function Hero({ lang, variant }) {
 }
 
 function HeroProgress({ lang }) {
-  const start = 70, target = 65, current = 68.0;
+  const start = D.hero.startWeight ?? 70;
+  const target = D.hero.targetWeight ?? 65;
+  const current = D.hero.currentWeight ?? 68.0;
   const pct = Math.min(100, Math.max(0, ((start - current) / (start - target)) * 100));
+  const lost = (start - current).toFixed(1);
+  const goal = (start - target).toFixed(0);
   const [w, setW] = useState(0);
   useEffect(() => { const t = setTimeout(() => setW(pct), 200); return () => clearTimeout(t); }, [pct]);
   return (
@@ -85,7 +89,7 @@ function HeroProgress({ lang }) {
       </div>
       <div className="bar"><div className="bar-fill" style={{ width: `${w}%` }} /></div>
       <div className="meta">
-        <span>{lang === "en" ? "−2.0 kg / 5 kg goal" : "已減 2.0 / 5 公斤"}</span>
+        <span>{lang === "en" ? `−${lost} kg / ${goal} kg goal` : `已減 ${lost} / ${goal} 公斤`}</span>
         <span>{t(D.hero.progressMeta, lang)}</span>
       </div>
     </div>
