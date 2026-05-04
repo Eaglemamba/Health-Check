@@ -20,9 +20,9 @@ window.HC_DATA = {
   markers: [
     {
       sys: "heart", name: { en: "Blood Pressure", zh: "血壓" },
-      val: "122/71", unit: "mmHg",
-      delta: { en: "W17 weekly avg · target met (<130)", zh: "W17 週均 · 已達標 (<130)" },
-      cadence: { en: "Daily · 7-day avg", zh: "每日 · 7 日均" },
+      val: "124/73", unit: "mmHg",
+      delta: { en: "W18 weekly avg (4 days) · target met (<130) · last 5/3 113/68", zh: "W18 週均（4 天）· 已達標 (<130) · 最新 5/3 113/68" },
+      cadence: { en: "Daily · weekly avg", zh: "每日 · 週均" },
       status: "ok",
     },
     {
