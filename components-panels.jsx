@@ -403,6 +403,32 @@ function PanelDiet({ lang }) {
         </div>
       </>)}
 
+      {d.fructoseHidden && (<>
+        <div className="spacer-20" />
+        <div className="card" style={{borderTop: "3px solid var(--uric)"}}>
+          <div className="h3" style={{color: "var(--uric)"}}>{Tt(d.fructoseHidden.ttl, lang)}</div>
+          <p className="body">{Tt(d.fructoseHidden.sub, lang)}</p>
+          <table className="t">
+            <thead><tr>{d.fructoseHidden.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {d.fructoseHidden.rows.map(([src, load, action, cls], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(src, lang)}</strong></td>
+                  <td style={{fontSize: 12}}>{Tt(load, lang)}</td>
+                  <td style={{fontSize: 12}}>{Tt(action, lang)}</td>
+                  <td><span className={"tag " + (cls === "ok" ? "ok" : cls === "bad" ? "bad" : "")}>
+                    {cls === "ok" ? (lang === "en" ? "OK" : "可") : cls === "bad" ? (lang === "en" ? "Avoid" : "避免") : (lang === "en" ? "Limit" : "限量")}
+                  </span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="callout" style={{marginTop: 8}}>
+            <strong>{Tt(d.fructoseHidden.audit.ttl, lang)}：</strong> {Tt(d.fructoseHidden.audit.body, lang)}
+          </div>
+        </div>
+      </>)}
+
       {d.fruits && (<>
         <div className="spacer-20" />
         <div className="card">
