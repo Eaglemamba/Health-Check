@@ -54,8 +54,20 @@ window.HC_DATA = {
     { id: "routine",  en: "Daily Routine", zh: "每日作息" },
     { id: "timeline", en: "Timeline", zh: "時程" },
     { id: "safety",   en: "Safety",   zh: "安全" },
+    { id: "dashboard",en: "Dashboard",zh: "儀表板" },
     { id: "tracker",  en: "Tracker",  zh: "追蹤" },
   ],
+
+  // ===== Dashboard (auto-generated PNG) =====
+  dashboard: {
+    ttl: { en: "Health Dashboard", zh: "健康儀表板" },
+    sub: { en: "Trend charts: weight, body composition, BP / heart rate, Sleep Score. Auto-generated from reviews/daily/*.md after each check-in by scripts/generate_dashboard.py.",
+           zh: "趨勢圖：體重、體組成、血壓 / 心率、Sleep Score。每次 daily check-in 後由 scripts/generate_dashboard.py 從 reviews/daily/*.md 自動生成。" },
+    src: "reviews/health_dashboard.png",
+    fallback: "https://raw.githubusercontent.com/Eaglemamba/Health-Check/main/reviews/health_dashboard.png",
+    spo2Src: "reviews/daily/spo2/spo2_desat_trend.png",
+    spo2Fallback: "https://raw.githubusercontent.com/Eaglemamba/Health-Check/main/reviews/daily/spo2/spo2_desat_trend.png",
+  },
 
   // ===== Overview =====
   overview: {
