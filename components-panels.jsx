@@ -706,8 +706,8 @@ function PanelSupps({ lang }) {
                     {plan.rows.map(([item, spec, use, cost], i) => (
                       <tr key={i}>
                         <td><strong>{Tt(item, lang)}</strong></td>
-                        <td style={{fontSize: 12}}>{spec}</td>
-                        <td style={{fontSize: 12}}>{Tt(use, lang)}</td>
+                        <td style={{fontSize: 12}}>{typeof spec === "string" ? spec : Tt(spec, lang)}</td>
+                        <td style={{fontSize: 12}}>{typeof use === "string" ? use : Tt(use, lang)}</td>
                         <td className="num-cell" style={{fontFamily: "var(--font-mono)", fontSize: 12}}>{cost}</td>
                       </tr>
                     ))}
