@@ -9,8 +9,8 @@ window.HC_DATA = {
     lede:    { en: "Sleep, BP, lipids, uric acid — one shared metabolic root. Lifestyle stacks first; medication only after lifestyle plateaus.",
                zh: "睡眠、血壓、血脂、尿酸——共享同一個代謝根源。生活方式介入優先，等到效果平台期再考慮藥物。" },
     progressLbl: { en: "Weight progress · 70 → 65 kg", zh: "體重進度 · 70 → 65 公斤" },
-    progressMeta: { en: "Day 49 · 67.8 kg · Sat official (5/2)", zh: "第 49 天 · 67.8 公斤 · 週六正式（5/2）" },
-    startDate: { en: "Start date · Mar 17, 2026 · Last sync 5/4", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/4" },
+    progressMeta: { en: "Day 50 · 67.8 kg · Sat official (5/2)", zh: "第 50 天 · 67.8 公斤 · 週六正式（5/2）" },
+    startDate: { en: "Start date · Mar 17, 2026 · Last sync 5/5", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/5" },
     startWeight: 70,
     targetWeight: 65,
     currentWeight: 67.8,
@@ -27,7 +27,7 @@ window.HC_DATA = {
     },
     {
       sys: "sleep", name: { en: "Sleep Score", zh: "睡眠分數" },
-      val: "77", unit: "Garmin",
+      val: "71", unit: "Garmin",
       delta: { en: "5/4 · OSA flag: T90 18.4% (severe)", zh: "5/4 · OSA 紅旗：T90 18.4%（重度）" },
       cadence: { en: "Daily · Garmin", zh: "每日 · Garmin" },
       status: "warn",
@@ -820,14 +820,14 @@ window.HC_DATA = {
   tracker: {
     // [SBP, DBP] — gaps filled with prior reading
     bp: [
-      [121,75], [125,71], [126,68], [121,72], [128,74], [122,70], [129,75], [127,75], [127,72], [127,72], [127,72], [127,72], [113,68], [113,68],
+      [125,71], [126,68], [121,72], [128,74], [122,70], [129,75], [127,75], [127,72], [127,72], [127,72], [127,72], [113,68], [113,68], [113,68],
     ],
     // 4/21–5/4 daily weight (kg)
-    weight: [68.6, 68.5, 68, 67.9, 68.4, 68.6, 68.9, 68.4, 68.2, 67.8, 67.9, 67.8, 68.7, 69.1],
+    weight: [68.5, 68, 67.9, 68.4, 68.6, 68.9, 68.4, 68.2, 67.8, 67.9, 67.8, 68.7, 69.1, 68.4],
     // Garmin Sleep Score
-    sleep:  [74, 69, 73, 71, 75, 64, 64, 69, 64, 71, 52, 69, 77, 77],
+    sleep:  [69, 73, 71, 75, 64, 64, 69, 64, 71, 52, 69, 77, 77, 71],
     // Body Battery waking
-    bb:     [56, 60, 59, 34, 66, 60, 57, 57, 58, 51, 47, 41, 54, 49],
+    bb:     [60, 59, 34, 66, 60, 57, 57, 58, 51, 47, 41, 54, 49, 47],
   },
 
   // ===== Running — started 2026-04-26 =====
