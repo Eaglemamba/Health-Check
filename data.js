@@ -9,8 +9,8 @@ window.HC_DATA = {
     lede:    { en: "Sleep, BP, lipids, uric acid — one shared metabolic root. Lifestyle stacks first; medication only after lifestyle plateaus.",
                zh: "睡眠、血壓、血脂、尿酸——共享同一個代謝根源。生活方式介入優先，等到效果平台期再考慮藥物。" },
     progressLbl: { en: "Weight progress · 70 → 65 kg", zh: "體重進度 · 70 → 65 公斤" },
-    progressMeta: { en: "Day 51 · 67.8 kg · Sat official (5/2)", zh: "第 51 天 · 67.8 公斤 · 週六正式（5/2）" },
-    startDate: { en: "Start date · Mar 17, 2026 · Last sync 5/6", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/6" },
+    progressMeta: { en: "Day 52 · 67.8 kg · Sat official (5/2)", zh: "第 52 天 · 67.8 公斤 · 週六正式（5/2）" },
+    startDate: { en: "Start date · Mar 17, 2026 · Last sync 5/7", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/7" },
     startWeight: 70,
     targetWeight: 65,
     currentWeight: 67.8,
@@ -21,13 +21,13 @@ window.HC_DATA = {
     {
       sys: "heart", name: { en: "Blood Pressure", zh: "血壓" },
       val: "124/72", unit: "mmHg",
-      delta: { en: "W18 weekly avg (4 days) · target met (<130) · last 128/78 (5/6)", zh: "W18 週均（4 天）· 已達標 (<130) · 最新 128/78 (5/6)" },
+      delta: { en: "W18 weekly avg (4 days) · target met (<130) · last 120/73 (5/7)", zh: "W18 週均（4 天）· 已達標 (<130) · 最新 120/73 (5/7)" },
       cadence: { en: "Daily · weekly avg", zh: "每日 · 週均" },
       status: "ok",
     },
     {
       sys: "sleep", name: { en: "Sleep Score", zh: "睡眠分數" },
-      val: "75", unit: "Garmin",
+      val: "68", unit: "Garmin",
       delta: { en: "5/4 · OSA flag: T90 18.4% (severe)", zh: "5/4 · OSA 紅旗：T90 18.4%（重度）" },
       cadence: { en: "Daily · Garmin", zh: "每日 · Garmin" },
       status: "warn",
@@ -820,14 +820,14 @@ window.HC_DATA = {
   tracker: {
     // [SBP, DBP] — gaps filled with prior reading
     bp: [
-      [126,68], [121,72], [128,74], [122,70], [129,75], [127,75], [127,72], [127,72], [127,72], [127,72], [113,68], [113,68], [113,68], [128,78],
+      [121,72], [128,74], [122,70], [129,75], [127,75], [127,72], [127,72], [127,72], [127,72], [113,68], [113,68], [113,68], [128,78], [120,73],
     ],
     // 4/21–5/4 daily weight (kg)
-    weight: [68, 67.9, 68.4, 68.6, 68.9, 68.4, 68.2, 67.8, 67.9, 67.8, 68.7, 69.1, 68.4, 68.2],
+    weight: [67.9, 68.4, 68.6, 68.9, 68.4, 68.2, 67.8, 67.9, 67.8, 68.7, 69.1, 68.4, 68.2, 68.2],
     // Garmin Sleep Score
-    sleep:  [73, 71, 75, 64, 64, 69, 64, 71, 52, 69, 77, 77, 71, 75],
+    sleep:  [71, 75, 64, 64, 69, 64, 71, 52, 69, 77, 77, 71, 75, 68],
     // Body Battery waking
-    bb:     [59, 34, 66, 60, 57, 57, 58, 51, 47, 41, 54, 49, 47, 56],
+    bb:     [34, 66, 60, 57, 57, 58, 51, 47, 41, 54, 49, 47, 56, 47],
   },
 
   // ===== Running — started 2026-04-26 =====
