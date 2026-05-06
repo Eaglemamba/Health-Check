@@ -474,27 +474,44 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
     cmap = plt.get_cmap("viridis")
     n = len(nights_to_plot)
 
-    legend_lines = []
+    def mins_below(epochs, thr):
+        return sum(1 for e in epochs if e.get("spo2Reading") is not None and e["spo2Reading"] < thr)
+
+    summary_rows = []
     for i, d in enumerate(nights_to_plot):
         epochs, summary = load_epochs(str(d))
         if not epochs:
             continue
         t0 = parse_ts(epochs[0]["epochTimestamp"])
         xs = [(parse_ts(e["epochTimestamp"]) - t0).total_seconds() / 60 for e in epochs]
-        ys = [e.get("spo2Reading") for e in epochs]
+        ys_raw = [e.get("spo2Reading") for e in epochs]
+        ys = [v if v is not None else float("nan") for v in ys_raw]
         is_today = (d == today)
         color = "#d7301f" if is_today else cmap(i / max(n - 1, 1) * 0.85)
         alpha = 1.0 if is_today else 0.55
-        lw = 1.8 if is_today else 1.0
+        lw = 1.9 if is_today else 1.0
         nadir = summary.get("lowestSPO2") if summary else None
         avg = summary.get("averageSPO2") if summary else None
         pct, _, _ = t90(epochs)
-        label = f"{d}  nadir {nadir}%  avg {avg}%  T90 {pct:.1f}%" + ("  ◀ today" if is_today else "")
+        m90 = mins_below(epochs, 90)
+        m85 = mins_below(epochs, 85)
+        m80 = mins_below(epochs, 80)
+        label = (f"{d}  nadir {nadir}%  T90 {pct:.1f}%  "
+                 f"<90:{m90}m <85:{m85}m <80:{m80}m"
+                 + ("  ◀ today" if is_today else ""))
         ax.plot(xs, ys, color=color, alpha=alpha, linewidth=lw, label=label)
-        legend_lines.append(label)
+        # AUC shading: fill between line and 90 where line<90 (and 85, 80 stacked layers)
+        fill_alpha = 0.30 if is_today else 0.10
+        ax.fill_between(xs, ys, 90, where=[(v is not None and v < 90) for v in ys_raw],
+                        color="#fdae6b", alpha=fill_alpha, interpolate=True, linewidth=0)
+        ax.fill_between(xs, ys, 85, where=[(v is not None and v < 85) for v in ys_raw],
+                        color="#fc8d59", alpha=fill_alpha + 0.05, interpolate=True, linewidth=0)
+        ax.fill_between(xs, ys, 80, where=[(v is not None and v < 80) for v in ys_raw],
+                        color="#d7301f", alpha=fill_alpha + 0.10, interpolate=True, linewidth=0)
+        summary_rows.append((d, nadir, pct, m90, m85, m80, is_today))
 
     ax.axhline(90, color="orange", linestyle="--", linewidth=0.8, alpha=0.7, label="OSA 90%")
-    ax.axhline(88, color="red", linestyle="--", linewidth=0.6, alpha=0.5, label="紅旗 88%")
+    ax.axhline(85, color="#fc8d59", linestyle=":", linewidth=0.7, alpha=0.6, label="中度 85%")
     ax.axhline(80, color="darkred", linestyle="--", linewidth=0.6, alpha=0.5, label="重度 80%")
 
     ax.set_xlabel("距入睡時間 (分鐘)")
@@ -512,6 +529,12 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
     plt.close(fig)
     print(f"Overlay 圖已存：{out}")
     print(f"涵蓋 {n} 晚（cycle 上限 {max_nights}），下一晚 {'起新 cycle' if n >= max_nights else '繼續延伸'}")
+    print()
+    print(f"  {'日期':<12} {'nadir':>6} {'T90':>6}  {'<90':>5} {'<85':>5} {'<80':>5}")
+    print("  " + "-" * 50)
+    for d, nadir, pct, m90, m85, m80, is_today in summary_rows:
+        marker = " ◀" if is_today else "  "
+        print(f"  {str(d):<12} {nadir:>5}% {pct:>5.1f}%  {m90:>4}m {m85:>4}m {m80:>4}m{marker}")
 
 
 def main():
