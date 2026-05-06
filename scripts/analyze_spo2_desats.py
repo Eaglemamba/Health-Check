@@ -478,6 +478,7 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
         return sum(1 for e in epochs if e.get("spo2Reading") is not None and e["spo2Reading"] < thr)
 
     summary_rows = []
+    line_entries = []  # (color, short_label) for in-plot stat block
     for i, d in enumerate(nights_to_plot):
         epochs, summary = load_epochs(str(d))
         if not epochs:
@@ -496,10 +497,8 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
         m90 = mins_below(epochs, 90)
         m85 = mins_below(epochs, 85)
         m80 = mins_below(epochs, 80)
-        label = (f"{d}  nadir {nadir}%  T90 {pct:.1f}%  "
-                 f"<90:{m90}m <85:{m85}m <80:{m80}m"
-                 + ("  ◀ today" if is_today else ""))
-        ax.plot(xs, ys, color=color, alpha=alpha, linewidth=lw, label=label)
+        legend_label = f"{d}" + ("  ◀ today" if is_today else "")
+        ax.plot(xs, ys, color=color, alpha=alpha, linewidth=lw, label=legend_label)
         # AUC shading: fill between line and 90 where line<90 (and 85, 80 stacked layers)
         fill_alpha = 0.30 if is_today else 0.10
         ax.fill_between(xs, ys, 90, where=[(v is not None and v < 90) for v in ys_raw],
@@ -508,6 +507,10 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
                         color="#fc8d59", alpha=fill_alpha + 0.05, interpolate=True, linewidth=0)
         ax.fill_between(xs, ys, 80, where=[(v is not None and v < 80) for v in ys_raw],
                         color="#d7301f", alpha=fill_alpha + 0.10, interpolate=True, linewidth=0)
+        short = (f"{d.strftime('%m-%d')}  nadir {nadir}%  T90 {pct:.1f}%  "
+                 f"<90:{m90}m  <85:{m85}m  <80:{m80}m"
+                 + ("  ◀" if is_today else ""))
+        line_entries.append((color, short, is_today))
         summary_rows.append((d, nadir, pct, m90, m85, m80, is_today))
 
     ax.axhline(90, color="orange", linestyle="--", linewidth=0.8, alpha=0.7, label="OSA 90%")
@@ -519,7 +522,20 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
     ax.set_ylim(70, 100)
     ax.grid(alpha=0.3)
     ax.set_title(f"多晚 SpO2 Overlay — {new_start} 至 {today}（{n} 晚，cycle 上限 {max_nights} 晚）")
-    ax.legend(loc="lower right", fontsize=8, framealpha=0.85)
+    ax.legend(loc="upper right", fontsize=8, framealpha=0.85, ncol=2)
+
+    # In-plot stat block (lower-left): one line per night, color-matched
+    block_top = 0.32
+    line_h = 0.035
+    ax.text(0.005, block_top + line_h, "晚數累計（分鐘）", transform=ax.transAxes,
+            fontsize=9, fontweight="bold", color="#222",
+            bbox=dict(boxstyle="round,pad=0.25", fc="white", ec="#888", alpha=0.85))
+    for j, (color, short, is_today) in enumerate(line_entries):
+        ax.text(0.005, block_top - j * line_h, short, transform=ax.transAxes,
+                fontsize=8, color=color, family="monospace",
+                fontweight="bold" if is_today else "normal",
+                bbox=dict(boxstyle="round,pad=0.15", fc="white", ec="none", alpha=0.7))
+
     fig.tight_layout()
 
     out = spo2_dir / f"spo2_overlay_{new_start}_to_{today}_elapsed.png"
