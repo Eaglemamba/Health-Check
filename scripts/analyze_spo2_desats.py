@@ -11,6 +11,7 @@ SpO2 Desaturation Event 分析（從 wellnessEpochSPO2DataDTOList 擷取）
     python scripts/analyze_spo2_desats.py --summary 14
     python scripts/analyze_spo2_desats.py --night 2026-05-01
     python scripts/analyze_spo2_desats.py --chart 2026-05-01
+    python scripts/analyze_spo2_desats.py --overlay 2026-05-06   # rolling 7-day overlay
 """
 import argparse
 import json
@@ -400,6 +401,119 @@ def cmd_trend(days: int = 9999, out: Path = None):
     print(f"最長 event ≥ 15 分（重度）：{nights_red_event}/{len(rows)} 晚")
 
 
+def cmd_overlay(today_str: str, max_nights: int = 7):
+    """多晚 SpO2 epoch 疊圖（x = 距入睡分鐘，y = SpO2）。
+
+    Cycle 規則（檔名 spo2_overlay_{start}_to_{end}_elapsed.png）：
+    - 無前檔：bootstrap，向前最多 max_nights 晚可用資料當 anchor
+    - 前檔 < max_nights 晚：取代為 (start=old_start, end=today)
+    - 前檔 = max_nights 晚：起新 cycle (start=today, end=today)，舊檔保留
+    """
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from matplotlib import rcParams
+        rcParams["font.sans-serif"] = ["PingFang TC", "PingFang SC", "Heiti TC",
+                                       "Hiragino Sans GB", "Arial Unicode MS",
+                                       "Noto Sans CJK TC", "DejaVu Sans"]
+        rcParams["axes.unicode_minus"] = False
+    except ImportError:
+        print("需先安裝 matplotlib")
+        return
+
+    from datetime import date as date_type
+    spo2_dir = ROOT / "reviews" / "daily" / "spo2"
+    spo2_dir.mkdir(parents=True, exist_ok=True)
+    today = datetime.strptime(today_str, "%Y-%m-%d").date()
+
+    existing = sorted(spo2_dir.glob("spo2_overlay_*_to_*_elapsed.png"))
+    new_start = None
+    file_to_replace = None
+
+    if existing:
+        latest = existing[-1]
+        parts = latest.stem.split("_")
+        try:
+            old_start = datetime.strptime(parts[2], "%Y-%m-%d").date()
+            old_end = datetime.strptime(parts[4], "%Y-%m-%d").date()
+        except (ValueError, IndexError):
+            old_start = old_end = None
+
+        if old_start and old_end:
+            nights = (old_end - old_start).days + 1
+            if old_end == today:
+                new_start = old_start
+                file_to_replace = latest
+            elif nights < max_nights:
+                new_start = old_start
+                file_to_replace = latest
+            else:
+                new_start = today
+
+    if new_start is None:
+        new_start = today
+        for back in range(max_nights - 1, -1, -1):
+            cand = today - timedelta(days=back)
+            if (DATA_DIR / f"{cand}.json").exists():
+                new_start = cand
+                break
+
+    nights_to_plot = []
+    cur = new_start
+    while cur <= today:
+        if (DATA_DIR / f"{cur}.json").exists():
+            nights_to_plot.append(cur)
+        cur += timedelta(days=1)
+
+    if not nights_to_plot:
+        print(f"[skip] {new_start} ~ {today} 無可用 epoch 資料")
+        return
+
+    fig, ax = plt.subplots(figsize=(14, 6))
+    cmap = plt.get_cmap("viridis")
+    n = len(nights_to_plot)
+
+    legend_lines = []
+    for i, d in enumerate(nights_to_plot):
+        epochs, summary = load_epochs(str(d))
+        if not epochs:
+            continue
+        t0 = parse_ts(epochs[0]["epochTimestamp"])
+        xs = [(parse_ts(e["epochTimestamp"]) - t0).total_seconds() / 60 for e in epochs]
+        ys = [e.get("spo2Reading") for e in epochs]
+        is_today = (d == today)
+        color = "#d7301f" if is_today else cmap(i / max(n - 1, 1) * 0.85)
+        alpha = 1.0 if is_today else 0.55
+        lw = 1.8 if is_today else 1.0
+        nadir = summary.get("lowestSPO2") if summary else None
+        avg = summary.get("averageSPO2") if summary else None
+        pct, _, _ = t90(epochs)
+        label = f"{d}  nadir {nadir}%  avg {avg}%  T90 {pct:.1f}%" + ("  ◀ today" if is_today else "")
+        ax.plot(xs, ys, color=color, alpha=alpha, linewidth=lw, label=label)
+        legend_lines.append(label)
+
+    ax.axhline(90, color="orange", linestyle="--", linewidth=0.8, alpha=0.7, label="OSA 90%")
+    ax.axhline(88, color="red", linestyle="--", linewidth=0.6, alpha=0.5, label="紅旗 88%")
+    ax.axhline(80, color="darkred", linestyle="--", linewidth=0.6, alpha=0.5, label="重度 80%")
+
+    ax.set_xlabel("距入睡時間 (分鐘)")
+    ax.set_ylabel("SpO2 (%)")
+    ax.set_ylim(70, 100)
+    ax.grid(alpha=0.3)
+    ax.set_title(f"多晚 SpO2 Overlay — {new_start} 至 {today}（{n} 晚，cycle 上限 {max_nights} 晚）")
+    ax.legend(loc="lower right", fontsize=8, framealpha=0.85)
+    fig.tight_layout()
+
+    out = spo2_dir / f"spo2_overlay_{new_start}_to_{today}_elapsed.png"
+    if file_to_replace and file_to_replace != out and file_to_replace.exists():
+        file_to_replace.unlink()
+    fig.savefig(out, dpi=110)
+    plt.close(fig)
+    print(f"Overlay 圖已存：{out}")
+    print(f"涵蓋 {n} 晚（cycle 上限 {max_nights}），下一晚 {'起新 cycle' if n >= max_nights else '繼續延伸'}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--summary", type=int, metavar="N", help="近 N 晚文字摘要")
@@ -407,6 +521,7 @@ def main():
     ap.add_argument("--chart", help="產生單晚 SpO2 chart，YYYY-MM-DD")
     ap.add_argument("--trend", type=int, nargs="?", const=9999, metavar="N",
                     help="多日趨勢圖（預設全部，N 限制最近幾天）")
+    ap.add_argument("--overlay", help="多晚 SpO2 epoch 疊圖（rolling 7 晚），YYYY-MM-DD = 今日")
     args = ap.parse_args()
 
     if args.summary:
@@ -417,7 +532,9 @@ def main():
         cmd_chart(args.chart)
     if args.trend is not None:
         cmd_trend(args.trend)
-    if not (args.summary or args.night or args.chart or args.trend is not None):
+    if args.overlay:
+        cmd_overlay(args.overlay)
+    if not (args.summary or args.night or args.chart or args.trend is not None or args.overlay):
         ap.print_help()
 
 
