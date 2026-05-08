@@ -404,10 +404,9 @@ def cmd_trend(days: int = 9999, out: Path = None):
 def cmd_overlay(today_str: str, max_nights: int = 7):
     """多晚 SpO2 epoch 疊圖（x = 距入睡分鐘，y = SpO2）。
 
-    Cycle 規則（檔名 spo2_overlay_{start}_to_{end}_elapsed.png）：
-    - 無前檔：bootstrap，向前最多 max_nights 晚可用資料當 anchor
-    - 前檔 < max_nights 晚：取代為 (start=old_start, end=today)
-    - 前檔 = max_nights 晚：起新 cycle (start=today, end=today)，舊檔保留
+    Rolling window：每次都畫 today 與往前 (max_nights-1) 晚（共 max_nights 晚）。
+    缺資料的日期自動跳過。檔名 spo2_overlay_{actual_start}_to_{today}_elapsed.png。
+    每日 daily check-in 呼叫時會產生當日的滾動快照，舊快照保留為歷史。
     """
     try:
         import matplotlib
@@ -422,53 +421,23 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
         print("需先安裝 matplotlib")
         return
 
-    from datetime import date as date_type
     spo2_dir = ROOT / "reviews" / "daily" / "spo2"
     spo2_dir.mkdir(parents=True, exist_ok=True)
     today = datetime.strptime(today_str, "%Y-%m-%d").date()
 
-    existing = sorted(spo2_dir.glob("spo2_overlay_*_to_*_elapsed.png"))
-    new_start = None
-    file_to_replace = None
-
-    if existing:
-        latest = existing[-1]
-        parts = latest.stem.split("_")
-        try:
-            old_start = datetime.strptime(parts[2], "%Y-%m-%d").date()
-            old_end = datetime.strptime(parts[4], "%Y-%m-%d").date()
-        except (ValueError, IndexError):
-            old_start = old_end = None
-
-        if old_start and old_end:
-            nights = (old_end - old_start).days + 1
-            if old_end == today:
-                new_start = old_start
-                file_to_replace = latest
-            elif nights < max_nights:
-                new_start = old_start
-                file_to_replace = latest
-            else:
-                new_start = today
-
-    if new_start is None:
-        new_start = today
-        for back in range(max_nights - 1, -1, -1):
-            cand = today - timedelta(days=back)
-            if (DATA_DIR / f"{cand}.json").exists():
-                new_start = cand
-                break
-
+    window_start_target = today - timedelta(days=max_nights - 1)
     nights_to_plot = []
-    cur = new_start
+    cur = window_start_target
     while cur <= today:
         if (DATA_DIR / f"{cur}.json").exists():
             nights_to_plot.append(cur)
         cur += timedelta(days=1)
 
     if not nights_to_plot:
-        print(f"[skip] {new_start} ~ {today} 無可用 epoch 資料")
+        print(f"[skip] {window_start_target} ~ {today} 無可用 epoch 資料")
         return
+
+    new_start = nights_to_plot[0]
 
     fig, ax = plt.subplots(figsize=(14, 6))
     cmap = plt.get_cmap("viridis")
@@ -521,7 +490,7 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
     ax.set_ylabel("SpO2 (%)")
     ax.set_ylim(70, 100)
     ax.grid(alpha=0.3)
-    ax.set_title(f"多晚 SpO2 Overlay — {new_start} 至 {today}（{n} 晚，cycle 上限 {max_nights} 晚）")
+    ax.set_title(f"多晚 SpO2 Overlay（rolling {max_nights} 晚）— {new_start} 至 {today}（共 {n} 晚）")
     ax.legend(loc="upper right", fontsize=8, framealpha=0.85, ncol=2)
 
     # In-plot stat block (lower-left): one line per night, color-matched
@@ -539,12 +508,10 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
     fig.tight_layout()
 
     out = spo2_dir / f"spo2_overlay_{new_start}_to_{today}_elapsed.png"
-    if file_to_replace and file_to_replace != out and file_to_replace.exists():
-        file_to_replace.unlink()
     fig.savefig(out, dpi=110)
     plt.close(fig)
     print(f"Overlay 圖已存：{out}")
-    print(f"涵蓋 {n} 晚（cycle 上限 {max_nights}），下一晚 {'起新 cycle' if n >= max_nights else '繼續延伸'}")
+    print(f"Rolling 窗：{new_start} ~ {today}（{n}/{max_nights} 晚有資料）")
     print()
     print(f"  {'日期':<12} {'nadir':>6} {'T90':>6}  {'<90':>5} {'<85':>5} {'<80':>5}")
     print("  " + "-" * 50)
