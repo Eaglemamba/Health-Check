@@ -1254,6 +1254,83 @@ function PanelRunning({ lang }) {
           ? "Stay strictly in Z2 until UA normalizes. Lactic acid competes with urate at renal tubule transporters — push too hard and UA will spike for 24-72h."
           : "尿酸正常前嚴格守 Zone 2。乳酸與尿酸鹽在腎小管轉運子競爭排泄，硬推之後尿酸會升高 24-72 小時。"}
       </div>
+
+      {r.hipDrive && (
+        <>
+          <div className="spacer-20" />
+          <div className="card">
+            <div className="h3">{Tt(r.hipDrive.ttl, lang)}</div>
+            <p className="body" style={{margin:"6px 0 14px", fontSize: 13, color: "var(--ink-3)"}}>
+              {Tt(r.hipDrive.intro, lang)}
+            </p>
+
+            <div className="h3" style={{fontSize: 14, marginTop: 6}}>{Tt(r.hipDrive.threeSteps.ttl, lang)}</div>
+            <table className="t" style={{marginTop: 6}}>
+              <thead><tr>{r.hipDrive.threeSteps.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+              <tbody>
+                {r.hipDrive.threeSteps.rows.map((row, i) => (
+                  <tr key={i}>
+                    <td><strong>{Tt(row[0], lang)}</strong></td>
+                    <td>{Tt(row[1], lang)}</td>
+                    <td style={{color:"var(--ink-3)", fontSize: 12}}>{Tt(row[2], lang)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="h3" style={{fontSize: 14, marginTop: 18}}>{Tt(r.hipDrive.drills.ttl, lang)}</div>
+            <table className="t" style={{marginTop: 6}}>
+              <thead><tr>{r.hipDrive.drills.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+              <tbody>
+                {r.hipDrive.drills.rows.map((row, i) => (
+                  <tr key={i}>
+                    <td><strong>{Tt(row[0], lang)}</strong></td>
+                    <td>{Tt(row[1], lang)}</td>
+                    <td>{Tt(row[2], lang)}</td>
+                    <td style={{color:"var(--ink-3)", fontSize: 12}}>{Tt(row[3], lang)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="body" style={{margin:"10px 0 0", fontSize: 12, color: "var(--ink-3)", fontStyle: "italic"}}>
+              {Tt(r.hipDrive.drills.note, lang)}
+            </p>
+
+            <div className="h3" style={{fontSize: 14, marginTop: 18}}>{Tt(r.hipDrive.diagnose.ttl, lang)}</div>
+            <table className="t" style={{marginTop: 6}}>
+              <thead><tr>{r.hipDrive.diagnose.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+              <tbody>
+                {r.hipDrive.diagnose.rows.map((row, i) => (
+                  <tr key={i}>
+                    <td><strong>{Tt(row[0], lang)}</strong></td>
+                    <td>{Tt(row[1], lang)}</td>
+                    <td style={{color:"var(--ink-3)", fontSize: 12}}>{Tt(row[2], lang)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="h3" style={{fontSize: 14, marginTop: 18}}>{Tt(r.hipDrive.shoes.ttl, lang)}</div>
+            <p className="body" style={{margin:"6px 0 10px", fontSize: 13}}>
+              {Tt(r.hipDrive.shoes.body, lang)}
+            </p>
+            <table className="t">
+              <thead><tr>{r.hipDrive.shoes.fit.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+              <tbody>
+                {r.hipDrive.shoes.fit.rows.map((row, i) => (
+                  <tr key={i}>
+                    <td><strong>{Tt(row[0], lang)}</strong></td>
+                    <td>{Tt(row[1], lang)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="body" style={{margin:"10px 0 0", fontSize: 12, color: "var(--ink-3)", fontStyle: "italic"}}>
+              {Tt(r.hipDrive.shoes.pair, lang)}
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 }
