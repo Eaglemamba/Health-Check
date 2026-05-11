@@ -96,6 +96,7 @@ def fetch_day(client: Garmin, iso_date: str) -> dict:
         "training_readiness": safe_call(
             "training_readiness", client.get_training_readiness, iso_date
         ),
+        "activities": safe_call("activities", client.get_activities_by_date, iso_date, iso_date),
     }
 
 
@@ -201,6 +202,43 @@ def summarize(payload: dict) -> str:
             f"- 最低：{low_sp if low_sp else '—'}%",
             "",
         ]
+
+    # === Activities（運動 / 騎車 / 走路 等）===
+    acts = payload.get("activities") or []
+    if isinstance(acts, list) and acts:
+        # Sort by startTimeLocal
+        acts_sorted = sorted(acts, key=lambda a: a.get("startTimeLocal", ""))
+        lines += ["## 活動", "| 時段 | 類型 | 距離 | 時長 | 平均 HR | 最大 HR | 主動 kcal | 含 BMR |",
+                  "|------|------|------|------|---------|---------|-----------|--------|"]
+        tot_dist = 0.0
+        tot_dur = 0.0
+        tot_kcal_active = 0.0
+        tot_kcal_total = 0.0
+        for a in acts_sorted:
+            start = (a.get("startTimeLocal") or "")[-8:-3]  # HH:MM
+            atype = (a.get("activityType") or {}).get("typeKey", "—")
+            dist_m = a.get("distance") or 0
+            dur_s = a.get("duration") or 0
+            avg_hr = a.get("averageHR")
+            max_hr = a.get("maxHR")
+            cal_active = a.get("calories") or 0
+            cal_bmr = a.get("bmrCalories") or 0
+            cal_total = cal_active + cal_bmr
+            tot_dist += dist_m
+            tot_dur += dur_s
+            tot_kcal_active += cal_active
+            tot_kcal_total += cal_total
+            lines.append(
+                f"| {start} | {atype} | {dist_m/1000:.2f} km | {dur_s/60:.1f} min | "
+                f"{int(avg_hr) if avg_hr else '—'} | {int(max_hr) if max_hr else '—'} | "
+                f"{int(cal_active)} | {int(cal_total)} |"
+            )
+        if len(acts_sorted) > 1:
+            lines.append(
+                f"| **小計** | {len(acts_sorted)} 段 | **{tot_dist/1000:.2f} km** | "
+                f"**{tot_dur/60:.1f} min** | — | — | **{int(tot_kcal_active)}** | **{int(tot_kcal_total)}** |"
+            )
+        lines.append("")
 
     hyd = payload.get("hydration") or {}
     if hyd:
