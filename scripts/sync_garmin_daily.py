@@ -148,6 +148,21 @@ def summarize(payload: dict) -> str:
                     bb_wake = closest[1]
         if bb_wake is not None:
             lines.append(f"- Body Battery 起床值：{bb_wake}")
+
+        # === Sleep latency 估算（HR/步數/壓力回推上床時間）===
+        try:
+            from estimate_sleep_latency import estimate as estimate_latency
+            est = estimate_latency(d)
+            if est and "error" not in est and est.get("bedtime_est_local"):
+                lat = est.get("latency_min")
+                q = est.get("quality")
+                q_tag = "" if q == "ok" else f"（{q}）"
+                lines.append(f"- 估算上床：{est['bedtime_est_local']}｜入睡 latency：{lat} 分{q_tag}")
+                if est.get("note"):
+                    lines.append(f"  - 備註：{est['note']}")
+        except Exception as e:
+            lines.append(f"- 估算上床：—（估算失敗：{e.__class__.__name__}）")
+
         lines.append("")
 
     rhr = payload.get("rhr") or {}

@@ -15,8 +15,16 @@ SpO2 Desaturation Event 分析（從 wellnessEpochSPO2DataDTOList 擷取）
 """
 import argparse
 import json
+import sys
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
+
+# Windows cp950 → UTF-8 for unicode markers in stdout
+if sys.stdout.encoding and sys.stdout.encoding.lower() not in ("utf-8", "utf8"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data" / "garmin"
@@ -186,11 +194,34 @@ def cmd_chart(date: str, out: Path = None):
     ax.axhline(88, color="red", linestyle="--", linewidth=0.6, alpha=0.6, label="紅旗 88%")
     ax.axhline(80, color="darkred", linestyle="--", linewidth=0.6, alpha=0.6, label="重度 80%")
 
+    # === 上床時間估算 + Sleep onset 標線 ===
+    latency_text = ""
+    try:
+        from estimate_sleep_latency import estimate as estimate_latency
+        est = estimate_latency(date)
+        if est and "error" not in est:
+            onset_ms = est.get("sleep_onset_utc_ms")
+            bedtime_ms = est.get("bedtime_est_utc_ms")
+            if onset_ms:
+                t_onset = datetime.fromtimestamp(onset_ms / 1000, tz=timezone.utc).astimezone(TPE)
+                ax.axvline(t_onset, color="#2c7fb8", linestyle="-", linewidth=1.2,
+                           alpha=0.85, label=f"Sleep onset {t_onset.strftime('%H:%M')}")
+            if bedtime_ms:
+                t_bed = datetime.fromtimestamp(bedtime_ms / 1000, tz=timezone.utc).astimezone(TPE)
+                ax.axvline(t_bed, color="#7b3294", linestyle=":", linewidth=1.2,
+                           alpha=0.85, label=f"估算上床 {t_bed.strftime('%H:%M')}")
+                if est.get("latency_min") is not None:
+                    q = est.get("quality")
+                    tag = "" if q == "ok" else f"·{q}"
+                    latency_text = f"  |  Latency {est['latency_min']}分{tag}"
+    except Exception:
+        pass
+
     ax.set_ylabel("SpO2 (%)")
     ax.set_xlabel("Time (Asia/Taipei)")
     sleep_low = summary.get("lowestSPO2")
     sleep_avg = summary.get("averageSPO2")
-    ax.set_title(f"夜間 SpO2 — {date}  |  Avg {sleep_avg}%  Lowest {sleep_low}%  T90 {pct:.1f}%  ({len(events)} events)")
+    ax.set_title(f"夜間 SpO2 — {date}  |  Avg {sleep_avg}%  Lowest {sleep_low}%  T90 {pct:.1f}%  ({len(events)} events){latency_text}")
     ax.set_ylim(70, 100)
     ax.grid(alpha=0.3)
     ax.legend(loc="lower right", fontsize=8)
@@ -222,6 +253,10 @@ def cmd_trend(days: int = 9999, out: Path = None):
 
     files = sorted(DATA_DIR.glob("*.json"))[-days:]
     rows = []
+    try:
+        from estimate_sleep_latency import estimate as estimate_latency
+    except Exception:
+        estimate_latency = None
     for f in files:
         date = f.stem
         epochs, summary = load_epochs(date)
@@ -234,6 +269,15 @@ def cmd_trend(days: int = 9999, out: Path = None):
         data = json.loads(f.read_text())
         dto = (data.get("sleep") or {}).get("dailySleepDTO") or {}
         tst_min = (dto.get("sleepTimeSeconds") or 0) / 60
+        # Latency 估算
+        latency_min = None
+        if estimate_latency is not None:
+            try:
+                est = estimate_latency(date)
+                if est and "error" not in est:
+                    latency_min = est.get("latency_min")
+            except Exception:
+                pass
         rows.append({
             "date": datetime.strptime(date, "%Y-%m-%d").date(),
             "lowest": summary.get("lowestSPO2"),
@@ -242,6 +286,7 @@ def cmd_trend(days: int = 9999, out: Path = None):
             "longest": longest,
             "events": len(events),
             "tst": tst_min,
+            "latency": latency_min,
         })
 
     if not rows:
@@ -254,6 +299,7 @@ def cmd_trend(days: int = 9999, out: Path = None):
     t90s = [r["t90"] for r in rows]
     longest_ev = [r["longest"] for r in rows]
     tsts = [r["tst"] / 60 for r in rows]  # 小時
+    latencies = [r["latency"] if r["latency"] is not None else 0 for r in rows]
     # ODI 代理（AHI proxy）= 每睡眠小時 desat events 數
     odi = [r["events"] / (r["tst"] / 60) if r["tst"] > 0 else 0 for r in rows]
 
@@ -283,9 +329,16 @@ def cmd_trend(days: int = 9999, out: Path = None):
         if v >= 5:  return "#fdcc8a"
         return "#74c476"
 
+    def color_lat(v):
+        # 入睡 latency：> 30 分需注意；> 45 分提示 sleep onset insomnia
+        if v >= 45: return "#d7301f"
+        if v >= 30: return "#fc8d59"
+        if v >= 20: return "#fdcc8a"
+        return "#74c476"
+
     width = max(16, len(dates) * 0.32)
-    fig, axes = plt.subplots(5, 1, figsize=(width, 20),
-                              sharex=True, gridspec_kw={"height_ratios": [3, 2, 2, 2, 2]})
+    fig, axes = plt.subplots(6, 1, figsize=(width, 23),
+                              sharex=True, gridspec_kw={"height_ratios": [3, 2, 2, 2, 2, 2]})
 
     # Panel 1: SpO2 lowest + avg
     ax = axes[0]
@@ -360,16 +413,37 @@ def cmd_trend(days: int = 9999, out: Path = None):
     ax.axhline(6,   color="red",       linestyle=":", linewidth=1.0, alpha=0.6, label="底線 6h")
     ax.axhline(7,   color="orange",    linestyle=":", linewidth=1.0, alpha=0.6, label="目標 7h")
     ax.axhline(7.5, color="goldenrod", linestyle=":", linewidth=1.0, alpha=0.6, label="理想 7.5h")
-    # 在每根 bar 上方標出時數
     for d, v in zip(dates, tsts):
         ax.annotate(f"{v:.1f}", xy=(d, v), xytext=(0, 2),
                     textcoords="offset points", ha="center", fontsize=6,
                     color="darkred" if v < 6 else "#444")
     ax.set_ylabel("TST 總睡眠時間 (h)\nGarmin dailySleepDTO", fontsize=11)
     ax.set_ylim(0, max(10, max(tsts) + 0.5))
+    ax.grid(alpha=0.3, axis="y")
+    ax.legend(loc="upper right", fontsize=8, ncol=3)
+
+    # Panel 6: Sleep latency 估算
+    ax = axes[5]
+    colors = [color_lat(v) for v in latencies]
+    ax.bar(dates, latencies, color=colors, edgecolor="#333", linewidth=0.6, width=0.8)
+    ax.axhline(20, color="goldenrod", linestyle=":", linewidth=1.0, alpha=0.6, label="正常上限 20 分")
+    ax.axhline(30, color="orange",    linestyle=":", linewidth=1.0, alpha=0.6, label="偏長 30 分")
+    ax.axhline(45, color="red",       linestyle=":", linewidth=1.0, alpha=0.6, label="疑似失眠 45 分")
+    for d, v in zip(dates, latencies):
+        if v > 0:
+            ax.annotate(f"{v}", xy=(d, v), xytext=(0, 2),
+                        textcoords="offset points", ha="center", fontsize=6,
+                        color="darkred" if v >= 30 else "#444")
+    ax.set_ylabel("入睡 Latency (分)\nHR+步數+壓力 估算", fontsize=11)
+    ax.set_ylim(0, max(50, max(latencies) + 5) if latencies else 50)
     ax.set_xlabel("日期（每根 bar = 一晚睡眠）", fontsize=11)
     ax.grid(alpha=0.3, axis="y")
     ax.legend(loc="upper right", fontsize=8, ncol=3)
+    ax.text(0.01, 0.95,
+            "[!] 估算非測量。手錶無法直接測 sleep latency；數值為「最後清醒訊號→Garmin 偵測入睡」之差",
+            transform=ax.transAxes, fontsize=8, color="darkred",
+            verticalalignment="top",
+            bbox=dict(boxstyle="round,pad=0.3", fc="#fff3cd", ec="#d7301f", alpha=0.9))
 
     # Date formatting — 每天一個 tick（放在最底層 panel）
     ax.set_xticks(dates)
@@ -446,6 +520,12 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
     def mins_below(epochs, thr):
         return sum(1 for e in epochs if e.get("spo2Reading") is not None and e["spo2Reading"] < thr)
 
+    # Lazy import latency estimator
+    try:
+        from estimate_sleep_latency import estimate as estimate_latency
+    except Exception:
+        estimate_latency = None
+
     summary_rows = []
     line_entries = []  # (color, short_label) for in-plot stat block
     for i, d in enumerate(nights_to_plot):
@@ -476,8 +556,17 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
                         color="#fc8d59", alpha=fill_alpha + 0.05, interpolate=True, linewidth=0)
         ax.fill_between(xs, ys, 80, where=[(v is not None and v < 80) for v in ys_raw],
                         color="#d7301f", alpha=fill_alpha + 0.10, interpolate=True, linewidth=0)
+        # Latency 估算
+        lat_str = "—"
+        if estimate_latency is not None:
+            try:
+                est = estimate_latency(str(d))
+                if est and "error" not in est and est.get("latency_min") is not None:
+                    lat_str = f"{est['latency_min']}m"
+            except Exception:
+                pass
         short = (f"{d.strftime('%m-%d')}  nadir {nadir}%  T90 {pct:.1f}%  "
-                 f"<90:{m90}m  <85:{m85}m  <80:{m80}m"
+                 f"<90:{m90}m  <85:{m85}m  <80:{m80}m  lat:{lat_str}"
                  + ("  ◀" if is_today else ""))
         line_entries.append((color, short, is_today))
         summary_rows.append((d, nadir, pct, m90, m85, m80, is_today))
