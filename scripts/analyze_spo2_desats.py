@@ -212,8 +212,13 @@ def cmd_chart(date: str, out: Path = None):
                            alpha=0.85, label=f"估算上床 {t_bed.strftime('%H:%M')}")
                 if est.get("latency_min") is not None:
                     q = est.get("quality")
-                    tag = "" if q == "ok" else f"·{q}"
-                    latency_text = f"  |  Latency {est['latency_min']}分{tag}"
+                    lo, hi = est.get("latency_min_lower"), est.get("latency_min_upper")
+                    if lo is not None and hi is not None and lo != hi:
+                        lat_disp = f"{lo}–{hi}分"
+                    else:
+                        lat_disp = f"{est['latency_min']}分"
+                    tag = "" if q in ("ok", "manual") else f"·{q}"
+                    latency_text = f"  |  Latency {lat_disp}{tag}"
     except Exception:
         pass
 
@@ -271,11 +276,17 @@ def cmd_trend(days: int = 9999, out: Path = None):
         tst_min = (dto.get("sleepTimeSeconds") or 0) / 60
         # Latency 估算
         latency_min = None
+        latency_lo = None
+        latency_hi = None
+        latency_src = None
         if estimate_latency is not None:
             try:
                 est = estimate_latency(date)
                 if est and "error" not in est:
                     latency_min = est.get("latency_min")
+                    latency_lo = est.get("latency_min_lower")
+                    latency_hi = est.get("latency_min_upper")
+                    latency_src = est.get("source")
             except Exception:
                 pass
         rows.append({
@@ -287,6 +298,9 @@ def cmd_trend(days: int = 9999, out: Path = None):
             "events": len(events),
             "tst": tst_min,
             "latency": latency_min,
+            "latency_lo": latency_lo,
+            "latency_hi": latency_hi,
+            "latency_src": latency_src,
         })
 
     if not rows:
@@ -300,6 +314,9 @@ def cmd_trend(days: int = 9999, out: Path = None):
     longest_ev = [r["longest"] for r in rows]
     tsts = [r["tst"] / 60 for r in rows]  # 小時
     latencies = [r["latency"] if r["latency"] is not None else 0 for r in rows]
+    latencies_lo = [r["latency_lo"] if r["latency_lo"] is not None else 0 for r in rows]
+    latencies_hi = [r["latency_hi"] if r["latency_hi"] is not None else 0 for r in rows]
+    latency_srcs = [r["latency_src"] for r in rows]
     # ODI 代理（AHI proxy）= 每睡眠小時 desat events 數
     odi = [r["events"] / (r["tst"] / 60) if r["tst"] > 0 else 0 for r in rows]
 
@@ -422,25 +439,39 @@ def cmd_trend(days: int = 9999, out: Path = None):
     ax.grid(alpha=0.3, axis="y")
     ax.legend(loc="upper right", fontsize=8, ncol=3)
 
-    # Panel 6: Sleep latency 估算
+    # Panel 6: Sleep latency 估算（雙範圍 lower–upper）
     ax = axes[5]
-    colors = [color_lat(v) for v in latencies]
-    ax.bar(dates, latencies, color=colors, edgecolor="#333", linewidth=0.6, width=0.8)
+    colors = [color_lat(v) for v in latencies_lo]
+    ax.bar(dates, latencies_lo, color=colors, edgecolor="#333", linewidth=0.6, width=0.8,
+           label="HR-based 下限")
+    # Upper bound 用「半透明擴增條」疊在 lower bar 上方
+    upper_extension = [max(hi - lo, 0) for lo, hi in zip(latencies_lo, latencies_hi)]
+    ax.bar(dates, upper_extension, bottom=latencies_lo, color="#888", alpha=0.35,
+           edgecolor="#444", linewidth=0.4, width=0.8, hatch="///",
+           label="步數-based 上限（躺床清醒不確定區）")
+    # 手動覆寫日期 — 加邊框與標記
+    for d, src, v in zip(dates, latency_srcs, latencies):
+        if src == "manual_override":
+            ax.bar([d], [v], color="#1e88e5", edgecolor="#0d47a1", linewidth=1.5, width=0.8, alpha=0.85)
+            ax.annotate("✎", xy=(d, v), xytext=(0, 8),
+                        textcoords="offset points", ha="center", fontsize=10, color="#0d47a1")
     ax.axhline(20, color="goldenrod", linestyle=":", linewidth=1.0, alpha=0.6, label="正常上限 20 分")
     ax.axhline(30, color="orange",    linestyle=":", linewidth=1.0, alpha=0.6, label="偏長 30 分")
     ax.axhline(45, color="red",       linestyle=":", linewidth=1.0, alpha=0.6, label="疑似失眠 45 分")
-    for d, v in zip(dates, latencies):
-        if v > 0:
-            ax.annotate(f"{v}", xy=(d, v), xytext=(0, 2),
+    for d, lo, hi in zip(dates, latencies_lo, latencies_hi):
+        if hi > 0:
+            label = f"{lo}" if lo == hi else f"{lo}–{hi}"
+            ax.annotate(label, xy=(d, hi), xytext=(0, 2),
                         textcoords="offset points", ha="center", fontsize=6,
-                        color="darkred" if v >= 30 else "#444")
+                        color="darkred" if lo >= 30 else "#444")
     ax.set_ylabel("入睡 Latency (分)\nHR+步數+壓力 估算", fontsize=11)
-    ax.set_ylim(0, max(50, max(latencies) + 5) if latencies else 50)
+    max_y = max(latencies_hi) if latencies_hi else 0
+    ax.set_ylim(0, max(50, max_y + 5))
     ax.set_xlabel("日期（每根 bar = 一晚睡眠）", fontsize=11)
     ax.grid(alpha=0.3, axis="y")
-    ax.legend(loc="upper right", fontsize=8, ncol=3)
+    ax.legend(loc="upper right", fontsize=7, ncol=2)
     ax.text(0.01, 0.95,
-            "[!] 估算非測量。手錶無法直接測 sleep latency；數值為「最後清醒訊號→Garmin 偵測入睡」之差",
+            "[!] 估算非測量。實線下限=HR訊號（可能低估）；陰影上限=步數訊號（可能高估）；藍色=手動上床時間",
             transform=ax.transAxes, fontsize=8, color="darkred",
             verticalalignment="top",
             bbox=dict(boxstyle="round,pad=0.3", fc="#fff3cd", ec="#d7301f", alpha=0.9))

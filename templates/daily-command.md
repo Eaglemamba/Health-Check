@@ -16,6 +16,7 @@
    - 睡眠：**以 Garmin 摘要為準**（就寢、起床、總時長、深眠、REM、Sleep Score、Body Battery 起床值）；只需向使用者追問：
      - 中途醒來（次數+原因）
      - 主觀恢復感：1-5 分（1=極度疲憊, 5=精力充沛）
+     - **實際上床時間（可選填）**：若 daily-garmin 摘要的 latency 估算品質為 `wide_range`（HR 訊號與步數訊號差 > 30 分，代表演算法無法區分「躺床清醒」與「已睡」），向使用者追問「昨晚實際幾點上床？」；若回答則填入 `**實際上床：** HH:MM` 一行，演算法會以此覆寫 latency 估算
    - **昨日實際飲水量**（L）：優先讀取 Garmin summary 的「飲水 - 實際」欄；若為「—」（代表 Garmin Connect 未紀錄），才向使用者追問；使用者回覆後，執行 `python scripts/log_hydration.py --ml <mL值> --date <昨日日期> --replace` 自動回寫至 Garmin Connect（`--replace` 會先讀當日值算 delta，避免重複累加）；對照 ≥ 2.5L 目標
    - 身體信號：部位、性質、強度 (0-10)，或回答「清」
    - 今日計畫：飲水目標、補充品、運動安排、活動度/伸展安排

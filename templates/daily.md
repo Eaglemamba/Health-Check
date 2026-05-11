@@ -27,12 +27,14 @@
 
 ## 睡眠狀態
 
-**實際就寢：**
+**Garmin 偵測入睡：**（自動填，= sleepStartTimestampLocal）
+**實際上床：**（可選填 HH:MM；若填會覆寫演算法 latency 估算 — 解決 HR 訊號低估「躺床清醒」的問題）
 **實際起床：**
 **中途醒來：** [ 無 / 次數：__ / 原因：__ ]
 **Garmin Sleep Score：** [ ] / 100
 **Garmin Body Battery 起床值：** [ ]
 **主觀恢復感：** [ ] / 5（1=極度疲憊, 5=精力充沛）
+**入睡 latency：**（自動估算，範圍 LO–HI 分）
 
 ### SpO2 夜間最低（7 晚趨勢）
 

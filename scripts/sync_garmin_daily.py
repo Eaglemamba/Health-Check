@@ -155,9 +155,17 @@ def summarize(payload: dict) -> str:
             est = estimate_latency(d)
             if est and "error" not in est and est.get("bedtime_est_local"):
                 lat = est.get("latency_min")
+                lo = est.get("latency_min_lower")
+                hi = est.get("latency_min_upper")
                 q = est.get("quality")
-                q_tag = "" if q == "ok" else f"（{q}）"
-                lines.append(f"- 估算上床：{est['bedtime_est_local']}｜入睡 latency：{lat} 分{q_tag}")
+                src = est.get("source")
+                src_tag = "（手動）" if src == "manual_override" else ""
+                if lo is not None and hi is not None and lo != hi:
+                    lat_str = f"{lat} 分（範圍 {lo}–{hi} 分）"
+                else:
+                    lat_str = f"{lat} 分"
+                q_tag = "" if q in ("ok", "manual") else f"（{q}）"
+                lines.append(f"- 估算上床：{est['bedtime_est_local']}{src_tag}｜入睡 latency：{lat_str}{q_tag}")
                 if est.get("note"):
                     lines.append(f"  - 備註：{est['note']}")
         except Exception as e:
