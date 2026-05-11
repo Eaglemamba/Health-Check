@@ -8,7 +8,7 @@
 - 每週 / 每月 / 年度回顧
 - 年度健檢報告與補充品策略追蹤
 - Garmin 數據同步、健康趨勢儀表板自動生成
-- 6 個月健康逆轉計畫前端（10 個 panel：總覽 / 睡眠 / 飲食 / 靠牆深蹲 / 跑步 / 保健品 / 每日作息 / 時程 / 安全 / 儀表板 / 追蹤）
+- 6 個月健康逆轉計畫前端（11 個 panel：總覽 / 睡眠 / 飲食 / 靠牆深蹲 / 跑步 / 保健品 / 每日作息 / 時程 / 安全 / 儀表板 / 追蹤）
 
 ## 專案結構
 
@@ -25,13 +25,15 @@ reviews/
   health_dashboard.png  健康趨勢儀表板（自動生成）
 articles/             前瞻性指南（補充品、健檢加測等），最新版於根目錄，舊版於 archive/
   archive/            被新版取代的歷史指南；不再修改
+reports/
+  daily-garmin/       Garmin 每日摘要 markdown（由 sync_garmin_daily.py 產生）
 
 # 前端（React 單頁 PWA — 6-Month Health Reversal Plan）
 index.html            HTML shell（React 18 + Babel-standalone CDN）
 data.js               雙語（EN/ZH）資料層 — hero、markers、panels、tracker
 styles.css            主題（Cool / Warm / Dark）+ 密度（Comfortable / Compact）
 components-core.jsx   Hero、Marker、Tabs、Icon
-components-panels.jsx 10 個 panel
+components-panels.jsx 11 個 panel
 tweaks-panel.jsx      右下角即時調整面板（theme / lang / hero / density）
 manifest.webmanifest  PWA manifest（standalone display、theme-color）
 sw.js                 Service Worker（CDN cache-first，離線可用）

@@ -26,6 +26,8 @@ reviews/
   annual/                   # 年度健康評估報告（YYYY-MM-DD.md，含子資料夾歸檔）
   food/                     # 每日飲食紀錄（YYYY-MM-DD.md）
   health_dashboard.png      # 健康趨勢儀表板圖表（自動生成）
+reports/
+  daily-garmin/             # Garmin 每日摘要 markdown（sync_garmin_daily.py 產生）
 articles/                   # 前瞻性指南（補充品、健檢加測等）
   archive/                  # 被新版取代的歷史指南；不再修改
 
