@@ -487,11 +487,39 @@ T = 90   核心體溫降至 sleep onset 閾值 → 入睡
 | 晚餐 | **取消 NOW EGCG 膠囊**（避免脂肪肝 ALT/AST 負擔疊加） | 0 mg |
 | **合計** | | **~48–95 mg/天** |
 
-### 劑量現實評估
+### 劑量現實評估（2026-05-11 audit 校準）
 
-- **低於 RCT 有效閾值**：降 LDL 的 RCT 有效範圍 **200–500mg EGCG/天**；現行單一拿鐵僅 ~48–95mg。
-- **牛奶 casein 進一步減吸收 ~25–30%**（Egert 2013, Eur J Nutr），實際有效量可能僅 ~35–70mg。
-- **意味著**：抹茶此時在你的策略中**不是 LDL 主力**，它的角色降為「午餐替代含糖飲料 + 一點抗氧化 + 生活愉悅」。降 LDL 的責任全部落在**益生菌 + 魚油（輕度）+ 飲食纖維 + 洛神花茶加成**。
+**你實際使用的產品**：[伊藤園 お～いお茶 濃い茶 さらさら抹茶入り緑茶 40g](https://www.itoen.jp/products/41483/)（instant 即溶粉末，非純抹茶筅刷品）
+
+| 項目 | 你 2g/杯 實況 | 官方 1 serving 標準 |
+|------|---------------|--------------------|
+| 用量 | 2g | 7.2g（= 你用量的 3.6×）|
+| Gallate catechins | ~95mg | 340mg（機能性食品 BMI claim 對應劑量）|
+| EGCG（估算）| ~95mg | ~340mg |
+| Dextrin（隱性碳水）| ~1.5g/杯 | 5.4g/serving |
+| 咖啡因 | ~43mg | 154mg |
+
+- **低於 RCT 有效閾值**：降 LDL 的 RCT 有效範圍 **200–500mg EGCG/天**；現行單一拿鐵僅 ~95mg。
+- **牛奶 casein 進一步減吸收 ~25–30%**（Egert 2013, Eur J Nutr），實際有效量可能僅 ~70mg。
+- **「機能性食品」claim 對你雙重落空**：(a) 用量 28% of labeled dose；(b) 你 BMI 24.5 < 25（claim target 為「BMI が高めの方」）。
+- **意味著**：抹茶此時在你的策略中**不是 LDL 主力**，它的角色降為「午餐替代含糖飲料 + 一點抗氧化 + 生活愉悅」。降 LDL 的責任全部落在**psyllium husk 10g/天 + 益生菌 + 魚油（輕度）+ 飲食纖維 + 洛神花茶加成**。
+
+### 為什麼**不**建議拉到官方 7.2g/杯
+
+- ❌ 咖啡因 154mg / 杯 × 12:00 lunch → 21:30 上床時殘留 ~50mg → 加劇 sleep latency wide_range
+- ❌ Dextrin 5.4g/杯 × 365 = 一年 ~1.97kg 高 GI 糊精負擔（HbA1c 5.9% 不利）
+- ❌ 你不在 claim target population（BMI 24.5 < 25）
+- ❌ 月成本 +2,750 TWD ROI 低（同樣金額換乳清 Naked Whey 更值得）
+
+### 升級選項（不急，可選）
+
+| 選項 | 產品 | 月成本 | 純度 |
+|------|------|--------|------|
+| 維持現狀 | さらさら 40g (41483) | ~550 | 🟡 dextrin |
+| **小升級** | [お抹茶 30g (41489)](https://www.itoen.jp/products/41489/) 純粉 | ~780 | ✅ 純 |
+| **大升級** | [京都宇治抹茶 130g (50861)](https://www.itoen.jp/products/50861/) 純粉 | ~360-540（划算）| ✅ 純頂級 |
+
+升級需配「電動奶泡器」(~250 TWD 一次性) 或「罐子搖晃法」（零成本）。
 
 ### LDL 策略重新權衡
 
@@ -788,6 +816,128 @@ TST 目標：22:00 → 05:45 = 7h 45min
 
 **通則**：商業預製食品中「保存期 ≥ 7 天 + 看起來水嫩多汁」幾乎必然含磷酸鹽。
 **安全替代**：自煮（電鍋、氣炸鍋）+ 冷藏 3-5 天內食用。
+
+---
+
+## 八之三、乳清蛋白粉的隱藏成本（ON Whey Isolate 案例）🆕 2026-05-11
+
+> 起因：日常 audit 中發現 ON Whey Isolate（Costco TW，1.9 kg 巧克力/香草口味）含 4 層問題，且**完全無主觀感受**（與茶葉蛋的「鈉敏感」不同）。對你 HbA1c 5.9% prediabetes + hsCRP 1.42 尤其重要 — 這是 stack 中**唯一一個 silent biochemical 擾動每日 30g × 365 天**的單品。
+
+### 你的實際產品：ON Whey Isolate（Costco TW）成分
+
+依 [Costco 官方頁面](https://www.costco.com.tw/Health-Beauty/Supplements/Sports-Performance/Optimum-Nutrition-Whey-Isolate-Protein-Powder-Chocolate-Shake-19-kg/p/1019492) 揭露：
+
+```
+分離乳清蛋白（牛奶）       ✅ 主蛋白源（90%+）
+低脂可可粉 / 香草口味      🟡 巧克力 Cd 風險（香草無此問題）
+香料 (flavorings)           🟡 黑盒子分子
+大豆卵磷脂                  🟡 異黃酮微量 + 可能 GMO
+鹽                          已計入 stack
+羧甲基纖維素鈉 (CMC)        🔴 ← 主要新發現
+香莢蘭醛 (vanillin)         合成香草，普遍 OK
+蔗糖素 (sucralose)          🔴 已分析過
+醋磺內酯鉀 (Ace-K)          🔴 已分析過
+```
+
+**好消息（vs Performance Whey）**：
+- ✅ 無 Titanium Dioxide (TiO2 / E171)
+- ✅ 無 Dipotassium Phosphate（無磷酸鹽地雷）
+- ✅ 純 Isolate（非 concentrate 混合）
+
+**但仍 4 層 microbiome 擾動**：CMC + Sucralose + Ace-K + 大豆卵磷脂。
+
+### 4 層機制與 RCT 證據
+
+| 層 | 成分 | 主要機制 | 關鍵 RCT |
+|----|------|----------|----------|
+| 1 | **CMC（羧甲基纖維素鈉）** | 腸黏膜侵蝕 + Akkermansia ↓ + 慢性發炎 | **Chassaing 2022, Gastroenterology**（人類 RCT 11 天可見發炎）+ Chassaing 2015 Nature |
+| 2 | **Sucralose** | gut microbiome 改變 + glucose tolerance ↓ | **Méndez-García 2022, Cell**（人類 RCT 14 天） + Suez 2014 Nature |
+| 3 | **Ace-K** | 90% 不代謝 + microbiome 擾動 | Bian 2017 同 sucralose 機制 |
+| 4 | **大豆卵磷脂** | 異黃酮微量；GMO 風險 | 機制性 |
+
+### 對你的累積影響估算
+
+```
+你每日：30g 全勺 × 365 天 = 11 kg/年
+
+CMC 暴露：~0.1-0.3g/勺 × 365 = 30-110g/年
+Sucralose：~5-12mg/勺 × 365 = 1.8-4.4g/年
+Ace-K：~5-12mg/勺 × 365 = 1.8-4.4g/年
+大豆卵磷脂：~0.3-0.6g/勺 × 365 = 110-220g/年
+```
+
+### 為什麼這是 stack priority 1（甚至高於茶葉蛋）
+
+| 對比維度 | ON Whey | 茶葉蛋 ×2 |
+|----------|---------|-----------|
+| 暴露形式 | 連續溶液（直接腸吸收）| 固體（有殼屏障）|
+| 添加物層數 | 4 | 5 |
+| **核心傷害機制** | **microbiome dysbiosis + 黏膜侵蝕** | 血管鈣化 + BP + 致癌風險 |
+| 你最敏感的指標 | HbA1c 5.9% + hsCRP 1.42 卡住 | LVH + BP |
+| 可見性 | ❌ **完全無感**（無 self-correction）| ✅ 鈉敏感者察覺 |
+| 直接 RCT | Chassaing 2022 人類 11 天即見發炎 | 較間接 |
+
+→ **乳清的「無感但確實傷害」最危險** — 沒有身體訊號回饋會自動修正。
+
+### 替代方案
+
+#### 🥇 推薦：**Naked Whey Unflavored**（USA, iHerb 直送）
+
+- **單一成分**：grass-fed whey isolate（無甜味劑、無乳化劑、無風味劑、無 CMC）
+- **CLP 5/5 星**（重金屬最低等級）
+- 第三方重金屬檢測公開
+- 月成本 ~1,400-1,700 TWD（vs ON ~800 = +600-900）
+
+#### 🥈 過渡：**MyProtein Impact Whey Isolate Unflavored / Natural**
+
+- **無添加版本**只有 WPI（須選 unflavored / natural）
+- CLP 3/5
+- 台灣 MyProtein 官網可購
+
+#### ❌ 避免：含 sucralose / Ace-K / CMC 的所有口味
+
+- ON 巧克力 / 香草 / 草莓
+- BSN Syntha-6
+- Dymatize ISO100
+
+### 執行
+
+- 用完目前 ON 1.9 kg（30g/天 ≈ 63 天）
+- iHerb 預訂 Naked Whey 2 lb（~907g / 30 天份）
+- 切換當天無味剛好融入雪坊優格 + 香蕉 + 藍莓（升級早餐 blend 自帶風味）
+
+**月支出淨變動**：+600-900 TWD（被「換掉茶葉蛋 −400」與「換掉 7-11 藜麥毛豆 −250」抵消大部分）
+
+**依據**：**(Chassaing B et al. 2015, Nature)** + **(Chassaing B et al. 2022, Gastroenterology)** + **(Méndez-García LA et al. 2022, Cell)** + **(Clean Label Project 2018 Protein Powder Report)**
+
+---
+
+## 八之四、商業食品 audit 結果總覽（你每日固定攝取項）🆕 2026-05-11
+
+逐項驗證後的「保留 / 升級 / 換掉」名單：
+
+| 項目 | 評估 | 行動 | 月成本變動 |
+|------|------|------|----------|
+| **雪坊 6 號優格** 200g/天 | ✅ stack 最乾淨單品（鮮乳 + 6 株乳酸菌，無添加） | **繼續吃** — 你做對了 | 0 |
+| **伊藤園 さらさら抹茶** 40g（[産品 41483](https://www.itoen.jp/products/41483/)）| 🟡 含 dextrin 1.5g/天 + Vit C；EGCG ~95mg/杯 | **可選**升級至 [お抹茶 30g (41489)](https://www.itoen.jp/products/41489/) 或 [京都宇治 130g (50861)](https://www.itoen.jp/products/50861/) 純抹茶；不急 | +200-400 / 月 |
+| **ON Whey Isolate** 30g/天（Costco TW）| 🔴 **priority 1**：CMC + 雙甜味劑 + 大豆卵磷脂 | **換 Naked Whey Unflavored** | +600-900 |
+| **7-11 茶葉蛋 ×2** | 🔴 priority 2：磷酸鹽 + 鈉 + 4-MEI + AGE + 添加物 | **電鍋自煮白煮蛋 ×2**（週日 batch 15 分鐘） | −400 |
+| **7-11 藜麥毛豆** | 🟠 鈉 400mg + 可能磷酸鹽 | **自帶冷凍毛豆 120g**（無鹽水煮 5 分） | −250 |
+| 全脂鮮奶（自泡抹茶用，300mL/天）| ❓ 待 audit | 確認品牌 / A1 vs A2 | — |
+| 堅果 30g/天 | ❓ 待 audit | 確認品牌 / 種類 / 包裝大小 / aflatoxin 風險 | — |
+| 南瓜籽仁 30g/天 | 🟡 Cd 推導風險 | 確認品牌 / 來源國 / 鹽味 | — |
+
+### 普篩通則（給未來新增食物參考）
+
+避開「**保存期 ≥ 7 天 + 看起來水嫩/濕潤的便利食品**」幾乎必含磷酸鹽。
+避開「**無糖飲料 / 蛋白粉常見**」幾乎必含人工甜味劑（sucralose / Ace-K）。
+避開「**Instant 即溶 / さらさら**」幾乎必含 dextrin / maltodextrin（除非寫明「100% 〇〇」）。
+
+選擇「**冷藏保存期 ≤ 14 天 + 原料清單 ≤ 3 項**」的單品。
+
+### 為什麼這個 audit 重要
+
+你的 stack 整體 **strategy 已超越 90% 同齡層**（補品選擇、訓練計畫、biomarker 追蹤），但**輸入端的食物 / 商品品質**若有隱性 microbiome 擾動，會卡住 hsCRP / HbA1c / HDL 進階改善的最後一哩。「換 1 個乳清」的 ROI 可能大於「再加 1 個補品」。
 
 ---
 
