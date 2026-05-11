@@ -60,6 +60,9 @@
 **昨日活動消耗：** [ ] kcal（主動 + BMR；自動讀自 Garmin daily summary 活動區塊）
   - > 300 kcal → 今日可彈性增加 200-300 kcal 攝取
   - < 100 kcal → 今日加強運動（補一段 Zone 2 走路 30 分）
+**昨日 Na / K / Na-K ratio：** [ ] mg / [ ] mg / [ ]（自動讀自 `scripts/analyze_nutrition.py --date YYYY-MM-DD`）
+  - Na/K < 0.5 ✅ / 0.5-0.6 🟢 / 0.6-0.8 🟡 / > 0.8 🟠（INTERSALT 1988）
+  - 連 3 天 ≥ 0.8 → 首選減鈉（自煮蛋取代茶葉蛋 −440 mg）或加 K（香蕉 +422 mg）
 
 ---
 
