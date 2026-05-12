@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="doc-date" content="2026-05-12" />
+<title>FDA Authorized Health Claims (SSA Standard) — 條文原文與解說 · 2026-05-12</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; color: #334155; background: #f8fafc; }
+  .container { max-width: 1280px; margin: 0 auto; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #064e3b, #047857, #059669); color: #fff; padding: 2.5rem 2rem; text-align: center; position: relative; }
+  .header::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, #047857, #6ee7b7); }
+  .header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .header .subtitle { font-size: 1rem; opacity: 0.9; }
+  .header .meta { font-size: 0.8rem; opacity: 0.75; margin-top: 0.75rem; }
+  .tags { margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+  .tag { padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+  .tag-evidence { background: #fde68a; color: #92400e; }
+  .tag-labs { background: #fed7aa; color: #9a3412; }
+  .tag-supplement { background: #e9d5ff; color: #581c87; }
+
+  /* Executive Summary */
+  .exec-summary { background: #ecfdf5; padding: 1.5rem 2rem; border-left: 4px solid #047857; margin: 0; }
+  .exec-summary h2 { color: #064e3b; font-size: 1.15rem; margin-bottom: 0.75rem; }
+  .exec-summary p { color: #334155; font-size: 0.95rem; }
+  .rating-bar { display: flex; align-items: center; gap: 1rem; margin-top: 1rem; padding: 0.6rem 1rem; background: linear-gradient(135deg, #ecfdf5, #f0fdfa); border-radius: 8px; flex-wrap: wrap; border: 1px solid #a7f3d0; }
+  .rating-score { font-weight: 700; color: #065f46; font-size: 1rem; }
+  .rating-stars { color: #f59e0b; letter-spacing: 1px; }
+  .evidence-tier { font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 4px; }
+  .evidence-strong { background: #d1fae5; color: #065f46; }
+  .rating-high { font-size: 0.8rem; color: #047857; background: #d1fae5; padding: 0.2rem 0.5rem; border-radius: 4px; }
+  .rating-low { font-size: 0.8rem; color: #64748b; background: #f1f5f9; padding: 0.2rem 0.5rem; border-radius: 4px; }
+
+  /* Learning Objectives */
+  .objectives { padding: 1.5rem 2rem; }
+  .objectives h2 { color: #064e3b; font-size: 1.15rem; margin-bottom: 1rem; }
+  .obj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; }
+  .obj-item { background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 0.75rem 1rem; transition: transform 0.2s, box-shadow 0.2s; font-size: 0.9rem; }
+  .obj-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .obj-num { display: inline-block; background: #047857; color: #fff; width: 1.5rem; height: 1.5rem; border-radius: 50%; text-align: center; line-height: 1.5rem; font-size: 0.75rem; font-weight: 700; margin-right: 0.5rem; }
+
+  /* Key Numbers Dashboard */
+  .dashboard { margin: 1.5rem 2rem; padding: 1.25rem; background: #ecfdf5; border: 1px solid #86efac; border-radius: 12px; }
+  .dashboard h3 { color: #064e3b; font-size: 1rem; margin-bottom: 1rem; }
+  .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+  .dash-item { text-align: center; }
+  .dash-num { font-size: 1.5rem; font-weight: 700; color: #047857; }
+  .dash-label { font-size: 0.78rem; color: #475569; margin-top: 0.25rem; }
+
+  /* Dual Column Section */
+  .section { padding: 1.5rem 2rem; border-top: 1px solid #e2e8f0; }
+  .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .section-header h2 { color: #064e3b; font-size: 1.15rem; }
+  .cfr-badge { background: #047857; color: #fff; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600; font-family: 'Source Code Pro', monospace; }
+  .topic-badge { background: #dbeafe; color: #1e3a8a; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600; }
+  .relevance-badge { padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600; }
+  .relev-high { background: #fecaca; color: #7f1d1d; }
+  .relev-med { background: #fed7aa; color: #9a3412; }
+  .relev-low { background: #e2e8f0; color: #475569; }
+
+  .dual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .col-original, .col-explain { padding: 1rem; border-radius: 8px; font-size: 0.9rem; line-height: 1.65; }
+  .col-original { background: #f8fafc; border: 1px solid #cbd5e1; border-left: 3px solid #64748b; }
+  .col-explain { background: #f0fdf4; border: 1px solid #86efac; border-left: 3px solid #047857; }
+  .col-label { font-size: 0.75rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .col-original .col-label { color: #475569; }
+  .col-explain .col-label { color: #047857; }
+  .col-original p { font-family: 'Source Code Pro', monospace; font-size: 0.82rem; color: #1e293b; margin-bottom: 0.5rem; }
+  .col-explain p { margin-bottom: 0.5rem; }
+  .col-explain strong { color: #064e3b; }
+  .model-claim { background: #fff7ed; border: 1px dashed #fdba74; border-radius: 6px; padding: 0.6rem 0.8rem; margin-top: 0.5rem; font-style: italic; color: #9a3412; }
+  .quote-en { font-style: italic; }
+
+  /* Info Boxes */
+  .info-box { margin: 1rem 0; border-radius: 8px; overflow: hidden; border: 1px solid; }
+  .info-box-header { padding: 0.5rem 0.75rem; font-weight: 600; font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; }
+  .info-box-content { padding: 0.75rem; font-size: 0.88rem; }
+  .box-key { border-color: #fdba74; }
+  .box-key .info-box-header { background: #fed7aa; color: #9a3412; }
+  .box-key .info-box-content { background: #fff7ed; }
+  .box-supplement { border-color: #d8b4fe; }
+  .box-supplement .info-box-header { background: #e9d5ff; color: #581c87; }
+  .box-supplement .info-box-content { background: #faf5ff; }
+  .box-safety { border-color: #fda4af; }
+  .box-safety .info-box-header { background: #fecdd3; color: #9f1239; }
+  .box-safety .info-box-content { background: #fff1f2; }
+
+  /* Comparison Table */
+  table.cmp { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.88rem; }
+  table.cmp th { background: #047857; color: #fff; padding: 0.6rem; text-align: left; font-weight: 600; }
+  table.cmp td { padding: 0.5rem 0.6rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  table.cmp tr:nth-child(even) { background: #f8fafc; }
+  table.cmp tr:hover { background: #ecfdf5; }
+  .highlight-row { background: #fef3c7 !important; }
+
+  /* Strategic Implications Cards */
+  .cards-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0; }
+  .card { background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+  .card-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .card-title { font-weight: 700; color: #064e3b; margin-bottom: 0.5rem; font-size: 0.95rem; }
+  .card-body { font-size: 0.85rem; color: #334155; line-height: 1.6; }
+
+  /* Bottom Line */
+  .bottom-line { background: linear-gradient(135deg, #ecfdf5, #f0fdfa); margin: 1.5rem 2rem; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #059669; }
+  .bottom-line-header { font-weight: 700; color: #064e3b; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; }
+  .bottom-line-item { margin-bottom: 1rem; }
+  .bottom-line-item:last-child { margin-bottom: 0; }
+  .bottom-line-label { font-weight: 600; color: #047857; font-size: 0.85rem; margin-bottom: 0.25rem; }
+  .bottom-line-text { font-size: 0.95rem; line-height: 1.7; color: #334155; }
+
+  /* Practice */
+  .practice { padding: 1.5rem 2rem; background: #f8fafc; }
+  .practice h2 { color: #064e3b; font-size: 1.15rem; margin-bottom: 1rem; }
+  .question-accordion { background: #fff; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 0.75rem; overflow: hidden; }
+  .question-accordion summary { padding: 0.75rem 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; user-select: none; }
+  .question-accordion summary::-webkit-details-marker { display: none; }
+  .question-number { background: #047857; color: #fff; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.78rem; font-weight: 700; }
+  .question-type { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; }
+  .question-text { flex: 1; color: #1e293b; }
+  .accordion-icon::after { content: '▼'; font-size: 0.75rem; color: #64748b; transition: transform 0.2s; }
+  .question-accordion[open] .accordion-icon::after { transform: rotate(180deg); display: inline-block; }
+  .question-answer { padding: 0 1rem 0.75rem; font-size: 0.88rem; line-height: 1.7; color: #334155; border-top: 1px solid #e2e8f0; padding-top: 0.75rem; background: #f0fdf4; }
+
+  /* Footer */
+  .footer { background: #1e293b; color: #94a3b8; padding: 1.5rem 2rem; text-align: center; font-size: 0.8rem; }
+  .footer a { color: #6ee7b7; text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+  .disclaimer { background: #fff1f2; border: 1px solid #fda4af; border-radius: 8px; padding: 0.75rem 1rem; margin: 1rem 2rem; font-size: 0.82rem; color: #7f1d1d; }
+
+  @media (max-width: 768px) {
+    .dual { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.35rem; }
+    .section { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>FDA Authorized Health Claims (SSA 標準)</h1>
+    <div class="subtitle">21 CFR Part 101 Subpart E · 條文原文與中文解說</div>
+    <div class="meta">製作日期：2026-05-12｜來源：FDA / eCFR / Cornell Law / Federal Register</div>
+    <div class="tags">
+      <span class="tag tag-evidence">Evidence</span>
+      <span class="tag tag-labs">Regulation</span>
+      <span class="tag tag-supplement">Supplement</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="exec-summary">
+    <h2>📋 快速摘要</h2>
+    <p>FDA 對食品功效宣稱的最高標準是「Significant Scientific Agreement (SSA)」— 須有多數獨立合格專家對證據總體性達成顯著科學共識。目前 SSA authorized health claims 共 <strong>12 項</strong>，全部編碼於 21 CFR §101.72 至 §101.83。本文逐條呈現英文原文（左欄）與中文解說（右欄），標註與個人補品 stack 的相關性。SSA 之下的 Qualified Health Claims (QHC) 屬較弱證據，需附 disclaimer，另列於文末對照。</p>
+    <div class="rating-bar">
+      <span class="rating-score"><span class="rating-stars">★★★★★</span> 5.0/5</span>
+      <span class="evidence-tier evidence-strong">證據: Strong (FDA SSA 法規標準)</span>
+      <span class="rating-high">↑ 證據品質, 可行動性</span>
+      <span class="rating-low">↓ 多數宣稱針對一般族群，非體組成優化</span>
+    </div>
+  </div>
+
+  <!-- LEARNING OBJECTIVES -->
+  <div class="objectives">
+    <h2>🎯 學習目標</h2>
+    <div class="obj-grid">
+      <div class="obj-item"><span class="obj-num">1</span>掌握 12 項 SSA authorized claims 的物質-疾病配對與 CFR 條號</div>
+      <div class="obj-item"><span class="obj-num">2</span>區分 Authorized Claim vs Qualified Claim vs Structure/Function Claim 三者證據層級</div>
+      <div class="obj-item"><span class="obj-num">3</span>辨識目前 stack 中哪些補品落在 FDA 法規承認範圍內，哪些僅為 RCT 證據</div>
+    </div>
+  </div>
+
+  <!-- KEY NUMBERS DASHBOARD -->
+  <div class="dashboard">
+    <h3>🔑 關鍵數字</h3>
+    <div class="dash-grid">
+      <div class="dash-item"><div class="dash-num">12</div><div class="dash-label">SSA Authorized Claims 總數</div></div>
+      <div class="dash-item"><div class="dash-num">§101.72-83</div><div class="dash-label">CFR 條號範圍</div></div>
+      <div class="dash-item"><div class="dash-num">7 g</div><div class="dash-label">Psyllium 每日宣稱劑量 (§101.81)</div></div>
+      <div class="dash-item"><div class="dash-num">3 g</div><div class="dash-label">β-Glucan 每日宣稱劑量 (§101.81)</div></div>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- §101.72 Calcium + Vit D + Osteoporosis -->
+  <!-- ============================== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.72</span>
+      <span class="topic-badge">Calcium / Vit D ➜ Osteoporosis</span>
+      <h2>鈣、維生素 D 與骨質疏鬆</h2>
+      <span class="relevance-badge relev-med">中度相關（你已補 D3 2000 IU）</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"An inadequate intake of calcium or calcium and vitamin D contributes to low peak bone mass, which has been identified as one of many risk factors in the development of osteoporosis."</p>
+        <p class="quote-en">Vitamin D enables proper calcium absorption and prevents elevated parathyroid hormone levels. Adequate intakes during adolescence and early adulthood optimize bone development.</p>
+        <div class="model-claim">Model claim: "Adequate calcium and vitamin D throughout life, as part of a well-balanced diet, may reduce the risk of osteoporosis."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>鈣或鈣+D 攝取不足會降低<strong>巔峰骨量 (peak bone mass)</strong>，而巔峰骨量是骨質疏鬆的多個風險因子之一。Vit D 的角色是促進腸道鈣吸收 + 抑制副甲狀腺激素 (PTH) 過度分泌。</p>
+        <p><strong>FDA 措辭極保守：</strong>用 "<em>may reduce the risk</em>"、"<em>one of many risk factors</em>"，明確排除「鈣是唯一決定因子」的解讀。</p>
+        <p><strong>對你的應用：</strong>D3 2000 IU 已在 stack 內；但 SSA 宣稱針對「鈣 + D」而非單獨 D。骨質疏鬆非當前重點，但 LVH/動脈鈣化 (K2 MK-7 領域) 與此節無關 — K2 不在 §101.72 範圍。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.73 Dietary lipids + Cancer -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.73</span>
+      <span class="topic-badge">Dietary Fat ➜ Cancer</span>
+      <h2>飲食脂肪與癌症</h2>
+      <span class="relevance-badge relev-low">低相關</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"Diets low in fat may reduce the risk of some cancers. Development of cancer depends on many factors. A diet low in total fat may reduce the risk of some cancers."</p>
+        <div class="model-claim">Model claim: "Development of cancer depends on many factors. A diet low in total fat may reduce the risk of some cancers."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>低總脂肪飲食與「某些癌症」風險下降相關。注意 FDA 用 "some cancers" 而非具體癌別，反映證據涵蓋面寬但效應分散。</p>
+        <p><strong>2026 觀點：</strong>此條於 1993 通過，當時膳食指南偏向「低脂萬能」。現代證據已強調<strong>脂肪品質 (saturated vs unsaturated)</strong> 比總量更重要。SSA 標準雖未撤回，但臨床建議已轉向地中海/EPA-DHA 等模式。</p>
+        <p><strong>對你的應用：</strong>魚油（Omega-3）走 §101.85（QHC，CHD），不在此條。LDL/TG 管理見 §101.75/§101.81。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.74 Sodium + Hypertension -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.74</span>
+      <span class="topic-badge">Sodium ➜ Hypertension</span>
+      <h2>鈉與高血壓</h2>
+      <span class="relevance-badge relev-high">高相關（你 SP 125-130）</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"Diets high in sodium are associated with a high prevalence of hypertension or high blood pressure and with increases in blood pressure with age, and diets low in sodium are associated with a low prevalence of hypertension or high blood pressure."</p>
+        <p class="quote-en">(c)(2)(ii) "The food shall meet all of the nutrient content requirements of § 101.61 for a 'low sodium' food."</p>
+        <div class="model-claim">Model claim: "Diets low in sodium may reduce the risk of high blood pressure, a disease associated with many factors."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>高鈉飲食 ↔ 高血壓盛行率上升 + BP 隨年齡上升加速；低鈉飲食 ↔ 反之。是少數雙向流行病學證據 + RCT 一致（DASH-Sodium 2001）的條目。</p>
+        <p><strong>FDA "low sodium" 門檻：</strong>每份食物 ≤ 140 mg 鈉（§101.61）。</p>
+        <div class="info-box box-key"><div class="info-box-header">⚠️ 對你的直接應用</div><div class="info-box-content">茶葉蛋 2 顆/天 ≈ +440 mg Na；7-11 藜麥毛豆 +400 mg。改自煮白煮蛋 + 家樂福冷凍毛豆 → 每日 −800 mg Na。配合洛神花茶 (RCT −7 mmHg) + L-Citrulline 4g (meta −4 mmHg) → BP 多軸下壓。</div></div>
+        <p><strong>注意：</strong>§101.74 只承認「鈉 → BP」單向，不承認「鉀 → BP」(Na/K ratio 邏輯) — INTERSALT 1988 證據未進入 SSA。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.75 Saturated Fat + Cholesterol + CHD -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.75</span>
+      <span class="topic-badge">Saturated Fat + Cholesterol ➜ CHD</span>
+      <h2>飽和脂肪與膽固醇與冠心病</h2>
+      <span class="relevance-badge relev-high">高相關（你 LDL 管理）</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"Diets high in saturated fat and cholesterol increase total and LDL cholesterol levels and thus increase the risk of coronary heart disease."</p>
+        <p class="quote-en">"Many factors contribute to heart disease; however, diets low in saturated fat and cholesterol may reduce the risk of this disease."</p>
+        <div class="model-claim">Model claim: "While many factors affect heart disease, diets low in saturated fat and cholesterol may reduce the risk of this disease."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>飽和脂肪 + 膳食膽固醇 ↑ → TC/LDL ↑ → CHD 風險 ↑。是 SSA 中最早通過的條目之一（1993），證據基於 Keys 七國研究 + 後續 RCT。</p>
+        <p><strong>2026 細節：</strong>「膳食膽固醇」現認為對血清膽固醇影響有限（除個體 hyper-responders）；FDA 2015 移除每日 300 mg 上限。但 SSA 條文仍保留「膳食膽固醇」字眼。</p>
+        <p><strong>對你的應用：</strong>Psyllium (§101.81) 與此條互補 — §101.81 是「加入水溶性纖維」，§101.75 是「降低 SFA」。兩條合用即「低 SFA 飲食 + psyllium 7g/天」雙重 LDL 介入。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.76 Fiber-containing grains/fruits/veg + Cancer -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.76</span>
+      <span class="topic-badge">Fiber Foods ➜ Cancer</span>
+      <h2>含纖維的穀類/蔬果與癌症</h2>
+      <span class="relevance-badge relev-med">中度相關</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"Diets low in fat and high in fiber-containing grain products, fruits, and vegetables may reduce the risk of some types of cancer, a disease associated with many factors."</p>
+        <div class="model-claim">Model claim: "Low fat diets rich in fiber-containing grain products, fruits, and vegetables may reduce the risk of some types of cancer, a disease associated with many factors."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>「低脂 + 高纖蔬果穀類」整體飲食模式 ↔ 某些癌症風險下降。注意是<strong>整體飲食</strong>宣稱，不是單一纖維補充品。</p>
+        <p><strong>與 §101.81 區別：</strong>§101.76 主訴癌症，物質為「整體含纖維食物」（食物為單位）；§101.81 主訴 CHD，物質為「水溶性纖維 g 數」（成分為單位）。</p>
+        <p><strong>對你的應用：</strong>每日蔬果 + 全穀達標即符合此宣稱基礎；補品 psyllium 不算（補充品形式不在此條認可內）。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.77 Fiber + CHD -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.77</span>
+      <span class="topic-badge">Fruits/Veg/Grain Fiber ➜ CHD</span>
+      <h2>含纖維蔬果穀類與冠心病</h2>
+      <span class="relevance-badge relev-med">中度相關</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"Diets low in saturated fat and cholesterol and rich in fruits, vegetables, and grain products that contain some types of dietary fiber, particularly soluble fiber, may reduce the risk of coronary heart disease."</p>
+        <div class="model-claim">Model claim: "Diets low in saturated fat and cholesterol that include 25 grams of soluble fiber a day from fruits, vegetables, and grain products may reduce the risk of heart disease."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>低 SFA + 富含蔬果穀類（特別含水溶性纖維）的飲食 → CHD 風險 ↓。是「整體飲食模式」宣稱，與 §101.81「水溶性纖維成分」並存。</p>
+        <p><strong>數字目標：</strong>條文 model 提到 25 g 纖維 — 這是美國膳食指南上緣，目前你日均 ~7.6 g（健檢數據），缺口超過 17 g。Psyllium 5g ×2 + 蔬果 → 可補回 80%。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.78 Fruits + Vegetables + Cancer -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.78</span>
+      <span class="topic-badge">Fruits + Vegetables ➜ Cancer</span>
+      <h2>蔬果與癌症</h2>
+      <span class="relevance-badge relev-low">低相關</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"Diets low in fat and rich in fruits and vegetables (foods that are low in fat and may contain dietary fiber, vitamin A, or vitamin C) may reduce the risk of some types of cancer, a disease associated with many factors."</p>
+        <div class="model-claim">Model claim: "Low fat diets rich in fruits and vegetables (foods that are low in fat and may contain dietary fiber, vitamin A, or vitamin C) may reduce the risk of some types of cancer."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>蔬果含 Vit A、C、纖維 → 某些癌症風險 ↓。與 §101.76 高度重疊，但本條僅限「新鮮蔬果」（不含穀類）。</p>
+        <p><strong>2026 觀點：</strong>後續大型研究（如 EPIC）顯示蔬果對癌症的相關性弱於最初預期，但對心血管仍強。FDA 條文未更新撤回。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.79 Folate + NTD -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.79</span>
+      <span class="topic-badge">Folate ➜ Neural Tube Defects</span>
+      <h2>葉酸與神經管缺陷</h2>
+      <span class="relevance-badge relev-low">低相關（非育齡女性）</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"The available data show that diets adequate in folate may reduce the risk of neural tube defects."</p>
+        <p class="quote-en">"Folate, at levels attainable in usual diets, may reduce the risk of neural tube defects."</p>
+        <div class="model-claim">Model claim: "Healthful diets with adequate folate may reduce a woman's risk of having a child with a brain or spinal cord birth defect."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>葉酸攝取充足 → 神經管缺陷（NTD：脊柱裂、無腦畸形）風險 ↓。是 FDA SSA 中最具 RCT 證據強度的條目（MRC 1991 Lancet RCT 直接證實）。</p>
+        <p><strong>劑量門檻：</strong>條文限制每份食物或補充品葉酸 ≤ 100% DV（400 mcg DFE）；高劑量產品需附 "Folate intake should not exceed 250% of the DV (1,000 mcg)" 警語。</p>
+        <p><strong>對你：</strong>非適用對象（非懷孕計畫）；但若同半胱胺酸 (Hcy) ≥ 10，葉酸 + B12 + B6 三件套是降 Hcy 標準介入 — 此用途不在 §101.79 SSA 範圍內，屬補充品結構/功能宣稱。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.80 Sugar alcohols + Dental Caries -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.80</span>
+      <span class="topic-badge">Sugar Alcohols ➜ Dental Caries</span>
+      <h2>非致齲性糖醇與蛀牙</h2>
+      <span class="relevance-badge relev-low">低相關</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"Frequent between-meal consumption of foods high in sugars and starches promotes tooth decay. The sugar alcohols [xylitol, sorbitol, mannitol, maltitol, isomalt, lactitol, hydrogenated starch hydrolysates, hydrogenated glucose syrups, erythritol] in this food do not promote tooth decay."</p>
+        <div class="model-claim">Model claim: "Frequent between-meal consumption of foods high in sugars and starches promotes tooth decay. The sugar alcohol used to sweeten this food does not promote tooth decay."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>糖醇（木糖醇、赤藻糖醇等）不被口腔細菌發酵成酸 → 不促進蛀牙。是極特殊的「物質不引起疾病」宣稱（非「降低風險」）。</p>
+        <p><strong>清單：</strong>xylitol、sorbitol、mannitol、maltitol、isomalt、lactitol、erythritol 等 9 種。</p>
+        <p><strong>注意：</strong>本條與體組成/BP/心血管完全不相關，但糖醇代糖（特別 sucralose、Ace-K）對腸道菌的潛在影響不在此節討論範圍 — 那是 structure/function 領域。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.81 Soluble Fiber + CHD - THE BIG ONE -->
+  <div class="section" style="background: #fffbeb; border-top: 3px solid #f59e0b;">
+    <div class="section-header">
+      <span class="cfr-badge">§101.81</span>
+      <span class="topic-badge">Soluble Fiber ➜ CHD</span>
+      <h2>水溶性纖維（β-葡聚醣 / Psyllium）與冠心病</h2>
+      <span class="relevance-badge relev-high">⭐ 最高相關（你 stack 中唯一打到 SSA）</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">(a) "Diets low in saturated fat and cholesterol that include soluble fiber from certain foods may reduce the risk of CHD, a disease associated with many factors."</p>
+        <p class="quote-en">(c)(2)(ii) Eligible sources &amp; daily intake levels:</p>
+        <p class="quote-en">• Beta-glucan soluble fiber from whole oats or barley: <strong>3 g or more per day</strong></p>
+        <p class="quote-en">• Psyllium seed husk (≥ 95% purity): <strong>7 g or more per day of soluble fiber</strong></p>
+        <p class="quote-en">Per-serving minimums: ≥ 0.75 g oat/barley β-glucan, OR ≥ 1.7 g psyllium per RACC.</p>
+        <p class="quote-en">Food must also meet "low saturated fat" + "low cholesterol" nutrient content standards.</p>
+        <div class="model-claim">Model claim: "Soluble fiber from foods such as [name of eligible source], as part of a diet low in saturated fat and cholesterol, may reduce the risk of heart disease. A serving of [name of food] supplies __ grams of the [necessary daily dietary intake for the benefit] soluble fiber from [name of eligible source] necessary per day to have this effect."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>水溶性纖維在小腸形成凝膠 → 結合膽汁酸排出 → 肝臟調動血中膽固醇合成新膽汁酸 → LDL ↓。FDA 1997 通過 β-glucan，1998 加入 psyllium。</p>
+        <div class="info-box box-supplement"><div class="info-box-header">💊 對你補品 stack 的意義</div><div class="info-box-content"><strong>Psyllium husk 是你 stack 中唯一「FDA SSA authorized」的補品。</strong><br>當前計畫：5 g ×2/天（午餐前 + 晚餐前）= 10 g/天 → 換算純水溶性纖維約 7-8 g，<strong>剛好打到 §101.81 的 7 g 門檻</strong>。<br>支持效應：meta-analysis（Jovanovski 2018）：LDL −9.7 mg/dL、apoB −9.2 mg/dL，與 FDA SSA 證據基礎一致。</div></div>
+        <table class="cmp">
+          <tr><th>來源</th><th>SSA 認可形式</th><th>每日宣稱劑量</th><th>純度要求</th></tr>
+          <tr><td>燕麥麩 / 全燕麥</td><td>β-glucan</td><td>≥ 3 g</td><td>—</td></tr>
+          <tr><td>大麥 / 大麥 β-fiber</td><td>β-glucan</td><td>≥ 3 g</td><td>—</td></tr>
+          <tr class="highlight-row"><td><strong>Psyllium husk</strong></td><td>水溶性纖維</td><td><strong>≥ 7 g</strong></td><td><strong>≥ 95%</strong></td></tr>
+        </table>
+        <div class="info-box box-safety"><div class="info-box-header">🛡️ 安全注意</div><div class="info-box-content">每 5g psyllium 配 240-350 mL 水；與口服藥/補品分隔 ≥ 2 hr（凝膠吸附小分子降低吸收）。已內建於你的時程（餐前 30 min，魚油晚餐後 ≥ 2 hr 自然分隔）。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.82 Soy Protein + CHD -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.82</span>
+      <span class="topic-badge">Soy Protein ➜ CHD</span>
+      <h2>大豆蛋白與冠心病</h2>
+      <span class="relevance-badge relev-med">中度相關（爭議中）</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"Diets low in saturated fat and cholesterol that include 25 grams of soy protein a day may reduce the risk of heart disease."</p>
+        <p class="quote-en">"One serving of [name of food] provides __ grams of soy protein."</p>
+        <p class="quote-en">Per-serving minimum: ≥ 6.25 g soy protein.</p>
+        <div class="model-claim">Model claim: "25 grams of soy protein a day, as part of a diet low in saturated fat and cholesterol, may reduce the risk of heart disease. A serving of [name of food] supplies __ grams of soy protein."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>每日 25 g 大豆蛋白（4 份 × 6.25 g）+ 低 SFA 飲食 → CHD 風險 ↓。1999 通過。</p>
+        <p><strong>2017 FDA 重新評估：</strong>後續 RCT 證據強度下滑，FDA 2017 提案<strong>撤回此 SSA 宣稱降為 QHC</strong>，但至 2026 仍處 proposed rule 階段，§101.82 技術上仍有效。</p>
+        <p><strong>對你：</strong>豆腐/豆漿/毛豆是優質植物蛋白來源（你目前午餐毛豆 120 g 即包含），但「降 LDL」效應比 psyllium 弱且有撤回風險，定位為<strong>整體飲食組成</strong>而非單一介入。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- §101.83 Plant Sterol/Stanol + CHD -->
+  <div class="section">
+    <div class="section-header">
+      <span class="cfr-badge">§101.83</span>
+      <span class="topic-badge">Plant Sterols/Stanols ➜ CHD</span>
+      <h2>植物固醇/甾烷醇酯與冠心病</h2>
+      <span class="relevance-badge relev-high">高相關（LDL 補品選項）</span>
+    </div>
+    <div class="dual">
+      <div class="col-original">
+        <div class="col-label">📜 Original Regulation Text</div>
+        <p class="quote-en">"Foods containing at least 0.65 g per serving of plant sterol esters, eaten twice a day with meals for a daily total intake of at least 1.3 g, as part of a diet low in saturated fat and cholesterol, may reduce the risk of heart disease."</p>
+        <p class="quote-en">"At least 1.7 g per serving of plant stanol esters, eaten twice a day with meals for a daily total intake of at least 3.4 g."</p>
+        <div class="model-claim">Model claim: "Foods containing at least 0.65 gram per serving of plant sterol esters, eaten twice a day with meals for a daily total intake of at least 1.3 grams, as part of a diet low in saturated fat and cholesterol, may reduce the risk of heart disease."</div>
+      </div>
+      <div class="col-explain">
+        <div class="col-label">🇹🇼 中文解說</div>
+        <p><strong>核心邏輯：</strong>植物固醇/甾烷醇酯競爭性抑制小腸膽固醇吸收 → LDL ↓ 6-15%。2000 通過。</p>
+        <p><strong>劑量分歧：</strong>Sterol esters 1.3 g/天｜Stanol esters 3.4 g/天（兩種化學形式效力不同）。</p>
+        <p><strong>FDA 2010 變更：</strong>移除「分兩餐攝取」與「酯化形式」強制要求 — 即非酯化游離形式與單次大量攝取亦合格。</p>
+        <p><strong>對你的應用：</strong>植物固醇可作 psyllium 之外的<strong>LDL 第二補品選項</strong>，特別若 psyllium GI 不適。市售產品：Benecol 人造奶油（含 stanol ester）、固醇膠囊（CardioAid 等）。月成本約 600-1000 TWD，效應疊加 psyllium 可期 LDL 額外 −5-10%，但<strong>建議先把 psyllium 跑滿 8-12 週確認反應</strong>再考慮疊加。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON TABLE: Authorized vs Qualified vs Structure/Function -->
+  <div class="section">
+    <h2 style="color: #064e3b; font-size: 1.15rem; margin-bottom: 1rem;">📊 三層宣稱證據強度對照</h2>
+    <table class="cmp">
+      <tr><th>類別</th><th>標準</th><th>FDA 預核可</th><th>需 Disclaimer</th><th>你 stack 範例</th></tr>
+      <tr class="highlight-row"><td><strong>Authorized (SSA)</strong></td><td>顯著科學共識</td><td>是（12 項，§101.72-83）</td><td>否</td><td>Psyllium 7g（§101.81）</td></tr>
+      <tr><td>Qualified (QHC)</td><td>證據存在但未達 SSA</td><td>是（letters of enforcement discretion）</td><td>必須附 qualifier</td><td>魚油 EPA+DHA（2019 QHC for CHD）、堅果、橄欖油</td></tr>
+      <tr><td>Structure/Function</td><td>無須證明降疾病風險</td><td>否（廠商備案即可）</td><td>需附 "This statement has not been evaluated by FDA"</td><td>鎂「支持睡眠」、Citrulline「支持血流」、酸櫻桃「支持恢復」、Glycine、NAC、D3K2、抹茶、洛神花</td></tr>
+    </table>
+    <div class="info-box box-key"><div class="info-box-header">⚠️ 關鍵啟示</div><div class="info-box-content">你 stack 中 10+ 項補品<strong>只有 psyllium 進入 SSA</strong>。這不代表其他無效 — RCT 證據可以強於 FDA 法規承認進度（FDA SSA 通過慢且保守）。但這是衡量「法規等級證據」vs「臨床 RCT 證據」差距的客觀指標。</div></div>
+  </div>
+
+  <!-- STRATEGIC IMPLICATIONS -->
+  <div class="section">
+    <h2 style="color: #064e3b; font-size: 1.15rem; margin-bottom: 1rem;">🎯 應用啟示</h2>
+    <div class="cards-4">
+      <div class="card">
+        <div class="card-icon">🥗</div>
+        <div class="card-title">日常飲食</div>
+        <div class="card-body">優先打到 §101.74（低鈉，每日 Na &lt; 2300 mg）、§101.75（低 SFA）、§101.76/77（蔬果穀類纖維 25g）— 食物層即可符合，零補品成本。</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">💊</div>
+        <div class="card-title">補充劑決策</div>
+        <div class="card-body">Psyllium 維持 7g/天（§101.81 法規等級）；植物固醇可作 LDL 第二補品；其他補品依 RCT 證據（§三 比較表），非 SSA 不代表弱。</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏋️</div>
+        <div class="card-title">訓練調整</div>
+        <div class="card-body">SSA 條目皆不直接涵蓋運動 — 訓練介入屬「lifestyle modification」非食品宣稱範圍。阻力訓練 + Zone 2 走 ACSM/AHA 指南。</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧪</div>
+        <div class="card-title">追蹤指標</div>
+        <div class="card-body">LDL、TC、apoB、BP、HbA1c — SSA 條目對應的 hard endpoints。每 3-6 個月複測，psyllium 反應評估期 8-12 週。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM LINE -->
+  <div class="bottom-line">
+    <div class="bottom-line-header">🎯 我的行動結論</div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">✔ 核心洞察</div>
+      <div class="bottom-line-text">我目前 stack 中<strong>唯一打到 FDA SSA authorized claim</strong> 的是 psyllium husk（§101.81，水溶性纖維 7g/天 → CHD 風險 ↓）。其他補品（魚油、D3K2、鎂、L-Citrulline、酸櫻桃、洛神花、Glycine、NAC、抹茶）全屬 structure/function 或 RCT 證據級別，未通過 FDA SSA。這不是貶低它們 — FDA SSA 標準保守且通過慢；但「法規承認」與「RCT 證據」是兩個獨立坐標軸，我需同時看。</div>
+    </div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">📈 本週應用</div>
+      <div class="bottom-line-text">1) Psyllium 維持 5g × 2/天 = 10g 全 husk（≈ 7-8 g 水溶性纖維），剛好打到 §101.81 門檻。2) §101.74 鈉低於 2300 mg：本週起白煮蛋取代茶葉蛋（−440 mg/天）+ 自帶毛豆取代 7-11（−400 mg/天）。3) §101.77 纖維 25g：psyllium 8g + 蔬果穀類 17g = 25g 達標。4) §101.83 植物固醇暫不疊加 — 等 psyllium 跑滿 12 週、Q3 健檢 LDL 再評估。</div>
+    </div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">⚠ 需要驗證</div>
+      <div class="bottom-line-text">Psyllium 8 週後測 LDL，預期 −7% 以上（meta 中位）；若達到，psyllium 為 SSA 等級證據在你身上 confirmed。鈉降低 8 週後測居家晨間 BP，預期 SBP −2 至 −5 mmHg；若 BP 跌至 &lt; 115/70，啟動退場機制（先撤洛神花 #2，§101.74 不撤）。同半胱胺酸值若 ≥ 10，再評估葉酸 + B12（不在 §101.79 應用範圍，但屬 RCT 證據）。</div>
+    </div>
+  </div>
+
+  <!-- PRACTICE -->
+  <div class="practice">
+    <h2>📝 練習題</h2>
+    <details class="question-accordion">
+      <summary>
+        <span class="question-number">Q1</span>
+        <span class="question-type" style="background:#d1fae5;color:#065f46;">證據評估題</span>
+        <span class="question-text">市售一款洛神花茶包標示「臨床研究證實降低血壓風險」，這個宣稱在 FDA 法規下屬於哪一層級？廠商可以這樣標嗎？</span>
+        <span class="accordion-icon"></span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>參考答案：</strong>洛神花茶<strong>不在</strong> §101.72-83 SSA authorized 名單，也<strong>沒有</strong>取得 BP-related Qualified Health Claim。雖然 Serban 2015 meta-analysis 顯示 SBP −7.58 mmHg 屬 RCT 級證據，但 FDA SSA 通過需提交 health claim petition 並達顯著科學共識，目前無人申請。</p>
+        <p>廠商可以做 <strong>structure/function claim</strong>（例：「support healthy blood pressure」），但<strong>不可</strong>宣稱「降低高血壓風險」— 後者屬疾病風險宣稱，需 SSA 或 QHC 預核可，且必須附 "This statement has not been evaluated by FDA" disclaimer。標示「臨床研究證實降低血壓風險」屬<strong>違規</strong>，FDA 可發 warning letter。</p>
+      </div>
+    </details>
+    <details class="question-accordion">
+      <summary>
+        <span class="question-number">Q2</span>
+        <span class="question-type" style="background:#dbeafe;color:#1e3a8a;">應用情境題</span>
+        <span class="question-text">如果你要購買 psyllium 補品，§101.81 的哪些細節會影響你的選品決策？</span>
+        <span class="accordion-icon"></span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>參考答案：</strong>三個關鍵點：</p>
+        <p>1. <strong>純度 ≥ 95%</strong>：§101.81 明文要求 psyllium seed husk「at least 95 percent purity」才符合 SSA。市售 Metamucil 含糖/代糖/色素 → 純度低，技術上不符 §101.81 標準。選 Now Foods / Yerba Prima / Organic India / Konsyl 100% psyllium husk。</p>
+        <p>2. <strong>每份 ≥ 1.7 g psyllium</strong>：法規要求單份食物含此最低量才能在標籤打宣稱。膠囊每顆 ~0.5 g → 要吞 4 顆才達單份門檻，10-14 顆才達日 7 g 目標 → 粉劑（whole husk）為唯一實際選擇。</p>
+        <p>3. <strong>日總 ≥ 7 g 水溶性纖維</strong>：粉劑標示「fiber per serving」需確認是 total fiber 還是 soluble fiber，因 psyllium husk 含約 70% 水溶性纖維 → 10 g whole husk ≈ 7 g 水溶性纖維。你 5 g × 2 = 10 g 設定剛好打到門檻。</p>
+      </div>
+    </details>
+    <details class="question-accordion">
+      <summary>
+        <span class="question-number">Q3</span>
+        <span class="question-type" style="background:#fef3c7;color:#92400e;">決策判斷題</span>
+        <span class="question-text">為什麼魚油和橄欖油是 Qualified Health Claim 而不是 Authorized Health Claim？這對你的決策有什麼影響？</span>
+        <span class="accordion-icon"></span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>參考答案：</strong></p>
+        <p><strong>原因：</strong>SSA 要求「顯著科學共識」— 多數獨立合格專家對證據總體性達成一致。魚油 EPA+DHA 與 CHD 的 RCT 有 GISSI-Prevenzione（陽性）、REDUCE-IT（陽性，但 icosapent 純品）、VITAL（陰性）、ASCEND（陰性）等大型 RCT 結果不一致 → 未達 SSA 門檻，FDA 2019 給予 QHC + 必須附 qualifier「The FDA has concluded that there is credible evidence supporting this claim, although the evidence is not conclusive.」</p>
+        <p>橄欖油類似 — PREDIMED 與一系列觀察研究支持，但缺少多項一致 RCT，僅取得 QHC。</p>
+        <p><strong>對決策影響：</strong></p>
+        <p>(1) 不要因「FDA 未給 SSA」而棄用魚油 — RCT 證據在 TG（⭐⭐⭐）和脂肪肝（⭐⭐⭐）方向已強，CHD 是 endpoints 異質性問題。</p>
+        <p>(2) 但要認識證據限制 — 一般低風險族群魚油 CHD 受益不確定（VITAL/ASCEND）；高 TG/高風險族群 icosapent ethyl（藥用純 EPA）才有強 RCT。</p>
+        <p>(3) 選品考量：選 USP/IFOS 認證、EPA+DHA ≥ 60%、無重金屬。日劑量看 endpoint：TG → 2-4 g EPA+DHA；CHD 預防 → 1 g EPA+DHA。</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <strong>免責聲明：</strong>本文件為教育性質整理，整合自 FDA / eCFR / Cornell Law 之公開法規文本，不構成醫療建議。實施任何重大改變（含補充品劑量、飲食結構、停止藥物）前，請諮詢合格醫療專業人員或藥師。檢驗數值需在臨床情境下解讀。
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    製作日期：2026-05-12｜資料來源：FDA Food Labeling Guide, 21 CFR Part 101 Subpart E (§101.72–83), eCFR.gov, Cornell LII<br>
+    建議 Chat Title：<code>2026-05-12 [Evidence] FDA SSA Health Claims - 12 Authorized List</code><br>
+    <a href="https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/authorized-health-claims-meet-significant-scientific-agreement-ssa-standard">FDA Authorized Health Claims (SSA Standard) ↗</a> ·
+    <a href="https://www.law.cornell.edu/cfr/text/21/part-101/subpart-E">21 CFR Part 101 Subpart E ↗</a>
+  </div>
+
+</div>
+</body>
+</html>
