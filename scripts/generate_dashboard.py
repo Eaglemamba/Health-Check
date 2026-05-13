@@ -4,7 +4,7 @@
 import re
 import os
 import glob
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import matplotlib
 matplotlib.use('Agg')
@@ -103,7 +103,8 @@ def generate_dashboard(data_list, output_path):
     valid_w = [(dt, w) for dt, w in zip(dates, weights) if w is not None]
     if valid_w:
         w_dates, w_vals = zip(*valid_w)
-        ax.plot(w_dates, w_vals, "o-", color="#00d4ff", linewidth=2, markersize=6)
+        ax.plot(w_dates, w_vals, "o-", color="#00d4ff", linewidth=2, markersize=6,
+                label="Daily")
         ax.fill_between(w_dates, w_vals, alpha=0.15, color="#00d4ff")
         for dt, w, d in zip(w_dates, w_vals, [x for x in data_list if x["weight"] is not None]):
             label = f"{w}"
@@ -113,6 +114,25 @@ def generate_dashboard(data_list, output_path):
                 ax.plot(dt, w, "o", color="#ffd700", markersize=8, zorder=5)
             ax.annotate(label, (dt, w), textcoords="offset points",
                         xytext=(0, offset), ha="center", fontsize=8, color="#00d4ff")
+
+        # 7-day rolling mean (calendar window, not point window — handles gaps)
+        rolling_dates = []
+        rolling_means = []
+        for dt, _ in valid_w:
+            window_start = dt - timedelta(days=6)
+            window_vals = [ww for dd, ww in valid_w if window_start <= dd <= dt]
+            if len(window_vals) >= 2:
+                rolling_dates.append(dt)
+                rolling_means.append(sum(window_vals) / len(window_vals))
+        if rolling_dates:
+            ax.plot(rolling_dates, rolling_means, "--", color="#ffd700",
+                    linewidth=2, alpha=0.9, label="7-Day Rolling Mean", zorder=4)
+            # Label the latest rolling mean value
+            ax.annotate(f"{rolling_means[-1]:.1f}", (rolling_dates[-1], rolling_means[-1]),
+                        textcoords="offset points", xytext=(6, 0), ha="left", va="center",
+                        fontsize=9, color="#ffd700", fontweight="bold")
+            ax.legend(loc="upper right", fontsize=8)
+
         margin = 0.5
         ax.set_ylim(min(w_vals) - margin, max(w_vals) + margin)
     ax.set_title("Weight", fontsize=12, color="white", pad=8)
