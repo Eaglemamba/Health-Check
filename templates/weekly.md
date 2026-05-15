@@ -79,6 +79,20 @@
 
 ---
 
+### HRV 趨勢
+
+*週日填寫時執行 `python scripts/analyze_hrv_trend.py` 並貼上 markdown snippet。預設讀全部歷史；用 `--days 28` 限制近 4 週。*
+
+<!-- Paste output from: python scripts/analyze_hrv_trend.py -->
+
+**本週判讀**：
+- Verdict（CONFIRMED / LIKELY / WEAK / NO TREND）：_____
+- 若 CONFIRMED 且 slope < −0.05 ms/night → 訓練 deload 1 週 + 熱量補回 200–300 kcal/day
+- 若整體 mean < 18 ms → paced breathing 6 breaths/min × 5 min × 2/day 加上去
+- 若 OSA 治療介入後 → 期待 3 個月內回升至 25+ ms
+
+---
+
 ## 二、身體信號模式
 
 *本週 Daily 中記錄的身體信號，標注出現頻率與強度變化。*
