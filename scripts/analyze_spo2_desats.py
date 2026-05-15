@@ -41,7 +41,7 @@ def load_epochs(date: str):
     p = DATA_DIR / f"{date}.json"
     if not p.exists():
         return None, None
-    data = json.loads(p.read_text())
+    data = json.loads(p.read_text(encoding="utf-8"))
     sleep = data.get("sleep") or {}
     epochs = sleep.get("wellnessEpochSPO2DataDTOList") or []
     if not epochs:
@@ -271,7 +271,7 @@ def cmd_trend(days: int = 9999, out: Path = None):
         pct, below, total = t90(epochs)
         longest = max((e["duration_min"] for e in events), default=0)
         # TST 從 dailySleepDTO 取
-        data = json.loads(f.read_text())
+        data = json.loads(f.read_text(encoding="utf-8"))
         dto = (data.get("sleep") or {}).get("dailySleepDTO") or {}
         tst_min = (dto.get("sleepTimeSeconds") or 0) / 60
         # Latency 估算
