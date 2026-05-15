@@ -43,6 +43,7 @@ function Hero({ lang, variant }) {
   const titleParts = h.title[lang];
   return (
     <div className="hero">
+      <OsaAlert lang={lang} />
       <div className="hero-top">
         <div>
           <div className="hero-eyebrow">{t(h.eyebrow, lang)}</div>
@@ -68,6 +69,51 @@ function Hero({ lang, variant }) {
           <Marker key={i} m={m} lang={lang} />
         ))}
       </div>
+    </div>
+  );
+}
+
+/* ===== OSA red-flag banner ===== */
+function trailingStreakBelow(arr, threshold) {
+  if (!Array.isArray(arr)) return 0;
+  let n = 0;
+  for (let i = arr.length - 1; i >= 0; i--) {
+    const v = arr[i];
+    if (v == null) break;
+    if (v < threshold) n++;
+    else break;
+  }
+  return n;
+}
+
+function OsaAlert({ lang }) {
+  const cfg = D.osaAlert;
+  const nadir = D.tracker?.spo2Nadir;
+  const [psgBooked, setPsgBooked] = useState(() => {
+    try { return localStorage.getItem("hc_psg_booked") === "1"; } catch { return false; }
+  });
+  if (!cfg || !nadir) return null;
+  if (psgBooked || cfg.psgStatus === "booked" || cfg.psgStatus === "done") return null;
+  const streak = trailingStreakBelow(nadir, cfg.threshold);
+  if (streak < cfg.minAlert) return null;
+  const urgent = streak >= cfg.minUrgent;
+  const tmpl = urgent ? cfg.urgent : cfg.body;
+  const text = t(tmpl, lang).replace("%N", streak);
+  return (
+    <div className={"osa-banner" + (urgent ? " urgent" : "")} role="alert">
+      <div className="osa-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2l10 18H2L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17" r="0.6" fill="currentColor"/>
+        </svg>
+      </div>
+      <div className="osa-text">
+        <div className="osa-title">{t(cfg.title, lang)} · {t(cfg.psgStatusLabel, lang)}: {cfg.psgStatus}</div>
+        <div className="osa-body">{text}</div>
+      </div>
+      <button className="osa-cta" onClick={() => {
+        try { localStorage.setItem("hc_psg_booked", "1"); } catch {}
+        setPsgBooked(true);
+      }}>{t(cfg.cta, lang)}</button>
     </div>
   );
 }

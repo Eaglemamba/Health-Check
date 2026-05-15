@@ -236,6 +236,51 @@ button { font-family: inherit; }
   margin-top: 8px;
 }
 
+/* OSA red-flag banner */
+.osa-banner {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  border-radius: var(--radius);
+  background: var(--heart-soft);
+  border: 1px solid color-mix(in oklch, var(--heart) 30%, transparent);
+  color: var(--ink);
+}
+.osa-banner.urgent {
+  background: var(--heart);
+  border-color: var(--heart);
+  color: white;
+  box-shadow: 0 6px 20px color-mix(in oklch, var(--heart) 35%, transparent);
+}
+.osa-banner .osa-icon { flex: 0 0 auto; color: var(--heart); }
+.osa-banner.urgent .osa-icon { color: white; }
+.osa-banner .osa-text { flex: 1 1 auto; min-width: 0; }
+.osa-banner .osa-title {
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+.osa-banner .osa-body { font-size: 14px; line-height: 1.45; }
+.osa-banner .osa-cta {
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer;
+  background: white;
+  color: var(--heart);
+  border: 1px solid color-mix(in oklch, var(--heart) 40%, transparent);
+  transition: transform .12s, box-shadow .12s;
+}
+.osa-banner.urgent .osa-cta {
+  background: white; color: var(--heart); border-color: white;
+}
+.osa-banner .osa-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
+@media (max-width: 640px) {
+  .osa-banner { flex-wrap: wrap; }
+  .osa-banner .osa-cta { width: 100%; }
+}
+
 /* Marker grid */
 .marker-grid {
   display: grid;

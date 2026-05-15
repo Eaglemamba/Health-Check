@@ -9,25 +9,43 @@ window.HC_DATA = {
     lede:    { en: "Sleep, BP, lipids, uric acid — one shared metabolic root. Lifestyle stacks first; medication only after lifestyle plateaus.",
                zh: "睡眠、血壓、血脂、尿酸——共享同一個代謝根源。生活方式介入優先，等到效果平台期再考慮藥物。" },
     progressLbl: { en: "Weight progress · 70 → 65 kg", zh: "體重進度 · 70 → 65 公斤" },
-    progressMeta: { en: "Day 59 · 68.0 kg · Sat official (5/9)", zh: "第 59 天 · 68.0 公斤 · 週六正式（5/9）" },
-    startDate: { en: "Start date · Mar 17, 2026 · Last sync 5/14", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/14" },
+    progressMeta: { en: "Day 60 · 68.0 kg · Sat official (5/9)", zh: "第 60 天 · 68.0 公斤 · 週六正式（5/9）" },
+    startDate: { en: "Start date · Mar 17, 2026 · Last sync 5/15", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/15" },
     startWeight: 70,
     targetWeight: 65,
     currentWeight: 68.0,
     currentWeightDate: "5/9 Sat official",
   },
 
+  // ===== OSA red-flag banner =====
+  // Threshold from CLAUDE.md: SpO2 nadir < 88% for >= 3 consecutive nights -> PSG.
+  // streak auto-computed from tracker.spo2Nadir (trailing). minAlert: show banner; minUrgent: escalate copy.
+  osaAlert: {
+    threshold: 88,
+    minAlert: 3,
+    minUrgent: 5,
+    psgStatus: "pending", // pending | booked | done
+    psgStatusLabel: { en: "PSG appointment", zh: "PSG 預約" },
+    title:    { en: "OSA red flag",
+                zh: "OSA 紅旗" },
+    body:     { en: "SpO2 nadir < 88% for %N consecutive nights (CLAUDE.md threshold: 3). Book PSG today.",
+                zh: "SpO2 夜間最低 < 88% 連續 %N 晚（門檻：3 晚）。今日預約 PSG。" },
+    urgent:   { en: "URGENT — %N consecutive nights well past the 3-night threshold. PSG today, no further delay.",
+                zh: "極度緊急 — 連 %N 晚遠超 3 晚門檻。今日預約 PSG，不可再延。" },
+    cta:      { en: "Mark PSG booked", zh: "標記 PSG 已預約" },
+  },
+
   markers: [
     {
       sys: "heart", name: { en: "Blood Pressure", zh: "血壓" },
       val: "126/76", unit: "mmHg",
-      delta: { en: "W19 weekly avg (4 days) · target met (<130) · last 125/70 (5/14)", zh: "W19 週均（4 天）· 已達標 (<130) · 最新 125/70 (5/14)" },
+      delta: { en: "W19 weekly avg (4 days) · target met (<130) · last 122/69 (5/15)", zh: "W19 週均（4 天）· 已達標 (<130) · 最新 122/69 (5/15)" },
       cadence: { en: "Daily · weekly avg", zh: "每日 · 週均" },
       status: "ok",
     },
     {
       sys: "sleep", name: { en: "Sleep Score", zh: "睡眠分數" },
-      val: "67", unit: "Garmin",
+      val: "74", unit: "Garmin",
       delta: { en: "5/4 · OSA flag: T90 18.4% (severe)", zh: "5/4 · OSA 紅旗：T90 18.4%（重度）" },
       cadence: { en: "Daily · Garmin", zh: "每日 · Garmin" },
       status: "warn",
@@ -832,14 +850,17 @@ window.HC_DATA = {
   tracker: {
     // [SBP, DBP] — gaps filled with prior reading
     bp: [
-      [113,68], [113,68], [113,68], [113,68], [113,68], [113,68], [128,78], [120,73], [131,79], [123,76], [126,74], [131,75], [114,66], [125,70],
+      [113,68], [113,68], [113,68], [113,68], [113,68], [128,78], [120,73], [131,79], [123,76], [126,74], [131,75], [114,66], [125,70], [122,69],
     ],
     // 4/21–5/4 daily weight (kg)
-    weight: [67.8, 67.9, 67.8, 68.7, 69.1, 68.4, 68.2, 68.2, 68.1, 68, 68.7, 68.5, 68.3, 67.9],
+    weight: [67.9, 67.8, 68.7, 69.1, 68.4, 68.2, 68.2, 68.1, 68, 68.7, 68.5, 68.3, 67.9, 67.3],
     // Garmin Sleep Score
-    sleep:  [71, 52, 69, 77, 77, 71, 75, 68, 78, 78, 79, 44, 67, 67],
+    sleep:  [52, 69, 77, 77, 71, 75, 68, 78, 78, 79, 44, 67, 67, 74],
     // Body Battery waking
-    bb:     [51, 47, 41, 54, 49, 47, 56, 47, 37, 48, 55, 36, 42, 34],
+    bb:     [47, 41, 54, 49, 47, 56, 47, 37, 48, 55, 36, 42, 34, 51],
+    // SpO2 nightly nadir % (last 14 days, parallel to bp/weight/sleep/bb).
+    // Earlier nights null until sync_data_js.py backfills; banner only uses trailing values.
+    spo2Nadir: [null, null, null, null, null, 84, 79, 87, 85, 84, 84, 86, 82, 84],
   },
 
   // ===== Running — started 2026-04-26 =====
