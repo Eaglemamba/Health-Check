@@ -1,7 +1,18 @@
 # 30 年累積、一個下午定位：一份自我整理的解剖性 OSA 診斷敘事
 
-*建檔：2026-05-15*
+*建檔：2026-05-15*｜*v2（同日校正）*
 *前置：[低 HRV 心血管 risk review（2026-05-15）](2026-05-15-hrv-cv-risk-review.md)｜[OSA 深度調查（2026-04-30）](2026-04-30-osa-investigation-deep-dive.md)*
+
+---
+
+## 校正紀錄（v1 → v2，同日）
+
+兩項 over-claim 經自我 push-back 校正：
+
+1. **「Sleep HR max 87–93 bpm 多晚命中」→ 撤回**：原計算未排除 Garmin sleepLevels = awake epochs。重算 asleep 期 HR max 67–77 bpm 全 27 晚，落在 normal range 上緣。
+2. **「HBOT 反應是最強單一診斷訊號」→ 弱化**：實際使用艙體約 1.1 ATA（mild chamber），非 true HBOT（≥1.4 ATA × 100% O2）。對應溶氧增量 1.7–6× 而非原稱 15–20×，特異性顯著降低，無法單獨排除「全 artifact」假設。
+
+剩下強訊號：HRV 偏低 + 解剖三項（Mallampati III / 大舌頭 / AR） + 過度日間嗜睡 + LVH 11 年。OSA 結論仍成立，但證據基礎從「客觀 hard data 冒煙」改為「強烈臨床懷疑 + 解剖確證」。
 
 ---
 
@@ -30,8 +41,8 @@
 | 平均 T90（% 時間 < 90%） | **10.0%** | T90 ≥ 10% 為重度 (PIC/S Annex 1 不適用，引用 AASM 2014) |
 | 最差單晚 T90 | 22.2%（5/11）、20.4%（5/12） | 急性嚴重事件 |
 | 最長 desat event | 15 min（5/15） | ≥ 15 min 為重度 |
-| Sleep HR 最高峰 | **87–93 bpm 多晚命中** | 健康成人睡眠 HR 罕見 > 75 bpm（Bonnemeier JCE 2003） |
-| Sleep HR 平均 | 64.4 bpm | 上緣偏高（normal 50–60），證據力中等 |
+| Sleep HR 最高峰（asleep epochs only） | **67–77 bpm（27 晚全範圍）** | Normal range 上緣 — 早期我曾誤把 awake epoch（87–93 bpm）算進去 |
+| Sleep HR 平均 | 64.4 bpm（含 awake）/ 預估 ~62 bpm（asleep only） | Normal range — 不是 OSA 直接證據 |
 | Body Battery 起床值 | 多次 < 50（OSA 警示閾值） | 慢性恢復不足 |
 | HRV avgOvernightHrv | **19.7 ms（27 晚 mean）** | 健康 35–40 yo 約 40–45 ms，**第 7 百分位**（Nunan 2010 Pacing Clin Electrophysiol） |
 | HRV 27 晚趨勢 | **顯著下降**：slope −0.092 ms/night, p=0.011；累積 −2.4 ms | 3/3 統計檢定顯著（linear regression / first-vs-second-half / Mann-Kendall） |
@@ -107,10 +118,10 @@
 
 **結果**：
 - **HRV 19.7 ms**（PPG 為 RMSSD 近似，獨立於 SpO2 測量）— 第 7 百分位
-- **Sleep HR max 87–93 bpm**（PPG 對 HR 是 designed function，準度遠高於 SpO2 衍生）
-- **HBOT 後主觀改善**（治療反應證據）— 後詳
+- ~~**Sleep HR max 87–93 bpm**~~ — **撤回**：經 QC 排除 awake epochs 後，asleep 期 HR max 67–77 bpm 全 27 晚，落在 normal range 上緣，無 OSA 直接訊號
+- **HBOT 後主觀改善**（治療反應證據）— 後詳，但若艙體實際只有 1.1 ATA × mild O2，特異性遠低於 true HBOT
 
-**結論**：❌ 全 artifact 假設機率極低。HBOT 反應這條訊號單獨就足以排除。
+**結論**：全 artifact 假設**機率降低但無法完全排除**。主要排除根據是 HRV 偏低 + 解剖三大訊號 + 主觀嗜睡 — 不是單一 hard data。
 
 ---
 
@@ -186,7 +197,23 @@
 
 ---
 
-## 四、HBOT 反應 — 最強的單一證據
+## 四、HBOT 反應 — 訊號但**非診斷級**（含艙體規格 caveat）
+
+⚠️ **本節先前 over-claim，已校正**。原版稱「最強單一證據、健康人不會有此反應」假設艙體為 true HBOT（≥1.4 ATA × 100% O2）。經確認我使用的艙體**實際只有約 1.1 ATA**，O2 濃度待查（多半 mild chamber 為 30–40%）。對應 mild oxygenation 而非 true HBOT，**特異性顯著降低**。下節保留原推論並逐項標示修正。
+
+### 4.0 艙體規格決定特異性
+
+| 規格 | 血漿溶氧增量（vs baseline 0.3 mL/dL）| 健康人反應 |
+|---|---|---|
+| **1.0 ATA × 21%**（海平面 baseline） | 1× | n/a |
+| **1.1 ATA × 30%** | ~1.7× | 部分可感（mild） |
+| **1.1 ATA × 40%** | ~2.3× | 部分可感（mild） |
+| **1.1 ATA × 100%** | ~6× | 可感（中等） |
+| **True HBOT 2.5 ATA × 100%** | ~18× | 無感（無 O2 debt） |
+
+文獻支持：Mychaskiw Anesth Analg 2009 雙盲 mild HBOT vs sham — **無顯著差異**。意指 1.3 ATA 以下艙體的主觀效應有相當 placebo 成分。
+
+**我若是 1.1 ATA × 30–40%，溶氧只增 1.7–2.3×** — 不是 18× — 健康人也常感主觀好轉，無法用作 OSA 診斷級證據。下面 4.1–4.5 仍可參考但需打折。
 
 如果今天有一條訊號可以單獨完成診斷，是這個。
 
@@ -201,16 +228,14 @@
 
 ### 4.2 為什麼這條訊號排除「全 artifact」假設
 
-HBOT 機制：血漿溶氧量增加 15–20 倍（不靠 Hb），全身組織 O2 暫時補滿。
+**原推論（true HBOT 2.5 ATA × 100% 假設下）**：血漿溶氧量增加 15–20 倍，全身組織 O2 暫時補滿。
 
 | 反應模式 | 對應族群 |
 |---|---|
 | HBOT 後**無感** | 健康人（沒有 O2 debt 可填） |
-| HBOT 後「精神超好」 | **慢性間歇性缺氧者** — 你的反應 |
+| HBOT 後「精神超好」 | **慢性間歇性缺氧者** |
 
-健康人做 HBOT 不會有「睡飽感」的反應。**只有長期累積組織 O2 債務的人，被 HBOT 暫時填滿後才會有這種主觀變化**。
-
-這條訊號**不是 Garmin、不是 PPG、不是 algorithm** — 是你身體在治療對比中的直接證據。
+**修正後（1.1 ATA × mild O2）**：溶氧只增 1.7–6×，**健康人也可能感主觀好轉**（部分為 placebo + 中等溶氧增益）。我的反應 suggest 慢性缺氧 + 對 O2 supplementation 反應佳，但**特異性不足以單獨作診斷依據**。
 
 ### 4.3 為什麼視覺與認知都同步改善
 
@@ -435,15 +460,19 @@ AHI > 30 (severe)    CPAP（必須）              效果差距太大
 
 ---
 
-## 十、給睡眠科醫師面談的兩句話
+## 十、給睡眠科醫師面談的關鍵訊息
 
-不必帶 27 晚 Garmin 圖。**這兩句話 + 兩個身體訊號就夠**：
+**核心強訊號**（不依賴撤回過的 HR / HBOT data）：
 
-1. 「我做 HBOT 90 min 後有明顯睡飽感、視線變清楚」
-2. 「週末會強制午睡 3 小時」
-3. 補：「Mallampati III、舌側緣有齒痕、童年起過敏性鼻炎、LVH 11 年自 26 歲」
+1. **「週末會強制午睡 3 小時」**（過度日間嗜睡核心症狀）
+2. **「LVH 11 年自 26 歲 + 2026-03-25 新增 biatrial enlargement」**（長期未診斷 OSA 的累積後果）
+3. **「Mallampati III + 舌側緣齒痕 + 童年起過敏性鼻炎」**（多層級結構性塌陷的解剖證據）
+4. **「Garmin avgOvernightHrv 27 晚 mean 19.7 ms（第 7 百分位）+ 統計顯著下降趨勢 p<0.05」**（自主神經失衡客觀數據）
+5. **補**：「Garmin SpO2 nadir 27/27 晚 < 88%、平均 T90 10%」 — 此條有 wrist PPG artifact 疑慮，但 pattern 一致
 
-任何稱職的睡眠專科會直接安排 HSAT 而不再質疑。
+**可選提及但不主推**：「mild hyperbaric（1.1 ATA）90 min 後主觀感受改善」 — 非 true HBOT，特異性有限。
+
+任何稱職的睡眠專科看到上 1–4 點會直接安排 HSAT，不需要進一步說服。
 
 ---
 
@@ -469,7 +498,7 @@ AHI > 30 (severe)    CPAP（必須）              效果差距太大
 
 1. 我有**多層級結構性 OSA**（鼻 + 軟腭 + 舌根），不是肥胖型
 2. **30 年發育累積，不是 random bad luck，不是最近才發生**
-3. **HBOT 反應**是最強的單一診斷訊號（healthy 人不會有這反應）
+3. ~~**HBOT 反應**是最強的單一診斷訊號~~ → **撤回**：經 QC 我使用的艙體實際只有 ~1.1 ATA（非 true HBOT ≥ 1.4 ATA × 100% O2），對應 mild oxygenation，特異性顯著降低。仍 suggest 慢性缺氧但不具診斷力
 4. UA 8.9 是「果糖 × OSA 雙打」共用 ATP 耗竭路徑
 5. LVH 11 年是長期未診斷 OSA 的累積後果，不是獨立疾病
 6. HRV 19.7 ms 與下降趨勢提示已經有自主神經結構性傷害
@@ -505,6 +534,7 @@ AHI > 30 (severe)    CPAP（必須）              效果差距太大
 20. **Cole P.** Biophysics of nasal airflow: a review. *Acta Otolaryngol Suppl* 2000;543:6-9. — 仰躺位鼻腔阻力升高
 21. **Naclerio R, et al.** Pathophysiology of nasal congestion. *Otolaryngol Head Neck Surg* 2010;142(6 Suppl):S5-13.
 22. **Hellgren J, et al.** Sleeping position and reported sleep quality in subjects with nasal obstruction. *Clin Otolaryngol* 2002;27(5):371-374. — 頭部抬高 30° 改善 supine 鼻塞
+23. **Mychaskiw G, et al.** Sham-controlled, randomized, double-blind, crossover trial of mild hyperbaric oxygen treatment. *Anesth Analg* 2009 — Mild HBOT (1.3 ATA) vs sham 無顯著差異，提示 mild chamber 主觀效應含 placebo 成分
 
 ---
 
