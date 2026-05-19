@@ -65,7 +65,7 @@ analyzer.html               # 年度健檢數據獨立分析頁（仍為 vanilla
    - **idempotent，無變化會印 `data.js: no changes`**
 3. 將 daily / weekly / `health_dashboard.png` / `data.js` 一併 commit & push
 
-PWA 部署於 `https://eaglemamba.github.io/Health-Check/`（GitHub Pages）。Service Worker 在下次開 PWA 時自動拉新版 data.js。SW 邏輯有變動時 bump `sw.js` 內 `VERSION` 字串。
+PWA 部署於 `https://eaglemamba.github.io/Health-Check/`（GitHub Pages）。**Service Worker 自 v16 起對 `data.js` 採 stale-while-revalidate**：每次開 PWA 立即顯示 cache 版，背景拉新版寫回 cache，下次開啟即見最新 daily 數值。其餘靜態資源（HTML/JSX/CSS/icons）仍 cache-first。SW 邏輯本身有變動時才需 bump `sw.js` 內 `VERSION` 字串；單純 data.js 數值更新無需 bump。
 
 ## 重要規則
 
