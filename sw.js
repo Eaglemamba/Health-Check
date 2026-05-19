@@ -1,4 +1,4 @@
-const VERSION = 'v16-2026-05-19-swr-datajs';
+const VERSION = 'v17-2026-05-19-conflict-fix';
 const CORE = './';
 const CORE_FILES = [
   './',
