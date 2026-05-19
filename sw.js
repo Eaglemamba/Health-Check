@@ -1,4 +1,4 @@
-const VERSION = 'v17-2026-05-19-conflict-fix';
+const VERSION = 'v18-2026-05-19-csp-fix';
 const CORE = './';
 const CORE_FILES = [
   './',
