@@ -1,7 +1,17 @@
 # Session Handover — 2026-05-04
 
+> ⚠️ **STALE — last updated 2026-05-04**. Significant evolution since:
+> - 2026-05-13–19: 7 晚 OSA SpO2 < 88% 紅旗持續，新增 hypnogram × SpO2 + HRV 三軸分析
+> - `scripts/analyze_spo2_desats.py` 新增 `--hypnogram7` cmd（7 晚 SpO2 × 睡眠分期疊圖）
+> - `scripts/archive_spo2.py` 新增（週一自動歸檔非當週 SpO2 PNG → `reviews/daily/spo2/archive/`）
+> - `articles/2026-05-19-deep-sleep-hrv-review.md` 新增（Deep 期 HRV 異常之機轉與介入策略）
+> - SW v6 → v18，自 v16 起對 `data.js` 採 stale-while-revalidate；index.html 加入 CSP meta 允許 unsafe-eval（修復 babel-standalone 在嚴格 CSP 環境失效）
+> - Pending #2（W18 weekly review）狀態已過期，現在是 W21 in-progress
+>
+> **當前狀態請以 `CLAUDE.md` 與最近 10 個 git commit 為準**。本檔保留為 2026-05-04 redesign 收尾的歷史記錄。
+
 **Branch:** `main` (synced with origin)
-**Status:** index.html replaced with React-based PWA; old version archived; PWA installable on iPhone home screen; data.js now auto-syncs from daily reviews.
+**Status (as of 2026-05-04):** index.html replaced with React-based PWA; old version archived; PWA installable on iPhone home screen; data.js now auto-syncs from daily reviews.
 
 *Replaces prior handover.md (2026-04-21 supplement-guide overhaul + partial index.html sync; that work is now moot — entire index.html has been redesigned, archived to `articles/archive/index_pre_redesign_2026-05-04.html`).*
 

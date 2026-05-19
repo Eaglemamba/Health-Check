@@ -14,14 +14,22 @@
 
 ```
 templates/            每日 / 週 / 月 / 年模板與 check-in 流程指令
-scripts/              Garmin 同步、儀表板圖表、data.js 同步
+scripts/
+  sync_garmin_daily.py    抓取 Garmin 昨夜睡眠 + 今晨 SpO2
+  analyze_spo2_desats.py  SpO2 全夜圖（含 hypnogram 條帶）+ 趨勢 + 7 晚 overlay + 7 晚 hypnogram×SpO2 疊圖
+  analyze_hrv_trend.py    HRV 趨勢圖 + markdown snippet（週日 daily 額外執行）
+  generate_dashboard.py   健康儀表板圖表
+  sync_data_js.py         從 daily reviews 同步最新值至 data.js
+  log_hydration.py        將昨日飲水量回寫 Garmin Connect
+  archive_spo2.py         週一 daily check-in 執行：將非當週 SpO2 PNG 移至 archive/
 reviews/
   daily/              每日紀錄（YYYY-MM-DD.md）
+    spo2/             當週 SpO2 圖 + 永久趨勢圖（trend / hrv_trend / by_cycle）
+      archive/        非當週 SpO2 圖；週一自動歸檔
   weekly/             每週回顧（YYYY-Wxx.md）
   monthly/            每月回顧（YYYY-MM.md）
   annual/             年度健檢報告（最新版位於根目錄，歷年歸檔於 YYYY/ 子資料夾）
   food/               每日飲食紀錄
-  daily/spo2/         每日 SpO2 epoch-level 圖與整體趨勢
   health_dashboard.png  健康趨勢儀表板（自動生成）
 articles/             前瞻性指南（補充品、健檢加測等），最新版於根目錄，舊版於 archive/
   archive/            被新版取代的歷史指南；不再修改
@@ -29,14 +37,14 @@ reports/
   daily-garmin/       Garmin 每日摘要 markdown（由 sync_garmin_daily.py 產生）
 
 # 前端（React 單頁 PWA — 6-Month Health Reversal Plan）
-index.html            HTML shell（React 18 + Babel-standalone CDN）
+index.html            HTML shell（React 18 + Babel-standalone CDN；含 CSP meta 允許 unsafe-eval）
 data.js               雙語（EN/ZH）資料層 — hero、markers、panels、tracker
 styles.css            主題（Cool / Warm / Dark）+ 密度（Comfortable / Compact）
 components-core.jsx   Hero、Marker、Tabs、Icon
 components-panels.jsx 11 個 panel
 tweaks-panel.jsx      右下角即時調整面板（theme / lang / hero / density）
 manifest.webmanifest  PWA manifest（standalone display、theme-color）
-sw.js                 Service Worker（CDN cache-first，離線可用）
+sw.js                 Service Worker（自 v16 起：data.js stale-while-revalidate；其餘 cache-first）
 icons/                PWA icon（apple-touch / 192 / 512 / maskable）
 
 analyzer.html         年度健檢數據獨立分析頁（仍為 vanilla JS）
@@ -62,7 +70,7 @@ analyzer.html         年度健檢數據獨立分析頁（仍為 vanilla JS）
 4. Service Worker 第一次載入後快取 React / Babel / Google Fonts，**離線可用**
 5. data.js 更新時，每天 daily check-in 流程自動 push；下次開 PWA 會抓到新版（SW 重新註冊）
 
-如改動到 SW 邏輯需強制清快取，bump `sw.js` 內 `VERSION` 字串，user 端：刪除桌面 icon → Safari 重新打開網址 → 加回主畫面。
+如改動到 SW 邏輯（非 data.js 數值）需強制清快取，bump `sw.js` 內 `VERSION` 字串，user 端：刪除桌面 icon → Safari 重新打開網址 → 加回主畫面。data.js 數值變動則 SW 自動拉新（stale-while-revalidate），下次開啟即見最新。
 
 ## 設定
 
