@@ -1,4 +1,4 @@
-const VERSION = 'v14-2026-05-14-osa-banner';
+const VERSION = 'v15-2026-05-19-hypnogram';
 const CORE = './';
 const CORE_FILES = [
   './',
