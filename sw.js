@@ -1,4 +1,4 @@
-const VERSION = 'v15-2026-05-19-hypnogram';
+const VERSION = 'v16-2026-05-19-swr-datajs';
 const CORE = './';
 const CORE_FILES = [
   './',
@@ -28,6 +28,10 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+// data.js 採 stale-while-revalidate：先回 cache 立即顯示，背景刷新；下次開啟即見最新值
+// 其餘資源仍 cache-first（純靜態 / CDN）
+const SWR_PATHS = [/\/data\.js(\?.*)?$/];
+
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
@@ -35,6 +39,24 @@ self.addEventListener('fetch', (e) => {
   const isCDN = /unpkg\.com|fonts\.googleapis\.com|fonts\.gstatic\.com/.test(url.host);
   const isSameOrigin = url.origin === self.location.origin;
   if (!isCDN && !isSameOrigin) return;
+
+  const isSWR = isSameOrigin && SWR_PATHS.some((re) => re.test(url.pathname));
+
+  if (isSWR) {
+    e.respondWith(
+      caches.match(req).then((hit) => {
+        const fresh = fetch(req).then((res) => {
+          if (res && res.status === 200) {
+            const clone = res.clone();
+            caches.open('hc-runtime-' + VERSION).then((c) => c.put(req, clone));
+          }
+          return res;
+        }).catch(() => hit);
+        return hit || fresh;
+      })
+    );
+    return;
+  }
 
   e.respondWith(
     caches.match(req).then((hit) => {
