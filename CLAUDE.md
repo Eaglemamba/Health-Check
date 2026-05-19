@@ -18,9 +18,11 @@ scripts/
   sync_garmin_daily.py      # 抓取 Garmin 昨夜睡眠 + 今晨 SpO2
   analyze_spo2_desats.py    # SpO2 全夜圖（含 hypnogram 條帶）+ 趨勢 + 7 晚 overlay + 7 晚 hypnogram×SpO2 疊圖
   log_hydration.py          # 將昨日飲水量回寫至 Garmin Connect
+  archive_spo2.py           # 週一執行：將非當週 SpO2 PNG 移至 spo2/archive/ 並更新 daily review 連結
 reviews/
   daily/                    # 每日紀錄（YYYY-MM-DD.md）
-    spo2/                   # 每日 SpO2 epoch-level 圖 + 趨勢圖
+    spo2/                   # 當週 SpO2 圖 + 永久趨勢圖（trend / hrv_trend / by_cycle）
+      archive/              # 非當週 SpO2 圖；週一 daily check-in 自動歸檔（scripts/archive_spo2.py）
   weekly/                   # 每週回顧（YYYY-Wxx.md）
   monthly/                  # 每月回顧（YYYY-MM.md）
   annual/                   # 年度健康評估報告（YYYY-MM-DD.md，含子資料夾歸檔）

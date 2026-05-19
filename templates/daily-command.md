@@ -39,9 +39,10 @@
 6. **更新 Dashboard**：執行 `python3 scripts/generate_dashboard.py` 重新生成 `reviews/health_dashboard.png`
    - **週日 daily 額外執行**：`python scripts/analyze_hrv_trend.py` 產生 HRV 趨勢圖 + markdown snippet（貼至當週 weekly review 「HRV 趨勢」段）。若 Verdict 為 CONFIRMED 且 slope < −0.05 ms/night → 提醒下週訓練 deload + 熱量補回
 7. **同步 data.js（index.html PWA 用）**：執行 `python3 scripts/sync_data_js.py` 將最新 daily / weekly 數據寫回 `data.js`（hero.currentWeight、markers BP/Sleep/Weight、tracker 14 天陣列）。若有變更會印出 `[ok] ...` 清單；無變更則印 `data.js: no changes`
-8. **Commit & Push**：將 daily 檔案、weekly 檔案、dashboard PNG、data.js 一併 commit 並 push（在這一步完成後才結束對話，避免 stop hook 抱怨 untracked files）
-9. **開啟 Dashboard 檢查**：執行 `open reviews/health_dashboard.png` 讓使用者確認圖表數據正確
-10. 控制在 3 分鐘內完成 — 簡潔，不討論
+8. **歸檔上週 SpO2 圖**（**只在週一 daily check-in 執行**）：執行 `python scripts/archive_spo2.py` — 將 `reviews/daily/spo2/` 中**非當週 ISO week** 的 PNG 移至 `archive/`，並同步更新 daily review markdown 內的圖片連結。當週 PNG（含今日新生成的 hypnogram / hrv / overlay）+ 永久軸圖（trend / hrv_trend / by_cycle）保留於 root。非週一不執行此步驟。
+9. **Commit & Push**：將 daily 檔案、weekly 檔案、dashboard PNG、data.js、（若週一）archive 移動結果一併 commit 並 push（在這一步完成後才結束對話，避免 stop hook 抱怨 untracked files）
+10. **開啟 Dashboard 檢查**：執行 `open reviews/health_dashboard.png` 讓使用者確認圖表數據正確
+11. 控制在 3 分鐘內完成 — 簡潔，不討論
 
 注意事項：
 - 如果血壓收縮壓 > 160 或 < 90，提醒就醫
