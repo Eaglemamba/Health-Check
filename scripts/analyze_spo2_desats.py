@@ -149,16 +149,16 @@ def cmd_summary(days: int):
 
 
 def cmd_chart(date: str, out: Path = None):
-    """產生單晚 SpO2 epoch chart，標出 desat 區段。"""
+    """產生單晚 SpO2 epoch chart，標出 desat 區段；若有 sleepLevels 則加上 hypnogram 條帶 + 階段背景色。"""
     try:
         import matplotlib
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
         import matplotlib.dates as mdates
         from matplotlib import rcParams
-        # macOS Chinese font fallback
-        rcParams["font.sans-serif"] = ["PingFang TC", "PingFang SC", "Heiti TC",
-                                       "Hiragino Sans GB", "Arial Unicode MS",
+        from matplotlib.patches import Patch
+        rcParams["font.sans-serif"] = ["Microsoft JhengHei", "PingFang TC", "PingFang SC",
+                                       "Heiti TC", "Hiragino Sans GB", "Arial Unicode MS",
                                        "Noto Sans CJK TC", "DejaVu Sans"]
         rcParams["axes.unicode_minus"] = False
     except ImportError:
@@ -170,16 +170,61 @@ def cmd_chart(date: str, out: Path = None):
         print(f"[skip] {date}：無 epoch 資料")
         return
 
+    # Load sleepLevels (hypnogram)
+    p = DATA_DIR / f"{date}.json"
+    levels = []
+    if p.exists():
+        try:
+            sleep = json.loads(p.read_text(encoding="utf-8")).get("sleep") or {}
+            levels = sleep.get("sleepLevels") or []
+        except Exception:
+            levels = []
+
+    def _parse_gmt(s):
+        return datetime.fromisoformat(s.rstrip("Z").replace(".0", "")).replace(tzinfo=timezone.utc).astimezone(TPE)
+
+    stage_color = {0.0: "#1f3a5f", 1.0: "#9ecae1", 2.0: "#d7301f", 3.0: "#777777"}
+    stage_alpha_bg = {0.0: 0.08, 1.0: 0.04, 2.0: 0.15, 3.0: 0.10}
+    stage_y = {0.0: 0, 1.0: 1, 2.0: 2, 3.0: 3}
+    stage_name = {0.0: "Deep", 1.0: "Light", 2.0: "REM", 3.0: "Awake"}
+
     times = [parse_ts(e["epochTimestamp"]) for e in epochs]
     vals = [e["spo2Reading"] for e in epochs]
 
     events = find_events(epochs)
     pct, below, total = t90(epochs)
 
-    fig, ax = plt.subplots(figsize=(14, 5))
-    ax.plot(times, vals, color="#2c7fb8", linewidth=1.0)
+    if levels:
+        fig, (ax_h, ax) = plt.subplots(2, 1, figsize=(14, 6.5), sharex=True,
+                                         gridspec_kw={"height_ratios": [1, 3.5]})
+        # Hypnogram strip
+        for lv in levels:
+            start = _parse_gmt(lv["startGMT"])
+            end = _parse_gmt(lv["endGMT"])
+            al = lv["activityLevel"]
+            y = stage_y.get(al, 1)
+            w_days = (end - start).total_seconds() / 86400.0
+            ax_h.barh(y, w_days, left=mdates.date2num(start), height=0.85,
+                      color=stage_color.get(al, "#888"), edgecolor="white", linewidth=0.5)
+        ax_h.set_yticks([0, 1, 2])
+        ax_h.set_yticklabels(["Deep", "Light", "REM"])
+        ax_h.set_ylabel("分期")
+        ax_h.grid(alpha=0.3, axis="x")
+        ax_h.invert_yaxis()
+
+        # Stage backgrounds on SpO2 panel
+        for lv in levels:
+            s_dt = _parse_gmt(lv["startGMT"])
+            e_dt = _parse_gmt(lv["endGMT"])
+            al = lv["activityLevel"]
+            if al in stage_alpha_bg:
+                ax.axvspan(s_dt, e_dt, color=stage_color[al], alpha=stage_alpha_bg[al], zorder=0)
+    else:
+        fig, ax = plt.subplots(figsize=(14, 5))
+
+    ax.plot(times, vals, color="#222", linewidth=1.1, zorder=3)
     ax.fill_between(times, vals, 90, where=[v is not None and v < 90 for v in vals],
-                     interpolate=False, alpha=0.3, color="#fdae6b")
+                     interpolate=False, alpha=0.3, color="#fdae6b", zorder=2)
 
     # 標註 desat events
     for ev in events:
@@ -193,6 +238,17 @@ def cmd_chart(date: str, out: Path = None):
     ax.axhline(90, color="orange", linestyle="--", linewidth=0.8, label="OSA threshold 90%")
     ax.axhline(88, color="red", linestyle="--", linewidth=0.6, alpha=0.6, label="紅旗 88%")
     ax.axhline(80, color="darkred", linestyle="--", linewidth=0.6, alpha=0.6, label="重度 80%")
+
+    if levels:
+        # Stage legend patches (compact, top-of-SpO2 panel)
+        stage_legend = [
+            Patch(facecolor=stage_color[0.0], alpha=0.35, label="Deep"),
+            Patch(facecolor=stage_color[1.0], alpha=0.35, label="Light"),
+            Patch(facecolor=stage_color[2.0], alpha=0.35, label="REM"),
+        ]
+        # Don't overwrite the main legend; add stage legend separately
+        leg2 = ax.legend(handles=stage_legend, loc="upper right", fontsize=8, framealpha=0.85)
+        ax.add_artist(leg2)
 
     # === 上床時間估算 + Sleep onset 標線 ===
     latency_text = ""
@@ -226,7 +282,11 @@ def cmd_chart(date: str, out: Path = None):
     ax.set_xlabel("Time (Asia/Taipei)")
     sleep_low = summary.get("lowestSPO2")
     sleep_avg = summary.get("averageSPO2")
-    ax.set_title(f"夜間 SpO2 — {date}  |  Avg {sleep_avg}%  Lowest {sleep_low}%  T90 {pct:.1f}%  ({len(events)} events){latency_text}")
+    title = f"夜間 SpO2 — {date}  |  Avg {sleep_avg}%  Lowest {sleep_low}%  T90 {pct:.1f}%  ({len(events)} events){latency_text}"
+    if levels:
+        ax_h.set_title(title)
+    else:
+        ax.set_title(title)
     ax.set_ylim(70, 100)
     ax.grid(alpha=0.3)
     ax.legend(loc="lower right", fontsize=8)
@@ -640,6 +700,142 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
         print(f"  {str(d):<12} {nadir:>5}% {pct:>5.1f}%  {m90:>4}m {m85:>4}m {m80:>4}m{marker}")
 
 
+def cmd_hypnogram7(today_str: str, max_nights: int = 7):
+    """7 晚 SpO2 × 睡眠分期疊圖（每晚一列 subplot，stage 背景色 + SpO2 折線）。
+
+    Rolling window：today 與往前 (max_nights-1) 晚共 max_nights 晚；缺資料自動跳過。
+    輸出：reviews/daily/spo2/spo2_hypnogram_7night_{today}.png
+    用途：OSA 表型驗證（REM/Light/Deep dominant 漂移分析）。
+    """
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from matplotlib import rcParams
+        from matplotlib.patches import Patch
+        rcParams["font.sans-serif"] = ["Microsoft JhengHei", "PingFang TC", "PingFang SC",
+                                       "Heiti TC", "Hiragino Sans GB", "Arial Unicode MS",
+                                       "Noto Sans CJK TC", "DejaVu Sans"]
+        rcParams["axes.unicode_minus"] = False
+    except ImportError:
+        print("需先安裝 matplotlib")
+        return
+
+    spo2_dir = ROOT / "reviews" / "daily" / "spo2"
+    spo2_dir.mkdir(parents=True, exist_ok=True)
+    today = datetime.strptime(today_str, "%Y-%m-%d").date()
+
+    def _parse_gmt(s):
+        return datetime.fromisoformat(s.rstrip("Z").replace(".0", "")).replace(tzinfo=timezone.utc).astimezone(TPE)
+
+    stage_color = {0.0: "#1f3a5f", 1.0: "#9ecae1", 2.0: "#d7301f"}
+    stage_alpha = {0.0: 0.18, 1.0: 0.08, 2.0: 0.22}
+
+    nights = []
+    for i in range(max_nights - 1, -1, -1):
+        d = today - timedelta(days=i)
+        p = DATA_DIR / f"{d.isoformat()}.json"
+        if not p.exists():
+            continue
+        data = json.loads(p.read_text(encoding="utf-8"))
+        sleep = data.get("sleep") or {}
+        epochs = sleep.get("wellnessEpochSPO2DataDTOList") or []
+        levels = sleep.get("sleepLevels") or []
+        if not epochs or not levels:
+            continue
+        epochs.sort(key=lambda e: e["epochTimestamp"])
+        nights.append((d, epochs, levels, sleep.get("wellnessSpO2SleepSummaryDTO") or {}))
+
+    if not nights:
+        print(f"[skip] {today} 往前 {max_nights} 晚無 sleepLevels + epochs 資料")
+        return
+
+    n = len(nights)
+    fig, axes = plt.subplots(n, 1, figsize=(14, 2.0 * n), sharex=True)
+    if n == 1:
+        axes = [axes]
+
+    table_rows = []
+    for ax, (d, epochs, levels, summ) in zip(axes, nights):
+        t_start = _parse_gmt(levels[0]["startGMT"])
+        for lv in levels:
+            s = (_parse_gmt(lv["startGMT"]) - t_start).total_seconds() / 60
+            e = (_parse_gmt(lv["endGMT"]) - t_start).total_seconds() / 60
+            al = lv["activityLevel"]
+            if al in stage_color:
+                ax.axvspan(s, e, color=stage_color[al], alpha=stage_alpha[al], zorder=0)
+        xs = [(parse_ts(e["epochTimestamp"]) - t_start).total_seconds() / 60 for e in epochs]
+        ys = [e.get("spo2Reading") if e.get("spo2Reading") is not None else float("nan") for e in epochs]
+        ax.plot(xs, ys, color="#222", linewidth=1.2, zorder=3)
+        ax.fill_between(xs, ys, 88, where=[(v is not None and not (v != v) and v < 88) for v in ys],
+                         color="#fc8d59", alpha=0.5, interpolate=True, zorder=2)
+        ax.fill_between(xs, ys, 85, where=[(v is not None and not (v != v) and v < 85) for v in ys],
+                         color="#d7301f", alpha=0.6, interpolate=True, zorder=2)
+        ax.axhline(88, color="orange", linestyle="--", linewidth=0.6, alpha=0.6)
+        ax.axhline(85, color="darkred", linestyle=":", linewidth=0.5, alpha=0.5)
+        ax.set_ylim(75, 100)
+        ax.set_yticks([80, 90, 100])
+        ax.grid(alpha=0.25)
+
+        nadir = summ.get("lowestSPO2")
+        avg = summ.get("averageSPO2")
+        is_today = (d == today)
+        label = f"{d.strftime('%m-%d %a')}  nadir {nadir}%  avg {avg}%"
+        if is_today:
+            label += "  < today"
+        ax.set_ylabel(label, rotation=0, ha="right", va="center", fontsize=9,
+                      fontweight="bold" if is_today else "normal",
+                      color="#d7301f" if is_today else "#222")
+
+        # Stage-stratified stats
+        def stage_at(ts, lvs=levels):
+            for lv in lvs:
+                s_ = _parse_gmt(lv["startGMT"])
+                e_ = _parse_gmt(lv["endGMT"])
+                if s_ <= ts < e_:
+                    return lv["activityLevel"]
+            return None
+        from collections import defaultdict
+        sp = defaultdict(list)
+        for ep in epochs:
+            v = ep.get("spo2Reading")
+            if v is None: continue
+            st = stage_at(parse_ts(ep["epochTimestamp"]))
+            if st is not None:
+                sp[st].append(v)
+        row = [d.isoformat()]
+        for st_val in [0.0, 1.0, 2.0]:
+            vals = sp.get(st_val, [])
+            if vals:
+                lo = min(vals)
+                p90 = sum(1 for v in vals if v < 90) / len(vals) * 100
+                row.append(f"{lo}/{p90:.0f}%")
+            else:
+                row.append("—")
+        table_rows.append(row)
+
+    axes[-1].set_xlabel("距入睡時間（分鐘）")
+    legend_elems = [
+        Patch(facecolor="#1f3a5f", alpha=0.18, label="Deep（深眠）"),
+        Patch(facecolor="#9ecae1", alpha=0.4, label="Light（淺眠）"),
+        Patch(facecolor="#d7301f", alpha=0.22, label="REM"),
+        Patch(facecolor="#fc8d59", alpha=0.5, label="SpO2 < 88%"),
+        Patch(facecolor="#d7301f", alpha=0.6, label="SpO2 < 85%"),
+    ]
+    axes[0].legend(handles=legend_elems, loc="lower right", fontsize=8, framealpha=0.9, ncol=5)
+    axes[0].set_title(f"7 晚 SpO2 × 睡眠分期對應分析（{nights[0][0]} 至 {today}）— OSA 表型驗證")
+
+    fig.tight_layout()
+    out = spo2_dir / f"spo2_hypnogram_7night_{today}.png"
+    fig.savefig(out, dpi=110)
+    plt.close(fig)
+    print(f"7 晚 hypnogram 圖已存：{out}")
+    print(f"  Stage-stratified nadir / <90% 比例")
+    print(f"  {'Date':<12} {'Deep':>12} {'Light':>12} {'REM':>12}")
+    for row in table_rows:
+        print(f"  {row[0]:<12} {row[1]:>12} {row[2]:>12} {row[3]:>12}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--summary", type=int, metavar="N", help="近 N 晚文字摘要")
@@ -648,6 +844,7 @@ def main():
     ap.add_argument("--trend", type=int, nargs="?", const=9999, metavar="N",
                     help="多日趨勢圖（預設全部，N 限制最近幾天）")
     ap.add_argument("--overlay", help="多晚 SpO2 epoch 疊圖（rolling 7 晚），YYYY-MM-DD = 今日")
+    ap.add_argument("--hypnogram7", help="7 晚 SpO2 × 睡眠分期疊圖（rolling），YYYY-MM-DD = 今日")
     args = ap.parse_args()
 
     if args.summary:
@@ -660,7 +857,9 @@ def main():
         cmd_trend(args.trend)
     if args.overlay:
         cmd_overlay(args.overlay)
-    if not (args.summary or args.night or args.chart or args.trend is not None or args.overlay):
+    if args.hypnogram7:
+        cmd_hypnogram7(args.hypnogram7)
+    if not (args.summary or args.night or args.chart or args.trend is not None or args.overlay or args.hypnogram7):
         ap.print_help()
 
 

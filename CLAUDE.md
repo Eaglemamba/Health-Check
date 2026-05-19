@@ -16,7 +16,7 @@ scripts/
   generate_dashboard.py     # 健康儀表板圖表生成腳本（matplotlib PNG）
   sync_data_js.py           # 從 reviews/daily/*.md 同步最新值至 data.js
   sync_garmin_daily.py      # 抓取 Garmin 昨夜睡眠 + 今晨 SpO2
-  analyze_spo2_desats.py    # SpO2 epoch-level 全夜圖 + 整體趨勢圖
+  analyze_spo2_desats.py    # SpO2 全夜圖（含 hypnogram 條帶）+ 趨勢 + 7 晚 overlay + 7 晚 hypnogram×SpO2 疊圖
   log_hydration.py          # 將昨日飲水量回寫至 Garmin Connect
 reviews/
   daily/                    # 每日紀錄（YYYY-MM-DD.md）
