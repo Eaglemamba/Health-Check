@@ -580,21 +580,22 @@ T = 90   核心體溫降至 sleep onset 閾值 → 入睡
        ☐ BP 測量（座位 5 min 後）
        ※ 不開手機（推遲 cortisol spike）
 ─────────────────────────────────────────────────────────────────
-06:00  早餐優格 blend（2026-05-11 對齊實際版 + 升級版）
-       【實際版 minimum，已執行】
-       ☐ 優格 + whey 30g + 堅果 30g
-       ☐ L-Citrulline 4g ⬆️
-       ☐ D3 2000 IU + K2 MK-7 180mcg ⬆️
+06:00  早餐優格 blend（2026-05-20 最終定案版 🆕）
+       【固定配方 — 已穩定執行】
+       ☐ 雪坊 6 號優格 150 g
+       ☐ NOW Sports Whey Protein Isolate, Unflavored 30 g ⬆️（取代 ON Performance Whey）
+       ☐ 冷凍藍莓 150 g（莓好時果，↑ from 100 g — 進入 Curtis 2019 AJCN RCT 有效劑量）
+       ☐ 綜合堅果 30 g（核桃 15 g + 杏仁 15 g — omega-3 ALA + Mg + D3 載體脂肪）
+       ☐ 生可可粉（non-alkalized）10 g — flavanols ~100 mg，hsCRP 介入
+       ☐ 大麥燕麥片 15 g 🆕 — β-glucan ~0.6-1 g（與午餐合補 LDL）
+       ☐ L-Citrulline 4 g（訓練日訓練前再 +2 g，全日 6 g 進入 BP RCT 區間）
+       ☐ D3 3000 IU + K2 MK-7 180 mcg ⬆️（脂溶性，隨優格 + 堅果脂肪吸收）
        ☐ 益生菌（直接入優格）
-       【K 升級項，目標補回 ~600 mg K 缺口】★
-       ☐ 香蕉 1 整根（+422 mg K）— 整根剝皮即吃，0 工時
-       ☐ 冷凍藍莓 50-100g（+77-154 mg K + anthocyanin）— 倒入優格融化即可，全家/全聯有
-       ☐ 枸杞 15-20g（+100 mg K）— 一茶匙乾貨撒進優格
-       ☐ 生可可粉 5-10g（+100 mg K + 500mg flavanols + 急性 cortisol ↓ COSMOS）
+       ☐ 無糖杏仁奶 100 mL（首選；無 carrageenan / gellan / 磷酸鹽品牌）
+           OR 低脂牛奶 100 mL（替代；確認 A2 為佳）
        ＋ 500 mL 水繼續喝至 09:00
-       ※ 早餐不放抹茶粉（EGCG 集中至午餐）
-
-       Week 1 起步：先加香蕉（最 ROI 高），其他依採購進度 ramp
+       ※ 早餐不放抹茶粉（EGCG 集中至 9:30 辦公室）
+       ※ 移除項：香蕉（鉀已由藍莓 + 優格覆蓋）、枸杞（非核心代謝目標）、奇亞籽（堅果已提供 ω-3 ALA）
 ─────────────────────────────────────────────────────────────────
 06:30  通勤 / 上班前
        ☐ 洛神花茶 #1（保溫瓶帶出門）
@@ -700,14 +701,14 @@ TST 目標：22:00 → 05:45 = 7h 45min
 
 | 時段 | 項目 | 熱量 (kcal) | 蛋白質 | 脂肪 | 飽和脂肪 | 糖 | 纖維 |
 |------|------|------------|--------|------|---------|-----|------|
-| 早餐 | 優格 blend（whey + 堅果 30g + 藍莓 100g + 香蕉半 + 可可 10g + 枸杞 20g + citrulline 2g）| ~650 | 30g | 30g | 5g | 25g | 10g |
+| 早餐 🆕 2026-05-20 | 優格 blend（雪坊優格 150g + NOW WPI 30g + 堅果 30g + 藍莓 150g + 可可 10g + 大麥燕麥 15g + citrulline 4g + D3 3000 IU + 杏仁奶 100mL）| ~610 | 37g | 23g | 4g | 19g | 7g |
 | 午餐前 | Psyllium 5g | 20 | 0 | 0 | 0 | 0 | 5g |
 | 午餐 | 蛋 + 地瓜 + 凱撒沙拉 + 抹茶拿鐵 400ml | 665 | 43g | 31g | 10g | 15g | 8g |
 | **下午** | **南瓜籽仁 30g** 🆕 | 160 | 8g | 14g | 2.5g | 1g | 2g |
 | 晚餐前 | Psyllium 5g | 20 | 0 | 0 | 0 | 0 | 5g |
 | 晚餐 | UberEats（估）| 700 | 35g | 30g | 8g | 15g | 6g |
-| **合計** | | **~2215** | **~116g** | **~105g** | **~25.5g** | **~56g** | **~36g** |
-| 目標 | | 2100–2400（維持）| 70–90g ✅超 | <30% kcal | <22g ❗邊緣 | <50g ❗邊緣 | 25–30g ✅超 |
+| **合計** 🆕 2026-05-20 | | **~2175** | **~123g** | **~98g** | **~24.5g** | **~50g** | **~33g** |
+| 目標 | | 2100–2400（維持）| 70–90g ✅超 | <30% kcal | <22g ❗邊緣 | <50g ✅持平 | 25–30g ✅超 |
 
 ### 72% 巧克力若再加一份（15g）：邊際變動
 
@@ -819,9 +820,11 @@ TST 目標：22:00 → 05:45 = 7h 45min
 
 ---
 
-## 八之三、乳清蛋白粉的隱藏成本（ON Whey Isolate 案例）🆕 2026-05-11
+## 八之三、乳清蛋白粉的隱藏成本（ON Whey 案例）🆕 2026-05-11 · 🆕 2026-05-20 最終決定 NOW Sports
 
-> 起因：日常 audit 中發現 ON Whey Isolate（Costco TW，1.9 kg 巧克力/香草口味）含 4 層問題，且**完全無主觀感受**（與茶葉蛋的「鈉敏感」不同）。對你 HbA1c 5.9% prediabetes + hsCRP 1.42 尤其重要 — 這是 stack 中**唯一一個 silent biochemical 擾動每日 30g × 365 天**的單品。
+> **2026-05-20 update：** 決定切換到 **NOW Sports Whey Protein Isolate, Unflavored**（取代原推薦的 Naked Whey）。理由 = NSF Certified for Sport 第三方稽核強度更高、月成本更低（~1,100 vs Naked ~1,500）、iHerb 取得性穩定。Naked Whey 降為 🥈 備案。
+>
+> 起因：日常 audit 中發現 ON Whey 系列（含 Performance Whey Vanilla 及 Costco TW Isolate 1.9 kg）含 4 層問題，且**完全無主觀感受**（與茶葉蛋的「鈉敏感」不同）。對你 HbA1c 5.9% prediabetes + hsCRP 1.42 尤其重要 — 這是 stack 中**唯一一個 silent biochemical 擾動每日 30g × 365 天**的單品。
 
 ### 你的實際產品：ON Whey Isolate（Costco TW）成分
 
@@ -881,32 +884,42 @@ Ace-K：~5-12mg/勺 × 365 = 1.8-4.4g/年
 
 ### 替代方案
 
-#### 🥇 推薦：**Naked Whey Unflavored**（USA, iHerb 直送）
+#### 🥇 推薦（2026-05-20 最終決定）：**NOW Sports Whey Protein Isolate, Unflavored**（USA, iHerb 直送）
 
-- **單一成分**：grass-fed whey isolate（無甜味劑、無乳化劑、無風味劑、無 CMC）
-- **CLP 5/5 星**（重金屬最低等級）
-- 第三方重金屬檢測公開
-- 月成本 ~1,400-1,700 TWD（vs ON ~800 = +600-900）
+- **單一成分**：純 WPI（無甜味劑、無乳化劑、無風味劑、無 CMC、無大豆卵磷脂）
+- **NSF Certified for Sport** ✅ — 唯一**第三方稽核**的乾淨選項（每批檢測重金屬 + 興奮劑 + 標示一致性）
+- 蛋白密度：25 g / 28 g 份（~89%）
+- iHerb SKU `NOW-02147`（5 lb 桶 = 2.27 kg，~75 份）
+- **月成本 ~1,100 TWD**（30g/天 × 30 天）
 
-#### 🥈 過渡：**MyProtein Impact Whey Isolate Unflavored / Natural**
+#### 🥈 備案：**Naked Whey Isolate, Unflavored**（USA, iHerb 直送）
 
-- **無添加版本**只有 WPI（須選 unflavored / natural）
-- CLP 3/5
-- 台灣 MyProtein 官網可購
+- 單一成分 grass-fed WPI（無認證但 CLP 5/5 星 + 自家 COA 公開）
+- 草飼乳源是唯一加分項（牛奶 ω-3 較高、共軛亞麻油酸 CLA 較高）
+- **月成本 ~1,400-1,700 TWD**（比 NOW 貴 30%）
+- 適用情境：對草飼乳源有偏好且不在意 NSF 認證
+
+#### 🥉 過渡 / 預算款：**MyProtein Impact Whey Isolate Unflavored / Natural**
+
+- 無添加版本只有 WPI（須選 unflavored / natural）
+- CLP 3/5；部分批次 Informed Sport
+- 台灣 MyProtein 官網可購，**月成本 ~800-1,000 TWD**（最便宜）
 
 #### ❌ 避免：含 sucralose / Ace-K / CMC 的所有口味
 
-- ON 巧克力 / 香草 / 草莓
+- ON Performance Whey（all flavors）/ ON Gold Standard 巧克力 / 香草 / 草莓
+- ON Whey Isolate Costco TW 巧克力 / 香草
 - BSN Syntha-6
-- Dymatize ISO100
+- Dymatize ISO100 **flavored 系列**（unflavored Gourmet 版可，但無 NOW 認證強）
 
 ### 執行
 
-- 用完目前 ON 1.9 kg（30g/天 ≈ 63 天）
-- iHerb 預訂 Naked Whey 2 lb（~907g / 30 天份）
-- 切換當天無味剛好融入雪坊優格 + 香蕉 + 藍莓（升級早餐 blend 自帶風味）
+- 用完目前 ON Performance Whey Vanilla（30g/天）— **不丟（沉沒成本）**
+- iHerb 下單 NOW Sports WPI Unflavored 5 lb（`NOW-02147`），美西倉到台 5-10 工作天
+- **建議剩 7-10 天份量時下單**
+- 切換當天無味剛好融入雪坊優格 + 藍莓 + 大麥燕麥（自帶風味）
 
-**月支出淨變動**：+600-900 TWD（被「換掉茶葉蛋 −400」與「換掉 7-11 藜麥毛豆 −250」抵消大部分）
+**月支出淨變動**：+200-400 TWD（vs 原推薦 Naked Whey 的 +600-900；被「換掉茶葉蛋 −400」「7-11 藜麥毛豆 −250」抵消後實際淨減 ~500 TWD/月）
 
 **依據**：**(Chassaing B et al. 2015, Nature)** + **(Chassaing B et al. 2022, Gastroenterology)** + **(Méndez-García LA et al. 2022, Cell)** + **(Clean Label Project 2018 Protein Powder Report)**
 
@@ -918,9 +931,11 @@ Ace-K：~5-12mg/勺 × 365 = 1.8-4.4g/年
 
 | 項目 | 評估 | 行動 | 月成本變動 |
 |------|------|------|----------|
-| **雪坊 6 號優格** 200g/天 | ✅ stack 最乾淨單品（鮮乳 + 6 株乳酸菌，無添加） | **繼續吃** — 你做對了 | 0 |
+| **雪坊 6 號優格** 150g/天 🆕 2026-05-20（原 200g）| ✅ stack 最乾淨單品（鮮乳 + 6 株乳酸菌，無添加） | **繼續吃** — 由 200g 降至 150g（為新增大麥燕麥 + 藍莓 +50g 騰熱量空間） | 0 |
 | **伊藤園 さらさら抹茶** 40g（[産品 41483](https://www.itoen.jp/products/41483/)）| 🟡 含 dextrin 1.5g/天 + Vit C；EGCG ~95mg/杯 | **可選**升級至 [お抹茶 30g (41489)](https://www.itoen.jp/products/41489/) 或 [京都宇治 130g (50861)](https://www.itoen.jp/products/50861/) 純抹茶；不急 | +200-400 / 月 |
-| **ON Whey Isolate** 30g/天（Costco TW）| 🔴 **priority 1**：CMC + 雙甜味劑 + 大豆卵磷脂 | **換 Naked Whey Unflavored** | +600-900 |
+| **ON Performance Whey Vanilla** 30g/天 🆕 2026-05-20 | 🔴 **priority 1**：CMC + 雙甜味劑 + 大豆卵磷脂 + 人工香料 | **換 NOW Sports WPI Unflavored**（iHerb `NOW-02147` 5 lb） | +200-400 |
+| **冷凍藍莓 莓好時果** 150g/天 🆕 2026-05-20（原 100g）| ✅ Curtis 2019 AJCN RCT 有效劑量 150g | **繼續吃** — 劑量由 100g 拉到 150g | +400-600 |
+| **大麥燕麥片** 15g/天 🆕 2026-05-20 | ✅ β-glucan ~0.6-1g（與午餐合補 LDL） | **新增** — 早餐 blend 內 | +50-100 |
 | **7-11 茶葉蛋 ×2** | 🔴 priority 2：磷酸鹽 + 鈉 + 4-MEI + AGE + 添加物 | **電鍋自煮白煮蛋 ×2**（週日 batch 15 分鐘） | −400 |
 | **7-11 藜麥毛豆** | 🟠 鈉 400mg + 可能磷酸鹽 | **自帶冷凍毛豆 120g**（無鹽水煮 5 分） | −250 |
 | 全脂鮮奶（自泡抹茶用，300mL/天）| ❓ 待 audit | 確認品牌 / A1 vs A2 | — |
