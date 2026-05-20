@@ -1,7 +1,8 @@
 /* ====== Health Reversal Plan — bilingual data ======
  * Source of truth: articles/2026-03-25-supplement-guide.md
- * Latest sync: 2026-05-20 (breakfast blend finalized: NOW Sports WPI, blueberries 150g,
- *   barley/oats 15g, D3 3000 IU, almond milk 100mL; dropped banana/goji/chia)
+ * Latest sync: 2026-05-20 v2 (breakfast blend finalized: NOW Sports WPI, blueberries 150g,
+ *   barley/oats 15g, D3 3000 IU, almond milk 100mL;
+ *   dropped: banana, goji, chia, NUTS, COCOA)
  */
 window.HC_DATA = {
   // Hero
@@ -372,10 +373,6 @@ window.HC_DATA = {
           { en: "25g protein + leucine for MPS. NSF Certified for Sport. Replaces ON Performance Whey (4-layer microbiome additives).", zh: "25g 蛋白 + leucine 啟動 MPS。NSF Certified for Sport。取代 ON Performance Whey（4 層 microbiome 添加物）。" }],
         [{ en: "Frozen blueberries (Mei-Hao-Shi-Guo)", zh: "冷凍藍莓（莓好時果）" }, "150g ⬆️ 🆕",
           { en: "Anthocyanins → hsCRP ↓ + LDL oxidation ↓ + insulin sensitivity ↑ (Curtis 2019 AJCN: 150g/d RCT-effective dose; Stull 2010 J Nutr)", zh: "花青素 → hsCRP ↓ + LDL 氧化 ↓ + 胰島素敏感性 ↑（Curtis 2019 AJCN：150g/天 RCT 有效劑量；Stull 2010 J Nutr）" }],
-        [{ en: "Mixed nuts (walnut 15g + almond 15g)", zh: "綜合堅果（核桃 15g + 杏仁 15g）" }, "~30g",
-          { en: "ω-3 ALA + Mg + MUFA + fat-soluble vit carrier (PREDIMED-aligned)", zh: "ω-3 ALA + 鎂 + MUFA + 脂溶性維他命載體（PREDIMED 對齊）" }],
-        [{ en: "Raw cacao powder (non-alkalized)", zh: "生可可粉（non-alkalized）" }, "10g",
-          { en: "Flavanols ~100mg → SBP −2–3 mmHg + endothelial (Ried 2020 Cochrane). Must be non-alkalized.", zh: "Flavanols ~100mg → SBP −2–3 mmHg + endothelial（Ried 2020 Cochrane）。必須 non-alkalized。" }],
         [{ en: "Barley/oats flakes 🆕", zh: "大麥燕麥片 🆕" }, "15g",
           { en: "β-glucan ~0.6–1g (combine with lunch for full LDL effect; FDA-acknowledged at 3g/d β-glucan total)", zh: "β-glucan ~0.6-1g（與午餐合補達 3g/天 FDA 認可降 LDL 閾值）" }],
         [{ en: "L-Citrulline ⬆️", zh: "L-瓜胺酸 ⬆️" }, "4g (+2g pre-workout on training days)",
@@ -390,8 +387,8 @@ window.HC_DATA = {
           { en: "Pending RT resumption. Confounds weight + serum creatinine (eGFR misread).", zh: "待重訓恢復後加。會干擾體重 + 血清肌酸酐（eGFR 誤判）。" }],
       ],
       note: {
-        en: "2026-05-20 changes: switch whey ON Performance → NOW Sports WPI; blueberries 100g → 150g; add barley/oats 15g; D3 2000 → 3000 IU; add 100 mL almond milk for consistency; drop banana / goji / chia (covered by remaining ingredients). Removed because they were extras, not because they're bad — keep stack lean.",
-        zh: "2026-05-20 變動：乳清由 ON Performance 換 NOW Sports WPI；藍莓 100g→150g；新增大麥燕麥 15g；D3 2000→3000 IU；加 100 mL 杏仁奶調稠度；移除香蕉/枸杞/奇亞籽（其營養已被其他成分覆蓋）。並非它們不好，而是 stack 精簡化。",
+        en: "2026-05-20 v2 finalized: whey switched to NOW Sports WPI; blueberries 150g; +barley/oats 15g; D3 3000 IU; +100mL almond/low-fat milk. Dropped: banana, goji, chia, NUTS, COCOA. Gaps to fill from other meals: nuts → ω-3 ALA + Mg ~80mg; cocoa → flavanols ~100mg (consider 85% dark choco 10g afternoon or walnuts at dinner).",
+        zh: "2026-05-20 v2 定案：乳清換 NOW Sports WPI；藍莓 150g；新增大麥燕麥 15g；D3 3000 IU；加 100mL 杏仁奶/低脂牛奶。移除：香蕉、枸杞、奇亞籽、**堅果**、**生可可**。缺口建議從別餐補：堅果 → ω-3 ALA + Mg ~80mg；可可 → flavanols ~100mg（考慮下午 85% 黑巧克力 10g 或晚餐加核桃）。",
       },
       blending: {
         en: "Blending retains all fiber (only physical structure changes); juicing discards fiber. With protein and fat, fructose absorption slows further — not equivalent to juice.",
@@ -483,9 +480,9 @@ window.HC_DATA = {
       head: { en: ["Time", "Drink", "Metabolic target"],
               zh: ["時間", "飲料", "代謝目標"] },
       rows: [
-        [{ en: "Breakfast 07:00 (home) 🆕 2026-05-20", zh: "早餐 07:00（家）🆕 2026-05-20" },
-          { en: "Snow Factory No.6 yogurt 150g + NOW Sports WPI 30g + blueberries 150g + nuts 30g + cacao 10g + barley/oats 15g + L-citrulline 4g + D3 3000 IU + K2 180mcg + almond milk 100mL", zh: "雪坊 6 號優格 150g + NOW Sports WPI 30g + 藍莓 150g + 堅果 30g + 可可 10g + 大麥燕麥 15g + 瓜胺酸 4g + D3 3000 IU + K2 180mcg + 杏仁奶 100mL" },
-          { en: "Casein+whey (UA clearance) + β-glucan + NO precursor + ω-3 ALA + fat-soluble vitamin window + anthocyanin RCT dose", zh: "酪蛋白+乳清（尿酸排泄）+ β-葡聚醣 + NO 前體 + ω-3 ALA + 脂溶性維生素吸收窗 + 花青素 RCT 劑量" }],
+        [{ en: "Breakfast 07:00 (home) 🆕 2026-05-20 v2", zh: "早餐 07:00（家）🆕 2026-05-20 v2" },
+          { en: "Snow Factory No.6 yogurt 150g + NOW Sports WPI 30g + blueberries 150g + barley/oats 15g + L-citrulline 4g + D3 3000 IU + K2 180mcg + almond milk 100mL", zh: "雪坊 6 號優格 150g + NOW Sports WPI 30g + 藍莓 150g + 大麥燕麥 15g + 瓜胺酸 4g + D3 3000 IU + K2 180mcg + 杏仁奶 100mL" },
+          { en: "Casein+whey (UA clearance) + anthocyanin RCT dose + β-glucan + NO precursor + fat-soluble vitamin window", zh: "酪蛋白+乳清（尿酸排泄）+ 花青素 RCT 劑量 + β-葡聚醣 + NO 前體 + 脂溶性維生素吸收窗" }],
         [{ en: "7:30–9:00 commute", zh: "7:30–9:00 通勤" },
           { en: "Water 300–500 mL on HSR; no caffeine yet", zh: "高鐵上 300–500 mL 白水；尚未進咖啡因" },
           { en: "Base hydration + commute window", zh: "基礎補水 + 通勤窗" }],
@@ -1091,8 +1088,8 @@ window.HC_DATA = {
       ],
       foodForm: {
         ttl: { en: "Food-form nutrition (already in daily meals)", zh: "食物形態營養（已在每日餐食中）" },
-        body: { en: "🆕 2026-05-20 finalized: Raw cacao 10g (breakfast, flavanols ~100mg), blueberries 150g (breakfast, RCT-effective anthocyanin dose), barley/oats 15g (breakfast, β-glucan), mixed nuts ~30g (breakfast, ω-3 ALA + MUFA carrier for D3K2), pumpkin seeds 30g (afternoon snack). Food provides matrix effects supplements can't replicate.",
-                zh: "🆕 2026-05-20 定案：生可可粉 10g（早餐，flavanols ~100mg）、藍莓 150g（早餐，RCT 有效花青素劑量）、大麥燕麥 15g（早餐，β-glucan）、綜合堅果 ~30g（早餐，ω-3 ALA + MUFA 載體助 D3K2 吸收）、南瓜籽 30g（下午點心）。食物的 matrix 效應補充劑無法取代。" },
+        body: { en: "🆕 2026-05-20 v2 finalized: Blueberries 150g (breakfast, RCT-effective anthocyanin dose), barley/oats 15g (breakfast, β-glucan), pumpkin seeds 30g (afternoon snack). Removed from breakfast: cacao + nuts. Coverage gaps to fill from other meals: nuts (ω-3 ALA + Mg) and cocoa (flavanols).",
+                zh: "🆕 2026-05-20 v2 定案：藍莓 150g（早餐，RCT 有效花青素劑量）、大麥燕麥 15g（早餐，β-glucan）、南瓜籽 30g（下午點心）。早餐已移除可可與堅果，覆蓋缺口需從其他餐食補（堅果 ω-3 ALA + Mg；可可 flavanols）。" },
       },
     },
     rtg: {
@@ -1244,9 +1241,9 @@ window.HC_DATA = {
         ["5:35", { en: "BP measurement #1", zh: "量血壓 第 1 次" }, "—",
           { en: "After bathroom, before eating. Sit 5 min, back supported, feet flat. 2 readings 1 min apart; use 2nd.",
             zh: "上完廁所、進食前。靜坐 5 分鐘背靠椅、雙腳平放。連量 2 次間隔 1 分鐘，取第 2 次。" }],
-        ["7:00", { en: "Breakfast (home) — yogurt blend 🆕 2026-05-20 finalized", zh: "早餐（家）— 優格飲 🆕 2026-05-20 定案" }, "—",
-          { en: "Snow Factory No.6 yogurt 150g + NOW Sports WPI 30g + blueberries 150g + nuts 30g + cacao 10g + barley/oats 15g + L-citrulline 4g + D3 3000 IU + K2 MK-7 180mcg + probiotic + almond milk 100mL. NO matcha (relocated to office 9:30). Casein+whey (UA clearance) + anthocyanin RCT dose + β-glucan + ω-3 ALA.",
-            zh: "雪坊 6 號優格 150g + NOW Sports WPI 30g + 藍莓 150g + 堅果 30g + 可可 10g + 大麥燕麥 15g + 瓜胺酸 4g + D3 3000 IU + K2 MK-7 180mcg + 益生菌 + 杏仁奶 100mL。不放抹茶（移至辦公室 9:30）。酪蛋白+乳清（尿酸排泄）+ 花青素 RCT 劑量 + β-葡聚醣 + ω-3 ALA。" }],
+        ["7:00", { en: "Breakfast (home) — yogurt blend 🆕 2026-05-20 v2 finalized", zh: "早餐（家）— 優格飲 🆕 2026-05-20 v2 定案" }, "—",
+          { en: "Snow Factory No.6 yogurt 150g + NOW Sports WPI 30g + blueberries 150g + barley/oats 15g + L-citrulline 4g + D3 3000 IU + K2 MK-7 180mcg + probiotic + almond milk 100mL. NO matcha (relocated to office 9:30). Casein+whey (UA clearance) + anthocyanin RCT dose + β-glucan.",
+            zh: "雪坊 6 號優格 150g + NOW Sports WPI 30g + 藍莓 150g + 大麥燕麥 15g + 瓜胺酸 4g + D3 3000 IU + K2 MK-7 180mcg + 益生菌 + 杏仁奶 100mL。不放抹茶（移至辦公室 9:30）。酪蛋白+乳清（尿酸排泄）+ 花青素 RCT 劑量 + β-葡聚醣。" }],
         ["7:30–9:00", { en: "Commute (HSR)", zh: "通勤（高鐵）" }, "300–500 mL",
           { en: "Water bottle + 4-7-8 breathing or 10-min meditation. NO caffeine yet.", zh: "水壺 + 4-7-8 呼吸或 10 分鐘冥想。尚未進咖啡因。" }],
         ["~9:30", { en: "Matcha (office) 🆕 2026-05-14", zh: "抹茶（辦公室）🆕 2026-05-14" }, "300 mL",
@@ -1305,7 +1302,7 @@ window.HC_DATA = {
       ttl: { en: "Daily supplement summary (gram-explicit)", zh: "每日補品劑量總覽（公克明列）" },
       items: {
         en: [
-          "Yogurt blend (06:00) 🆕 2026-05-20 finalized: NOW Sports WPI 30g + yogurt 150g + blueberries 150g + nuts 30g + cacao 10g + barley/oats 15g + L-citrulline 4g (+2g pre-workout on training days) + D3 3000 IU + K2 MK-7 180mcg + probiotic + almond milk 100mL",
+          "Yogurt blend (06:00) 🆕 2026-05-20 v2 finalized: NOW Sports WPI 30g + yogurt 150g + blueberries 150g + barley/oats 15g + L-citrulline 4g (+2g pre-workout on training days) + D3 3000 IU + K2 MK-7 180mcg + probiotic + almond milk 100mL. NO nuts / NO cocoa in blend.",
           "Hibiscus tea: 2g × 1 cup (14:00) 🆕 2026-05-14 (reduced from 2 cups), 240 mL, 5–10 min steep",
           "Matcha (office) 🆕 2026-05-14: 3–4g + 300 mL warm water at 9:30 (EGCG ~75–120 mg, caffeine ~90–120 mg → 22:00 residual ~16–20 mg sub-clinical)",
           "Psyllium husk: 5g × 2 (11:30 + 16:30) 🆕 2026-05-14, each in 300 mL water — 16:30 dose at office before HSR commute; peak satiety 18:00–18:30",
@@ -1319,7 +1316,7 @@ window.HC_DATA = {
           "⏸️ Pending PSG: NAC 600mg × 2 (conditional on AHI > 15)",
         ],
         zh: [
-          "優格飲（06:00）🆕 2026-05-20 定案：NOW Sports WPI 30g + 雪坊優格 150g + 藍莓 150g + 堅果 30g + 可可 10g + 大麥燕麥 15g + 瓜胺酸 4g（訓練日訓前再 +2g）+ D3 3000 IU + K2 MK-7 180mcg + 益生菌 + 杏仁奶 100mL",
+          "優格飲（06:00）🆕 2026-05-20 v2 定案：NOW Sports WPI 30g + 雪坊優格 150g + 藍莓 150g + 大麥燕麥 15g + 瓜胺酸 4g（訓練日訓前再 +2g）+ D3 3000 IU + K2 MK-7 180mcg + 益生菌 + 杏仁奶 100mL。**不含堅果、不含可可**",
           "洛神花茶：2g × 1 杯（14:00）🆕 2026-05-14（由 2 杯減為 1 杯），240 mL 沖 5–10 分鐘",
           "抹茶（辦公室）🆕 2026-05-14：3–4g + 溫水 300 mL，9:30 沖泡（EGCG ~75–120 mg、咖啡因 ~90–120 mg → 22:00 殘餘 ~16–20 mg 亞臨床）",
           "Psyllium husk：5g × 2（11:30 + 16:30）🆕 2026-05-14，各配 300 mL — 16:30 劑於辦公室下班前服用；18:00-18:30 達飽足感峰值",
