@@ -96,6 +96,11 @@ function App() {
         {lang === "en"
           ? "Personal protocol — not medical advice. Built from research notes; consult clinicians for medication and OSA evaluation."
           : "個人化方案 — 非醫療建議。基於研究筆記整理；用藥與 OSA 評估請諮詢醫師。"}
+        <div style={{marginTop: 8}}>
+          <a href="analyzer.html">
+            {lang === "en" ? "Personal Health Report Analysis →" : "個人健檢報告分析 →"}
+          </a>
+        </div>
       </div>
 
       <TweaksPanel title="Tweaks" defaultPosition={{ right: 24, bottom: 24 }}>
