@@ -19,11 +19,12 @@ scripts/
   analyze_spo2_desats.py    # SpO2 全夜圖（含 hypnogram 條帶）+ 趨勢 + 7 晚 hypnogram×SpO2 疊圖
   analyze_spo2_by_cycle.py  # SpO2 cycle 統計（90-min bins，全 Venu 4 cohort）
   analyze_spo2_heatmap.py   # SpO2 全夜 heatmap（all Venu 4 nights × elapsed min × color；自 2026-05-21 取代 7 晚 overlay）
+  analyze_wedge_effect.py   # 頭部楔形枕 pre/post C1 SpO2 對照（one-shot 自然實驗分析；2026-05-21 建立）
   log_hydration.py          # 將昨日飲水量回寫至 Garmin Connect
   archive_spo2.py           # 週一執行：將非當週 SpO2 PNG 移至 spo2/archive/ 並更新 daily review 連結
 reviews/
   daily/                    # 每日紀錄（YYYY-MM-DD.md）
-    spo2/                   # 當週 SpO2 圖 + 永久趨勢圖（trend / hrv_trend / by_cycle）
+    spo2/                   # 當週 SpO2 圖 + 永久軸圖（trend / hrv_trend / by_cycle / heatmap_all_nights）
       archive/              # 非當週 SpO2 圖；週一 daily check-in 自動歸檔（scripts/archive_spo2.py）
   weekly/                   # 每週回顧（YYYY-Wxx.md）
   monthly/                  # 每月回顧（YYYY-MM.md）
