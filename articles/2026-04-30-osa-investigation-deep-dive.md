@@ -291,7 +291,7 @@ python scripts/analyze_spo2_desats.py --chart 2026-05-01
 | 2018 - 2024 Q3 | Garmin **Vivoactive 3** | ❌ **無 Pulse Ox 感測器** |
 | 2024 Q4 / 2025 起 | Garmin **Vivoactive 5** | ✅ Pulse Ox + 全夜採樣 |
 
-### 已有長期數據（reports/garmin-sleep-analysis.md）
+### 已有長期數據（reports/archive/garmin-sleep-analysis.md）
 
 | 年份 | 量測夜數 | Avg SpO2 | **Lowest SpO2 年均** |
 |------|---------|----------|---------------------|
@@ -501,7 +501,7 @@ T90 對應的長期風險（套用 SHHS / SantOSA 大型世代研究）：
 - AASM Practice Parameters（MAD 治療指引）
 - 自身 Garmin Vivoactive 5 Pulse Ox 數據（2025-2026，N=190 晚）
 - 自身 reviews/annual/2026-causal-map.html
-- 自身 reports/garmin-sleep-analysis.md
+- 自身 reports/archive/garmin-sleep-analysis.md
 - 自身 reviews/daily/ 2026-04-21 至 2026-04-30
 
 ---

@@ -82,7 +82,7 @@ _最後更新：2026-04-20_
    - 「歷史歸檔」區塊新增 `2026/` 條目
 
 4. **更新引用的外部檔案**
-   - 檢查 `handover.md`、`articles/archive/*-supplement-guide.md`、前版因果地圖內的「Filed:」footer 等
+   - 檢查 `archive/handover.md`、`articles/archive/*-supplement-guide.md`、前版因果地圖內的「Filed:」footer 等
 
 5. **commit 訊息格式**
    ```
@@ -140,5 +140,5 @@ reviews/annual/舊YYYY/舊YYYY-MM-DD-supplement-guide.md  ← 歷史快照
 - `../food/` — 飲食紀錄
 - `../../articles/` — 前瞻性指南（目前生效版）
 - `../../articles/archive/` — 歷史歸檔指南
-- `../../reports/garmin-sleep-charts/` — Garmin 睡眠分析圖表
+- `../../reports/archive/garmin-sleep-charts/` — Garmin 睡眠分析圖表（一次性歷史回顧已歸檔）
 - `../../scripts/` — 資料處理腳本

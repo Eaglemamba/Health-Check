@@ -38,6 +38,10 @@ articles/             前瞻性指南（補充品、健檢加測等），最新�
   archive/            被新版取代的歷史指南；不再修改
 reports/
   daily-garmin/       Garmin 每日摘要 markdown（由 sync_garmin_daily.py 產生）
+  archive/            一次性歷史回顧（2026-04-18-20 Garmin 8 年完整 + 睡眠分析及對應圖表）
+archive/              非健康資料歸檔（過時的 handover、預測前端原型、template、dev scratch 等）
+
+PROGRESS.md           專案進度總覽（timeline、關鍵指標、目前生效策略、待辦）
 
 # 前端（React 單頁 PWA — 6-Month Health Reversal Plan）
 index.html            HTML shell（React 18 + Babel-standalone CDN；含 CSP meta 允許 unsafe-eval）

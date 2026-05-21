@@ -33,8 +33,12 @@ reviews/
   health_dashboard.png      # 健康趨勢儀表板圖表（自動生成）
 reports/
   daily-garmin/             # Garmin 每日摘要 markdown（sync_garmin_daily.py 產生）
+  archive/                  # 一次性歷史回顧（Garmin 8 年完整 + 睡眠分析及圖表，2026-04-18-20）
 articles/                   # 前瞻性指南（補充品、健檢加測等）
   archive/                  # 被新版取代的歷史指南；不再修改
+archive/                    # 非健康資料歸檔（過時 handover、前端原型 / template / dev scratch）
+
+PROGRESS.md                 # 專案進度總覽（timeline、關鍵指標、目前生效策略、待辦）
 
 # 前端 PWA — 6-Month Health Reversal Plan（React + Babel-standalone CDN）
 index.html                  # HTML shell（PWA meta、SW 註冊、Babel 編譯 JSX）

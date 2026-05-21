@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Health Reversal Plan · 6-Month</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data.js"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="components-core.jsx"></script>
+<script type="text/babel" src="components-panels.jsx"></script>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "warm",
+  "density": "compact",
+  "heroVariant": "today",
+  "lang": "zh"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const [active, setActive] = useState("overview");
+  const lang = tweaks.lang;
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = tweaks.theme;
+    document.documentElement.dataset.density = tweaks.density;
+  }, [tweaks.theme, tweaks.density]);
+
+  const panels = {
+    overview: PanelOverview, sleep: PanelSleep, diet: PanelDiet,
+    exercise: PanelExercise, running: PanelRunning,
+    supps: PanelSupps, routine: PanelRoutine,
+    timeline: PanelTimeline, safety: PanelSafety, tracker: PanelTracker,
+  };
+  const Panel = panels[active] || PanelOverview;
+
+  return (
+    <div className="app">
+      <div className="topbar">
+        <div className="brand">
+          <div className="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <div>
+            <h1>{lang === "en" ? "Health Reversal Plan" : "健康逆轉計畫"}</h1>
+            <div className="sub">{lang === "en" ? "Started Mar 17, 2026 · 6-month plan" : "起始 2026 年 3 月 17 日 · 6 個月計畫"}</div>
+          </div>
+        </div>
+        <div className="topbar-tools">
+          <div className="lang-toggle" onClick={() => setTweak("lang", lang === "en" ? "zh" : "en")}>
+            <span className={"seg " + (lang === "en" ? "active" : "")}>EN</span>
+            <span className={"seg " + (lang === "zh" ? "active" : "")}>中文</span>
+          </div>
+        </div>
+      </div>
+
+      <Hero lang={lang} variant={tweaks.heroVariant} />
+      <Tabs active={active} onChange={setActive} lang={lang} />
+      <Panel lang={lang} />
+
+      <div className="footer">
+        {lang === "en"
+          ? "Personal protocol — not medical advice. Built from research notes; consult clinicians for medication and OSA evaluation."
+          : "個人化方案 — 非醫療建議。基於研究筆記整理；用藥與 OSA 評估請諮詢醫師。"}
+      </div>
+
+      <TweaksPanel title="Tweaks" defaultPosition={{ right: 24, bottom: 24 }}>
+        <TweakSection title="Appearance">
+          <TweakRadio label="Theme" value={tweaks.theme} onChange={(v) => setTweak("theme", v)}
+            options={[{value:"default",label:"Cool"},{value:"warm",label:"Warm"},{value:"dark",label:"Dark"}]} />
+          <TweakRadio label="Density" value={tweaks.density} onChange={(v) => setTweak("density", v)}
+            options={[{value:"comfortable",label:"Comfortable"},{value:"compact",label:"Compact"}]} />
+        </TweakSection>
+        <TweakSection title="Content">
+          <TweakRadio label="Hero" value={tweaks.heroVariant} onChange={(v) => setTweak("heroVariant", v)}
+            options={[{value:"main",label:"Headline"},{value:"snapshot",label:"Snapshot"},{value:"today",label:"Today"}]} />
+          <TweakRadio label="Language" value={tweaks.lang} onChange={(v) => setTweak("lang", v)}
+            options={[{value:"en",label:"EN"},{value:"zh",label:"中文"}]} />
+        </TweakSection>
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
