@@ -29,7 +29,12 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() not in ("utf-8", "utf8"):
 ROOT = Path(__file__).resolve().parent.parent
 SPO2_DIR = ROOT / "reviews" / "daily" / "spo2"
 DAILY_DIR = ROOT / "reviews" / "daily"
-ALWAYS_ROOT = {"spo2_desat_trend.png", "hrv_trend.png", "spo2_by_cycle.png"}
+ALWAYS_ROOT = {
+    "spo2_desat_trend.png",
+    "hrv_trend.png",
+    "spo2_by_cycle.png",
+    "spo2_heatmap_all_nights.png",
+}
 DATE_RE = re.compile(r"(\d{4})-(\d{2})-(\d{2})")
 
 

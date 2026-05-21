@@ -16,7 +16,9 @@ scripts/
   generate_dashboard.py     # 健康儀表板圖表生成腳本（matplotlib PNG）
   sync_data_js.py           # 從 reviews/daily/*.md 同步最新值至 data.js
   sync_garmin_daily.py      # 抓取 Garmin 昨夜睡眠 + 今晨 SpO2
-  analyze_spo2_desats.py    # SpO2 全夜圖（含 hypnogram 條帶）+ 趨勢 + 7 晚 overlay + 7 晚 hypnogram×SpO2 疊圖
+  analyze_spo2_desats.py    # SpO2 全夜圖（含 hypnogram 條帶）+ 趨勢 + 7 晚 hypnogram×SpO2 疊圖
+  analyze_spo2_by_cycle.py  # SpO2 cycle 統計（90-min bins，全 Venu 4 cohort）
+  analyze_spo2_heatmap.py   # SpO2 全夜 heatmap（all Venu 4 nights × elapsed min × color；自 2026-05-21 取代 7 晚 overlay）
   log_hydration.py          # 將昨日飲水量回寫至 Garmin Connect
   archive_spo2.py           # 週一執行：將非當週 SpO2 PNG 移至 spo2/archive/ 並更新 daily review 連結
 reviews/

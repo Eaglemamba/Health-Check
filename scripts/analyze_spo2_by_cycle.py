@@ -43,6 +43,10 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 STAGE = {0.0: "deep", 1.0: "light", 2.0: "REM", 3.0: "awake"}
 THRESHOLDS = [90, 85, 80]
 
+# Device filter — Venu 4 only. Earlier device (3471541259, used 4/19-4/23) had
+# different SpO2 sensor characteristics and is excluded for cross-night consistency.
+VENU4_DEVICE_ID = 3622900919
+
 
 def parse_gmt(s: str) -> datetime:
     """Garmin GMT timestamps end '.0'. Treat as UTC."""
@@ -69,6 +73,11 @@ def load_night(p: Path):
     epochs_raw = sleep.get("wellnessEpochSPO2DataDTOList") or []
     levels = sleep.get("sleepLevels") or []
     if not epochs_raw or not levels:
+        return None
+
+    # Device filter — skip nights from non-Venu 4 devices
+    first_device = epochs_raw[0].get("deviceId") if epochs_raw else None
+    if first_device != VENU4_DEVICE_ID:
         return None
 
     stages = []

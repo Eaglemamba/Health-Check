@@ -48,7 +48,7 @@
 
 **SpO2 全夜圖（含 hypnogram 條帶）：** [ ]
 **SpO2 趨勢圖：** [ ]
-**SpO2 多晚 Overlay（rolling 7 晚）：** [ ]
+**SpO2 全夜 Heatmap（28+ 晚 Venu 4 cohort）：** [ ]
 **SpO2 × 睡眠分期 7 晚疊圖：** [ ]
 
 *Sleep Score < 65 或 Body Battery < 50 連續三天 → 重新檢視睡眠修復方案。*
