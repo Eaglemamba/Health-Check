@@ -1,0 +1,2661 @@
+<body>
+
+<div class="hdr">
+<h1 data-en>Health PE Analyzer</h1><h1 data-zh>健康體檢分析儀</h1>
+<p data-en>Comprehensive Physical Examination Analysis Tool</p><p data-zh>全方位體檢分析工具</p>
+<button class="lang-toggle no-print" onclick="toggleLang()" id="lang-btn">中文</button>
+<div class="hdr-controls no-print">
+<label><span data-en>Gender:</span><span data-zh>性別：</span>
+<select id="gender" onchange="onGenderChange()">
+<option value="male">Male / 男</option>
+<option value="female">Female / 女</option>
+</select>
+</label>
+<label><span data-en>Age:</span><span data-zh>年齡：</span>
+<input type="number" id="age" min="1" max="120" value="" style="width:60px" placeholder="Age">
+</label>
+<button class="btn btn-secondary" onclick="loadSampleData()" style="padding:6px 14px"><span data-en>Load Sample</span><span data-zh>載入範例</span></button>
+<button class="btn btn-secondary" onclick="document.getElementById('pdf-input').click()" style="padding:6px 14px"><span data-en>Upload PDF</span><span data-zh>上傳 PDF</span></button>
+<button class="btn btn-secondary" onclick="document.getElementById('json-input').click()" style="padding:6px 14px"><span data-en>Import JSON</span><span data-zh>匯入 JSON</span></button>
+<button class="btn btn-secondary" onclick="exportJSON()" style="padding:6px 14px"><span data-en>Export JSON</span><span data-zh>匯出 JSON</span></button>
+<button class="btn btn-primary" onclick="runAnalysis()" style="padding:6px 14px"><span data-en>Analyze</span><span data-zh>開始分析</span></button>
+<input type="file" id="pdf-input" accept=".pdf" style="display:none" onchange="handlePDF(this)">
+<input type="file" id="json-input" accept=".json" style="display:none" onchange="handleJSON(this)">
+</div>
+</div>
+
+<!-- PDF Preview Modal -->
+<div id="pdf-modal" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.5);overflow-y:auto">
+<div style="max-width:700px;margin:40px auto;padding:20px">
+<div class="c">
+<h2><span data-en>PDF Extraction Preview</span><span data-zh>PDF 提取預覽</span></h2>
+<p style="font-size:12px;color:var(--tl);margin-bottom:12px"><span data-en>Review extracted values. Uncheck any incorrect matches, then click Apply.</span><span data-zh>確認提取的數值，取消勾選不正確的項目，然後點擊套用。</span></p>
+<div id="pdf-preview-gender" style="margin-bottom:10px"></div>
+<div class="tw"><table id="pdf-preview-table">
+<tr><th style="width:30px"><input type="checkbox" id="pdf-check-all" checked onchange="toggleAllPdfChecks(this.checked)"></th><th><span data-en>Field</span><span data-zh>欄位</span></th><th><span data-en>Extracted Value</span><span data-zh>提取數值</span></th><th><span data-en>Confidence</span><span data-zh>可信度</span></th></tr>
+</table></div>
+<div class="btn-row" style="margin-top:14px">
+<button class="btn btn-primary" onclick="applyPdfExtraction()"><span data-en>Apply Selected</span><span data-zh>套用選取</span></button>
+<button class="btn btn-secondary" onclick="closePdfModal()"><span data-en>Cancel</span><span data-zh>取消</span></button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="nav-c no-print"><div class="nav" id="nav">
+<div class="nt a" onclick="st('t0')"><span data-en>Input</span><span data-zh>輸入資料</span></div>
+<div class="nt" onclick="st('t1')"><span data-en>Results</span><span data-zh>分析結果</span></div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TAB 0: INPUT FORM                              -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="t0" class="tc a">
+
+<button class="expand-btn" onclick="toggleAllDetails(true)"><span data-en>Expand All</span><span data-zh>展開全部</span></button>
+<button class="expand-btn" onclick="toggleAllDetails(false)"><span data-en>Collapse All</span><span data-zh>收合全部</span></button>
+
+<!-- Section 1: Physical Measurements -->
+<details open>
+<summary><span data-en>Physical Measurements</span><span data-zh>身體測量</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>Height (cm)</span><span data-zh>身高 (cm)</span></label><input type="number" id="height" step="0.1" min="50" max="250" oninput="calcBMI()"></div>
+<div class="form-group"><label><span data-en>Weight (kg)</span><span data-zh>體重 (kg)</span></label><input type="number" id="weight" step="0.1" min="20" max="300" oninput="calcBMI()"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label><span data-en>BMI (auto)</span><span data-zh>BMI（自動計算）</span></label><input type="number" id="bmi" readonly></div>
+<div class="form-group"><label><span data-en>Temperature (&deg;C)</span><span data-zh>體溫 (&deg;C)</span></label><input type="number" id="temperature" step="0.1" min="34" max="42"></div>
+</div>
+<div class="form-row-3">
+<div class="form-group"><label><span data-en>Systolic BP (mmHg)</span><span data-zh>收縮壓 (mmHg)</span></label><input type="number" id="bp_systolic" min="50" max="300"></div>
+<div class="form-group"><label><span data-en>Diastolic BP (mmHg)</span><span data-zh>舒張壓 (mmHg)</span></label><input type="number" id="bp_diastolic" min="30" max="200"></div>
+<div class="form-group"><label><span data-en>Pulse (bpm)</span><span data-zh>心率 (bpm)</span></label><input type="number" id="pulse" min="30" max="220"></div>
+</div>
+<div class="form-row-3">
+<div class="form-group"><label><span data-en>Body Fat %</span><span data-zh>體脂率 %</span></label><input type="number" id="body_fat" step="0.1" min="1" max="60"></div>
+<div class="form-group"><label><span data-en>Visceral Fat Level</span><span data-zh>內臟脂肪等級</span></label><input type="number" id="visceral_fat" min="1" max="30"></div>
+<div class="form-group"><label><span data-en>Waist (cm)</span><span data-zh>腰圍 (cm)</span></label><input type="number" id="waist" step="0.1" min="40" max="200"></div>
+</div>
+<div class="form-group"><label><span data-en>Hip (cm)</span><span data-zh>臀圍 (cm)</span></label><input type="number" id="hip" step="0.1" min="40" max="200" style="max-width:calc(33.33% - 8px)"></div>
+</div>
+</details>
+
+<!-- Section 2: CBC -->
+<details>
+<summary><span data-en>Complete Blood Count (CBC)</span><span data-zh>全血細胞計數 (CBC)</span></summary>
+<div class="section-body">
+<div class="form-row-3">
+<div class="form-group"><label><span data-en>Hemoglobin (g/dL)</span><span data-zh>血紅素 (g/dL)</span></label><input type="number" id="hb" step="0.1"></div>
+<div class="form-group"><label><span data-en>RBC (&times;10&sup6;/uL)</span><span data-zh>紅血球 (&times;10&sup6;/uL)</span></label><input type="number" id="rbc" step="0.01"></div>
+<div class="form-group"><label><span data-en>Hematocrit (%)</span><span data-zh>血球容積比 (%)</span></label><input type="number" id="ht" step="0.1"></div>
+</div>
+<div class="form-row-3">
+<div class="form-group"><label><span data-en>MCV (fL)</span><span data-zh>MCV 平均紅血球容積 (fL)</span></label><input type="number" id="mcv" step="0.1"></div>
+<div class="form-group"><label><span data-en>MCH (pg)</span><span data-zh>MCH 平均血紅素量 (pg)</span></label><input type="number" id="mch" step="0.1"></div>
+<div class="form-group"><label><span data-en>MCHC (g/dL)</span><span data-zh>MCHC 平均血紅素濃度 (g/dL)</span></label><input type="number" id="mchc" step="0.1"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label><span data-en>WBC (&times;10&sup3;/uL)</span><span data-zh>白血球 (&times;10&sup3;/uL)</span></label><input type="number" id="wbc" step="0.01"></div>
+<div class="form-group"><label><span data-en>Platelets (&times;10&sup3;/uL)</span><span data-zh>血小板 (&times;10&sup3;/uL)</span></label><input type="number" id="platelets" step="1"></div>
+</div>
+<div class="form-row-3">
+<div class="form-group"><label><span data-en>Neutrophils %</span><span data-zh>嗜中性球 %</span></label><input type="number" id="neutrophils" step="0.1"></div>
+<div class="form-group"><label><span data-en>Eosinophils %</span><span data-zh>嗜酸性球 %</span></label><input type="number" id="eosinophils" step="0.1"></div>
+<div class="form-group"><label><span data-en>Basophils %</span><span data-zh>嗜鹼性球 %</span></label><input type="number" id="basophils" step="0.1"></div>
+</div>
+<div class="form-row-3">
+<div class="form-group"><label><span data-en>Monocytes %</span><span data-zh>單核球 %</span></label><input type="number" id="monocytes" step="0.1"></div>
+<div class="form-group"><label><span data-en>Lymphocytes %</span><span data-zh>淋巴球 %</span></label><input type="number" id="lymphocytes" step="0.1"></div>
+<div class="form-group"><label><span data-en>RDW %</span><span data-zh>RDW 紅血球分佈寬度 %</span></label><input type="number" id="rdw" step="0.1"></div>
+</div>
+</div>
+</details>
+
+<!-- Section 3: Liver Function -->
+<details>
+<summary><span data-en>Liver Function</span><span data-zh>肝功能</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>Direct Bilirubin (mg/dL)</span><span data-zh>直接膽紅素 (mg/dL)</span></label><input type="number" id="direct_bilirubin" step="0.01"></div>
+<div class="form-group"><label><span data-en>Total Bilirubin (mg/dL)</span><span data-zh>總膽紅素 (mg/dL)</span></label><input type="number" id="total_bilirubin" step="0.01"></div>
+</div>
+<div class="form-row-3">
+<div class="form-group"><label><span data-en>ALP (U/L)</span><span data-zh>ALP 鹼性磷酸酶 (U/L)</span></label><input type="number" id="alp" step="1"></div>
+<div class="form-group"><label><span data-en>AST / SGOT (U/L)</span><span data-zh>AST / GOT (U/L)</span></label><input type="number" id="ast" step="1"></div>
+<div class="form-group"><label><span data-en>ALT / SGPT (U/L)</span><span data-zh>ALT / GPT (U/L)</span></label><input type="number" id="alt" step="1"></div>
+</div>
+</div>
+</details>
+
+<!-- Section 4: Kidney Function -->
+<details>
+<summary><span data-en>Kidney Function</span><span data-zh>腎功能</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>BUN (mg/dL)</span><span data-zh>BUN 尿素氮 (mg/dL)</span></label><input type="number" id="bun" step="1"></div>
+<div class="form-group"><label><span data-en>Uric Acid (mg/dL)</span><span data-zh>尿酸 (mg/dL)</span></label><input type="number" id="uric_acid" step="0.1"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label><span data-en>Creatinine (mg/dL)</span><span data-zh>肌酸酐 (mg/dL)</span></label><input type="number" id="creatinine" step="0.01" oninput="calcEGFR()"></div>
+<div class="form-group"><label><span data-en>eGFR (auto-calc or enter)</span><span data-zh>eGFR 腎絲球過濾率（自動計算）</span></label><input type="number" id="egfr" step="0.1"></div>
+</div>
+</div>
+</details>
+
+<!-- Section 5: Glucose Metabolism -->
+<details>
+<summary><span data-en>Glucose Metabolism</span><span data-zh>血糖代謝</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>Fasting Glucose (mg/dL)</span><span data-zh>空腹血糖 (mg/dL)</span></label><input type="number" id="glucose" step="1"></div>
+<div class="form-group"><label><span data-en>HbA1c (%)</span><span data-zh>糖化血色素 HbA1c (%)</span></label><input type="number" id="hba1c" step="0.1"></div>
+</div>
+</div>
+</details>
+
+<!-- Section 6: Lipid Panel -->
+<details>
+<summary><span data-en>Lipid Panel</span><span data-zh>血脂檢查</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>Total Cholesterol (mg/dL)</span><span data-zh>總膽固醇 (mg/dL)</span></label><input type="number" id="tc" step="1" oninput="calcTcHdl()"></div>
+<div class="form-group"><label><span data-en>Triglycerides (mg/dL)</span><span data-zh>三酸甘油脂 (mg/dL)</span></label><input type="number" id="tg" step="1"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label><span data-en>LDL (mg/dL)</span><span data-zh>LDL 壞膽固醇 (mg/dL)</span></label><input type="number" id="ldl" step="1"></div>
+<div class="form-group"><label><span data-en>HDL (mg/dL)</span><span data-zh>HDL 好膽固醇 (mg/dL)</span></label><input type="number" id="hdl" step="1" oninput="calcTcHdl()"></div>
+</div>
+<div class="form-group"><label><span data-en>TC/HDL Ratio (auto)</span><span data-zh>TC/HDL 比值（自動計算）</span></label><input type="number" id="tc_hdl_ratio" readonly style="max-width:calc(50% - 6px)"></div>
+</div>
+</details>
+
+<!-- Section 7: Serum & Inflammation -->
+<details>
+<summary><span data-en>Serum &amp; Inflammation</span><span data-zh>血清指標 &amp; 發炎</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>Vitamin D 25-OH (ng/mL)</span><span data-zh>維生素 D 25-OH (ng/mL)</span></label><input type="number" id="vitamin_d" step="0.1"></div>
+<div class="form-group"><label><span data-en>TSH (&mu;IU/mL)</span><span data-zh>甲狀腺促激素 TSH (&mu;IU/mL)</span></label><input type="number" id="tsh" step="0.01"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label><span data-en>hsCRP (mg/L)</span><span data-zh>超敏C反應蛋白 hsCRP (mg/L)</span></label><input type="number" id="hscrp" step="0.001"></div>
+<div class="form-group"><label><span data-en>HBsAg (COI)</span><span data-zh>B肝表面抗原 HBsAg (COI)</span></label><input type="number" id="hbsag" step="0.01"></div>
+</div>
+</div>
+</details>
+
+<!-- Section 8: Tumor Markers -->
+<details>
+<summary><span data-en>Tumor Markers</span><span data-zh>腫瘤標誌物</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>PSA (ng/mL)</span><span data-zh>攝護腺特異抗原 PSA (ng/mL)</span></label><input type="number" id="psa" step="0.01"></div>
+<div class="form-group"><label><span data-en>CEA (ng/mL)</span><span data-zh>癌胚抗原 CEA (ng/mL)</span></label><input type="number" id="cea" step="0.01"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label><span data-en>AFP (ng/mL)</span><span data-zh>甲型胎兒蛋白 AFP (ng/mL)</span></label><input type="number" id="afp" step="0.1"></div>
+<div class="form-group"><label><span data-en>CA-199 (U/mL)</span><span data-zh>胰腺腫瘤標誌 CA-199 (U/mL)</span></label><input type="number" id="ca199" step="0.01"></div>
+</div>
+</div>
+</details>
+
+<!-- Section 9: Cardiovascular Tests -->
+<details>
+<summary><span data-en>Cardiovascular Tests</span><span data-zh>心血管檢查</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>ABI</span><span data-zh>踝臂指數 ABI</span></label><input type="number" id="abi" step="0.01"></div>
+<div class="form-group"><label><span data-en>PWV (cm/s)</span><span data-zh>脈波速度 PWV (cm/s)</span></label><input type="number" id="pwv" step="1"></div>
+</div>
+</div>
+</details>
+
+<!-- Section 10: Urinalysis -->
+<details>
+<summary><span data-en>Urinalysis</span><span data-zh>尿液檢查</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>Specific Gravity</span><span data-zh>尿液比重</span></label><input type="number" id="urine_sg" step="0.001" min="1.000" max="1.040"></div>
+<div class="form-group"><label><span data-en>pH</span><span data-zh>尿液 pH</span></label><input type="number" id="urine_ph" step="0.5" min="4" max="9"></div>
+</div>
+<div class="form-row-3">
+<div class="form-group"><label><span data-en>Protein</span><span data-zh>尿蛋白</span></label>
+<select id="urine_protein"><option value="">--</option><option value="negative">Negative</option><option value="trace">Trace</option><option value="1+">1+</option><option value="2+">2+</option><option value="3+">3+</option></select></div>
+<div class="form-group"><label><span data-en>Glucose</span><span data-zh>尿糖</span></label>
+<select id="urine_glucose"><option value="">--</option><option value="negative">Negative</option><option value="trace">Trace</option><option value="1+">1+</option><option value="2+">2+</option><option value="3+">3+</option></select></div>
+<div class="form-group"><label><span data-en>Ketones</span><span data-zh>酮體</span></label>
+<select id="urine_ketones"><option value="">--</option><option value="negative">Negative</option><option value="trace">Trace</option><option value="1+">1+</option><option value="2+">2+</option><option value="3+">3+</option></select></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label><span data-en>Occult Blood</span><span data-zh>尿潛血</span></label>
+<select id="urine_blood"><option value="">--</option><option value="negative">Negative</option><option value="trace">Trace</option><option value="1+">1+</option><option value="2+">2+</option><option value="3+">3+</option></select></div>
+<div class="form-group"><label><span data-en>Urobilinogen (mg/dL)</span><span data-zh>尿膽素原 (mg/dL)</span></label><input type="number" id="urine_urobilinogen" step="0.1"></div>
+</div>
+</div>
+</details>
+
+<!-- Section 11: Stool -->
+<details>
+<summary><span data-en>Stool</span><span data-zh>糞便檢查</span></summary>
+<div class="section-body">
+<div class="form-group"><label><span data-en>Fecal Occult Blood (ng/mL)</span><span data-zh>糞便潛血 (ng/mL)</span></label><input type="number" id="stool_ob" step="0.1" style="max-width:calc(50% - 6px)"></div>
+</div>
+</details>
+
+<!-- Section 12: Imaging & Special Tests -->
+<details>
+<summary><span data-en>Imaging &amp; Special Tests</span><span data-zh>影像 &amp; 特殊檢查</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>ECG</span><span data-zh>心電圖 ECG</span></label>
+<select id="ecg"><option value="">--</option><option value="normal">Normal</option><option value="arrhythmia">Arrhythmia</option><option value="lvh">LVH (Left Ventricular Hypertrophy)</option><option value="ischemia">Myocardial Ischemia</option><option value="other_abnormal">Other Abnormal</option></select></div>
+<div class="form-group"><label><span data-en>Chest X-ray</span><span data-zh>胸部 X 光</span></label>
+<select id="chest_xray"><option value="">--</option><option value="normal">Normal</option><option value="abnormal">Abnormal</option></select></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label><span data-en>Abdominal Ultrasound</span><span data-zh>腹部超音波</span></label>
+<select id="ultrasound"><option value="">--</option><option value="normal">Normal</option><option value="fatty_liver_mild">Fatty Liver (Mild)</option><option value="fatty_liver_moderate">Fatty Liver (Moderate)</option><option value="fatty_liver_severe">Fatty Liver (Severe)</option><option value="other_abnormal">Other Abnormal</option></select></div>
+<div class="form-group"><label><span data-en>Bone Density</span><span data-zh>骨密度</span></label>
+<select id="bone_density"><option value="">--</option><option value="normal">Normal</option><option value="osteopenia">Osteopenia</option><option value="osteoporosis">Osteoporosis</option></select></div>
+</div>
+</div>
+</details>
+
+<!-- Section 13: Eye Exam -->
+<details>
+<summary><span data-en>Eye Exam</span><span data-zh>眼科檢查</span></summary>
+<div class="section-body">
+<div class="form-row">
+<div class="form-group"><label><span data-en>Visual Acuity (Left)</span><span data-zh>視力 左眼</span></label><input type="number" id="va_l" step="0.1" min="0" max="2.0"></div>
+<div class="form-group"><label><span data-en>Visual Acuity (Right)</span><span data-zh>視力 右眼</span></label><input type="number" id="va_r" step="0.1" min="0" max="2.0"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label><span data-en>IOP Left (mmHg)</span><span data-zh>眼壓 左眼 IOP (mmHg)</span></label><input type="number" id="iop_l" step="0.1"></div>
+<div class="form-group"><label><span data-en>IOP Right (mmHg)</span><span data-zh>眼壓 右眼 IOP (mmHg)</span></label><input type="number" id="iop_r" step="0.1"></div>
+</div>
+</div>
+</details>
+
+<div class="btn-row no-print">
+<button class="btn btn-secondary" onclick="clearAll()"><span data-en>Clear All</span><span data-zh>清除全部</span></button>
+<button class="btn btn-primary" onclick="runAnalysis()"><span data-en>Analyze</span><span data-zh>開始分析</span></button>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TAB 1: RESULTS (JS-populated)                  -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="t1" class="tc">
+<div id="results-container">
+<div class="c" style="text-align:center;padding:40px">
+<p style="color:var(--tl)">Enter your PE test data in the Input tab and click <strong><span data-en>Analyze</span><span data-zh>開始分析</span></strong> to generate results.</p>
+</div>
+</div>
+</div>
+
+<div class="ft">
+<a href="index.html">6-Month Health Reversal Plan</a> &middot; Health PE Analyzer v1.0
+</div>
+
+<div id="toast-el" class="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+/* ── Language toggle ──────────────────────────────── */
+let _lang = 'en';
+function toggleLang() {
+  _lang = _lang === 'en' ? 'zh' : 'en';
+  document.body.classList.toggle('zh', _lang === 'zh');
+  document.getElementById('lang-btn').textContent = _lang === 'en' ? '中文' : 'EN';
+  // Re-render results if currently visible
+  const resTab = document.getElementById('t1');
+  if (resTab && resTab.classList.contains('a') && document.getElementById('results-container').innerHTML.trim()) {
+    runAnalysis();
+  }
+}
+function T(en, zh) { return _lang === 'zh' ? zh : en; }
+</script>
+<script>
+// ═══════════════════════════════════════════════════
+// SEVERITY META
+// ═══════════════════════════════════════════════════
+const SEV = {
+  green:  { label: 'Normal',  labelZh: '正常',    cls: 'tg-g', fieldCls: 'field-green',  cardCls: 'cg', pri: 0 },
+  yellow: { label: 'Low',     labelZh: '輕度異常', cls: 'tg-y', fieldCls: 'field-yellow', cardCls: 'cy', pri: 1 },
+  orange: { label: 'Medium',  labelZh: '中度異常', cls: 'tg-o', fieldCls: 'field-orange', cardCls: 'co-o', pri: 2 },
+  red:    { label: 'High',    labelZh: '高度異常', cls: 'tg-r', fieldCls: 'field-red',    cardCls: 'cr', pri: 3 }
+};
+
+// ═══════════════════════════════════════════════════
+// INDICATORS — ~55 definitions
+// ═══════════════════════════════════════════════════
+const INDICATORS = {
+  // ── Physical Measurements ────────────────────────
+  bmi: {
+    label: 'BMI', unit: '', cat: 'body', type: 'numeric', dir: 'lower-better', tier: 1, computed: true,
+    ranges: {
+      male:   { green: [null, 25.0], yellow: [25.0, 27.0], orange: [27.0, 30.0], red: [30.0, null] },
+      female: { green: [null, 25.0], yellow: [25.0, 27.0], orange: [27.0, 30.0], red: [30.0, null] }
+    }, ref: '18.5 - 24.9 (WHO) / 18.5 - 22.9 (Asia-Pacific)'
+  },
+  bp_systolic: {
+    label: 'Systolic BP (SBP)', unit: 'mmHg', cat: 'body', type: 'numeric', dir: 'lower-better', tier: 1,
+    ranges: {
+      male:   { green: [null, 120], yellow: [120, 130], orange: [130, 140], red: [140, null] },
+      female: { green: [null, 120], yellow: [120, 130], orange: [130, 140], red: [140, null] }
+    }, ref: '< 120 mmHg'
+  },
+  bp_diastolic: {
+    label: 'Diastolic BP (DBP)', unit: 'mmHg', cat: 'body', type: 'numeric', dir: 'lower-better', tier: 2,
+    ranges: {
+      male:   { green: [null, 80], yellow: [80, 85], orange: [85, 90], red: [90, null] },
+      female: { green: [null, 80], yellow: [80, 85], orange: [85, 90], red: [90, null] }
+    }, ref: '< 80 mmHg'
+  },
+  pulse: {
+    label: 'Pulse', unit: 'bpm', cat: 'body', type: 'numeric', dir: 'range', tier: 3,
+    ranges: {
+      male:   { green: [60, 100], yellow: [50, 60], orange: [100, 110], red: [110, null] },
+      female: { green: [60, 100], yellow: [50, 60], orange: [100, 110], red: [110, null] }
+    }, ref: '60 - 100 bpm'
+  },
+  body_fat: {
+    label: 'Body Fat %', unit: '%', cat: 'body', type: 'numeric', dir: 'lower-better', tier: 1,
+    ranges: {
+      male:   { green: [null, 23], yellow: [23, 25], orange: [25, 28], red: [28, null] },
+      female: { green: [null, 30], yellow: [30, 33], orange: [33, 36], red: [36, null] }
+    }, ref: '17 - 23% (male) / 20 - 30% (female)'
+  },
+  waist: {
+    label: 'Waist Circumference', unit: 'cm', cat: 'body', type: 'numeric', dir: 'lower-better', tier: 2,
+    ranges: {
+      male:   { green: [null, 90], yellow: [90, 95], orange: [95, 100], red: [100, null] },
+      female: { green: [null, 80], yellow: [80, 85], orange: [85, 90], red: [90, null] }
+    }, ref: '< 90 cm (male) / < 80 cm (female)'
+  },
+
+  // ── CBC ──────────────────────────────────────────
+  hb: {
+    label: 'Hemoglobin', unit: 'g/dL', cat: 'cbc', type: 'numeric', dir: 'range', tier: 3,
+    ranges: {
+      male:   { green: [13, 18], yellow: [12, 13], orange: [10, 12], red: [null, 10] },
+      female: { green: [12, 16], yellow: [11, 12], orange: [9, 11], red: [null, 9] }
+    }, ref: '13 - 18 g/dL (male)'
+  },
+  rbc: {
+    label: 'RBC', unit: 'x10^6/uL', cat: 'cbc', type: 'numeric', dir: 'range', tier: 3,
+    ranges: {
+      male:   { green: [4.5, 5.7], yellow: [4.0, 4.5], orange: [3.5, 4.0], red: [null, 3.5] },
+      female: { green: [3.8, 5.1], yellow: [3.5, 3.8], orange: [3.0, 3.5], red: [null, 3.0] }
+    }, ref: '4.5 - 5.7 (male)'
+  },
+  ht: {
+    label: 'Hematocrit', unit: '%', cat: 'cbc', type: 'numeric', dir: 'range', tier: 3,
+    ranges: {
+      male:   { green: [40, 54], yellow: [36, 40], orange: [30, 36], red: [null, 30] },
+      female: { green: [36, 48], yellow: [33, 36], orange: [28, 33], red: [null, 28] }
+    }, ref: '40 - 54% (male)'
+  },
+  mcv: {
+    label: 'MCV', unit: 'fL', cat: 'cbc', type: 'numeric', dir: 'range', tier: 3,
+    ranges: {
+      male:   { green: [80, 98], yellow: [75, 80], orange: [70, 75], red: [null, 70] },
+      female: { green: [80, 98], yellow: [75, 80], orange: [70, 75], red: [null, 70] }
+    }, ref: '80 - 98 fL'
+  },
+  wbc: {
+    label: 'WBC', unit: 'x10^3/uL', cat: 'cbc', type: 'numeric', dir: 'range', tier: 3,
+    ranges: {
+      male:   { green: [4.0, 10.0], yellow: [3.5, 4.0], orange: [10.0, 12.0], red: [12.0, null] },
+      female: { green: [4.0, 10.0], yellow: [3.5, 4.0], orange: [10.0, 12.0], red: [12.0, null] }
+    }, ref: '4.0 - 10.0'
+  },
+  platelets: {
+    label: 'Platelets', unit: 'x10^3/uL', cat: 'cbc', type: 'numeric', dir: 'range', tier: 3,
+    ranges: {
+      male:   { green: [140, 450], yellow: [100, 140], orange: [50, 100], red: [null, 50] },
+      female: { green: [140, 450], yellow: [100, 140], orange: [50, 100], red: [null, 50] }
+    }, ref: '140 - 450'
+  },
+
+  // ── Liver Function ───────────────────────────────
+  direct_bilirubin: {
+    label: 'Direct Bilirubin', unit: 'mg/dL', cat: 'liver', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 0.40], yellow: [0.40, 0.60], orange: [0.60, 1.0], red: [1.0, null] },
+      female: { green: [null, 0.40], yellow: [0.40, 0.60], orange: [0.60, 1.0], red: [1.0, null] }
+    }, ref: '<= 0.40 mg/dL'
+  },
+  total_bilirubin: {
+    label: 'Total Bilirubin', unit: 'mg/dL', cat: 'liver', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 1.2], yellow: [1.2, 1.5], orange: [1.5, 2.5], red: [2.5, null] },
+      female: { green: [null, 1.2], yellow: [1.2, 1.5], orange: [1.5, 2.5], red: [2.5, null] }
+    }, ref: '<= 1.20 mg/dL'
+  },
+  alp: {
+    label: 'ALP', unit: 'U/L', cat: 'liver', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 129], yellow: [129, 150], orange: [150, 200], red: [200, null] },
+      female: { green: [null, 129], yellow: [129, 150], orange: [150, 200], red: [200, null] }
+    }, ref: '40 - 129 U/L'
+  },
+  ast: {
+    label: 'AST (SGOT)', unit: 'U/L', cat: 'liver', type: 'numeric', dir: 'lower-better', tier: 2,
+    ranges: {
+      male:   { green: [null, 40], yellow: [40, 55], orange: [55, 80], red: [80, null] },
+      female: { green: [null, 32], yellow: [32, 45], orange: [45, 65], red: [65, null] }
+    }, ref: '<= 40 U/L (male)'
+  },
+  alt: {
+    label: 'ALT (SGPT)', unit: 'U/L', cat: 'liver', type: 'numeric', dir: 'lower-better', tier: 2,
+    ranges: {
+      male:   { green: [null, 40], yellow: [40, 55], orange: [55, 80], red: [80, null] },
+      female: { green: [null, 32], yellow: [32, 45], orange: [45, 65], red: [65, null] }
+    }, ref: '<= 40 U/L (male)'
+  },
+
+  // ── Kidney Function ──────────────────────────────
+  bun: {
+    label: 'BUN', unit: 'mg/dL', cat: 'kidney', type: 'numeric', dir: 'range', tier: 3,
+    ranges: {
+      male:   { green: [6, 23], yellow: [23, 28], orange: [28, 35], red: [35, null] },
+      female: { green: [6, 23], yellow: [23, 28], orange: [28, 35], red: [35, null] }
+    }, ref: '6 - 23 mg/dL'
+  },
+  uric_acid: {
+    label: 'Uric Acid', unit: 'mg/dL', cat: 'kidney', type: 'numeric', dir: 'lower-better', tier: 1,
+    ranges: {
+      male:   { green: [null, 7.0], yellow: [7.0, 7.5], orange: [7.5, 9.0], red: [9.0, null] },
+      female: { green: [null, 6.0], yellow: [6.0, 6.5], orange: [6.5, 8.0], red: [8.0, null] }
+    }, ref: '3.4 - 7.0 mg/dL (male)'
+  },
+  creatinine: {
+    label: 'Creatinine', unit: 'mg/dL', cat: 'kidney', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 1.2], yellow: [1.2, 1.4], orange: [1.4, 1.7], red: [1.7, null] },
+      female: { green: [null, 1.0], yellow: [1.0, 1.2], orange: [1.2, 1.5], red: [1.5, null] }
+    }, ref: '0.7 - 1.2 mg/dL (male)'
+  },
+  egfr: {
+    label: 'eGFR', unit: 'mL/min', cat: 'kidney', type: 'numeric', dir: 'higher-better', tier: 2, computed: true,
+    ranges: {
+      male:   { green: [90, null], yellow: [60, 90], orange: [45, 60], red: [null, 45] },
+      female: { green: [90, null], yellow: [60, 90], orange: [45, 60], red: [null, 45] }
+    }, ref: '>= 90 mL/min'
+  },
+
+  // ── Glucose Metabolism ───────────────────────────
+  glucose: {
+    label: 'Fasting Glucose', unit: 'mg/dL', cat: 'glucose', type: 'numeric', dir: 'lower-better', tier: 2,
+    ranges: {
+      male:   { green: [null, 100], yellow: [100, 110], orange: [110, 126], red: [126, null] },
+      female: { green: [null, 100], yellow: [100, 110], orange: [110, 126], red: [126, null] }
+    }, ref: '70 - 100 mg/dL'
+  },
+  hba1c: {
+    label: 'HbA1c', unit: '%', cat: 'glucose', type: 'numeric', dir: 'lower-better', tier: 1,
+    ranges: {
+      male:   { green: [null, 5.7], yellow: [5.7, 6.0], orange: [6.0, 6.5], red: [6.5, null] },
+      female: { green: [null, 5.7], yellow: [5.7, 6.0], orange: [6.0, 6.5], red: [6.5, null] }
+    }, ref: '< 5.7% normal / 5.7-6.4% pre-diabetes'
+  },
+
+  // ── Lipid Panel ──────────────────────────────────
+  tc: {
+    label: 'Total Cholesterol', unit: 'mg/dL', cat: 'lipids', type: 'numeric', dir: 'lower-better', tier: 1,
+    ranges: {
+      male:   { green: [null, 200], yellow: [200, 220], orange: [220, 240], red: [240, null] },
+      female: { green: [null, 200], yellow: [200, 220], orange: [220, 240], red: [240, null] }
+    }, ref: '< 200 mg/dL'
+  },
+  tg: {
+    label: 'Triglycerides', unit: 'mg/dL', cat: 'lipids', type: 'numeric', dir: 'lower-better', tier: 1,
+    ranges: {
+      male:   { green: [null, 150], yellow: [150, 200], orange: [200, 500], red: [500, null] },
+      female: { green: [null, 150], yellow: [150, 200], orange: [200, 500], red: [500, null] }
+    }, ref: '< 150 mg/dL'
+  },
+  ldl: {
+    label: 'LDL Cholesterol', unit: 'mg/dL', cat: 'lipids', type: 'numeric', dir: 'lower-better', tier: 1,
+    ranges: {
+      male:   { green: [null, 100], yellow: [100, 130], orange: [130, 160], red: [160, null] },
+      female: { green: [null, 100], yellow: [100, 130], orange: [130, 160], red: [160, null] }
+    }, ref: '< 130 mg/dL (optimal < 100)'
+  },
+  hdl: {
+    label: 'HDL Cholesterol', unit: 'mg/dL', cat: 'lipids', type: 'numeric', dir: 'higher-better', tier: 2,
+    ranges: {
+      male:   { green: [60, null], yellow: [40, 60], orange: [35, 40], red: [null, 35] },
+      female: { green: [60, null], yellow: [50, 60], orange: [40, 50], red: [null, 40] }
+    }, ref: '> 40 mg/dL (male) / > 50 mg/dL (female)'
+  },
+  tc_hdl_ratio: {
+    label: 'TC/HDL Ratio', unit: '', cat: 'lipids', type: 'numeric', dir: 'lower-better', tier: 2, computed: true,
+    ranges: {
+      male:   { green: [null, 4.0], yellow: [4.0, 5.0], orange: [5.0, 6.0], red: [6.0, null] },
+      female: { green: [null, 4.0], yellow: [4.0, 5.0], orange: [5.0, 6.0], red: [6.0, null] }
+    }, ref: '< 5.0'
+  },
+
+  // ── Serum & Inflammation ─────────────────────────
+  vitamin_d: {
+    label: 'Vitamin D (25-OH)', unit: 'ng/mL', cat: 'serum', type: 'numeric', dir: 'higher-better', tier: 2,
+    ranges: {
+      male:   { green: [30, null], yellow: [20, 30], orange: [12, 20], red: [null, 12] },
+      female: { green: [30, null], yellow: [20, 30], orange: [12, 20], red: [null, 12] }
+    }, ref: '>= 30 ng/mL'
+  },
+  tsh: {
+    label: 'TSH', unit: 'uIU/mL', cat: 'serum', type: 'numeric', dir: 'range', tier: 2,
+    ranges: {
+      male:   { green: [0.27, 4.20], yellow: [4.20, 6.0], orange: [6.0, 10.0], red: [10.0, null] },
+      female: { green: [0.27, 4.20], yellow: [4.20, 6.0], orange: [6.0, 10.0], red: [10.0, null] }
+    }, ref: '0.27 - 4.20 uIU/mL'
+  },
+  hscrp: {
+    label: 'hsCRP', unit: 'mg/dL', cat: 'serum', type: 'numeric', dir: 'lower-better', tier: 2,
+    ranges: {
+      male:   { green: [null, 0.1], yellow: [0.1, 0.2], orange: [0.2, 0.3], red: [0.3, null] },
+      female: { green: [null, 0.1], yellow: [0.1, 0.2], orange: [0.2, 0.3], red: [0.3, null] }
+    }, ref: '< 0.1 mg/dL low CV risk / 0.1-0.3 moderate / > 0.3 high (AHA/CDC 2003)'
+  },
+  hbsag: {
+    label: 'HBsAg', unit: 'COI', cat: 'serum', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 0.90], yellow: [0.90, 1.0], orange: [1.0, 2.0], red: [2.0, null] },
+      female: { green: [null, 0.90], yellow: [0.90, 1.0], orange: [1.0, 2.0], red: [2.0, null] }
+    }, ref: '< 0.90 (Negative)'
+  },
+
+  // ── Tumor Markers ────────────────────────────────
+  psa: {
+    label: 'PSA', unit: 'ng/mL', cat: 'tumor', type: 'numeric', dir: 'lower-better', tier: 3, maleOnly: true,
+    ranges: {
+      male:   { green: [null, 4.0], yellow: [4.0, 7.0], orange: [7.0, 10.0], red: [10.0, null] },
+      female: { green: [null, 999], yellow: [999, 999], orange: [999, 999], red: [999, null] }
+    }, ref: '< 4.0 ng/mL'
+  },
+  cea: {
+    label: 'CEA', unit: 'ng/mL', cat: 'tumor', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 5.0], yellow: [5.0, 7.0], orange: [7.0, 10.0], red: [10.0, null] },
+      female: { green: [null, 5.0], yellow: [5.0, 7.0], orange: [7.0, 10.0], red: [10.0, null] }
+    }, ref: '< 5.0 ng/mL'
+  },
+  afp: {
+    label: 'AFP', unit: 'ng/mL', cat: 'tumor', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 7.0], yellow: [7.0, 10.0], orange: [10.0, 20.0], red: [20.0, null] },
+      female: { green: [null, 7.0], yellow: [7.0, 10.0], orange: [10.0, 20.0], red: [20.0, null] }
+    }, ref: '<= 7.0 ng/mL'
+  },
+  ca199: {
+    label: 'CA-199', unit: 'U/mL', cat: 'tumor', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 39], yellow: [39, 60], orange: [60, 100], red: [100, null] },
+      female: { green: [null, 39], yellow: [39, 60], orange: [60, 100], red: [100, null] }
+    }, ref: '<= 39 U/mL'
+  },
+
+  // ── Cardiovascular ───────────────────────────────
+  pwv: {
+    label: 'PWV', unit: 'cm/s', cat: 'cv', type: 'numeric', dir: 'lower-better', tier: 2,
+    ranges: {
+      male:   { green: [null, 1400], yellow: [1400, 1500], orange: [1500, 1800], red: [1800, null] },
+      female: { green: [null, 1400], yellow: [1400, 1500], orange: [1500, 1800], red: [1800, null] }
+    }, ref: '< 1400 cm/s'
+  },
+
+  // ── Urinalysis (categorical) ─────────────────────
+  urine_protein: {
+    label: 'Urine Protein', unit: '', cat: 'urine', type: 'categorical', tier: 3,
+    severity: { negative: 'green', trace: 'yellow', '1+': 'orange', '2+': 'red', '3+': 'red' },
+    ref: 'Negative'
+  },
+  urine_glucose: {
+    label: 'Urine Glucose', unit: '', cat: 'urine', type: 'categorical', tier: 3,
+    severity: { negative: 'green', trace: 'yellow', '1+': 'orange', '2+': 'red', '3+': 'red' },
+    ref: 'Negative'
+  },
+  urine_ketones: {
+    label: 'Urine Ketones', unit: '', cat: 'urine', type: 'categorical', tier: 3,
+    severity: { negative: 'green', trace: 'yellow', '1+': 'yellow', '2+': 'orange', '3+': 'red' },
+    ref: 'Negative'
+  },
+  urine_blood: {
+    label: 'Urine Occult Blood', unit: '', cat: 'urine', type: 'categorical', tier: 3,
+    severity: { negative: 'green', trace: 'yellow', '1+': 'orange', '2+': 'red', '3+': 'red' },
+    ref: 'Negative'
+  },
+  stool_ob: {
+    label: 'Fecal Occult Blood', unit: 'ng/mL', cat: 'stool', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 30], yellow: [30, 50], orange: [50, 100], red: [100, null] },
+      female: { green: [null, 30], yellow: [30, 50], orange: [50, 100], red: [100, null] }
+    }, ref: '< 30 ng/mL'
+  },
+
+  // ── Imaging (categorical) ────────────────────────
+  ecg: {
+    label: 'ECG', unit: '', cat: 'imaging', type: 'categorical', tier: 1,
+    severity: { normal: 'green', arrhythmia: 'orange', lvh: 'orange', ischemia: 'red', other_abnormal: 'orange' },
+    ref: 'Normal'
+  },
+  chest_xray: {
+    label: 'Chest X-ray', unit: '', cat: 'imaging', type: 'categorical', tier: 3,
+    severity: { normal: 'green', abnormal: 'red' },
+    ref: 'Normal'
+  },
+  ultrasound: {
+    label: 'Abdominal Ultrasound', unit: '', cat: 'imaging', type: 'categorical', tier: 1,
+    severity: { normal: 'green', fatty_liver_mild: 'yellow', fatty_liver_moderate: 'orange', fatty_liver_severe: 'red', other_abnormal: 'orange' },
+    ref: 'Normal'
+  },
+  bone_density: {
+    label: 'Bone Density', unit: '', cat: 'imaging', type: 'categorical', tier: 3,
+    severity: { normal: 'green', osteopenia: 'yellow', osteoporosis: 'red' },
+    ref: 'Normal'
+  },
+
+  // ── Eye Exam ─────────────────────────────────────
+  iop_l: {
+    label: 'IOP (Left)', unit: 'mmHg', cat: 'eye', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 21], yellow: [21, 24], orange: [24, 28], red: [28, null] },
+      female: { green: [null, 21], yellow: [21, 24], orange: [24, 28], red: [28, null] }
+    }, ref: '10 - 21 mmHg'
+  },
+  iop_r: {
+    label: 'IOP (Right)', unit: 'mmHg', cat: 'eye', type: 'numeric', dir: 'lower-better', tier: 3,
+    ranges: {
+      male:   { green: [null, 21], yellow: [21, 24], orange: [24, 28], red: [28, null] },
+      female: { green: [null, 21], yellow: [21, 24], orange: [24, 28], red: [28, null] }
+    }, ref: '10 - 21 mmHg'
+  }
+};
+
+// ═══════════════════════════════════════════════════
+// PLANS — Tier 1, Tier 2, Tier 3
+// ═══════════════════════════════════════════════════
+const PLANS = {
+  // ── TIER 1 ───────────────────────────────────────
+  body_comp: {
+    title: 'Body Composition Action Plan',
+    triggers: ['bmi', 'body_fat', 'waist'],
+    intro: 'Elevated BMI, body fat %, or waist circumference indicates excess adiposity. This is the upstream driver of many metabolic issues including fatty liver, insulin resistance, dyslipidemia, and elevated uric acid.',
+    timeline: '1-2 months for initial weight loss; 4-6 months for measurable body composition change',
+    related: ['hba1c', 'tg', 'ldl', 'bp_systolic', 'uric_acid'],
+    sections: [
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'Create 500 kcal/day deficit (target ~0.5 kg/week loss) — 5-10% body weight loss reverses fatty liver and significantly improves all metabolic markers', textZh: '每日減少 500 大卡（目標每週減重約 0.5 kg）— 體重減少 5-10% 可逆轉脂肪肝，顯著改善所有代謝指標' },
+        { pri: 'high', text: 'DASH diet pattern: vegetables 5+ servings, fruits 2-3, whole grains, lean protein, low-fat dairy — proven to reduce BP, LDL, and body fat simultaneously', textZh: 'DASH 飲食模式：蔬菜 5+ 份、水果 2-3 份、全穀類、瘦蛋白、低脂乳品 — 已證實可同步降低血壓、LDL 及體脂' },
+        { pri: 'high', text: 'Protein 1.2-1.6 g/kg/day to preserve lean mass during caloric deficit — distribute across 3 meals', textZh: '每日蛋白質 1.2-1.6 g/kg，以維持熱量限制期間的肌肉量 — 分配於三餐攝取' },
+        { pri: 'medium', text: 'Eliminate sugar-sweetened beverages and limit added sugars to < 25g/day — reduces visceral fat, TG, and hepatic fat', textZh: '戒除含糖飲料，每日添加糖控制在 25g 以下 — 降低內臟脂肪、三酸甘油酯及肝臟脂肪' },
+        { pri: 'medium', text: 'Front-load calories: larger breakfast/lunch, lighter dinner — improves insulin sensitivity and reduces overnight fat storage', textZh: '熱量前置：早午餐多、晚餐少 — 改善胰島素敏感性，減少夜間脂肪囤積' },
+        { pri: 'low', text: 'Mindful eating: eat slowly, stop at 80% full, use smaller plates — reduces caloric intake 10-15% without counting', textZh: '正念飲食：細嚼慢嚥、八分飽停止、使用小盤子 — 無需計算卡路里即可減少攝取 10-15%' }
+      ]},
+      { type: 'exercise', title: 'Exercise', items: [
+        { pri: 'high', text: '150 min/week moderate aerobic exercise (brisk walking, cycling) — start at current fitness level and increase 10% per week', textZh: '每週中等強度有氧運動 150 分鐘（快走、騎車）— 從目前體能水平開始，每週增加 10%' },
+        { pri: 'high', text: 'Resistance training 2x/week — preserves muscle during weight loss, increases resting metabolic rate', textZh: '每週阻力訓練 2 次 — 減重期間保留肌肉，提升基礎代謝率' },
+        { pri: 'medium', text: 'Daily step goal: 8,000-10,000 steps — each 1,000 steps above 4,000 reduces mortality risk', textZh: '每日目標步數：8,000-10,000 步 — 超過 4,000 步後，每增加 1,000 步均可降低死亡風險' },
+        { pri: 'low', text: 'NEAT (Non-Exercise Activity Thermogenesis): standing desk, stairs, walking meetings — adds 200-500 kcal/day expenditure', textZh: '非運動活動熱量消耗（NEAT）：站立辦公、走樓梯、邊走邊開會 — 每日額外消耗 200-500 大卡' }
+      ]},
+      { type: 'lifestyle', title: 'Lifestyle', items: [
+        { pri: 'high', text: 'Sleep 7-8 hours — sleep deprivation increases ghrelin (hunger hormone), cortisol, and insulin resistance; 3.5x hypertension risk with < 6h', textZh: '睡眠 7-8 小時 — 睡眠不足會增加飢餓素、皮質醇及胰島素阻抗；不足 6 小時高血壓風險上升 3.5 倍' },
+        { pri: 'medium', text: 'Stress management: chronic cortisol elevation promotes visceral fat storage and insulin resistance', textZh: '壓力管理：長期皮質醇升高會促進內臟脂肪囤積及胰島素阻抗' },
+        { pri: 'low', text: 'Weekly official weigh-in (Saturday AM, post-void, fasted) — track trend, not daily fluctuations', textZh: '每週正式量體重（週六早晨、排尿後、進食前；週末大餐前）— 追蹤趨勢，不糾結單日波動' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Body composition analysis every 3 months — track fat mass vs lean mass, not just weight', textZh: '每 3 個月進行體組成分析 — 追蹤體脂量與肌肉量，而非僅看體重' },
+        { pri: 'medium', text: 'If BMI > 27 with comorbidities or > 30: discuss pharmacotherapy (GLP-1 agonists) with physician', textZh: '若 BMI > 27 合併共病症，或 BMI > 30：與醫師討論藥物治療（GLP-1 受體促效劑）' }
+      ]}
+    ]
+  },
+  bp: {
+    title: 'Blood Pressure Action Plan',
+    triggers: ['bp_systolic', 'bp_diastolic'],
+    intro: 'Elevated blood pressure increases cardiovascular, stroke, and kidney disease risk. If systolic is elevated but diastolic is normal (< 80), this is Isolated Systolic Hypertension (ISH) — common in younger adults and highly responsive to isometric exercise.',
+    timeline: '2-4 weeks for exercise-induced BP reduction; 8-12 weeks for full lifestyle effect',
+    related: ['body_fat', 'bmi', 'hscrp', 'egfr'],
+    sections: [
+      { type: 'exercise', title: 'Exercise (ISH-Specific)', items: [
+        { pri: 'high', text: 'Wall sits (isometric exercise): 4 x 2-min holds, 2-min rest between, 3x/week — 2023 BJSM meta-analysis (270 RCTs): most effective exercise type for BP reduction', textZh: '靠牆深蹲（等長收縮運動）：每次 4 組 × 2 分鐘，組間休息 2 分鐘，每週 3 次 — 2023 年 BJSM 統合分析（270 項 RCT）：降血壓效果最佳的運動類型' },
+        { pri: 'high', text: '2024 RCT confirmed wall sits reduce SBP by 12.9 mmHg in 8 weeks — superior to aerobic, resistance, and combined training for ISH', textZh: '2024 年 RCT 確認靠牆深蹲 8 週可降低收縮壓 12.9 mmHg — 優於有氧、阻力及複合訓練（針對單純收縮期高血壓）' },
+        { pri: 'high', text: '30 min brisk walking daily — aerobic exercise reduces SBP 5-8 mmHg independently', textZh: '每日快走 30 分鐘 — 有氧運動可單獨降低收縮壓 5-8 mmHg' },
+        { pri: 'medium', text: 'Form critical: back flat against wall, thighs at target angle (start shallow, progress), breathe continuously — never hold breath', textZh: '動作要領：背部貼牆、大腿保持目標角度（初期較淺再漸進），全程持續呼吸 — 切勿憋氣' }
+      ]},
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'DASH diet: high potassium (bananas, sweet potatoes, spinach), low sodium < 2,300 mg/day — reduces SBP 8-14 mmHg', textZh: 'DASH 飲食：高鉀（香蕉、地瓜、菠菜），低鈉每日 < 2,300 mg — 可降低收縮壓 8-14 mmHg' },
+        { pri: 'high', text: 'Omega-3 rTG 2g/day — combined with DASH: SBP -14.7 mmHg (combined effect)', textZh: 'Omega-3 再酯化三酸甘油酯型每日 2g — 與 DASH 合併使用：收縮壓下降 14.7 mmHg（聯合效果）' },
+        { pri: 'medium', text: 'Limit caffeine to < 400mg/day and avoid 2 hours before BP measurement', textZh: '每日咖啡因控制在 400mg 以下，量血壓前 2 小時避免攝取' },
+        { pri: 'medium', text: 'Weight loss: each 1 kg lost reduces SBP ~1 mmHg', textZh: '體重控制：每減少 1 kg 可降低收縮壓約 1 mmHg' }
+      ]},
+      { type: 'supplement', title: 'Supplements', items: [
+        { pri: 'high', text: 'Omega-3 Fish Oil (rTG form) 4 capsules/day — EPA+DHA 1,920mg for BP + lipid support', textZh: 'Omega-3 魚油（rTG 型）每日 4 粒 — EPA+DHA 1,920mg，用於血壓及血脂管理' },
+        { pri: 'medium', text: 'Magnesium glycinate 200-400mg at bedtime — mild BP reduction + sleep quality improvement', textZh: '甘胺酸鎂 200-400mg 睡前服用 — 輕度降血壓 + 改善睡眠品質' }
+      ]},
+      { type: 'lifestyle', title: 'Lifestyle', items: [
+        { pri: 'high', text: 'Sleep repair priority: hypertension risk 3.5x with < 6 hours sleep — cortisol/sympathetic activation pathway', textZh: '睡眠修復優先：睡不足 6 小時高血壓風險增加 3.5 倍 — 皮質醇／交感神經激活路徑' },
+        { pri: 'medium', text: 'Home BP monitoring 2x/week (seated, after 5 min rest, use 2nd reading) — establishes true baseline vs white coat effect', textZh: '每週在家量血壓 2 次（坐姿、休息 5 分鐘後、取第二次讀數）— 建立真實基線，排除白袍效應' },
+        { pri: 'medium', text: '4-7-8 breathing technique: inhale 4s, hold 7s, exhale 8s — acute parasympathetic activation reduces BP', textZh: '4-7-8 呼吸法：吸氣 4 秒、憋氣 7 秒、吐氣 8 秒 — 急性副交感神經激活，即時降低血壓' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'If SBP persistently > 140 despite 3 months lifestyle: discuss antihypertensive medication with physician', textZh: '若生活介入 3 個月後收縮壓仍持續 > 140：與醫師討論降壓藥物' },
+        { pri: 'medium', text: 'Annual kidney function check (eGFR, creatinine) — hypertension damages kidneys silently', textZh: '每年檢查腎功能（eGFR、肌酸酐）— 高血壓會無聲地損傷腎臟' }
+      ]}
+    ]
+  },
+  ldl: {
+    title: 'LDL Cholesterol Action Plan',
+    triggers: ['ldl'],
+    intro: 'LDL deposits in artery walls, initiating atherosclerosis. At > 160 mg/dL, cardiovascular risk is significantly elevated. LDL is highly responsive to combined dietary + supplement intervention.',
+    timeline: '8-12 weeks for measurable LDL reduction; 16-24 weeks for full effect',
+    related: ['tc', 'tc_hdl_ratio', 'hdl', 'hscrp', 'tg'],
+    sections: [
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'Oat beta-glucan 3g/day (40-50g dry oats or oat bran) — clinically proven LDL reduction 5-10%', textZh: '每日燕麥 β-葡聚糖 3g（40-50g 乾燕麥片或燕麥麩）— 臨床實證可降低 LDL 5-10%' },
+        { pri: 'high', text: 'Replace saturated fats (butter, red meat fat, palm oil) with unsaturated fats (olive oil, avocado, nuts) — shifts LDL production', textZh: '以不飽和脂肪（橄欖油、酪梨、堅果）取代飽和脂肪（奶油、紅肉脂肪、棕櫚油）— 改變 LDL 合成路徑' },
+        { pri: 'high', text: 'Plant sterols/stanols 2g/day (fortified margarine or supplement) — blocks cholesterol absorption in gut, LDL -6-10%', textZh: '每日植物固醇／甾烷醇 2g（強化人造奶油或補充劑）— 阻斷腸道膽固醇吸收，LDL 下降 6-10%' },
+        { pri: 'medium', text: 'Increase soluble fiber: psyllium 5-10g, beans, apples, citrus — each gram of soluble fiber lowers LDL ~1-2 mg/dL', textZh: '增加可溶性膳食纖維：車前子 5-10g、豆類、蘋果、柑橘 — 每克可溶性纖維可降低 LDL 約 1-2 mg/dL' },
+        { pri: 'medium', text: 'Soy protein 25g/day (tofu, edamame, soy milk) — modest LDL reduction 3-5%', textZh: '每日大豆蛋白 25g（豆腐、毛豆、豆漿）— 可輕度降低 LDL 3-5%' },
+        { pri: 'low', text: 'Eliminate trans fats entirely — check labels for "partially hydrogenated oils"', textZh: '完全戒除反式脂肪 — 查看標籤，避免「部分氫化油脂」' }
+      ]},
+      { type: 'exercise', title: 'Exercise', items: [
+        { pri: 'high', text: '150 min/week moderate aerobic exercise — increases LDL receptor expression, LDL -5-8%', textZh: '每週中等強度有氧運動 150 分鐘 — 增加 LDL 受體表達，降低 LDL 5-8%' },
+        { pri: 'medium', text: 'Resistance training 2x/week — improves overall lipid profile independent of weight loss', textZh: '每週阻力訓練 2 次 — 不依賴減重，獨立改善整體血脂' }
+      ]},
+      { type: 'supplement', title: 'Supplements', items: [
+        { pri: 'high', text: 'Omega-3 rTG form 4 caps/day (EPA+DHA 1,920mg) — primarily lowers TG but supports overall lipid metabolism', textZh: 'Omega-3 再酯化三酸甘油酯型每日 4 粒（EPA+DHA 1,920mg）— 主要降低三酸甘油酯，同時支持整體血脂代謝' },
+        { pri: 'medium', text: 'Consider bergamot extract 500mg/day — shown to lower LDL 20-30% in some RCTs (consult physician)', textZh: '考慮佛手柑萃取物每日 500mg — 部分 RCT 顯示可降低 LDL 20-30%（請先諮詢醫師）' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Recheck lipid panel in 3 months — establish whether lifestyle intervention is sufficient', textZh: '3 個月後複查血脂四項 — 評估生活介入是否足夠' },
+        { pri: 'high', text: 'At LDL > 160 with additional risk factors (elevated TC/HDL ratio, hsCRP): calculate 10-year CV risk score; discuss statin with physician', textZh: 'LDL > 160 且合併其他風險因子（TC/HDL 比偏高、hsCRP 升高）：計算 10 年心血管風險，與醫師討論他汀類藥物' },
+        { pri: 'medium', text: 'If LDL > 190 mg/dL: strong indication for statin regardless of other risk factors (ACC/AHA guidelines)', textZh: '若 LDL > 190 mg/dL：不論其他風險因子，強烈建議使用他汀類藥物（ACC/AHA 指引）' }
+      ]}
+    ]
+  },
+  tg: {
+    title: 'Triglycerides Action Plan',
+    triggers: ['tg'],
+    intro: 'Elevated triglycerides (>= 150 mg/dL) increase cardiovascular risk and are closely linked to insulin resistance, fatty liver, and visceral adiposity. TG is one of the most diet-responsive lipid markers.',
+    timeline: '4-8 weeks for significant TG reduction with dietary changes + omega-3',
+    related: ['ldl', 'hdl', 'glucose', 'hba1c', 'body_fat'],
+    sections: [
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'Reduce refined carbohydrates and added sugars — fructose and sucrose are directly converted to TG in the liver', textZh: '減少精製碳水化合物及添加糖 — 果糖與蔗糖在肝臟直接轉化為三酸甘油酯' },
+        { pri: 'high', text: 'Increase omega-3 rich fish (salmon, mackerel, sardines) 2-3x/week — EPA/DHA suppress hepatic TG synthesis', textZh: '每週增加富含 Omega-3 的魚類（鮭魚、鯖魚、沙丁魚）2-3 次 — EPA/DHA 抑制肝臟三酸甘油酯合成' },
+        { pri: 'high', text: 'Limit alcohol — even moderate intake raises TG via hepatic lipogenesis', textZh: '限制飲酒 — 即使適量飲酒也會透過肝臟脂質合成升高三酸甘油酯' },
+        { pri: 'medium', text: 'Mediterranean diet pattern: olive oil, nuts, vegetables, whole grains, legumes — TG reduction 10-15%', textZh: '地中海飲食模式：橄欖油、堅果、蔬菜、全穀類、豆類 — 三酸甘油酯下降 10-15%' },
+        { pri: 'medium', text: 'Avoid large carbohydrate-heavy meals — spread intake across meals to prevent postprandial TG spikes', textZh: '避免大量高碳水化合物餐食 — 分次攝取，防止餐後三酸甘油酯急升' }
+      ]},
+      { type: 'supplement', title: 'Supplements', items: [
+        { pri: 'high', text: 'Omega-3 rTG 2g/day therapeutic dose — TG reduction 25-30% at this dose (REDUCE-IT trial context)', textZh: 'Omega-3 rTG 型每日 2g 治療劑量 — 此劑量可降低三酸甘油酯 25-30%（REDUCE-IT 試驗背景）' },
+        { pri: 'medium', text: 'Combined DASH + Omega-3 protocol: LDL -31.7, TG -45.3, SBP -14.7 (combined evidence from index.html plan)', textZh: 'DASH + Omega-3 聯合方案：LDL -31.7、TG -45.3、收縮壓 -14.7（聯合實證數據）' }
+      ]},
+      { type: 'exercise', title: 'Exercise', items: [
+        { pri: 'high', text: 'Regular aerobic exercise 150 min/week — TG reduction 15-20% via increased lipoprotein lipase activity', textZh: '每週規律有氧運動 150 分鐘 — 透過提升脂蛋白脂酶活性，降低三酸甘油酯 15-20%' },
+        { pri: 'medium', text: 'Post-meal walking 15-20 min — reduces postprandial TG surge', textZh: '餐後步行 15-20 分鐘 — 降低餐後三酸甘油酯急升' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'If TG > 500 mg/dL: risk of pancreatitis — requires medical intervention (fibrates or prescription omega-3)', textZh: '若三酸甘油酯 > 500 mg/dL：有胰臟炎風險 — 需要醫療介入（貝特類藥物或處方 Omega-3）' },
+        { pri: 'medium', text: 'Recheck fasting lipid panel in 2-3 months — TG responds faster than LDL to lifestyle changes', textZh: '2-3 個月後複查空腹血脂 — 三酸甘油酯對生活改變的反應快於 LDL' }
+      ]}
+    ]
+  },
+  uric_acid: {
+    title: 'Uric Acid Action Plan',
+    triggers: ['uric_acid'],
+    intro: 'Elevated uric acid (hyperuricemia) increases gout risk and is associated with kidney stones, hypertension, and cardiovascular disease. At > 8.0 mg/dL, annual gout attack risk is 20-25%. This indicator may have a genetic component (constitutional elevation since early adulthood).',
+    timeline: '4-8 weeks for dietary/supplement effect; may require long-term management',
+    related: ['creatinine', 'egfr', 'bp_systolic'],
+    sections: [
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'Limit high-purine foods: organ meats, shellfish, red meat, anchovies — reduce to < 2 servings/week', textZh: '限制高嘌呤食物：內臟類、甲殼海鮮、紅肉、鯷魚 — 每週控制在 2 份以下' },
+        { pri: 'high', text: 'Avoid fructose-sweetened beverages — fructose metabolism directly generates uric acid via purine degradation', textZh: '避免含果糖飲料 — 果糖代謝透過嘌呤降解直接生成尿酸' },
+        { pri: 'high', text: 'Increase low-fat dairy — casein and lactalbumin promote uric acid excretion', textZh: '增加低脂乳製品 — 酪蛋白與乳白蛋白可促進尿酸排泄' },
+        { pri: 'medium', text: 'Cherries and dark berries — anthocyanins inhibit xanthine oxidase (same target as allopurinol)', textZh: '櫻桃及深色漿果 — 花青素可抑制黃嘌呤氧化酶（與別嘌醇作用靶點相同）' },
+        { pri: 'medium', text: 'Limit alcohol, especially beer (contains purines + inhibits renal uric acid excretion)', textZh: '限制飲酒，尤其是啤酒（含嘌呤 + 抑制腎臟尿酸排泄）' },
+        { pri: 'low', text: 'Coffee 2-3 cups/day — associated with lower uric acid levels (epidemiological data)', textZh: '每日咖啡 2-3 杯 — 與尿酸水平降低相關（流行病學數據）' }
+      ]},
+      { type: 'lifestyle', title: 'Hydration', items: [
+        { pri: 'high', text: 'Hydration 2.5L/day minimum — increases renal uric acid clearance; complete main volume before 17:00', textZh: '每日至少喝水 2.5 公升 — 提升腎臟尿酸清除率；主要飲水量於 17:00 前完成' },
+        { pri: 'medium', text: 'Alkalinize urine with citrus water (lemon/lime) — uric acid is more soluble in alkaline urine', textZh: '以柑橘水（檸檬、萊姆）鹼化尿液 — 尿酸在鹼性尿液中溶解度更高' }
+      ]},
+      { type: 'supplement', title: 'Supplements', items: [
+        { pri: 'high', text: 'Tart cherry extract — 2025 RCT: uric acid -37.4%, CRP -23% with daily supplementation', textZh: '酸櫻桃萃取物 — 2025 年 RCT：每日補充可降低尿酸 37.4%、CRP 23%' },
+        { pri: 'medium', text: 'Vitamin C 500mg/day — promotes renal uric acid excretion; modest reduction ~0.5 mg/dL', textZh: '維生素 C 每日 500mg — 促進腎臟尿酸排泄；輕度降低約 0.5 mg/dL' },
+        { pri: 'medium', text: 'Goji berry tea 20g/day — traditional use for kidney support; anti-inflammatory properties', textZh: '枸杞茶每日 20g — 傳統用於腎臟保健；具抗發炎特性' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'If uric acid > 9.0 mg/dL or recurrent gout: discuss allopurinol or febuxostat with physician — pharmacotherapy indicated', textZh: '若尿酸 > 9.0 mg/dL 或反覆發作痛風：與醫師討論別嘌醇或非布索坦 — 需藥物治療' },
+        { pri: 'high', text: 'Monitor kidney function (eGFR, creatinine) — chronic hyperuricemia can cause urate nephropathy', textZh: '監測腎功能（eGFR、肌酸酐）— 長期高尿酸血症可導致尿酸鹽腎病' },
+        { pri: 'medium', text: 'Recheck uric acid in 3 months — gradual reduction preferred (rapid drops can paradoxically trigger gout)', textZh: '3 個月後複查尿酸 — 建議緩慢下降（驟降反而可能誘發痛風）' },
+        { pri: 'low', text: 'Avoid rapid weight loss (> 1.5 kg/week) — increases uric acid via purine release from tissue breakdown + gout flare risk', textZh: '避免快速減重（每週 > 1.5 kg）— 組織分解釋放嘌呤會升高尿酸，增加痛風發作風險' }
+      ]}
+    ]
+  },
+  hba1c: {
+    title: 'HbA1c / Pre-Diabetes Action Plan',
+    triggers: ['hba1c', 'glucose'],
+    intro: 'HbA1c 5.7-6.4% indicates pre-diabetes. Without intervention, 25-50% of people in this range progress to type 2 diabetes within 5 years. The Diabetes Prevention Program (DPP) trial (n=3,234) showed lifestyle intervention reduces progression risk by 58% — more effective than metformin.',
+    timeline: '3-6 months for measurable HbA1c improvement; 12 months for sustained reversal',
+    related: ['glucose', 'body_fat', 'bmi', 'waist', 'tg'],
+    sections: [
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'Low glycemic index (GI) diet — replace white rice/bread with brown rice, whole grain, sweet potatoes; reduces postprandial glucose spikes', textZh: '低升糖指數（GI）飲食 — 以糙米、全穀、地瓜取代白飯白麵包；降低餐後血糖急升' },
+        { pri: 'high', text: 'Fiber 25-30g/day — slows glucose absorption; each 10g fiber increase reduces HbA1c ~0.2%', textZh: '每日膳食纖維 25-30g — 減緩葡萄糖吸收；每增加 10g 纖維可降低 HbA1c 約 0.2%' },
+        { pri: 'high', text: 'Chromium-rich foods (broccoli, barley, oats) — chromium picolinate improves insulin sensitivity', textZh: '富含鉻的食物（花椰菜、大麥、燕麥）— 吡啶甲酸鉻可改善胰島素敏感性' },
+        { pri: 'medium', text: 'Reduce refined carbohydrates and added sugars — direct drivers of glucose excursion and insulin demand', textZh: '減少精製碳水化合物及添加糖 — 這是血糖波動及胰島素需求的直接驅動因素' },
+        { pri: 'medium', text: 'Apple cider vinegar 1-2 tbsp before meals — may reduce postprandial glucose by 20-30% (small studies)', textZh: '餐前蘋果醋 1-2 湯匙 — 可能降低餐後血糖 20-30%（小型研究）' }
+      ]},
+      { type: 'exercise', title: 'Exercise', items: [
+        { pri: 'high', text: '150 min/week moderate exercise — DPP study protocol; improves insulin sensitivity within 1 week of starting', textZh: '每週中等強度運動 150 分鐘 — DPP 研究方案；開始後 1 週內即可改善胰島素敏感性' },
+        { pri: 'high', text: 'Resistance training 2-3x/week — increases glucose uptake by muscles independent of insulin (GLUT-4 translocation)', textZh: '每週阻力訓練 2-3 次 — 透過 GLUT-4 轉位增加肌肉葡萄糖攝取，不依賴胰島素' },
+        { pri: 'medium', text: 'Post-meal walking 15-20 min — reduces 2-hour postprandial glucose by 15-25%', textZh: '餐後步行 15-20 分鐘 — 降低餐後 2 小時血糖 15-25%' }
+      ]},
+      { type: 'lifestyle', title: 'Lifestyle', items: [
+        { pri: 'high', text: '5-7% body weight loss — the most impactful single intervention; DPP goal; reverses insulin resistance', textZh: '減重 5-7% — 最有效的單一介入；DPP 目標；可逆轉胰島素阻抗' },
+        { pri: 'high', text: 'Sleep 7-8 hours — sleep deprivation directly impairs glucose tolerance and insulin sensitivity', textZh: '睡眠 7-8 小時 — 睡眠不足直接損害葡萄糖耐受性及胰島素敏感性' },
+        { pri: 'medium', text: 'Stress reduction — cortisol raises blood glucose via hepatic gluconeogenesis', textZh: '壓力管理 — 皮質醇透過肝糖異生升高血糖' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Annual HbA1c monitoring — track trajectory; if rising toward 6.5%, intensify intervention or discuss metformin', textZh: '每年監測 HbA1c — 追蹤趨勢；若接近 6.5%，加強介入或與醫師討論二甲雙胍' },
+        { pri: 'medium', text: 'Consider OGTT (Oral Glucose Tolerance Test) if HbA1c borderline — may reveal impaired glucose tolerance not visible in fasting glucose', textZh: '若 HbA1c 臨界，考慮口服葡萄糖耐受試驗（OGTT）— 可揭示空腹血糖未見的葡萄糖耐受障礙' },
+        { pri: 'medium', text: 'Screen for metabolic syndrome criteria — pre-diabetes rarely exists in isolation', textZh: '篩查代謝症候群標準 — 前期糖尿病鮮少單獨存在' }
+      ]}
+    ]
+  },
+  fatty_liver: {
+    title: 'Fatty Liver (NAFLD) Action Plan',
+    triggers: ['ultrasound'],
+    intro: 'Non-Alcoholic Fatty Liver Disease (NAFLD) affects 25% of adults globally. It is both a consequence and driver of metabolic dysfunction — excess liver fat impairs insulin signaling, worsening glucose, triglycerides, and uric acid. 5-10% body weight loss resolves fatty liver in ~50% of cases.',
+    timeline: '3-6 months for ultrasound-confirmed improvement with 5-10% weight loss',
+    related: ['alt', 'ast', 'body_fat', 'bmi', 'tg', 'hba1c'],
+    sections: [
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'Mediterranean diet — strongest evidence for NAFLD reversal: olive oil, fish, nuts, vegetables, whole grains', textZh: '地中海飲食 — 逆轉非酒精性脂肪肝（NAFLD）的最強實證：橄欖油、魚類、堅果、蔬菜、全穀類' },
+        { pri: 'high', text: 'Eliminate fructose from beverages and minimize added sugars — fructose is preferentially metabolized in the liver and directly drives de novo lipogenesis', textZh: '戒除飲料中的果糖，最小化添加糖 — 果糖優先在肝臟代謝，直接驅動脂肪新生' },
+        { pri: 'high', text: 'Reduce saturated fat intake — replaces liver fat stores; shift to mono/polyunsaturated fats', textZh: '減少飽和脂肪攝取 — 減少肝臟脂肪儲存；轉向單元及多元不飽和脂肪' },
+        { pri: 'medium', text: 'Coffee 2-3 cups/day (unsweetened) — multiple studies show hepatoprotective effect, reduces liver fibrosis risk', textZh: '每日無糖咖啡 2-3 杯 — 多項研究顯示具護肝效果，降低肝臟纖維化風險' },
+        { pri: 'medium', text: 'Increase dietary fiber — supports gut microbiome health which modulates liver fat metabolism', textZh: '增加膳食纖維 — 支持腸道菌群健康，調節肝臟脂肪代謝' }
+      ]},
+      { type: 'exercise', title: 'Exercise', items: [
+        { pri: 'high', text: 'Both aerobic and resistance exercise reduce liver fat independently of weight loss — aim for 150+ min/week combined', textZh: '有氧與阻力運動均可獨立於減重之外降低肝臟脂肪 — 目標每週合計 150 分鐘以上' },
+        { pri: 'medium', text: 'High-intensity interval training (HIIT) may be more time-efficient for liver fat reduction than steady-state cardio', textZh: '高強度間歇訓練（HIIT）在減少肝臟脂肪方面可能比穩態有氧更有時間效益' }
+      ]},
+      { type: 'lifestyle', title: 'Weight Management', items: [
+        { pri: 'high', text: '5-10% body weight loss — the single most effective intervention; resolves steatosis in 50%+ of cases', textZh: '減重 5-10% — 最有效的單一介入；超過 50% 的案例可逆轉脂肪變性' },
+        { pri: 'medium', text: 'Avoid rapid weight loss (> 1.5 kg/week) — can paradoxically worsen liver inflammation', textZh: '避免快速減重（每週 > 1.5 kg）— 可能反而加重肝臟發炎' },
+        { pri: 'medium', text: 'Eliminate or minimize alcohol — even moderate intake accelerates NAFLD progression', textZh: '完全戒酒或將飲酒降至最低 — 即使適量飲酒也會加速 NAFLD 進展' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Monitor ALT/AST every 3-6 months — rising transaminases suggest progression to NASH (Non-Alcoholic Steatohepatitis)', textZh: '每 3-6 個月監測 ALT/AST — 轉氨酶上升提示可能進展至非酒精性脂肪性肝炎（NASH）' },
+        { pri: 'high', text: 'Repeat abdominal ultrasound in 6 months to assess liver fat regression', textZh: '6 個月後複查腹部超音波，評估肝臟脂肪消退情況' },
+        { pri: 'medium', text: 'If ALT persistently elevated > 2x ULN: consider FibroScan or liver biopsy to assess fibrosis stage', textZh: '若 ALT 持續 > 正常上限 2 倍：考慮 FibroScan 或肝臟切片，評估纖維化程度' },
+        { pri: 'low', text: 'Vitamin E 800 IU/day — shown to improve NASH histology in non-diabetic patients (PIVENS trial); discuss with physician due to long-term safety concerns', textZh: '維生素 E 每日 800 IU — 已顯示可改善非糖尿病患者 NASH 的組織學表現（PIVENS 試驗）；因長期安全性疑慮，需與醫師討論' }
+      ]}
+    ]
+  },
+
+  // ── TIER 2 ───────────────────────────────────────
+  hdl: {
+    title: 'HDL Cholesterol Plan', triggers: ['hdl'],
+    intro: 'Low HDL reduces reverse cholesterol transport capacity. HDL is the "good cholesterol" that removes LDL from artery walls.',
+    timeline: '3-6 months', related: ['ldl', 'tc_hdl_ratio', 'tg'],
+    sections: [
+      { type: 'exercise', title: 'Exercise', items: [
+        { pri: 'high', text: 'Regular aerobic exercise is the most effective HDL-raising intervention — 30+ min, 5x/week; HDL increases 5-10%', textZh: '規律有氧運動是最有效的提升 HDL 介入 — 每次 30 分鐘以上、每週 5 次；HDL 提升 5-10%' },
+        { pri: 'medium', text: 'Resistance training also raises HDL — combine with aerobic for best effect', textZh: '阻力訓練也能提升 HDL — 與有氧運動結合效果最佳' }
+      ]},
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'Replace refined carbs with healthy fats (olive oil, nuts, avocado) — low-fat diets paradoxically lower HDL', textZh: '以健康脂肪（橄欖油、堅果、酪梨）取代精製碳水化合物 — 低脂飲食反而會降低 HDL' },
+        { pri: 'medium', text: 'Moderate alcohol (1 drink/day) raises HDL — but weigh against TG elevation and liver effects', textZh: '適量飲酒（每日 1 杯）可提升 HDL — 但需權衡三酸甘油酯升高及肝臟影響' },
+        { pri: 'medium', text: 'Omega-3 fatty acids support HDL function and particle quality', textZh: 'Omega-3 脂肪酸支持 HDL 功能及微粒品質' }
+      ]},
+      { type: 'lifestyle', title: 'Lifestyle', items: [
+        { pri: 'high', text: 'Smoking cessation raises HDL 5-10% within weeks', textZh: '戒菸可在數週內提升 HDL 5-10%' },
+        { pri: 'medium', text: 'Weight loss — each 3 kg lost raises HDL ~1 mg/dL', textZh: '減重 — 每減少 3 kg 可提升 HDL 約 1 mg/dL' }
+      ]}
+    ]
+  },
+  hscrp: {
+    title: 'hsCRP (Inflammation) Plan', triggers: ['hscrp'],
+    intro: 'hsCRP is a biomarker of systemic inflammation. Even mildly elevated levels (> 0.3 mg/L) are associated with increased cardiovascular risk when combined with other risk factors.',
+    timeline: '4-8 weeks for measurable reduction', related: ['ldl', 'bp_systolic', 'body_fat'],
+    sections: [
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'Anti-inflammatory diet: omega-3 rich fish, colorful vegetables, turmeric, ginger, green tea — reduces CRP 20-30%', textZh: '抗發炎飲食：富含 Omega-3 的魚類、多彩蔬菜、薑黃、薑、綠茶 — 降低 CRP 20-30%' },
+        { pri: 'medium', text: 'Reduce ultra-processed foods, refined sugars, and seed oils — all promote systemic inflammation', textZh: '減少超加工食品、精製糖及種子油 — 這些均會促進全身性發炎' }
+      ]},
+      { type: 'supplement', title: 'Supplements', items: [
+        { pri: 'high', text: 'Omega-3 EPA+DHA — anti-inflammatory via resolution mediator pathways', textZh: 'Omega-3 EPA+DHA — 透過促消退介質路徑發揮抗發炎作用' },
+        { pri: 'medium', text: 'Tart cherry — CRP reduction 23% (2025 RCT, also targets uric acid)', textZh: '酸櫻桃 — CRP 降低 23%（2025 年 RCT，同時作用於尿酸）' },
+        { pri: 'medium', text: 'Curcumin 500mg/day with piperine — evidence for CRP reduction in multiple meta-analyses', textZh: '薑黃素每日 500mg 搭配胡椒鹼 — 多項統合分析顯示有 CRP 降低效果' }
+      ]},
+      { type: 'exercise', title: 'Exercise', items: [
+        { pri: 'high', text: 'Regular moderate exercise reduces CRP — acute anti-inflammatory effect via IL-6/IL-10 cascade', textZh: '規律中等強度運動可降低 CRP — 透過 IL-6/IL-10 級聯產生急性抗發炎效果' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'medium', text: 'Rule out acute infection or injury if hsCRP > 3.0 mg/L — values > 10 suggest acute inflammation, not cardiovascular risk', textZh: '若 hsCRP > 3.0 mg/L，需先排除急性感染或外傷 — 數值 > 10 提示急性發炎，而非心血管風險' }
+      ]}
+    ]
+  },
+  vitamin_d: {
+    title: 'Vitamin D Plan', triggers: ['vitamin_d'],
+    intro: 'Vitamin D insufficiency (< 30 ng/mL) is linked to impaired immune function, bone health, and cardiovascular risk. Levels 20-30 are insufficient; < 20 is deficient.',
+    timeline: '8-12 weeks to reach target with supplementation', related: [],
+    sections: [
+      { type: 'supplement', title: 'Supplements', items: [
+        { pri: 'high', text: 'Vitamin D3 2,000-4,000 IU/day to reach >= 30 ng/mL — D3 (cholecalciferol) is more effective than D2', textZh: '每日維生素 D3 2,000-4,000 IU，目標達到 ≥ 30 ng/mL — D3（膽鈣化醇）比 D2 更有效' },
+        { pri: 'high', text: 'Pair with Vitamin K2 (MK-7) 100-200 mcg — directs calcium to bones rather than arteries', textZh: '搭配維生素 K2（MK-7）100-200 mcg — 將鈣引導至骨骼而非動脈' },
+        { pri: 'medium', text: 'Take with fat-containing meal for optimal absorption — vitamin D is fat-soluble', textZh: '與含脂肪餐食同服以最佳化吸收 — 維生素 D 為脂溶性維生素' }
+      ]},
+      { type: 'lifestyle', title: 'Lifestyle', items: [
+        { pri: 'medium', text: 'Sun exposure 15-20 min/day on arms/face — limited effectiveness at latitudes > 35 degrees; supplement is more reliable', textZh: '每日手臂及臉部日曬 15-20 分鐘 — 北緯 35 度以上效果有限；補充劑更可靠' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'medium', text: 'Recheck 25-OH Vitamin D in 3 months — adjust dose to maintain 30-50 ng/mL; avoid exceeding 100 ng/mL', textZh: '3 個月後複查 25-OH 維生素 D — 調整劑量維持 30-50 ng/mL；避免超過 100 ng/mL' }
+      ]}
+    ]
+  },
+  ast_alt: {
+    title: 'Liver Enzymes (AST/ALT) Plan', triggers: ['ast', 'alt'],
+    intro: 'Elevated AST/ALT indicates hepatocyte damage. Common causes: NAFLD, alcohol, medications, viral hepatitis. ALT is more liver-specific; AST also rises with muscle damage.',
+    timeline: '4-12 weeks with cause elimination', related: ['ultrasound', 'body_fat', 'tg'],
+    sections: [
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'Reduce alcohol — primary cause of transaminase elevation outside of NAFLD', textZh: '減少飲酒 — 非 NAFLD 情況下轉氨酶升高的主要原因' },
+        { pri: 'high', text: 'Mediterranean diet for liver health — reduces hepatic fat and inflammation', textZh: '地中海飲食護肝 — 減少肝臟脂肪及發炎' },
+        { pri: 'medium', text: 'Coffee 2-3 cups/day — hepatoprotective, reduces fibrosis risk', textZh: '每日咖啡 2-3 杯 — 具護肝效果，降低纖維化風險' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Review medications for hepatotoxicity — acetaminophen, statins, NSAIDs, herbal supplements', textZh: '審查藥物的肝毒性 — 乙醯胺酚、他汀類、非類固醇消炎藥、中草藥補充品' },
+        { pri: 'high', text: 'If ALT > 2x ULN: check hepatitis panel (HBsAg, anti-HCV), consider liver ultrasound', textZh: '若 ALT > 正常上限 2 倍：檢查肝炎套組（HBsAg、anti-HCV），考慮肝臟超音波' },
+        { pri: 'medium', text: 'Recheck in 4-6 weeks — persistent elevation requires further workup', textZh: '4-6 週後複查 — 持續升高需進一步檢查' }
+      ]}
+    ]
+  },
+  egfr_kidney: {
+    title: 'Kidney Function (eGFR) Plan', triggers: ['egfr', 'creatinine'],
+    intro: 'eGFR 60-89 indicates mildly decreased kidney function (CKD Stage 2). Often asymptomatic but requires monitoring to prevent progression.',
+    timeline: 'Ongoing monitoring; kidney function preservation is the goal', related: ['uric_acid', 'bp_systolic', 'glucose'],
+    sections: [
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'high', text: 'Adequate hydration 2-2.5L/day — supports renal clearance', textZh: '每日足量補水 2-2.5 公升 — 維持腎臟清除功能' },
+        { pri: 'medium', text: 'Moderate protein intake (0.8-1.0 g/kg/day) — excessive protein increases renal workload', textZh: '適度蛋白質攝取（每日 0.8-1.0 g/kg）— 過量蛋白質會增加腎臟負擔' },
+        { pri: 'medium', text: 'Reduce sodium — lessens glomerular hyperfiltration pressure', textZh: '減少鈉攝取 — 降低腎小球過度過濾壓力' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Control blood pressure — hypertension is the #1 modifiable cause of CKD progression', textZh: '控制血壓 — 高血壓是慢性腎臟病進展最重要的可控因素' },
+        { pri: 'high', text: 'Avoid nephrotoxic drugs: NSAIDs, high-dose contrast dye, certain antibiotics', textZh: '避免腎毒性藥物：非類固醇消炎藥、高劑量顯影劑、某些抗生素' },
+        { pri: 'medium', text: 'Annual eGFR + urine albumin-to-creatinine ratio (UACR) — detect microalbuminuria early', textZh: '每年檢測 eGFR + 尿液白蛋白肌酸酐比值（UACR）— 早期偵測微量白蛋白尿' }
+      ]}
+    ]
+  },
+  tsh_plan: {
+    title: 'Thyroid (TSH) Plan', triggers: ['tsh'],
+    intro: 'TSH outside 0.27-4.20 may indicate thyroid dysfunction. Elevated TSH suggests hypothyroidism; suppressed TSH suggests hyperthyroidism.',
+    timeline: '6-8 weeks for medication adjustment effect', related: [],
+    sections: [
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Check Free T4 and Free T3 — TSH alone is insufficient for diagnosis', textZh: '檢查游離 T4 及游離 T3 — 單憑 TSH 不足以診斷' },
+        { pri: 'high', text: 'Check thyroid antibodies (anti-TPO, anti-Tg) to rule out Hashimoto or Graves disease', textZh: '檢查甲狀腺抗體（anti-TPO、anti-Tg）以排除橋本氏甲狀腺炎或葛瑞夫茲病' },
+        { pri: 'medium', text: 'If subclinical (TSH 4.2-10, normal FT4): observe and recheck in 6-8 weeks before starting medication', textZh: '若為亞臨床型（TSH 4.2-10，FT4 正常）：觀察並在 6-8 週後複查，再決定是否用藥' }
+      ]},
+      { type: 'diet', title: 'Diet', items: [
+        { pri: 'medium', text: 'Ensure adequate iodine and selenium intake — both essential for thyroid hormone synthesis', textZh: '確保足夠的碘及硒攝取 — 兩者均為甲狀腺激素合成所必需' },
+        { pri: 'low', text: 'Limit raw cruciferous vegetables if hypothyroid — goitrogens can interfere with iodine uptake (cooking neutralizes)', textZh: '若有甲狀腺低下，限制生食十字花科蔬菜 — 致甲狀腺腫物質可干擾碘的吸收（加熱可中和）' }
+      ]}
+    ]
+  },
+
+  // ── TIER 3 (brief) ───────────────────────────────
+  ecg_plan: {
+    title: 'ECG Abnormality Follow-Up', triggers: ['ecg'],
+    intro: 'ECG abnormalities require cardiology evaluation to determine significance.',
+    timeline: 'Immediate specialist referral for ischemia; routine follow-up for other findings', related: ['bp_systolic', 'ldl', 'hscrp'],
+    sections: [
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Myocardial ischemia on ECG: schedule cardiology consultation — may need stress test, echocardiogram, or coronary angiography', textZh: '心電圖出現心肌缺血：安排心臟科會診 — 可能需要運動壓力測試、心臟超音波或冠狀動脈攝影' },
+        { pri: 'high', text: 'If persistent ischemia pattern: do NOT ignore — even without symptoms, silent ischemia carries significant risk', textZh: '若缺血型態持續：切勿輕忽 — 即使無症狀，無聲心肌缺血仍有顯著風險' },
+        { pri: 'medium', text: 'LVH (Left Ventricular Hypertrophy): often related to chronic hypertension — optimize BP control', textZh: '左心室肥大（LVH）：常與慢性高血壓相關 — 優化血壓控制' }
+      ]}
+    ]
+  },
+  bone_plan: {
+    title: 'Bone Density Plan', triggers: ['bone_density'],
+    intro: 'Osteopenia or osteoporosis increases fracture risk.',
+    timeline: '12-24 months for measurable bone density improvement', related: ['vitamin_d'],
+    sections: [
+      { type: 'supplement', title: 'Supplements', items: [
+        { pri: 'high', text: 'Calcium 1000-1200 mg/day (diet + supplement) + Vitamin D3 2000 IU + Vitamin K2', textZh: '每日鈣 1000-1200 mg（飲食 + 補充劑）+ 維生素 D3 2000 IU + 維生素 K2' },
+        { pri: 'medium', text: 'Weight-bearing and resistance exercise — stimulates osteoblast activity', textZh: '負重及阻力運動 — 刺激成骨細胞活性' }
+      ]},
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'If osteoporosis: discuss bisphosphonate or denosumab with physician', textZh: '若有骨質疏鬆：與醫師討論雙磷酸鹽或保骨針（denosumab）' },
+        { pri: 'medium', text: 'DEXA scan every 1-2 years to monitor', textZh: '每 1-2 年進行 DEXA 骨密度掃描監測' }
+      ]}
+    ]
+  },
+  cbc_plan: {
+    title: 'CBC Abnormality Follow-Up', triggers: ['hb', 'rbc', 'ht', 'mcv', 'wbc', 'platelets'],
+    intro: 'Abnormal CBC values may indicate anemia, infection, or hematologic conditions.',
+    timeline: 'Varies by condition', related: [],
+    sections: [
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Low hemoglobin/RBC: check iron, ferritin, B12, folate — identify anemia type before supplementing', textZh: '血紅素/紅血球偏低：檢查鐵質、鐵蛋白、維生素 B12、葉酸 — 補充前先確認貧血類型' },
+        { pri: 'medium', text: 'Elevated WBC: rule out active infection; if persistent, consider hematology referral', textZh: '白血球升高：排除活動性感染；若持續升高，考慮血液科轉介' },
+        { pri: 'medium', text: 'Low platelets (< 100): avoid NSAIDs and assess bleeding risk; hematology referral if < 50', textZh: '血小板偏低（< 100）：避免非類固醇消炎藥並評估出血風險；若 < 50 需轉介血液科' }
+      ]}
+    ]
+  },
+  urine_plan: {
+    title: 'Urinalysis Abnormality Follow-Up', triggers: ['urine_protein', 'urine_glucose', 'urine_blood'],
+    intro: 'Abnormal urinalysis findings may indicate kidney disease, UTI, or metabolic conditions.',
+    timeline: 'Recheck in 2-4 weeks; persistent findings require workup', related: ['egfr', 'creatinine', 'glucose'],
+    sections: [
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Proteinuria: check spot urine albumin/creatinine ratio — persistent proteinuria indicates kidney damage', textZh: '蛋白尿：檢查單次尿液白蛋白/肌酸酐比值 — 持續蛋白尿提示腎臟損傷' },
+        { pri: 'high', text: 'Glucosuria with normal blood glucose: consider renal tubular dysfunction', textZh: '血糖正常卻有尿糖：考慮腎小管功能異常' },
+        { pri: 'medium', text: 'Hematuria: urology referral to rule out stones, infection, or malignancy', textZh: '血尿：轉介泌尿科排除結石、感染或惡性腫瘤' }
+      ]}
+    ]
+  },
+  tumor_plan: {
+    title: 'Tumor Marker Elevation Follow-Up', triggers: ['psa', 'cea', 'afp', 'ca199'],
+    intro: 'Elevated tumor markers are NOT diagnostic of cancer — they require clinical correlation and further workup. False positives are common.',
+    timeline: 'Recheck in 4-6 weeks; imaging if persistently elevated', related: [],
+    sections: [
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'Single elevated tumor marker: repeat in 4-6 weeks to confirm — transient elevations are common with inflammation or benign conditions', textZh: '單一腫瘤標記升高：4-6 週後複查確認 — 發炎或良性疾病常見暫時性升高' },
+        { pri: 'high', text: 'PSA elevated: urology referral for DRE and consideration of MRI/biopsy', textZh: 'PSA 升高：轉介泌尿科進行直腸指診，並考慮 MRI 或切片' },
+        { pri: 'medium', text: 'CEA/AFP/CA-199: correlate with imaging (CT/MRI) if persistently elevated', textZh: 'CEA/AFP/CA-199：若持續升高，需搭配影像檢查（CT/MRI）' }
+      ]}
+    ]
+  },
+  eye_plan: {
+    title: 'Eye Findings Follow-Up', triggers: ['iop_l', 'iop_r'],
+    intro: 'Elevated intraocular pressure (> 21 mmHg) is a primary risk factor for glaucoma.',
+    timeline: 'Annual ophthalmology follow-up', related: [],
+    sections: [
+      { type: 'medical', title: 'Medical', items: [
+        { pri: 'high', text: 'IOP > 21: ophthalmology referral for visual field test and optic nerve evaluation — early glaucoma is asymptomatic', textZh: '眼壓 > 21：轉介眼科進行視野測試及視神經評估 — 早期青光眼無症狀' },
+        { pri: 'medium', text: 'Annual comprehensive eye exam including fundoscopy — especially important with metabolic conditions', textZh: '每年包含眼底檢查的全面眼科檢查 — 代謝異常者尤為重要' }
+      ]}
+    ]
+  }
+};
+
+// ═══════════════════════════════════════════════════
+// CROSS-INDICATOR PATTERNS
+// ═══════════════════════════════════════════════════
+const PATTERNS = [
+  {
+    id: 'metabolic_syndrome', label: 'Metabolic Syndrome', labelZh: '代謝症候群',
+    desc: 'Constellation of metabolic abnormalities that multiply cardiovascular and diabetes risk.',
+    threshold: 3,
+    criteria: [
+      { id: 'waist', label: 'Elevated waist circumference', test: (v,g) => g==='female' ? v>=80 : v>=90 },
+      { id: 'tg', label: 'Triglycerides >= 150 mg/dL', test: v => v>=150 },
+      { id: 'hdl', label: 'Low HDL', test: (v,g) => g==='female' ? v<50 : v<40 },
+      { id: 'bp_systolic', label: 'SBP >= 130 mmHg', test: v => v>=130 },
+      { id: 'glucose', label: 'Fasting glucose >= 100 mg/dL', test: v => v>=100 }
+    ],
+    narrative: (met, total, items) =>
+      `${met >= 3 ? 'Metabolic Syndrome criteria met — this triples cardiovascular risk and quintuples type 2 diabetes risk.' : 'Approaching Metabolic Syndrome threshold.'} Met criteria: ${items}. Priority: waist circumference reduction through caloric deficit + aerobic exercise simultaneously improves all five criteria.`
+  },
+  {
+    id: 'cv_risk_cluster', label: 'Cardiovascular Risk Cluster', labelZh: '心血管風險群集',
+    desc: 'Co-elevation of lipid and inflammatory markers indicating heightened CV risk.',
+    threshold: 2,
+    criteria: [
+      { id: 'ldl', label: 'LDL > 130 mg/dL', test: v => v>130 },
+      { id: 'tc_hdl_ratio', label: 'TC/HDL ratio >= 5.0', test: v => v>=5.0 },
+      { id: 'hscrp', label: 'hsCRP > 0.3 mg/L', test: v => v>0.3 },
+      { id: 'bp_systolic', label: 'SBP >= 130 mmHg', test: v => v>=130 }
+    ],
+    narrative: (met, total, items) =>
+      `${met} of ${total} cardiovascular risk markers elevated simultaneously. Co-elevation is synergistic — the combination poses greater risk than the sum of parts. Elevated: ${items}. Requires Omega-3, dietary cholesterol reduction, and inflammation management in parallel.`
+  },
+  {
+    id: 'liver_metabolic', label: 'Liver-Metabolic Axis', labelZh: '肝臟代謝軸線',
+    desc: 'Fatty liver with metabolic stress indicators suggesting NAFLD progression risk.',
+    threshold: 2,
+    criteria: [
+      { id: 'ultrasound', label: 'Fatty liver present', test: v => v && v!=='normal' && v!=='' },
+      { id: 'alt', label: 'Elevated ALT', test: (v,g) => g==='female' ? v>32 : v>40 },
+      { id: 'body_fat', label: 'Elevated body fat %', test: (v,g) => g==='female' ? v>30 : v>23 },
+      { id: 'tg', label: 'Triglycerides >= 150 mg/dL', test: v => v>=150 }
+    ],
+    narrative: (met, total, items) =>
+      `${met} of ${total} Liver-Metabolic Axis markers flagged. Fatty liver both results from and drives metabolic dysfunction — excess liver fat impairs insulin signaling, worsening glucose, TG, and uric acid. Key: 5-7% body weight reduction resolves fatty liver in ~50% of cases within 6 months. Flagged: ${items}.`
+  },
+  {
+    id: 'kidney_uric_acid', label: 'Kidney-Uric Acid Axis', labelZh: '腎臟尿酸軸線',
+    desc: 'Elevated uric acid with potential kidney function impact.',
+    threshold: 2,
+    criteria: [
+      { id: 'uric_acid', label: 'Uric acid > 7.0 mg/dL', test: v => v>7.0 },
+      { id: 'creatinine', label: 'Elevated creatinine', test: (v,g) => g==='female' ? v>1.0 : v>1.2 },
+      { id: 'egfr', label: 'eGFR < 90', test: v => v<90 }
+    ],
+    narrative: (met, total, items) =>
+      `${met} of ${total} Kidney-Uric Acid markers elevated. Chronic hyperuricemia with renal involvement needs immediate dietary management. Above 9.0 mg/dL, crystal deposition in kidneys (urate nephropathy) begins. Hydration 2.5L/day and tart cherry are first-line. Flagged: ${items}.`
+  },
+  {
+    id: 'pre_diabetes', label: 'Pre-Diabetes Pathway', labelZh: '前期糖尿病路徑',
+    desc: 'Multiple glucose dysregulation signals converging — high reversal potential with early intervention.',
+    threshold: 2,
+    criteria: [
+      { id: 'hba1c', label: 'HbA1c >= 5.7%', test: v => v>=5.7 },
+      { id: 'glucose', label: 'Fasting glucose >= 100 mg/dL', test: v => v>=100 },
+      { id: 'body_fat', label: 'Elevated body fat %', test: (v,g) => g==='female' ? v>30 : v>23 },
+      { id: 'waist', label: 'Elevated waist', test: (v,g) => g==='female' ? v>=80 : v>=90 }
+    ],
+    narrative: (met, total, items) =>
+      `${met} of ${total} pre-diabetes indicators flagged. Pre-diabetes is highly reversible: 5-7% body weight reduction + 150 min/week exercise reduces diabetes progression risk by 58% (DPP trial, n=3,234). Every month of early intervention prevents years of diabetes management. Flagged: ${items}.`
+  }
+];
+
+// ═══════════════════════════════════════════════════
+// SAMPLE DATA (2026-03-25 Annual Exam)
+// ═══════════════════════════════════════════════════
+const SAMPLE_DATA = {
+  gender: 'male', age: 37,
+  height: 168.5, weight: 69.6, bmi: 24.5,
+  bp_systolic: 153, bp_diastolic: 88, pulse: 75,
+  body_fat: 21.5, waist: 84.0,
+  hb: 13.8, rbc: 5.04, ht: 42.4, mcv: 84.1, mch: 27.4, mchc: 32.5,
+  wbc: 6.74, neutrophils: 59.7, lymphocytes: 32.6,
+  monocytes: 4.2, eosinophils: 2.8, basophils: 0.7,
+  platelets: 313, rdw: 12.5,
+  direct_bilirubin: 0.2, total_bilirubin: 1.0,
+  alp: 59, ast: 38, alt: 22,
+  bun: 14, uric_acid: 8.9, creatinine: 1.05,
+  glucose: 90, hba1c: 5.9,
+  tc: 191, tg: 103, ldl: 154, hdl: 39, tc_hdl_ratio: 4.9,
+  tsh: 1.956, hscrp: 0.142, hbsag: 0.27,
+  afp: 3.2,
+  urine_sg: 1.018, urine_ph: 6.0,
+  urine_protein: 'negative', urine_glucose: 'negative',
+  urine_ketones: 'negative', urine_blood: 'negative', urine_urobilinogen: 0.2,
+  stool_ob: 49,
+  ecg: 'other_abnormal', chest_xray: 'abnormal',
+  va_l: 1.0, va_r: 1.0, iop_l: 19, iop_r: 19
+};
+
+// ═══════════════════════════════════════════════════
+// SEVERITY ENGINE
+// ═══════════════════════════════════════════════════
+function classify(id, value, gender) {
+  const def = INDICATORS[id];
+  if (!def || value === null || value === undefined || value === '') return null;
+
+  // Categorical
+  if (def.type === 'categorical') {
+    const sev = def.severity[value];
+    if (!sev) return null;
+    return { id, sev, label: SEV[sev].label, abnormal: sev !== 'green', value, ref: def.ref, def };
+  }
+
+  // Numeric
+  const v = parseFloat(value);
+  if (isNaN(v)) return null;
+  const gk = gender === 'female' ? 'female' : 'male';
+  const ranges = def.ranges[gk];
+
+  // Walk from most severe downward
+  for (const level of ['red', 'orange', 'yellow', 'green']) {
+    const r = ranges[level];
+    if (!r) continue;
+    const [lo, hi] = r;
+    const inRange = (lo === null || v >= lo) && (hi === null || v < hi);
+    if (inRange) {
+      const msg = buildMsg(def, v, level, gk);
+      return { id, sev: level, label: SEV[level].label, abnormal: level !== 'green', value: v, ref: def.ref, msg, def };
+    }
+  }
+  // Fallback for values below all ranges (e.g., pulse < 50)
+  return { id, sev: 'yellow', label: 'Low', abnormal: true, value: v, ref: def.ref, msg: `${def.label} ${v} ${def.unit} — outside expected range`, def };
+}
+
+function buildMsg(def, v, sev, gk) {
+  if (sev === 'green') return '';
+  const gr = def.ranges[gk].green;
+  if (def.dir === 'lower-better' && gr[1] !== null) {
+    return `${v} ${def.unit} (${(v - gr[1]).toFixed(1)} above limit of ${gr[1]})`;
+  }
+  if (def.dir === 'higher-better' && gr[0] !== null) {
+    return `${v} ${def.unit} (${(gr[0] - v).toFixed(1)} below target of ${gr[0]})`;
+  }
+  return `${v} ${def.unit}`;
+}
+
+// ═══════════════════════════════════════════════════
+// AUTO-CALCULATIONS
+// ═══════════════════════════════════════════════════
+function calcBMI() {
+  const h = parseFloat(document.getElementById('height').value);
+  const w = parseFloat(document.getElementById('weight').value);
+  const el = document.getElementById('bmi');
+  if (h > 0 && w > 0) {
+    el.value = (w / Math.pow(h / 100, 2)).toFixed(1);
+    colorField('bmi');
+  } else {
+    el.value = '';
+  }
+}
+
+function calcTcHdl() {
+  const tc = parseFloat(document.getElementById('tc').value);
+  const hdl = parseFloat(document.getElementById('hdl').value);
+  const el = document.getElementById('tc_hdl_ratio');
+  if (tc > 0 && hdl > 0) {
+    el.value = (tc / hdl).toFixed(2);
+    colorField('tc_hdl_ratio');
+  } else {
+    el.value = '';
+  }
+}
+
+function calcEGFR() {
+  const scr = parseFloat(document.getElementById('creatinine').value);
+  const age = parseInt(document.getElementById('age').value);
+  const gender = document.getElementById('gender').value;
+  const el = document.getElementById('egfr');
+  if (scr > 0 && age > 0) {
+    const kappa = gender === 'female' ? 0.7 : 0.9;
+    const alpha = gender === 'female' ? -0.241 : -0.302;
+    const sexF = gender === 'female' ? 1.012 : 1.0;
+    const ratio = scr / kappa;
+    const val = 142 * Math.pow(Math.min(ratio, 1), alpha) * Math.pow(Math.max(ratio, 1), -1.200) * Math.pow(0.9938, age) * sexF;
+    el.value = Math.round(val * 10) / 10;
+    colorField('egfr');
+  } else {
+    el.value = '';
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// FIELD COLORING
+// ═══════════════════════════════════════════════════
+function colorField(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('field-green', 'field-yellow', 'field-orange', 'field-red');
+  const val = el.tagName === 'SELECT' ? el.value : el.value;
+  if (val === '' || val === null) return;
+  const gender = document.getElementById('gender').value;
+  const result = classify(id, val, gender);
+  if (result) el.classList.add(SEV[result.sev].fieldCls);
+}
+
+function colorAllFields() {
+  Object.keys(INDICATORS).forEach(id => colorField(id));
+}
+
+function onGenderChange() {
+  calcBMI(); calcTcHdl(); calcEGFR();
+  colorAllFields();
+}
+
+// ═══════════════════════════════════════════════════
+// ANALYSIS ENGINE
+// ═══════════════════════════════════════════════════
+function gatherValues() {
+  const vals = {};
+  // Collect all input/select values
+  document.querySelectorAll('#t0 input, #t0 select').forEach(el => {
+    if (!el.id || el.id === 'gender' || el.id === 'age') return;
+    const v = el.value;
+    if (v !== '' && v !== null) {
+      vals[el.id] = el.type === 'number' ? (el.value === '' ? null : parseFloat(el.value)) : v;
+    }
+  });
+  return vals;
+}
+
+function runAnalysis() {
+  const gender = document.getElementById('gender').value;
+  const age = parseInt(document.getElementById('age').value) || 0;
+  const vals = gatherValues();
+
+  // Classify all indicators
+  const results = [];
+  const allClassified = {};
+  for (const id in INDICATORS) {
+    if (vals[id] !== undefined && vals[id] !== null && vals[id] !== '') {
+      const r = classify(id, vals[id], gender);
+      if (r) {
+        allClassified[id] = r;
+        if (r.abnormal) results.push(r);
+      }
+    }
+  }
+
+  // Sort by severity (red first)
+  results.sort((a, b) => SEV[b.sev].pri - SEV[a.sev].pri);
+
+  // Detect patterns
+  const patternResults = PATTERNS.map(p => {
+    const evaluated = p.criteria.map(c => {
+      const v = vals[c.id];
+      if (v === undefined || v === null || v === '') return { ...c, passed: false };
+      const numV = typeof v === 'string' ? v : parseFloat(v);
+      return { ...c, passed: c.test(numV, gender) };
+    });
+    const met = evaluated.filter(c => c.passed);
+    return { pattern: p, met: met.length, total: p.criteria.length, metItems: met, active: met.length >= p.threshold };
+  }).sort((a, b) => (b.met / b.total) - (a.met / a.total));
+
+  // Build follow-up schedule
+  const followUp = buildFollowUp(results);
+
+  // Render
+  renderResults(results, allClassified, patternResults, followUp, Object.keys(allClassified).length);
+
+  // Switch to results tab
+  st('t1');
+  toast(T('Analysis complete', '分析完成'));
+}
+
+function buildFollowUp(flagged) {
+  const items = [];
+  const seen = new Set();
+  flagged.forEach(r => {
+    const tier = r.def.tier;
+    if (tier === 1) {
+      if (r.id === 'ldl' || r.id === 'tc' || r.id === 'tg' || r.id === 'hdl') {
+        if (!seen.has('lipid')) { items.push({ test: 'Fasting Lipid Panel', when: '3 months', specialist: 'Internal Medicine' }); seen.add('lipid'); }
+      }
+      if (r.id === 'hba1c' || r.id === 'glucose') {
+        if (!seen.has('glucose')) { items.push({ test: 'HbA1c + Fasting Glucose', when: '3-6 months', specialist: 'Endocrinology (if worsening)' }); seen.add('glucose'); }
+      }
+      if (r.id === 'uric_acid') {
+        items.push({ test: 'Uric Acid + Kidney Panel', when: '3 months', specialist: 'Nephrology (if > 9.0 or recurrent gout)' });
+      }
+      if (r.id === 'bp_systolic' || r.id === 'bp_diastolic') {
+        if (!seen.has('bp')) { items.push({ test: 'BP Monitoring (home)', when: '2x/week ongoing', specialist: 'Cardiology (if persistent > 140/90)' }); seen.add('bp'); }
+      }
+      if (r.id === 'ecg') {
+        items.push({ test: 'Cardiology Consultation', when: 'Within 1 month', specialist: 'Cardiology' });
+      }
+      if (r.id === 'ultrasound') {
+        items.push({ test: 'Abdominal Ultrasound', when: '6 months', specialist: 'Gastroenterology/Hepatology' });
+      }
+    }
+    if (tier === 2) {
+      if (r.id === 'vitamin_d') { items.push({ test: '25-OH Vitamin D', when: '3 months', specialist: '' }); }
+      if (r.id === 'egfr') {
+        if (!seen.has('kidney')) { items.push({ test: 'eGFR + UACR', when: 'Annual', specialist: 'Nephrology (if declining)' }); seen.add('kidney'); }
+      }
+      if (r.id === 'tsh') { items.push({ test: 'TSH + Free T4', when: '6-8 weeks', specialist: 'Endocrinology' }); }
+    }
+  });
+  return items;
+}
+
+// ═══════════════════════════════════════════════════
+// PERSONAL ACTION SUMMARY — consolidated cross-plan actions
+// ═══════════════════════════════════════════════════
+const MERGED_ACTIONS = [
+  // ── Diet ──
+  { type: 'diet', text: 'DASH/Mediterranean diet: vegetables 5+/day, whole grains, lean protein, olive oil, nuts, low-fat dairy — proven to reduce BP, LDL, TG, and body fat simultaneously', textZh: 'DASH／地中海飲食：每日蔬菜 5+ 份、全穀類、瘦蛋白、橄欖油、堅果、低脂乳品 — 已證實可同步降低血壓、LDL、三酸甘油酯及體脂',
+    match: /DASH|Mediterranean/i, benefits: ['BP', 'LDL', 'TG', 'Body Fat', 'Fatty Liver'] },
+  { type: 'diet', text: 'Create 500 kcal/day deficit (target ~0.5 kg/week). 5-10% body weight loss reverses fatty liver, improves insulin resistance, and reduces all metabolic markers', textZh: '每日減少 500 大卡（目標每週減重約 0.5 kg）。體重減少 5-10% 可逆轉脂肪肝、改善胰島素阻抗並降低所有代謝指標',
+    match: /500\s*kcal|caloric deficit|body\s*weight\s*loss/i, benefits: ['BMI', 'Body Fat', 'LDL', 'TG', 'HbA1c', 'Fatty Liver', 'Uric Acid'] },
+  { type: 'diet', text: 'Protein 1.2-1.6 g/kg/day to preserve lean mass during weight loss — distribute across 3 meals', textZh: '每日蛋白質 1.2-1.6 g/kg，以維持減重期間的肌肉量 — 分配於三餐攝取',
+    match: /protein\s*1\.[2-6]/i, benefits: ['Body Comp'] },
+  { type: 'diet', text: 'Oat beta-glucan 3g/day (40-50g oats) + soluble fiber (psyllium, beans) — LDL reduction 5-10%', textZh: '每日燕麥 β-葡聚糖 3g（40-50g 燕麥）+ 可溶性纖維（車前子、豆類）— LDL 降低 5-10%',
+    match: /oat\s*beta|soluble\s*fiber/i, benefits: ['LDL', 'TC'] },
+  { type: 'diet', text: 'Plant sterols/stanols 2g/day — blocks cholesterol absorption, LDL -6-10%', textZh: '每日植物固醇／甾烷醇 2g — 阻斷膽固醇吸收，LDL 下降 6-10%',
+    match: /plant\s*sterol/i, benefits: ['LDL'] },
+  { type: 'diet', text: 'Omega-3 rich fish (salmon, mackerel) 2-3x/week + eliminate added sugars and sugar-sweetened beverages — reduces TG, hepatic fat, and fructose-driven uric acid production', textZh: '每週富含 Omega-3 魚類（鮭魚、鯖魚）2-3 次 + 戒除添加糖及含糖飲料 — 降低三酸甘油酯、肝臟脂肪及果糖驅動的尿酸生成',
+    match: /omega.?3.*fish|fish.*omega|sugar.*bever|fructose.*bever/i, benefits: ['TG', 'Fatty Liver', 'Uric Acid'] },
+  { type: 'diet', text: 'Reduce refined carbohydrates; low glycemic index foods (brown rice, sweet potatoes); fiber 25-30g/day — improves HbA1c and postprandial glucose', textZh: '減少精製碳水化合物；選擇低升糖指數食物（糙米、地瓜）；每日膳食纖維 25-30g — 改善 HbA1c 及餐後血糖',
+    match: /low\s*glycemic|refined\s*carb|fiber\s*25/i, benefits: ['HbA1c', 'Glucose'] },
+  { type: 'diet', text: 'Sodium < 2,300 mg/day; increase potassium-rich foods (bananas, sweet potatoes, spinach) — BP reduction 8-14 mmHg', textZh: '每日鈉攝取 < 2,300 mg；增加富含鉀的食物（香蕉、地瓜、菠菜）— 血壓降低 8-14 mmHg',
+    match: /sodium|potassium|DASH.*sodium/i, benefits: ['BP'] },
+  { type: 'diet', text: 'Limit high-purine foods (organ meats, shellfish, red meat < 2x/week); increase low-fat dairy — promotes uric acid excretion', textZh: '限制高嘌呤食物（內臟、甲殼海鮮、紅肉每週 < 2 次）；增加低脂乳品 — 促進尿酸排泄',
+    match: /purine|low.?fat\s*dairy.*uric/i, benefits: ['Uric Acid'] },
+  { type: 'diet', text: 'Replace saturated fats with unsaturated fats (olive oil, avocado, nuts) — shifts LDL production and supports HDL', textZh: '以不飽和脂肪（橄欖油、酪梨、堅果）取代飽和脂肪 — 改變 LDL 合成並支持 HDL',
+    match: /saturated\s*fat.*unsaturated|replace.*saturated/i, benefits: ['LDL', 'HDL'] },
+  { type: 'diet', text: 'Anti-inflammatory foods: turmeric, ginger, green tea, colorful vegetables — reduces hsCRP 20-30%', textZh: '抗發炎食物：薑黃、薑、綠茶、多彩蔬菜 — 降低 hsCRP 20-30%',
+    match: /anti.?inflamm.*diet|turmeric|ginger.*green\s*tea/i, benefits: ['hsCRP'] },
+  // ── Exercise ──
+  { type: 'exercise', text: 'Aerobic exercise 150+ min/week (brisk walking, cycling) — improves LDL, TG, HDL, HbA1c, BP, and body composition; start at current fitness and increase 10%/week', textZh: '每週有氧運動 150 分鐘以上（快走、騎車）— 改善 LDL、三酸甘油酯、HDL、HbA1c、血壓及體組成；從目前體能開始，每週增加 10%',
+    match: /150\s*min.*(?:week|aerobic)|aerobic.*150/i, benefits: ['LDL', 'TG', 'HDL', 'HbA1c', 'BP', 'Body Fat', 'hsCRP'] },
+  { type: 'exercise', text: 'Resistance training 2-3x/week — preserves muscle during weight loss, increases resting metabolic rate, improves glucose uptake via GLUT-4 translocation', textZh: '每週阻力訓練 2-3 次 — 減重期間保留肌肉、提升基礎代謝率、透過 GLUT-4 轉位改善葡萄糖攝取',
+    match: /resistance\s*training\s*2/i, benefits: ['BMI', 'HbA1c', 'HDL', 'Fatty Liver'] },
+  { type: 'exercise', text: 'Wall sits (isometric): 4x2min holds, 2min rest, 3x/week — most effective exercise for BP reduction (2023 BJSM meta-analysis: SBP -12.9 mmHg in 8 weeks)', textZh: '靠牆深蹲（等長收縮）：每組 2 分鐘 × 4 組，組間休息 2 分鐘，每週 3 次 — 降血壓效果最佳的運動（2023 年 BJSM 統合分析：8 週收縮壓 -12.9 mmHg）',
+    match: /wall\s*sit/i, benefits: ['BP'] },
+  { type: 'exercise', text: 'Post-meal walking 15-20 min — reduces postprandial glucose by 15-25% and TG surge', textZh: '餐後步行 15-20 分鐘 — 降低餐後血糖 15-25% 及三酸甘油酯急升',
+    match: /post.?meal\s*walk/i, benefits: ['HbA1c', 'Glucose', 'TG'] },
+  { type: 'exercise', text: 'Daily step goal 8,000-10,000 — each 1,000 steps above 4,000 reduces mortality risk', textZh: '每日目標步數 8,000-10,000 — 超過 4,000 步後，每增加 1,000 步均可降低死亡風險',
+    match: /8,?000.*10,?000\s*step|step.*goal/i, benefits: ['Overall'] },
+  // ── Supplements ──
+  { type: 'supplement', text: 'Omega-3 Fish Oil rTG form 4 caps/day (EPA+DHA ~1,920mg) — supports BP (-14.7 combined with DASH), TG (-25-30%), and inflammation', textZh: 'Omega-3 魚油 rTG 型每日 4 粒（EPA+DHA 約 1,920mg）— 支持血壓（與 DASH 合用 -14.7 mmHg）、三酸甘油酯（-25-30%）及發炎管理',
+    match: /omega.?3.*rTG|fish\s*oil.*rTG|EPA.*DHA/i, benefits: ['BP', 'TG', 'LDL', 'hsCRP'] },
+  { type: 'supplement', text: 'Vitamin D3 2,000-4,000 IU/day + K2 (MK-7) 100-200mcg — take with fat-containing meal; target ≥30 ng/mL', textZh: '維生素 D3 每日 2,000-4,000 IU + K2（MK-7）100-200 mcg — 與含脂肪餐食同服；目標 ≥30 ng/mL',
+    match: /vitamin\s*D3.*(?:2,?000|4,?000)|D3.*K2/i, benefits: ['Vitamin D'] },
+  { type: 'supplement', text: 'Tart cherry extract daily — uric acid -37.4%, CRP -23% (2025 RCT); also targets inflammation', textZh: '每日酸櫻桃萃取物 — 尿酸 -37.4%、CRP -23%（2025 年 RCT）；同時作用於發炎指標',
+    match: /tart\s*cherry/i, benefits: ['Uric Acid', 'hsCRP'] },
+  { type: 'supplement', text: 'Magnesium glycinate 200-400mg at bedtime — mild BP reduction + sleep quality improvement', textZh: '甘胺酸鎂 200-400mg 睡前服用 — 輕度降血壓 + 改善睡眠品質',
+    match: /magnesium\s*glycinate/i, benefits: ['BP', 'Sleep'] },
+  { type: 'supplement', text: 'Vitamin C 500mg/day — promotes renal uric acid excretion; modest reduction ~0.5 mg/dL', textZh: '維生素 C 每日 500mg — 促進腎臟尿酸排泄；輕度降低約 0.5 mg/dL',
+    match: /vitamin\s*C\s*500/i, benefits: ['Uric Acid'] },
+  // ── Lifestyle ──
+  { type: 'lifestyle', text: 'Sleep 7-8 hours — sleep deprivation increases ghrelin, cortisol, insulin resistance; hypertension risk 3.5x with < 6h; directly impairs glucose tolerance', textZh: '睡眠 7-8 小時 — 睡眠不足增加飢餓素、皮質醇、胰島素阻抗；不足 6 小時高血壓風險 3.5 倍；直接損害葡萄糖耐受性',
+    match: /sleep\s*7.?8/i, benefits: ['BP', 'HbA1c', 'Body Fat', 'Cortisol'] },
+  { type: 'lifestyle', text: 'Hydration 2.5L/day minimum (complete main volume before 17:00) + citrus water for alkaline urine — increases renal uric acid clearance', textZh: '每日至少喝水 2.5 公升（主要飲水量於 17:00 前完成）+ 柑橘水鹼化尿液 — 提升腎臟尿酸清除率',
+    match: /hydration\s*2\.5|2\.5\s*L.*day/i, benefits: ['Uric Acid'] },
+  { type: 'lifestyle', text: 'Stress management: chronic cortisol promotes visceral fat storage, raises blood glucose, and drives inflammation', textZh: '壓力管理：長期皮質醇升高促進內臟脂肪囤積、升高血糖並驅動發炎',
+    match: /stress\s*manag|cortisol.*visceral/i, benefits: ['Body Fat', 'HbA1c', 'hsCRP'] },
+  { type: 'lifestyle', text: 'Weekly weigh-in (Saturday AM, post-void, fasted) — track trend, not daily fluctuations', textZh: '每週量體重（週六早晨、排尿後、進食前；週末大餐前）— 追蹤趨勢，不糾結單日波動',
+    match: /weekly.*weigh|weigh.?in.*(saturday|sunday)/i, benefits: ['BMI'] },
+  { type: 'lifestyle', text: 'Home BP monitoring 2x/week (seated, 5min rest, use 2nd reading) — establishes true baseline', textZh: '每週在家量血壓 2 次（坐姿、休息 5 分鐘後、取第二次讀數）— 建立真實基線',
+    match: /home\s*BP\s*monitor|BP\s*monitor.*2x/i, benefits: ['BP'] },
+  // ── Medical ──
+  { type: 'medical', text: 'Cardiology consultation for persistent ECG myocardial ischemia — within 1 month', textZh: '心電圖持續性心肌缺血：1 個月內安排心臟科會診',
+    match: /cardiol.*consult|ECG.*ischemia|heart.*cardiol/i, benefits: ['ECG'] },
+  { type: 'medical', text: 'Recheck fasting lipid panel in 3 months. If LDL >160 with additional risk factors: discuss statin with physician', textZh: '3 個月後複查空腹血脂。若 LDL > 160 且合併其他風險因子：與醫師討論他汀類藥物',
+    match: /lipid\s*panel.*3\s*month|LDL.*statin/i, benefits: ['LDL', 'TC', 'TG'] },
+  { type: 'medical', text: 'Annual HbA1c + fasting glucose monitoring; if rising toward 6.5%, discuss metformin. Consider OGTT for borderline cases', textZh: '每年監測 HbA1c + 空腹血糖；若趨近 6.5%，討論二甲雙胍。臨界個案考慮口服葡萄糖耐受試驗',
+    match: /HbA1c.*monitor|annual.*HbA1c|metformin/i, benefits: ['HbA1c', 'Glucose'] },
+  { type: 'medical', text: 'Monitor kidney function (eGFR, creatinine) annually. If uric acid >9.0 or recurrent gout: discuss allopurinol/febuxostat', textZh: '每年監測腎功能（eGFR、肌酸酐）。若尿酸 > 9.0 或反覆痛風：討論別嘌醇／非布索坦',
+    match: /kidney.*function|uric.*9\.0|allopurinol|febuxostat/i, benefits: ['Uric Acid', 'eGFR'] },
+  { type: 'medical', text: 'Repeat abdominal ultrasound in 6 months; monitor ALT/AST every 3-6 months — track fatty liver regression', textZh: '6 個月後重複腹部超音波；每 3-6 個月監測 ALT/AST — 追蹤脂肪肝消退情況',
+    match: /ultrasound.*6\s*month|ALT.*AST.*3.?6/i, benefits: ['Fatty Liver', 'ALT', 'AST'] },
+  { type: 'medical', text: 'Body composition analysis every 3 months — track fat mass vs lean mass, not just weight', textZh: '每 3 個月進行體組成分析 — 追蹤體脂量與肌肉量，而非僅看體重',
+    match: /body\s*composition\s*analysis/i, benefits: ['BMI', 'Body Fat'] },
+  { type: 'medical', text: 'Recheck 25-OH Vitamin D in 3 months — adjust dose to maintain 30-50 ng/mL', textZh: '3 個月後複查 25-OH 維生素 D — 調整劑量維持 30-50 ng/mL',
+    match: /recheck.*vitamin\s*D|25.?OH.*3\s*month/i, benefits: ['Vitamin D'] },
+];
+
+// ═══════════════════════════════════���═══════════════
+// iHerb SUPPLEMENT RECOMMENDATIONS
+// ═══════════════════════════════════════════════════
+const SUPPLEMENTS = [
+  // ── Heart & Vascular ���─
+  {
+    id: 'omega3', name: 'Omega-3 Fish Oil (rTG Form)',
+    nameZh: 'Omega-3 魚油（rTG 型）',
+    dose: '1-2 softgels/day with food (EPA+DHA &#8805;1,000mg)',
+    doseZh: '每日 1-2 粒軟膠囊，隨餐服用（EPA+DHA ≥1,000mg）',
+    triggers: ['bp_systolic','bp_diastolic','tg','ldl','tc','hscrp','tc_hdl_ratio'],
+    mechanism: 'rTG form EPA+DHA: dose-dependent TG reduction (JAHA 2023 meta-analysis, linear at &gt;2g/d). SBP -14.7 mmHg combined with DASH. Anti-inflammatory via EPA-derived resolvins.',
+    mechanismZh: 'rTG 型 EPA+DHA：劑量依賴性降低三酸甘油酯（JAHA 2023 統合分析，>2g/d 線性效應）。與 DASH 飲食合用收縮壓 -14.7 mmHg。透過 EPA 衍生的促消退素發揮抗發炎作用。',
+    evidence: 'strong',
+    rootCause: 'TG driven by fructose/refined carbs/alcohol; LDL by saturated fat; BP by sodium/obesity/sedentary. Reduce added sugars &lt;25g/d, saturated fat &lt;7% calories, increase omega-3 rich fish 2-3x/week.',
+    rootCauseZh: '三酸甘油酯升高主因：果糖/精製碳水化合物/酒精；LDL 升高主因：飽和脂肪；血壓升高主因：鈉攝取過多/肥胖/久坐。添加糖控制在 &lt;25g/d、飽和脂肪 &lt;7% 總熱量、每週 2-3 次富含 Omega-3 的魚類。',
+    bridge: '3-6 months; recheck lipid panel. If dietary changes sustained + TG/LDL normalized, consider step-down to maintenance dose or dietary omega-3 only.',
+    bridgeZh: '3-6 個月後複查血脂。若飲食改善持續且三酸甘油酯/LDL 正常化，可考慮降至維持劑量或純從飲食攝取 Omega-3。',
+    products: [
+      { name: 'California Gold Nutrition Omega 800', spec: '480mg EPA + 320mg DHA/softgel, kd-p&#363;r TG, IFOS certified, 90ct', url: 'https://www.iherb.com/pr/california-gold-nutrition-omega-800-ultra-concentrated-omega-3-fish-oil-kd-pur-triglyceride-form-90-fish-gelatin-softgels-1-000-mg-per-softgel/85180', top: true },
+      { name: 'Sports Research Triple Strength', spec: '~1055mg Omega-3/softgel, rTG form, Norway sourced, 180ct', url: 'https://www.iherb.com/pr/sports-research-omega-3-fish-oil-triple-strength-180-softgels/113871' }
+    ]
+  },
+  {
+    id: 'magnesium', name: 'Magnesium Glycinate',
+    nameZh: '甘胺酸鎂',
+    dose: '200-400mg before bed (3 caps)',
+    doseZh: '睡前 200-400mg（3 粒）',
+    triggers: ['bp_systolic','bp_diastolic'],
+    mechanism: 'Meta-analysis (38 RCTs, n=2709): SBP -2.84, DBP -2.10 mmHg at 365mg/d; at &#8805;400mg/d: SBP -6.38, DBP -3.71 mmHg. Glycinate form has superior bioavailability and minimal GI distress. Also improves sleep quality.',
+    mechanismZh: '統合分析（38 項 RCT，n=2709）：365mg/d 時收縮壓 -2.84、舒張壓 -2.10 mmHg；≥400mg/d 時收縮壓 -6.38、舒張壓 -3.71 mmHg。甘胺酸鎂生物利用率高，腸胃不適少。亦可改善睡眠品質。',
+    evidence: 'moderate',
+    rootCause: 'BP driven by sodium excess (&gt;2,300mg/d), obesity, sleep deprivation (&lt;6h = 3.5x hypertension risk), chronic stress, sedentary lifestyle. DASH diet + weight loss 5-10% + 150min/wk exercise.',
+    rootCauseZh: '血壓升高根本原因：鈉攝取過多（&gt;2,300mg/d）、肥胖、睡眠不足（&lt;6 小時使高血壓風險增加 3.5 倍）、慢性壓力、久坐。DASH 飲食 + 體重減輕 5-10% + 每週運動 150 分鐘。',
+    bridge: '3-6 months; monitor home BP 2x/week. Magnesium may be continued long-term as modern diets are often Mg-deficient.',
+    bridgeZh: '3-6 個月，每週 2 次居家量血壓監測。現代飲食普遍鎂攝取不足，可考慮長期補充。',
+    products: [
+      { name: 'California Gold Nutrition Magnesium Glycinate', spec: '400mg/3caps, 180 vcaps', url: 'https://www.iherb.com/pr/california-gold-nutrition-magnesium-glycinate-180-veggie-capsules-133-mg-per-capsule/129685', top: true },
+      { name: "Doctor's Best High Absorption Magnesium", spec: '100mg/tab chelated, 240 tabs', url: 'https://www.iherb.com/pr/doctor-s-best-high-absorption-magnesium-lysinate-glycinate-chelated-albion-traacs-240-tablets-100-mg-per-tablet/16567' }
+    ]
+  },
+  {
+    id: 'coq10', name: 'CoQ10 / Ubiquinol',
+    nameZh: 'CoQ10 / 泛醌（Ubiquinol）',
+    dose: '100-200mg/day with food',
+    doseZh: '每日 100-200mg，隨餐服用',
+    triggers: ['bp_systolic','bp_diastolic','pwv'],
+    mechanism: 'Meta-analysis (45 RCTs): SBP -3.44 mmHg; at &lt;200mg/d: SBP -6.05 mmHg after &gt;8 weeks. Essential CoQ10 replenishment if taking statins (statins deplete CoQ10).',
+    mechanismZh: '統合分析（45 項 RCT）：收縮壓 -3.44 mmHg；&lt;200mg/d 且持續 &gt;8 週：收縮壓 -6.05 mmHg。服用他汀類藥物者需補充 CoQ10（他汀類會耗竭 CoQ10）。',
+    evidence: 'moderate',
+    rootCause: 'BP driven by sodium excess, obesity, sedentary lifestyle. CoQ10 declines naturally with age (&gt;40) and is depleted by statin therapy. Address BP root causes first.',
+    rootCauseZh: '血壓升高根本原因：鈉攝取過多、肥胖、久坐。CoQ10 隨年齡（&gt;40 歲）自然下降，他汀類治療亦會耗竭。應優先從根本解決血壓問題。',
+    bridge: 'If on statins: ongoing supplementation recommended. If not on statins and BP normalized via lifestyle: reassess after 6 months. Age-related decline may warrant long-term use after 40.',
+    bridgeZh: '服用他汀類：建議持續補充。未使用他汀類且血壓透過生活調整正常化：6 個月後重新評估。40 歲後因年齡相關性下降，可能需長期補充。',
+    products: [
+      { name: 'Thorne Heart Health Complex', spec: 'CoQ10 + Hawthorn, 90 caps', url: 'https://www.iherb.com/pr/thorne-heart-health-complex-with-coq10-and-hawthorn-90-capsules/18496', top: true }
+    ]
+  },
+  // ── Blood / CBC (low values) ──
+  {
+    id: 'iron', name: 'Iron (Ferrochel Bisglycinate)',
+    nameZh: '鐵（螯合型雙甘胺酸鐵）',
+    dose: '18-27mg/day with Vitamin C; take on empty stomach',
+    doseZh: '每日 18-27mg，搭配維生素 C，空腹服用',
+    triggers: ['hb','rbc','ht','mcv'],
+    mechanism: 'Chelated iron for deficiency anemia; high absorption, non-constipating. Only supplement when values are LOW. Confirm deficiency with physician first.',
+    mechanismZh: '螯合型鐵，吸收率高且不易便秘，適用於缺鐵性貧血。<b>僅在數值偏低時補充</b>，請先由醫師確認缺鐵。',
+    evidence: 'strong',
+    rootCause: 'Iron deficiency caused by: insufficient dietary iron (red meat, legumes, dark leafy greens), menstrual blood loss, GI bleeding (occult), or poor absorption (celiac, H. pylori). Identify and treat the underlying cause.',
+    rootCauseZh: '缺鐵原因：飲食中鐵質不足（紅肉、豆類、深色葉菜）、月經失血、消化道出血（隱性）、吸收不良（乳糜瀉、幽門螺旋桿菌）。應找出並治療根本原因。',
+    bridge: '3-6 months until ferritin &gt;50 ng/mL and Hb normalizes. Stop supplementation once stores replenished — ongoing iron without deficiency causes oxidative damage. Recheck CBC + ferritin at 3 months.',
+    bridgeZh: '3-6 個月直至鐵蛋白 &gt;50 ng/mL 且血紅素正常。儲量恢復後應停止補充——無缺鐵情況下持續補鐵會造成氧化損傷。3 個月後複查 CBC + 鐵蛋白。',
+    products: [
+      { name: 'Thorne Ferrasorb', spec: 'Iron + B12 + Folate + Vit C, 60 caps', url: 'https://www.iherb.com/pr/thorne-ferrasorb-60-capsules/18582', top: true },
+      { name: "Doctor's Best High Absorption Iron 27mg", spec: 'Ferrochel bisglycinate, 120 tabs', url: 'https://www.iherb.com/pr/Doctor-s-Best-High-Absorption-With-Ferrochel-27-mg-120-Tablets/72625' },
+      { name: 'Floradix Iron + Herbs', spec: 'Liquid form, gentle on stomach, 250ml', url: 'https://www.iherb.com/pr/floradix-floradix-iron-herbs-liquid-herbal-supplement-8-5-fl-oz-250-ml/106339' }
+    ]
+  },
+  // ── Liver ──
+  {
+    id: 'liver_support', name: 'Milk Thistle + NAC',
+    nameZh: '奶薊 + NAC',
+    dose: 'NAC 600mg + Silymarin 150-300mg, twice daily',
+    doseZh: 'NAC 600mg + 水飛薊素 150-300mg，每日兩次',
+    triggers: ['ast','alt','direct_bilirubin','total_bilirubin','alp','ultrasound'],
+    mechanism: 'Silymarin is hepatoprotective; NAC is a glutathione precursor supporting liver detoxification and enzyme normalization.',
+    mechanismZh: '水飛薊素具護肝作用；NAC 為麩胱甘肽前驅物，支持肝臟解毒及酵素正常化。',
+    evidence: 'moderate',
+    rootCause: 'Elevated liver enzymes most commonly from: caloric excess &#8594; non-alcoholic fatty liver (NAFLD), alcohol, fructose/sugar overload, medication toxicity. 5-7% body weight loss reverses NAFLD in most cases.',
+    rootCauseZh: '肝酵素升高最常見原因：熱量過剩 &#8594; 非酒精性脂肪肝（NAFLD）、酒精、果糖/糖分過量、藥物毒性。體重減輕 5-7% 在多數情況下可逆轉 NAFLD。',
+    bridge: '3-6 months while addressing root cause. Stop when ALT/AST normalize + ultrasound shows reduced fatty infiltration. NAC/silymarin are bridge support, not a substitute for caloric reduction.',
+    bridgeZh: '3-6 個月，同步處理根本原因。待 ALT/AST 正常化且超音波顯示脂肪浸潤減少後停用。NAC/水飛薊素是過渡支援，不能取代熱量控制。',
+    products: [
+      { name: 'Dr. Mercola NAC with Milk Thistle', spec: '180 caps', url: 'https://www.iherb.com/pr/dr-mercola-nac-with-milk-thistle-180-capsules/123149', top: true },
+      { name: "Nature's Craft Liver Support + NAC", spec: 'Milk Thistle + NAC + Chanca Piedra, 60 caps', url: 'https://www.iherb.com/pr/nature-s-craft-liver-support-nac-with-milk-thistle-60-capsules/139638' }
+    ]
+  },
+  // ── Kidney / Uric Acid ──
+  {
+    id: 'tart_cherry', name: 'Tart Cherry Extract',
+    nameZh: '酸櫻桃萃取物',
+    dose: '1,000mg/day',
+    doseZh: '每日 1,000mg',
+    triggers: ['uric_acid','hscrp'],
+    mechanism: '2025 RCT (J Dietary Suppl, n=10, crossover): 500mg/d x 28 days &#8594; serum urate -2.62 mg/dL vs placebo +0.24 mg/dL. Mechanism: anthocyanins inhibit xanthine oxidase and promote renal urate excretion.',
+    mechanismZh: '2025 年 RCT（J Dietary Suppl，n=10，交叉設計）：500mg/d × 28 天 &#8594; 血清尿酸 -2.62 mg/dL（安慰劑 +0.24 mg/dL）。機制：花青素抑制黃嘌呤氧化酶並促進腎臟尿酸排泄。',
+    evidence: 'strong',
+    rootCause: 'Uric acid driven by: fructose intake (fructose &#8594; ATP depletion &#8594; AMP &#8594; xanthine oxidase &#8594; uric acid), purine-rich diet (organ meats, beer), dehydration, visceral fat. Cut added sugars &lt;25g/d, hydrate &#8805;2L/d, reduce alcohol.',
+    rootCauseZh: '尿酸升高根本原因：果糖攝取（果糖 &#8594; ATP 消耗 &#8594; AMP &#8594; 黃嘌呤氧化酶 &#8594; 尿酸）、富含普林飲食（內臟、啤酒）、脫水、內臟脂肪。添加糖控制在 &lt;25g/d、每日飲水 ≥2L、減少飲酒。',
+    bridge: '3-6 months while fixing diet. If fructose/purine intake controlled + adequate hydration + uric acid &lt;7.0 mg/dL, discontinue. Uric acid WILL rebound if root causes are not addressed.',
+    bridgeZh: '3-6 個月，同步修正飲食。若果糖/普林攝取控制 + 充足飲水 + 尿酸 &lt;7.0 mg/dL，可停用。根本原因未改善則尿酸必然反彈。',
+    products: [
+      { name: 'Amazing Nutrition Tart Cherry 1000mg', spec: '120 caps', url: 'https://www.iherb.com/pr/amazing-nutrition-tart-cherry-1-000-mg-120-capsules/108565', top: true },
+      { name: 'Eu Natural Uric Acid Purge', spec: 'Celery Seed + Tart Cherry 3-in-1, 60 vcaps', url: 'https://www.iherb.com/pr/eu-natural-uric-acid-purge-celery-seed-tart-cherry-60-vegetarian-capsules/102756' }
+    ]
+  },
+  {
+    id: 'vitamin_c_supp', name: 'Vitamin C',
+    nameZh: '維生素 C',
+    dose: '500mg/day',
+    doseZh: '每日 500mg',
+    triggers: ['uric_acid'],
+    mechanism: 'Meta-analysis (13 RCTs, n=556): 500mg/d &#8594; uric acid -0.35 mg/dL (95% CI: -0.66, -0.03). Individual RCT: -0.5 mg/dL after 2 months. Also promotes renal urate excretion and enhances iron absorption.',
+    mechanismZh: '統合分析（13 項 RCT，n=556）：500mg/d &#8594; 尿酸 -0.35 mg/dL（95% CI：-0.66, -0.03）。個別 RCT：2 個月後 -0.5 mg/dL。亦促進腎臟尿酸排泄並增強鐵質吸收。',
+    evidence: 'moderate',
+    rootCause: 'Same upstream drivers as uric acid: fructose excess, purine-rich diet, dehydration, visceral fat. Vitamin C promotes renal urate clearance but does not address production. Fix diet first.',
+    rootCauseZh: '與尿酸升高相同的上游驅動因子：果糖過量、富含普林飲食、脫水、內臟脂肪。維生素 C 促進尿酸清除但不抑制生成，應優先修正飲食。',
+    bridge: '3 months, then recheck uric acid. If dietary changes sustained and uric acid normalized, discontinue. Vitamin C from whole foods (guava, kiwi, citrus) can maintain the effect.',
+    bridgeZh: '3 個月後複查尿酸。若飲食改善持續且尿酸正常化，可停用。全食物（芭樂、奇異果、柑橘）中的維生素 C 可維持同等效果。',
+    products: [
+      { name: 'California Gold Nutrition Gold C 500mg', spec: 'USP grade ascorbic acid, 240 vcaps', url: 'https://www.iherb.com/pr/california-gold-nutrition-gold-c-usp-grade-vitamin-c-500-mg-240-veggie-capsules/61866', top: true },
+      { name: 'Solgar Ester-C Plus 500mg', spec: 'pH neutral, gentle on stomach, 100 vcaps', url: 'https://www.iherb.com/pr/solgar-ester-c-plus-vitamin-c-500-mg-100-vegetable-capsules/69610' }
+    ]
+  },
+  {
+    id: 'cranberry', name: 'Cranberry Extract (PACs)',
+    nameZh: '蔓越莓萃取物（PACs）',
+    dose: 'Per label; standardized to PAC content',
+    doseZh: '依標示服用；應確認 PAC 含量標準化',
+    triggers: ['urine_protein','urine_blood'],
+    mechanism: 'Proanthocyanidins (PACs) support urinary tract health via anti-adhesion properties against bacteria.',
+    mechanismZh: '原花青素（PACs）透過抗黏附特性抑制細菌附著，支持泌尿道健康。',
+    evidence: 'moderate',
+    rootCause: 'Urine protein/blood may indicate UTI, kidney disease, or structural issues. Cranberry only addresses recurrent UTI risk. Abnormal urinalysis requires physician evaluation to rule out glomerulonephritis, stones, or malignancy.',
+    rootCauseZh: '尿蛋白/尿血可能為泌尿道感染、腎臟病或結構問題所致。蔓越莓僅針對反覆性泌尿道感染。持續異常尿液分析必須就醫排除腎絲球腎炎、結石或惡性腫瘤。',
+    bridge: 'During active UTI risk period or recurrent UTI history. Not a substitute for medical evaluation of persistent proteinuria or hematuria. See physician if findings persist.',
+    bridgeZh: '限於泌尿道感染高風險期或有反覆感染病史者。不能取代持續蛋白尿或血尿的醫療評估。若症狀持續請就醫。',
+    products: [
+      { name: 'NOW Foods Cranberry with PACs', spec: '1000mg Cranberry + Uva Ursi + Grape Seed, 90 vcaps', url: 'https://www.iherb.com/pr/now-foods-cranberry-with-pacs-90-veg-capsules/505', top: true }
+    ]
+  },
+  // ── Glucose Metabolism ──
+  {
+    id: 'berberine', name: 'Berberine',
+    nameZh: '小檗鹼（Berberine）',
+    dose: '500mg 2-3x/day with meals',
+    doseZh: '每次 500mg，每日 2-3 次，隨餐服用',
+    triggers: ['glucose','hba1c'],
+    mechanism: 'Meta-analysis (37 RCTs): HbA1c -0.63% (95% CI: -0.72, -0.53); FPG -0.82 mmol/L (~-14.8 mg/dL). AMPK activator; 500mg 2-3x/d. Safe profile with no increased hypoglycemia risk.',
+    mechanismZh: '統合分析（37 項 RCT）：HbA1c -0.63%（95% CI：-0.72, -0.53）；空腹血糖 -0.82 mmol/L（約 -14.8 mg/dL）。AMPK 活化劑；500mg 每日 2-3 次。低血糖風險不增加，安全性良好。',
+    evidence: 'strong',
+    rootCause: 'Insulin resistance driven by: excess body fat (especially visceral), refined carbs/sugar, sedentary lifestyle. DPP trial: 5-7% weight loss + 150min/wk exercise reduces diabetes progression 58%. This is more effective than any supplement or drug.',
+    rootCauseZh: '胰島素阻抗根本原因：體脂過多（尤其內臟脂肪）、精製碳水化合物/糖分、久坐。DPP 試驗：體重減輕 5-7% + 每週運動 150 分鐘可降低糖尿病進展風險 58%，效果優於任何補充品或藥物。',
+    bridge: '3-6 months while implementing lifestyle changes. Recheck FPG + HbA1c. If weight loss achieved + exercise sustained + glucose normalized, taper off. Berberine masks the problem if diet unchanged.',
+    bridgeZh: '3-6 個月，同步建立生活習慣。複查空腹血糖 + HbA1c。若體重減輕、運動維持且血糖正常化，可逐步停用。飲食未改善則小檗鹼只是治標不治本。',
+    products: [
+      { name: 'NOW Foods Berberine Glucose Support', spec: 'MCT oil enhanced absorption, 90 softgels', url: 'https://www.iherb.com/pr/now-foods-berberine-glucose-support-90-softgels/88818', top: true },
+      { name: 'Swanson Berberine Complex', spec: '+ Ceylon Cinnamon + Gymnema + Fenugreek, 90 vcaps', url: 'https://www.iherb.com/pr/swanson-berberine-complex-90-veggie-capsules/110994' }
+    ]
+  },
+  // ── Lipid Panel ──
+  {
+    id: 'plant_sterols', name: 'Plant Sterols (Beta-Sitosterol)',
+    nameZh: '植物固醇（β-谷甾醇）',
+    dose: '800mg-2g/day with meals (split into 2 doses)',
+    doseZh: '每日 800mg-2g，分 2 次隨餐服用',
+    triggers: ['ldl','tc'],
+    mechanism: 'Meta-analysis (41 RCTs): 2g/d &#8594; LDL -8-10% (-0.31 mmol/L, 95% CI: -0.35 to -0.27). Higher intakes add little. FDA heart health claim at &#8805;800mg/day split into 2 doses with meals.',
+    mechanismZh: '統合分析（41 項 RCT）：2g/d &#8594; LDL -8-10%（-0.31 mmol/L，95% CI：-0.35 to -0.27）。攝取量增加效益有限。每日 ≥800mg 分 2 次隨餐，獲 FDA 心臟健康宣稱認可。',
+    evidence: 'strong',
+    rootCause: 'LDL/TC elevated by: saturated fat &gt;7% calories, trans fat, excess body weight, genetic predisposition (familial hypercholesterolemia). Reduce saturated fat, increase soluble fiber (oats, beans), exercise 150min/wk.',
+    rootCauseZh: 'LDL/TC 升高原因：飽和脂肪 &gt;7% 總熱量、反式脂肪、體重過重、遺傳因素（家族性高膽固醇血症）。減少飽和脂肪、增加可溶性纖維（燕麥、豆類）、每週運動 150 分鐘。',
+    bridge: '3-6 months; recheck lipid panel. If dietary changes sustained + LDL at target, consider discontinuing. Genetic hypercholesterolemia may require ongoing use or statin therapy.',
+    bridgeZh: '3-6 個月後複查血脂。若飲食改善持續且 LDL 達標，可考慮停用。遺傳性高膽固醇血症可能需長期使用或他汀類藥物治療。',
+    products: [
+      { name: 'NOW Foods Beta-Sitosterol Plant Sterols', spec: 'CardioAid-S blend, 180 softgels', url: 'https://www.iherb.com/pr/now-foods-beta-sitosterol-plant-sterols-180-softgels/44501', top: true },
+      { name: 'Nature Made CholestOff Complete', spec: '900mg sterols+stanols/serving, 120 softgels', url: 'https://www.iherb.com/pr/nature-made-cholestoff-complete-120-softgels/70870' }
+    ]
+  },
+  {
+    id: 'red_yeast_rice', name: 'Red Yeast Rice + CoQ10',
+    nameZh: '紅麴 + CoQ10',
+    dose: '1,200mg/day red yeast rice + CoQ10',
+    doseZh: '每日紅麴 1,200mg + CoQ10',
+    triggers: ['ldl','tc'],
+    mechanism: 'Meta-analysis (14 RCTs): LDL -15.6% (95% CI: -9.6% to -21.6%); up to -25% in 6-8 weeks. Contains monacolin K (identical to lovastatin). Comparable to low-dose statin therapy. Add CoQ10 to offset depletion.',
+    mechanismZh: '統合分析（14 項 RCT）：LDL -15.6%（95% CI：-9.6% to -21.6%）；6-8 週可達 -25%。含莫納可林 K（與洛伐他汀相同）。效果相當於低劑量他汀類治療。需加 CoQ10 補充耗竭。',
+    evidence: 'strong',
+    rootCause: 'Same as LDL/TC: saturated fat, trans fat, obesity, genetics. Red yeast rice is essentially a natural low-dose statin — it treats the number, not the cause. Diet + exercise should be primary intervention.',
+    rootCauseZh: '與 LDL/TC 相同根本原因：飽和脂肪、反式脂肪、肥胖、遺傳。紅麴本質上是天然低劑量他汀——只針對數值，不解決根本。飲食 + 運動應為首要介入。',
+    bridge: '3-6 months; recheck lipid panel. If lifestyle changes achieve LDL target, discontinue. Note: monacolin K carries same risks as statins (liver, muscle) — physician monitoring recommended.',
+    bridgeZh: '3-6 個月後複查血脂。若生活調整達到 LDL 目標，停用。注意：莫納可林 K 具有與他汀類相同風險（肝臟、肌肉）——建議醫師監測。',
+    products: [
+      { name: 'Thorne Red Yeast Rice + CoQ10', spec: '120 caps', url: 'https://www.iherb.com/pr/thorne-red-yeast-rice-coq10-120-capsules/18124', top: true },
+      { name: 'Nordic Naturals Cholesterol Support', spec: 'Omega-3 + Red Yeast Rice + CoQ10, 60 softgels', url: 'https://www.iherb.com/pr/nordic-naturals-omega-ldl-with-red-yeast-rice-and-coq10-384-mg-60-soft-gels/29599' }
+    ]
+  },
+  {
+    id: 'psyllium', name: 'Psyllium Husk Fiber',
+    nameZh: '車前子殼纖維',
+    dose: '5-10g/day in water, before meals',
+    doseZh: '每日 5-10g，加水，餐前服用',
+    triggers: ['ldl','tc','tg'],
+    mechanism: 'Meta-analysis (41 RCTs, n=2049): 10g/d &#8594; LDL -7%, TC -4%. Dose- and time-dependent effect. FDA heart health claim at &#8805;7g/d soluble fiber. Mechanism: binds bile acids, forcing hepatic cholesterol conversion.',
+    mechanismZh: '統合分析（41 項 RCT，n=2049）：10g/d &#8594; LDL -7%、TC -4%。效果具劑量和時間依賴性。每日 ≥7g 可溶性纖維獲 FDA 心臟健康宣稱。機制：與膽汁酸結合，迫使肝臟轉換膽固醇。',
+    evidence: 'strong',
+    rootCause: 'Low dietary fiber intake (&lt;25g/d) is the root issue. Whole food sources: oats, barley, beans, lentils, flaxseed, chia seeds, vegetables. A high-fiber diet achieves the same bile acid binding effect naturally.',
+    rootCauseZh: '根本問題是飲食纖維攝取不足（&lt;25g/d）。全食物來源：燕麥、大麥、豆類、扁豆、亞麻籽、奇亞籽、蔬菜。高纖飲食可達到相同的膽汁酸結合效果。',
+    bridge: 'Can replace with whole food fiber once dietary habits change. If eating &#8805;25g fiber/d from food consistently, psyllium supplementation is unnecessary. Easiest supplement to \"graduate\" from.',
+    bridgeZh: '一旦飲食習慣改變，可用全食物纖維取代。若每日穩定從食物攝取 ≥25g 纖維，無需再補充車前子。這是最容易「畢業」的補充品。',
+    products: [
+      { name: 'NOW Foods Psyllium Husk Powder', spec: '6g soluble fiber/serving, 12oz (340g)', url: 'https://www.iherb.com/pr/now-foods-psyllium-husk-powder-12-oz-340-g/8934', top: true }
+    ]
+  },
+  {
+    id: 'niacin', name: 'Niacin (Vitamin B3)',
+    nameZh: '菸鹼酸（維生素 B3）',
+    dose: '500mg/day (start at 100mg, titrate up over weeks)',
+    doseZh: '每日 500mg（從 100mg 開始，數週內逐步加量）',
+    triggers: ['hdl','tg'],
+    mechanism: 'Clinical trial: HDL 35&#8594;42 mg/dL (~+20%) over 2 years. Dose-dependent TG lowering at 1000-2000mg/d. Flushing is normal — start at 100mg, titrate up. Only niacin form (not niacinamide) affects lipids. Note: HDL increase may not reduce CV events when already on statins (AIM-HIGH trial).',
+    mechanismZh: '臨床試驗：2 年後 HDL 從 35 升至 42 mg/dL（約 +20%）。1000-2000mg/d 具劑量依賴性降低三酸甘油酯效果。潮紅反應屬正常——從 100mg 開始逐步加量。只有菸鹼酸（非菸鹼醯胺）才能影響血脂。注意：已服用他汀類時，增加菸鹼酸可能不進一步降低心血管事件（AIM-HIGH 試驗）。',
+    evidence: 'strong',
+    rootCause: 'Low HDL driven by: sedentary lifestyle (exercise is the #1 HDL booster, +3-6 mg/dL), smoking, excess body fat, high refined carb diet. Aerobic exercise 150min/wk + smoking cessation + weight loss are the primary interventions.',
+    rootCauseZh: 'HDL 偏低原因：久坐（運動是提升 HDL 的首要方法，+3-6 mg/dL）、吸菸、體脂過多、高精製碳水化合物飲食。有氧運動每週 150 分鐘 + 戒菸 + 減重為首要介入。',
+    bridge: '3-6 months while establishing exercise habit. If HDL rises with exercise + weight management, discontinue niacin. AIM-HIGH trial showed adding niacin to statins did not reduce CV events — exercise remains superior.',
+    bridgeZh: '3-6 個月，同步建立運動習慣。若 HDL 透過運動 + 體重管理提升，停用菸鹼酸。AIM-HIGH 試驗顯示在他汀類基礎上加用菸鹼酸並未降低心血管事件——運動仍優於藥物。',
+    products: [
+      { name: 'Life Extension Vitamin B3 Niacin 500mg', spec: '100 caps', url: 'https://www.iherb.com/pr/life-extension-vitamin-b3-niacin-500-mg-100-capsules/16365', top: true }
+    ]
+  },
+  // ── Vitamin D ──
+  {
+    id: 'vitamin_d_supp', name: 'Vitamin D3 + K2 (MK-7)',
+    nameZh: '維生素 D3 + K2（MK-7）',
+    dose: 'D3 2,000-4,000 IU + K2 100-200mcg/day with fat-containing meal',
+    doseZh: '每日 D3 2,000-4,000 IU + K2 100-200 mcg，隨含脂肪餐食服用',
+    triggers: ['vitamin_d','bone_density'],
+    mechanism: 'D3 promotes calcium absorption; K2 (MK-7) directs calcium into bones instead of arteries. Synergistic pair. Target serum 25-OH &#8805;30 ng/mL.',
+    mechanismZh: 'D3 促進鈣質吸收；K2（MK-7）將鈣引導至骨骼而非動脈。協同作用組合。目標血清 25-OH ≥30 ng/mL。',
+    evidence: 'strong',
+    longTerm: true,
+    rootCause: 'Vitamin D deficiency from insufficient sun exposure — especially common in Taiwan (indoor work, sun avoidance). Diet alone cannot meet needs (few natural food sources). 15-20 min midday sun on arms/face = ~10,000 IU, but impractical for most office workers.',
+    rootCauseZh: '維生素 D 缺乏源於日曬不足——在台灣尤為常見（室內工作、避免日曬）。純靠飲食難以達標（天然食物來源稀少）。每日正午在手臂/臉部曬 15-20 分鐘 ≈ 10,000 IU，但對多數上班族不可行。',
+    bridge: 'LONG-TERM supplementation recommended. Unlike most supplements here, dietary/lifestyle changes rarely provide adequate vitamin D. Recheck 25-OH-D every 6 months to calibrate dose.',
+    bridgeZh: '建議<b>長期補充</b>。與多數補充品不同，飲食/生活調整很少能提供足夠的維生素 D。每 6 個月複查 25-OH-D 以校正劑量。',
+    products: [
+      { name: 'California Gold Nutrition D3 + K2 (MK-7)', spec: '180 vcaps', url: 'https://www.iherb.com/pr/california-gold-nutrition-vitamin-d3-k2-as-mk-7-180-veggie-capsules/124745', top: true },
+      { name: "Doctor's Best Vitamin D3 + K2 MK-7", spec: '180 softgels', url: 'https://www.iherb.com/pr/doctor-s-best-vitamin-d3-k2-mk-7-180-softgels/155204' }
+    ]
+  },
+  // ── Thyroid ──
+  {
+    id: 'thyroid_support', name: 'Selenium + Thyroid Support',
+    nameZh: '硒 + 甲狀腺支援配方',
+    dose: 'Selenium 200mcg/day',
+    doseZh: '硒 200 mcg/day',
+    triggers: ['tsh'],
+    mechanism: 'Selenium supports T4&#8594;T3 conversion; essential cofactor for deiodinase enzymes. Iodine + L-tyrosine support thyroid hormone synthesis.',
+    mechanismZh: '硒支援 T4 &#8594; T3 轉換；為脫碘酶的必需輔因子。碘 + L-酪氨酸支援甲狀腺激素合成。',
+    evidence: 'moderate',
+    rootCause: 'Thyroid dysfunction usually from: autoimmune (Hashimoto\'s/Graves\'), iodine deficiency/excess, or medication effects. Requires physician diagnosis — supplements alone do NOT treat thyroid disease.',
+    rootCauseZh: '甲狀腺功能異常通常源於：自體免疫（橋本氏/葛瑞夫茲）、碘缺乏/過量、藥物副作用。必須由醫師診斷——補充品<b>無法</b>治療甲狀腺疾病。',
+    bridge: 'Ongoing under physician supervision. Selenium may help reduce thyroid antibodies in Hashimoto\'s (Cochrane review), but does not replace thyroid hormone replacement if needed. Never self-treat abnormal TSH.',
+    bridgeZh: '須在醫師指導下進行。硒可能有助於降低橋本氏病的甲狀腺抗體（Cochrane 回顧），但若需要甲狀腺激素補充治療，硒無法取代。<b>切勿自行治療 TSH 異常</b>。',
+    products: [
+      { name: 'Terry Naturally Thyroid Care Plus', spec: 'Selenium + Iodine + L-Tyrosine, 60 caps', url: 'https://www.iherb.com/pr/terry-naturally-thyroid-care-plus-with-selenium-60-capsules/106210', top: true },
+      { name: 'Thorne Thyroid Health Complex', spec: 'Iodine + Selenium cofactors, 120 caps', url: 'https://www.iherb.com/pr/thorne-thyroid-health-complex-with-iodine-and-selenium-120-capsules/33639' }
+    ]
+  },
+  // ── Inflammation ──
+  {
+    id: 'curcumin', name: 'Curcumin (Turmeric Extract)',
+    nameZh: '薑黃素（薑黃萃取物）',
+    dose: '500-1,000mg/day with piperine (BioPerine)',
+    doseZh: '每日 500-1,000mg，搭配胡椒鹼（BioPerine）',
+    triggers: ['hscrp'],
+    mechanism: 'Pooled meta-analysis (21 MAs): CRP WMD -0.87 mg/L (95% CI: -1.14, -0.59); hs-CRP SMD -0.65 (p=0.02). Inhibits NF-&#954;B pathway. BioPerine increases bioavailability 2,000%. Dose: 500-1000mg/d for 12+ days.',
+    mechanismZh: '統合統合分析（21 篇 MA）：CRP WMD -0.87 mg/L（95% CI：-1.14, -0.59）；hs-CRP SMD -0.65（p=0.02）。抑制 NF-&#954;B 路徑。BioPerine 提升生物利用率 2,000%。劑量：500-1000mg/d，持續 12 天以上。',
+    evidence: 'strong',
+    rootCause: 'Chronic inflammation driven by: visceral fat (adipocytes secrete IL-6, TNF-&#945;), chronic stress, poor sleep (&lt;6h), excess sugar/processed food, sedentary lifestyle. Reduce visceral fat + manage stress + sleep &#8805;7h.',
+    rootCauseZh: '慢性發炎根本原因：內臟脂肪（脂肪細胞分泌 IL-6、TNF-&#945;）、慢性壓力、睡眠不足（&lt;6 小時）、過量糖分/加工食品、久坐。優先減少內臟脂肪 + 壓力管理 + 睡眠 ≥7 小時。',
+    bridge: '3-6 months while addressing inflammatory drivers. If hs-CRP normalizes with weight loss + lifestyle changes, discontinue. Curcumin treats the downstream signal, not the upstream source.',
+    bridgeZh: '3-6 個月，同步處理發炎驅動因子。若 hs-CRP 透過體重減輕 + 生活改善正常化，停用。薑黃素治療的是下游訊號，非上游根本原因。',
+    products: [
+      { name: "Doctor's Best High Absorption Curcumin C3 Complex", spec: 'With BioPerine, 120 vcaps', url: 'https://www.iherb.com/pr/doctor-s-best-high-absorption-curcumin-120-veggie-caps/13', top: true },
+      { name: 'Sports Research Turmeric Curcumin', spec: '500mg with C3 Complex, 120 softgels', url: 'https://www.iherb.com/pr/sports-research-turmeric-curcumin-500-mg-120-softgels/72054' }
+    ]
+  },
+  // ── Prostate ──
+  {
+    id: 'saw_palmetto', name: 'Saw Palmetto',
+    nameZh: '鋸棕櫚',
+    dose: '320mg/day standardized extract',
+    doseZh: '每日標準化萃取物 320mg',
+    triggers: ['psa'],
+    mechanism: 'Traditionally used for BPH. However, CAMUS RCT (NEJM): even at 3x standard dose, no significant benefit over placebo for urinary symptoms or PSA. Does not affect PSA readings. Cochrane 2023: little to no benefit. Consider only as adjunct if physician recommends.',
+    mechanismZh: '傳統用於良性攝護腺增生（BPH）。然而 CAMUS RCT（NEJM）：即使 3 倍標準劑量，對排尿症狀或 PSA 的效果與安慰劑無顯著差異。Cochrane 2023：幾乎無效。若醫師建議方考慮作為輔助使用。',
+    evidence: 'weak',
+    rootCause: 'Elevated PSA may indicate: BPH (benign, age-related), prostatitis, or prostate cancer. Requires urologist evaluation — PSA is a screening marker, not a diagnosis. No supplement replaces proper medical workup.',
+    rootCauseZh: 'PSA 升高可能代表：良性攝護腺增生（BPH，良性，年齡相關）、攝護腺炎或攝護腺癌。必須由泌尿科醫師評估——PSA 是篩檢指標，不是診斷。任何補充品都無法取代適當的醫療檢查。',
+    bridge: 'Physician-directed only. Evidence does not support self-treatment with saw palmetto. If urologist confirms BPH with no malignancy, discuss alpha-blockers or 5-alpha reductase inhibitors as first-line therapy.',
+    bridgeZh: '僅在醫師指導下使用。實證不支持自行服用鋸棕櫚。若泌尿科確認為無惡性腫瘤之 BPH，請與醫師討論 α 阻斷劑或 5-α 還原酶抑制劑作為第一線治療。',
+    products: [
+      { name: "Doctor's Best Saw Palmetto 320mg", spec: 'Standardized extract, 60 softgels', url: 'https://www.iherb.com/pr/doctor-s-best-saw-palmetto-standardized-extract-320-mg-60-softgels/24', top: true },
+      { name: 'Real Health Prostate Formula', spec: 'Saw Palmetto + Zinc + Pomegranate + Quercetin, 270 tabs', url: 'https://www.iherb.com/pr/real-health-the-prostate-formula-with-saw-palmetto-270-tablets/57282' }
+    ]
+  },
+  // ── Bone Density ──
+  {
+    id: 'bone_support', name: 'Calcium + D3 + K2 Complex',
+    nameZh: '鈣 + D3 + K2 複合配方',
+    dose: 'Calcium 600-1,200mg + D3 + K2 daily, split into 2 doses',
+    doseZh: '每日鈣 600-1,200mg + D3 + K2，分 2 次服用',
+    triggers: ['bone_density'],
+    mechanism: 'Calcium for bone mineralization; D3 for intestinal absorption; K2 (MK-4) clinically studied for maintaining bone density. Split doses for better absorption.',
+    mechanismZh: '鈣用於骨質礦化；D3 促進腸道吸收；K2（MK-4）在臨床研究中顯示可維持骨密度。分次服用以提升吸收率。',
+    evidence: 'strong',
+    rootCause: 'Bone loss from: calcium-poor diet, vitamin D deficiency, sedentary lifestyle (weight-bearing exercise stimulates bone), menopause (estrogen decline accelerates loss), smoking, excess alcohol. Weight-bearing exercise + adequate dietary calcium (dairy, tofu, sardines) are primary.',
+    rootCauseZh: '骨質流失原因：鈣質飲食不足、維生素 D 缺乏、久坐（負重運動刺激骨質）、更年期（雌激素下降加速流失）、吸菸、過量飲酒。負重運動 + 充足飲食鈣質（乳製品、豆腐、沙丁魚）為首要介入。',
+    bridge: 'Long-term if confirmed osteopenia/osteoporosis. Post-menopausal women and men &gt;70 typically need ongoing supplementation. Younger adults: optimize diet + exercise first, supplement only if intake &lt;1000mg Ca/d.',
+    bridgeZh: '確診骨質疏鬆症/骨量減少者需長期補充。停經後女性及 70 歲以上男性通常需持續補充。年輕成人：優先優化飲食 + 運動，每日鈣攝取 &lt;1000mg 再考慮補充。',
+    products: [
+      { name: 'Life Extension Bone Restore Elite', spec: 'Ca + D3 + K2(MK-4) + trace minerals, 120 caps', url: 'https://www.iherb.com/pr/life-extension-bone-restore-elite-calcium-supplement-with-super-potent-k2-120-capsules/113499', top: true },
+      { name: 'New Chapter Bone Strength Take Care', spec: 'Plant-source calcium + D3 + K2, 240 tiny tabs', url: 'https://www.iherb.com/pr/new-chapter-plant-calcium-bone-strength-take-care-240-vegan-tiny-tablets/39500' }
+    ]
+  },
+  // ── Eye Health ──
+  {
+    id: 'eye_support', name: 'Lutein + Zeaxanthin',
+    nameZh: '葉黃素 + 玉米黃質',
+    dose: '20-40mg lutein + 2-4mg zeaxanthin/day with food',
+    doseZh: '每日葉黃素 20-40mg + 玉米黃質 2-4mg，隨餐服用',
+    triggers: ['iop_l','iop_r'],
+    mechanism: 'Macular carotenoids that filter blue light and provide antioxidant protection. Supports overall eye health and recovery from bright light exposure.',
+    mechanismZh: '黃斑部類胡蘿蔔素，可過濾藍光並提供抗氧化保護。支援整體眼部健康及強光照射後的恢復。',
+    evidence: 'moderate',
+    longTerm: true,
+    rootCause: 'Elevated IOP may indicate glaucoma risk — requires ophthalmologist evaluation. Macular degeneration driven by: age, UV/blue light exposure, oxidative stress. Reduce screen time, wear UV-blocking sunglasses, eat dark leafy greens (natural lutein source).',
+    rootCauseZh: '眼壓升高可能表示青光眼風險——需眼科醫師評估。黃斑部退化受：年齡、紫外線/藍光暴露、氧化壓力驅動。減少螢幕時間、佩戴 UV 防護太陽眼鏡、攝取深色葉菜（天然葉黃素來源）。',
+    bridge: 'Long-term for screen-intensive workers. AREDS2 formula (lutein + zeaxanthin) showed 25% reduction in advanced AMD progression over 5 years. Dietary sources: kale, spinach, eggs. Annual ophthalmology follow-up essential.',
+    bridgeZh: '螢幕密集工作者宜長期補充。AREDS2 配方（葉黃素 + 玉米黃質）顯示 5 年後晚期老年性黃斑部病變進展降低 25%。飲食來源：羽衣甘藍、菠菜、雞蛋。每年眼科追蹤不可少。',
+    products: [
+      { name: "Doctor's Best Lutein (Lutemax 2020)", spec: '20mg lutein + zeaxanthin isomers, 180 softgels', url: 'https://www.iherb.com/pr/doctor-s-best-lutein-lutemax-2020-20-mg-180-softgels/58903', top: true },
+      { name: 'NOW Foods Lutein & Zeaxanthin', spec: '60 softgels', url: 'https://www.iherb.com/pr/now-foods-lutein-zeaxanthin-60-softgels/70960' }
+    ]
+  }
+];
+
+function buildPersonalSummary(flagged) {
+  // 1. Collect all triggered plans
+  const triggeredPlanKeys = new Set();
+  flagged.forEach(r => {
+    for (const pk in PLANS) {
+      if (PLANS[pk].triggers.includes(r.id)) triggeredPlanKeys.add(pk);
+    }
+  });
+
+  // 2. Collect all high-priority raw items from triggered plans
+  const rawItems = [];
+  triggeredPlanKeys.forEach(pk => {
+    const plan = PLANS[pk];
+    plan.sections.forEach(sec => {
+      sec.items.forEach(item => {
+        if (item.pri === 'high') rawItems.push({ text: item.text, textZh: item.textZh, type: sec.type, planKey: pk });
+      });
+    });
+  });
+
+  // 3. Match raw items to merged actions; track which merged actions are "active"
+  const activeActions = new Map(); // mergedIdx → Set of planKeys
+  const unmatchedItems = [];
+
+  rawItems.forEach(raw => {
+    let matched = false;
+    for (let i = 0; i < MERGED_ACTIONS.length; i++) {
+      const ma = MERGED_ACTIONS[i];
+      if (ma.match.test(raw.text)) {
+        if (!activeActions.has(i)) activeActions.set(i, new Set());
+        activeActions.get(i).add(raw.planKey);
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) unmatchedItems.push(raw);
+  });
+
+  // 4. Build output grouped by type
+  const groups = {
+    diet:       { icon: '&#x1F957;', title: T('Diet','飲食'), cls: 'cg', items: [] },
+    exercise:   { icon: '&#x1F3C3;', title: T('Exercise','運動'), cls: 'cb', items: [] },
+    supplement: { icon: '&#x1F48A;', title: T('Supplements','補充品'), cls: 'co-o', items: [] },
+    lifestyle:  { icon: '&#x1F33F;', title: T('Lifestyle','生活習慣'), cls: 'cg', items: [] },
+    medical:    { icon: '&#x1F3E5;', title: T('Medical','就醫建議'), cls: 'cr', items: [] }
+  };
+
+  // Add matched merged actions (sorted by number of source plans — more plans = higher priority)
+  const sortedActive = [...activeActions.entries()].sort((a, b) => b[1].size - a[1].size);
+  sortedActive.forEach(([idx, planKeys]) => {
+    const ma = MERGED_ACTIONS[idx];
+    const g = groups[ma.type];
+    if (g) g.items.push({ text: ma.text, textZh: ma.textZh, benefits: ma.benefits, planCount: planKeys.size });
+  });
+
+  // Add unmatched items (deduplicated by text)
+  const seenUnmatched = new Set();
+  unmatchedItems.forEach(raw => {
+    if (seenUnmatched.has(raw.text)) return;
+    seenUnmatched.add(raw.text);
+    const g = groups[raw.type];
+    if (g) g.items.push({ text: raw.text, textZh: raw.textZh, benefits: [], planCount: 1 });
+  });
+
+  // 5. Render
+  let html = `<div class="c"><h2>${T('Personal Action Summary','個人行動總覽')}</h2>
+    <p style="font-size:12px;color:var(--tl);margin-bottom:12px">${T(`Consolidated from ${triggeredPlanKeys.size} plans. Multi-indicator actions ranked first.`,`整合自 ${triggeredPlanKeys.size} 個計畫。跨指標行動優先顯示。`)}</p>`;
+
+  const pillCls = { 'BP': 'pill-r', 'LDL': 'pill-r', 'TC': 'pill-o', 'TG': 'pill-o', 'HbA1c': 'pill-o', 'Uric Acid': 'pill-o',
+    'HDL': 'pill-b', 'Body Fat': 'pill-y', 'BMI': 'pill-y', 'Fatty Liver': 'pill-o', 'hsCRP': 'pill-y', 'Vitamin D': 'pill-b',
+    'Glucose': 'pill-o', 'ECG': 'pill-r', 'eGFR': 'pill-b', 'ALT': 'pill-o', 'AST': 'pill-o', 'Body Comp': 'pill-y', 'Sleep': 'pill-b',
+    'Cortisol': 'pill-y', 'Overall': 'pill-g' };
+
+  for (const [type, g] of Object.entries(groups)) {
+    if (g.items.length === 0) continue;
+    html += `<div class="co ${g.cls}"><div class="ct">${g.icon} ${g.title}</div>`;
+    g.items.forEach((item, i) => {
+      const pills = item.benefits.map(b => `<span class="pill ${pillCls[b] || 'pill-b'}">${b}</span>`).join('');
+      html += `<div class="act-item"><span class="act-num">${i + 1}</span>${T(item.text, item.textZh || item.text)}${pills ? `<div class="act-pills">${pills}</div>` : ''}</div>`;
+    });
+    html += `</div>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+// ═══════════════════════════════════════════════════
+// SUPPLEMENT RECOMMENDATION ENGINE
+// ═══════════════════════════════════════════════════
+function buildSupplementSection(flagged) {
+  if (flagged.length === 0) return '';
+
+  // Collect all flagged indicator IDs
+  const flaggedIds = new Set(flagged.map(r => r.id));
+
+  // Find matching supplements and count how many flagged indicators each one addresses
+  const matched = [];
+  for (const supp of SUPPLEMENTS) {
+    const hits = supp.triggers.filter(t => flaggedIds.has(t));
+    if (hits.length > 0) {
+      matched.push({ supp, hits, hitCount: hits.length });
+    }
+  }
+
+  if (matched.length === 0) return '';
+
+  // Sort: more indicator hits first, then by evidence strength
+  const evPri = { strong: 3, moderate: 2, weak: 1 };
+  matched.sort((a, b) => {
+    if (b.hitCount !== a.hitCount) return b.hitCount - a.hitCount;
+    return (evPri[b.supp.evidence] || 0) - (evPri[a.supp.evidence] || 0);
+  });
+
+  // Build indicator label map for pills
+  const idToLabel = {};
+  for (const r of flagged) {
+    idToLabel[r.id] = r.def ? r.def.label : r.id;
+  }
+
+  let html = `<div class="c"><h2>&#x1F48A; ${T('Recommended Supplements (iHerb)','建議補充品（iHerb）')}</h2>
+    <p style="font-size:12px;color:var(--tl);margin-bottom:4px">${T(`${matched.length} supplements matched to your ${flagged.length} flagged indicators. Sorted by relevance.`,`${matched.length} 種補充品對應您的 ${flagged.length} 項異常指標，依相關性排序。`)}</p>
+    <div class="supp-grid">`;
+
+  for (const { supp, hits } of matched) {
+    const evCls = supp.evidence === 'strong' ? 'supp-ev-strong' : supp.evidence === 'moderate' ? 'supp-ev-moderate' : 'supp-ev-weak';
+    const evLabel = supp.evidence === 'strong' ? T('Strong Evidence','強實證') : supp.evidence === 'moderate' ? T('Moderate Evidence','中等實證') : T('Weak Evidence','初步實證');
+
+    html += `<div class="supp-card">`;
+    html += `<div class="supp-hdr"><span class="supp-name">${T(supp.name, supp.nameZh || supp.name)}</span><span class="supp-ev ${evCls}">${evLabel}</span></div>`;
+    html += `<div class="supp-dose">${T(supp.dose, supp.doseZh || supp.dose)}</div>`;
+    html += `<div class="supp-body">`;
+
+    // Product links
+    for (const p of supp.products) {
+      const cls = p.top ? 'supp-product top' : 'supp-product';
+      html += `<a class="${cls}" href="${p.url}" target="_blank" rel="noopener">
+        <span>${p.top ? '&#9733; ' : ''}${p.name}</span>
+        <span class="supp-spec">${p.spec}</span>
+      </a>`;
+    }
+
+    // Mechanism
+    html += `<div class="supp-mech">${T(supp.mechanism, supp.mechanismZh || supp.mechanism)}</div>`;
+
+    // Indicator pills (which flagged indicators this addresses)
+    html += `<div class="supp-tags">`;
+    for (const hid of hits) {
+      const label = idToLabel[hid] || hid;
+      html += `<span class="pill pill-r">${label}</span>`;
+    }
+    html += `</div>`;
+
+    // Root cause & bridge therapy info
+    if (supp.rootCause) {
+      if (supp.longTerm) {
+        html += `<div class="supp-long-term"><b>&#128218; ${T('Long-Term Needed','長期使用')}</b><br>${T(supp.rootCause, supp.rootCauseZh || supp.rootCause)}</div>`;
+      } else {
+        html += `<div class="supp-root"><b>&#x1F50D; ${T('Root Cause','根本原因')}</b><br>${T(supp.rootCause, supp.rootCauseZh || supp.rootCause)}</div>`;
+      }
+    }
+    if (supp.bridge) {
+      html += `<div class="supp-bridge">${supp.longTerm ? '&#128337;' : '&#x1F504;'} ${T('Bridge','過渡方案')}: ${T(supp.bridge, supp.bridgeZh || supp.bridge)}</div>`;
+    }
+
+    html += `</div></div>`;
+  }
+
+  html += `</div>`;
+
+  // Disclaimer
+  html += `<div class="supp-disclaimer"><strong>&#9888; ${T('Disclaimer','免責聲明')}:</strong> ${T('Supplement recommendations are for informational reference only and do not constitute medical advice. Always consult your physician before starting any supplement, especially if you are on medication. Supplements do not replace medical treatment. Product links are to iHerb for convenience; no commercial affiliation.','補充品建議僅供參考，不構成醫療建議。開始任何補充品前請諮詢您的醫師，尤其是服藥中。補充品不能取代醫療治療。產品連結導向 iHerb 僅供便利；與商業無從屬關係。')}</div>`;
+
+  html += `</div>`;
+  return html;
+}
+
+// ═══════════════════════════════════════════════════
+// BILINGUAL LOOKUP TABLES
+// ═══════════════════════════════════════════════════
+const PLAN_TITLE_ZH = {
+  body_comp: '體組成改善計畫', bp: '血壓管理計畫', ldl: 'LDL 膽固醇管理計畫',
+  tg: '三酸甘油酯管理計畫', uric_acid: '尿酸管理計畫', hba1c: 'HbA1c／前期糖尿病管理計畫',
+  fatty_liver: '脂肪肝（NAFLD）改善計畫', hdl: 'HDL 膽固醇管理計畫',
+  hscrp: '發炎指標（hsCRP）管理計畫', vitamin_d: '維生素 D 補充計畫',
+  ast_alt: '肝功能（AST／ALT）管理計畫', egfr_kidney: '腎功能（eGFR）管理計畫',
+  tsh_plan: '甲狀腺（TSH）管理計畫', ecg_plan: '心電圖異常處理計畫',
+  bone_plan: '骨密度管理計畫', cbc_plan: '全血球計數異常管理計畫',
+  urine_plan: '尿液分析異常管理計畫', tumor_plan: '腫瘤指標異常管理計畫',
+  eye_plan: '眼部檢查追蹤計畫'
+};
+const SEC_TITLE_ZH = {
+  'Diet': '飲食', 'Exercise': '運動', 'Exercise (ISH-Specific)': '運動（等長訓練）',
+  'Supplements': '補充品', 'Medical': '就醫建議', 'Lifestyle': '生活習慣',
+  'Hydration': '補水', 'Weight Management': '體重管理'
+};
+const FOLLOWUP_ZH = {
+  'Fasting Lipid Panel': '空腹血脂四項', 'HbA1c + Fasting Glucose': 'HbA1c + 空腹血糖',
+  'Uric Acid + Kidney Panel': '尿酸 + 腎功能', 'BP Monitoring (home)': '居家血壓監測',
+  'Cardiology Consultation': '心臟科諮詢', 'Abdominal Ultrasound': '腹部超音波',
+  '25-OH Vitamin D': '25-OH 維生素 D', 'eGFR + UACR': 'eGFR + 尿白蛋白肌酐比',
+  'TSH + Free T4': 'TSH + 游離 T4',
+  'Internal Medicine': '內科', 'Endocrinology (if worsening)': '內分泌科（惡化時）',
+  'Nephrology (if > 9.0 or recurrent gout)': '腎臟科（> 9.0 或痛風反覆）',
+  'Cardiology (if persistent > 140/90)': '心臟科（持續 > 140/90）',
+  'Cardiology': '心臟科', 'Gastroenterology/Hepatology': '腸胃肝膽科',
+  'Nephrology (if declining)': '腎臟科（持續下降時）', 'Endocrinology': '內分泌科'
+};
+
+// ═══════════════════════════════════════════════════
+// RESULTS RENDERER
+// ═══════════════════════════════════════════════════
+function renderResults(flagged, allClassified, patternResults, followUp, totalAnalyzed) {
+  const container = document.getElementById('results-container');
+  const redCount = flagged.filter(r => r.sev === 'red').length;
+  const orangeCount = flagged.filter(r => r.sev === 'orange').length;
+  const yellowCount = flagged.filter(r => r.sev === 'yellow').length;
+
+  let riskLevel = 'Low'; let riskLevelZh = '低風險';
+  let riskColor = 'var(--gn)';
+  if (redCount >= 2) { riskLevel = 'High'; riskLevelZh = '高風險'; riskColor = 'var(--rd)'; }
+  else if (redCount >= 1 || orangeCount >= 3) { riskLevel = 'Moderate-High'; riskLevelZh = '中高風險'; riskColor = 'var(--or)'; }
+  else if (orangeCount >= 1) { riskLevel = 'Moderate'; riskLevelZh = '中度風險'; riskColor = 'var(--or)'; }
+  else if (yellowCount >= 1) { riskLevel = 'Low-Moderate'; riskLevelZh = '低中風險'; riskColor = 'var(--yw)'; }
+
+  let html = '';
+
+  // ── Section 1: Summary Dashboard ─────────────────
+  html += `<div class="c">
+  <h2>${T('Summary Dashboard','分析摘要')} <span class="risk-badge" style="background:${riskColor};color:#fff">${T(riskLevel+' Risk', riskLevelZh)}</span></h2>
+  <p>${T(`${totalAnalyzed} indicators analyzed, ${flagged.length} flagged`, `共分析 ${totalAnalyzed} 項指標，${flagged.length} 項異常`)}</p>
+  <div class="summary-grid">
+    <div class="stat-card" style="background:var(--rl)"><div class="stat-num" style="color:var(--rd)">${redCount}</div><div class="stat-label" style="color:var(--rd)">${T('HIGH PRIORITY','高度異常')}</div></div>
+    <div class="stat-card" style="background:var(--ol)"><div class="stat-num" style="color:var(--or)">${orangeCount}</div><div class="stat-label" style="color:var(--or)">${T('MEDIUM PRIORITY','中度異常')}</div></div>
+    <div class="stat-card" style="background:var(--yl)"><div class="stat-num" style="color:#7B6B00">${yellowCount}</div><div class="stat-label" style="color:#7B6B00">${T('LOW PRIORITY','輕度異常')}</div></div>
+  </div></div>`;
+
+  // ── Section 2: Cross-Indicator Patterns ──────────
+  const activePatterns = patternResults.filter(p => p.active);
+  const nearMiss = patternResults.filter(p => !p.active && p.met > 0);
+
+  if (activePatterns.length > 0 || nearMiss.length > 0) {
+    html += `<div class="c"><h2>${T('Cross-Indicator Patterns','複合指標風險模式')}</h2>`;
+    activePatterns.forEach(pr => {
+      const pct = Math.round(pr.met / pr.total * 100);
+      const items = pr.metItems.map(c => `<span class="pill pill-r">${c.label}</span>`).join('');
+      const patternLabel = T(pr.pattern.label, pr.pattern.labelZh || pr.pattern.label);
+      html += `<div class="co cr"><div class="ct">${patternLabel}</div>
+        <div style="background:var(--rl);border-radius:6px;height:8px;margin:8px 0;overflow:hidden"><div style="background:var(--rd);height:100%;width:${pct}%;border-radius:6px"></div></div>
+        <div style="font-size:11px;color:var(--tl);margin-bottom:6px">${T(`${pr.met}/${pr.total} criteria met (threshold: ${pr.pattern.threshold})`,`${pr.met}／${pr.total} 項條件符合（閾值：${pr.pattern.threshold}）`)}</div>
+        <div>${items}</div></div>`;
+    });
+    nearMiss.forEach(pr => {
+      const pct = Math.round(pr.met / pr.total * 100);
+      const items = pr.metItems.map(c => `<span class="pill pill-b">${c.label}</span>`).join('');
+      const patternLabel = T(pr.pattern.label, pr.pattern.labelZh || pr.pattern.label);
+      html += `<div class="co cb"><div class="ct">${patternLabel} — ${T('approaching','接近警戒值')}</div>
+        <div style="background:var(--bl);border-radius:6px;height:8px;margin:8px 0;overflow:hidden"><div style="background:var(--bm);height:100%;width:${pct}%;border-radius:6px"></div></div>
+        <div style="font-size:11px;color:var(--tl);margin-bottom:6px">${T(`${pr.met}/${pr.total} criteria met (threshold: ${pr.pattern.threshold})`,`${pr.met}／${pr.total} 項條件符合（閾值：${pr.pattern.threshold}）`)}</div>
+        <div>${items}</div></div>`;
+    });
+    html += `</div>`;
+  }
+
+  // ── Section 3: Flagged Indicators ─────────────────
+  if (flagged.length > 0) {
+    html += `<div class="c"><h2>${T('Flagged Indicators','異常指標')}</h2><div class="flag-grid">`;
+    flagged.forEach(r => {
+      const sevMeta = SEV[r.sev];
+      const sevLabel = T(sevMeta.label, sevMeta.labelZh || sevMeta.label);
+      const barColor = r.sev === 'red' ? 'var(--rd)' : r.sev === 'orange' ? 'var(--or)' : 'var(--yw)';
+      const displayVal = r.def.type === 'categorical' ? r.value.replace(/_/g, ' ') : `${r.value} ${r.def.unit}`;
+      html += `<div class="flag-card" style="border-top-color:${barColor}"><div class="flag-body">
+        <div class="flag-head"><span class="flag-name">${r.def.label}</span><span class="tg ${sevMeta.cls}">${sevLabel}</span></div>
+        <div class="flag-val" style="color:${barColor}">${displayVal}</div>
+        <div class="flag-ref">${T('Ref','參考值')}: ${r.ref}</div>
+      </div></div>`;
+    });
+    html += `</div></div>`;
+  } else {
+    html += `<div class="c"><div class="co cg"><div class="ct">${T('All Analyzed Indicators Normal','所有分析指標均正常')}</div>
+      <p>${T('No abnormal values detected in the indicators you entered.','您輸入的指標中未偵測到異常值。')}</p></div></div>`;
+  }
+
+  // ── Section 4: Detailed Action Plans (collapsible) ──
+  if (flagged.length > 0) {
+    html += `<div class="c"><h2>${T('Detailed Action Plans','詳細行動計畫')}</h2>
+      <p style="font-size:12px;color:var(--tl);margin-bottom:8px">${T('Expand each plan for full evidence-based recommendations.','展開各計畫查看完整實證建議。')}</p>`;
+
+    const renderedPlans = new Set();
+    flagged.forEach(r => {
+      for (const planKey in PLANS) {
+        const plan = PLANS[planKey];
+        if (plan.triggers.includes(r.id) && !renderedPlans.has(planKey)) {
+          renderedPlans.add(planKey);
+          const sevMeta = SEV[r.sev];
+          const sevLabel = T(sevMeta.label, sevMeta.labelZh || sevMeta.label);
+          const planDisplayTitle = T(plan.title, PLAN_TITLE_ZH[planKey] || plan.title);
+          const itemCount = plan.sections.reduce((n,s) => n + s.items.length, 0);
+          html += `<details class="plan-detail"><summary><span><span class="tg ${sevMeta.cls}">${sevLabel}</span> ${planDisplayTitle}</span><span style="font-size:11px;color:var(--tl)">${T(`${itemCount} items`,`${itemCount} 項建議`)}</span></summary>
+          <div class="plan-detail-body">${renderPlanCard(planKey, plan, r)}</div></details>`;
+        }
+      }
+    });
+    html += `</div>`;
+  }
+
+  // ── Section 5: Personal Action Summary ────────────
+  if (flagged.length > 0) {
+    html += buildPersonalSummary(flagged);
+  }
+
+  // ── Section 6: Recommended Supplements (iHerb) ───
+  if (flagged.length > 0) {
+    html += buildSupplementSection(flagged);
+  }
+
+  // ── Section 7: Follow-Up Schedule ────────────────
+  if (followUp.length > 0) {
+    html += `<div class="c"><h2>${T('Recommended Follow-Up Schedule','建議追蹤時程')}</h2><div class="tw"><table>
+    <tr><th>${T('Test','檢查項目')}</th><th>${T('When','時間')}</th><th>${T('Specialist','轉介科別')}</th></tr>`;
+    followUp.forEach(f => {
+      const testZh = FOLLOWUP_ZH[f.test] || f.test;
+      const specZh = f.specialist ? (FOLLOWUP_ZH[f.specialist] || f.specialist) : '—';
+      html += `<tr><td>${T(f.test, testZh)}</td><td>${f.when}</td><td>${T(f.specialist || '—', specZh)}</td></tr>`;
+    });
+    html += `</table></div></div>`;
+  }
+
+  // ── Back to Input button ─────────────────────────
+  html += `<div class="btn-row no-print"><button class="btn btn-secondary" onclick="st('t0')">${T('Back to Input','返回輸入')}</button>
+    <button class="btn btn-primary" onclick="window.print()">${T('Print Report','列印報告')}</button></div>`;
+
+  container.innerHTML = html;
+}
+
+function renderPlanCard(key, plan, triggerResult) {
+  const sectionMeta = {
+    diet: { icon: '&#x1F957;', cls: 'cg' },
+    exercise: { icon: '&#x1F3C3;', cls: 'cb' },
+    supplement: { icon: '&#x1F48A;', cls: 'co-o' },
+    medical: { icon: '&#x1F3E5;', cls: 'cr' },
+    lifestyle: { icon: '&#x1F33F;', cls: 'cg' }
+  };
+
+  let html = `<p style="font-size:12px;color:var(--tl);margin-bottom:8px">${plan.intro}</p>
+    <div class="co cb" style="padding:10px 14px"><span class="ct" style="margin-bottom:0">${T('Timeline:','時程：')}</span> ${plan.timeline}
+    ${plan.related.length > 0 ? ` &nbsp;|&nbsp; <strong>${T('Watch:','關聯指標：')}</strong> ${plan.related.map(rid => INDICATORS[rid] ? INDICATORS[rid].label : rid).join(', ')}` : ''}</div>`;
+
+  plan.sections.forEach(sec => {
+    const meta = sectionMeta[sec.type] || { icon: '', cls: 'cb' };
+    const secDisplayTitle = T(sec.title, SEC_TITLE_ZH[sec.title] || sec.title);
+    html += `<div class="co ${meta.cls}"><div class="ct">${meta.icon} ${secDisplayTitle}</div><ul class="plan-list">`;
+    sec.items.forEach(item => {
+      html += `<li class="plan-${item.pri}">${T(item.text, item.textZh || item.text)}</li>`;
+    });
+    html += `</ul></div>`;
+  });
+
+  return html;
+}
+
+// ═══════════════════════════════════════════════════
+// UI GLUE
+// ═══════════════════════════════════════════════════
+function st(id) {
+  document.querySelectorAll('.tc').forEach(e => e.classList.remove('a'));
+  document.querySelectorAll('.nt').forEach(e => e.classList.remove('a'));
+  document.getElementById(id).classList.add('a');
+  // Activate the correct nav tab
+  const tabs = document.querySelectorAll('.nt');
+  const idx = id === 't0' ? 0 : 1;
+  tabs[idx].classList.add('a');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast-el');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+function toggleAllDetails(open) {
+  document.querySelectorAll('#t0 details').forEach(d => {
+    if (open) d.setAttribute('open', '');
+    else d.removeAttribute('open');
+  });
+}
+
+function loadSampleData() {
+  document.getElementById('gender').value = SAMPLE_DATA.gender;
+  document.getElementById('age').value = SAMPLE_DATA.age;
+
+  for (const key in SAMPLE_DATA) {
+    if (key === 'gender' || key === 'age') continue;
+    const el = document.getElementById(key);
+    if (el) el.value = SAMPLE_DATA[key];
+  }
+
+  // Trigger auto-calculations
+  calcBMI();
+  calcTcHdl();
+  calcEGFR();
+
+  // Restore sample values for computed fields (lab-reported values override auto-calc)
+  ['egfr', 'bmi', 'tc_hdl_ratio'].forEach(id => {
+    if (SAMPLE_DATA[id] !== undefined) document.getElementById(id).value = SAMPLE_DATA[id];
+  });
+
+  colorAllFields();
+
+  // Open all details sections
+  toggleAllDetails(true);
+
+  toast(T('Sample data loaded from 2026-03-25 Annual Exam', '範例資料已載入（2026-03-25 年度體檢）'));
+}
+
+function clearAll() {
+  document.querySelectorAll('#t0 input[type="number"]').forEach(el => { el.value = ''; el.classList.remove('field-green', 'field-yellow', 'field-orange', 'field-red'); });
+  document.querySelectorAll('#t0 select').forEach(el => { if (el.id !== 'gender') el.value = ''; el.classList.remove('field-green', 'field-yellow', 'field-orange', 'field-red'); });
+  document.getElementById('age').value = '';
+  document.getElementById('results-container').innerHTML = '<div class="c" style="text-align:center;padding:40px"><p style="color:var(--tl)">Enter your PE test data in the Input tab and click <strong><span data-en>Analyze</span><span data-zh>開始分析</span></strong> to generate results.</p></div>';
+  toast('All fields cleared');
+}
+
+// Add oninput coloring to all indicator fields
+document.addEventListener('DOMContentLoaded', () => {
+  for (const id in INDICATORS) {
+    const el = document.getElementById(id);
+    if (el && !el.hasAttribute('readonly')) {
+      el.addEventListener('input', () => colorField(id));
+      el.addEventListener('change', () => colorField(id));
+    }
+  }
+});
+
+// ═══════════════════════════════════════════════════
+// PDF EXTRACTION PATTERNS
+// ═══════════════════════════════════════════════════
+const PDF_PATTERNS = {
+  // Physical Measurements — range: [plausible_min, plausible_max]
+  height:   { patterns: [/身高\s*Height[^\d]*(\d+\.?\d*)/i, /身高[^\d]*(\d+\.?\d*)\s*cm/i], label: 'Height', range: [100, 250] },
+  weight:   { patterns: [/體重\s*Weight[^\d]*(\d+\.?\d*)/i, /體重[^\d]*(\d+\.?\d*)\s*kg/i], label: 'Weight', range: [20, 300] },
+  bp_systolic:  { patterns: [/血壓\s*BP[^\d]*(\d{2,3})\s*\/\s*\d+/i, /血壓[^\d]*(\d{2,3})\s*\/\s*\d+/i, /收縮壓[^\d]*(\d{2,3})/], label: 'Systolic BP', range: [60, 260] },
+  bp_diastolic: { patterns: [/血壓\s*BP[^\d]*\d+\s*\/\s*(\d{2,3})/i, /血壓[^\d]*\d+\s*\/\s*(\d{2,3})/i, /舒張壓[^\d]*(\d{2,3})/], label: 'Diastolic BP', range: [30, 160] },
+  pulse:    { patterns: [/脈搏\s*Pulse\s*Rate[^\d]*(\d+)/i, /脈搏[^\d]*(\d+)/i], label: 'Pulse', range: [30, 220] },
+  temperature: { patterns: [/體溫\s*Temp[^\d]*(\d+\.?\d*)/i, /體溫[^\d]*(\d+\.?\d*)/i], label: 'Temperature', range: [34, 42] },
+  body_fat: { patterns: [/體脂\s*Body\s*Fat[^\d]*(\d+\.?\d*)/i, /體脂[率肪][^\d]*(\d+\.?\d*)/i], label: 'Body Fat %', range: [3, 60] },
+  waist:    { patterns: [/腰圍\s*Waist[^\d]*(\d+\.?\d*)/i, /腰圍[^\d]*(\d+\.?\d*)/i], label: 'Waist', range: [40, 200] },
+  hip:      { patterns: [/臀圍\s*Buttock[^\d]*(\d+\.?\d*)/i, /臀圍[^\d]*(\d+\.?\d*)/i], label: 'Hip', range: [50, 200] },
+  // CBC
+  hb:       { patterns: [/血紅素\s*Hb[^\d]*(\d+\.?\d*)/i, /Hemoglobin[^\d]*(\d+\.?\d*)/i], label: 'Hemoglobin', range: [3, 22] },
+  rbc:      { patterns: [/紅血球計數\s*RBC\s*Count[^\d]*(\d+\.?\d*)/i, /RBC[^\d]*Count[^\d]*(\d+\.?\d*)/i], label: 'RBC', range: [1, 8] },
+  ht:       { patterns: [/血球容積比\s*Ht[^\d]*(\d+\.?\d*)/i, /Hematocrit[^\d]*(\d+\.?\d*)/i], label: 'Hematocrit', range: [15, 65] },
+  mcv:      { patterns: [/平均紅血球容積\s*MCV[^\d]*(\d+\.?\d*)/i, /MCV[^\d]*(\d+\.?\d*)/i], label: 'MCV', range: [50, 130] },
+  mch:      { patterns: [/平均紅血球色素量\s*MCH[^\d]*(\d+\.?\d*)/i, /MCH(?!C)[^\d]*(\d+\.?\d*)/i], label: 'MCH', range: [15, 45] },
+  mchc:     { patterns: [/平均紅血球色素濃度\s*MCHC[^\d]*(\d+\.?\d*)/i, /MCHC[^\d]*(\d+\.?\d*)/i], label: 'MCHC', range: [25, 40] },
+  wbc:      { patterns: [/白血球計數\s*WBC\s*count[^\d]*(\d+\.?\d*)/i, /WBC[^\d]*count[^\d]*(\d+\.?\d*)/i], label: 'WBC', range: [1, 30] },
+  platelets:{ patterns: [/血小板計數\s*Platelet\s*count[^\d]*(\d+)/i, /Platelet[^\d]*count[^\d]*(\d+)/i], label: 'Platelets', range: [10, 1000] },
+  neutrophils: { patterns: [/嗜中性球\s*Segment[^\d]*(\d+\.?\d*)/i, /Segment[^\d]*(\d+\.?\d*)/i], label: 'Neutrophils', range: [10, 95] },
+  eosinophils: { patterns: [/嗜酸性球\s*Eosinophil[^\d]*(\d+\.?\d*)/i, /Eosinophil[^\d]*(\d+\.?\d*)/i], label: 'Eosinophils', range: [0, 30] },
+  basophils:   { patterns: [/嗜鹼性球\s*Basophil[^\d]*(\d+\.?\d*)/i, /Basophil[^\d]*(\d+\.?\d*)/i], label: 'Basophils', range: [0, 5] },
+  monocytes:   { patterns: [/單核球\s*Monocyte[^\d]*(\d+\.?\d*)/i, /Monocyte[^\d]*(\d+\.?\d*)/i], label: 'Monocytes', range: [0, 25] },
+  lymphocytes: { patterns: [/淋巴球\s*Lymphocyte[^\d]*(\d+\.?\d*)/i, /Lymphocyte[^\d]*(\d+\.?\d*)/i], label: 'Lymphocytes', range: [5, 70] },
+  rdw:      { patterns: [/紅血球分佈寬度\s*RDW[^\d]*(\d+\.?\d*)/i, /RDW[^\d]*(\d+\.?\d*)/i], label: 'RDW', range: [10, 25] },
+  // Liver
+  direct_bilirubin: { patterns: [/直接膽紅素\s*Direct\s*Bilirubin[^\d]*(\d+\.?\d*)/i, /Direct\s*Bilirubin[^\d]*(\d+\.?\d*)/i], label: 'Direct Bilirubin', range: [0, 5] },
+  total_bilirubin:  { patterns: [/總膽紅素\s*Total\s*Bilirubin[^\d]*(\d+\.?\d*)/i, /Total\s*Bilirubin[^\d]*(\d+\.?\d*)/i], label: 'Total Bilirubin', range: [0, 10] },
+  alp:      { patterns: [/鹼性磷酸酶\s*Alkaline\s*Phosphatase[^\d]*(\d+\.?\d*)/i, /Alkaline\s*Phosphatase[^\d]*(\d+\.?\d*)/i, /ALP[^\d]*(\d+\.?\d*)/i], label: 'ALP', range: [10, 500] },
+  ast:      { patterns: [/血清麩氨酸轉移酶\s*SGOT[^\d]*(\d+\.?\d*)/i, /SGOT[^\d]*(\d+\.?\d*)/i, /AST[^\d]*(\d+\.?\d*)/i], label: 'AST', range: [5, 500] },
+  alt:      { patterns: [/血清丙酮酸轉移酶\s*SGPT[^\d]*(\d+\.?\d*)/i, /SGPT[^\d]*(\d+\.?\d*)/i, /ALT[^\d]*(\d+\.?\d*)/i], label: 'ALT', range: [5, 500] },
+  // Kidney
+  bun:      { patterns: [/尿素氮\s*BUN[^\d]*(\d+\.?\d*)/i, /BUN[^\d]*(\d+\.?\d*)/i], label: 'BUN', range: [2, 80] },
+  uric_acid:{ patterns: [/尿酸\s*Uric\s*Acid[^\d]*(\d+\.?\d*)/i, /Uric\s*Acid[^\d]*(\d+\.?\d*)/i], label: 'Uric Acid', range: [1, 15] },
+  creatinine:{ patterns: [/肌酸酐\s*Creatinine[^\d]*(\d+\.?\d*)/i, /Creatinine[^\d]*(\d+\.?\d*)/i], label: 'Creatinine', range: [0.2, 15] },
+  egfr:     { patterns: [/腎絲球過濾率[（\(]?eGFR[）\)]?[^\d]*(\d+\.?\d*)/i, /eGFR[^\d]*(\d+\.?\d*)/i], label: 'eGFR', range: [5, 150] },
+  // Glucose
+  glucose:  { patterns: [/空腹血糖\s*Glucose\s*AC[^\d]*(\d+\.?\d*)/i, /Glucose\s*AC[^\d]*(\d+\.?\d*)/i], label: 'Fasting Glucose', range: [30, 500] },
+  hba1c:    { patterns: [/醣化血色素\s*HbA1c[^\d]*(\d+\.?\d*)/i, /HbA1c[^\d]*(\d+\.?\d*)/i], label: 'HbA1c', range: [3, 15] },
+  // Lipids
+  tc:       { patterns: [/總膽固醇\s*Total\s*Cholesterol[^\d]*(\d+\.?\d*)/i, /Total\s*Cholesterol[^\d]*(\d+\.?\d*)/i], label: 'Total Cholesterol', range: [50, 500] },
+  tg:       { patterns: [/三酸甘油酯\s*Triglyceride[^\d]*(\d+\.?\d*)/i, /Triglyceride[^\d]*(\d+\.?\d*)/i], label: 'Triglycerides', range: [20, 2000] },
+  ldl:      { patterns: [/低密度脂蛋白膽固醇\s*LDL[^\d]*(\d+\.?\d*)/i, /LDL[^\d]*(\d+\.?\d*)/i], label: 'LDL', range: [20, 400] },
+  hdl:      { patterns: [/高密度脂蛋白膽固醇\s*HDL[^\d]*(\d+\.?\d*)/i, /HDL[^\d]*(\d+\.?\d*)/i], label: 'HDL', range: [10, 120] },
+  // Serum
+  vitamin_d:{ patterns: [/25[\-]?OH\s*Vitamin\s*D[^\d]*(\d+\.?\d*)/i, /維生素\s*D[^\d]*(\d+\.?\d*)/i, /Vitamin\s*D[^\d]*(\d+\.?\d*)/i], label: 'Vitamin D', range: [3, 150] },
+  tsh:      { patterns: [/甲狀腺刺激素\s*TSH[^\d]*(\d+\.?\d*)/i, /TSH[^\d]*(\d+\.?\d*)/i], label: 'TSH', range: [0.01, 50] },
+  hscrp:    { patterns: [/高敏感性\s*C\s*反應蛋白[^\d]*High\s*Sensitive\s*CRP[^\d]*(\d+\.?\d*)/i, /High\s*Sensitive\s*CRP[^\d]*(\d+\.?\d*)/i, /hsCRP[^\d]*(\d+\.?\d*)/i, /hs[\-]?CRP[^\d]*(\d+\.?\d*)/i], label: 'hsCRP', range: [0, 50] },
+  hbsag:    { patterns: [/B\s*型肝炎表面抗原\s*HBsAg[^\d]*(\d+\.?\d*)/i, /HBsAg[^\d]*(\d+\.?\d*)/i], label: 'HBsAg', range: [0, 100] },
+  // Tumor Markers
+  psa:      { patterns: [/前列腺特異性?抗原\s*PSA[^\d]*(\d+\.?\d*)/i, /PSA[^\d]*(\d+\.?\d*)/i], label: 'PSA', range: [0, 100] },
+  cea:      { patterns: [/癌胚抗原\s*CEA[^\d]*(\d+\.?\d*)/i, /CEA[^\d]*(\d+\.?\d*)/i], label: 'CEA', range: [0, 100] },
+  afp:      { patterns: [/甲型胎兒蛋白\s*AFP[^\d]*(\d+\.?\d*)/i, /AFP[^\d]*(\d+\.?\d*)/i], label: 'AFP', range: [0, 100] },
+  ca199:    { patterns: [/醣[鏈鎖]抗原[\-]?199\s*CA[\-]?199[^\d]*(?:<\s*)?(\d+\.?\d*)/i, /CA[\-]?199[^\d]*(?:<\s*)?(\d+\.?\d*)/i], label: 'CA-199', range: [0, 200] },
+  // Cardiovascular
+  pwv:      { patterns: [/動脈波血流速\s*PWV[^\d]*(\d+)/i, /PWV[^\d]*(\d+)/i], label: 'PWV', range: [500, 3000] },
+  // Urinalysis
+  urine_sg: { patterns: [/比重\s*Specific\s*Gravity[^\d]*(1\.\d+)/i, /比重[^\d]*(1\.\d+)/i, /Specific\s*Gravity[^\d]*(1\.\d+)/i], label: 'Urine SG', range: [1.000, 1.050] },
+  urine_ph: { patterns: [/酸鹼度\s*pH(\d+\.?\d*)/i, /酸鹼度\s*pH\s*(\d+\.?\d*)/i], label: 'Urine pH', range: [4, 9.5] },
+  urine_urobilinogen: { patterns: [/尿膽素原\s*Urobilinogen[^\d]*(\d+\.?\d*)/i, /Urobilinogen[^\d]*(\d+\.?\d*)/i], label: 'Urobilinogen', range: [0, 5] },
+  // Stool
+  stool_ob: { patterns: [/糞便潛血[^<\d]*(?:<\s*)?(\d+\.?\d*)/i, /Stool\s*OB[^<\d]*(?:<\s*)?(\d+\.?\d*)/i], label: 'Stool OB', range: [0, 500] },
+  // Eye
+  iop_l:    { patterns: [/眼壓[（\(]?左[）\)]?[^\d]*(\d+\.?\d*)/i, /IOP\s*(?:L|Left)[^\d]*(\d+\.?\d*)/i], label: 'IOP Left', range: [5, 40] },
+  iop_r:    { patterns: [/眼壓[（\(]?右[）\)]?[^\d]*(\d+\.?\d*)/i, /IOP\s*(?:R|Right)[^\d]*(\d+\.?\d*)/i], label: 'IOP Right', range: [5, 40] },
+  va_l:     { patterns: [/視力[（\(]?左[）\)]?[^\d]*(\d+\.\d+)/i, /裸視[（\(]?左[）\)]?[^\d]*(\d+\.\d+)/i], label: 'VA Left', range: [0.05, 2.5] },
+  va_r:     { patterns: [/視力[（\(]?右[）\)]?[^\d]*(\d+\.\d+)/i, /裸視[（\(]?右[）\)]?[^\d]*(\d+\.\d+)/i], label: 'VA Right', range: [0.05, 2.5] },
+};
+
+// Categorical extraction patterns — map text descriptions to <select> values
+const PDF_CATEGORICAL = {
+  ecg: {
+    patterns: [/心電圖|ECG/i],
+    mapping: {
+      ischemia: [/心肌缺[氧血]/i, /ischemia/i, /ischaemia/i],
+      arrhythmia: [/心律不整/i, /arrhythmia/i],
+      lvh: [/左心室肥大/i, /LVH/i],
+      normal: [/正常竇性心律/i, /normal\s*sinus/i]
+    },
+    label: 'ECG'
+  },
+  ultrasound: {
+    patterns: [/腹部超音波|超音波|肝臟/i],
+    mapping: {
+      fatty_liver_severe: [/重度脂肪肝/i, /severe\s*fatty/i],
+      fatty_liver_moderate: [/中度脂肪肝/i, /moderate\s*fatty/i],
+      fatty_liver_mild: [/輕度脂肪肝/i, /mild\s*fatty/i],
+      normal: [/無異常/i, /normal/i]
+    },
+    label: 'Ultrasound'
+  },
+  chest_xray: {
+    patterns: [/胸部\s*X\s*光|Chest\s*X/i],
+    mapping: {
+      abnormal: [/異常/i, /abnormal/i],
+      normal: [/無異常/i, /normal/i]
+    },
+    label: 'Chest X-ray'
+  },
+  bone_density: {
+    patterns: [/骨密度|DEXA|骨質/i],
+    mapping: {
+      osteoporosis: [/骨質疏鬆(?!症前期)/i, /osteoporosis/i],
+      osteopenia: [/骨質疏鬆症前期|骨質缺乏/i, /osteopenia/i],
+      normal: [/正常/i, /normal/i]
+    },
+    label: 'Bone Density'
+  },
+  urine_protein: {
+    patterns: [/尿蛋白/i],
+    mapping: { '3+': [/3\+/], '2+': [/2\+/], '1+': [/1\+/], trace: [/trace|\+\/?-|微量/i], negative: [/陰性|negative|–|−/i] },
+    label: 'Urine Protein'
+  },
+  urine_glucose: {
+    patterns: [/尿糖/i],
+    mapping: { '3+': [/3\+/], '2+': [/2\+/], '1+': [/1\+/], trace: [/trace|\+\/?-|微量/i], negative: [/陰性|negative|–|−/i] },
+    label: 'Urine Glucose'
+  },
+  urine_ketones: {
+    patterns: [/酮體/i],
+    mapping: { '3+': [/3\+/], '2+': [/2\+/], '1+': [/1\+/], trace: [/trace|\+\/?-|微量/i], negative: [/陰性|negative|–|−/i] },
+    label: 'Urine Ketones'
+  },
+  urine_blood: {
+    patterns: [/尿潛血/i],
+    mapping: { '3+': [/3\+/], '2+': [/2\+/], '1+': [/1\+/], trace: [/trace|\+\/?-|微量/i], negative: [/陰性|negative|–|−/i] },
+    label: 'Urine Blood'
+  }
+};
+
+// Gender/age extraction
+const PDF_META = {
+  gender: { male: [/性別[：:\s]*男/i, /Gender[：:\s]*Male/i, /Sex[：:\s]*M(?:ale)?/i], female: [/性別[：:\s]*女/i, /Gender[：:\s]*Female/i, /Sex[：:\s]*F(?:emale)?/i] },
+  age: [/年齡[：:\s]*(\d+)/i, /Age[：:\s]*(\d+)/i]
+};
+
+// ═══════════════════════════════════════════════════
+// PDF EXTRACTION ENGINE
+// ═══════════════════════════════════════════════════
+let _pdfExtracted = [];
+
+async function extractPdfText(file) {
+  const arrayBuf = await file.arrayBuffer();
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuf }).promise;
+  const lines = [];
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    // Group text items by y-position (same row)
+    const rows = {};
+    content.items.forEach(item => {
+      const y = Math.round(item.transform[5] * 10) / 10; // round to 0.1
+      // Find existing row within tolerance
+      let rowKey = null;
+      for (const k of Object.keys(rows)) {
+        if (Math.abs(parseFloat(k) - y) < 3) { rowKey = k; break; }
+      }
+      if (!rowKey) rowKey = y.toString();
+      if (!rows[rowKey]) rows[rowKey] = [];
+      rows[rowKey].push({ x: item.transform[4], text: item.str });
+    });
+    // Sort rows by y (descending in PDF coords = top-to-bottom)
+    const sortedKeys = Object.keys(rows).sort((a, b) => parseFloat(b) - parseFloat(a));
+    sortedKeys.forEach(k => {
+      const rowItems = rows[k].sort((a, b) => a.x - b.x);
+      const line = rowItems.map(r => r.text).join(' ').trim();
+      if (line) lines.push(line);
+    });
+  }
+  return lines.join('\n');
+}
+
+function extractValues(text) {
+  const results = [];
+
+  // Extract gender
+  let detectedGender = null;
+  for (const [g, pats] of Object.entries(PDF_META.gender)) {
+    for (const p of pats) {
+      if (p.test(text)) { detectedGender = g; break; }
+    }
+    if (detectedGender) break;
+  }
+  if (detectedGender) {
+    results.push({ id: '_gender', label: 'Gender', value: detectedGender, displayValue: detectedGender === 'male' ? 'Male' : 'Female', confidence: 'high', checked: true });
+  }
+
+  // Extract age
+  for (const p of PDF_META.age) {
+    const m = text.match(p);
+    if (m) {
+      results.push({ id: '_age', label: 'Age', value: m[1], displayValue: m[1], confidence: 'high', checked: true });
+      break;
+    }
+  }
+
+  // Extract numeric fields — use matchAll + range validation
+  for (const [id, cfg] of Object.entries(PDF_PATTERNS)) {
+    let found = false;
+    for (const p of cfg.patterns) {
+      // Create global version of pattern for matchAll
+      const gp = new RegExp(p.source, (p.flags.includes('g') ? p.flags : p.flags + 'g'));
+      const matches = [...text.matchAll(gp)];
+      for (const m of matches) {
+        if (m && m[1]) {
+          const val = parseFloat(m[1]);
+          if (isNaN(val)) continue;
+          // Range validation: skip if outside plausible range
+          if (cfg.range && (val < cfg.range[0] || val > cfg.range[1])) continue;
+          const conf = cfg.patterns.indexOf(p) === 0 ? 'high' : 'medium';
+          results.push({ id, label: cfg.label, value: val, displayValue: val.toString(), confidence: conf, checked: true });
+          found = true;
+          break;
+        }
+      }
+      if (found) break;
+    }
+  }
+
+  // Extract categorical fields
+  for (const [id, cfg] of Object.entries(PDF_CATEGORICAL)) {
+    // Find relevant section in text
+    let found = false;
+    for (const secPat of cfg.patterns) {
+      const secMatch = text.match(secPat);
+      if (!secMatch) continue;
+      // Search in text near the match (within 500 chars after)
+      const startIdx = secMatch.index;
+      const searchRegion = text.substring(startIdx, startIdx + 500);
+      // Try each option from most severe to least
+      for (const [optVal, optPats] of Object.entries(cfg.mapping)) {
+        for (const op of optPats) {
+          if (op.test(searchRegion)) {
+            results.push({ id, label: cfg.label, value: optVal, displayValue: optVal.replace(/_/g, ' '), confidence: 'low', checked: true, categorical: true });
+            found = true;
+            break;
+          }
+        }
+        if (found) break;
+      }
+      if (found) break;
+    }
+  }
+
+  return results;
+}
+
+async function handlePDF(input) {
+  const file = input.files[0];
+  if (!file) return;
+  input.value = '';
+
+  toast('Extracting data from PDF...');
+  try {
+    const text = await extractPdfText(file);
+    const results = extractValues(text);
+
+    if (results.length === 0) {
+      toast('No data could be extracted from this PDF');
+      return;
+    }
+
+    _pdfExtracted = results;
+    showPdfPreview(results);
+  } catch (err) {
+    console.error('PDF extraction error:', err);
+    toast('Error reading PDF. Make sure it is not a scanned image.');
+  }
+}
+
+function showPdfPreview(results) {
+  const table = document.getElementById('pdf-preview-table');
+  // Clear existing rows except header
+  while (table.rows.length > 1) table.deleteRow(1);
+
+  const confColors = { high: 'var(--gn)', medium: 'var(--bm)', low: 'var(--or)' };
+  const confLabels = { high: 'High', medium: 'Medium', low: 'Low' };
+
+  results.forEach((r, i) => {
+    const row = table.insertRow(-1);
+    row.innerHTML = `<td><input type="checkbox" class="pdf-check" data-idx="${i}" ${r.checked ? 'checked' : ''}></td>
+      <td>${r.label}</td><td><strong>${r.displayValue}</strong></td>
+      <td><span class="tg" style="background:${confColors[r.confidence]}20;color:${confColors[r.confidence]}">${confLabels[r.confidence]}</span></td>`;
+  });
+
+  document.getElementById('pdf-modal').style.display = 'block';
+}
+
+function toggleAllPdfChecks(checked) {
+  document.querySelectorAll('.pdf-check').forEach(cb => cb.checked = checked);
+}
+
+function closePdfModal() {
+  document.getElementById('pdf-modal').style.display = 'none';
+}
+
+function applyPdfExtraction() {
+  const checks = document.querySelectorAll('.pdf-check');
+  let applied = 0;
+
+  checks.forEach(cb => {
+    if (!cb.checked) return;
+    const idx = parseInt(cb.dataset.idx);
+    const item = _pdfExtracted[idx];
+    if (!item) return;
+
+    if (item.id === '_gender') {
+      document.getElementById('gender').value = item.value;
+    } else if (item.id === '_age') {
+      document.getElementById('age').value = item.value;
+    } else {
+      const el = document.getElementById(item.id);
+      if (el) { el.value = item.value; applied++; }
+    }
+  });
+
+  // Trigger auto-calculations
+  calcBMI(); calcTcHdl(); calcEGFR();
+  colorAllFields();
+  toggleAllDetails(true);
+  closePdfModal();
+  toast(`Applied ${applied} values from PDF`);
+}
+
+// ═══════════════════════════════════════════════════
+// JSON IMPORT / EXPORT
+// ═══════════════════════════════════════════════════
+function exportJSON() {
+  const data = { _meta: { exportedAt: new Date().toISOString(), tool: 'Health PE Analyzer' } };
+  data.gender = document.getElementById('gender').value;
+  data.age = document.getElementById('age').value;
+
+  document.querySelectorAll('#t0 input, #t0 select').forEach(el => {
+    if (!el.id || el.id === 'gender' || el.id === 'age') return;
+    if (el.value !== '' && el.value !== null) data[el.id] = el.type === 'number' ? parseFloat(el.value) : el.value;
+  });
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `health-pe-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Data exported as JSON');
+}
+
+function handleJSON(input) {
+  const file = input.files[0];
+  if (!file) return;
+  input.value = '';
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.gender) document.getElementById('gender').value = data.gender;
+      if (data.age) document.getElementById('age').value = data.age;
+
+      for (const key in data) {
+        if (key === 'gender' || key === 'age' || key === '_meta') continue;
+        const el = document.getElementById(key);
+        if (el) el.value = data[key];
+      }
+
+      calcBMI(); calcTcHdl(); calcEGFR();
+
+      // Restore explicit values for computed fields (override auto-calc)
+      ['egfr', 'bmi', 'tc_hdl_ratio'].forEach(id => {
+        if (data[id] !== undefined) document.getElementById(id).value = data[id];
+      });
+
+      colorAllFields();
+      toggleAllDetails(true);
+      toast('Data imported from JSON');
+    } catch (err) {
+      toast('Error: Invalid JSON file');
+    }
+  };
+  reader.readAsText(file);
+}
+</script>
+</body>
+</html>

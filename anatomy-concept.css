@@ -1,0 +1,436 @@
+/* ====== Anatomical view — concept styles ====== */
+:root {
+  --bg: #f4f4f7;
+  --bg-soft: #fafafc;
+  --bg-elev: #ffffff;
+  --ink: #0f1115;
+  --ink-1: #1f2025;
+  --ink-2: #3a3a44;
+  --ink-3: #6b6b75;
+  --ink-4: #a0a0a9;
+  --line: rgba(15,17,21,.08);
+  --line-2: rgba(15,17,21,.05);
+
+  --heart: #ff375f;       --heart-soft: #ffe5ec;
+  --sleep: #5e5ce6;       --sleep-soft: #eae9ff;
+  --weight: #ff9f0a;      --weight-soft: #fff1d6;
+  --metabolic: #30d158;   --metabolic-soft: #ddf7e2;
+  --water: #00b8d4;       --water-soft: #d4f4fa;
+  --uric: #bf5af2;        --uric-soft: #f3e3fb;
+
+  --font-sans: "Inter Tight", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", "Cormorant Garamond", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app { max-width: 1280px; margin: 0 auto; padding: 36px 24px 96px; }
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--heart); font-weight: 600; margin-bottom: 12px;
+}
+.title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(36px, 4.5vw, 56px);
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  margin: 0 0 16px;
+  max-width: 760px;
+}
+.title em { color: var(--heart); font-style: italic; }
+.lede {
+  color: var(--ink-2); font-size: 15px; line-height: 1.6;
+  max-width: 640px; margin-bottom: 24px;
+}
+
+/* ===== Lab data banner ===== */
+.lab-banner {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--ink-2);
+  margin-bottom: 28px;
+  max-width: max-content;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+.lab-banner.show { display: inline-flex; }
+.lab-banner.empty { color: var(--ink-3); }
+.lab-banner a { color: var(--heart); text-decoration: none; }
+.lab-banner a:hover { text-decoration: underline; }
+.lab-banner .lb-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.lab-banner .lb-ok { background: #30a060; }
+.lab-banner .lb-flag { background: #e08020; }
+.lab-banner .lb-empty { background: var(--ink-4); }
+.lab-banner .lb-clear {
+  margin-left: 6px;
+  color: var(--ink-3);
+  font-size: 11px;
+}
+
+/* ===== Canvas layout ===== */
+.canvas {
+  display: grid;
+  grid-template-columns: minmax(420px, 1.05fr) minmax(340px, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+@media (max-width: 980px) { .canvas { grid-template-columns: 1fr; } }
+
+/* ===== Body card ===== */
+.body-card {
+  position: relative;
+  background: var(--bg-elev);
+  border-radius: 28px;
+  padding: 24px 28px;
+  box-shadow: 0 1px 2px rgba(15,17,21,.04), 0 4px 24px rgba(15,17,21,.06);
+  border: 1px solid var(--line-2);
+  overflow: hidden;
+  min-height: 580px;
+}
+.body-card::before {
+  content: "";
+  position: absolute; inset: -40% -20% auto auto;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle at 30% 30%, var(--heart-soft), transparent 60%),
+              radial-gradient(circle at 70% 70%, var(--sleep-soft), transparent 60%);
+  filter: blur(28px);
+  opacity: .45;
+  pointer-events: none;
+  z-index: 0;
+}
+.body-card > * { position: relative; z-index: 1; }
+
+/* Body-mode controls */
+.body-controls {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.bc-btn {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-2);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  transition: all .15s;
+}
+.bc-btn:hover { background: var(--bg-elev); border-color: var(--ink-4); color: var(--ink); }
+.bc-btn[aria-pressed="true"] { background: var(--ink); color: var(--bg-elev); border-color: var(--ink); }
+.bc-upload { display: inline-flex; align-items: center; }
+.bc-reset { margin-left: auto; padding: 6px 10px; }
+
+/* Body stage — image backdrop + SVG overlay */
+.body-stage {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  aspect-ratio: 480 / 720;
+}
+.body-bg-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity .35s;
+  border-radius: 16px;
+  background: var(--bg-soft);
+}
+.body-stage[data-mode="reference"] .body-bg-img { opacity: 0.35; }
+.body-stage[data-mode="reference"] .silhouette { opacity: 0; }
+.body-stage[data-mode="reference"] .organ-shape { opacity: 0.4; }
+.body-stage[data-mode="reference"] .organ:hover .organ-shape,
+.body-stage[data-mode="reference"] .organ.active .organ-shape,
+.body-stage[data-mode="reference"] .organ.lit .organ-shape { opacity: 0.9; }
+
+.body-svg { width: 100%; height: auto; display: block; position: relative; z-index: 2; }
+.bc-hint {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  align-self: center;
+}
+
+.silhouette { fill: oklch(98% 0.005 60); stroke: var(--line); stroke-width: 1; }
+.silhouette-shadow { fill: oklch(95% 0.005 60); }
+
+/* ===== Organs ===== */
+.organ {
+  cursor: pointer;
+  transition: transform .35s cubic-bezier(.2,.7,.2,1);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.organ-shape {
+  transition: filter .3s;
+}
+.organ-glow {
+  opacity: 0;
+  transition: opacity .35s;
+  pointer-events: none;
+}
+.organ:hover .organ-shape { filter: brightness(1.06); }
+.organ.lit .organ-glow,
+.organ.active .organ-glow { opacity: 1; }
+.organ.active { transform: scale(1.06); }
+.organ.dim { opacity: 0.35; transition: opacity .3s; }
+.organ[data-sev] .organ-num { font-weight: 700; }
+.organ-sev-badge { pointer-events: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,.15)); }
+
+.organ-num {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 600;
+  fill: var(--ink); text-anchor: middle;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+/* ===== Chips column ===== */
+.chip-col h3 {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3); margin: 0 0 12px; font-weight: 600;
+}
+.chip-col > h3:not(:first-child) { margin-top: 24px; }
+.chip-grid { display: grid; gap: 6px; }
+.chip {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all .15s;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+}
+.chip:hover { background: var(--bg-soft); border-color: var(--ink-4); transform: translateX(2px); }
+.chip.active { background: var(--ink); color: var(--bg-elev); border-color: var(--ink); }
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.chip .name { white-space: nowrap; }
+.chip .name-zh { color: var(--ink-3); font-size: 12px; margin-left: auto; font-weight: 400; white-space: nowrap; }
+.chip.active .name-zh { color: rgba(255,255,255,.65); }
+
+/* Subtle life — heart pulse, lungs breathe */
+@keyframes pulseHeart {
+  0%, 80%, 100% { transform: scale(1); }
+  40% { transform: scale(1.06); }
+}
+@keyframes breatheLungs {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+.organ[data-organ="heart"] .organ-shape {
+  animation: pulseHeart 1.1s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.organ[data-organ="lungs"] .organ-shape {
+  animation: breatheLungs 4s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+@media (prefers-reduced-motion: reduce) {
+  .organ[data-organ="heart"] .organ-shape,
+  .organ[data-organ="lungs"] .organ-shape { animation: none; }
+}
+
+/* ===== Detail panel ===== */
+.detail {
+  background: var(--bg-elev);
+  border-radius: 18px;
+  border: 1px solid var(--line-2);
+  padding: 22px 24px;
+  margin-top: 22px;
+  min-height: 140px;
+  transition: opacity .25s;
+}
+.detail-empty {
+  color: var(--ink-3);
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.detail-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-3); font-weight: 600;
+}
+.detail-name {
+  font-family: var(--font-serif);
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 4px 0 10px; line-height: 1.1;
+}
+.detail-name em { font-style: italic; }
+.detail-body {
+  color: var(--ink-2); font-size: 14px; line-height: 1.55;
+  margin-bottom: 14px;
+}
+.detail-rows { display: grid; gap: 8px; }
+.detail-row { display: flex; gap: 12px; font-size: 13px; align-items: baseline; }
+.detail-row .lbl {
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 10px; min-width: 78px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+.detail-row .val { color: var(--ink-1); }
+
+/* Indicator list per organ */
+.detail-section {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-2);
+}
+.lbl-section {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3);
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex; justify-content: space-between;
+}
+.lbl-section .count {
+  color: var(--ink-4);
+  font-weight: 500;
+}
+.indicators-grid {
+  display: grid; gap: 1px;
+  background: var(--line-2);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+}
+.indicator-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  background: var(--bg-elev);
+  align-items: center;
+}
+.indicator-row.has-data { background: var(--bg-soft); }
+.ind-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ind-name { color: var(--ink-1); font-weight: 500; }
+.ind-zh {
+  color: var(--ink-3); font-weight: 400;
+  font-size: 11px;
+}
+.ind-sev {
+  display: inline-block;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.ind-vals { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.ind-user {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-1);
+  font-feature-settings: "tnum";
+}
+.ind-user.empty { color: var(--ink-4); }
+.ind-ref {
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+.pill-target {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin: 3px 4px 3px 0;
+  font-weight: 500;
+  letter-spacing: -.005em;
+}
+.pill-target .pt-zh {
+  opacity: .6;
+  margin-left: 4px;
+  font-size: 11px;
+}
+
+/* Legend */
+.legend {
+  margin-top: 18px;
+  display: flex; gap: 14px; flex-wrap: wrap;
+  font-size: 11px; color: var(--ink-3);
+  font-family: var(--font-mono); letter-spacing: 0.04em;
+}
+.legend .item { display: flex; align-items: center; gap: 6px; }
+.legend .item .swatch { width: 10px; height: 10px; border-radius: 50%; }
+
+/* Notes block */
+.notes {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 880px) { .notes { grid-template-columns: 1fr; } }
+.note {
+  background: var(--bg-elev);
+  border: 1px solid var(--line-2);
+  border-radius: 18px;
+  padding: 20px 22px;
+}
+.note .n-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3); font-weight: 600;
+}
+.note h4 {
+  font-family: var(--font-serif);
+  font-weight: 400; font-size: 22px;
+  margin: 6px 0 8px; letter-spacing: -0.015em; line-height: 1.15;
+}
+.note p { color: var(--ink-2); font-size: 13px; line-height: 1.55; margin: 0; }
+
+.footer-note {
+  margin-top: 32px;
+  font-size: 12px; color: var(--ink-4);
+  font-family: var(--font-mono); letter-spacing: 0.04em;
+  text-align: center;
+}
