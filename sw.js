@@ -1,4 +1,4 @@
-const VERSION = 'v18-2026-05-19-csp-fix';
+const VERSION = 'v19-2026-05-21-post-rearrange';
 const CORE = './';
 const CORE_FILES = [
   './',
