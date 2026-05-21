@@ -198,6 +198,159 @@ David 的縱向資料已揭露多條 internal evidence chain：
 
 ---
 
+## 七-B、11 年心血管時序與 OSA 因果重構（2026-03-25 健檢 reframe）
+
+**重要前提**：本節 supersedes 並 contextualize `reviews/annual/2026-03-25.md` 第四節「下一步優先順序」表格。`reviews/annual/2026-03-25.md` 為歷史紀錄不修改；本節為**上游 root cause analysis 與 priority 0 補充**。
+
+### 2026-03-25 健檢異常 ↔ OSA mechanism mapping
+
+| 健檢異常 | OSA mechanism | 文獻 | 推估 OSA 貢獻 |
+|---------|--------------|------|------------|
+| **LVH + 心肌缺氧（11 年自 26 歲起）** | 夜間 sympathetic surge + Mueller maneuvre 胸內壓震盪 → 慢性 LV pressure load → LVH | Drager *Eur Respir J* 2007；Cuspidi *Hypertens Res* 2009 | **主要 driver**（26 歲健康男性無其他原因可解釋 LVH） |
+| **雙心房擴大（2026 NEW）** | OSA → 胸內壓震盪 → atrial wall stress → atrial remodeling → AF 2-4× 風險 | **Gami *NEJM* 2005**（classic OSA cardiac finding） | **主要 driver** |
+| **前壁 ST 上升（2026 NEW）** | 夜間 desat events → demand-supply mismatch；LVH 引起 secondary repolarization | Hayashi 2003 | 部分 OSA-derived；需 echo + Holter 排除 vasospasm / 早期 STEMI mimic |
+| **BP 113→153 mmHg（11 年）** | OSA → 夜間 sympathetic surge → 持續 daytime hypertension；30-40% essential HTN 由 OSA 驅動 | Pepperell *Lancet* 2002；Marin *JAMA* 2012 | **主要 driver** |
+| **主動脈扭曲 + 雙肺紋路（NEW）** | 長期 HTN aortic remodeling + LV pressure → pulmonary congestion | 標準心臟學 | 間接（透過 HTN / LV damage）|
+| **UA 7.8→8.9（11 年恆高）** | IH → ATP catabolism → purine → UA | Wu 2017 meta；García-Aroca 2020 | **0.7-1.5 mg/dL contribution** |
+| **HbA1c 5.6→6.0 跨入 prediabetes** | OSA → insulin resistance | Punjabi *AJRCCM* 2009；Babu 2005 | 部分 driver |
+| **HDL 39-48（11 年 borderline）** | OSA → lipoprotein metabolism 部分干擾 | Bratel 1999 | 弱 driver |
+| **2017 輕度脂肪肝（新發於 28 歲）** | OSA → NAFLD via metabolic syndrome pathway | Polotsky 2008 | 部分 driver |
+| **體脂 24.9 → 21.5%（近期介入下降中）** | OSA → leptin/ghrelin 干擾 → 慢性體重 trend up | Drager *JACC* 2012 | 部分 driver（近期管理已壓住）|
+
+### Narrative reframe — 過去 11 年的真實時序
+
+```
+Old narrative（過去自我認知）:
+  26 歲 ECG 異常但無症狀 → 「年輕人偶有」
+  飲食 + 工作壓力 → BP / UA / 脂肪肝
+  最近積極管理 → 代謝指標改善
+  但 BP / ECG 仍惡化 → 「why?」
+
+New narrative（OSA 加入因果鏈後）:
+  約 20 歲 OSA 開始（推估）→ 完全未被診斷
+       ↓
+  26 歲：sympathetic / pressure load 已造成 LVH + ST↓
+       ↓
+  26→34 歲：BP 持續漂移、UA 一直異常
+       ↓
+  34 歲：HbA1c 跨入 prediabetes
+       ↓
+  35 歲：LDL 飆 177 + HDL 跌
+       ↓
+  37 歲（2026-03）：雙心房擴大 NEW + ST 上升 NEW
+       ↓
+  37 歲（2026-05/識別當日）：意外發現 OSA via Garmin
+       ↓
+  缺氧 — 心血管傷害 — 代謝失調 的因果鏈終於閉環
+```
+
+### Priority 0 補充（凌駕 2026-03-25 的 priority 1-7 之上）
+
+`reviews/annual/2026-03-25.md` 列出 priority 1-7 為各別 silos（心臟 / BP / HDL / 眼科 / 聽力 / UA 等）。**OSA 識別後，這些可能多數 share 同一上游 driver**：
+
+```
+Priority 0（新加，2026-05-21）：
+  確認 OSA dx + 啟動有效治療
+       │
+       ├── 解決或減輕 priority 1（心臟超音波 + Holter 仍要做 — 量化 baseline）
+       ├── 解決或減輕 priority 2（BP 居家連測 — OSA 治療後 BP 預期下降）
+       ├── 部分解決 priority 3（HDL — 弱 OSA link，主要靠運動 + 飲食）
+       ├── 部分解決 priority 4（LDL — 弱 OSA link，主要靠 statin + 飲食）
+       ├── 不影響 priority 5（眼科 — 獨立做）
+       ├── 不影響 priority 6（聽力 — 獨立做）
+       └── 主要解決 priority 7（UA — OSA-driven 0.7-1.3 mg/dL）
+
+執行順序：
+  6/21 HSAT 連續式 oximeter（已預約）
+  → 若 ODI 明確 + 體位 dependent → 帶 28 晚 Garmin + 11 年健檢主動爭取 in-lab PSG
+  → 同時排心臟超音波 + 24h Holter（不等 PSG）
+  → 居家 BP 連測 2 週（任何時候開始都可以）
+```
+
+---
+
+## 七-C、不可逆傷害的真實意義（中文解釋）
+
+**「不可逆」≠「現在完蛋」**，意思是 OSA 治好後**不會 100% 回到從沒得過 OSA 的狀態**。但 David 37 歲，多數損傷還在「微」階段。重點是**停止繼續傷害**。
+
+### 1. 心肌纖維化（心臟肌肉的「疤」）
+
+**機制**：OSA 夜間 BP 飆升 → 心肌長期承受異常壓力 → LVH → 局部血液供應跟不上 → 細胞慢性受傷 → 被「疤痕組織」(纖維化) 取代 → 心臟收縮 / 舒張效率永久輕度下降。
+
+**比喻**：皮膚受傷留下的疤 — **疤不會消失，但不會繼續擴大**（若停止傷害）。
+
+**對 David 意義**：
+- ECG「LVH + 心肌缺氧」11 年 → **可能已有些微疤痕**
+- 治療 OSA 後**疤不會消失，但心肌肥大可縮回 10-20%**
+- 影響：心臟「儲備力」(reserve) 永遠比正常人略低，**但日常生活感覺不出來**
+- **必須**做心臟超音波 quantify 目前疤痕程度
+
+### 2. 心房結構性重塑（雙心房擴大的後果）
+
+**機制**：OSA 呼吸暫停 → 胸腔內負壓暴漲 → 心房被拉扯 → 每晚數百次 × 多年 → 心房肌肉永久撐大 → 內部電氣傳導路徑改變 → AF 易發體質。
+
+**比喻**：氣球反覆充氣放氣多年 → 球壁變鬆 → 回不到全新狀態。
+
+**對 David 意義**：
+- 2026-03 健檢**新增**雙心房擴大 → 已達 measurable 程度
+- 治療後**心房可部分縮回**，但「易發 AF 體質」永久殘留
+- **未來 10-20 年 AF 風險比同齡無 OSA 者高 2-4 倍**
+- 好好控制 OSA → AF 不一定會發作
+
+### 3. 已形成的血管斑塊（如果有）
+
+**機制**：OSA + HTN + 高 LDL + 高 UA + 慢性發炎 → 血管內皮受傷 → 膽固醇沉積成斑塊 → 長期累積 → 哪天破裂 → 心梗 / 中風。
+
+**比喻**：水管內壁水垢 — 垢清不掉，但可阻止繼續沉積 + 用 statin「穩定」不讓脫落。
+
+**對 David 意義**：
+- 目前**未做冠狀動脈 CT**，**不知道有沒有斑塊**
+- 推估**可能有早期斑塊**（LDL 154 + HTN + UA 高 + LVH 並存）
+- 治療 OSA 不會溶解已有斑塊，但**阻止繼續形成新斑塊**
+- **建議**：HSAT/PSG 後跟醫師討論做 **冠狀動脈 CT (CCTA) + calcium score** → 量化斑塊負擔
+- 有 → statin 長期吃；沒有 → 大幅鬆一口氣
+
+### 4. 海馬迴萎縮（記憶中樞）
+
+**機制**：夜間反覆缺氧 → 海馬迴神經元慢慢減少 → 灰質體積縮小（MRI 可見）→ 影響記憶細節、空間導航、新事物學習速度。
+
+**對 David 意義**：
+- 文獻 (O'Donoghue 2005) OSA 患者海馬迴比同齡正常人小 3-7%
+- 治療後 **部分恢復**（O'Donoghue 2012：12 個月 CPAP 後灰質部分回升）
+- 但**無法 100% 回到「從沒得過」狀態**
+- 主觀：可能輕微記憶細節遺漏（想不起名字、忘記放在哪）但不影響工作
+- 不需特別檢查（除非真有 cognitive 困擾，可做 MoCA 篩檢）
+
+### 60 歲心血管事件風險比較（粗估）
+
+| 假設情境 | 60 歲心血管事件風險 |
+|---------|------------------|
+| 從沒得過 OSA 的同齡人 | 基準（假設 5%）|
+| **今天 37 歲開始有效治療 OSA** | **~7-9%（接近基準）** |
+| OSA 一直不治療到 60 歲 | ~20-30%（中風 / 心梗 / AF 高風險）|
+
+→ **「今天識別 + 治療」vs「繼續忽略」的差距比「治療 vs 從沒得 OSA」的差距大很多**。  
+→ 11 年是 sunk cost，**重點是接下來 30+ 年**。
+
+---
+
+## 七-D、Diagnostic grief — 情緒處理
+
+讀完上面可能出現的情緒（Engleman *Sleep Med* 2003 描述為 **「diagnostic grief」**）：
+
+- 對醫療系統的 anger（為什麼沒早診斷）
+- 對自己的 self-blame（為什麼沒早察覺）
+- 對未來的 uncertainty（傷害有多深？）
+- 對過去的 grief（被偷走的精力、被誤解的疲憊）
+
+**4 個方法**：
+1. **不要壓抑，也不要沉溺** — 給自己 2-4 週時間消化
+2. **能量導回行動** — 凍結期紀律 + 腰凳定位 + HSAT 準備就是最好的 antidote
+3. **記錄恢復軌跡** — 3 個月後 HRV 19.7→25 ms、UA 8.9→7.5 mg/dL 會具體看到「我在 reclaim」
+4. **看見正面** — 37 歲識別，比 80% 同 phenotype 患者早 5-10 年；reversibility window 在 prime
+
+---
+
 ## 八、Long-term motivation anchor
 
 凍結期紀律疲乏時 / 治療依從性動搖時 / 「補品要不要這麼麻煩」之類懷疑時，**回讀以下三條**：
