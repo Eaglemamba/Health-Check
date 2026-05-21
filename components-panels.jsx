@@ -62,6 +62,46 @@ function PanelOverview({ lang }) {
           </tbody>
         </table>
       </div>
+
+      {o.threeLeverages && (<>
+        <div className="spacer-20" />
+        <div className="card" style={{borderTop: "3px solid var(--heart)"}}>
+          <div className="h3" style={{color: "var(--heart)"}}>{Tt(o.threeLeverages.ttl, lang)}</div>
+          <p className="body" style={{marginBottom: 12}}>{Tt(o.threeLeverages.intro, lang)}</p>
+          <table className="t">
+            <thead><tr>{o.threeLeverages.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+            <tbody>
+              {o.threeLeverages.rows.map(([marker, diet, ex, sleep], i) => (
+                <tr key={i}>
+                  <td><strong>{Tt(marker, lang)}</strong></td>
+                  <td style={{fontSize: 12}}>{typeof diet === "string" ? diet : Tt(diet, lang)}</td>
+                  <td style={{fontSize: 12}}>{typeof ex === "string" ? ex : Tt(ex, lang)}</td>
+                  <td style={{fontSize: 12, fontWeight: 500}}>{typeof sleep === "string" ? sleep : Tt(sleep, lang)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {o.threeLeverages.reframe && (
+            <div style={{marginTop: 16}}>
+              <div className="h4" style={{fontSize: 14, marginBottom: 10}}>{Tt(o.threeLeverages.reframe.ttl, lang)}</div>
+              <div className="grid-2">
+                <div className="callout warn" style={{padding: 14}}>
+                  <div style={{fontWeight: 600, fontSize: 12, marginBottom: 4, opacity: 0.7}}>{lang === "en" ? "Old (past 11 yr)" : "舊（過去 11 年）"}</div>
+                  <div style={{fontSize: 13, lineHeight: 1.55}}>{Tt(o.threeLeverages.reframe.old, lang)}</div>
+                </div>
+                <div className="callout" style={{padding: 14, borderLeft: "3px solid var(--heart)"}}>
+                  <div style={{fontWeight: 600, fontSize: 12, marginBottom: 4, opacity: 0.7}}>{lang === "en" ? "New (next 6 mo)" : "新（接下來 6 個月）"}</div>
+                  <div style={{fontSize: 13, lineHeight: 1.55}}>{Tt(o.threeLeverages.reframe.new, lang)}</div>
+                </div>
+              </div>
+              <div className="callout" style={{marginTop: 10, padding: 14}}>
+                <strong>{lang === "en" ? "Takeaway: " : "結論："}</strong>{Tt(o.threeLeverages.reframe.takeaway, lang)}
+              </div>
+            </div>
+          )}
+        </div>
+      </>)}
     </div>
   );
 }
