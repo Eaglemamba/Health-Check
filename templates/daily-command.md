@@ -12,7 +12,8 @@
    - **SpO2 × 睡眠分期 7 晚疊圖**：執行 `python scripts/analyze_spo2_desats.py --hypnogram7 {今日日期}` 產生 rolling 7 晚 hypnogram × SpO2 疊圖（檔名 `reviews/daily/spo2/spo2_hypnogram_7night_{今日日期}.png`）。每晚一列 subplot，REM/Light/Deep 背景色 + SpO2 折線。**主要用途**：判讀 OSA 主導階段是否漂移（REM-dominant vs Light-dominant vs Deep-dominant），單晚結論需用 7 晚趨勢驗證再下表型。在 daily 檔案的 SpO2 區塊嵌入該圖相對連結。同時 console 輸出 stage-stratified nadir / <90% 表，可在判讀區引用。
    - 若 sync 失敗（429 / 網路 / token 過期），改採手動輸入模式，在睡眠步驟向使用者詢問 Sleep Score、Body Battery、就寢/起床時間
 3. **逐項引導使用者填寫，一次一個問題**（此階段**不寫任何檔案**，僅在對話中收集回答，避免 stop hook 中途觸發導致重複提問）：
-   - 體重（可選填，**週六**為正式紀錄日）
+   - 體重 / 體脂 / 內臟脂肪（可選填，**週六**為正式紀錄日）
+   - **腰圍**（每日量；起床排尿後、肚臍上 1 cm 環繞、吐氣末、不收腹；用於追蹤內臟脂肪變化，比體重更敏感）
    - 血壓：收縮壓 / 舒張壓 / 心率（兩次測量）— Garmin 無晨間 BP，需使用者輸入
    - 睡眠：**以 Garmin 摘要為準**（就寢、起床、總時長、深眠、REM、Sleep Score、Body Battery 起床值）；只需向使用者追問：
      - 中途醒來（次數+原因）
@@ -30,7 +31,7 @@
    - 昨日回顧區塊填入昨日實際飲水量
    - 其餘區塊填入使用者輸入
 5. 同步更新 `reviews/weekly/` 對應週次檔案（如 `2026-W12.md`）：
-   - 將今日體重填入體重表格對應欄位
+   - 將今日體重 + 腰圍填入體重表格對應欄位
    - 將第二次血壓讀數填入血壓表格對應日期列
    - 將睡眠數據（Sleep Score / Body Battery / 總時長 / 主觀恢復感）填入睡眠表格對應日期列
    - 將身體信號（部位+性質+強度）更新至「身體信號模式」區塊（新增或累加出現天數、計算平均強度）
