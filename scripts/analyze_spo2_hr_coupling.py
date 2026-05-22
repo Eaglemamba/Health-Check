@@ -172,12 +172,35 @@ def analyze_night(date: str, verbose=True):
         result = classify_coupling(ev, night["hr"], true_baseline=true_base)
         classified.append({**ev, **result})
 
+    # Per-cycle T90 stats (90-min cycles from sleep onset)
+    cycles = []
+    sleep_start = night.get("sleep_start")
+    if sleep_start and night["spo2"]:
+        total_min = (night["spo2"][-1][0] - sleep_start).total_seconds() / 60
+        n_cycles = int(total_min // 90) + 1
+        for ci in range(n_cycles):
+            cs = sleep_start + timedelta(minutes=90 * ci)
+            ce = sleep_start + timedelta(minutes=90 * (ci + 1))
+            cycle_spo2 = [v for t, v in night["spo2"] if cs <= t < ce]
+            if not cycle_spo2:
+                continue
+            below = sum(1 for v in cycle_spo2 if v < 90)
+            t90_c = below / len(cycle_spo2) * 100
+            n_ev = sum(1 for c in classified if cs <= c["start"] < ce)
+            cycles.append({"cycle": ci + 1, "start": cs, "end": ce, "t90": t90_c, "n_events": n_ev})
+
     counts = {"coupled": 0, "silent": 0, "ambiguous": 0, "no_hr": 0}
     for c in classified:
         counts[c["class"]] += 1
 
     if verbose:
         print(f"### {date}（true baseline = {true_base:.0f} bpm｜HR 採樣 120s avg）" if true_base else f"### {date}")
+        if cycles:
+            print(f"Cycle T90（90-min cycles from sleep onset {sleep_start.strftime('%H:%M')}）：")
+            for c in cycles:
+                flag = " 🔴" if c["t90"] >= 5 else ""
+                print(f"  C{c['cycle']} ({c['start'].strftime('%H:%M')}-{c['end'].strftime('%H:%M')}): T90={c['t90']:.1f}%, n_events={c['n_events']}{flag}")
+            print()
         n = len(classified)
         print(f"Desat events: {n}（coupled {counts['coupled']} / ambiguous {counts['ambiguous']} / silent {counts['silent']} / no_hr {counts['no_hr']}）")
         silent_pct = counts["silent"] / n * 100 if n else 0
@@ -226,6 +249,23 @@ def plot_night(date: str, out_path: Path = None):
     spo2_v = [v for _, v in night["spo2"]]
     hr_t = [t for t, _ in night["hr"]]
     hr_v = [v for _, v in night["hr"]]
+    sleep_start = night.get("sleep_start")
+
+    # Cycle 分隔（每 90 min，自 sleep onset）+ 各 cycle T90 計算
+    cycles = []  # list of (cycle_no, start_dt, end_dt, t90_pct, n_events)
+    if sleep_start and spo2_t:
+        total_min = (spo2_t[-1] - sleep_start).total_seconds() / 60
+        n_cycles = int(total_min // 90) + 1
+        for ci in range(n_cycles):
+            cs = sleep_start + timedelta(minutes=90 * ci)
+            ce = sleep_start + timedelta(minutes=90 * (ci + 1))
+            cycle_spo2 = [v for t, v in night["spo2"] if cs <= t < ce]
+            if not cycle_spo2:
+                continue
+            below = sum(1 for v in cycle_spo2 if v < 90)
+            t90_c = below / len(cycle_spo2) * 100
+            n_ev = sum(1 for c in classified if cs <= c["start"] < ce)
+            cycles.append((ci + 1, cs, ce, t90_c, n_ev))
 
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 7), sharex=True,
                                     gridspec_kw={"height_ratios": [1, 1]})
@@ -233,13 +273,33 @@ def plot_night(date: str, out_path: Path = None):
     ax1.plot(spo2_t, spo2_v, color="#1f77b4", lw=1.2, label="SpO2")
     ax1.axhline(90, color="orange", ls="--", lw=0.8, alpha=0.7)
     ax1.axhline(88, color="red", ls="--", lw=0.8, alpha=0.7)
+
+    # Cycle 分隔線 + 標籤（兩 panel 都加）
+    for ci, cs, ce, t90_c, n_ev in cycles:
+        for ax in (ax1, ax2):
+            ax.axvline(cs, color="#999", ls=":", lw=0.6, alpha=0.5)
+        # cycle label + T90 在 ax1 上方
+        mid = cs + (ce - cs) / 2
+        clip_end = min(ce, spo2_t[-1])
+        if mid > spo2_t[-1]:
+            mid = cs + (clip_end - cs) / 2
+        flag = " *" if t90_c >= 5 else ""
+        ax1.text(mid, 99.5, f"C{ci}\nT90={t90_c:.0f}%{flag}\nn={n_ev}",
+                 fontsize=7, ha="center", va="top",
+                 color="#d62728" if t90_c >= 5 else "#444",
+                 bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="#ccc", alpha=0.8, lw=0.5))
+
     color_map = {"coupled": "#2ca02c", "silent": "#d62728", "ambiguous": "#ff7f0e", "no_hr": "#888888"}
     for c in classified:
         ax1.axvspan(c["start"], c["end"], color=color_map[c["class"]], alpha=0.25)
         ax1.annotate(f"{c['min']}%", xy=(c["start"], c["min"]), fontsize=7, color=color_map[c["class"]])
     ax1.set_ylabel("SpO2 (%)")
-    ax1.set_ylim(75, 100)
-    ax1.set_title(f"{date} — SpO2 ↔ HR coupling（綠=coupled, 紅=silent, 橘=ambiguous）")
+    ax1.set_ylim(75, 102)
+    cycle_summary = ""
+    if cycles:
+        red_cycles = [f"C{c[0]}({c[3]:.0f}%)" for c in cycles if c[3] >= 5]
+        cycle_summary = f"｜🔴 cycle: {' '.join(red_cycles)}" if red_cycles else "｜all cycles T90<5%"
+    ax1.set_title(f"{date} — SpO2 ↔ HR coupling（綠=coupled, 紅=silent, 橘=ambiguous）{cycle_summary}")
     ax1.grid(alpha=0.3)
 
     ax2.plot(hr_t, hr_v, color="#d62728", lw=1.0, label="HR")

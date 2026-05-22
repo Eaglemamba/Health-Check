@@ -1,4 +1,4 @@
-const VERSION = 'v20-2026-05-22-uphill-z2';
+const VERSION = 'v21-2026-05-22-monthly-targets';
 const CORE = './';
 const CORE_FILES = [
   './',

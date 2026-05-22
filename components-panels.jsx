@@ -897,17 +897,101 @@ function PanelRoutine({ lang }) {
 
 /* ===== Timeline / months ===== */
 function PanelTimeline({ lang }) {
+  const baseline = DD.milestoneStart;
+  const currentWeight = DD.hero.currentWeight;
+  const startDate = new Date(baseline.fullDate + "T00:00:00");
+  const today = new Date();
+  const daysSince = Math.max(0, Math.floor((today - startDate) / 86400000));
+  // Each month phase = 30.44 days (avg). Current month index (0=in M1 phase, 1=in M2 phase, ...).
+  const monthsElapsed = daysSince / 30.44;
+  const currentMonthIdx = Math.min(6, Math.floor(monthsElapsed) + 1); // which month phase we're IN
+  // Find most recent past milestone (target weight already due) for comparison
+  const lastDueMonth = DD.months.filter(m => m.num < currentMonthIdx).pop() || null;
+  const lastDueTarget = lastDueMonth ? lastDueMonth.weight : baseline.weight;
+  const lastDueDelta = +(currentWeight - lastDueTarget).toFixed(1);
+  const onTrack = lastDueDelta <= 0.3; // within +0.3 kg of target considered on track
+  const ahead = lastDueDelta <= -0.2;
+
   return (
     <div className="section">
       <div className="kicker">{lang === "en" ? "Six-month roadmap" : "6 個月路徑"}</div>
       <h2 className="section-title">{lang === "en" ? "Timeline & milestones" : "時程與里程碑"}</h2>
-      <div className="months">
-        {DD.months.map((m, i) => (
-          <div key={i} className="month" data-num={"0" + m.num}>
-            <div className="ttl">{Tt(m.ttl, lang)}</div>
-            <div className="body-sm">{Tt(m.body, lang)}</div>
+
+      {/* Progress summary */}
+      <div className="milestone-summary">
+        <div className="ms-row">
+          <div className="ms-col">
+            <div className="ms-lbl">{lang === "en" ? "Day" : "第幾天"}</div>
+            <div className="ms-val">{daysSince}</div>
+            <div className="ms-sub">/ 183 ({lang === "en" ? "6 mo" : "6 個月"})</div>
           </div>
-        ))}
+          <div className="ms-col">
+            <div className="ms-lbl">{lang === "en" ? "Current phase" : "目前階段"}</div>
+            <div className="ms-val">M{currentMonthIdx}</div>
+            <div className="ms-sub">{lang === "en" ? `${(monthsElapsed).toFixed(1)} mo elapsed` : `已過 ${(monthsElapsed).toFixed(1)} 個月`}</div>
+          </div>
+          <div className="ms-col">
+            <div className="ms-lbl">{lang === "en" ? "Current weight" : "目前體重"}</div>
+            <div className="ms-val">{currentWeight}<span className="ms-unit">kg</span></div>
+            <div className="ms-sub">{DD.hero.currentWeightDate}</div>
+          </div>
+          <div className="ms-col">
+            <div className="ms-lbl">{lang === "en" ? `vs M${lastDueMonth ? lastDueMonth.num : 0} target` : `vs M${lastDueMonth ? lastDueMonth.num : 0} 目標`}</div>
+            <div className={"ms-val " + (ahead ? "ms-ahead" : onTrack ? "ms-ok" : "ms-behind")}>
+              {lastDueDelta > 0 ? "+" : ""}{lastDueDelta}<span className="ms-unit">kg</span>
+            </div>
+            <div className="ms-sub">
+              {lang === "en"
+                ? (ahead ? "Ahead of plan" : onTrack ? "On track" : "Behind target")
+                : (ahead ? "超前進度" : onTrack ? "達標" : "落後目標")}
+              {" · "}{lang === "en" ? "target" : "目標"} {lastDueTarget} kg
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="spacer-12" />
+
+      {/* Baseline (M0) + 6 month cards */}
+      <div className="months months-7">
+        <div className="month baseline" data-num="M0">
+          <div className="ttl">{Tt(baseline.label, lang)}</div>
+          <div className="m-meta">
+            <span className="m-date">{baseline.date}</span>
+            <span className="m-weight">{baseline.weight} kg</span>
+          </div>
+          <div className="body-sm">{lang === "en" ? "Starting point" : "起始點"}</div>
+        </div>
+        {DD.months.map((m, i) => {
+          const isCurrent = (currentMonthIdx === m.num);
+          const isPast = currentMonthIdx > m.num;
+          const isFuture = currentMonthIdx < m.num;
+          const delta = (isPast || isCurrent) ? +(currentWeight - m.weight).toFixed(1) : null;
+          const status = delta === null ? "" : (delta <= -0.2 ? "ahead" : delta <= 0.3 ? "ok" : "behind");
+          return (
+            <div key={i} className={"month m-" + (isCurrent ? "current" : isPast ? "past" : "future")} data-num={"M" + m.num}>
+              <div className="ttl">{Tt(m.ttl, lang)}</div>
+              <div className="m-meta">
+                <span className="m-date">{m.date}</span>
+                <span className="m-weight">{m.weight} kg</span>
+              </div>
+              {delta !== null && (
+                <div className={"m-delta m-" + status}>
+                  {delta > 0 ? "+" : ""}{delta} kg {lang === "en" ? "vs target" : "vs 目標"}
+                </div>
+              )}
+              <div className="body-sm">{Tt(m.body, lang)}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="spacer-12" />
+      <div className="callout" style={{fontSize: 12, lineHeight: 1.55}}>
+        <strong>{lang === "en" ? "Weight trajectory: " : "體重路徑："}</strong>
+        {lang === "en"
+          ? "Linear plan loses ~0.83 kg/month (~0.2 kg/wk) — gentle deficit. Saturday morning reading is the official weekly value."
+          : "計畫每月平均降 0.83 kg（約 0.2 kg/週）— 緩和熱量赤字。每週六晨間排尿後為正式體重讀數。"}
       </div>
     </div>
   );
