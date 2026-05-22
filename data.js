@@ -13,11 +13,14 @@ window.HC_DATA = {
     titleEm: { en: "without medication first", zh: "先以生活方式介入" },
     lede:    { en: "Sleep, BP, lipids, uric acid — one shared metabolic root. Lifestyle stacks first; medication only after lifestyle plateaus.",
                zh: "睡眠、血壓、血脂、尿酸——共享同一個代謝根源。生活方式介入優先，等到效果平台期再考慮藥物。" },
-    progressLbl: { en: "Weight progress · 70 → 65 kg", zh: "體重進度 · 70 → 65 公斤" },
-    progressMeta: { en: "Day 68 · 67.3 kg · Sat official (5/23)", zh: "第 68 天 · 67.3 公斤 · 週六正式（5/23）" },
-    startDate: { en: "Start date · Mar 17, 2026 · Last sync 5/23", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/23" },
+    progressLbl: { en: "Weight progress · 70 → 65 (Cut, 6mo) → 63.1 kg (2015 align, 12mo)", zh: "體重進度 · 70 → 65（減脂期 6 個月）→ 63.1 公斤（對齊 2015，12 個月）" },
+    progressMeta: { en: "Day 68 · 67.3 kg · Sat official (5/23) · ahead of M3", zh: "第 68 天 · 67.3 公斤 · 週六正式（5/23）· 領先 M3 計畫" },
+    startDate: { en: "Start date · Mar 17, 2026 · Last sync 5/23 · 12-mo plan to 2027-03-17", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/23 · 12 個月計畫至 2027-03-17" },
     startWeight: 70,
-    targetWeight: 65,
+    targetWeight: 63.1,
+    cutPhaseTarget: 65,
+    cutPhaseEndDate: "2026-09-17",
+    finalTargetDate: "2027-03-17",
     currentWeight: 67.3,
     currentWeightDate: "5/23 Sat official",
   },
@@ -862,8 +865,11 @@ window.HC_DATA = {
   },
 
   // ===== Timeline / months =====
-  // 6-month plan baseline + monthly weight targets (linear 70 → 65 kg over 6 months)
-  // Start: 2026-03-17 (Day 0, baseline 70.0 kg) → End: 2026-09-17 (M6, target 65.0 kg)
+  // 12-month plan baseline → 2015-alignment endpoint.
+  // Phase A: Cut (M0-M6) — 70 → 65 kg / 15% BF
+  // Phase B: Recomp (M7-M9) — maintain weight, build lean mass, BF drifts to 14%
+  // Phase C: Final micro-cut (M10-M12) — 65 → 63.1 kg / ~13.5% BF (2015 weight, leaner than 2015)
+  // Start: 2026-03-17 (Day 0, baseline 70.0 kg) → End: 2027-03-17 (M12, 2015 alignment annual checkup)
   milestoneStart: { date: "3/17", fullDate: "2026-03-17", weight: 70.0, bodyFat: 21.5, label: { en: "Baseline", zh: "基準" } },
   months: [
     { num: 1, date: "4/17", fullDate: "2026-04-17", weight: 69.2, bodyFat: 21.0,
@@ -882,8 +888,32 @@ window.HC_DATA = {
               ttl: { en: "Optimize", zh: "優化" },
               body: { en: "Hold 90–120 s, intervals in walks, weight ~66 kg.", zh: "撐 90–120 秒、走路間歇、體重 ~66 kg。" } },
     { num: 6, date: "9/17", fullDate: "2026-09-17", weight: 65.0, bodyFat: 15.0,
-              ttl: { en: "Goal check", zh: "目標檢視" },
-              body: { en: "65 kg target, BF 15%, BP 120/75, all four markers in range.", zh: "65 kg、體脂 15%、血壓 120/75、四項指標達標。" } },
+              ttl: { en: "Cut phase end · 6-mo checkpoint", zh: "減脂期結束 · 6 個月檢視點" },
+              body: { en: "65 kg / 15% BF / BP 120/75. End of Cut. Switch to Recomp.", zh: "65 kg / 體脂 15% / BP 120/75。減脂期結束，轉入 Recomp。" } },
+    { num: 7, date: "10/17", fullDate: "2026-10-17", weight: 65.0, bodyFat: 14.5,
+              ttl: { en: "Recomp phase 1 · resistance 2-3×/wk", zh: "Recomp 階段 1 · 重訓 2-3 次/週確立" },
+              body: { en: "Maintain weight at 65 kg. Resistance 2-3×/wk (squat / DL / bench / row / press). Protein 1.6 g/kg. BF drifts ↓ via lean mass gain (not via cut).",
+                      zh: "維持體重 65 kg。重訓 2-3 次/週（深蹲/硬舉/臥推/划船/推舉）。蛋白質 1.6 g/kg。體脂率靠增肌自然下降，不靠減脂。" } },
+    { num: 8, date: "11/17", fullDate: "2026-11-17", weight: 65.0, bodyFat: 14.0,
+              ttl: { en: "Recomp phase 2 · progressive overload", zh: "Recomp 階段 2 · 漸進負荷" },
+              body: { en: "Increase compound lift weights ~2.5% / 2 wks. Protein up to 1.8 g/kg. Lipid recheck + UA recheck.",
+                      zh: "複合動作每 2 週加重 ~2.5%。蛋白質提升至 1.8 g/kg。血脂 + 尿酸複檢。" } },
+    { num: 9, date: "12/17", fullDate: "2026-12-17", weight: 64.8, bodyFat: 14.0,
+              ttl: { en: "Recomp phase 3 · holiday hold", zh: "Recomp 階段 3 · 假期維持" },
+              body: { en: "Hold lean mass through holiday season. Quality over volume. Verify OSA intervention effect post-PSG.",
+                      zh: "假期維持瘦組織。重訓質 > 量。PSG 後 OSA 介入效果驗證。" } },
+    { num: 10, date: "1/17", fullDate: "2027-01-17", weight: 64.3, bodyFat: 14.0,
+              ttl: { en: "Final cut start · 100-150 kcal/d deficit", zh: "最終減脂啟動 · 100-150 kcal/天缺口" },
+              body: { en: "Slow cut to preserve lean mass gained in Recomp. Resistance training intensity maintained.",
+                      zh: "緩減脂以保留 Recomp 階段建立的瘦組織。重訓強度維持。" } },
+    { num: 11, date: "2/17", fullDate: "2027-02-17", weight: 63.7, bodyFat: 13.8,
+              ttl: { en: "Approaching 2015 alignment", zh: "逼近 2015 對齊" },
+              body: { en: "Weight approaching 2015 baseline (63.1 kg). Waist target 77 cm. Monitor RHR / sleep / mood for over-cutting signals.",
+                      zh: "體重逼近 2015 baseline（63.1 kg）。腰圍目標 77 cm。監測 RHR / 睡眠 / 情緒避免 over-cut。" } },
+    { num: 12, date: "3/17", fullDate: "2027-03-17", weight: 63.1, bodyFat: 13.5,
+              ttl: { en: "2015 alignment · annual checkup", zh: "對齊 2015 · 年度健檢" },
+              body: { en: "Target: 63.1 kg / 13.5% BF / waist 77 cm / BP <120/75 / LDL <130 / TC <180. Lean mass +1-1.5 kg vs 2015 (better than 2015 at same weight). Full annual blood panel + ECG + abdominal US.",
+                      zh: "目標：63.1 kg / 體脂 13.5% / 腰圍 77 cm / BP <120/75 / LDL <130 / TC <180。瘦組織比 2015 多 +1-1.5 kg（同體重但比 2015 健康）。完整年度血液 + ECG + 腹部超音波。" } },
   ],
 
   // ===== Safety =====
