@@ -1374,6 +1374,93 @@ function PanelRunning({ lang }) {
           : "尿酸正常前嚴格守 Zone 2。乳酸與尿酸鹽在腎小管轉運子競爭排泄，硬推之後尿酸會升高 24-72 小時。"}
       </div>
 
+      {r.uphillWalk && (
+        <>
+          <div className="spacer-20" />
+          <div className="card">
+            <div className="kicker" style={{marginBottom: 4}}>{lang === "en" ? "Filed 2026-05-22 · Z2 toolkit add-on" : "2026-05-22 新增 · Z2 工具補完"}</div>
+            <div className="h3">{Tt(r.uphillWalk.ttl, lang)}</div>
+            <p className="body" style={{margin:"6px 0 14px", fontSize: 13, color: "var(--ink-3)"}}>
+              {Tt(r.uphillWalk.intro, lang)}
+            </p>
+
+            <div className="h3" style={{fontSize: 14, marginTop: 6}}>{Tt(r.uphillWalk.prescription.ttl, lang)}</div>
+            <table className="t" style={{marginTop: 6}}>
+              <thead><tr>{r.uphillWalk.prescription.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+              <tbody>
+                {r.uphillWalk.prescription.rows.map((row, i) => (
+                  <tr key={i}>
+                    <td><strong>{row[0]}</strong></td>
+                    <td>{row[1]}</td>
+                    <td>{row[2]}</td>
+                    <td style={{fontFamily:"var(--font-mono)"}}>{row[3]}</td>
+                    <td style={{color:"var(--ink-3)", fontSize: 12}}>{Tt(row[4], lang)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="body" style={{margin:"10px 0 0", fontSize: 12, color: "var(--ink-3)", fontStyle: "italic"}}>
+              {Tt(r.uphillWalk.prescription.anchor, lang)}
+            </p>
+
+            <div className="h3" style={{fontSize: 14, marginTop: 18}}>{Tt(r.uphillWalk.tools.ttl, lang)}</div>
+            <table className="t" style={{marginTop: 6}}>
+              <thead><tr>{r.uphillWalk.tools.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+              <tbody>
+                {r.uphillWalk.tools.rows.map((row, i) => (
+                  <tr key={i}>
+                    <td><strong>{Tt(row[0], lang)}</strong></td>
+                    <td>{Tt(row[1], lang)}</td>
+                    <td>{Tt(row[2], lang)}</td>
+                    <td style={{color:"var(--ink-3)", fontSize: 12}}>{Tt(row[3], lang)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="h3" style={{fontSize: 14, marginTop: 18}}>{Tt(r.uphillWalk.weekly.ttl, lang)}</div>
+            <table className="t" style={{marginTop: 6}}>
+              <thead><tr>{r.uphillWalk.weekly.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+              <tbody>
+                {r.uphillWalk.weekly.rows.map((row, i) => (
+                  <tr key={i}>
+                    <td><strong>{Tt(row[0], lang)}</strong></td>
+                    <td>{Tt(row[1], lang)}</td>
+                    <td style={{fontFamily:"var(--font-mono)", color: "var(--heart)"}}>{row[2]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="body" style={{margin:"10px 0 0", fontSize: 12, color: "var(--ink-3)", fontStyle: "italic"}}>
+              {Tt(r.uphillWalk.weekly.note, lang)}
+            </p>
+
+            <div className="h3" style={{fontSize: 14, marginTop: 18}}>{Tt(r.uphillWalk.ramp.ttl, lang)}</div>
+            <table className="t" style={{marginTop: 6}}>
+              <thead><tr>{r.uphillWalk.ramp.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+              <tbody>
+                {r.uphillWalk.ramp.rows.map((row, i) => (
+                  <tr key={i}>
+                    <td><strong>{Tt(row[0], lang)}</strong></td>
+                    <td>{Tt(row[1], lang)}</td>
+                    <td style={{fontFamily:"var(--font-mono)"}}>{row[2]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="h3" style={{fontSize: 14, marginTop: 18, color: "var(--heart)"}}>{Tt(r.uphillWalk.safety.ttl, lang)}</div>
+            <ul className="body" style={{paddingLeft: 18, margin: "8px 0 0"}}>
+              {r.uphillWalk.safety.items[lang].map((it, i) => <li key={i} style={{marginBottom: 6, fontSize: 13}}>{it}</li>)}
+            </ul>
+
+            <p className="body" style={{margin:"14px 0 0", fontSize: 11, color: "var(--ink-3)", fontFamily: "var(--font-mono)"}}>
+              {Tt(r.uphillWalk.ref, lang)}
+            </p>
+          </div>
+        </>
+      )}
+
       {r.hipDrive && (
         <>
           <div className="spacer-20" />

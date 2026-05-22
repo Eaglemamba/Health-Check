@@ -1,4 +1,4 @@
-const VERSION = 'v19-2026-05-21-post-rearrange';
+const VERSION = 'v20-2026-05-22-uphill-z2';
 const CORE = './';
 const CORE_FILES = [
   './',
