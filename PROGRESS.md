@@ -74,6 +74,8 @@
 5. **2026-05-19** — 表型修正：混合型 OSA + 高 arousal threshold（非純 REM-OSA）
 6. **2026-05-20** — 肌功能治療 protocol（myofunctional therapy）
 7. **2026-05-21** — **HSAT 預約 6/21**；楔形枕 pre/post 自然實驗證實 C1 T90 ↓ 75%；user-confirmed 仰臥翻身→ POSA 假設經驗證實；OSA 累積傷害評估完成
+8. **2026-05-22** — 14 晚 cohort HR coupling 分析揭露 **89% silent desat**（autonomic arousal-side blunted；vagal apneic bradycardia 完整）；cycle annotation 加入 dual-panel chart，5/22 cycle 分布：C1 0% ✓（wedge effective）/ C2-C5 8.9-20.0% 🔴；user 5/22 補入 attribution 修正 — **5/22 = Level 1 only（網球腰包漏背）+ Level 1 substituted（高背枕）**，非 Level 2 fail；user-reported 醒來腳酸 → **dual-trigger model (positional + desat)** → **OSA + PLMD 共病嫌疑** → 診斷路徑升級 **PSG > HSAT**（HSAT 缺 EMG，無法測 PLMS）
+9. **2026-05-23（今日）** — 5/22 commit `9b3bc3e` 包含：daily 5/22 attribution 修正 + Sims trial article + HR coupling cycle annotation + PWA monthly targets + sw.js v21；今晚 D3 stack 用戶決定 **stack-up（Layer 1+2+3+4）** 為主路徑（楔形枕 + 高背枕 + 腰包網球 + 胸前長條抱枕），Modified Sims 為 fallback path（5 天 trial 已 article 化備援）
 
 **OSA 修復視窗**：
 - 治療後血壓、HRV、insulin sensitivity 數週 – 3 個月內回升
@@ -100,15 +102,18 @@
 
 詳見 `articles/2026-03-25-supplement-guide.md`（鏡射於 `reviews/annual/`）。
 
-### OSA 介入分層
+### OSA 介入分層（5/22 更新後）
 
-| Level | 介入 | 狀態 |
+| Layer | 介入 | 狀態 |
 |-------|------|------|
 | L1 | 環境（防螨枕套、洗鼻、避開塵螨） | ✓ 持續 |
-| L2 | 楔形枕（頭部 30°） | ✓ 5/14 起；C1 T90 ↓ 75% 驗證 |
-| L3 | 網球 T-shirt（POSA） | 5/21 D1（5 天凍結期觀察） |
-| L4 | HSAT 多項睡眠檢查 | **預約 6/21** |
-| L5 | CPAP / 口腔裝置 | 待 HSAT 結果 |
+| L2 | 楔形枕（頭部 30° elevation） | ✓ 5/14 起；C1 T90 ↓ 75% 驗證；C2-C5 fidelity decay |
+| L3 | 高背枕（passive lateral bias） | ✓ 持續；5/22 仰躺時形成 45° 斜面而非完全仰 |
+| **L4** | **腰包網球（active anti-supine）** | 🆕 **5/23 D3 必背**；位置：肩胛骨之間 T4-T6（非腰部） |
+| **L5** | **胸前長條抱枕（lateral lock）** | 🆕 **5/23 D3 加入** |
+| **fallback** | **Modified Sims position** | 備案：若 L1-L5 stack 在 5/27 結算仍不足 → 啟動 5 天 trial |
+| L6 | PSG（升級自 HSAT，因 PLMD 共病嫌疑） | **預約 6/21**；要求 full PSG + EMG + iron panel |
+| L7 | CPAP / 口腔裝置 / dopaminergic | 待 PSG 結果 |
 
 ### 半年體重逆轉里程碑
 
@@ -124,7 +129,7 @@ M0  M1   M2   M3   M4   M5   M6
 
 | 優先 | 項目 | 截止 / 排程 |
 |------|------|-----------|
-| 🔴 1 | HSAT 多項睡眠檢查 | 6/21 已預約 |
+| 🔴 1 | **PSG**（升級自 HSAT）多項睡眠檢查 + EMG + iron panel / B12 / folate（5/22 PLMD 共病嫌疑） | 6/21 預約電話打給診所升級檢查項目 |
 | 🔴 2 | 心臟超音波 + 24h Holter | 待安排（ECG 雙心房擴大新發現） |
 | 🟠 3 | 第 3 月抽血追蹤（TG/LDL/UA/hsCRP/HDL） | 5 月下旬待安排 |
 | 🟠 4 | 眼科 OCT + 視野 | 待安排（IOP 雙眼 19 + VA 下滑） |
