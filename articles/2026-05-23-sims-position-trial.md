@@ -1,9 +1,22 @@
 # Modified Sims position trial — 從「外物 fidelity」轉「自身體位 fidelity」
 
-*建立日：2026-05-23（W21 D3 起算 trial baseline）*
+*建立日：2026-05-23（W21 D3）*
 *前置：[2026-05-21 OSA 累積傷害評估](2026-05-21-osa-damage-recovery.md)｜[2026-05-22 HR coupling 分析](2026-05-22-osa-hr-coupling-analysis.md)*
-*Trial 期間：2026-05-23 ~ 2026-05-27（5 晚）*
-*狀態：HSAT 預約 6/21；此為其前最後一個自體 trial*
+*狀態：PSG 預約 6/21（自 HSAT 升級，因 PLMD 共病嫌疑）；此為其前的 fallback path*
+
+---
+
+## ⚠️ 用途定位（5/22 user-clarified attribution 後重新分類）
+
+5/22 結束時 user 重新檢視 attribution，確認：
+- 5/22 並非「wedge / Layer 1+2 failed」，而是 **「Layer 3 (腰包網球) 漏執行」** + **dual-trigger model**（positional + desat 同時驅動 awakening）+ **PLMD 共病嫌疑**
+
+→ 因此 **5/23 D3 用戶選擇先走 L1-L5 stack-up**（楔形枕 + 高背枕 + 腰包網球 + 胸前長條抱枕），而非直接跳 Sims position。
+
+→ **本 article 重新定位為 fallback path**：
+- **若 D3 stack-up（5/23-5/27）結算仍 C2-C5 T90 中位數 > 6%** → 啟動 Sims 5 天 trial
+- **若 PSG 6/21 確診 PLMS arousal index > 5/h** → Sims 不再是必要（dopaminergic / iron repletion 為 first-line）
+- **若 stack-up 成功** → Sims 留檔不執行，作為長期備案
 
 ---
 
@@ -89,7 +102,11 @@ C5 (03:41-05:11): T90 11.6%  events 3   🔴
 | **L3 警報** | 網球 T-shirt（T4-T6 中胸椎）| 翻過抱枕時觸發不適 — 最後警報 |
 | **L4 ground** | 薄頭枕（5-8 cm）| 頸部中位、避免肩部歪斜 |
 
-### 網球 T-shirt 精確定位（不是腰、是肩胛骨之間）
+### 網球 T-shirt 精確定位（注意：常用語「腰包」≠ 腰部位置）
+
+⚠️ **5/22 之後的 reminder**：daily 紀錄常稱「腰包網球」 — 這是裝置形式（背後口袋型 pouch）而非位置。正確 anatomical 位置仍是**肩胛骨之間 T4-T6**。
+
+
 
 ```
        ─┬─ 後頸第七節 (C7) 突出骨點
@@ -166,17 +183,33 @@ C5 (03:41-05:11): T90 11.6%  events 3   🔴
 
 ---
 
-## 七、結算後的下一步路徑圖
+## 七、結算後的下一步路徑圖（fallback 啟動後）
 
 ```
-5/27 結算
+若 5/23-5/27 stack-up 結算 C2-C5 T90 中位數 > 6%
   ↓
-✅ 成功 → 維持 Sims → 6/21 HSAT 帶 wedge pre/post + Sims pre/post 雙 dataset
-  ↓ → CPAP 仍可能必要（HSAT 結果決定）
+本 article 5 天 Sims trial 啟動（5/28-6/1）
+  ↓
+6/1 結算
+  ↓
+✅ 成功 → 維持 Sims → 6/21 PSG 帶 wedge pre/post + stack-up + Sims pre/post 三 dataset
+  ↓ → CPAP 仍可能必要（PSG 結果決定）
   ↓ → 即使 CPAP，Sims 也可作為 CPAP 順從度補強
-🟡 部分 → 強化抱枕 / 加綁帶 → 第二輪 5 天 trial → 6/21 HSAT
-🔴 無效 → 跳過 Sims、聚焦 6/21 HSAT → CPAP first-line
+🟡 部分 → 強化抱枕 / 加綁帶 → 第二輪 trial → 6/21 PSG
+🔴 無效 → 跳過 Sims、聚焦 6/21 PSG → CPAP / dopaminergic first-line（依 PLMS 結果）
+
+若 5/23-5/27 stack-up 成功（C2-C5 T90 中位數 ↓ ≥ 50%）
+  ↓
+本 article 留檔不執行；長期備案
 ```
+
+## 八、5/22 dual-trigger / PLMD 共病嫌疑對本 trial 的影響
+
+若 6/21 PSG 確認 **PLMS arousal index > 5/h**：
+- Sims 的 anti-supine 機制對 PLMD 無效（PLM 是中樞性肢動，非體位驅動）
+- 應優先 iron panel（ferritin < 75 ng/mL 為 PLMD 啟動條件）+ dopaminergic agent 評估
+- Sims 仍可保留作 OSA 子問題的解
+- **不要把 Sims 視為「PSG 之前的萬靈丹」**
 
 ---
 
