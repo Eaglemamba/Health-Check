@@ -864,26 +864,26 @@ window.HC_DATA = {
   // ===== Timeline / months =====
   // 6-month plan baseline + monthly weight targets (linear 70 → 65 kg over 6 months)
   // Start: 2026-03-17 (Day 0, baseline 70.0 kg) → End: 2026-09-17 (M6, target 65.0 kg)
-  milestoneStart: { date: "3/17", fullDate: "2026-03-17", weight: 70.0, label: { en: "Baseline", zh: "基準" } },
+  milestoneStart: { date: "3/17", fullDate: "2026-03-17", weight: 70.0, bodyFat: 21.5, label: { en: "Baseline", zh: "基準" } },
   months: [
-    { num: 1, date: "4/17", fullDate: "2026-04-17", weight: 69.2,
+    { num: 1, date: "4/17", fullDate: "2026-04-17", weight: 69.2, bodyFat: 21.0,
               ttl: { en: "Sleep first", zh: "先修睡眠" },
               body: { en: "OSA screen, fluid timing, leg elevation, 5:30 rule.", zh: "OSA 篩檢、補水時機、抬腿、5:30 規則。" } },
-    { num: 2, date: "5/17", fullDate: "2026-05-17", weight: 68.3,
+    { num: 2, date: "5/17", fullDate: "2026-05-17", weight: 68.3, bodyFat: 20.0,
               ttl: { en: "Foundation", zh: "打基礎" },
               body: { en: "Brisk walk routine, sodium audit, supplement stack settled.", zh: "快走、鈉審視、保健品穩定。" } },
-    { num: 3, date: "6/17", fullDate: "2026-06-17", weight: 67.5,
+    { num: 3, date: "6/17", fullDate: "2026-06-17", weight: 67.5, bodyFat: 19.0,
               ttl: { en: "Wall sit ramp", zh: "靠牆深蹲進展" },
               body: { en: "Hold time 60 s, sodium < 1,500 mg, Body Battery ≥ 65.", zh: "撐 60 秒、鈉 < 1,500 mg、身體電量 ≥ 65。" } },
-    { num: 4, date: "7/17", fullDate: "2026-07-17", weight: 66.7,
-              ttl: { en: "First labs", zh: "首次回診" },
-              body: { en: "BP, lipids, UA recheck. Adjust fish oil if LDL ↑.", zh: "血壓、血脂、尿酸複檢。LDL 上升則調魚油。" } },
-    { num: 5, date: "8/17", fullDate: "2026-08-17", weight: 65.8,
+    { num: 4, date: "7/17", fullDate: "2026-07-17", weight: 66.7, bodyFat: 17.5,
+              ttl: { en: "First labs + resistance", zh: "首次回診 + 重訓上路" },
+              body: { en: "BP, lipids, UA recheck. Resistance training Phase 1 settled, BF target needs lean preservation.", zh: "血壓、血脂、尿酸複檢。重訓 Phase 1 穩定，BF 目標靠 lean preservation 達成。" } },
+    { num: 5, date: "8/17", fullDate: "2026-08-17", weight: 65.8, bodyFat: 16.0,
               ttl: { en: "Optimize", zh: "優化" },
               body: { en: "Hold 90–120 s, intervals in walks, weight ~66 kg.", zh: "撐 90–120 秒、走路間歇、體重 ~66 kg。" } },
-    { num: 6, date: "9/17", fullDate: "2026-09-17", weight: 65.0,
+    { num: 6, date: "9/17", fullDate: "2026-09-17", weight: 65.0, bodyFat: 15.0,
               ttl: { en: "Goal check", zh: "目標檢視" },
-              body: { en: "65 kg target, BP 120/75, all four markers in range.", zh: "65 kg、血壓 120/75、四項指標達標。" } },
+              body: { en: "65 kg target, BF 15%, BP 120/75, all four markers in range.", zh: "65 kg、體脂 15%、血壓 120/75、四項指標達標。" } },
   ],
 
   // ===== Safety =====

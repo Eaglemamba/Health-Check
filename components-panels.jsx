@@ -960,6 +960,9 @@ function PanelTimeline({ lang }) {
             <span className="m-date">{baseline.date}</span>
             <span className="m-weight">{baseline.weight} kg</span>
           </div>
+          {baseline.bodyFat != null && (
+            <div className="m-bf">{lang === "en" ? "BF" : "體脂"} {baseline.bodyFat}%</div>
+          )}
           <div className="body-sm">{lang === "en" ? "Starting point" : "起始點"}</div>
         </div>
         {DD.months.map((m, i) => {
@@ -975,6 +978,9 @@ function PanelTimeline({ lang }) {
                 <span className="m-date">{m.date}</span>
                 <span className="m-weight">{m.weight} kg</span>
               </div>
+              {m.bodyFat != null && (
+                <div className="m-bf">{lang === "en" ? "BF target" : "體脂目標"} ≤ {m.bodyFat}%</div>
+              )}
               {delta !== null && (
                 <div className={"m-delta m-" + status}>
                   {delta > 0 ? "+" : ""}{delta} kg {lang === "en" ? "vs target" : "vs 目標"}

@@ -1,4 +1,4 @@
-const VERSION = 'v21-2026-05-22-monthly-targets';
+const VERSION = 'v22-2026-05-22-bf-targets';
 const CORE = './';
 const CORE_FILES = [
   './',
