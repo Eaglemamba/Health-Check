@@ -1094,6 +1094,88 @@ window.HC_DATA = {
         },
       },
     },
+    // Uphill Z2 walk module (filed 2026-05-22) — third Z2 tool alongside slow-jog and run-walk
+    uphillWalk: {
+      ttl: { en: "Uphill Z2 walk — add grade, not speed", zh: "上斜坡 Z2 健走 — 加坡度而非加速度" },
+      intro: {
+        en: "Flat brisk walks tap out at HR 120-125 bpm (Z1). Adding 5-8% grade lifts walking HR into the Z2 band (133-146) without the lactic / impact cost of running — the lowest-risk Z2 modality during OSA recovery and at UA 8.9. Built on the ACSM walking equation: each +1% grade ≈ +0.4 MET ≈ +3-4 bpm at 5 km/h.",
+        zh: "平地快走 HR 上限 120-125 bpm（Z1）。加 5-8% 坡即可推 HR 進 Z2 區（133-146），又免去跑步的乳酸與衝擊代價 — OSA 修復視窗 + UA 8.9 背景下最低風險的 Z2 工具。基於 ACSM 步行能量方程式：5 km/h 時每 +1% 坡度 ≈ +0.4 MET ≈ +3-4 bpm。",
+      },
+      prescription: {
+        ttl: { en: "Personalized prescription — speed × grade → predicted HR", zh: "個人化處方 — 速度 × 坡度 → 預測 HR" },
+        head: { en: ["Speed", "Grade", "Est. MET", "Predicted HR", "Zone"], zh: ["速度", "坡度", "估算 MET", "預測 HR", "Zone"] },
+        rows: [
+          ["5 km/h",   "0%",  "3.4", "115-125", { en: "Z1",                     zh: "Z1" }],
+          ["5 km/h",   "3%",  "4.4", "125-132", { en: "Z1 high / Z2 edge",      zh: "Z1 上 / Z2 邊" }],
+          ["5 km/h",   "6%",  "5.4", "133-142", { en: "Z2 mid  ✓",              zh: "Z2 中  ✓" }],
+          ["5 km/h",   "9%",  "6.4", "142-152", { en: "Z2 high / Z3 edge",      zh: "Z2 上 / Z3 邊" }],
+          ["6 km/h",   "5%",  "5.5", "133-145", { en: "Z2 mid  ✓",              zh: "Z2 中  ✓" }],
+          ["4.8 km/h", "12%", "8.0", "148-160", { en: "Z3 (post-CPAP only)",    zh: "Z3（僅 CPAP 啟動後）" }],
+        ],
+        anchor: {
+          en: "Anchor recipe (W1-W2 test): 5 km/h × 6% × 30 min, calibrate by Garmin avg HR — if < 133 raise grade +2%, if > 146 lower grade -2%.",
+          zh: "錨點配方（W1-W2 試水）：5 km/h × 6% × 30 分。用 Garmin 平均 HR 校準 — < 133 下次坡度 +2%、> 146 下次坡度 -2%。",
+        },
+      },
+      tools: {
+        ttl: { en: "Tools — precision × accessibility", zh: "工具：精準度 × 可及性" },
+        head: { en: ["Tool", "Grade precision", "Continuity", "Note"], zh: ["工具", "坡度精準度", "連續性", "備註"] },
+        rows: [
+          [{ en: "Treadmill",      zh: "跑步機" },           { en: "🟢 ±0.5%",        zh: "🟢 ±0.5%" },        { en: "🟢 30+ min",        zh: "🟢 30+ 分" },     { en: "Most controlled Z2 — gym or home",                 zh: "最可控的 Z2 — 健身房 / 家用" }],
+          [{ en: "Mountain trail", zh: "山徑步道" },         { en: "🟡 variable",     zh: "🟡 變動" },          { en: "🟢 60+ min",        zh: "🟢 60+ 分" },     { en: "Xiangshan / Xianjiyan / Junjianyan — count UPHILL min only", zh: "象山 / 仙跡岩 / 軍艦岩 — 只計上行段" }],
+          [{ en: "Bridge ramp",    zh: "河堤橋引道" },       { en: "🟡 ~4-7%",        zh: "🟡 ~4-7%" },        { en: "🔴 3-5 min round",  zh: "🔴 3-5 分來回" }, { en: "Riverside bridges × 8-12 reps = 25-30 min Z2",     zh: "河堤橋上下 8-12 趟 = 25-30 分 Z2" }],
+          [{ en: "Parking ramp",   zh: "停車場斜坡" },       { en: "🟢 6-10%",        zh: "🟢 6-10%" },        { en: "🔴 2-4 min round",  zh: "🔴 2-4 分來回" }, { en: "Most underrated daily option",                     zh: "最被低估的日常選項" }],
+          [{ en: "Stairs",         zh: "樓梯" },             { en: "🔴 ~55% effective", zh: "🔴 ~55% 等效" },  { en: "🔴 1-3 min",        zh: "🔴 1-3 分" },     { en: "NEAT only — HR overshoots Z2",                     zh: "僅累積 NEAT — HR 容易超 Z2" }],
+        ],
+      },
+      weekly: {
+        ttl: { en: "Suggested weekly placement (W22+)", zh: "建議週訓練表（W22 起）" },
+        head: { en: ["Day", "Primary", "Target Z2 min"], zh: ["日", "主項", "Z2 目標分鐘"] },
+        rows: [
+          [{ en: "Mon", zh: "一" }, { en: "Uphill walk — 5 km/h × 6% × 30 min", zh: "上坡健走 — 5 km/h × 6% × 30 分" }, "30"],
+          [{ en: "Tue", zh: "二" }, { en: "Commute cycling (Z2 segments)",      zh: "通勤騎車（Z2 段）" },              "10-15"],
+          [{ en: "Wed", zh: "三" }, { en: "Slow jog 180 spm × 30 min",          zh: "超慢跑 180 spm × 30 分" },          "30"],
+          [{ en: "Thu", zh: "四" }, { en: "Uphill walk — 5 km/h × 6% × 30 min", zh: "上坡健走 — 5 km/h × 6% × 30 分" }, "30"],
+          [{ en: "Fri", zh: "五" }, { en: "Commute cycling (Z2 segments)",      zh: "通勤騎車（Z2 段）" },              "10-15"],
+          [{ en: "Sat", zh: "六" }, { en: "Long walk / mountain trail",         zh: "長走 / 山徑步道" },                "25-40"],
+          [{ en: "Sun", zh: "日" }, { en: "Rest + stretch",                     zh: "完全休息 + 伸展" },                "0"],
+        ],
+        note: { en: "Weekly Z2 total: 135-160 min ✓ (5/13 baseline was <25 min/wk)", zh: "週 Z2 累積：135-160 分 ✓（5/13 baseline < 25 分/週）" },
+      },
+      ramp: {
+        ttl: { en: "4-week ramp-up", zh: "4 週進階" },
+        head: { en: ["Week", "Format", "Total min"], zh: ["週", "格式", "總分鐘"] },
+        rows: [
+          [{ en: "W1 (5/22-28)",  zh: "W1 (5/22-28)" },  { en: "Test water · 5 km/h × 4-5% · 3 sessions × 20-25 min", zh: "試水 · 5 km/h × 4-5% · 3 次 × 20-25 分" }, "65-70"],
+          [{ en: "W2 (5/29-6/4)", zh: "W2 (5/29-6/4)" }, { en: "Standard · 5 km/h × 6% · 3 sessions × 30 min",       zh: "主力 · 5 km/h × 6% · 3 次 × 30 分" },       "85"],
+          [{ en: "W3 (6/5-11)",   zh: "W3 (6/5-11)" },   { en: "Volume up · 4 sessions × 30-40 min",                  zh: "加量 · 4 次 × 30-40 分" },                  "125-135"],
+          [{ en: "W4 (6/12-18)",  zh: "W4 (6/12-18)" },  { en: "Maintain · review RHR / Sleep vs baseline · 6/21 HSAT", zh: "維持 · 評估 RHR / 睡眠 vs baseline · 6/21 HSAT" }, "125-135"],
+        ],
+      },
+      safety: {
+        ttl: { en: "Red lines — stop session if any triggered", zh: "紅線 — 任一觸發即中止當日 session" },
+        items: {
+          en: [
+            "HR > 155 bpm (Z2 ceiling +10) → stop, breathe 2 min, restart slower or lower grade.",
+            "Last night SpO2 nadir < 80% or T90 > 10% → Z1 only today (no incline) — save recovery for sleep.",
+            "Morning BP > 140/90 → defer session or downgrade to Z1.",
+            "No 12-3-30 (12% × 3 mph) until HSAT (6/21) confirms phenotype + CPAP started — HR 150+ too taxing on autonomic.",
+            "Post-workout 90 min: water 500 mL + hibiscus tea, no purine-heavy food / alcohol (UA 8.9 rule).",
+          ],
+          zh: [
+            "HR > 155 bpm（Z2 上緣 +10）→ 停下深呼吸 2 分、降速降坡再進。",
+            "昨夜 SpO2 nadir < 80% 或 T90 > 10% → 當日只走 Z1（不爬坡），保留體力給夜間修復。",
+            "晨間 BP > 140/90 → 當日延後或改 Z1。",
+            "HSAT（6/21）確認 phenotype + CPAP 啟動前不做 12-3-30（12% × 3 mph） — HR 150+ 對自律神經負擔過大。",
+            "訓練後 90 min：水 500 mL + 洛神花茶，禁高普林食物 / 酒（UA 8.9 配套）。",
+          ],
+        },
+      },
+      ref: {
+        en: "Full protocol: articles/2026-05-22-uphill-zone2-walking-plan.md",
+        zh: "完整文件：articles/2026-05-22-uphill-zone2-walking-plan.md",
+      },
+    },
   },
 
   // ===== Supplements detail (extended) =====
