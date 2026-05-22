@@ -175,7 +175,7 @@ def cycle_metrics(spo2, t0, t1):
 
 def main():
     nights = []
-    for p in sorted(DATA_DIR.glob("*.json")):
+    for p in sorted(DATA_DIR.rglob("*.json")):
         n = load_night(p)
         if n:
             nights.append(n)

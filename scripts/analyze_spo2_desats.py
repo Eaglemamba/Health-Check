@@ -38,7 +38,7 @@ def parse_ts(s: str) -> datetime:
 
 def load_epochs(date: str):
     """回傳 (epochs_sorted, summary_dict) 或 (None, None)。"""
-    p = DATA_DIR / f"{date}.json"
+    p = next(iter(DATA_DIR.rglob(f"{date}.json")), DATA_DIR / f"{date}.json")
     if not p.exists():
         return None, None
     data = json.loads(p.read_text(encoding="utf-8"))
@@ -128,7 +128,7 @@ def cmd_night(date: str):
 
 
 def cmd_summary(days: int):
-    files = sorted(DATA_DIR.glob("*.json"))[-days:]
+    files = sorted(DATA_DIR.rglob("*.json"))[-days:]
     print(f"{'='*82}")
     print(f"  近 {len(files)} 晚 SpO2 Desat 摘要（threshold < 90%）")
     print(f"{'='*82}\n")
@@ -171,7 +171,7 @@ def cmd_chart(date: str, out: Path = None):
         return
 
     # Load sleepLevels (hypnogram)
-    p = DATA_DIR / f"{date}.json"
+    p = next(iter(DATA_DIR.rglob(f"{date}.json")), DATA_DIR / f"{date}.json")
     levels = []
     if p.exists():
         try:
@@ -316,7 +316,7 @@ def cmd_trend(days: int = 9999, out: Path = None):
         print("需先安裝 matplotlib")
         return
 
-    files = sorted(DATA_DIR.glob("*.json"))[-days:]
+    files = sorted(DATA_DIR.rglob("*.json"))[-days:]
     rows = []
     try:
         from estimate_sleep_latency import estimate as estimate_latency
@@ -594,7 +594,7 @@ def cmd_overlay(today_str: str, max_nights: int = 7):
     nights_to_plot = []
     cur = window_start_target
     while cur <= today:
-        if (DATA_DIR / f"{cur}.json").exists():
+        if any(DATA_DIR.rglob(f"{cur}.json")):
             nights_to_plot.append(cur)
         cur += timedelta(days=1)
 
@@ -734,7 +734,7 @@ def cmd_hypnogram7(today_str: str, max_nights: int = 7):
     nights = []
     for i in range(max_nights - 1, -1, -1):
         d = today - timedelta(days=i)
-        p = DATA_DIR / f"{d.isoformat()}.json"
+        p = next(iter(DATA_DIR.rglob(f"{d.isoformat()}.json")), DATA_DIR / f"{d.isoformat()}.json")
         if not p.exists():
             continue
         data = json.loads(p.read_text(encoding="utf-8"))

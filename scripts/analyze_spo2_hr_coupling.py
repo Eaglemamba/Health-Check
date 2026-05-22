@@ -47,7 +47,7 @@ def ms_to_tpe(ms: int) -> datetime:
 
 
 def load_night(date: str):
-    p = DATA_DIR / f"{date}.json"
+    p = next(iter(DATA_DIR.rglob(f"{date}.json")), DATA_DIR / f"{date}.json")
     if not p.exists():
         return None
     data = json.loads(p.read_text(encoding="utf-8"))
@@ -331,7 +331,7 @@ def plot_night(date: str, out_path: Path = None):
 
 
 def cmd_summary(days: int):
-    files = sorted(DATA_DIR.glob("*.json"))[-days:]
+    files = sorted(DATA_DIR.rglob("*.json"))[-days:]
     print(f"近 {len(files)} 晚 SpO2↔HR 偶聯摘要")
     print("-" * 78)
     print(f"{'日期':<12} {'events':>7} {'coupled':>8} {'ambig':>6} {'silent':>7} {'silent%':>8}")

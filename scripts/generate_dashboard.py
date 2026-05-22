@@ -321,7 +321,8 @@ def main():
     daily_dir = os.path.join(base_dir, "reviews", "daily")
     output_path = os.path.join(base_dir, "reviews", "health_dashboard.png")
 
-    files = sorted(glob.glob(os.path.join(daily_dir, "*.md")))
+    # Recursive: 涵蓋月份歸檔子資料夾 (reviews/daily/YYYY-MM/*.md)
+    files = sorted(glob.glob(os.path.join(daily_dir, "**", "*.md"), recursive=True))
     if not files:
         print("No daily records found.")
         return

@@ -41,7 +41,7 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 def load_hrv(days=None):
     rows = []
-    for p in sorted(DATA_DIR.glob("*.json")):
+    for p in sorted(DATA_DIR.rglob("*.json")):
         try:
             d = json.loads(p.read_text(encoding="utf-8"))
         except Exception:

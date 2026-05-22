@@ -70,7 +70,7 @@ def local_date(ts_str: str) -> str:
 
 
 def load_day(date: str) -> dict | None:
-    p = DATA_DIR / f"{date}.json"
+    p = next(iter(DATA_DIR.rglob(f"{date}.json")), DATA_DIR / f"{date}.json")
     if not p.exists():
         return None
     try:
@@ -162,7 +162,7 @@ def extract_outcome(day_json: dict) -> dict:
 
 def build_dataset(window: int | None = None) -> list[dict]:
     """Pair exposure(day D) with outcome(sleep night D->D+1, stored in JSON D+1)."""
-    files = sorted(DATA_DIR.glob("*.json"))
+    files = sorted(DATA_DIR.rglob("*.json"))
     if not files:
         return []
 

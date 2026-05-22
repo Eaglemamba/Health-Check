@@ -22,7 +22,7 @@ def parse_ts(s):
 
 
 def load_epochs(date):
-    p = DATA_DIR / f"{date}.json"
+    p = next(iter(DATA_DIR.rglob(f"{date}.json")), DATA_DIR / f"{date}.json")
     if not p.exists():
         return None, None, None
     data = json.loads(p.read_text())

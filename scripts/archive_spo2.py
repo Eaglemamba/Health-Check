@@ -94,7 +94,7 @@ def main():
     # Update daily review markdown to point to archive/
     archived_names = {f.name for f in archive.iterdir() if f.is_file()}
     updated_md = 0
-    for md in sorted(DAILY_DIR.glob("*.md")):
+    for md in sorted(DAILY_DIR.rglob("*.md")):
         text = md.read_text(encoding="utf-8")
         orig = text
         for name in archived_names:

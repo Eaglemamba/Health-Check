@@ -134,7 +134,7 @@ def paired_delta_hr(spo2, hr, threshold=90):
 
 
 def main():
-    files = sorted(DATA_DIR.glob("20*.json"))
+    files = sorted(DATA_DIR.rglob("20*.json"))
     nights = []
     for f in files:
         n = load_night(f)

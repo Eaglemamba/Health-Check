@@ -24,6 +24,7 @@ scripts/
   archive_spo2.py           # 週一執行：將非當週 SpO2 PNG 移至 spo2/archive/ 並更新 daily review 連結
 reviews/
   daily/                    # 每日紀錄（YYYY-MM-DD.md）
+    YYYY-MM/                # 月份歸檔（非當週的 daily md，2026-05-22 起組織化）
     spo2/                   # 當週 SpO2 圖 + 永久軸圖（trend / hrv_trend / by_cycle / heatmap_all_nights）
       archive/              # 非當週 SpO2 圖；週一 daily check-in 自動歸檔（scripts/archive_spo2.py）
   weekly/                   # 每週回顧（YYYY-Wxx.md）
@@ -33,6 +34,7 @@ reviews/
   health_dashboard.png      # 健康趨勢儀表板圖表（自動生成）
 reports/
   daily-garmin/             # Garmin 每日摘要 markdown（sync_garmin_daily.py 產生）
+    YYYY-MM/                # 月份歸檔（非當週）
   archive/                  # 一次性歷史回顧（Garmin 8 年完整 + 睡眠分析及圖表，2026-04-18-20）
 articles/                   # 前瞻性指南（補充品、健檢加測等）
   archive/                  # 被新版取代的歷史指南；不再修改
@@ -53,6 +55,15 @@ icons/                      # PWA icon（apple-touch / 192 / 512 / maskable）
 
 analyzer.html               # 年度健檢數據獨立分析頁（仍為 vanilla JS）
 ```
+
+## 月份歸檔慣例（2026-05-22 起）
+
+當週（ISO week）以外的 daily-style 檔案歸檔於各資料夾的 `YYYY-MM/` 子資料夾，避免單一目錄檔案過多：
+- `reviews/daily/2026-04/2026-04-19.md` …
+- `reports/daily-garmin/2026-04/2026-04-19.md` …
+- `data/garmin/2026-04/2026-04-19.json` …（gitignored 內容）
+
+所有讀取這些目錄的 script 已改為 **recursive glob**（`rglob` / `glob.glob(..., recursive=True)`）+ 路徑 fallback（先試根目錄再試 `YYYY-MM/` 子資料夾）。新增的當週檔案仍寫到根目錄；週一/週日節點手動或腳本將上週批次移入 `YYYY-MM/`。
 
 ## 每日 Check-in 流程
 
@@ -98,7 +109,7 @@ PWA 部署於 `https://eaglemamba.github.io/Health-Check/`（GitHub Pages）。*
 
 ## 檔案命名慣例
 
-- Daily: `reviews/daily/YYYY-MM-DD.md`
+- Daily: `reviews/daily/YYYY-MM-DD.md`（當週位於根目錄；過往週於 `reviews/daily/YYYY-MM/`）
 - Weekly: `reviews/weekly/YYYY-Wxx.md`
 - Monthly: `reviews/monthly/YYYY-MM.md`
 - Annual（單次健檢）: `reviews/annual/YYYY-MM-DD.md`（目前生效位於根目錄；過往年度已歸檔至 `reviews/annual/YYYY/` 子資料夾）

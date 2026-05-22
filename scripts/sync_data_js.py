@@ -72,7 +72,8 @@ def parse_daily(path: Path) -> dict:
 
 
 def collect_daily(n_days: int = 14) -> list[dict]:
-    files = sorted(glob.glob(str(DAILY_DIR / "*.md")))
+    # Recursive: 涵蓋月份歸檔子資料夾 (e.g. reviews/daily/2026-04/*.md)
+    files = sorted(glob.glob(str(DAILY_DIR / "**" / "*.md"), recursive=True))
     parsed = [d for d in (parse_daily(Path(p)) for p in files) if d.get("date")]
     parsed.sort(key=lambda d: d["date"])
     return parsed

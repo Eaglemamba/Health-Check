@@ -102,7 +102,7 @@ def load_night(p: Path):
 
 
 def main():
-    files = sorted(DATA_DIR.glob("20*.json"))
+    files = sorted(DATA_DIR.rglob("20*.json"))
     nights = []
     for f in files:
         n = load_night(f)

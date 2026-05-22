@@ -47,7 +47,7 @@ OVERRIDE_RE = re.compile(r"\*\*實際上床：\*\*\s*(\d{1,2}):(\d{2})")
 
 
 def _load_json(date: str) -> dict | None:
-    p = DATA_DIR / f"{date}.json"
+    p = next(iter(DATA_DIR.rglob(f"{date}.json")), DATA_DIR / f"{date}.json")
     if not p.exists():
         return None
     return json.loads(p.read_text(encoding="utf-8"))
@@ -111,9 +111,12 @@ def _read_manual_override(date: str, sleep_onset_tpe: datetime) -> datetime | No
     可能跨日（21:30 上床但 calendar 屬於 5/11；23:50 上床屬於 5/10）。
     取 sleep_onset 前最接近的 HH:MM 為上床時間。
     """
+    # 先試根目錄（當週），再試 YYYY-MM/ 月份歸檔子資料夾
     p = DAILY_DIR / f"{date}.md"
     if not p.exists():
-        return None
+        p = DAILY_DIR / date[:7] / f"{date}.md"
+        if not p.exists():
+            return None
     m = OVERRIDE_RE.search(p.read_text(encoding="utf-8"))
     if not m:
         return None
