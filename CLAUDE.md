@@ -22,6 +22,7 @@ scripts/
   analyze_wedge_effect.py   # 頭部楔形枕 pre/post C1 SpO2 對照（one-shot 自然實驗分析；2026-05-21 建立）
   log_hydration.py          # 將昨日飲水量回寫至 Garmin Connect
   archive_spo2.py           # 週一執行：將非當週 SpO2 PNG 移至 spo2/archive/ 並更新 daily review 連結
+  archive_to_monthly.py     # 每天執行（idempotent）：將非當週 daily-style 檔案移至 YYYY-MM/ 子資料夾
 reviews/
   daily/                    # 每日紀錄（YYYY-MM-DD.md）
     YYYY-MM/                # 月份歸檔（非當週的 daily md，2026-05-22 起組織化）

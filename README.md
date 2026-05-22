@@ -25,6 +25,7 @@ scripts/
   sync_data_js.py         從 daily reviews 同步最新值至 data.js
   log_hydration.py        將昨日飲水量回寫 Garmin Connect
   archive_spo2.py         週一 daily check-in 執行：將非當週 SpO2 PNG 移至 archive/
+  archive_to_monthly.py   每天 daily check-in 執行（idempotent）：將非當週 daily-style 檔案移至 YYYY-MM/ 子資料夾
 reviews/
   daily/              每日紀錄（YYYY-MM-DD.md）
     spo2/             當週 SpO2 圖 + 永久軸圖（trend / hrv_trend / by_cycle / heatmap_all_nights）
