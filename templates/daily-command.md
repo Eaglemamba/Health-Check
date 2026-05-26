@@ -1,6 +1,6 @@
 開始今天的晨間健康紀錄。
 
-1. **確認日期**：執行 `TZ=Asia/Taipei date '+%Y-%m-%d %A %H:%M'` 取得系統時間，**自動 +8 小時**（此環境系統時鐘長期慢 8 小時，TZ flag 無效）後即為當前台灣時間。校正後若與使用者口頭告知或 context `currentDate` 一致則直接採用，無需再向使用者確認；不一致時才追問
+1. **確認日期**：執行 `date '+%Y-%m-%d %A %H:%M'` 取得系統時間即為當前台灣時間（系統時鐘已校正，**不需再 +8 小時**）。若與使用者口頭告知或 context `currentDate` 一致則直接採用，無需再向使用者確認；不一致時才追問
 2. **抓取昨夜 Garmin 資料**：Garmin `calendarDate` 以「起床日」歸檔，故昨夜睡眠 → calendarDate = 今日。
    - 先執行 `python scripts/sync_garmin_daily.py`（預設抓今日，即昨夜睡眠 + 今晨 SpO2）
    - 再執行 `python scripts/sync_garmin_daily.py --days-back 1`（抓昨日，取得昨日全日飲水、步數等 day-level 總量供「昨日回顧」區塊）
