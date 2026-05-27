@@ -23,6 +23,8 @@
   --water-soft: #d4f4fa;
   --uric:  #bf5af2;
   --uric-soft: #f3e3fb;
+  --lipid: #0a84ff;
+  --lipid-soft: #d9ecff;
 
   --radius-sm: 12px;
   --radius: 18px;
@@ -349,6 +351,8 @@ button { font-family: inherit; }
 .marker[data-system="sleep"] .ico { background: var(--sleep); }
 .marker[data-system="weight"] .ico { background: var(--weight); }
 .marker[data-system="uric"] .ico { background: var(--uric); }
+.marker[data-system="remnant"] .ico { background: var(--lipid); }
+.marker[data-system="tghdl"] .ico { background: var(--lipid); }
 
 /* ============ Tabs ============ */
 .tabs-wrap {

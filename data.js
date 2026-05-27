@@ -69,6 +69,20 @@ window.HC_DATA = {
       cadence: { en: "Lab only · last Mar 25", zh: "僅實驗室 · 上次 3/25" },
       status: "bad",
     },
+    {
+      sys: "remnant", name: { en: "Remnant-C", zh: "殘餘膽固醇" },
+      val: "~21", unit: "mg/dL",
+      delta: { en: "Self-calc TC−HDL−LDL. Rising 3→5→18→~21 (2015→2026). Mar 25 direct-LDL breaks the subtraction (−2); TG/5≈21 used instead. Warning line ≥30 not yet hit — TG-driven.", zh: "自算 TC−HDL−LDL。歷年 3→5→18→~21（2015→2026）走升。3/25 為直測 LDL 致公式失真（−2），改用 TG/5≈21。警訊線 ≥30 尚未觸及 — 由 TG 驅動。" },
+      cadence: { en: "Lab only · last Mar 25", zh: "僅實驗室 · 上次 3/25" },
+      status: "ok",
+    },
+    {
+      sys: "tghdl", name: { en: "TG / HDL", zh: "TG / HDL 比值" },
+      val: "2.64", unit: "ratio",
+      delta: { en: "Self-calc TG÷HDL. Highest ever (2.02→2.13→1.74→2.64). >2 = metabolic flexibility declining; ideal <1.5. Driven by HDL crash to 39 (lowest), not TG. Insulin-resistance proxy.", zh: "自算 TG÷HDL。歷來最高（2.02→2.13→1.74→2.64）。>2 = 代謝彈性下降；理想 <1.5。由 HDL 跌至 39（歷來最低）驅動，非 TG。胰島素阻抗替代指標。" },
+      cadence: { en: "Lab only · last Mar 25", zh: "僅實驗室 · 上次 3/25" },
+      status: "warn",
+    },
   ],
 
   tabs: [

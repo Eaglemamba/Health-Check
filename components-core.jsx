@@ -35,7 +35,7 @@ const tabIcons = {
   supps: "drop", routine: "clock", timeline: "calendar", safety: "shield", tracker: "list",
 };
 
-const sysIcons = { heart: "heart", sleep: "moon", weight: "scale", uric: "sparkle" };
+const sysIcons = { heart: "heart", sleep: "moon", weight: "scale", uric: "sparkle", remnant: "drop", tghdl: "activity" };
 
 /* ===== Hero ===== */
 function Hero({ lang, variant }) {
