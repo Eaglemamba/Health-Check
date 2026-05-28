@@ -1922,9 +1922,9 @@ window.HC_DATA = {
         { folder: "skin-aesthetics",  en: "Skin / Aesthetics",              zh: "臉部保養 / 美學",          count: 2,
           blurb: { en: "Facial skincare RCT evidence + CeraVe retinol 0.1% × LRP UVA Pro starter protocol (2026-05-28).",
                    zh: "臉部保養 RCT 實證 + CeraVe A 醇 0.1% × 理膚寶水 UVA Pro 起步 protocol（2026-05-28）。" } },
-        { folder: "checkups",         en: "Predicted Checkups",             zh: "預測健檢報告",             count: 2,
-          blurb: { en: "Month 3 (2026-06-17) and Month 6 (2026-09-17) predicted lab values.",
-                   zh: "Month 3（2026-06-17）與 Month 6（2026-09-17）預測檢驗值。" } },
+        { folder: "checkups",         en: "Checkups / Health Management",   zh: "健檢報告 / 健康管理服務", count: 3,
+          blurb: { en: "Month 3 / Month 6 predicted lab values + holistic health quarterback service options (US/TW comparison, 2026-05-28).",
+                   zh: "Month 3 / Month 6 預測檢驗值 + 全人健康 quarterback 服務選項（美/台對照，2026-05-28）。" } },
       ],
     },
     planned: {
