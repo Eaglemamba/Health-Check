@@ -333,7 +333,7 @@ TC、TG、AST/ALT/GGT/ALP/T-Bil/Albumin、BUN/Cr/eGFR、hsCRP、Hb/RBC/Ht/WBC/Pl
 
 ---
 
-*Filed: articles/2026-06-17-predicted-checkup-report.md*
+*Filed: articles/checkups/2026-06-17-predicted-checkup-report.md*
 *基準：2026-03-25 baseline + 5/2 週六正式體重 67.8 kg + W18 BP 均值 124/72 + Psyllium / 洛神花 / Citrulline 4/21 起*
 *校準依據：supplement guide §十（July 預測）回推 30 天 + 文獻劑量反應曲線 + RT 缺位 + 果糖戒除時程*
 *下一步：6/17 實測完成後，建立 `reviews/annual/2026-06-17.md`（實測）+ 本檔末尾追加「實測 vs 預測偏差表」*

@@ -1181,8 +1181,8 @@ window.HC_DATA = {
         },
       },
       ref: {
-        en: "Full protocol: articles/2026-05-22-uphill-zone2-walking-plan.md",
-        zh: "完整文件：articles/2026-05-22-uphill-zone2-walking-plan.md",
+        en: "Full protocol: articles/cardio-metabolic/2026-05-22-uphill-zone2-walking-plan.md",
+        zh: "完整文件：articles/cardio-metabolic/2026-05-22-uphill-zone2-walking-plan.md",
       },
     },
   },
@@ -1537,8 +1537,8 @@ window.HC_DATA = {
     osaCardiacMap: {
       ttl: { en: "OSA → 11-year cardiac trajectory mapping", zh: "OSA ↔ 11 年心血管時序對應" },
       intro: {
-        en: "Rebuilt 2026-05-21 from 28-night Garmin Venu 4 cohort. 5/17 forced-lateral natural experiment (T90 1.62% vs baseline 9.3%) + 11-year health-check archive merged into single causal chain. Source: articles/2026-05-21-osa-damage-recovery.md.",
-        zh: "2026-05-21 從 28 晚 Venu 4 cohort 重建。5/17 強制側睡自然實驗（T90 1.62% vs baseline 9.3%）+ 11 年健檢檔案合併為單一因果鏈。詳見 articles/2026-05-21-osa-damage-recovery.md。",
+        en: "Rebuilt 2026-05-21 from 28-night Garmin Venu 4 cohort. 5/17 forced-lateral natural experiment (T90 1.62% vs baseline 9.3%) + 11-year health-check archive merged into single causal chain. Source: articles/osa-sleep/2026-05-21-osa-damage-recovery.md.",
+        zh: "2026-05-21 從 28 晚 Venu 4 cohort 重建。5/17 強制側睡自然實驗（T90 1.62% vs baseline 9.3%）+ 11 年健檢檔案合併為單一因果鏈。詳見 articles/osa-sleep/2026-05-21-osa-damage-recovery.md。",
       },
       head: { en: ["Health-check finding", "OSA mechanism", "Literature", "OSA share"],
               zh: ["健檢異常", "OSA 機制", "文獻", "OSA 貢獻"] },
@@ -1703,8 +1703,8 @@ window.HC_DATA = {
 
     uricAcidProtocol: {
       ttl: { en: "Uric acid — additions from Taniguchi 2023 (not yet in stack)", zh: "降尿酸補充（谷口敦夫 2023 — 目前 stack 未涵蓋）" },
-      intro: { en: "Source: 《尿酸（痛風）完全控制的最新療法》Taniguchi A. 2023, San-min. Items below are evidence-backed additions on top of current stack (hibiscus / tart cherry / low-purine diet). Full discussion: articles/2026-05-04-uric-acid-japanese-protocol.md.",
-               zh: "來源：《尿酸（痛風）完全控制的最新療法》谷口敦夫 2023 三民。以下為現有 stack（洛神花/酸櫻桃/低普林）之外的實證補充。完整討論見 articles/2026-05-04-uric-acid-japanese-protocol.md。" },
+      intro: { en: "Source: 《尿酸（痛風）完全控制的最新療法》Taniguchi A. 2023, San-min. Items below are evidence-backed additions on top of current stack (hibiscus / tart cherry / low-purine diet). Full discussion: articles/diet-nutrition/2026-05-04-uric-acid-japanese-protocol.md.",
+               zh: "來源：《尿酸（痛風）完全控制的最新療法》谷口敦夫 2023 三民。以下為現有 stack（洛神花/酸櫻桃/低普林）之外的實證補充。完整討論見 articles/diet-nutrition/2026-05-04-uric-acid-japanese-protocol.md。" },
       head: { en: ["Action", "Evidence", "Expected UA effect", "Note"],
               zh: ["動作", "實證", "預期 UA 影響", "備註"] },
       rows: [

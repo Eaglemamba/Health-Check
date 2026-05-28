@@ -381,6 +381,6 @@ Priority 0（新加，2026-05-21）：
 
 ---
 
-*Filed: articles/2026-05-21-osa-damage-recovery.md*
+*Filed: articles/osa-sleep/2026-05-21-osa-damage-recovery.md*
 *Source of truth for: OSA cumulative damage assessment, UA-OSA causal chain, recovery timeline*
 *下次健檢報告納入時：UA 變化納入 reviews/annual/YYYY-MM-DD.md 因果地圖追蹤*

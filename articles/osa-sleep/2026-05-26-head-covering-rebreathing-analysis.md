@@ -107,5 +107,5 @@
 
 ---
 
-*Filed: articles/2026-05-26-head-covering-rebreathing-analysis.md*
+*Filed: articles/osa-sleep/2026-05-26-head-covering-rebreathing-analysis.md*
 *對應 daily：reviews/daily/2026-05-26.md（當日 check-in 已記錄攝影機發現與「睡眠安全」行動項）*

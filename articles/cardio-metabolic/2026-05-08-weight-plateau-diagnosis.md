@@ -376,6 +376,6 @@
 
 ---
 
-*Source*: 2026-05-08 對話分析；參考 `templates/pt-rules.md`、`articles/2026-03-25-supplement-guide.md`、`articles/2026-04-29-osa-allergic-rhinitis-action-plan.md`、`articles/2026-05-01-osa-positional-therapy-trial.md`
+*Source*: 2026-05-08 對話分析；參考 `templates/pt-rules.md`、`articles/2026-03-25-supplement-guide.md`、`articles/osa-sleep/2026-04-29-osa-allergic-rhinitis-action-plan.md`、`articles/osa-sleep/2026-05-01-osa-positional-therapy-trial.md`
 
 *下次重審*：URI 完全康復後 +3 天（預計 5/16–5/19），重新評估體組成 baseline 與飲食調整啟動。

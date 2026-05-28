@@ -177,5 +177,5 @@
 
 ---
 
-*Filed: articles/711-nutrition-reference.md*
+*Filed: articles/diet-nutrition/711-nutrition-reference.md*
 *同步對照：index.html §Diet Plan §Lunch / Drinks，templates/food.md*

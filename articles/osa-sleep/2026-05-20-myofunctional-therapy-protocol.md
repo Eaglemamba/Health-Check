@@ -483,6 +483,6 @@ Week 13+ ─── 維持劑量 ─────── 每日 15 分維持，不�
 
 ---
 
-*Filed: articles/2026-05-20-myofunctional-therapy-protocol.md*
+*Filed: articles/osa-sleep/2026-05-20-myofunctional-therapy-protocol.md*
 *Source of truth for: MFT 12-week intervention plan*
-*Related: articles/2026-04-29-osa-allergic-rhinitis-action-plan.md（鼻部上游處理）、reviews/rfs_signal_analysis.md（RFS 已排除為主因）*
+*Related: articles/osa-sleep/2026-04-29-osa-allergic-rhinitis-action-plan.md（鼻部上游處理）、reviews/rfs_signal_analysis.md（RFS 已排除為主因）*

@@ -2,7 +2,7 @@
 
 **個人化處方與 4 週進階表 — 2026-05-22**
 
-> 本文為 `articles/2026-05-13-weight-stall-z2-rhr-analysis.md` 的續篇模組。5/13 分析確認「過去 4 週 Z2 累積 < 25 min/週」是體重停滯與 RHR 無法下探的核心訓練盲點。本文聚焦於**第三種 Z2 工具：上斜坡健走**，補上「不能跑、不能在家原地、想戶外動」的場景缺口。
+> 本文為 `articles/cardio-metabolic/2026-05-13-weight-stall-z2-rhr-analysis.md` 的續篇模組。5/13 分析確認「過去 4 週 Z2 累積 < 25 min/週」是體重停滯與 RHR 無法下探的核心訓練盲點。本文聚焦於**第三種 Z2 工具：上斜坡健走**，補上「不能跑、不能在家原地、想戶外動」的場景缺口。
 >
 > **關鍵問題**：平地快走 HR 111-121（Z1 高段），距 Z2 下緣 133 bpm 還差 12-22 bpm。**加坡度，比加速度安全、可控、衝擊低。**
 
@@ -322,9 +322,9 @@ data.js 內 `running` panel 為 **8 週跑走進階表**，建議：
 
 | 既有文件 | 互動關係 |
 |---------|---------|
-| `articles/2026-05-13-weight-stall-z2-rhr-analysis.md` | 本文延伸第三節 Karvonen + 第五節超慢跑為「第三種 Z2 工具」 |
+| `articles/cardio-metabolic/2026-05-13-weight-stall-z2-rhr-analysis.md` | 本文延伸第三節 Karvonen + 第五節超慢跑為「第三種 Z2 工具」 |
 | `articles/2026-03-25-supplement-guide.md` | 本文不改動補充品配方；訓練後 30 min 內可照常 L-Citrulline / 益生菌 |
-| `articles/2026-05-21-osa-damage-recovery.md` | 上坡 Z2 是 OSA 修復視窗中「對心血管 remodeling 最友善」的有氧負荷 |
+| `articles/osa-sleep/2026-05-21-osa-damage-recovery.md` | 上坡 Z2 是 OSA 修復視窗中「對心血管 remodeling 最友善」的有氧負荷 |
 | data.js `running` panel | 不衝突；建議 W22-W26 上坡健走優先、跑走進階暫緩 |
 | `templates/pt-rules.md` | 可新增規則：「主觀恢復 ≤ 2 連 2 天 → 上坡量砍半」 |
 
@@ -355,7 +355,7 @@ data.js 內 `running` panel 為 **8 週跑走進階表**，建議：
 
 ---
 
-*Filed: articles/2026-05-22-uphill-zone2-walking-plan.md*
+*Filed: articles/cardio-metabolic/2026-05-22-uphill-zone2-walking-plan.md*
 *作者：David Kuo + Claude（協作分析）*
-*基準資料：reviews/daily/2026-04-02 ~ 2026-05-21、reports/daily-garmin/、articles/2026-05-13-weight-stall-z2-rhr-analysis.md*
+*基準資料：reviews/daily/2026-04-02 ~ 2026-05-21、reports/daily-garmin/、articles/cardio-metabolic/2026-05-13-weight-stall-z2-rhr-analysis.md*
 *下次更新節點：6/21 HSAT 結果 / 7/17 8 週執行回顧*

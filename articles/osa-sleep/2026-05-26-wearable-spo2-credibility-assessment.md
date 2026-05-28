@@ -96,6 +96,6 @@
 
 ---
 
-*Filed: articles/2026-05-26-wearable-spo2-credibility-assessment.md*
+*Filed: articles/osa-sleep/2026-05-26-wearable-spo2-credibility-assessment.md*
 *資料檢驗腳本為一次性，已於分析後清除；數據源 `data/garmin/**/*.json`（gitignored）*
 *PubMed 引用之文獻 DOI 已內嵌於 Part 2 表格*

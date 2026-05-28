@@ -37,7 +37,13 @@ reports/
   daily-garmin/             # Garmin 每日摘要 markdown（sync_garmin_daily.py 產生）
     YYYY-MM/                # 月份歸檔（非當週）
   archive/                  # 一次性歷史回顧（Garmin 8 年完整 + 睡眠分析及圖表，2026-04-18-20）
-articles/                   # 前瞻性指南（補充品、健檢加測等）
+articles/                   # 前瞻性指南與專題分析（依主題分資料夾，2026-05-28 起）
+  2026-03-25-supplement-guide.md       # 目前生效補充品指南（留根，data.js source-of-truth）
+  2026-03-25-mackay-checkup-addons.md  # 目前生效健檢加測（留根）
+  osa-sleep/                # OSA / SpO2 / 睡眠 / 姿勢療法 / 肌功能訓練
+  diet-nutrition/           # 補充品評估 / 尿酸 / 飲食 / smoothie / 營養參考
+  cardio-metabolic/         # 體重停滯 / Z2 訓練 / HRV / 心血管 / 皮膚 / 生理軸
+  checkups/                 # 預測健檢報告（Month 3 / Month 6）
   archive/                  # 被新版取代的歷史指南；不再修改
 archive/                    # 非健康資料歸檔（過時 handover、前端原型 / template / dev scratch）
 
@@ -65,6 +71,24 @@ analyzer.html               # 年度健檢數據獨立分析頁（仍為 vanilla
 - `data/garmin/2026-04/2026-04-19.json` …（gitignored 內容）
 
 所有讀取這些目錄的 script 已改為 **recursive glob**（`rglob` / `glob.glob(..., recursive=True)`）+ 路徑 fallback（先試根目錄再試 `YYYY-MM/` 子資料夾）。新增的當週檔案仍寫到根目錄；週一/週日節點手動或腳本將上週批次移入 `YYYY-MM/`。
+
+## articles 主題分類慣例（2026-05-28 起）
+
+`articles/` 依**主題**分資料夾（非日期），詳見 `articles/README.md`：
+
+| 資料夾 | 收錄主題 |
+|--------|----------|
+| `osa-sleep/` | OSA、SpO2、睡眠、姿勢療法、肌功能訓練、穿戴血氧可信度 |
+| `diet-nutrition/` | 補充品評估、尿酸、飲食/smoothie、醋、營養參考、糖代謝、health claims |
+| `cardio-metabolic/` | 體重停滯、Z2 訓練、HRV、心血管風險、皮膚、生理軸 |
+| `checkups/` | 預測健檢報告（Month 3 / Month 6） |
+
+**例外（留根目錄）**：`2026-03-25-supplement-guide.md` 與 `2026-03-25-mackay-checkup-addons.md` 為「目前生效指南」，依「新健檢報告納入規則」留在 `articles/` 根目錄（前者亦為 `data.js` source-of-truth）。
+
+**新增 article 規則**：
+1. 每篇新 article **必須**歸入最相關的既有主題資料夾，不得散落根目錄（兩份現行指南除外）。
+2. 若內容**不屬於任何既有資料夾**，**新建一個主題資料夾**（命名用小寫連字號，如 `mental-health/`），並同步在本表與 `articles/README.md` 補上該分類。
+3. 檔名維持 `YYYY-MM-DD-<slug>.md`（或無日期的常設參考檔）；移檔或新建後，更新所有引用該檔的路徑（`data.js`、`PROGRESS.md`、`templates/`、`reviews/`、article 間交叉連結），確保不斷連結。
 
 ## 每日 Check-in 流程
 

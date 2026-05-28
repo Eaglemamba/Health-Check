@@ -81,7 +81,7 @@
 - 治療後血壓、HRV、insulin sensitivity 數週 – 3 個月內回升
 - UA 預期 ↓ 0.5-1.0 mg/dL（García-Aroca 2020）
 - David demographic 仍在「最理想 reversibility candidate」區段
-- 詳見 `articles/2026-05-21-osa-damage-recovery.md`
+- 詳見 `articles/osa-sleep/2026-05-21-osa-damage-recovery.md`
 
 ---
 

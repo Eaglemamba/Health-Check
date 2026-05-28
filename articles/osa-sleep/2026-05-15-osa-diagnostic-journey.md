@@ -1,7 +1,7 @@
 # 30 年累積、一個下午定位：一份自我整理的解剖性 OSA 診斷敘事
 
 *建檔：2026-05-15*｜*v3（同日校正 + atopic march 增補）*
-*前置：[低 HRV 心血管 risk review（2026-05-15）](2026-05-15-hrv-cv-risk-review.md)｜[OSA 深度調查（2026-04-30）](2026-04-30-osa-investigation-deep-dive.md)*
+*前置：[低 HRV 心血管 risk review（2026-05-15）](../cardio-metabolic/2026-05-15-hrv-cv-risk-review.md)｜[OSA 深度調查（2026-04-30）](2026-04-30-osa-investigation-deep-dive.md)*
 
 ---
 
@@ -602,5 +602,5 @@ AHI > 30 (severe)    CPAP（必須）              效果差距太大
 
 ---
 
-*Filed: articles/2026-05-15-osa-diagnostic-journey.md*
-*前置：[低 HRV 心血管 risk review](2026-05-15-hrv-cv-risk-review.md)｜[OSA 深度調查 2026-04-30](2026-04-30-osa-investigation-deep-dive.md)*
+*Filed: articles/osa-sleep/2026-05-15-osa-diagnostic-journey.md*
+*前置：[低 HRV 心血管 risk review](../cardio-metabolic/2026-05-15-hrv-cv-risk-review.md)｜[OSA 深度調查 2026-04-30](2026-04-30-osa-investigation-deep-dive.md)*

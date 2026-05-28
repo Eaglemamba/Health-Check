@@ -254,5 +254,5 @@ Deep 期 HRV 低下不是「副交感太弱」單一缺陷，而是「**OSA 結�
 
 ---
 
-*Filed: articles/2026-05-19-deep-sleep-hrv-review.md*
+*Filed: articles/osa-sleep/2026-05-19-deep-sleep-hrv-review.md*
 *Author drafted in Claude Code Copilot Mode; clinical decisions require physician review.*

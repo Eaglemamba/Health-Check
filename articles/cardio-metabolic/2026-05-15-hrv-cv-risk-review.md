@@ -1,7 +1,7 @@
 # 夜間 HRV 偏低作為獨立心血管風險指標：19.7 ms 代表什麼，以及如何應對
 
 *建檔：2026-05-15*
-*前置：[Z2 訓練量與 RHR 降階分析（2026-05-13）](2026-05-13-weight-stall-z2-rhr-analysis.md) ｜ [OSA 深度調查（2026-04-30）](2026-04-30-osa-investigation-deep-dive.md)*
+*前置：[Z2 訓練量與 RHR 降階分析（2026-05-13）](2026-05-13-weight-stall-z2-rhr-analysis.md) ｜ [OSA 深度調查（2026-04-30）](../osa-sleep/2026-04-30-osa-investigation-deep-dive.md)*
 
 ---
 
@@ -417,6 +417,6 @@ Manresa-Rocamora 2021 研究的是「以 HRV 數值動態排程訓練」是否�
 
 ---
 
-*Filed: articles/2026-05-15-hrv-cv-risk-review.md*
+*Filed: articles/cardio-metabolic/2026-05-15-hrv-cv-risk-review.md*
 *作者：David Kuo + Claude Sonnet 4.6（協作分析）*
-*基準資料：Garmin avgOvernightHrv 27 晚（2026-04-18 ~ 2026-05-14）、ECG 2026-03-25、articles/2026-04-30-osa-investigation-deep-dive.md*
+*基準資料：Garmin avgOvernightHrv 27 晚（2026-04-18 ~ 2026-05-14）、ECG 2026-03-25、articles/osa-sleep/2026-04-30-osa-investigation-deep-dive.md*
