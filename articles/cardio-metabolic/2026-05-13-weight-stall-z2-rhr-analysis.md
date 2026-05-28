@@ -337,6 +337,6 @@
 
 ---
 
-*Filed: articles/2026-05-13-weight-stall-z2-rhr-analysis.md*
+*Filed: articles/cardio-metabolic/2026-05-13-weight-stall-z2-rhr-analysis.md*
 *作者：David Kuo + Claude Opus 4.7（協作分析）*
 *基準資料：reviews/daily/2026-04-02 ~ 2026-05-13、reports/daily-garmin/*

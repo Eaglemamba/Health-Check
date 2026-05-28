@@ -227,4 +227,4 @@ python scripts/analyze_spo2_hr_coupling.py --night 2026-05-23
 
 ---
 
-*Filed: articles/2026-05-23-sims-position-trial.md*
+*Filed: articles/osa-sleep/2026-05-23-sims-position-trial.md*

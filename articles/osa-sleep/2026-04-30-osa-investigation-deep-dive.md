@@ -506,5 +506,5 @@ T90 對應的長期風險（套用 SHHS / SantOSA 大型世代研究）：
 
 ---
 
-*Filed: articles/2026-04-30-osa-investigation-deep-dive.md*
+*Filed: articles/osa-sleep/2026-04-30-osa-investigation-deep-dive.md*
 *Co-located with: reviews/daily/2026-04-30.md, reviews/weekly/2026-W18.md*

@@ -135,5 +135,5 @@ python scripts/analyze_spo2_hr_coupling.py --night 2026-05-22 --no-chart
 
 ---
 
-*Filed: articles/2026-05-22-osa-hr-coupling-analysis.md*
+*Filed: articles/osa-sleep/2026-05-22-osa-hr-coupling-analysis.md*
 *前置：[2026-05-21 OSA 累積傷害評估](2026-05-21-osa-damage-recovery.md)｜[2026-05-15 OSA 診斷敘事](2026-05-15-osa-diagnostic-journey.md)*

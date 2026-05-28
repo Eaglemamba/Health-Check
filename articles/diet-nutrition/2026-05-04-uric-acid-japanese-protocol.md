@@ -179,5 +179,5 @@ JCGS 2022 指引明確列出每日普林攝取硬上限。現有 repo 只說「�
 
 ---
 
-*Filed: articles/2026-05-04-uric-acid-japanese-protocol.md*
+*Filed: articles/diet-nutrition/2026-05-04-uric-acid-japanese-protocol.md*
 *同步至：data.js safetyDetail.uricAcidProtocol*

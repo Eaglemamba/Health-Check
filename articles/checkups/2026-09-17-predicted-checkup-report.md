@@ -4,7 +4,7 @@
 **建立日期：** 2026-05-06
 **對應健檢：** 2026-09-17（計畫 Month 6 / Day 184，較 6/17 預測再延 92 天）
 **baseline：** 2026-03-25（Day 0）
-**前瞻文件：** `articles/2026-06-17-predicted-checkup-report.md`（Month 3 預測）
+**前瞻文件：** `articles/checkups/2026-06-17-predicted-checkup-report.md`（Month 3 預測）
 
 **Δ vs 3/25 圖例：** 🟢 = 預期改善 ｜ 🔴 = 預期惡化 ｜ ⚪ = 持平/穩定/首測
 **色碼（絕對值風險分級）：** 🟢 正常 ｜ 🟡 邊界 ｜ 🟠 中度異常 ｜ 🔴 嚴重異常
@@ -301,7 +301,7 @@
 
 ---
 
-*Filed: articles/2026-09-17-predicted-checkup-report.md*
-*基準：2026-03-25 baseline + 2026-06-17 預測（articles/2026-06-17-predicted-checkup-report.md）+ 6 個月計畫 data.js months[6]*
+*Filed: articles/checkups/2026-09-17-predicted-checkup-report.md*
+*基準：2026-03-25 baseline + 2026-06-17 預測（articles/checkups/2026-06-17-predicted-checkup-report.md）+ 6 個月計畫 data.js months[6]*
 *校準依據：分支 A 假設 RT 6/24 啟動 + OSA 7 月 PSG → CPAP/MAD + 體重達 65 kg 目標 + 完整補品 stack 持續*
 *下一步：9/17 實測完成後，建立 `reviews/annual/2026-09-17.md`（實測）+ 本檔末尾追加「實測 vs 預測偏差表 + lifestyle ceiling 驗證結論」*

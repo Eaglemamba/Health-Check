@@ -120,6 +120,6 @@
 
 ---
 
-*Filed: articles/2026-05-26-skincare-rct-evidence.md*
+*Filed: articles/cardio-metabolic/2026-05-26-skincare-rct-evidence.md*
 *所有 RCT 文獻引用自 PubMed，DOI 已內嵌各段*
 *Copilot 模式：建議整理，處方與診斷由醫師定案*

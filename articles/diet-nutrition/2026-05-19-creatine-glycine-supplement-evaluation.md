@@ -262,5 +262,5 @@
 
 ---
 
-*Filed: articles/2026-05-19-creatine-glycine-supplement-evaluation.md*
+*Filed: articles/diet-nutrition/2026-05-19-creatine-glycine-supplement-evaluation.md*
 *Author drafted in Claude Code Copilot Mode; clinical decisions require physician review.*

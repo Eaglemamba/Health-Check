@@ -2,7 +2,7 @@
 
 **建立日期：** 2026-05-06
 **用途：** 在 PSG 出來前，釐清 OSA 各介入設備的角色、ROI 與您的決策樹
-**對應追蹤：** `articles/2026-04-30-osa-investigation-deep-dive.md` + `articles/2026-05-01-osa-positional-therapy-trial.md`
+**對應追蹤：** `articles/osa-sleep/2026-04-30-osa-investigation-deep-dive.md` + `articles/osa-sleep/2026-05-01-osa-positional-therapy-trial.md`
 **baseline 數據：** 5/4 T90 18.4%（重度，無介入）/ 5/5 T90 9.7%（床頭抬高 + 抱枕）/ 5/6 T90 4.9%（同上）
 
 ---
@@ -230,6 +230,6 @@
 
 ---
 
-*Filed: articles/2026-05-06-osa-equipment-decision-guide.md*
+*Filed: articles/osa-sleep/2026-05-06-osa-equipment-decision-guide.md*
 *基準：5/5–5/6 POSA 試驗 T90 9.7% / 4.9% + 5/4 baseline 18.4% + 三角枕已下單 + PSG 待預約*
 *下一步：5/8 結算 4 晚試驗 → 預約 PSG → PSG 報告後依本指南決策樹選擇設備配置*

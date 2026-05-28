@@ -154,4 +154,4 @@ POSA 在亞洲非肥胖 OSA 族群盛行率 ~50-60%（vs 西方肥胖型 ~25%）
 
 ---
 
-*Filed: articles/2026-05-01-osa-positional-therapy-trial.md*
+*Filed: articles/osa-sleep/2026-05-01-osa-positional-therapy-trial.md*

@@ -328,5 +328,5 @@ JACC 2024 RCT：MAD 在降血壓不劣於 CPAP，對你（非肥胖、亞洲面�
 
 ---
 
-*Filed: articles/2026-04-29-osa-allergic-rhinitis-action-plan.md*
+*Filed: articles/osa-sleep/2026-04-29-osa-allergic-rhinitis-action-plan.md*
 *觸發於 2026-04-29 daily check-in（Garmin SpO2 79%、連 3 晚 OSA 紅旗）*
