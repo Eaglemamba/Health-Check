@@ -999,6 +999,40 @@ function PanelTimeline({ lang }) {
           ? "Linear plan loses ~0.83 kg/month (~0.2 kg/wk) — gentle deficit. Saturday morning reading is the official weekly value."
           : "計畫每月平均降 0.83 kg（約 0.2 kg/週）— 緩和熱量赤字。每週六晨間排尿後為正式體重讀數。"}
       </div>
+
+      {/* Active interventions — recent intervention start log */}
+      {DD.interventions && DD.interventions.length > 0 && (
+        <>
+          <div className="spacer-20" />
+          <h3 className="h3" style={{marginBottom: 10}}>
+            {lang === "en" ? "Active interventions (recent starts)" : "進行中介入（近期起步）"}
+          </h3>
+          <div style={{display: "flex", flexDirection: "column", gap: 10}}>
+            {DD.interventions.map((iv, i) => {
+              const ivDate = new Date(iv.date + "T00:00:00");
+              const daysAgo = Math.max(0, Math.floor((today - ivDate) / 86400000));
+              return (
+                <div key={i} className="card" style={{padding: 12, borderLeft: "3px solid var(--accent)"}}>
+                  <div style={{display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4, gap: 8, flexWrap: "wrap"}}>
+                    <strong style={{fontSize: 13}}>{lang === "en" ? iv.en : iv.zh}</strong>
+                    <span style={{fontSize: 11, color: "var(--ink-3)", fontFamily: "var(--font-mono)", whiteSpace: "nowrap"}}>
+                      {iv.date} · {lang === "en" ? `D+${daysAgo}` : `第 ${daysAgo} 天`}
+                    </span>
+                  </div>
+                  <div style={{fontSize: 12, color: "var(--ink-2)", lineHeight: 1.5}}>
+                    {Tt(iv.detail, lang)}
+                    {iv.href && (
+                      <> · <a href={iv.href} style={{color: "var(--accent)"}}>
+                        {lang === "en" ? "protocol →" : "protocol →"}
+                      </a></>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -1631,7 +1665,86 @@ function PanelRunning({ lang }) {
   );
 }
 
+/* ===== Library (article taxonomy) ===== */
+function PanelLibrary({ lang }) {
+  const L = DD.library;
+  return (
+    <div className="section">
+      <div className="kicker">{lang === "en" ? "Knowledge base · articles/" : "知識庫 · articles/"}</div>
+      <h2 className="section-title">{Tt(L.ttl, lang)}</h2>
+      <p className="section-sub">{Tt(L.sub, lang)}</p>
+
+      {/* Root-staying live guides */}
+      <div className="card" style={{padding: 14, marginBottom: 16}}>
+        <div className="h3" style={{marginBottom: 10, fontSize: 14}}>{Tt(L.rootGuides.ttl, lang)}</div>
+        <div style={{display: "flex", flexDirection: "column", gap: 6}}>
+          {L.rootGuides.items.map((it, i) => (
+            <a key={i} href={it.href} style={{fontSize: 13, color: "var(--accent)", textDecoration: "none"}}>
+              → {Tt(it, lang)}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Current categories — clickable cards */}
+      <div className="h3" style={{marginBottom: 10}}>{Tt(L.current.ttl, lang)}</div>
+      <div style={{display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 12, marginBottom: 22}}>
+        {L.current.items.map((c, i) => (
+          <a key={i} href={"articles/" + c.folder + "/"}
+             className="card"
+             style={{padding: 14, textDecoration: "none", color: "inherit", display: "block",
+                     borderLeft: "3px solid var(--accent)", transition: "transform 0.15s"}}>
+            <div style={{display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 6}}>
+              <strong style={{fontSize: 14}}>{Tt(c, lang)}</strong>
+              <span style={{fontSize: 11, color: "var(--ink-3)", fontFamily: "var(--font-mono)"}}>
+                {c.count} {lang === "en" ? (c.count === 1 ? "article" : "articles") : "篇"}
+              </span>
+            </div>
+            <div style={{fontSize: 12, color: "var(--ink-2)", lineHeight: 1.5, marginBottom: 6}}>
+              {Tt(c.blurb, lang)}
+            </div>
+            <code style={{fontSize: 11, color: "var(--ink-3)"}}>articles/{c.folder}/</code>
+          </a>
+        ))}
+      </div>
+
+      {/* Planned categories — non-clickable, by tier */}
+      <div className="card" style={{padding: 14, marginBottom: 16}}>
+        <div className="h3" style={{marginBottom: 10, fontSize: 14}}>{Tt(L.planned.ttl, lang)}</div>
+        {L.planned.tiers.map((t, ti) => (
+          <div key={ti} style={{marginBottom: ti < L.planned.tiers.length - 1 ? 14 : 0}}>
+            <div style={{fontSize: 12, color: "var(--accent)", fontWeight: 600, marginBottom: 6}}>
+              {Tt(t.tier, lang)}
+            </div>
+            <div style={{display: "flex", flexDirection: "column", gap: 4}}>
+              {t.items.map((it, i) => (
+                <div key={i} style={{fontSize: 12, lineHeight: 1.5}}>
+                  <code style={{fontSize: 11, marginRight: 8, color: "var(--ink-3)"}}>{it.folder}/</code>
+                  <span style={{color: "var(--ink-2)"}}>{Tt(it, lang)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Rules */}
+      <div className="card" style={{padding: 14}}>
+        <div className="h3" style={{marginBottom: 8, fontSize: 14}}>{Tt(L.rules.ttl, lang)}</div>
+        <ol style={{paddingLeft: 18, margin: 0, fontSize: 12, color: "var(--ink-2)", lineHeight: 1.6}}>
+          {L.rules.items.map((it, i) => <li key={i} style={{marginBottom: 4}}>{Tt(it, lang)}</li>)}
+        </ol>
+      </div>
+
+      <p style={{margin: "16px 0 0", fontSize: 11, color: "var(--ink-3)", fontFamily: "var(--font-mono)", textAlign: "right"}}>
+        {lang === "en" ? "Source: " : "來源："}<code>{L.hubHref}</code>
+      </p>
+    </div>
+  );
+}
+
 Object.assign(window, {
   PanelOverview, PanelSleep, PanelDiet, PanelExercise, PanelRunning,
   PanelSupps, PanelRoutine, PanelTimeline, PanelSafety, PanelDashboard, PanelTracker,
+  PanelLibrary,
 });
