@@ -23,6 +23,8 @@
   --water-soft: #d4f4fa;
   --uric:  #bf5af2;
   --uric-soft: #f3e3fb;
+  --skin:  #ff6b9d;
+  --skin-soft: #ffe1ec;
 
   --radius-sm: 12px;
   --radius: 18px;
@@ -48,6 +50,7 @@
   --sleep: #6c63bf;
   --weight: #c98a3a;
   --metabolic: #5a8c5a;
+  --skin: #c97492;
 }
 [data-theme="dark"] {
   --bg: #0a0a0c;
@@ -593,6 +596,7 @@ table.t .num-cell {
 .day-event[data-cat="exer"] { color: var(--heart); }
 .day-event[data-cat="sleep"] { color: var(--sleep); }
 .day-event[data-cat="cutoff"] { color: var(--ink-3); }
+.day-event[data-cat="skin"] { color: var(--skin); }
 
 .legend {
   display: flex; gap: 14px; flex-wrap: wrap;
