@@ -83,6 +83,7 @@ window.HC_DATA = {
     { id: "safety",   en: "Safety",   zh: "安全" },
     { id: "dashboard",en: "Dashboard",zh: "儀表板" },
     { id: "tracker",  en: "Tracker",  zh: "追蹤" },
+    { id: "library",  en: "Library",  zh: "知識庫" },
   ],
 
   // ===== Dashboard (auto-generated PNG) =====
@@ -1853,5 +1854,85 @@ window.HC_DATA = {
         ["> 10%", { en: "Not POSA-driven — PSG → CPAP/MAD", zh: "非 POSA 主導 — PSG → CPAP/MAD" }, "bad"],
       ],
     },
+  },
+
+  // ===== Library (article taxonomy — surfaces articles/ knowledge base) =====
+  library: {
+    ttl: { en: "Knowledge Library", zh: "知識庫" },
+    sub: { en: "Research, decision logs, and RCT-evidence behind this plan. Click any category to browse (GitHub Pages renders the folder README).",
+           zh: "本計畫背後的研究、決策記錄與 RCT 實證。點任一分類進入瀏覽（GitHub Pages 會 render 該資料夾的 README）。" },
+    rootGuides: {
+      ttl: { en: "Live guides (root)", zh: "目前生效指南（留根）" },
+      items: [
+        { href: "articles/2026-03-25-supplement-guide.md",
+          en: "Supplement Guide (data.js source of truth)",
+          zh: "補充品指南（data.js source of truth）" },
+        { href: "articles/2026-03-25-mackay-checkup-addons.md",
+          en: "Mackay Checkup Add-ons",
+          zh: "馬偕健檢加測項目" },
+      ],
+    },
+    current: {
+      ttl: { en: "Current categories", zh: "現行分類" },
+      items: [
+        { folder: "osa-sleep",        en: "OSA / SpO2 / Sleep",            zh: "OSA / SpO2 / 睡眠",        count: 12,
+          blurb: { en: "OSA investigation, positional therapy, myofunctional protocol, equipment decisions, wearable SpO2 credibility.",
+                   zh: "OSA 調查、姿勢療法、肌功能訓練、設備決策、穿戴血氧可信度。" } },
+        { folder: "diet-nutrition",   en: "Diet / Supplements / Nutrition", zh: "飲食 / 補充品 / 營養",     count: 7,
+          blurb: { en: "Uric acid Japanese protocol, creatine/glycine evaluation, morning smoothie, vinegar evidence, FDA/SSA claims.",
+                   zh: "尿酸日式 protocol、creatine/glycine 評估、晨間 smoothie、醋實證、FDA/SSA health claims。" } },
+        { folder: "cardio-metabolic", en: "Cardio / Metabolic / Training",  zh: "心血管 / 代謝 / 訓練",     count: 6,
+          blurb: { en: "Weight plateau diagnosis, Z2/RHR analysis, uphill Z2 walking, HRV cv-risk, AHA habits, physiological axes.",
+                   zh: "體重停滯診斷、Z2/RHR 分析、上坡 Z2 健走、HRV 心血管風險、AHA 心臟習慣、生理軸綜覽。" } },
+        { folder: "skin-aesthetics",  en: "Skin / Aesthetics",              zh: "臉部保養 / 美學",          count: 1,
+          blurb: { en: "Facial skincare RCT evidence — retinoids / vitamin C / niacinamide / sunscreen photoaging.",
+                   zh: "臉部保養 RCT 實證 — A 醇 / 維 C / 菸鹼醯胺 / 防曬光老化。" } },
+        { folder: "checkups",         en: "Predicted Checkups",             zh: "預測健檢報告",             count: 2,
+          blurb: { en: "Month 3 (2026-06-17) and Month 6 (2026-09-17) predicted lab values.",
+                   zh: "Month 3（2026-06-17）與 Month 6（2026-09-17）預測檢驗值。" } },
+      ],
+    },
+    planned: {
+      ttl: { en: "Planned (rule of two — create folder once 2 articles exist)",
+             zh: "規劃中分類（rule of two — 累積 2 篇再建夾）" },
+      tiers: [
+        { tier: { en: "Tier 1 — near-term", zh: "第一階（近期）" },
+          items: [
+            { folder: "mind-cognition",       en: "Stress / meditation / cognitive performance / HRV biofeedback / resonant breathing",
+                                              zh: "壓力管理 / 冥想 / 認知效能 / HRV biofeedback / 共振呼吸" },
+            { folder: "mobility-flexibility", en: "Yoga / stretching / posture / breathing protocols / anti-sedentary / fascia",
+                                              zh: "瑜珈 / 伸展 / 姿勢矯正 / 呼吸 protocol / 抗久坐 / 筋膜" },
+            { folder: "strength-resistance",  en: "Resistance training / hypertrophy / sarcopenia prevention / taper-deload",
+                                              zh: "重訓 protocol / 肥大 / 肌少症預防 / taper-deload" },
+          ],
+        },
+        { tier: { en: "Tier 2 — within 3–6 months", zh: "第二階（3–6 個月內）" },
+          items: [
+            { folder: "hormones-endocrine",   en: "Testosterone / thyroid / cortisol / melatonin / DHEA / andropause",
+                                              zh: "Testosterone / thyroid / cortisol / melatonin / DHEA / andropause" },
+            { folder: "longevity-biomarkers", en: "Biological age / autophagy-fasting / mTOR-AMPK / rapamycin-metformin / NAD+ / ApoB-Lp(a)-CAC",
+                                              zh: "生物年齡 / autophagy-fasting / mTOR-AMPK / rapamycin-metformin / NAD+ / ApoB-Lp(a)-CAC" },
+            { folder: "oral-dental",          en: "Oral microbiome ↔ systemic inflammation / perio-cv axis / OSA mouthguard handoff",
+                                              zh: "口腔微生物 ↔ 系統發炎 / 牙周-心血管軸 / OSA mouthguard 銜接" },
+            { folder: "environmental",        en: "Air quality / water filtration / plastics-BPA / mold / EMF / endocrine disruptors",
+                                              zh: "空氣品質 / 淨水 / 塑膠-BPA / 黴菌 / EMF / 內分泌干擾物" },
+          ],
+        },
+      ],
+    },
+    rules: {
+      ttl: { en: "Rules", zh: "分類規則" },
+      items: [
+        { en: "New articles must go into the most relevant existing folder.",
+          zh: "新 article 必須歸入最相關的既有資料夾。" },
+        { en: "If no folder fits, create a new topic folder (lowercase-hyphen naming) and update CLAUDE.md + articles/README.md.",
+          zh: "若無適用資料夾，新建主題資料夾（小寫連字號），並同步更新 CLAUDE.md 與 articles/README.md。" },
+        { en: "Rule of two: do not create empty folders. Hold the first article in the closest existing folder until #2 arrives.",
+          zh: "Rule of two：不預先建空夾。第一篇暫放最相近的既有夾，等第二篇要建檔時再拆出。" },
+        { en: "When > 10 folders, consider switching to a tag system (frontmatter tags + auto-generated index).",
+          zh: "夾數 > 10 時考慮改 tag 系統（frontmatter tags + 自動生成索引）。" },
+      ],
+    },
+    hubHref: "articles/",
   },
 };
