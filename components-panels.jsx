@@ -999,6 +999,40 @@ function PanelTimeline({ lang }) {
           ? "Linear plan loses ~0.83 kg/month (~0.2 kg/wk) — gentle deficit. Saturday morning reading is the official weekly value."
           : "計畫每月平均降 0.83 kg（約 0.2 kg/週）— 緩和熱量赤字。每週六晨間排尿後為正式體重讀數。"}
       </div>
+
+      {/* Active interventions — recent intervention start log */}
+      {DD.interventions && DD.interventions.length > 0 && (
+        <>
+          <div className="spacer-20" />
+          <h3 className="h3" style={{marginBottom: 10}}>
+            {lang === "en" ? "Active interventions (recent starts)" : "進行中介入（近期起步）"}
+          </h3>
+          <div style={{display: "flex", flexDirection: "column", gap: 10}}>
+            {DD.interventions.map((iv, i) => {
+              const ivDate = new Date(iv.date + "T00:00:00");
+              const daysAgo = Math.max(0, Math.floor((today - ivDate) / 86400000));
+              return (
+                <div key={i} className="card" style={{padding: 12, borderLeft: "3px solid var(--accent)"}}>
+                  <div style={{display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4, gap: 8, flexWrap: "wrap"}}>
+                    <strong style={{fontSize: 13}}>{lang === "en" ? iv.en : iv.zh}</strong>
+                    <span style={{fontSize: 11, color: "var(--ink-3)", fontFamily: "var(--font-mono)", whiteSpace: "nowrap"}}>
+                      {iv.date} · {lang === "en" ? `D+${daysAgo}` : `第 ${daysAgo} 天`}
+                    </span>
+                  </div>
+                  <div style={{fontSize: 12, color: "var(--ink-2)", lineHeight: 1.5}}>
+                    {Tt(iv.detail, lang)}
+                    {iv.href && (
+                      <> · <a href={iv.href} style={{color: "var(--accent)"}}>
+                        {lang === "en" ? "protocol →" : "protocol →"}
+                      </a></>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 }
