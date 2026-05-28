@@ -42,7 +42,8 @@ articles/                   # 前瞻性指南與專題分析（依主題分資�
   2026-03-25-mackay-checkup-addons.md  # 目前生效健檢加測（留根）
   osa-sleep/                # OSA / SpO2 / 睡眠 / 姿勢療法 / 肌功能訓練
   diet-nutrition/           # 補充品評估 / 尿酸 / 飲食 / smoothie / 營養參考
-  cardio-metabolic/         # 體重停滯 / Z2 訓練 / HRV / 心血管 / 皮膚 / 生理軸
+  cardio-metabolic/         # 體重停滯 / Z2 訓練 / HRV / 心血管 / 生理軸
+  skin-aesthetics/          # 臉部保養 / 痘印與真疤 / A 酸/維C/菸鹼醯胺 / 防曬光老化
   checkups/                 # 預測健檢報告（Month 3 / Month 6）
   archive/                  # 被新版取代的歷史指南；不再修改
 archive/                    # 非健康資料歸檔（過時 handover、前端原型 / template / dev scratch）
@@ -80,8 +81,21 @@ analyzer.html               # 年度健檢數據獨立分析頁（仍為 vanilla
 |--------|----------|
 | `osa-sleep/` | OSA、SpO2、睡眠、姿勢療法、肌功能訓練、穿戴血氧可信度 |
 | `diet-nutrition/` | 補充品評估、尿酸、飲食/smoothie、醋、營養參考、糖代謝、health claims |
-| `cardio-metabolic/` | 體重停滯、Z2 訓練、HRV、心血管風險、皮膚、生理軸 |
+| `cardio-metabolic/` | 體重停滯、Z2 訓練、HRV、心血管風險、生理軸 |
+| `skin-aesthetics/` | 臉部保養 RCT、痘印 vs 真疤、A 酸/維 C/菸鹼醯胺、防曬光老化、頭髮 |
 | `checkups/` | 預測健檢報告（Month 3 / Month 6） |
+
+**規劃中分類（rule of two：累積 2 篇後再建資料夾，先不建空夾）：**
+
+| 規劃資料夾 | 收錄主題 | 階段 |
+|------------|---------|------|
+| `mind-cognition/` | 壓力管理、冥想、HRV biofeedback、認知效能、情緒/憂鬱 markers、共振呼吸 | 第一階 |
+| `mobility-flexibility/` | 瑜珈、伸展、姿勢矯正、box/Wim Hof 呼吸 protocol、抗久坐、筋膜 | 第一階 |
+| `strength-resistance/` | 重訓 protocol、肥大/最大肌力、肌少症預防、taper/deload | 第一階 |
+| `hormones-endocrine/` | testosterone、thyroid、cortisol、melatonin、DHEA、andropause | 第二階 |
+| `longevity-biomarkers/` | 生物年齡、autophagy/fasting、mTOR/AMPK、rapamycin/metformin、NAD+、ApoB/Lp(a)/CAC | 第二階 |
+| `oral-dental/` | 口腔微生物 ↔ 系統發炎、牙周-心血管軸、口腔器具（與 OSA mouthguard 銜接） | 第二階 |
+| `environmental/` | 空氣品質、淨水、塑膠/BPA、黴菌、EMF、內分泌干擾物 | 第二階 |
 
 **例外（留根目錄）**：`2026-03-25-supplement-guide.md` 與 `2026-03-25-mackay-checkup-addons.md` 為「目前生效指南」，依「新健檢報告納入規則」留在 `articles/` 根目錄（前者亦為 `data.js` source-of-truth）。
 
