@@ -843,6 +843,7 @@ function PanelRoutine({ lang }) {
           <span className="legend-item"><span className="dot" style={{background:"var(--uric)"}}/>{lang === "en" ? "Supplement" : "保健品"}</span>
           <span className="legend-item"><span className="dot" style={{background:"var(--heart)"}}/>{lang === "en" ? "Exercise" : "運動"}</span>
           <span className="legend-item"><span className="dot" style={{background:"var(--ink-3)"}}/>{lang === "en" ? "Cutoff" : "停止"}</span>
+          <span className="legend-item"><span className="dot" style={{background:"var(--skin)"}}/>{lang === "en" ? "Skincare" : "保養"}</span>
         </div>
       </div>
 

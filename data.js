@@ -813,6 +813,7 @@ window.HC_DATA = {
     // hour, label{en,zh}, cat
     [5.5,  { en: "Wake", zh: "起床" }, "sleep"],
     [7,    { en: "Breakfast (home)", zh: "早餐（家）" }, "meal"],
+    [7.42, { en: "Sunscreen (UVA Pro)", zh: "防曬（UVA Pro）" }, "skin"],
     [7.5,  { en: "Commute (HSR)", zh: "通勤（高鐵）" }, "exer"],
     [9,    { en: "Arrive office", zh: "到辦公室" }, "supp"],
     [9.5,  { en: "Matcha (office)", zh: "抹茶（辦公室）" }, "supp"],
@@ -827,6 +828,7 @@ window.HC_DATA = {
     [19,   { en: "Dinner (rice halved) + Omega-3", zh: "晚餐（飯減半）+ 魚油" }, "meal"],
     [19,   { en: "Wall sits", zh: "靠牆深蹲" }, "exer"],
     [20,   { en: "Leg elevation", zh: "抬腿" }, "exer"],
+    [20.25,{ en: "Retinol PM (CeraVe)", zh: "Retinol PM（CeraVe）" }, "skin"],
     [20.5, { en: "Bed · Mg + Cherry", zh: "就寢 · 鎂 + 酸櫻桃" }, "sleep"],
   ],
 
