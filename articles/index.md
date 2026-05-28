@@ -7,7 +7,7 @@
 | 資料夾 | 主題 | 篇數 |
 |--------|------|------|
 | [osa-sleep/](osa-sleep/) | OSA / SpO2 / 睡眠 | 12 |
-| [diet-nutrition/](diet-nutrition/) | 飲食 / 補充品 / 營養 | 7 |
+| [diet-nutrition/](diet-nutrition/) | 飲食 / 補充品 / 營養 | 8 |
 | [cardio-metabolic/](cardio-metabolic/) | 心血管 / 代謝 / 訓練 | 6 |
 | [skin-aesthetics/](skin-aesthetics/) | 臉部保養 / 美學 | 2 |
 | [checkups/](checkups/) | 預測健檢報告 | 2 |
