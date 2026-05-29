@@ -10,7 +10,7 @@
 | [diet-nutrition/](diet-nutrition/) | 飲食 / 補充品 / 營養 | 8 |
 | [cardio-metabolic/](cardio-metabolic/) | 心血管 / 代謝 / 訓練 | 6 |
 | [skin-aesthetics/](skin-aesthetics/) | 臉部保養 / 美學 | 2 |
-| [checkups/](checkups/) | 預測健檢報告 | 2 |
+| [checkups/](checkups/) | 健檢報告 / 健康管理服務 | 3 |
 
 ## 留根目錄的「目前生效指南」
 

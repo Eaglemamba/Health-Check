@@ -14,8 +14,8 @@ window.HC_DATA = {
     lede:    { en: "Sleep, BP, lipids, uric acid — one shared metabolic root. Lifestyle stacks first; medication only after lifestyle plateaus.",
                zh: "睡眠、血壓、血脂、尿酸——共享同一個代謝根源。生活方式介入優先，等到效果平台期再考慮藥物。" },
     progressLbl: { en: "Weight progress · 70 → 65 kg", zh: "體重進度 · 70 → 65 公斤" },
-    progressMeta: { en: "Day 73 · 67.3 kg · Sat official (5/23)", zh: "第 73 天 · 67.3 公斤 · 週六正式（5/23）" },
-    startDate: { en: "Start date · Mar 17, 2026 · Last sync 5/28", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/28" },
+    progressMeta: { en: "Day 74 · 67.3 kg · Sat official (5/23)", zh: "第 74 天 · 67.3 公斤 · 週六正式（5/23）" },
+    startDate: { en: "Start date · Mar 17, 2026 · Last sync 5/29", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 5/29" },
     startWeight: 70,
     targetWeight: 65,
     currentWeight: 67.3,
@@ -50,7 +50,7 @@ window.HC_DATA = {
     },
     {
       sys: "sleep", name: { en: "Sleep Score", zh: "睡眠分數" },
-      val: "76", unit: "Garmin",
+      val: "66", unit: "Garmin",
       delta: { en: "5/4 · OSA flag: T90 18.4% (severe)", zh: "5/4 · OSA 紅旗：T90 18.4%（重度）" },
       cadence: { en: "Daily · Garmin", zh: "每日 · Garmin" },
       status: "warn",
@@ -921,14 +921,14 @@ window.HC_DATA = {
   tracker: {
     // [SBP, DBP] — gaps filled with prior reading
     bp: [
-      [125,70], [122,69], [115,68], [119,76], [119,76], [113,69], [113,69], [113,69], [123,72], [113,72], [116,66], [112,70], [117,66], [117,66],
+      [122,69], [115,68], [119,76], [119,76], [113,69], [113,69], [113,69], [123,72], [113,72], [116,66], [112,70], [117,66], [117,66], [117,66],
     ],
     // daily weight (kg)
-    weight: [67.9, 67.3, 67.6, 68.7, 68.6, 68.3, 68, 67.6, 67.3, 67.3, 68, 68.2, 67.6, 67.1],
+    weight: [67.3, 67.6, 68.7, 68.6, 68.3, 68, 67.6, 67.3, 67.3, 68, 68.2, 67.6, 67.1, 66.8],
     // Garmin Sleep Score
-    sleep:  [67, 74, 74, 65, 64, 65, 74, 80, 49, 80, 65, 70, 75, 76],
+    sleep:  [74, 74, 65, 64, 65, 74, 80, 49, 80, 65, 70, 75, 76, 66],
     // Body Battery waking
-    bb:     [34, 51, 63, 48, 62, 54, 61, 56, 34, 59, 55, 53, 64, 59],
+    bb:     [51, 63, 48, 62, 54, 61, 56, 34, 59, 55, 53, 64, 59, 55],
     // SpO2 nightly nadir % (last 14 days, parallel to bp/weight/sleep/bb).
     // Earlier nights null until sync_data_js.py backfills; banner only uses trailing values.
     spo2Nadir: [null, null, null, null, null, 84, 79, 87, 85, 84, 84, 86, 82, 84],
@@ -1407,9 +1407,9 @@ window.HC_DATA = {
         ["11:30", { en: "Psyllium dose 1 (30 min pre-lunch)", zh: "Psyllium 第 1 劑（午餐前 30 分）" }, "300 mL",
           { en: "Whole psyllium husk 5g + 300 mL water. ≥2 hr from any other supplement.",
             zh: "全粒 5g + 300 mL 水。距其他補品 ≥2 小時。" }],
-        ["12:00", { en: "Lunch 🆕 (low-fat milk only)", zh: "午餐 🆕（改低脂奶）" }, { en: "Low-fat milk 300 mL", zh: "低脂奶 300 mL" },
-          { en: "Sweet potato + 2 boiled eggs + low-fat milk 300 mL + half-dressing caesar salad (NO croutons) + mushrooms 30–50g (king oyster/shimeji). NO matcha latte. NO fat-soluble supplements.",
-            zh: "地瓜 + 水煮蛋 ×2 + 低脂奶 300 mL + 半醬凱薩沙拉（去麵包丁）+ 菇蕈 30-50g（杏鮑菇/鴻喜菇）。不放抹茶拿鐵。不放脂溶性補品。" }],
+        ["12:00", { en: "Lunch 🆕 2026-05-28 (M-F: fortified-Ca unsweetened soy milk)", zh: "午餐 🆕 2026-05-28（週一-五改強化鈣無糖豆漿）" }, { en: "M-F: Soy milk 300mL · Sat-Sun: Low-fat milk 300mL", zh: "週一-五：強化鈣無糖豆漿 300 mL · 週末：低脂奶 300 mL" },
+          { en: "Sweet potato + 2 boiled eggs + (M-F) UNSWEETENED FORTIFIED-CALCIUM SOY MILK 300 mL — covers Ca / folate / isoflavones gaps; LDL ↓3-5% via isoflavones (Anderson 1995 NEJM); −25 kcal/day vs milk. (Sat-Sun) low-fat milk 300 mL for B12 + protein quality diversity. + half-dressing caesar salad (NO croutons) + mushrooms 30–50g (king oyster/shimeji). NO matcha latte. NO fat-soluble supplements.",
+            zh: "地瓜 + 水煮蛋 ×2 + 【週一-五】強化鈣無糖豆漿 300 mL — 補上 Ca/葉酸/異黃酮缺口；LDL ↓3-5%（Anderson 1995 NEJM 異黃酮機轉）；較低脂奶 −25 kcal/天。【週末】回低脂奶 300 mL（保留 B12 天然來源 + 蛋白質多樣性）。+ 半醬凱薩沙拉（去麵包丁）+ 菇蕈 30-50g（杏鮑菇/鴻喜菇）。不放抹茶拿鐵。不放脂溶性補品。" }],
         ["14:00", { en: "Hibiscus cup 1 🆕 (only cup)", zh: "洛神花 🆕（單杯）" }, "240 mL",
           { en: "Calyces 2g, steep 5–10 min. Reduced to 1 cup/day (was 2). ≥1 hr from red meat / iron. Reduce or skip if home BP <110/70.",
             zh: "花萼 2g 沖泡 5–10 分鐘。減為每日 1 杯（原 2 杯）。距紅肉/鐵劑 ≥1 hr。家中 BP <110/70 減量或跳過。" }],
@@ -1922,9 +1922,9 @@ window.HC_DATA = {
         { folder: "skin-aesthetics",  en: "Skin / Aesthetics",              zh: "臉部保養 / 美學",          count: 2,
           blurb: { en: "Facial skincare RCT evidence + CeraVe retinol 0.1% × LRP UVA Pro starter protocol (2026-05-28).",
                    zh: "臉部保養 RCT 實證 + CeraVe A 醇 0.1% × 理膚寶水 UVA Pro 起步 protocol（2026-05-28）。" } },
-        { folder: "checkups",         en: "Predicted Checkups",             zh: "預測健檢報告",             count: 2,
-          blurb: { en: "Month 3 (2026-06-17) and Month 6 (2026-09-17) predicted lab values.",
-                   zh: "Month 3（2026-06-17）與 Month 6（2026-09-17）預測檢驗值。" } },
+        { folder: "checkups",         en: "Checkups / Health Management",   zh: "健檢報告 / 健康管理服務", count: 3,
+          blurb: { en: "Month 3 / Month 6 predicted lab values + holistic health quarterback service options (US/TW comparison, 2026-05-28).",
+                   zh: "Month 3 / Month 6 預測檢驗值 + 全人健康 quarterback 服務選項（美/台對照，2026-05-28）。" } },
       ],
     },
     planned: {
