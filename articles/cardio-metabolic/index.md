@@ -13,5 +13,8 @@
 | 2026-05-22 | [上坡 Zone 2 健走計畫](2026-05-22-uphill-zone2-walking-plan.md) |
 | 2026-05-26 | [生理軸綜覽（gut-organ axes）](2026-05-26-physiological-axes-survey.md) |
 | 2026-05-29 | [HCM「後天能解決多少」RCT 證據審視](2026-05-29-hcm-acquired-management-rct-review.md) |
+| 2026-05-29 | [2024 AHA/ACC HCM 指引導讀](2026-05-29-aha-acc-2024-hcm-guideline-reading.md) |
+| 2026-05-29 | [2025 AHA/ACC 高血壓指引導讀](2026-05-29-aha-acc-2025-hypertension-guideline-reading.md) |
+| 2026-05-29 | [2026 ACC/AHA 血脂異常指引導讀](2026-05-29-aha-acc-2026-dyslipidemia-guideline-reading.md) |
 
 [← 回 articles/](../)
