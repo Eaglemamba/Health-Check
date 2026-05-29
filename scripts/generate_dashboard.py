@@ -10,12 +10,24 @@ import matplotlib
 matplotlib.use('Agg')
 matplotlib.rcParams['font.family'] = [
     'Noto Sans CJK TC', 'Noto Sans CJK SC',
-    'Microsoft YaHei', 'SimHei', 'PingFang TC', 'Arial Unicode MS', 'sans-serif'
+    'Microsoft JhengHei', 'Microsoft YaHei', 'SimHei', 'PingFang TC',
+    'Arial Unicode MS', 'sans-serif'
 ]
 matplotlib.rcParams['axes.unicode_minus'] = False
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
+
+
+# 健檢 baseline（2026-03-25 國泰健檢，診間/抽血量測，非家中 daily 讀數）。
+# 以獨立星形標記疊在各 panel 上，讓逆轉趨勢有真正的起點錨。
+# 診間 BP 153/88 與家中量性質不同，故在 BP panel 單獨標籤、不併入家中折線。
+CHECKUP_BASELINE = {
+    "date": datetime(2026, 3, 25),
+    "weight": 69.6,
+    "body_fat": 21.5,
+    "sbp": 153, "dbp": 88, "hr": 75,
+}
 
 
 def parse_daily_file(filepath):
@@ -135,6 +147,15 @@ def generate_dashboard(data_list, output_path):
 
         margin = 0.5
         ax.set_ylim(min(w_vals) - margin, max(w_vals) + margin)
+    # 健檢 baseline 錨點（診間量測，非家中 daily 點）
+    _cb = CHECKUP_BASELINE
+    ax.plot(_cb["date"], _cb["weight"], "*", color="#ffffff", markersize=16,
+            markeredgecolor="#ff4757", markeredgewidth=1.2, zorder=6,
+            label="健檢 baseline (3/25)")
+    ax.annotate(f"健檢\n{_cb['weight']}", (_cb["date"], _cb["weight"]),
+                textcoords="offset points", xytext=(0, -24), ha="center",
+                fontsize=8, color="#ffffff")
+    ax.legend(loc="upper right", fontsize=8)
     ax.set_title("Weight", fontsize=12, color="white", pad=8)
     ax.set_ylabel("kg", fontsize=10)
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
@@ -175,6 +196,16 @@ def generate_dashboard(data_list, output_path):
         ax2.axhline(y=10, color="#ffa502", linestyle=":", alpha=0.4, linewidth=1)
         left_vals.extend(vf_vals)
 
+    # 健檢 baseline 體脂 %（診間 3/25）
+    _cb = CHECKUP_BASELINE
+    ax2.plot(_cb["date"], _cb["body_fat"], "*", color="#ffffff", markersize=16,
+             markeredgecolor="#ff6b81", markeredgewidth=1.2, zorder=6,
+             label="健檢 baseline (3/25)")
+    ax2.annotate(f"健檢\n{_cb['body_fat']}%", (_cb["date"], _cb["body_fat"]),
+                 textcoords="offset points", xytext=(0, 8), ha="center",
+                 fontsize=8, color="#ffffff")
+    left_vals.append(_cb["body_fat"])
+
     if left_vals:
         ax2.set_ylim(min(left_vals) - 1.0, max(left_vals) + 2.0)
 
@@ -184,8 +215,15 @@ def generate_dashboard(data_list, output_path):
         for dt, v in zip(nf_dates, nf_vals):
             ax2r.annotate(f"{v:.2f}", (dt, v), textcoords="offset points",
                           xytext=(8, 0), ha="left", va="center", fontsize=8, color="#00d4ff")
+        _nf_base = _cb["weight"] * _cb["body_fat"] / 100.0
+        ax2r.plot(_cb["date"], _nf_base, "*", color="#ffffff", markersize=14,
+                  markeredgecolor="#00d4ff", markeredgewidth=1.0, zorder=6)
+        ax2r.annotate(f"{_nf_base:.2f}", (_cb["date"], _nf_base),
+                      textcoords="offset points", xytext=(8, 0), ha="left",
+                      va="center", fontsize=8, color="#ffffff")
+        _all_nf = list(nf_vals) + [_nf_base]
         nf_margin = 0.3
-        ax2r.set_ylim(min(nf_vals) - nf_margin, max(nf_vals) + nf_margin + 0.5)
+        ax2r.set_ylim(min(_all_nf) - nf_margin, max(_all_nf) + nf_margin + 0.5)
 
     ax2.set_title("Body Composition", fontsize=12, color="white", pad=8)
     ax2.set_ylabel("Body Fat % / Visceral Fat Level", fontsize=10, color="white")
@@ -231,6 +269,18 @@ def generate_dashboard(data_list, output_path):
 
         ax.axhline(y=140, color="#ff4757", linestyle=":", alpha=0.4, linewidth=1)
 
+    # 健檢診間 baseline（3/25；與家中量性質不同，單獨星標、不併入折線）
+    _cb = CHECKUP_BASELINE
+    ax.plot(_cb["date"], _cb["sbp"], "*", color="#ffffff", markersize=16,
+            markeredgecolor="#ff4757", markeredgewidth=1.2, zorder=6,
+            label="健檢診間 (3/25)")
+    ax.plot(_cb["date"], _cb["dbp"], "*", color="#ffffff", markersize=12,
+            markeredgecolor="#ffa502", markeredgewidth=1.0, zorder=6)
+    ax.plot(_cb["date"], _cb["hr"], "*", color="#ffffff", markersize=12,
+            markeredgecolor="#2ed573", markeredgewidth=1.0, zorder=6)
+    ax.annotate(f"健檢診間\n{_cb['sbp']}/{_cb['dbp']}", (_cb["date"], _cb["sbp"]),
+                textcoords="offset points", xytext=(0, 10), ha="center",
+                fontsize=7, color="#ffffff")
     ax.set_title("Blood Pressure & Heart Rate", fontsize=12, color="white", pad=8)
     ax.set_ylabel("mmHg / bpm", fontsize=10)
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d"))
