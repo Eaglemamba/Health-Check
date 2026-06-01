@@ -1,8 +1,11 @@
 /* ====== Health Reversal Plan — bilingual data ======
  * Source of truth: articles/2026-03-25-supplement-guide.md
- * Latest sync: 2026-05-27 v3 (breakfast blend: NOW Sports WPI, blueberries 150g,
- *   flaxseed powder 15g [replaces barley/oats], D3 3000 IU, almond milk 100mL;
- *   dropped: banana, goji, chia, oats/barley, NUTS, COCOA)
+ * Latest sync: 2026-06-01 v4 (breakfast blend: + baby kale 15–20g for sulforaphane / lutein /
+ *   K1 / glucosinolates [fills green-leafy phytochemical gap; low-oxalate for kidney-Ca history];
+ *   lunch: + Quaker barley-functional-oat flakes 40g (~3g β-glucan/d, FDA LDL claim threshold)
+ *   soaked overnight in unsweetened soy milk 250–300mL, replaces/alternates with sweet potato.
+ *   v3 base retained: NOW Sports WPI 30g, blueberries 150g, flaxseed powder 15g, D3 3000 IU,
+ *   almond milk 100mL)
  */
 window.HC_DATA = {
   // Hero
@@ -422,7 +425,7 @@ window.HC_DATA = {
       },
     },
     yogurtBlend: {
-      ttl: { en: "Breakfast yogurt drink — finalized recipe (2026-05-27 v3)", zh: "早餐優格飲 — 最終定案版（2026-05-27 v3）" },
+      ttl: { en: "Breakfast yogurt drink — finalized recipe (2026-06-01 v4 · + baby kale)", zh: "早餐優格飲 — 最終定案版（2026-06-01 v4 · 新增嫩 kale）" },
       head: { en: ["Ingredient", "Amount", "Provides"],
               zh: ["材料", "份量", "提供"] },
       rows: [
@@ -434,8 +437,13 @@ window.HC_DATA = {
           { en: "Anthocyanins → hsCRP ↓ + LDL oxidation ↓ + insulin sensitivity ↑ (Curtis 2019 AJCN: 150g/d RCT-effective dose; Stull 2010 J Nutr)", zh: "花青素 → hsCRP ↓ + LDL 氧化 ↓ + 胰島素敏感性 ↑（Curtis 2019 AJCN：150g/天 RCT 有效劑量；Stull 2010 J Nutr）" }],
         [{ en: "Ground flaxseed powder 🆕 (replaces barley/oats)", zh: "亞麻籽粉 🆕（取代大麥燕麥）" }, "15g",
           { en: "ALA ω-3 ~3.5g + lignans + soluble (mucilage) fiber ~3g → LDL ↓ + BP ↓ (Rodriguez-Leyva 2013 Hypertension). MUST be ground (whole passes undigested); refrigerate to prevent ALA oxidation. NOTE: no β-glucan — refill LDL β-glucan gap from lunch oats/barley.", zh: "ALA ω-3 ~3.5g + lignans + 可溶性（黏質）纖維 ~3g → 降 LDL + 降 BP（Rodriguez-Leyva 2013 Hypertension）。**務必磨碎**（整顆不消化直接排出）；冷藏避免 ALA 氧化。注意：無 β-glucan — 降 LDL 的 β-glucan 缺口由午餐燕麥/大麥補。" }],
+        [{ en: "Baby kale 🆕 2026-06-01 (Costco organic baby kale)", zh: "嫩 kale 🆕 2026-06-01（Costco 有機嫩羽衣甘藍）" }, "15g start → 20g target (max 25g)",
+          { en: "Fills green-leafy phytochemical gap: sulforaphane (cruciferous, NRF2 induction), lutein + zeaxanthin (retina / IOP), Vit K1 (#1 food source), quercetin + kaempferol. Costco mix (curly + Red Russian + Lacinato baby leaves) — no massage / no destemming needed. Low oxalate (~1/6–1/8 of spinach) → kidney-calcification-history friendly. Blueberry 150g + WPI 30g + yogurt mask green taste at this dose.",
+            zh: "補上綠葉植化素缺口：sulforaphane（十字花科 NRF2 誘導）、葉黃素 + 玉米黃素（視網膜 / IOP）、Vit K1（食物排名 #1）、quercetin + kaempferol。Costco 混合葉（curly + Red Russian + Lacinato 嫩葉）— 不需按摩、不需去粗梗。草酸低（菠菜的 1/6–1/8）→ 對 2017 右腎鈣化點史友善。藍莓 150g + WPI 30g + 優格在此劑量可 mask 青味。" }],
+        [{ en: "Lemon juice (optional) 🆕 2026-06-01", zh: "檸檬汁（可選）🆕 2026-06-01" }, "1 tsp (~5 mL)",
+          { en: "Neutralizes kale's mild bitterness, stabilizes flaxseed ALA against oxidation, boosts non-heme iron absorption.", zh: "中和 kale 微苦，穩定亞麻籽 ALA 避免氧化，提升非血紅素鐵吸收。" }],
         [{ en: "L-Citrulline ⬆️", zh: "L-瓜胺酸 ⬆️" }, "4g (+2g pre-workout on training days)",
-          { en: "NO precursor → BP (Alsop 2019 meta SBP −4 mmHg at 3–6g). Training day total 6g enters Figueroa 2017 RCT range.", zh: "NO 前體 → BP（Alsop 2019 meta 3-6g SBP −4 mmHg）。訓練日合計 6g 進入 Figueroa 2017 RCT 區間。" }],
+          { en: "NO precursor → BP (Alsop 2019 meta SBP −4 mmHg at 3–6g). Training day total 6g enters Figueroa 2017 RCT range. Synergistic with kale dietary nitrates (~30–50 mg from 15–20g).", zh: "NO 前體 → BP（Alsop 2019 meta 3-6g SBP −4 mmHg）。訓練日合計 6g 進入 Figueroa 2017 RCT 區間。與 kale 膳食硝酸鹽（15-20g 約 30-50 mg）路徑加成。" }],
         [{ en: "D3 + K2 ⬆️", zh: "D3 + K2 ⬆️" }, "D3 3000 IU + K2 MK-7 180 mcg",
           { en: "Fat-soluble — yogurt + nuts fat enables absorption. D3 raised from 2000 to 3000 IU per most-recent 25-OH-D status.", zh: "脂溶性 — 優格 + 堅果脂肪助吸收。D3 由 2000 升至 3000 IU（依最新 25-OH-D 狀態）。" }],
         [{ en: "Unsweetened almond milk 🆕 (or low-fat milk)", zh: "無糖杏仁奶 🆕（或低脂牛奶）" }, "100 mL",
@@ -446,8 +454,8 @@ window.HC_DATA = {
           { en: "Pending RT resumption. Confounds weight + serum creatinine (eGFR misread).", zh: "待重訓恢復後加。會干擾體重 + 血清肌酸酐（eGFR 誤判）。" }],
       ],
       note: {
-        en: "2026-05-27 v3: barley/oats 15g REPLACED by ground flaxseed powder 15g (ALA ω-3 + lignans + soluble fiber; covers the dropped nuts' ω-3 ALA gap in-blend). Dropped: banana, goji, chia, oats/barley, NUTS, COCOA. Tradeoff: flaxseed has NO β-glucan — refill LDL β-glucan from lunch oats/barley (target 3g/d). Remaining gaps from other meals: cocoa → flavanols ~100mg (85% dark choco 10g afternoon).",
-        zh: "2026-05-27 v3：大麥燕麥 15g 由**亞麻籽粉 15g 取代**（ALA ω-3 + lignans + 可溶性纖維；同時補上被移除堅果的 ω-3 ALA 缺口）。移除：香蕉、枸杞、奇亞籽、**燕麥/大麥**、**堅果**、**生可可**。權衡：亞麻籽無 β-glucan — 降 LDL 的 β-glucan 改由午餐燕麥/大麥補（目標 3g/天）。其餘缺口從別餐補：可可 → flavanols ~100mg（下午 85% 黑巧克力 10g）。",
+        en: "2026-06-01 v4: + baby kale 15–20g (fills green-leafy phytochemical gap — sulforaphane / lutein / K1 / quercetin / kaempferol; low-oxalate friendly for kidney-calcification history) + optional lemon juice 1 tsp. β-glucan gap addressed at LUNCH via Quaker barley-functional-oat flakes 40g (≈3g β-glucan, FDA LDL claim threshold) — soaked overnight in unsweetened soy milk 250–300mL → cold/warm jar at lunch, replaces/alternates with sweet potato; pairs with existing home-style lunch (2 boiled eggs + caesar salad + mushrooms). 2026-05-27 v3 base retained: barley/oats 15g REPLACED by ground flaxseed powder 15g (ALA ω-3 + lignans + soluble fiber). Dropped from breakfast: banana, goji, chia, oats/barley, NUTS, COCOA. Cocoa flavanols ~100mg from 85% dark choco 10g afternoon.",
+        zh: "2026-06-01 v4：新增嫩 kale 15-20g（補綠葉植化素缺口 — sulforaphane / 葉黃素 / K1 / quercetin / kaempferol；草酸低對腎鈣化點史友善）+ 可選檸檬汁 1 茶匙。β-glucan 缺口在**午餐**以**桂格大麥機能燕麥片 40g**處理（≈3g β-glucan，達 FDA 降 LDL claim 閾值）— 隔夜泡無糖豆漿 250-300mL → 中午為冷/微溫罐，**取代或輪替地瓜**作主食；搭配現有家常午餐（水煮蛋 ×2 + 凱薩沙拉 + 菇）。2026-05-27 v3 基底保留：大麥燕麥 15g 由亞麻籽粉 15g 取代（ALA ω-3 + lignans + 可溶性纖維）。早餐移除：香蕉、枸杞、奇亞籽、燕麥/大麥、堅果、生可可。可可 flavanols ~100mg 由下午 85% 黑巧克力 10g 補。",
       },
       blending: {
         en: "Blending retains all fiber (only physical structure changes); juicing discards fiber. With protein and fat, fructose absorption slows further — not equivalent to juice.",
@@ -539,9 +547,9 @@ window.HC_DATA = {
       head: { en: ["Time", "Drink", "Metabolic target"],
               zh: ["時間", "飲料", "代謝目標"] },
       rows: [
-        [{ en: "Breakfast 07:00 (home) 🆕 2026-05-27 v3", zh: "早餐 07:00（家）🆕 2026-05-27 v3" },
-          { en: "Snow Factory No.6 yogurt 150g + NOW Sports WPI 30g + blueberries 150g + ground flaxseed 15g + L-citrulline 4g + D3 3000 IU + K2 180mcg + almond milk 100mL", zh: "雪坊 6 號優格 150g + NOW Sports WPI 30g + 藍莓 150g + 亞麻籽粉 15g + 瓜胺酸 4g + D3 3000 IU + K2 180mcg + 杏仁奶 100mL" },
-          { en: "Casein+whey (UA clearance) + anthocyanin RCT dose + ALA ω-3 + lignans + NO precursor + fat-soluble vitamin window", zh: "酪蛋白+乳清（尿酸排泄）+ 花青素 RCT 劑量 + ALA ω-3 + lignans + NO 前體 + 脂溶性維生素吸收窗" }],
+        [{ en: "Breakfast 07:00 (home) 🆕 2026-06-01 v4", zh: "早餐 07:00（家）🆕 2026-06-01 v4" },
+          { en: "Snow Factory No.6 yogurt 150g + NOW Sports WPI 30g + blueberries 150g + ground flaxseed 15g + baby kale 15–20g 🆕 + L-citrulline 4g + D3 3000 IU + K2 180mcg + almond milk 100mL + lemon juice 1 tsp (optional)", zh: "雪坊 6 號優格 150g + NOW Sports WPI 30g + 藍莓 150g + 亞麻籽粉 15g + 嫩 kale 15-20g 🆕 + 瓜胺酸 4g + D3 3000 IU + K2 180mcg + 杏仁奶 100mL + 檸檬汁 1 茶匙（可選）" },
+          { en: "Casein+whey (UA clearance) + anthocyanin RCT dose + ALA ω-3 + lignans + sulforaphane / lutein / K1 / nitrates + NO precursor + fat-soluble vitamin window", zh: "酪蛋白+乳清（尿酸排泄）+ 花青素 RCT 劑量 + ALA ω-3 + lignans + sulforaphane / 葉黃素 / K1 / 硝酸鹽 + NO 前體 + 脂溶性維生素吸收窗" }],
         [{ en: "7:30–9:00 commute", zh: "7:30–9:00 通勤" },
           { en: "Water 300–500 mL on HSR; no caffeine yet", zh: "高鐵上 300–500 mL 白水；尚未進咖啡因" },
           { en: "Base hydration + commute window", zh: "基礎補水 + 通勤窗" }],
@@ -1240,8 +1248,8 @@ window.HC_DATA = {
       ],
       foodForm: {
         ttl: { en: "Food-form nutrition (already in daily meals)", zh: "食物形態營養（已在每日餐食中）" },
-        body: { en: "🆕 2026-05-27 v3: Blueberries 150g (breakfast, RCT-effective anthocyanin dose), ground flaxseed 15g (breakfast, ALA ω-3 + lignans + soluble fiber — replaces barley/oats and covers the dropped nuts' ω-3), pumpkin seeds 30g (afternoon snack). Removed from breakfast: cacao + nuts + oats/barley. Gaps to fill from other meals: β-glucan (lunch oats/barley, target 3g/d) and cocoa (flavanols).",
-                zh: "🆕 2026-05-27 v3：藍莓 150g（早餐，RCT 有效花青素劑量）、亞麻籽粉 15g（早餐，ALA ω-3 + lignans + 可溶性纖維 — 取代大麥燕麥並補上被移除堅果的 ω-3）、南瓜籽 30g（下午點心）。早餐已移除可可、堅果、燕麥/大麥。覆蓋缺口需從其他餐食補（β-glucan 由午餐燕麥/大麥，目標 3g/天；可可 flavanols）。" },
+        body: { en: "🆕 2026-06-01 v4: + baby kale 15–20g (breakfast, fills green-leafy phytochemical gap: sulforaphane / lutein / K1 / quercetin; low-oxalate vs spinach → kidney-calcification-history friendly) + optional lemon juice 1 tsp. β-glucan gap NOW addressed: Quaker barley-functional-oat flakes 40g/day (~3g β-glucan, FDA LDL claim) — soaked overnight in unsweetened soy milk 250–300mL → cold/warm jar at lunch, replaces/alternates with sweet potato as starch base; pairs with home-style lunch (2 boiled eggs + caesar salad + mushrooms). v3 retained: blueberries 150g, ground flaxseed 15g, pumpkin seeds 30g (afternoon). Cocoa flavanols ~100mg from 85% dark choco 10g afternoon.",
+                zh: "🆕 2026-06-01 v4：新增嫩 kale 15-20g（早餐，補綠葉植化素：sulforaphane / 葉黃素 / K1 / quercetin；草酸比菠菜低 6-8 倍 → 對腎鈣化點史友善）+ 可選檸檬汁 1 茶匙。β-glucan 缺口**已落地**：桂格大麥機能燕麥片 40g/天（≈3g β-glucan，達 FDA 降 LDL claim）— 隔夜泡無糖豆漿 250-300mL → 中午為冷/微溫罐，**取代或輪替地瓜**作主食；搭配家常午餐（水煮蛋 ×2 + 凱薩沙拉 + 菇）。v3 保留：藍莓 150g、亞麻籽粉 15g、南瓜籽 30g（下午）。可可 flavanols ~100mg 由下午 85% 黑巧克力 10g 補。" },
       },
     },
     rtg: {
@@ -1393,9 +1401,9 @@ window.HC_DATA = {
         ["5:35", { en: "BP measurement #1", zh: "量血壓 第 1 次" }, "—",
           { en: "After bathroom, before eating. Sit 5 min, back supported, feet flat. 2 readings 1 min apart; use 2nd.",
             zh: "上完廁所、進食前。靜坐 5 分鐘背靠椅、雙腳平放。連量 2 次間隔 1 分鐘，取第 2 次。" }],
-        ["7:00", { en: "Breakfast (home) — yogurt blend 🆕 2026-05-27 v3 finalized", zh: "早餐（家）— 優格飲 🆕 2026-05-27 v3 定案" }, "—",
-          { en: "Snow Factory No.6 yogurt 150g + NOW Sports WPI 30g + blueberries 150g + ground flaxseed 15g + L-citrulline 4g + D3 3000 IU + K2 MK-7 180mcg + probiotic + almond milk 100mL. NO matcha (relocated to office 9:30). Casein+whey (UA clearance) + anthocyanin RCT dose + ALA ω-3 + lignans.",
-            zh: "雪坊 6 號優格 150g + NOW Sports WPI 30g + 藍莓 150g + 亞麻籽粉 15g + 瓜胺酸 4g + D3 3000 IU + K2 MK-7 180mcg + 益生菌 + 杏仁奶 100mL。不放抹茶（移至辦公室 9:30）。酪蛋白+乳清（尿酸排泄）+ 花青素 RCT 劑量 + ALA ω-3 + lignans。" }],
+        ["7:00", { en: "Breakfast (home) — yogurt blend 🆕 2026-06-01 v4 (+ baby kale)", zh: "早餐（家）— 優格飲 🆕 2026-06-01 v4（新增嫩 kale）" }, "—",
+          { en: "Snow Factory No.6 yogurt 150g + NOW Sports WPI 30g + blueberries 150g + ground flaxseed 15g + baby kale 15–20g 🆕 + L-citrulline 4g + D3 3000 IU + K2 MK-7 180mcg + probiotic + almond milk 100mL + lemon juice 1 tsp (optional). NO matcha (relocated to office 9:30). Casein+whey (UA clearance) + anthocyanin RCT dose + ALA ω-3 + lignans + sulforaphane / lutein / K1 / nitrates.",
+            zh: "雪坊 6 號優格 150g + NOW Sports WPI 30g + 藍莓 150g + 亞麻籽粉 15g + 嫩 kale 15-20g 🆕 + 瓜胺酸 4g + D3 3000 IU + K2 MK-7 180mcg + 益生菌 + 杏仁奶 100mL + 檸檬汁 1 茶匙（可選）。不放抹茶（移至辦公室 9:30）。酪蛋白+乳清（尿酸排泄）+ 花青素 RCT 劑量 + ALA ω-3 + lignans + sulforaphane / 葉黃素 / K1 / 硝酸鹽。" }],
         ["7:25", { en: "Sunscreen 🆕 2026-05-28 (before leaving)", zh: "防曬 🆕 2026-05-28（出門前）" }, "—",
           { en: "La Roche-Posay Anthelios UVMune 400 (UVA Pro), ~1g full face + neck + ears. Mexoryl 400 covers 380–400 nm UVA1 (standard SPF gap). Re-apply if outdoor > 2 hr or heavy sweat. MANDATORY pairing with PM retinol — without daily UVA1 coverage, retinol accelerates photodamage.",
             zh: "理膚寶水 UVA Pro（UVMune 400），1 元硬幣量全臉 + 頸 + 耳後。Mexoryl 400 覆蓋 380-400 nm 長 UVA1（一般 SPF 擋不到）。戶外 > 2 hr 或大量流汗需重塗。與 PM retinol 強制配對 — 沒有每日 UVA1 防護，retinol 會加速光損傷。" }],
@@ -1407,9 +1415,9 @@ window.HC_DATA = {
         ["11:30", { en: "Psyllium dose 1 (30 min pre-lunch)", zh: "Psyllium 第 1 劑（午餐前 30 分）" }, "300 mL",
           { en: "Whole psyllium husk 5g + 300 mL water. ≥2 hr from any other supplement.",
             zh: "全粒 5g + 300 mL 水。距其他補品 ≥2 小時。" }],
-        ["12:00", { en: "Lunch 🆕 2026-05-28 (M-F: fortified-Ca unsweetened soy milk)", zh: "午餐 🆕 2026-05-28（週一-五改強化鈣無糖豆漿）" }, { en: "M-F: Soy milk 300mL · Sat-Sun: Low-fat milk 300mL", zh: "週一-五：強化鈣無糖豆漿 300 mL · 週末：低脂奶 300 mL" },
-          { en: "Sweet potato + 2 boiled eggs + (M-F) UNSWEETENED FORTIFIED-CALCIUM SOY MILK 300 mL — covers Ca / folate / isoflavones gaps; LDL ↓3-5% via isoflavones (Anderson 1995 NEJM); −25 kcal/day vs milk. (Sat-Sun) low-fat milk 300 mL for B12 + protein quality diversity. + half-dressing caesar salad (NO croutons) + mushrooms 30–50g (king oyster/shimeji). NO matcha latte. NO fat-soluble supplements.",
-            zh: "地瓜 + 水煮蛋 ×2 + 【週一-五】強化鈣無糖豆漿 300 mL — 補上 Ca/葉酸/異黃酮缺口；LDL ↓3-5%（Anderson 1995 NEJM 異黃酮機轉）；較低脂奶 −25 kcal/天。【週末】回低脂奶 300 mL（保留 B12 天然來源 + 蛋白質多樣性）。+ 半醬凱薩沙拉（去麵包丁）+ 菇蕈 30-50g（杏鮑菇/鴻喜菇）。不放抹茶拿鐵。不放脂溶性補品。" }],
+        ["12:00", { en: "Lunch 🆕 2026-06-01 v4 (+ Quaker barley-oat overnight jar for β-glucan)", zh: "午餐 🆕 2026-06-01 v4（新增桂格大麥機能燕麥片隔夜罐補 β-glucan）" }, { en: "M-F: Soy milk 300mL · Sat-Sun: Low-fat milk 300mL", zh: "週一-五：強化鈣無糖豆漿 300 mL · 週末：低脂奶 300 mL" },
+          { en: "🆕 Quaker barley-functional oat flakes 40g (~3g β-glucan, FDA LDL claim threshold) — soaked overnight in unsweetened soy milk 250–300mL → cold/warm jar as starch base, REPLACES or alternates with sweet potato. Plus: 2 boiled eggs + half-dressing caesar salad (NO croutons) + mushrooms 30–50g (king oyster/shimeji). (Sat-Sun) low-fat milk 300mL retained for B12 + protein diversity. NO matcha latte. NO fat-soluble supplements.",
+            zh: "🆕 桂格大麥機能燕麥片 40g（≈3g β-glucan，達 FDA 降 LDL claim 閾值）— 隔夜泡無糖豆漿 250-300 mL，當冷/微溫罐**取代或輪替地瓜**作主食碳水。加：水煮蛋 ×2 + 半醬凱薩沙拉（去麵包丁）+ 菇蕈 30-50g（杏鮑菇/鴻喜菇）。【週末】回低脂奶 300 mL（保留 B12 + 蛋白質多樣性）。不放抹茶拿鐵。不放脂溶性補品。" }],
         ["14:00", { en: "Hibiscus cup 1 🆕 (only cup)", zh: "洛神花 🆕（單杯）" }, "240 mL",
           { en: "Calyces 2g, steep 5–10 min. Reduced to 1 cup/day (was 2). ≥1 hr from red meat / iron. Reduce or skip if home BP <110/70.",
             zh: "花萼 2g 沖泡 5–10 分鐘。減為每日 1 杯（原 2 杯）。距紅肉/鐵劑 ≥1 hr。家中 BP <110/70 減量或跳過。" }],
@@ -1460,12 +1468,12 @@ window.HC_DATA = {
       ttl: { en: "Daily supplement summary (gram-explicit)", zh: "每日補品劑量總覽（公克明列）" },
       items: {
         en: [
-          "Yogurt blend (06:00) 🆕 2026-05-27 v3 finalized: NOW Sports WPI 30g + yogurt 150g + blueberries 150g + ground flaxseed 15g + L-citrulline 4g (+2g pre-workout on training days) + D3 3000 IU + K2 MK-7 180mcg + probiotic + almond milk 100mL. NO nuts / NO cocoa / NO oats in blend (flaxseed covers ω-3 ALA; refill β-glucan at lunch).",
+          "Yogurt blend (06:00) 🆕 2026-06-01 v4: NOW Sports WPI 30g + yogurt 150g + blueberries 150g + ground flaxseed 15g + baby kale 15–20g 🆕 + L-citrulline 4g (+2g pre-workout on training days) + D3 3000 IU + K2 MK-7 180mcg + probiotic + almond milk 100mL + lemon juice 1 tsp (optional). NO nuts / NO cocoa / NO oats in blend (flaxseed covers ω-3 ALA; β-glucan now covered at lunch by Quaker barley-oat 40g).",
           "Hibiscus tea: 2g × 1 cup (14:00) 🆕 2026-05-14 (reduced from 2 cups), 240 mL, 5–10 min steep",
           "Matcha (office) 🆕 2026-05-14: 3–4g + 300 mL warm water at 9:30 (EGCG ~75–120 mg, caffeine ~90–120 mg → 22:00 residual ~16–20 mg sub-clinical)",
           "Psyllium husk: 5g × 2 (11:30 + 16:30) 🆕 2026-05-14, each in 300 mL water — 16:30 dose at office before HSR commute; peak satiety 18:00–18:30",
           "HSR snack 🆕 2026-05-14 (18:00): 1 boiled egg + half banana (7g protein + 210mg K) — prevents bento rice overeating at 19:00 dinner",
-          "Lunch (12:00) 🆕 2026-05-14: low-fat milk 300 mL (replaces matcha latte) + 2 boiled eggs + sweet potato + caesar salad (no croutons) + mushrooms 30–50g",
+          "Lunch (12:00) 🆕 2026-06-01 v4: Quaker barley-functional-oat flakes 40g 🆕 (~3g β-glucan, FDA LDL claim) soaked overnight in unsweetened soy milk 250–300mL → cold/warm jar (replaces/alternates with sweet potato) + 2 boiled eggs + caesar salad (no croutons) + mushrooms 30–50g. Weekends: low-fat milk 300mL retained for B12 + protein diversity.",
           "Dinner (19:00) 🆕 2026-05-14: bento with rice/purple rice HALVED at order — prevents weight stall from late-day carb overload",
           "Pumpkin seeds (15:30): 30g afternoon snack",
           "Mushrooms 🆕 100-130g/day: lunch 30-50g + dinner 50-80g (EGT source; avoid dried shiitake bulk for UA control)",
@@ -1474,12 +1482,12 @@ window.HC_DATA = {
           "⏸️ Pending PSG: NAC 600mg × 2 (conditional on AHI > 15)",
         ],
         zh: [
-          "優格飲（06:00）🆕 2026-05-27 v3 定案：NOW Sports WPI 30g + 雪坊優格 150g + 藍莓 150g + 亞麻籽粉 15g + 瓜胺酸 4g（訓練日訓前再 +2g）+ D3 3000 IU + K2 MK-7 180mcg + 益生菌 + 杏仁奶 100mL。**不含堅果、不含可可、不含燕麥**（亞麻籽補 ω-3 ALA；β-glucan 留午餐補）",
+          "優格飲（06:00）🆕 2026-06-01 v4：NOW Sports WPI 30g + 雪坊優格 150g + 藍莓 150g + 亞麻籽粉 15g + 嫩 kale 15-20g 🆕 + 瓜胺酸 4g（訓練日訓前再 +2g）+ D3 3000 IU + K2 MK-7 180mcg + 益生菌 + 杏仁奶 100mL + 檸檬汁 1 茶匙（可選）。**不含堅果、不含可可、不含燕麥**（亞麻籽補 ω-3 ALA；β-glucan 由午餐 Quaker 大麥燕麥 40g 補）",
           "洛神花茶：2g × 1 杯（14:00）🆕 2026-05-14（由 2 杯減為 1 杯），240 mL 沖 5–10 分鐘",
           "抹茶（辦公室）🆕 2026-05-14：3–4g + 溫水 300 mL，9:30 沖泡（EGCG ~75–120 mg、咖啡因 ~90–120 mg → 22:00 殘餘 ~16–20 mg 亞臨床）",
           "Psyllium husk：5g × 2（11:30 + 16:30）🆕 2026-05-14，各配 300 mL — 16:30 劑於辦公室下班前服用；18:00-18:30 達飽足感峰值",
           "高鐵點心 🆕 2026-05-14（18:00）：水煮蛋 1 顆 + 半根香蕉（7g 蛋白 + 鉀 210mg）— 防 19:00 便當紫米爆食",
-          "午餐（12:00）🆕 2026-05-14：低脂奶 300 mL（取代抹茶拿鐵）+ 水煮蛋 ×2 + 地瓜 + 半醬凱薩沙拉（去麵包丁）+ 菇蕈 30–50g",
+          "午餐（12:00）🆕 2026-06-01 v4：桂格大麥機能燕麥片 40g 🆕（≈3g β-glucan，達 FDA 降 LDL claim）隔夜泡無糖豆漿 250-300 mL → 中午為冷/微溫罐（取代或輪替地瓜作主食）+ 水煮蛋 ×2 + 半醬凱薩沙拉（去麵包丁）+ 菇蕈 30-50g。週末回低脂奶 300 mL（保留 B12 + 蛋白質多樣性）",
           "晚餐（19:00）🆕 2026-05-14：便當點餐時直接「飯減半」（紫米/糙米）— 防晚段碳水導致體重停滯",
           "南瓜籽（15:30）：30g 下午點心",
           "菇蕈 🆕 100-130g/天：午 30-50g + 晚 50-80g（EGT 來源；避乾香菇大量以控 UA）",
@@ -1872,6 +1880,12 @@ window.HC_DATA = {
       detail: { en: "12-wk protocol; expected PIH fade 30–40% by wk 12. Daily UVA1 sunscreen mandatory.",
                 zh: "12 週 protocol；預期第 12 週痘印淡化 30-40%。每日 UVA1 防曬必備。" },
       href: "articles/skin-aesthetics/2026-05-28-retinol-uva-pro-routine.md" },
+    { date: "2026-06-01",
+      en: "v4: + baby kale 15–20g (breakfast); + Quaker barley-oat 40g overnight soy-milk jar (lunch)",
+      zh: "v4：早餐新增嫩 kale 15-20g；午餐新增桂格大麥機能燕麥片 40g 隔夜豆漿罐",
+      detail: { en: "Kale fills green-leafy phytochemical gap (sulforaphane / lutein / K1 / quercetin; low-oxalate for kidney-Ca history). Quaker barley-oat 40g (≈3g β-glucan, FDA LDL claim threshold) soaked overnight in unsweetened soy milk 250–300mL → replaces/alternates with sweet potato at lunch. Pairs with existing home-style lunch (eggs + caesar salad + mushrooms).",
+                zh: "Kale 補綠葉植化素缺口（sulforaphane / 葉黃素 / K1 / quercetin；草酸低對腎鈣化點史友善）。桂格大麥機能燕麥片 40g（≈3g β-glucan，達 FDA 降 LDL claim）隔夜泡無糖豆漿 250-300mL → 午餐取代或輪替地瓜作主食。搭配既有家常午餐（蛋 + 凱薩沙拉 + 菇）。" },
+      href: "articles/diet-nutrition/2026-05-29-leafy-greens-phytochemical-strategy.md" },
     { date: "2026-05-27",
       en: "Breakfast v3 finalized: flaxseed powder 15g replaces barley/oats",
       zh: "早餐 v3 定案：亞麻籽粉 15g 取代大麥燕麥",
@@ -1913,9 +1927,9 @@ window.HC_DATA = {
         { folder: "osa-sleep",        en: "OSA / SpO2 / Sleep",            zh: "OSA / SpO2 / 睡眠",        count: 12,
           blurb: { en: "OSA investigation, positional therapy, myofunctional protocol, equipment decisions, wearable SpO2 credibility.",
                    zh: "OSA 調查、姿勢療法、肌功能訓練、設備決策、穿戴血氧可信度。" } },
-        { folder: "diet-nutrition",   en: "Diet / Supplements / Nutrition", zh: "飲食 / 補充品 / 營養",     count: 8,
-          blurb: { en: "Uric acid Japanese protocol, creatine/glycine evaluation, morning smoothie, vinegar evidence, FDA/SSA claims, flaxseed RCT deep dive (2026-05-28).",
-                   zh: "尿酸日式 protocol、creatine/glycine 評估、晨間 smoothie、醋實證、FDA/SSA health claims、亞麻籽 RCT 深度評估（2026-05-28）。" } },
+        { folder: "diet-nutrition",   en: "Diet / Supplements / Nutrition", zh: "飲食 / 補充品 / 營養",     count: 9,
+          blurb: { en: "Uric acid Japanese protocol, creatine/glycine evaluation, morning smoothie, vinegar evidence, FDA/SSA claims, flaxseed RCT deep dive (2026-05-28), leafy greens phytochemical strategy + kale (2026-05-29).",
+                   zh: "尿酸日式 protocol、creatine/glycine 評估、晨間 smoothie、醋實證、FDA/SSA health claims、亞麻籽 RCT 深度評估（2026-05-28）、綠葉植化素策略 + Kale（2026-05-29）。" } },
         { folder: "cardio-metabolic", en: "Cardio / Metabolic / Training",  zh: "心血管 / 代謝 / 訓練",     count: 6,
           blurb: { en: "Weight plateau diagnosis, Z2/RHR analysis, uphill Z2 walking, HRV cv-risk, AHA habits, physiological axes.",
                    zh: "體重停滯診斷、Z2/RHR 分析、上坡 Z2 健走、HRV 心血管風險、AHA 心臟習慣、生理軸綜覽。" } },
