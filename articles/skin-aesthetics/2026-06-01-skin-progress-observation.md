@@ -6,6 +6,7 @@
 **追蹤窗**：2026-05-27（v3 早餐定案 + retinol 啟動）→ 2026-06-01（D+5）
 **核心訊號**：自覺彈性光澤回升 + 下顎兩頰痘痘退場。
 **驅動問題**：是否需要加入 Vit C 精華？哪一支 RCT 有支持？
+**Update 2026-06-01 PM**：確認 PM TXA 為 **Transino 美白乳液**（第一三共製藥，2% TXA + Vit C 衍生物 + niacinamide），含 PM routine v2.1。同時建立完整 stack gap analysis：[2026-06-01-topical-actives-rct-gap-analysis](2026-06-01-topical-actives-rct-gap-analysis.md)。
 
 ---
 
@@ -162,7 +163,7 @@
 
 ---
 
-## 七、AM + PM 完整 routine（v2，加入 Vit C 精華）
+## 七、AM + PM 完整 routine（v2.1，加入 Vit C + Transino TXA）
 
 ```
 🌅 AM Routine（早晨）
@@ -173,19 +174,54 @@
 5. La Roche-Posay Anthelios UVMune 400 — 1 元硬幣量
    （等 Vit C 吸收 5-10 分鐘再上防曬）
 
-🌙 PM Routine（晚間）
-1. 卸妝（若有上 sunscreen）
-2. 潔面
-3. 等臉乾 15-20 分鐘（防止 retinol 刺激）
-4. CeraVe Resurfacing Retinol Serum 0.1% — 豆大量全臉
-5. 等 10-15 分鐘
-6. La Roche-Posay Cicaplast Baume B5 — 薄塗 + 痘痘區加厚
+🌙 PM Routine（v2.1，含 Transino TXA 乳液）
+
+階段 1（D+5 → Week 6，retinol 適應期，隔晚輪替）
+
+  Night A（週一/三/五）：Retinol 路線
+    1. 潔面
+    2. 等臉乾 15-20 分鐘
+    3. CeraVe Resurfacing Retinol Serum 0.1%（豆大量）
+    4. 等 10-15 分鐘
+    5. La Roche-Posay Cicaplast Baume B5（薄塗 + 痘痘區加厚）
+
+  Night B（週二/四/六）：TXA 路線
+    1. 潔面
+    2. （可選）化妝水
+    3. 🆕 Transino 美白乳液（取代當晚保濕 + 提供 2% TXA + Vit C 衍生物 + niacinamide）
+       — 適量塗全臉，重點下顎、頰、痘印區
+    4. 局部痘印區 Cicaplast B5 加厚（若需要）
+
+  Night C（週日）：純保濕休息日
+
+階段 2（Week 6+，適應後同晚層疊）
+
+  每晚 PM：
+    1. 潔面
+    2. 等臉乾 15-20 分鐘
+    3. CeraVe Retinol 0.1%（豆大量，**乾臉**上）
+    4. 等 10-15 分鐘讓 retinol 吸收
+    5. 🆕 Transino 美白乳液（取代原 Cicaplast 全臉位置）
+    6. 局部痘印區點塗 Cicaplast B5（不全臉）
 
 ⚠️ 衝突避免：
 - Vit C 與 retinol 不同時段使用（AM Vit C / PM retinol）✅ 已分開
-- Vit C 與 niacinamide 可同用（過去「黃化」迷思已 debunked）
+- Vit C 與 niacinamide 可同用（過去「黃化」迷思已 debunked，需 > 85°C 才發生）
+- Retinol 上**乾臉**（不被乳液阻擋 → 滲透最佳）
+- TXA 乳液在 retinol 之後（鎖水 + 遞送 TXA）
 - 起步 2 週 Vit C 每隔日 → 適應後每日
+- TXA 乳液隔晚與 retinol 輪替 → 適應後可同晚層疊
 ```
+
+### Transino 美白乳液成分核對
+（第一三共製藥，藥用 OTC）
+- **トラネキサム酸（TXA）2%** — 抑制 plasmin → 色素 ↓
+- **L-アスコルビン酸 2-グルコシド**（Vit C 衍生物）— 抗氧化 + 美白
+- **ナイアシンアミド**（niacinamide ~2%）— 屏障 + melanosome transfer ↓（注意：低於 RCT 主流 4-5% 治療劑量）
+- **グリチルリチン酸ジカリウム**（甘草酸鉀）— 抗發炎
+- 無酒精、低敏配方
+
+→ 含 niacinamide 但未達 RCT 主流劑量，未來可補一支專屬 niacinamide 4-5%（見 [gap analysis](2026-06-01-topical-actives-rct-gap-analysis.md) 中 P1-A 優先序）。
 
 ### Vit C 起步排程
 
@@ -278,4 +314,4 @@
 ---
 
 *Filed: articles/skin-aesthetics/2026-06-01-skin-progress-observation.md*
-*配對：[retinol + UVA Pro 起步 protocol](2026-05-28-retinol-uva-pro-routine.md)、[skincare RCT evidence](2026-05-26-skincare-rct-evidence.md)、[leafy greens phytochemical strategy](../diet-nutrition/2026-05-29-leafy-greens-phytochemical-strategy.md)*
+*配對：[topical actives RCT gap analysis](2026-06-01-topical-actives-rct-gap-analysis.md)、[retinol + UVA Pro 起步 protocol](2026-05-28-retinol-uva-pro-routine.md)、[skincare RCT evidence](2026-05-26-skincare-rct-evidence.md)、[leafy greens phytochemical strategy](../diet-nutrition/2026-05-29-leafy-greens-phytochemical-strategy.md)*
