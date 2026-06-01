@@ -3,7 +3,8 @@
 **基準日期：** 2026-03-25 健檢結果（前次 2025-09-17）
 **前版指南：** [archive/2025-09-17-supplement-guide.md](archive/2025-09-17-supplement-guide.md)（2025-09-17 健檢後制訂，作為原始策略保存）
 **優先指標：** LDL 154（177→154 🟠）/ TC 191（234→191 🟢）/ 尿酸 8.9（8.6→8.9 🟠 惡化）/ HbA1c 5.9%（6.0→5.9 🟡）/ hsCRP 0.142 mg/dL = 1.42 mg/L（3.02→1.42 🟡）/ **HDL 39（46→39 🟠 新問題）**
-**最後更新：** 2026-05-11（第二輪優化 v2：Glycine 3g 睡前（純粉 Plan A 確認，三軸機制詳述）；NAC 600mg × 2 改條件性（使用者前次自試無感 + PSG 未做，待 PSG 後決定）；Ergothioneine 加入食物層（菇蕈 100-130g/天 + 安全注意）；L-Citrulline 2g → 4g；K2 MK-7 100 → 180mcg；CoQ10 / Bergamot 條件性；新增 biomarker 加測清單；全日 schedule 重構）
+**最後更新：** 2026-06-01（**鎂深度評估**：查證使用者產品為 Doctor's Best High Absorption（glycinate/lysinate chelate，**每錠元素鎂 100mg**，瓶身 200mg＝2 錠份量）→ 睡前 1 錠僅 100mg，低於所有 RCT 門檻。**目標上修為睡前元素鎂 300mg**（3 錠或改粉劑）以兌現 BP⭐⭐⭐（Zhang 2016 *Hypertension* spline 門檻 300mg）；新增**鎂×維D 協同**（活化維 D 酵素需鎂為輔因子，Uwitonze 2018）作為足量第三理由；證據分級見 [diet-nutrition/2026-06-01-magnesium-rct-dose-form-deep-dive.md](diet-nutrition/2026-06-01-magnesium-rct-dose-form-deep-dive.md)）
+**更早 -0.5：** 2026-05-11（第二輪優化 v2：Glycine 3g 睡前（純粉 Plan A 確認，三軸機制詳述）；NAC 600mg × 2 改條件性（使用者前次自試無感 + PSG 未做，待 PSG 後決定）；Ergothioneine 加入食物層（菇蕈 100-130g/天 + 安全注意）；L-Citrulline 2g → 4g；K2 MK-7 100 → 180mcg；CoQ10 / Bergamot 條件性；新增 biomarker 加測清單；全日 schedule 重構）
 **更早 -1：** 2026-04-21（新增第十節阻力訓練 protocol — 缺失拼圖；HDL 39 升至 ≥45 的主力槓桿）
 **更早 0：** 2026-04-21（新增南瓜籽仁 30g 下午點心 — 鋅/鎂/phytosterol/tryptophan；全日零食與補品盤點；72% 巧克力不建議堆疊）
 **更早 1：** 2026-04-21（新增 Psyllium husk 5g × 2/天 — 午餐前/晚餐前 30 min；LDL⭐⭐⭐、Jovanovski 2018 meta −9.69 mg/dL）
@@ -37,7 +38,7 @@
 | **魚油 ×4** | ✅ 已有 | 必留 | TG⭐⭐⭐ · 脂肪肝⭐⭐⭐ · 血壓⭐⭐⭐ |
 | **酸櫻桃膠囊** | ✅ 已有 | 必留 | 尿酸⭐⭐⭐ · 血壓⭐⭐⭐ |
 | **D3K2**（MK-7 升 180mcg） | ✅ 已有 | 🔴 必加 | 修正維生素 D 不足 · hsCRP⭐⭐⭐ · 血壓⭐⭐⭐ · **動脈僵硬度（K2 180mcg/天 Knapen 2015）** |
-| **鎂（甘胺酸鎂）** | ✅ 已有 | 🔴 必加 | 血壓⭐⭐⭐ · 睡眠 |
+| **鎂（甘胺酸鎂）** | ✅ 已有（劑量上修中）| 🔴 必加 | 血壓⭐⭐⭐ · 睡眠 · **維D 活化輔因子**；現 Doctor's Best 睡前僅 1 錠＝100mg，**上修目標 300mg**（見鎂深度評估）|
 | **益生菌** | ✅ 已有 | 🟠 建議 | LDL⭐⭐⭐ · hsCRP⭐⭐⭐ |
 | **L-Citrulline**（上調 2g → **4g**）| ✅ 已有 | 🟠 升級 | BP⭐⭐⭐（Morales-Palomo 2020: 3g × 12週 SBP −6mmHg）· 內皮功能⭐⭐ |
 | **Psyllium husk 5g × 2** | ✅ 已有 | 🟠 建議 | LDL⭐⭐⭐（Jovanovski 2018 meta −9.69 mg/dL）· 膽酸 binding · 纖維 → HbA1c⭐⭐ |
@@ -551,7 +552,7 @@ T = 90   核心體溫降至 sleep onset 閾值 → 入睡
 | **抹茶** ✅（角色下修）| RCT 有效 EGCG 200–500mg/天 | **午餐自泡無糖義式抹茶拿鐵 400ml**（伊藤園粉 2–3g + 全脂奶）| 午餐（12:00 前完成，避免咖啡因影響睡眠）| 實測 ~48–95mg EGCG/天（milk casein 再 −25%）；**低於 RCT 有效範圍**，降 LDL 主力已改為益生菌 + 洛神花 + 纖維；取消 NOW EGCG 膠囊（AST 38 上升 + EFSA 肝安全訊號）|
 | **魚油** ✅ | EPA+DHA 2–4g/天（降TG）；1–2g（心血管） | ×4 粒/天 | 晚餐後（高脂餐） | rTG 形式最佳；隨高脂餐吸收率提升 ~50%；午餐低脂不適合 |
 | **益生菌** ✅ | L. reuteri 9億 CFU/天（降LDL最佳菌株） | 1–10 億 CFU | 早餐前或睡前 | 與枸杞/牛蒡菊糖同天服用協同效果最佳 |
-| **鎂** ✅ | 300–400mg/天 | 200–400mg，從低劑量開始 | 睡前 | 選甘胺酸鎂；氧化鎂吸收差不建議 |
+| **鎂** ✅ ⬆️ | BP ~300mg/天≥3mo（Zhang 2016 spline 門檻）；血糖 360–500mg≥24wk；睡眠 250mg | **元素鎂 300mg 睡前**（Doctor's Best 每錠 100mg → 3 錠，或改粉劑零吞嚥）| 睡前 30–60 min，與 Glycine 同窗 | **確認標元素鎂**（Doctor's Best 瓶身 200mg＝2 錠份量，使用者原以為 1 錠 200mg 實為 100mg）；甘胺酸鎂 chelate 劑型正確，**勿換氧化鎂**；補充劑 >350mg 留意軟便；**鎂×維D 協同**（缺鎂時 D3 活化打折，Uwitonze 2018）；與南瓜籽 ~150mg 食物鎂累加計總量；詳見 [鎂 RCT 深度評估](diet-nutrition/2026-06-01-magnesium-rct-dose-form-deep-dive.md) |
 | **D3K2** ✅ | D3：2000–4000 IU；K2（MK-7）：100–200mcg | **D3 2000 IU + K2 180mcg** ⬆️ | 早餐後（優格＋堅果提供油脂） | 脂溶性，需搭配油脂；K2 MK-7 優於 MK-4；**升至 180mcg 為對應 LVH ECG + 動脈僵硬度（Knapen 2015 Maastricht trial × 3 年顯著改善）** |
 | **酸櫻桃** ✅ | 相當於 480ml 原汁/天 | 膠囊 1000–2000mg | 早或睡前 | 血壓效果為新確認強項 |
 | **L-Citrulline** ✅ ⬆️ | 3–6g/天（BP RCT 有效區間）；6–8g（運動）| **4g/天** ⬆️（從 2g 上調，加在早餐優格內）| 早餐（隨蛋白/脂肪同食不影響吸收）| **上調理由：** 2g 在 Alsop 2019 meta 之下緣，SBP 加成僅 ~1-2 mmHg；4g 落在 Morales-Palomo 2020 區間（3g × 12 週 → SBP −6 mmHg）；確認是 pure L-citrulline 而非 citrulline malate（malate 劑量要打 ~65% 折）；禁 PDE5 抑制劑；居家 BP <110/70 時減半 |
