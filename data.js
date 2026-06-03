@@ -17,8 +17,8 @@ window.HC_DATA = {
     lede:    { en: "Sleep, BP, lipids, uric acid — one shared metabolic root. Lifestyle stacks first; medication only after lifestyle plateaus.",
                zh: "睡眠、血壓、血脂、尿酸——共享同一個代謝根源。生活方式介入優先，等到效果平台期再考慮藥物。" },
     progressLbl: { en: "Weight progress · 70 → 65 kg", zh: "體重進度 · 70 → 65 公斤" },
-    progressMeta: { en: "Day 77 · 67.3 kg · Sat official (5/23)", zh: "第 77 天 · 67.3 公斤 · 週六正式（5/23）" },
-    startDate: { en: "Start date · Mar 17, 2026 · Last sync 6/1", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 6/1" },
+    progressMeta: { en: "Day 79 · 67.3 kg · Sat official (5/23)", zh: "第 79 天 · 67.3 公斤 · 週六正式（5/23）" },
+    startDate: { en: "Start date · Mar 17, 2026 · Last sync 6/3", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 6/3" },
     startWeight: 70,
     targetWeight: 65,
     currentWeight: 67.3,
@@ -47,13 +47,13 @@ window.HC_DATA = {
     {
       sys: "heart", name: { en: "Blood Pressure", zh: "血壓" },
       val: "115/67", unit: "mmHg",
-      delta: { en: "W22 weekly avg (4 days) · target met (<130) · last 119/70 (6/1)", zh: "W22 週均（4 天）· 已達標 (<130) · 最新 119/70 (6/1)" },
+      delta: { en: "W22 weekly avg (4 days) · target met (<130) · last 113/70 (6/3)", zh: "W22 週均（4 天）· 已達標 (<130) · 最新 113/70 (6/3)" },
       cadence: { en: "Daily · weekly avg", zh: "每日 · 週均" },
       status: "ok",
     },
     {
       sys: "sleep", name: { en: "Sleep Score", zh: "睡眠分數" },
-      val: "80", unit: "Garmin",
+      val: "79", unit: "Garmin",
       delta: { en: "5/4 · OSA flag: T90 18.4% (severe)", zh: "5/4 · OSA 紅旗：T90 18.4%（重度）" },
       cadence: { en: "Daily · Garmin", zh: "每日 · Garmin" },
       status: "warn",
@@ -929,14 +929,14 @@ window.HC_DATA = {
   tracker: {
     // [SBP, DBP] — gaps filled with prior reading
     bp: [
-      [119,76], [119,76], [113,69], [113,69], [113,69], [123,72], [113,72], [116,66], [112,70], [117,66], [117,66], [117,66], [114,67], [119,70],
+      [113,69], [113,69], [113,69], [113,69], [123,72], [113,72], [116,66], [112,70], [117,66], [117,66], [117,66], [114,67], [119,70], [113,70],
     ],
     // daily weight (kg)
-    weight: [68.7, 68.6, 68.3, 68, 67.6, 67.3, 67.3, 68, 68.2, 67.6, 67.1, 66.8, 67, 67.2],
+    weight: [68.6, 68.3, 68, 67.6, 67.3, 67.3, 68, 68.2, 67.6, 67.1, 66.8, 67, 67.2, 67.2],
     // Garmin Sleep Score
-    sleep:  [65, 64, 65, 74, 80, 49, 80, 65, 70, 75, 76, 66, 79, 80],
+    sleep:  [64, 65, 74, 80, 49, 80, 65, 70, 75, 76, 66, 79, 80, 79],
     // Body Battery waking
-    bb:     [48, 62, 54, 61, 56, 34, 59, 55, 53, 64, 59, 55, 69, 71],
+    bb:     [62, 54, 61, 56, 34, 59, 55, 53, 64, 59, 55, 69, 71, 53],
     // SpO2 nightly nadir % (last 14 days, parallel to bp/weight/sleep/bb).
     // Earlier nights null until sync_data_js.py backfills; banner only uses trailing values.
     spo2Nadir: [null, null, null, null, null, 84, 79, 87, 85, 84, 84, 86, 82, 84],
@@ -1449,8 +1449,8 @@ window.HC_DATA = {
           { en: "5 min shoulder + hip flexor stretch (chronic shoulder tension monitoring). Leg elevation against wall.",
             zh: "5 min 雙肩 + 髖屈肌伸展（針對連 3 天緊繃）。抬腿靠牆。" }],
         ["21:00", { en: "Bedtime stack (tri-axis sleep onset)", zh: "睡前 stack（三軸入睡）" }, { en: "150 mL room-temp water for glycine", zh: "150 mL 室溫水沖 Glycine" },
-          { en: "Mg glycinate 200-400mg (GABA brake) + Tart cherry 500-2000mg (melatonin axis) + Glycine pure powder 3g 🆕 (SCN core-temp drop + NMDA + brainstem) + Fish oil ×2 (second half). Mouth tape + humidifier 50-60% RH + AC ≥26°C + saline rinse (OSA bridge).",
-            zh: "鎂甘胺酸 200-400mg（GABA 煞車）+ 酸櫻桃 500-2000mg（melatonin 軸）+ Glycine 純粉 3g 🆕（SCN 核心降溫 + NMDA + 腦幹 三軸）+ 魚油 ×2（後半）。嘴封 + 加濕器 50-60% RH + 冷氣 ≥26°C + 鹽水洗鼻（OSA 橋接）。" }],
+          { en: "Mg glycinate 300mg elemental (Doctor's Best 100mg/tablet → 3 tablets, or powder) (GABA brake + BP + vit-D cofactor) + Tart cherry 500-2000mg (melatonin axis) + Glycine pure powder 3g 🆕 (SCN core-temp drop + NMDA + brainstem) + Fish oil ×2 (second half). Mouth tape + humidifier 50-60% RH + AC ≥26°C + saline rinse (OSA bridge).",
+            zh: "鎂甘胺酸 元素鎂 300mg（Doctor's Best 每錠 100mg → 3 錠，或改粉劑）（GABA 煞車 + BP + 維D 輔因子）+ 酸櫻桃 500-2000mg（melatonin 軸）+ Glycine 純粉 3g 🆕（SCN 核心降溫 + NMDA + 腦幹 三軸）+ 魚油 ×2（後半）。嘴封 + 加濕器 50-60% RH + 冷氣 ≥26°C + 鹽水洗鼻（OSA 橋接）。" }],
         ["21:05", { en: "🆕 Bed routine 12 min (AASM-grade)", zh: "🆕 床上 12 分鐘 routine（AASM 證據級）" }, "—",
           { en: "[1] Child's Pose 3 min (Balasana — subjectively validated, vagal tone↑↑) → [2] Knee-to-chest + supine spinal twist 2 min → [3] Supine hamstring + side quad stretch 2 min (targets morning thigh soreness) → [4] PMR 5 groups 2 min (toes→calves→glutes→shoulders→face, Jacobson 1929, AASM Strong recommendation) → [5] 4-7-8 breathing ×4 rounds 2 min. Source: AASM JCSM 2025 RLS/PLMD guideline; Eur J Appl Physiol 2024 stretching meta (TST +14.7%).",
             zh: "[1] 嬰兒式 Child's Pose 3 分（已主觀驗證，副交感啟動↑↑）→ [2] 單膝抱胸 + 仰臥脊柱扭轉 2 分 → [3] 仰臥膕繩肌 + 側臥股四頭 2 分（對位晨痠）→ [4] PMR 5 組 2 分（腳趾→小腿→臀→肩→臉，Jacobson 1929 法，AASM Strong recommendation）→ [5] 4-7-8 呼吸 ×4 輪 2 分。出處：AASM JCSM 2025 RLS/PLMD 指引；Eur J Appl Physiol 2024 拉筋 meta（TST +14.7%）。" }],
@@ -1492,7 +1492,7 @@ window.HC_DATA = {
           "南瓜籽（15:30）：30g 下午點心",
           "菇蕈 🆕 100-130g/天：午 30-50g + 晚 50-80g（EGT 來源；避乾香菇大量以控 UA）",
           "晚餐後（18:30 + 19:30）：魚油 ×2 + ×2 拆分（EPA+DHA ~2g）",
-          "睡前 stack（21:00）：鎂甘胺酸 400mg + 酸櫻桃 1000-2000mg + Glycine 純粉 3g 🆕（三軸入睡：SCN 核心降溫 + NMDA + 腦幹）",
+          "睡前 stack（21:00）：鎂甘胺酸 元素鎂 300mg（Doctor's Best 100mg/錠 × 3，或粉劑）+ 酸櫻桃 1000-2000mg + Glycine 純粉 3g 🆕（三軸入睡：SCN 核心降溫 + NMDA + 腦幹）",
           "⏸️ 待 PSG：NAC 600mg × 2（條件性：AHI > 15 才加）",
         ],
       },
