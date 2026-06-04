@@ -16,5 +16,6 @@
 | 2026-05-29 | [2024 AHA/ACC HCM 指引導讀](2026-05-29-aha-acc-2024-hcm-guideline-reading.md) |
 | 2026-05-29 | [2025 AHA/ACC 高血壓指引導讀](2026-05-29-aha-acc-2025-hypertension-guideline-reading.md) |
 | 2026-05-29 | [2026 ACC/AHA 血脂異常指引導讀](2026-05-29-aha-acc-2026-dyslipidemia-guideline-reading.md) |
+| 2026-06-04 | [皮下脂肪（SAT）有效減少 — 六領域 RCT 證據綜整與決策](2026-06-04-subcutaneous-fat-reduction-rct-review.md) |
 
 [← 回 articles/](../)
