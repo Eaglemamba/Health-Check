@@ -3,7 +3,7 @@
 *個人化臉部 protocol 第 5 天回顧。配對閱讀：[retinol + UVA Pro 起步 protocol](2026-05-28-retinol-uva-pro-routine.md)、[skincare RCT evidence](2026-05-26-skincare-rct-evidence.md)、[leafy greens phytochemical strategy](../diet-nutrition/2026-05-29-leafy-greens-phytochemical-strategy.md)*
 
 **建立日期**：2026-06-01
-**追蹤窗**：2026-05-27（v3 早餐定案 + retinol 啟動）→ 2026-06-01（D+5）
+**追蹤窗**：2026-05-27（v3 早餐定案 + retinol 啟動）→ 2026-06-01（D+5）→ **2026-06-03（D+7 更新，見一-B 節）**
 **核心訊號**：自覺彈性光澤回升 + 下顎兩頰痘痘退場。
 **驅動問題**：是否需要加入 Vit C 精華？哪一支 RCT 有支持？
 **Update 2026-06-01 PM**：確認 PM TXA 為 **Transino 美白乳液**（第一三共製藥，2% TXA + Vit C 衍生物 + niacinamide），含 PM routine v2.1。同時建立完整 stack gap analysis：[2026-06-01-topical-actives-rct-gap-analysis](2026-06-01-topical-actives-rct-gap-analysis.md)。
@@ -19,6 +19,36 @@
 | 屏障感 | 改善（同時加入 Cicaplast B5） | D+2 起 |
 
 **沒做客觀紀錄**：本次為主觀感受。**下次追蹤起加入「**固定光源、無妝、雙側 45 度角拍照**」作為 baseline**。
+
+---
+
+## 一-B、D+7 追蹤更新（2026-06-03，user-reported）
+
+| 區域 | 變化 | 狀態 |
+|------|------|------|
+| 下顎兩頰痘痘 | **近完全消退、無新生** | ✅ 接近清空 |
+| 痘疤 / 痘印 | **隨保養品持續淡化中** | 🟡 進行中 |
+
+### 關鍵判讀：你淡化的是「痘印」不是「真疤」
+
+「痘疤變少」這句話必須分流，否則某個時點會誤判「怎麼停了」：
+
+| 類型 | 本質 | 你現有保養品有效嗎 |
+|------|------|------------------|
+| **痘印 PIE** | 發炎後**紅色**（血管擴張） | ✅ 會退（TXA / niacinamide / 時間） |
+| **痘印 PIH** | 發炎後**褐色**（黑色素沉著） | ✅ 會退（Vit C / TXA / retinol / **防曬**） |
+| **真疤（atrophic）** | 冰鑿 / 車廂 / 滾動型**凹陷**，膠原結構缺損 | ❌ 外用幾乎無效，需 procedural |
+
+你正在用的 **retinol 0.1% + Transino（2% TXA + Vit C 衍生物 + niacinamide）** 正是**清痘印的黃金組合** → 紅 / 褐印記會繼續淡，這是預期內、會持續的（Correia 2023 review；TXA 抑 plasmin → 色素↓）。
+
+**但**：摸得到凹凸、側光下有陰影的萎縮性凹疤是膠原缺損，retinol 只能輕微改善表淺者；**真凹疤不會靠保養品填平**，需微針 / 飛梭雷射 / subcision。先設定此期待，避免把「真疤停滯」誤判成保養失效。
+
+### 自我判別（30 秒）
+- **拉伸皮膚**：印記消失 = 色素 / 血管（會退）；凹陷仍在 = 真疤
+- **側光 45° 拍照**：只有顏色差 = 痘印；有陰影 / 紋理 = 真疤
+
+### 最大變數：防曬
+痘印（尤其 PIH 褐色）淡化速度，**UV 是最大干擾因子** — 曬到使黑色素滯留 / 加深，抵消 Vit C / TXA 效果。白天若無穩定防曬，這是目前淡印的最大漏洞（你已有 UVMune 400，重點是**執行率與補擦**）。
 
 ---
 
@@ -69,10 +99,24 @@
 | 睡眠 + cortisol | 雄激素脈衝穩定 | ⭐⭐ |
 
 ### 與 HbA1c 軌跡的時間對位
-- 2024 → 2026 HbA1c 5.6 → 6.0（兩年內跨 prediabetes 線）
-- IGF-1 ↑ → 角化過度 + 皮脂 ↑ → 下顎痘
-- 現在 stack（藍莓 + 鋅 + 亞麻 + D3 + 睡眠）改善代謝體質
-- **痘痘退場 = 代謝改善的早期 visual indicator，比 HbA1c 數字提前 3-6 個月**
+
+**分子核心（insulin/IGF-1 → FoxO1/mTORC1）**：高 GI + dairy → 高胰島素血症 → 游離 IGF-1↑（胰島素壓低 IGFBP-1/3）→ PI3K/Akt 把 **FoxO1 趕出細胞核** → 三個煞車同時鬆開：androgen receptor 去抑制（皮脂↑）、SREBP-1c↑（皮脂脂質生成↑）、**mTORC1↑**（角質細胞增生 = 角化過度 = 粉刺栓塞）。痘痘因此被視為 **mTORC1 驅動的文明病**（Melnik 2015）。下顎痘 lesion count 與血清 IGF-1 / 雄激素正相關（Cappel 2005）；低 GL 飲食 RCT 同時降 lesion 與改善胰島素敏感度、切片見皮脂腺縮小 + SREBP-1/IL-8↓（Smith 2007；Kwon 2012）。乳製品（尤脫脂奶）關聯痘痘（Juhl 2018 meta）。
+
+**為何皮膚會「領先」HbA1c — 兩個時間常數的差**：
+
+| Readout | 反映 | 反應速度 |
+|---------|------|---------|
+| **HbA1c** | RBC 醣化**累積積分**（壽命 ~120 天，最近 30 天佔 ~50% 權重） | 慢、回看型；今日改善需 2-3 個月才完整顯現 |
+| **皮脂 / 角化 / 新痘生成** | 當下 insulin/IGF-1/FoxO1/mTORC1 **訊號狀態** | 快；皮脂數天-數週、既有 lesion 清退 1-4 週 |
+
+→ 訊號先改善 → 高周轉且被同路徑直接支配的皮膚先顯示 → HbA1c 慢積分後補。
+
+**⚠️ 兩個必要 caveat（避免誤用此框架）**：
+
+1. **「提前 3-6 個月」是 biomarker kinetics 的合理推估，非任何研究實測的 lead-time** → 屬**假說等級**。要成為你可信的個人指標，須用**自己的配對數據**驗證：固定光源無妝照（見第九節）對上 fasting glucose / HbA1c 軌跡。
+2. **短期（天-週）皮膚變化 ≠ 代謝指標**：D+5~D+7 的痘退主要 driver 是 **retinol 解角化 + Cicaplast 修屏障 + 鋅/D3 抗發炎**（局部藥效，獨立於代謝），時間尺度上代謝不可能在數天內主導。**只有「長期（月）新痘生成率基線下移」才是代謝體質改善的 visual proxy**。
+
+**正確框架**：2024→2026 HbA1c 5.6→6.0 是硬訊號（上游 milieu 兩年惡化）。stack 若真逆轉，預期順序為：新痘生成率↓（週-1~2 月）→ fasting glucose↓（1-2 月）→ **HbA1c 數字落後補上（≥3 月，積分特性）** → 正好對應 Month 3 健檢（2026-06-17），屆時 HbA1c 可能尚未完全反映，但皮膚與 fasting glucose 應已先動。
 
 ---
 
@@ -310,6 +354,11 @@
 10. **Curtis PJ, et al.** Blueberries improve biomarkers of cardiometabolic function in participants with metabolic syndrome — results from a 6-month, double-blind, randomized controlled trial. *Am J Clin Nutr*. 2019;109(6):1535-45. — [PubMed 31136659](https://pubmed.ncbi.nlm.nih.gov/31136659/)（150 g/d 內皮 + hsCRP RCT）
 11. **Cervantes J, et al.** The role of zinc in the treatment of acne: A review of the literature. *Dermatol Ther*. 2018;31(1):e12576. — [PubMed 28815850](https://pubmed.ncbi.nlm.nih.gov/28815850/)
 12. **Dréno B.** What is new in the pathophysiology of acne, an overview. *J Eur Acad Dermatol Venereol*. 2017;31 Suppl 5:8-12. — [PubMed 28805938](https://pubmed.ncbi.nlm.nih.gov/28805938/)（IGF-1 / 雄激素 / 下顎痘軸）
+13. **Melnik BC.** Linking diet to acne metabolomics, inflammation, and comedogenesis: an update. *Clin Cosmet Investig Dermatol*. 2015;8:371-88. — [PMC 4496685](https://pmc.ncbi.nlm.nih.gov/articles/PMC4496685/)（acne 為 mTORC1/FoxO1 驅動）
+14. **Smith RN, et al.** A low-glycemic-load diet improves symptoms in acne vulgaris patients: a randomized controlled trial. *Am J Clin Nutr*. 2007;86(1):107-15. — [PubMed 17616769](https://pubmed.ncbi.nlm.nih.gov/17616769/)（低 GL → lesion↓ + 胰島素敏感度↑）
+15. **Kwon HH, et al.** Clinical and histological effect of a low glycaemic load diet in acne vulgaris: a randomized, controlled trial. *Acta Derm Venereol*. 2012;92(3):241-6. — [PubMed 22678562](https://pubmed.ncbi.nlm.nih.gov/22678562/)（切片見皮脂腺縮小、SREBP-1/IL-8↓）
+16. **Cappel M, Mauger D, Thiboutot D.** Correlation between serum levels of IGF-1, DHEAS, and DHT and acne lesion counts in adult women. *Arch Dermatol*. 2005;141(3):333-8. — [PubMed 15781674](https://pubmed.ncbi.nlm.nih.gov/15781674/)
+17. **Juhl CR, et al.** Dairy intake and acne vulgaris: a systematic review and meta-analysis. *Nutrients*. 2018;10(8):1049. — [PMC 6115795](https://pmc.ncbi.nlm.nih.gov/articles/PMC6115795/)
 
 ---
 
