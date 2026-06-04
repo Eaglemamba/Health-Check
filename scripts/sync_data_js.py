@@ -8,7 +8,7 @@ Targets fields driven from latest readings:
   - markers[heart] (BP weekly avg, when week is closed)
   - markers[sleep] (latest daily Sleep Score)
   - markers[weight] (latest Sat official weight)
-  - tracker.bp / weight / sleep / bb (last 14 daily entries)
+  - tracker.bp / weight / sleep / bb / spo2Nadir (last 14 daily entries)
 
 Run after `daily-command.md` finishes, before commit. Idempotent.
 """
@@ -67,6 +67,17 @@ def parse_daily(path: Path) -> dict:
                 data["bp_sys"] = int(sys_v)
                 data["bp_dia"] = int(dia_v) if dia_v else None
                 break
+
+    # SpO2 nightly nadir — last column of the 7-night "最低 %" table is THIS file's own night.
+    # "—" / 空白 cell => no reading that night => None (never fabricated).
+    data["spo2_nadir"] = None
+    m = re.search(r"^\|\s*最低\s*%\s*\|(.+)$", text, re.MULTILINE)
+    if m:
+        cells = [c.strip().strip("*").strip() for c in m.group(1).split("|")]
+        cells = [c for c in cells if c]
+        if cells:
+            mm = re.search(r"\d+", cells[-1])
+            data["spo2_nadir"] = int(mm.group()) if mm else None
 
     return data
 
@@ -150,7 +161,9 @@ def last_14(daily: list[dict]) -> dict:
     weights = fwd_fill([d["weight"] for d in cut], 70.0)
     sleep = fwd_fill([d["sleep_score"] for d in cut], 70)
     bb = fwd_fill([d["body_battery"] for d in cut], 50)
-    return {"bp": bp_filled, "weight": weights, "sleep": sleep, "bb": bb}
+    # nadir is NOT forward-filled — a missing night is genuinely unknown (null), not the prior value
+    spo2 = [d.get("spo2_nadir") for d in cut]
+    return {"bp": bp_filled, "weight": weights, "sleep": sleep, "bb": bb, "spo2": spo2}
 
 
 # ---------- data.js writer ----------
@@ -195,6 +208,10 @@ def fmt_bp_array(values: list[list[int]]) -> str:
 
 def fmt_weight_array(values: list[float]) -> str:
     return ", ".join(f"{v:g}" if v == int(v) else f"{v}" for v in values)
+
+
+def fmt_spo2(values: list) -> str:
+    return ", ".join("null" if v is None else str(v) for v in values)
 
 
 def update_data_js(text: str, ctx: dict) -> str:
@@ -319,6 +336,12 @@ def update_data_js(text: str, ctx: dict) -> str:
         r"(bb:\s*\[)[^\]]*(\],)",
         f"\\g<1>{fmt_array(arrays['bb'])}\\g<2>",
         "tracker.bb",
+    )
+    text = replace_field(
+        text,
+        r"(spo2Nadir:\s*\[)[^\]]*(\],)",
+        f"\\g<1>{fmt_spo2(arrays['spo2'])}\\g<2>",
+        "tracker.spo2Nadir",
     )
 
     return text
