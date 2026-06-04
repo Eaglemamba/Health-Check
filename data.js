@@ -939,7 +939,7 @@ window.HC_DATA = {
     bb:     [54, 61, 56, 34, 59, 55, 53, 64, 59, 55, 69, 71, 53, 41],
     // SpO2 nightly nadir % (last 14 days, parallel to bp/weight/sleep/bb).
     // Earlier nights null until sync_data_js.py backfills; banner only uses trailing values.
-    spo2Nadir: [null, null, null, null, null, 84, 79, 87, 85, 84, 84, 86, 82, 84],
+    spo2Nadir: [84, 83, 83, 84, null, null, 87, 93, 94, 91, 86, 89, 87, 92],
   },
 
   // ===== Running — started 2026-04-26 =====
