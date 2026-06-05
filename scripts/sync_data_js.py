@@ -3,6 +3,8 @@
 
 Targets fields driven from latest readings:
   - hero.currentWeight / currentWeightDate
+  - hero.currentBodyFat / currentVisceralFat / currentBodyCompDate (latest daily reading)
+  - hero.currentWaist / currentWaistDate (latest WHO-midpoint waist reading)
   - hero.progressMeta (Day N · X.X kg)
   - hero.startDate (Last sync M/D)
   - markers[heart] (BP weekly avg, when week is closed)
@@ -44,6 +46,13 @@ def parse_daily(path: Path) -> dict:
 
     m = re.search(r"體脂率：([\d.]+)\s*%", text)
     data["body_fat"] = float(m.group(1)) if m else None
+
+    m = re.search(r"內臟脂肪等級：([\d.]+)", text)
+    data["visceral_fat"] = float(m.group(1)) if m else None
+
+    # Waist: WHO-midpoint only (健檢-comparable). Empty cells (—, [ ], blank) => None, never fabricated.
+    m = re.search(r"腰圍\s*\(WHO midpoint\)：\s*([\d.]+)\s*cm", text)
+    data["waist"] = float(m.group(1)) if m else None
 
     m = re.search(r"Garmin Sleep Score[：:]\*?\*?\s*(\d+)\s*/\s*100", text)
     data["sleep_score"] = int(m.group(1)) if m else None
@@ -235,6 +244,49 @@ def update_data_js(text: str, ctx: dict) -> str:
             "hero.currentWeightDate",
         )
 
+    # hero.currentBodyFat / currentVisceralFat / currentBodyCompDate — latest daily readings
+    # (body comp is recorded daily, not Saturday-only, so use most-recent non-null reading)
+    g = lambda v: f"{v:g}"  # 8.5 -> "8.5", 9.0 -> "9"
+    if ctx.get("bf_latest"):
+        bf, _ = ctx["bf_latest"]
+        text = replace_field(
+            text,
+            r"currentBodyFat:\s*[\d.]+,",
+            f"currentBodyFat: {g(bf)},",
+            "hero.currentBodyFat",
+        )
+    if ctx.get("vf_latest"):
+        vf, _ = ctx["vf_latest"]
+        text = replace_field(
+            text,
+            r"currentVisceralFat:\s*[\d.]+,",
+            f"currentVisceralFat: {g(vf)},",
+            "hero.currentVisceralFat",
+        )
+    bc_readings = [r for r in (ctx.get("bf_latest"), ctx.get("vf_latest")) if r]
+    if bc_readings:
+        bc_date = max(r[1] for r in bc_readings)
+        text = replace_field(
+            text,
+            r'currentBodyCompDate:\s*"[^"]*",',
+            f'currentBodyCompDate: "{bc_date.month}/{bc_date.day}",',
+            "hero.currentBodyCompDate",
+        )
+    if ctx.get("waist_latest"):
+        ws, ws_date = ctx["waist_latest"]
+        text = replace_field(
+            text,
+            r"currentWaist:\s*[\d.]+,",
+            f"currentWaist: {g(ws)},",
+            "hero.currentWaist",
+        )
+        text = replace_field(
+            text,
+            r'currentWaistDate:\s*"[^"]*",',
+            f'currentWaistDate: "{ws_date.month}/{ws_date.day}",',
+            "hero.currentWaistDate",
+        )
+
     # hero.progressMeta — Day N + Sat official
     if ctx.get("official"):
         w, w_date = ctx["official"]
@@ -364,6 +416,9 @@ def main() -> int:
         "daily": daily,
         "official": latest_official_weight(daily),
         "sleep_latest": latest_value(daily, "sleep_score"),
+        "bf_latest": latest_value(daily, "body_fat"),
+        "vf_latest": latest_value(daily, "visceral_fat"),
+        "waist_latest": latest_value(daily, "waist"),
         "bp_week": closed_week_bp_avg(daily, today),
         "arrays": last_14(daily),
     }
@@ -373,6 +428,12 @@ def main() -> int:
         print(f"  Sat official weight: {ctx['official'][0]} kg ({ctx['official'][1]})")
     if ctx["sleep_latest"]:
         print(f"  Sleep score latest: {ctx['sleep_latest'][0]} ({ctx['sleep_latest'][1]})")
+    if ctx["bf_latest"]:
+        print(f"  Body fat latest: {ctx['bf_latest'][0]}% ({ctx['bf_latest'][1]})")
+    if ctx["vf_latest"]:
+        print(f"  Visceral fat latest: {ctx['vf_latest'][0]} ({ctx['vf_latest'][1]})")
+    if ctx["waist_latest"]:
+        print(f"  Waist (WHO mid) latest: {ctx['waist_latest'][0]} cm ({ctx['waist_latest'][1]})")
     if ctx["bp_week"]:
         sys_v, dia_v, wk, n = ctx["bp_week"]
         print(f"  BP closed week W{wk}: {sys_v}/{dia_v} avg over {n} day(s)")

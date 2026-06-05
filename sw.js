@@ -1,4 +1,4 @@
-const VERSION = 'v23-2026-06-01-data-network-first';
+const VERSION = 'v24-2026-06-05-timeline-bf-vf-deltas';
 const CORE = './';
 const CORE_FILES = [
   './',

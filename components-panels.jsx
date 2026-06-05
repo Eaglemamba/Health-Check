@@ -900,18 +900,24 @@ function PanelRoutine({ lang }) {
 function PanelTimeline({ lang }) {
   const baseline = DD.milestoneStart;
   const currentWeight = DD.hero.currentWeight;
+  const currentBodyFat = DD.hero.currentBodyFat;       // latest daily reading (auto-synced, see data.js)
+  const currentVisceralFat = DD.hero.currentVisceralFat;
+  const currentWaist = DD.hero.currentWaist;           // WHO-midpoint waist — best VAT proxy
+  // Per-metric on-track thresholds (delta = actual − target). Weight in kg; BF in %; VAT in level.
+  const statusOf = (d, aheadMax, okMax) => d <= aheadMax ? "ahead" : d <= okMax ? "ok" : "behind";
   const startDate = new Date(baseline.fullDate + "T00:00:00");
   const today = new Date();
   const daysSince = Math.max(0, Math.floor((today - startDate) / 86400000));
   // Each month phase = 30.44 days (avg). Current month index (0=in M1 phase, 1=in M2 phase, ...).
   const monthsElapsed = daysSince / 30.44;
   const currentMonthIdx = Math.min(6, Math.floor(monthsElapsed) + 1); // which month phase we're IN
-  // Find most recent past milestone (target weight already due) for comparison
-  const lastDueMonth = DD.months.filter(m => m.num < currentMonthIdx).pop() || null;
-  const lastDueTarget = lastDueMonth ? lastDueMonth.weight : baseline.weight;
-  const lastDueDelta = +(currentWeight - lastDueTarget).toFixed(1);
-  const onTrack = lastDueDelta <= 0.3; // within +0.3 kg of target considered on track
-  const ahead = lastDueDelta <= -0.2;
+  // Compare against the CURRENT phase milestone (the target we're working toward now),
+  // not the last past one — M2 (due 5/17) is history once we're in M3 phase.
+  const phaseMonth = DD.months.find(m => m.num === currentMonthIdx) || DD.months[DD.months.length - 1];
+  const phaseTarget = phaseMonth.weight;
+  const phaseDelta = +(currentWeight - phaseTarget).toFixed(1);
+  const onTrack = phaseDelta <= 0.3; // within +0.3 kg of target considered on track
+  const ahead = phaseDelta <= -0.2;
 
   return (
     <div className="section">
@@ -937,15 +943,15 @@ function PanelTimeline({ lang }) {
             <div className="ms-sub">{DD.hero.currentWeightDate}</div>
           </div>
           <div className="ms-col">
-            <div className="ms-lbl">{lang === "en" ? `vs M${lastDueMonth ? lastDueMonth.num : 0} target` : `vs M${lastDueMonth ? lastDueMonth.num : 0} 目標`}</div>
+            <div className="ms-lbl">{lang === "en" ? `vs M${phaseMonth.num} target` : `vs M${phaseMonth.num} 目標`}</div>
             <div className={"ms-val " + (ahead ? "ms-ahead" : onTrack ? "ms-ok" : "ms-behind")}>
-              {lastDueDelta > 0 ? "+" : ""}{lastDueDelta}<span className="ms-unit">kg</span>
+              {phaseDelta > 0 ? "+" : ""}{phaseDelta}<span className="ms-unit">kg</span>
             </div>
             <div className="ms-sub">
               {lang === "en"
                 ? (ahead ? "Ahead of plan" : onTrack ? "On track" : "Behind target")
                 : (ahead ? "超前進度" : onTrack ? "達標" : "落後目標")}
-              {" · "}{lang === "en" ? "target" : "目標"} {lastDueTarget} kg
+              {" · "}{lang === "en" ? "target" : "目標"} {phaseTarget} kg
             </div>
           </div>
         </div>
@@ -962,7 +968,11 @@ function PanelTimeline({ lang }) {
             <span className="m-weight">{baseline.weight} kg</span>
           </div>
           {baseline.bodyFat != null && (
-            <div className="m-bf">{lang === "en" ? "BF" : "體脂"} {baseline.bodyFat}%</div>
+            <div className="m-bf">
+              {lang === "en" ? "BF" : "體脂"} {baseline.bodyFat}%
+              {baseline.visceralFat != null && <> · {lang === "en" ? "VF" : "內脂"} {baseline.visceralFat}</>}
+              {baseline.waist != null && <> · {lang === "en" ? "WC" : "腰"} {baseline.waist} cm</>}
+            </div>
           )}
           <div className="body-sm">{lang === "en" ? "Starting point" : "起始點"}</div>
         </div>
@@ -970,8 +980,13 @@ function PanelTimeline({ lang }) {
           const isCurrent = (currentMonthIdx === m.num);
           const isPast = currentMonthIdx > m.num;
           const isFuture = currentMonthIdx < m.num;
-          const delta = (isPast || isCurrent) ? +(currentWeight - m.weight).toFixed(1) : null;
-          const status = delta === null ? "" : (delta <= -0.2 ? "ahead" : delta <= 0.3 ? "ok" : "behind");
+          const showDelta = isPast || isCurrent;
+          const wDelta = showDelta ? +(currentWeight - m.weight).toFixed(1) : null;
+          const bfDelta = (showDelta && currentBodyFat != null && m.bodyFat != null) ? +(currentBodyFat - m.bodyFat).toFixed(1) : null;
+          const vfDelta = (showDelta && currentVisceralFat != null && m.visceralFat != null) ? +(currentVisceralFat - m.visceralFat).toFixed(1) : null;
+          const wsDelta = (showDelta && currentWaist != null && m.waist != null) ? +(currentWaist - m.waist).toFixed(1) : null;
+          const vs = lang === "en" ? "vs target" : "vs 目標";
+          const sign = v => (v > 0 ? "+" : "") + v;
           return (
             <div key={i} className={"month m-" + (isCurrent ? "current" : isPast ? "past" : "future")} data-num={"M" + m.num}>
               <div className="ttl">{Tt(m.ttl, lang)}</div>
@@ -979,12 +994,37 @@ function PanelTimeline({ lang }) {
                 <span className="m-date">{m.date}</span>
                 <span className="m-weight">{m.weight} kg</span>
               </div>
-              {m.bodyFat != null && (
-                <div className="m-bf">{lang === "en" ? "BF target" : "體脂目標"} ≤ {m.bodyFat}%</div>
+              {(m.bodyFat != null || m.visceralFat != null || m.waist != null) && (
+                <div className="m-bf">
+                  {m.bodyFat != null && <>{lang === "en" ? "BF" : "體脂"} ≤ {m.bodyFat}%</>}
+                  {m.bodyFat != null && m.visceralFat != null && " · "}
+                  {m.visceralFat != null && <>{lang === "en" ? "VF" : "內脂"} ≤ {m.visceralFat}</>}
+                  {(m.bodyFat != null || m.visceralFat != null) && m.waist != null && " · "}
+                  {m.waist != null && <>{lang === "en" ? "WC" : "腰"} ≤ {m.waist} cm</>}
+                </div>
               )}
-              {delta !== null && (
-                <div className={"m-delta m-" + status}>
-                  {delta > 0 ? "+" : ""}{delta} kg {lang === "en" ? "vs target" : "vs 目標"}
+              {showDelta && (
+                <div className="m-deltas">
+                  {wDelta !== null && (
+                    <div className={"m-delta m-" + statusOf(wDelta, -0.2, 0.3)}>
+                      {lang === "en" ? "Wt" : "體重"} {sign(wDelta)} kg {vs}
+                    </div>
+                  )}
+                  {bfDelta !== null && (
+                    <div className={"m-delta m-" + statusOf(bfDelta, -0.2, 0.5)}>
+                      {lang === "en" ? "BF" : "體脂"} {sign(bfDelta)}% {vs}
+                    </div>
+                  )}
+                  {vfDelta !== null && (
+                    <div className={"m-delta m-" + statusOf(vfDelta, -0.2, 0.5)}>
+                      {lang === "en" ? "VF" : "內脂"} {sign(vfDelta)} {vs}
+                    </div>
+                  )}
+                  {wsDelta !== null && (
+                    <div className={"m-delta m-" + statusOf(wsDelta, -0.3, 0.5)}>
+                      {lang === "en" ? "WC" : "腰"} {sign(wsDelta)} cm {vs}
+                    </div>
+                  )}
                 </div>
               )}
               <div className="body-sm">{Tt(m.body, lang)}</div>
@@ -997,8 +1037,8 @@ function PanelTimeline({ lang }) {
       <div className="callout" style={{fontSize: 12, lineHeight: 1.55}}>
         <strong>{lang === "en" ? "Weight trajectory: " : "體重路徑："}</strong>
         {lang === "en"
-          ? "Linear plan loses ~0.83 kg/month (~0.2 kg/wk) — gentle deficit. Saturday morning reading is the official weekly value."
-          : "計畫每月平均降 0.83 kg（約 0.2 kg/週）— 緩和熱量赤字。每週六晨間排尿後為正式體重讀數。"}
+          ? `Linear plan loses ~0.83 kg/month (~0.2 kg/wk) — gentle deficit. Wt delta uses Saturday-official (${DD.hero.currentWeightDate}); BF/VF use latest daily (${DD.hero.currentBodyCompDate}); waist = WHO-midpoint (${DD.hero.currentWaistDate}), the strongest VAT proxy. VF target −0.5/mo from the M1–M3 trend; waist target ≤80 cm (WHtR < 0.47).`
+          : `計畫每月平均降 0.83 kg（約 0.2 kg/週）— 緩和熱量赤字。體重 delta 用週六正式值（${DD.hero.currentWeightDate}）；體脂／內脂用最新 daily（${DD.hero.currentBodyCompDate}）；腰圍用 WHO midpoint（${DD.hero.currentWaistDate}），為最佳 VAT 代理指標。內脂目標依 M1–M3 趨勢每月 −0.5；腰圍目標推進至 ≤80 cm（WHtR < 0.47）。`}
       </div>
 
       {/* Active interventions — recent intervention start log */}
