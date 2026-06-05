@@ -18,5 +18,6 @@
 | 2026-05-29 | [2026 ACC/AHA 血脂異常指引導讀](2026-05-29-aha-acc-2026-dyslipidemia-guideline-reading.md) |
 | 2026-06-04 | [皮下脂肪（SAT）有效減少 — 六領域 RCT 證據綜整與決策](2026-06-04-subcutaneous-fat-reduction-rct-review.md) |
 | 2026-06-04 | [體組成三個月線性回歸與走勢預測（體重/體脂/內臟）](2026-06-04-body-composition-regression-tracking.md) |
+| 2026-06-05 | [內臟脂肪（VAT）減少 — RCT 證據綜整與可達性評估](2026-06-05-visceral-fat-reduction-rct-review.md) |
 
 [← 回 articles/](../)

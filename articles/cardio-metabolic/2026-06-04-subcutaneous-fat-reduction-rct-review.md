@@ -2,7 +2,7 @@
 
 **基準對象**：David，37 歲男性，170 cm／66.7 kg，體脂 18.7%，Garmin 內臟等級 9.0，腰圍（WHO）82 cm（目標 <80）。UA 8.9（戒果糖後首筆真 baseline 預計 7 月、腎臟科待轉診）、HbA1c 6.0、LDL/BP 控制中、疑似 OSA（睡眠 5–6 h）。
 **建立日期**：2026-06-04　|　**研究方法**：6 個並行 agent 抓 RCT/meta-analysis，逐項標效應量、量測方式（CT/MRI/DXA/腰圍）、GRADE，並對抗性驗證後綜整。
-**相關**：[體重停滯診斷](2026-05-08-weight-plateau-diagnosis.md)、[體重停滯 × Z2/RHR](2026-05-13-weight-stall-z2-rhr-analysis.md)、[上坡 Zone 2 健走](2026-05-22-uphill-zone2-walking-plan.md)
+**相關**：[內臟脂肪（VAT）減少 RCT 證據](2026-06-05-visceral-fat-reduction-rct-review.md)、[體重停滯診斷](2026-05-08-weight-plateau-diagnosis.md)、[體重停滯 × Z2/RHR](2026-05-13-weight-stall-z2-rhr-analysis.md)、[上坡 Zone 2 健走](2026-05-22-uphill-zone2-walking-plan.md)
 
 ---
 
