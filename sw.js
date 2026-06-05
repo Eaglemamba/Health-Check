@@ -1,4 +1,4 @@
-const VERSION = 'v24-2026-06-05-timeline-bf-vf-deltas';
+const VERSION = 'v25-2026-06-05-vat-evidence-note';
 const CORE = './';
 const CORE_FILES = [
   './',

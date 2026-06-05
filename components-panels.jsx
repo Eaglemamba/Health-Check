@@ -1041,6 +1041,14 @@ function PanelTimeline({ lang }) {
           : `計畫每月平均降 0.83 kg（約 0.2 kg/週）— 緩和熱量赤字。體重 delta 用週六正式值（${DD.hero.currentWeightDate}）；體脂／內脂用最新 daily（${DD.hero.currentBodyCompDate}）；腰圍用 WHO midpoint（${DD.hero.currentWaistDate}），為最佳 VAT 代理指標。內脂目標依 M1–M3 趨勢每月 −0.5；腰圍目標推進至 ≤80 cm（WHtR < 0.47）。`}
       </div>
 
+      <div className="spacer-12" />
+      <div className="callout" style={{fontSize: 12, lineHeight: 1.55}}>
+        <strong>{lang === "en" ? "Visceral fat — evidence: " : "內脂可達性（RCT 實證）："}</strong>
+        {lang === "en"
+          ? "Reaching VF ≤7 is supported by combined diet-deficit + training RCTs; the 'elite' 1–4 zone is an evidence gap (no RCT in lean BMI ~23 subjects) and is constrained by uric-acid safety — track waist, not the device level. See articles/cardio-metabolic/2026-06-05-visceral-fat-reduction-rct-review.md."
+          : "內脂 ≤7 有「飲食赤字＋訓練」複合 RCT 支持；「頂尖」1–4 屬證據空白（無 BMI ~23 精實族群 RCT），且受尿酸安全約束——以腰圍為主指標，勿追體脂計等級。詳見 articles/cardio-metabolic/2026-06-05-visceral-fat-reduction-rct-review.md。"}
+      </div>
+
       {/* Active interventions — recent intervention start log */}
       {DD.interventions && DD.interventions.length > 0 && (
         <>
