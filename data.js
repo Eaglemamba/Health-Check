@@ -17,17 +17,17 @@ window.HC_DATA = {
     lede:    { en: "Sleep, BP, lipids, uric acid — one shared metabolic root. Lifestyle stacks first; medication only after lifestyle plateaus.",
                zh: "睡眠、血壓、血脂、尿酸——共享同一個代謝根源。生活方式介入優先，等到效果平台期再考慮藥物。" },
     progressLbl: { en: "Weight progress · 70 → 65 kg", zh: "體重進度 · 70 → 65 公斤" },
-    progressMeta: { en: "Day 82 · 66.2 kg · Sat official (6/6)", zh: "第 82 天 · 66.2 公斤 · 週六正式（6/6）" },
-    startDate: { en: "Start date · Mar 17, 2026 · Last sync 6/6", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 6/6" },
+    progressMeta: { en: "Day 83 · 66.2 kg · Sat official (6/6)", zh: "第 83 天 · 66.2 公斤 · 週六正式（6/6）" },
+    startDate: { en: "Start date · Mar 17, 2026 · Last sync 6/7", zh: "起始日期 · 2026 年 3 月 17 日 · 最後同步 6/7" },
     startWeight: 70,
     targetWeight: 65,
     currentWeight: 66.2,
     currentWeightDate: "6/6 Sat official",
     // Body comp current actuals — latest daily reading (6/5). Manual for now:
     // sync_data_js.py does NOT yet populate these (only weight/BP/sleep). Update on daily check-in.
-    currentBodyFat: 18.6,
-    currentVisceralFat: 8.5,
-    currentBodyCompDate: "6/6",
+    currentBodyFat: 19,
+    currentVisceralFat: 9,
+    currentBodyCompDate: "6/7",
     // Waist = WHO midpoint (健檢-comparable; better VAT proxy than weight). Latest non-empty daily reading.
     currentWaist: 82,
     currentWaistDate: "6/6",
@@ -54,14 +54,14 @@ window.HC_DATA = {
   markers: [
     {
       sys: "heart", name: { en: "Blood Pressure", zh: "血壓" },
-      val: "115/67", unit: "mmHg",
-      delta: { en: "W22 weekly avg (4 days) · target met (<130) · last 123/75 (6/6)", zh: "W22 週均（4 天）· 已達標 (<130) · 最新 123/75 (6/6)" },
+      val: "118/72", unit: "mmHg",
+      delta: { en: "W23 weekly avg (6 days) · target met (<130) · last 121/75 (6/7)", zh: "W23 週均（6 天）· 已達標 (<130) · 最新 121/75 (6/7)" },
       cadence: { en: "Daily · weekly avg", zh: "每日 · 週均" },
       status: "ok",
     },
     {
       sys: "sleep", name: { en: "Sleep Score", zh: "睡眠分數" },
-      val: "75", unit: "Garmin",
+      val: "67", unit: "Garmin",
       delta: { en: "5/4 · OSA flag: T90 18.4% (severe)", zh: "5/4 · OSA 紅旗：T90 18.4%（重度）" },
       cadence: { en: "Daily · Garmin", zh: "每日 · Garmin" },
       status: "warn",
@@ -937,17 +937,17 @@ window.HC_DATA = {
   tracker: {
     // [SBP, DBP] — gaps filled with prior reading
     bp: [
-      [113,69], [123,72], [113,72], [116,66], [112,70], [117,66], [117,66], [117,66], [114,67], [119,70], [113,70], [117,69], [118,74], [123,75],
+      [123,72], [113,72], [116,66], [112,70], [117,66], [117,66], [117,66], [114,67], [119,70], [113,70], [117,69], [118,74], [123,75], [121,75],
     ],
     // daily weight (kg)
-    weight: [67.6, 67.3, 67.3, 68, 68.2, 67.6, 67.1, 66.8, 67, 67.2, 67.2, 66.7, 66.6, 66.2],
+    weight: [67.3, 67.3, 68, 68.2, 67.6, 67.1, 66.8, 67, 67.2, 67.2, 66.7, 66.6, 66.2, 67.2],
     // Garmin Sleep Score
-    sleep:  [80, 49, 80, 65, 70, 75, 76, 66, 79, 80, 79, 76, 73, 75],
+    sleep:  [49, 80, 65, 70, 75, 76, 66, 79, 80, 79, 76, 73, 75, 67],
     // Body Battery waking
-    bb:     [56, 34, 59, 55, 53, 64, 59, 55, 69, 71, 53, 41, 40, 39],
+    bb:     [34, 59, 55, 53, 64, 59, 55, 69, 71, 53, 41, 40, 39, 29],
     // SpO2 nightly nadir % (last 14 days, parallel to bp/weight/sleep/bb).
     // Earlier nights null until sync_data_js.py backfills; banner only uses trailing values.
-    spo2Nadir: [83, 84, null, null, 87, 93, 94, 91, 86, 89, 87, 92, 94, 85],
+    spo2Nadir: [84, null, null, 87, 93, 94, 91, 86, 89, 87, 92, 94, 85, null],
   },
 
   // ===== Running — started 2026-04-26 =====
