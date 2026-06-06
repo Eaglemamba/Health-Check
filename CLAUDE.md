@@ -21,7 +21,8 @@ templates/                  # 模板與指令
   daily-command.md          # 每日 check-in 流程指令
   food.md                   # 每日飲食紀錄模板
 scripts/
-  generate_dashboard.py     # 健康儀表板圖表生成腳本（matplotlib PNG）
+  generate_dashboard.py     # 健康儀表板圖表生成腳本（日線級，matplotlib PNG）
+  generate_weekly_dashboard.py # 週線級儀表板（ISO 週均聚合，疊半年計畫線；重用 generate_dashboard 解析）
   sync_data_js.py           # 從 reviews/daily/*.md 同步最新值至 data.js
   sync_garmin_daily.py      # 抓取 Garmin 昨夜睡眠 + 今晨 SpO2
   analyze_spo2_desats.py    # SpO2 全夜圖（含 hypnogram 條帶）+ 趨勢 + 7 晚 hypnogram×SpO2 疊圖
@@ -40,7 +41,8 @@ reviews/
   monthly/                  # 每月回顧（YYYY-MM.md）
   annual/                   # 年度健康評估報告（YYYY-MM-DD.md，含子資料夾歸檔）
   food/                     # 每日飲食紀錄（YYYY-MM-DD.md）
-  health_dashboard.png      # 健康趨勢儀表板圖表（自動生成）
+  health_dashboard.png      # 健康趨勢儀表板圖表（日線級，自動生成）
+  health_dashboard_weekly.png # 週線級儀表板（ISO 週均，自動生成）
 reports/
   daily-garmin/             # Garmin 每日摘要 markdown（sync_garmin_daily.py 產生）
     YYYY-MM/                # 月份歸檔（非當週）
@@ -122,7 +124,8 @@ analyzer.html               # 年度健檢數據獨立分析頁（仍為 vanilla
 
 每次 daily check-in 完成並 commit 前，依序執行：
 
-1. **`python3 scripts/generate_dashboard.py`** — 重新生成 `reviews/health_dashboard.png`（體重、體組成、血壓/心率、Sleep Score 四組趨勢圖）
+1. **`python3 scripts/generate_dashboard.py`** — 重新生成 `reviews/health_dashboard.png`（日線級：體重、體組成、血壓/心率、Sleep Score 四組趨勢圖）
+1b. **`python3 scripts/generate_weekly_dashboard.py`** — 重新生成 `reviews/health_dashboard_weekly.png`（週線級：同四組指標按 ISO 週聚合成週均，平滑日波動、疊半年計畫里程碑線）
 2. **`python3 scripts/sync_data_js.py`** — 從 `reviews/daily/*.md` 與最近收盤 ISO 週的 BP 解析最新值，寫回 `data.js` 對應欄位：
    - `hero.currentWeight` / `currentWeightDate`（最新週六正式體重）
    - `hero.progressMeta`（Day N · X.X kg）
@@ -130,7 +133,7 @@ analyzer.html               # 年度健檢數據獨立分析頁（仍為 vanilla
    - `markers[heart] / [sleep] / [weight]` 的 val + delta
    - `tracker.bp / weight / sleep / bb`（last 14 days，缺值 forward-fill）
    - **idempotent，無變化會印 `data.js: no changes`**
-3. 將 daily / weekly / `health_dashboard.png` / `data.js` 一併 commit & push
+3. 將 daily / weekly / `health_dashboard.png` / `health_dashboard_weekly.png` / `data.js` 一併 commit & push
 
 PWA 部署於 `https://eaglemamba.github.io/Health-Check/`（GitHub Pages）。**Service Worker 自 v16 起對 `data.js` 採 stale-while-revalidate**：每次開 PWA 立即顯示 cache 版，背景拉新版寫回 cache，下次開啟即見最新 daily 數值。其餘靜態資源（HTML/JSX/CSS/icons）仍 cache-first。SW 邏輯本身有變動時才需 bump `sw.js` 內 `VERSION` 字串；單純 data.js 數值更新無需 bump。
 
