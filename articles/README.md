@@ -26,7 +26,7 @@ OSA 調查、姿勢療法、設備決策、診斷敘事、肌功能訓練、累�
 尿酸日式 protocol、creatine/glycine 評估、晨間 smoothie、醋實證、7-11 營養參考、糖代謝、FDA/SSA health claims、**五色植化素光譜實證 review（2026-06-08，v2 RCT-first：定向原始 RCT 檢索 + confirm/refute 雙 panel）**。
 
 ### `cardio-metabolic/` — 心血管 / 代謝 / 訓練
-體重停滯診斷、Z2/RHR 分析、上坡 Z2 健走、HRV 心血管風險、AHA 心臟習慣、生理軸綜覽。
+體重停滯診斷、Z2/RHR 分析、上坡 Z2 健走、HRV 心血管風險、AHA 心臟習慣、生理軸綜覽、**健康槓桿排序（2026-06-08，證據分層 + provenance 標註 + 2 處自我更正）**。
 
 ### `skin-aesthetics/` — 臉部保養 / 美學
 臉部保養 RCT、痘印 vs 真疤判別、A 酸/維 C/菸鹼醯胺/防曬光老化、頭髮、體態美學。
