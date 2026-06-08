@@ -1,4 +1,4 @@
-const VERSION = 'v26-2026-06-08-reviews-png-network-first';
+const VERSION = 'v27-2026-06-08-weekly-dashboard-panel';
 const CORE = './';
 const CORE_FILES = [
   './',

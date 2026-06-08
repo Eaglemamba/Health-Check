@@ -1347,6 +1347,21 @@ function PanelDashboard({ lang }) {
 
       <div className="spacer-20" />
       <div className="card" style={{padding: 12}}>
+        <div className="h3" style={{marginBottom: 4}}>{Tt(d.weeklyTtl, lang)}</div>
+        <p className="section-sub" style={{marginTop: 0, marginBottom: 10}}>{Tt(d.weeklySub, lang)}</p>
+        <img
+          src={d.weeklySrc}
+          alt={lang === "en" ? "Weekly Health Dashboard" : "週線級健康儀表板"}
+          style={{width: "100%", height: "auto", borderRadius: "var(--radius-sm)", display: "block"}}
+          onError={(e) => { if (e.target.src !== d.weeklyFallback) e.target.src = d.weeklyFallback; }}
+        />
+        <div style={{fontSize: 11, color: "var(--ink-3)", marginTop: 8, fontFamily: "var(--font-mono)", textAlign: "right"}}>
+          {lang === "en" ? "Source: " : "來源："}<code>{d.weeklySrc}</code>
+        </div>
+      </div>
+
+      <div className="spacer-20" />
+      <div className="card" style={{padding: 12}}>
         <div className="h3" style={{marginBottom: 8}}>{lang === "en" ? "SpO2 nightly trend" : "SpO2 每晚趨勢"}</div>
         <img
           src={d.spo2Src}
