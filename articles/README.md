@@ -23,7 +23,7 @@
 OSA 調查、姿勢療法、設備決策、診斷敘事、肌功能訓練、累積傷害修復、HR coupling、Sims 姿勢、被蓋頭 rebreathing、穿戴血氧可信度、深睡 HRV、過敏性鼻炎行動計畫。
 
 ### `diet-nutrition/` — 飲食 / 補充品 / 營養
-尿酸日式 protocol、creatine/glycine 評估、晨間 smoothie、醋實證、7-11 營養參考、糖代謝、FDA/SSA health claims。
+尿酸日式 protocol、creatine/glycine 評估、晨間 smoothie、醋實證、7-11 營養參考、糖代謝、FDA/SSA health claims、**五色植化素光譜實證 review（2026-06-08，deep-research 對抗式驗證版）**。
 
 ### `cardio-metabolic/` — 心血管 / 代謝 / 訓練
 體重停滯診斷、Z2/RHR 分析、上坡 Z2 健走、HRV 心血管風險、AHA 心臟習慣、生理軸綜覽。
