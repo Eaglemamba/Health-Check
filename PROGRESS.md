@@ -1,6 +1,6 @@
 # Health-Check 進度總覽
 
-*最後更新：2026-06-08（W24 D1，新增戒糖行為里程碑 + 重訓/肌酸/CoQ10/植物固醇 + RCT-first 植化素 review）*
+*最後更新：2026-06-08（W24 D1，新增戒糖行為里程碑 + 重訓/肌酸/CoQ10/植物固醇 + RCT-first 植化素 review；補錄 user 自述 8 項 habit list 至 W24 weekly）*
 *資料範圍：2026-03-17 起，60+ daily / 10 weekly / 2 monthly / 1 annual checkup*
 
 ---
@@ -66,6 +66,8 @@
 | 最長 desat | — | — | **30 min** | >15 min |
 | <88% 連續晚數 | — | — | **14+** | 3 |
 | HRV (ms) | — | — | ~20 | <18 |
+
+**⚠️ 2026-06-08 資料品質校正（SpO2 band-fidelity）**：user 回報先前 SpO2 nadir 80-83% **部分為手錶未拉緊 artifact**；拉緊後仍降但**未 <85%**。→ 嚴重度下修，圖像移向「輕度 OSA + 鼻腔成分 ± PLMD」較樂觀表型。但手腕血氧 screening 級、對短促 desat 低估、兩方向皆不可盡信，**更強化 PSG 必要性**。**下列 SpO2 衍生分析（wedge-effect pre/post、cycle 分布、T90、heatmap）均可能受 band fidelity 干擾，解讀保留，以 6/21 PSG 為準。** 另：睡前洗鼻通暢明顯改善主觀睡眠（鼻阻力↓→arousal↓），印證機械性介入路徑；建議升級每晚固定 + 評估鼻用類固醇。自律神經修復 RCT 處方見 `articles/cardio-metabolic/2026-06-08-autonomic-recovery-rct-review.md`。
 
 **OSA 表型確認流程**：
 1. **2026-04-29** — 連 3 晚 SpO2 <88% 觸發；建立過敏性鼻炎整合行動方案
