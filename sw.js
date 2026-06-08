@@ -1,4 +1,4 @@
-const VERSION = 'v25-2026-06-05-vat-evidence-note';
+const VERSION = 'v26-2026-06-08-reviews-png-network-first';
 const CORE = './';
 const CORE_FILES = [
   './',
@@ -30,8 +30,13 @@ self.addEventListener('activate', (e) => {
 
 // data.js 採 network-first：線上先抓最新版立即顯示今天的數值，離線才退回 cache。
 // 解決 stale-while-revalidate 造成「畫面永遠慢最新一天」的問題（v22 行為）。
+// v26：reviews/ 下每日重生成的 PNG（health_dashboard / SpO2 圖）同樣 network-first，
+//   解決「健康儀表板永遠顯示前一天」的 cache-first stale 問題。
 // 其餘資源仍 cache-first（純靜態 / CDN）
-const NETWORK_FIRST_PATHS = [/\/data\.js(\?.*)?$/];
+const NETWORK_FIRST_PATHS = [
+  /\/data\.js(\?.*)?$/,
+  /\/reviews\/.*\.png(\?.*)?$/,
+];
 
 self.addEventListener('fetch', (e) => {
   const req = e.request;

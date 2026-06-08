@@ -3,7 +3,8 @@
 **基準日期：** 2026-03-25 健檢結果（前次 2025-09-17）
 **前版指南：** [archive/2025-09-17-supplement-guide.md](archive/2025-09-17-supplement-guide.md)（2025-09-17 健檢後制訂，作為原始策略保存）
 **優先指標：** LDL 154（177→154 🟠）/ TC 191（234→191 🟢）/ 尿酸 8.9（8.6→8.9 🟠 惡化）/ HbA1c 5.9%（6.0→5.9 🟡）/ hsCRP 0.142 mg/dL = 1.42 mg/L（3.02→1.42 🟡）/ **HDL 39（46→39 🟠 新問題）**
-**最後更新：** 2026-06-01（**鎂深度評估**：查證使用者產品為 Doctor's Best High Absorption（glycinate/lysinate chelate，**每錠元素鎂 100mg**，瓶身 200mg＝2 錠份量）→ 睡前 1 錠僅 100mg，低於所有 RCT 門檻。**目標上修為睡前元素鎂 300mg**（3 錠或改粉劑）以兌現 BP⭐⭐⭐（Zhang 2016 *Hypertension* spline 門檻 300mg）；新增**鎂×維D 協同**（活化維 D 酵素需鎂為輔因子，Uwitonze 2018）作為足量第三理由；證據分級見 [diet-nutrition/2026-06-01-magnesium-rct-dose-form-deep-dive.md](diet-nutrition/2026-06-01-magnesium-rct-dose-form-deep-dive.md)）
+**最後更新：** 2026-06-08（**新增 Creatine monohydrate 5g/天**（加於早餐優格飲，2026-06-07 起步）：配合 6/7 啟動的阻力訓練週期（重訓胸+背 30 分 + 斜面走）。定位為**運動表現/肌肉/HDL 槓桿輔助層**，並對你 OSA 短睡場景另有**認知防護**加分。**對 UA 8.9 安全**——肌酸代謝終產物為 creatinine 而非 uric acid，不走嘌呤路徑；保水為**細胞內肌肉水**，不增腰圍/內臟脂肪，預期體重 +0.5–1kg 屬良性 baseline 平移。詳見第三、六節新增 Creatine 條目與證據摘要）
+**更早 -0.1：** 2026-06-01（**鎂深度評估**：查證使用者產品為 Doctor's Best High Absorption（glycinate/lysinate chelate，**每錠元素鎂 100mg**，瓶身 200mg＝2 錠份量）→ 睡前 1 錠僅 100mg，低於所有 RCT 門檻。**目標上修為睡前元素鎂 300mg**（3 錠或改粉劑）以兌現 BP⭐⭐⭐（Zhang 2016 *Hypertension* spline 門檻 300mg）；新增**鎂×維D 協同**（活化維 D 酵素需鎂為輔因子，Uwitonze 2018）作為足量第三理由；證據分級見 [diet-nutrition/2026-06-01-magnesium-rct-dose-form-deep-dive.md](diet-nutrition/2026-06-01-magnesium-rct-dose-form-deep-dive.md)）
 **更早 -0.5：** 2026-05-11（第二輪優化 v2：Glycine 3g 睡前（純粉 Plan A 確認，三軸機制詳述）；NAC 600mg × 2 改條件性（使用者前次自試無感 + PSG 未做，待 PSG 後決定）；Ergothioneine 加入食物層（菇蕈 100-130g/天 + 安全注意）；L-Citrulline 2g → 4g；K2 MK-7 100 → 180mcg；CoQ10 / Bergamot 條件性；新增 biomarker 加測清單；全日 schedule 重構）
 **更早 -1：** 2026-04-21（新增第十節阻力訓練 protocol — 缺失拼圖；HDL 39 升至 ≥45 的主力槓桿）
 **更早 0：** 2026-04-21（新增南瓜籽仁 30g 下午點心 — 鋅/鎂/phytosterol/tryptophan；全日零食與補品盤點；72% 巧克力不建議堆疊）
@@ -46,17 +47,19 @@
 | **Glycine 3g 睡前** 🆕 | ➕ 新增 | 🟠 建議 | **入睡 latency⭐⭐⭐（Yamadera 2007 RCT）**· 深眠比例 ↑ · 核心降溫 · 次日疲勞 ↓ |
 | **南瓜籽仁 30g** | ✅ 已有 | 🟡 輔助（食物）| 鋅 ~8mg · 鎂 ~150mg · phytosterol · tryptophan · 植物蛋白 8g |
 | **菇蕈 100-130g/天** 🆕 | ➕ 新增 | 🟡 輔助（食物）| Ergothioneine（EGT）⭐⭐⭐ epidemiology（KIHD cohort all-cause mortality HR 0.79）· 獨家 OCTN1 轉運至高氧化壓力組織（紅血球/肝/腦/眼）；針對你 OSA 間歇性缺氧 + AST 38 + LVH 抗氧化 — **見後續安全注意** |
+| **Creatine monohydrate 5g** 🆕 | ➕ 新增 | 🟠 訓練層 | 肌力/瘦體重⭐⭐⭐（Kreider 2017 ISSN position stand）· **HDL 間接槓桿**（支撐阻力訓練量）· 睡眠剝奪下認知防護⭐⭐（McMorris 2007；對你 OSA 短睡相關）· **不升 UA**（代謝為 creatinine 非嘌呤）· 對腎正常者安全 |
 
 **核心組合（6 項）：** 魚油 + 酸櫻桃 + D3K2(180mcg) + 鎂 + 益生菌 + **Glycine 3g 睡前** 🆕
 **輔助層：** L-Citrulline 4g（BP）、Psyllium husk 10g/天（LDL 主力）
 **食物層（非膠囊）：** 南瓜籽仁 30g 下午點心 + **菇蕈 100-130g/天 🆕**（EGT）
+**訓練層：** **Creatine monohydrate 5g/天 🆕**（早餐優格飲；配合阻力訓練週期，HDL 主力槓桿的支撐項）
 **待定**（PSG 結果後決定）：NAC 600mg × 2
 
 ### 條件性新增（待檢查結果）
 
 | 補品 | 觸發條件 | 月成本 | 為什麼等 |
 |------|----------|--------|---------|
-| **CoQ10（Ubiquinol）100-200mg** | echo 確認 LVMI 偏高 / 舒張功能不全；**或**啟動 statin | ~600-1000 TWD | LVH = HF stage B；Q-SYMBIO 2014 MACE −43% |
+| **CoQ10（Ubiquinone）100-200mg** ✅ 已自行啟動 2026-06-08 | ~~echo / statin 觸發~~ → 使用者已自行開始 | ~600-1000 TWD | LVH = HF stage B；Q-SYMBIO 2014 MACE −43%；**時機：早餐**與 D3/K2 脂溶性群組同服（亞麻籽+優格 ~12g 脂肪助吸收；早上避免干擾睡眠）；**ubiquinone 氧化型吸收低於 ubiquinol，務必配脂肪**；若日後想提升生體可用率可換 ubiquinol（>40 歲效益較明顯，你 37 歲非必要）|
 | **Bergamot extract (BPF) 1000mg** | 7 月複測 LDL 仍 > 140 | ~500-800 TWD | Mollace 2011: LDL −24%；先單變量試 psyllium 3 個月，否則 7 月複測歸因不清 |
 
 ### 不建議堆疊（明確排除）
@@ -86,6 +89,7 @@
 | **Psyllium husk** ✅ 🆕 | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | — | ⭐ | ⭐⭐ | ⭐ | ⭐ | ⭐ |
 | **NAC** ✅ 🆕 | ⭐⭐ | ⭐ | — | — | ⭐ | ⭐ | ⭐⭐ | ⭐⭐⭐ | — |
 | **Glycine** ✅ 🆕 | — | — | — | — | ⭐ | ⭐ | — | — | — |
+| **Creatine** ✅ 🆕 | — | — | — | — | — | ⭐ | — | — | ⭐（瘦體重↑/水重） |
 | **枸杞茶** ✅ | ⭐ | ⭐ | ⭐⭐⭐ | — | ⭐ | ⭐⭐ | ⭐ | ⭐ | ⭐ |
 | **洛神花茶** ✅ | ⭐⭐ | ⭐⭐ | ⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐ | ⭐ | — | ⭐ |
 | 玉米鬚茶 ☐ | ⭐⭐ | ⭐⭐ | ⭐⭐ | — | ⭐⭐ | ⭐⭐ | — | — | ⭐ |
@@ -462,6 +466,49 @@ T = 90   核心體溫降至 sleep onset 閾值 → 入睡
 
 ---
 
+### Creatine monohydrate 5g/天 🆕（2026-06-08 新增，訓練層）
+
+> **定位：** 不是代謝 marker 補品，而是**阻力訓練的放大器**。你 6/7 啟動重訓（胸+背 30 分 + 斜面走），而阻力訓練是本指南第十節指定的 **HDL 39 → ≥45 的主力槓桿**。Creatine 讓每次訓練多 1-2 rep / 多一點負荷 → 長期肌肉與 HDL 訊號的複利。對你 OSA 短睡場景另有認知防護加分。
+
+**肌力 / 瘦體重（主力證據，⭐⭐⭐）**
+- **Kreider RB et al. 2017, J Int Soc Sports Nutr（ISSN position stand）** — creatine monohydrate 是運動營養中**證據最充分、最安全**的補充品；提升高強度運動表現、訓練適應、瘦體重
+- **Chilibeck PD et al. 2017, Open Access J Sports Med** — meta-analysis：阻力訓練 + creatine vs 單純阻力訓練 → 瘦體重與上肢肌力顯著增加（年長者亦然）
+- **機制：** 提升肌肉 phosphocreatine 儲備 → ATP 再生 → 高強度組間恢復 → 訓練量 ↑
+
+**認知 / 睡眠剝奪防護（⭐⭐，對你特別相關）**
+- **McMorris T et al. 2007, Psychopharmacology** — 睡眠剝奪下 creatine 補充改善認知表現與情緒
+- **Gordji-Nejad A et al. 2024, Sci Rep** — 單次高劑量 creatine 在睡眠剝奪下提升認知與腦能量代謝
+- **對你：** OSA 間歇缺氧 + 偶發短睡（如 6/7 僅 4h56m）→ creatine 為腦能量緩衝
+
+**代謝（⭐，次要）**
+- 對胰島素敏感性 / 血糖有小幅訊號（與阻力訓練協同），非主力；對 LDL/TG/BP 中性
+
+**對你三個關鍵安全問題的釐清**
+| 疑慮 | 結論 | 依據 |
+|------|------|------|
+| **會升尿酸嗎？（UA 8.9）** | **不會**。Creatine 代謝終產物為 **creatinine**，走肌酐路徑排泄，**不經嘌呤/xanthine oxidase**，不產生 uric acid | 生化路徑明確 |
+| **傷腎嗎？** | 腎功能正常者長期安全；會使**血清 creatinine 輕升**（外源性，非腎損傷）→ 抽血前告知醫師、或停 5 天再驗，避免 eGFR 誤判 | (Kreider 2017 ISSN) |
+| **體重變重 = 復胖？** | 否。+0.5–1kg 為**細胞內肌肉水**（intramuscular），不增腰圍/內臟脂肪/皮下；判讀減脂改看腰圍 + 體脂% | (Antonio J et al. 2021, JISSN myths review) |
+
+**劑量與時機**
+- **5g/天，單一維持劑量，不做 loading**（loading 20g×5天會 1 週 +1-2kg 水重且 GI 不適，你無需求快）
+- 時機**不重要**（肌肉飽和是累積效應）；你加在**早餐優格飲**即可，0 adherence cost
+- 飽和需 ~3-4 週（無 loading）；屆時水重到頂後持平
+
+**劑型與品牌**
+- **Creatine monohydrate（一水肌酸）**即可，證據最多、最便宜；**Creapure®**（德國認證純度）為品質保險
+- 不需買 HCl / 緩衝 / 螯合等「進階劑型」（無臨床優勢，僅貴）
+- 月成本：~100-150 TWD（極高 CP 值）
+
+**安全與注意**
+- 配足水（細胞保水需水）— 與你拉回 2.5L 目標一致
+- 極罕見起步期 GI 不適 → 隨餐 / 分次可解
+- 抽血驗腎功能前主動告知有補 creatine（避免 creatinine/eGFR 誤判）
+
+**依據**：**(Kreider RB et al. 2017, JISSN position stand)** + **(Chilibeck PD et al. 2017, Open Access J Sports Med)** + **(Antonio J et al. 2021, JISSN creatine myths)** + **(Gordji-Nejad A et al. 2024, Sci Rep)**
+
+---
+
 ## 四、各指標策略分析
 
 | 指標 | 最強覆蓋 | 策略評估 |
@@ -559,6 +606,7 @@ T = 90   核心體溫降至 sleep onset 閾值 → 入睡
 | **Psyllium husk** ✅ 🆕 | 7–10g/天（FDA/Jovanovski meta） | **第 1 週 5g × 1；第 2 週起 5g × 2**（午餐前 + 晚餐前 30 min）| 餐前 30 min，配 240–350ml 水 | LDL⭐⭐⭐ 主力（−9.69 mg/dL meta）；**與其他補品/未來藥物間隔 ≥ 2 hr**（吸附脂溶性）；17:00 前完成；選 whole husk 無糖無調味（Now/Yerba Prima/Organic India）；配水不足反便秘；GI 不適 1–2 週適應 |
 | **NAC** ✅ 🆕 | OSA RCT 600mg × 2/天；NAFLD 同；抗氧化 600-1200mg | **600mg × 2/天**（早 + 晚） | 早餐後 30 min + 晚餐後（與魚油同時段）| OSA⭐⭐⭐（Sadasivam 2011：AHI 27→3）+ AST/ALT 修復⭐⭐⭐ + GSH 前驅 + hsCRP；**氣喘急性期禁用**；硝酸甘油同用會加成血管擴張；空腹效果稍佳但 GI 不適可隨餐；與 psyllium 自然錯開（psyllium 餐前 / NAC 餐後）|
 | **Glycine** ✅ 🆕 | 3g 睡前（Yamadera 2007 protocol）| **3g 睡前 30-60 min** | 睡前 30-60 min，加 100ml 溫水或直接含 | 入睡 latency⭐⭐⭐（Yamadera 2007 RCT n=23：主觀 latency ↓、深眠 ↑、次日疲勞 ↓）；核心降溫 + NMDA 抑制機制，與鎂（GABA）/酸櫻桃（melatonin）互補；起步 1.5g 試 3 天無 GI 不適後加到 3g；**與 clozapine 衝突**；極安全 |
+| **Creatine monohydrate** ✅ 🆕 | 5g/天維持（ISSN 3-5g）| **5g/天**（早餐優格飲）| 早餐（時機不重要，飽和為累積效應）| 肌力/瘦體重⭐⭐⭐（Kreider 2017 ISSN）+ 阻力訓練放大器（HDL 槓桿）+ 睡眠剝奪認知防護⭐⭐；**不升 UA**（代謝為 creatinine 非嘌呤）；不做 loading（避快速水重）；選 monohydrate / Creapure®；配足水；**抽血驗腎前告知**（creatinine 外源性輕升非腎損）；+0.5-1kg 為肌肉內水非脂肪 |
 | **南瓜籽仁（食物）** ✅ 🆕 | 觀察性研究 30g/天與代謝健康正相關 | **30g（一平小把）** | 15:00–17:00 下午點心 | 鋅 8mg（prediabetes + 免疫）· 鎂 150mg（白天基線，疊加睡前鎂）· phytosterol（LDL 小幅 ↓）· tryptophan（傍晚 serotonin → melatonin 支援你 Body Battery）· 植物蛋白 8g；選生或低溫烘焙、**無鹽無調味**；與洛神花茶間隔 ≥ 1 hr（多酚抑制非血基質鐵）；與 psyllium 晚餐前劑間隔 ≥ 30 min |
 | **枸杞茶** ✅ | 乾果 10–30g/天 | 15–20g | 直接加入早餐飲品打勻（推薦）；或早餐後泡茶飲 | TG 效果為主；打成飲品可攝取完整多醣體＋纖維，優於泡茶 |
 | **洛神花茶** ✅ 🆕 | 乾燥花萼 1.5–3g / 240ml，2–3 杯/天（McKay 2010 protocol） | **2g × 2 杯/天** 起；BP 若 >135/85 可到 3 杯 | 早餐後 + 午後（皆須距鐵劑/紅肉正餐 1–2 小時；14:00 前結束） | BP⭐⭐⭐（Serban 2015 meta：SBP −7.58 mmHg）+ LDL⭐⭐（Mozaffari-Khosravi 2009）+ 尿酸⭐⭐（XO 抑制）+ HDL 訊號；**抑制非血基質鐵吸收**故與紅肉/菠菜間隔；**避免與普拿疼同服**（加速代謝）；酸性 pH~2.8 用吸管飲；居家 BP <110/70 時減量 |
@@ -588,6 +636,7 @@ T = 90   核心體溫降至 sleep onset 閾值 → 入睡
        ☐ 冷凍藍莓 150 g（莓好時果，↑ from 100 g — 進入 Curtis 2019 AJCN RCT 有效劑量）
        ☐ 大麥燕麥片 15 g 🆕 — β-glucan ~0.6-1 g（與午餐合補 LDL）
        ☐ L-Citrulline 4 g（訓練日訓練前再 +2 g，全日 6 g 進入 BP RCT 區間）
+       ☐ Creatine monohydrate 5 g 🆕（直接拌入優格飲；時機不重要，0 adherence cost）
        ☐ D3 3000 IU + K2 MK-7 180 mcg ⬆️（脂溶性，隨優格脂肪 ~6g 吸收 — 邊際但充足）
        ☐ 益生菌（直接入優格）
        ☐ 無糖杏仁奶 100 mL（首選；無 carrageenan / gellan / 磷酸鹽品牌）
