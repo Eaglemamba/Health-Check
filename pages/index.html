@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>研究文庫 · Research Library — Health Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f4f4f7; --bg-elev: #fff; --ink: #0f1115; --muted: #6b7280;
+    --line: rgba(15,17,21,.08);
+    --heart: #ff375f; --weight: #ff9f0a; --uric: #bf5af2; --sleep: #5e5ce6;
+    --font-sans: "Inter Tight", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-serif: "Instrument Serif", "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0a0a0c; --bg-elev: #16161a; --ink: #f4f4f7; --muted: #9499a3; --line: rgba(255,255,255,.1); }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-sans);
+         -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
+  .back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted);
+          text-decoration: none; font-size: 14px; font-weight: 500; margin-bottom: 24px; }
+  .back:hover { color: var(--ink); }
+  h1 { font-family: var(--font-serif); font-weight: 400; font-size: 40px; line-height: 1.1;
+       margin: 0 0 6px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); font-size: 15px; margin: 0 0 36px; }
+  .group { margin-bottom: 36px; }
+  .group-head { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .group-head h2 { font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+                   margin: 0; color: var(--muted); }
+  .group-head .count { font-size: 12px; color: var(--muted); opacity: .7; }
+  a.card { display: block; background: var(--bg-elev); border: 1px solid var(--line);
+           border-radius: 16px; padding: 16px 18px; margin-bottom: 10px; text-decoration: none;
+           color: inherit; transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease; }
+  a.card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08);
+                 border-color: var(--accent); }
+  .card .title { font-size: 16px; font-weight: 600; letter-spacing: -.01em; margin-bottom: 4px; }
+  .card .meta { font-size: 13px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+  .card .date { font-variant-numeric: tabular-nums; }
+  .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line);
+            color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">← 回 6-Month Health Reversal Plan</a>
+  <h1>研究文庫</h1>
+  <p class="sub">Research Library · 健康主題深度解析彙整（12 篇）</p>
+
+  <section class="group" style="--accent: var(--heart);">
+    <div class="group-head"><span class="dot" style="background: var(--heart);"></span>
+      <h2>血脂與心血管</h2><span class="count">6 篇</span></div>
+    <a class="card" href="2026-05-24_Labs_ApoB-Discordance-Beyond-LDL.html">
+      <div class="title">當膽固醇成為一場戰爭 — ApoB-LDL 不一致與七維度風險地圖</div>
+      <div class="meta"><span class="date">2026-05-24</span><span>Labs</span></div></a>
+    <a class="card" href="2026-05-27_apob_pcsk9_lowering_strategies.html">
+      <div class="title">ApoB 降不下來怎麼辦？PCSK9 針劑與生活策略全解</div>
+      <div class="meta"><span class="date">2026-05-27</span><span>Lipids</span></div></a>
+    <a class="card" href="2026-05-27_cholesterol_evolution_LDL_ApoB_Remnant.html">
+      <div class="title">膽固醇的進化史 — LDL → ApoB → Remnant 三次革命解讀</div>
+      <div class="meta"><span class="date">2026-05-27</span><span>Lipids</span></div></a>
+    <a class="card" href="2026-05-28_central_adiposity_coronary.html">
+      <div class="title">中央型肥胖 vs BMI：誰才是冠狀動脈硬化的真正預測者</div>
+      <div class="meta"><span class="date">2026-05-28</span><span>Cardio</span></div></a>
+    <a class="card" href="2026-05-30_cardio_young_MI_prevention.html">
+      <div class="title">壯年猝死預防解碼：軟斑塊、CAC、Lp(a) 與 ApoB</div>
+      <div class="meta"><span class="date">2026-05-30</span><span>Cardio</span></div></a>
+    <a class="card" href="2026-05-31_HDL_function_CEC_ApoA1.html">
+      <div class="title">好膽固醇的進化史：從 HDL-C 到 HDL 功能性</div>
+      <div class="meta"><span class="date">2026-05-31</span><span>Lipids</span></div></a>
+  </section>
+
+  <section class="group" style="--accent: var(--weight);">
+    <div class="group-head"><span class="dot" style="background: var(--weight);"></span>
+      <h2>體組成與營養</h2><span class="count">3 篇</span></div>
+    <a class="card" href="2026-06-03_BodyComp_Fat-Loss-Tactics_Satiety-Metabolic-Behavioral.html">
+      <div class="title">7 個減脂作弊碼 — 證據分級拆解</div>
+      <div class="meta"><span class="date">2026-06-03</span><span>BodyComp</span></div></a>
+    <a class="card" href="2026-06-08_Evidence_DanGo-Potato-Satiety-and-Heat-Recovery.html">
+      <div class="title">Dan Go 4MF 解碼：馬鈴薯飽足感 vs 訓練後熱療</div>
+      <div class="meta"><span class="date">2026-06-08</span><span>Evidence</span></div></a>
+    <a class="card" href="2026-06-09_Nutrition_Carbs-Resistance-Training-Three-Roles.html">
+      <div class="title">重訓需要多少碳水？拆解爆紅說法</div>
+      <div class="meta"><span class="date">2026-06-09</span><span>Nutrition</span></div></a>
+  </section>
+
+  <section class="group" style="--accent: var(--uric);">
+    <div class="group-head"><span class="dot" style="background: var(--uric);"></span>
+      <h2>代謝與藥物</h2><span class="count">2 篇</span></div>
+    <a class="card" href="2026-06-09_Labs_UricAcid-Bathtub-Model.html">
+      <div class="title">尿酸的水槽模型</div>
+      <div class="meta"><span class="date">2026-06-09</span><span>Labs</span></div></a>
+    <a class="card" href="2026-06-09_Hormones_GLP-1-Drug-Universe-ADA2026.html">
+      <div class="title">GLP-1 藥物宇宙 ── ADA 2026 兩條戰線解析</div>
+      <div class="meta"><span class="date">2026-06-09</span><span>Hormones</span></div></a>
+  </section>
+
+  <section class="group" style="--accent: var(--sleep);">
+    <div class="group-head"><span class="dot" style="background: var(--sleep);"></span>
+      <h2>長壽</h2><span class="count">1 篇</span></div>
+    <a class="card" href="2026-05-24_bryan_johnson_longevity_protocol.html">
+      <div class="title">Bryan Johnson 長壽方案 — 6 個原則的證據評估</div>
+      <div class="meta"><span class="date">2026-05-24</span><span>Longevity</span></div></a>
+  </section>
+
+  <div class="footer">個人研究筆記彙整 — 非醫療建議。用藥與檢查請諮詢醫師。</div>
+</div>
+</body>
+</html>

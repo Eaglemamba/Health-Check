@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-date" content="2026-05-30">
+<title>壯年猝死預防解碼：軟斑塊、CAC、Lp(a) 與 ApoB</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; color: #334155; background: #f1f5f9; }
+.container { max-width: 920px; margin: 0 auto; background: #fff; box-shadow: 0 0 40px rgba(0,0,0,0.08); }
+code, .mono { font-family: 'Source Code Pro', monospace; }
+
+/* Header */
+.header { background: linear-gradient(135deg, #064e3b, #047857, #059669); color: #fff; padding: 2.5rem 2rem; text-align: center; position: relative; }
+.header::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, #047857, #6ee7b7); }
+.header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.4; }
+.header .subtitle { font-size: 0.95rem; opacity: 0.92; font-weight: 300; }
+.tag-row { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+.dtag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; border-radius: 999px; }
+.dtag-labs { background: #fed7aa; color: #9a3412; }
+.dtag-cardio { background: #cffafe; color: #155e75; }
+.dtag-evidence { background: #fde68a; color: #92400e; }
+.source-info { font-size: 0.8rem; opacity: 0.85; margin-top: 1rem; font-family: 'Source Code Pro', monospace; }
+
+/* Executive Summary */
+.exec { background: #ecfdf5; padding: 1.75rem 2rem; border-bottom: 1px solid #a7f3d0; }
+.exec h2 { color: #064e3b; font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.rating-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding: 0.6rem 1rem; background: linear-gradient(135deg, #ecfdf5, #f0fdfa); border-radius: 8px; flex-wrap: wrap; border: 1px solid #a7f3d0; }
+.rating-score { font-weight: 700; color: #065f46; font-size: 1rem; }
+.rating-stars { color: #f59e0b; letter-spacing: 1px; }
+.evidence-tier { font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.evidence-strong { background: #d1fae5; color: #065f46; }
+.evidence-moderate { background: #dbeafe; color: #1e3a8a; }
+.evidence-limited { background: #fef3c7; color: #92400e; }
+.evidence-preliminary { background: #fed7aa; color: #9a3412; }
+.evidence-speculative { background: #fecaca; color: #7f1d1d; }
+.rating-high { font-size: 0.8rem; color: #047857; background: #d1fae5; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.rating-low { font-size: 0.8rem; color: #64748b; background: #f1f5f9; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.exec p { color: #334155; font-size: 0.95rem; }
+.exec .label { font-weight: 600; color: #047857; }
+
+/* Sections */
+.section { padding: 2rem; }
+.section h2 { color: #064e3b; font-size: 1.35rem; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid #6ee7b7; display: flex; align-items: center; gap: 0.5rem; }
+.section h3 { color: #065f46; font-size: 1.1rem; margin: 1.5rem 0 0.75rem; }
+.section p { margin-bottom: 0.9rem; }
+
+/* Objectives grid */
+.obj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.objective-item { background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 1.1rem; transition: transform 0.2s, box-shadow 0.2s; }
+.objective-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.objective-item .num { font-family: 'Source Code Pro', monospace; font-weight: 600; color: #059669; font-size: 0.85rem; }
+.objective-item .txt { margin-top: 0.4rem; font-size: 0.92rem; }
+
+/* Framework visual */
+.framework-visual { background: linear-gradient(135deg, #047857, #059669); border-radius: 1rem; padding: 1.75rem 1.5rem; color: white; margin: 1.5rem 0; }
+.framework-title { text-align: center; font-size: 1.15rem; font-weight: 700; margin-bottom: 1.5rem; }
+.framework-steps { display: flex; justify-content: center; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.framework-step { text-align: center; min-width: 110px; max-width: 140px; }
+.framework-icon { font-size: 1.6rem; width: 3.5rem; height: 3.5rem; background: rgba(255,255,255,0.2); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; }
+.framework-step .fs-label { font-weight: 600; font-size: 0.9rem; }
+.framework-step .fs-desc { font-size: 0.75rem; opacity: 0.9; margin-top: 0.2rem; }
+.framework-arrow { font-size: 1.5rem; opacity: 0.7; }
+
+/* Key numbers dashboard */
+.kn-dash { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.kn-card { background: #ecfdf5; border: 1px solid #86efac; border-radius: 10px; padding: 1.1rem; text-align: center; }
+.kn-card .kn-val { font-family: 'Source Code Pro', monospace; font-size: 1.6rem; font-weight: 600; color: #047857; }
+.kn-card .kn-label { font-size: 0.8rem; color: #475569; margin-top: 0.3rem; }
+.kn-card .kn-sub { font-size: 0.7rem; color: #94a3b8; margin-top: 0.2rem; }
+
+/* Info boxes */
+.box { border-radius: 10px; margin: 1.25rem 0; overflow: hidden; border: 1px solid; }
+.box-header { padding: 0.6rem 1rem; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+.box-body { padding: 1rem; font-size: 0.92rem; }
+.box-key { border-color: #fdba74; }
+.box-key .box-header { background: #fed7aa; color: #9a3412; }
+.box-key .box-body { background: #fff7ed; }
+.box-evidence { border-color: #6ee7b7; }
+.box-evidence .box-header { background: #a7f3d0; color: #065f46; }
+.box-evidence .box-body { background: #ecfdf5; }
+.box-individual { border-color: #fca5a5; }
+.box-individual .box-header { background: #fecaca; color: #7f1d1d; }
+.box-individual .box-body { background: #fef2f2; }
+.box-lab { border-color: #fdba74; }
+.box-lab .box-header { background: #fed7aa; color: #9a3412; }
+.box-lab .box-body { background: #fff7ed; }
+.box-safety { border-color: #fda4af; }
+.box-safety .box-header { background: #fecdd3; color: #9f1239; }
+.box-safety .box-body { background: #fff1f2; }
+.box-analogy { border-color: #f9a8d4; }
+.box-analogy .box-header { background: #fbcfe8; color: #831843; }
+.box-analogy .box-body { background: #fdf2f8; }
+
+/* Comparison table */
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.88rem; }
+th, td { padding: 0.7rem 0.8rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #064e3b; color: #fff; font-weight: 600; }
+tr:nth-child(even) td { background: #f8fafc; }
+.optimal-row td { background: #ecfdf5 !important; font-weight: 500; }
+.tier-badge { font-size: 0.72rem; font-weight: 600; padding: 0.15rem 0.45rem; border-radius: 4px; white-space: nowrap; }
+
+/* Defense cards */
+.defense { display: flex; gap: 1rem; align-items: flex-start; background: #f8fafc; border-left: 4px solid #059669; border-radius: 0 10px 10px 0; padding: 1.1rem 1.25rem; margin: 1rem 0; }
+.defense .medal { font-size: 1.8rem; flex-shrink: 0; }
+.defense h3 { margin: 0 0 0.4rem; color: #064e3b; font-size: 1.05rem; }
+.defense p { margin-bottom: 0.4rem; font-size: 0.9rem; }
+
+.section { padding: 2rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="tag-row">
+    <span class="dtag dtag-cardio">Cardio 心血管</span>
+    <span class="dtag dtag-labs">Labs 進階檢驗</span>
+    <span class="dtag dtag-evidence">Evidence 實證分級</span>
+  </div>
+  <h1>壯年猝死的真相：軟斑塊、CAC、Lp(a) 與 ApoB</h1>
+  <div class="subtitle">為什麼 40 幾歲「沒慢性病」的人會突發心肌梗塞？2026 最新指引下的高階排雷清單</div>
+  <div class="source-info">來源：曾國翔醫師（心臟內科／心血管介入）衛教貼文 · 解析日期 2026-05-30</div>
+</div>
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="exec">
+  <h2>📌 快速摘要</h2>
+  <div class="rating-bar">
+    <span class="rating-score"><span class="rating-stars">★★★★☆</span> 4.0/5</span>
+    <span class="evidence-tier evidence-moderate">證據: Moderate（核心主張有指引與病理學支持）</span>
+    <span class="rating-high">↑ 目標相關性, 可行動性</span>
+    <span class="rating-low">↓ 機制簡化, 部分價格未驗證</span>
+  </div>
+  <p>這篇貼文的核心主張站得住腳：<span class="label">年輕族群的心肌梗塞，機轉確實常與老年人不同</span>，較高比例源於「軟斑塊破裂」或「斑塊侵蝕（plaque erosion）」這類僅造成輕度狹窄的非阻塞性病灶，標準運動心電圖難以偵測。而它推薦的三項進階檢查（CAC、Lp(a)、ApoB）也正好搭上 2026 年 3 月剛發布的 ACC/AHA 多學會血脂新指引，方向正確。</p>
+  <p style="margin-top:0.6rem;">需要打點折扣的地方：把年輕猝死簡化成單一「30% 軟斑塊爆發」略嫌一刀切（年輕 MI 還包括 SCAD、血管痙攣等機制）；CAC 對 46 歲、零傳統風險因子者的適用性其實有條件（指引主要針對「中等風險」者）；部分自費價格描述未經查證。整體仍是高於平均水準、值得行動的衛教內容。</p>
+</div>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="section">
+  <h2>🎯 學習目標</h2>
+  <div class="obj-grid">
+    <div class="objective-item"><span class="num">OBJ-01</span><div class="txt">理解年輕 MI 與老年 MI 的機轉差異，以及為何「運動心電圖正常」無法保證安全</div></div>
+    <div class="objective-item"><span class="num">OBJ-02</span><div class="txt">分辨四項進階檢查（CAC / Lp(a) / ApoB / hs-CRP）各自回答什麼問題、適合誰</div></div>
+    <div class="objective-item"><span class="num">OBJ-03</span><div class="txt">用實證分級判斷哪些主張該行動、哪些該保留，並轉化為個人化追蹤計畫</div></div>
+  </div>
+</div>
+
+<!-- FRAMEWORK VISUAL -->
+<div class="section" style="padding-top:0;">
+  <div class="framework-visual">
+    <div class="framework-title">🌋 年輕猝死的「活火山」連鎖反應</div>
+    <div class="framework-steps">
+      <div class="framework-step">
+        <div class="framework-icon">🫀</div>
+        <div class="fs-label">軟斑塊潛伏</div>
+        <div class="fs-desc">僅 30-40% 狹窄<br>薄纖維帽覆蓋脂質核</div>
+      </div>
+      <div class="framework-arrow">→</div>
+      <div class="framework-step">
+        <div class="framework-icon">🔥</div>
+        <div class="fs-label">引爆點</div>
+        <div class="fs-desc">熬夜／高壓／抽菸<br>／氣溫驟降 → 發炎</div>
+      </div>
+      <div class="framework-arrow">→</div>
+      <div class="framework-step">
+        <div class="framework-icon">💥</div>
+        <div class="fs-label">破裂或侵蝕</div>
+        <div class="fs-desc">薄帽衝破<br>或內皮侵蝕</div>
+      </div>
+      <div class="framework-arrow">→</div>
+      <div class="framework-step">
+        <div class="framework-icon">🩸</div>
+        <div class="fs-label">急性血栓</div>
+        <div class="fs-desc">數分鐘內<br>100% 阻塞</div>
+      </div>
+    </div>
+  </div>
+  <div class="box box-evidence">
+    <div class="box-header">🔬 證據品質：這個機制故事可信嗎？</div>
+    <div class="box-body">病理學與血管內影像（OCT/IVUS）研究確實支持：年輕患者整體動脈硬化負擔較低，但<strong>斑塊更不穩定</strong>，常見薄纖維帽與較高的破裂或侵蝕比例。斑塊侵蝕在屍檢與 OCT 研究中約佔三分之一的冠狀動脈血栓案例，且更常見於年輕人、吸菸者與女性。<strong>需補充的細節</strong>：年輕 MI 並非全是「軟斑塊爆發」——非阻塞性心肌梗塞（MINOCA）約佔急性 MI 的 5-15%，機制還包括自發性冠狀動脈剝離（SCAD）、血管痙攣與微血管功能障礙。貼文把故事講得乾淨好記，但實際病因更異質。</div>
+  </div>
+</div>
+
+<!-- KEY NUMBERS DASHBOARD -->
+<div class="section" style="padding-top:0;">
+  <h2>📊 關鍵數字儀表板</h2>
+  <div class="kn-dash">
+    <div class="kn-card"><div class="kn-val">30-40%</div><div class="kn-label">年輕猝死者常見狹窄程度</div><div class="kn-sub">非阻塞性，壓力測試難測</div></div>
+    <div class="kn-card"><div class="kn-val">~1/3</div><div class="kn-label">冠狀血栓由斑塊侵蝕造成</div><div class="kn-sub">屍檢／OCT 研究</div></div>
+    <div class="kn-card"><div class="kn-val">1/5</div><div class="kn-label">全球人口 Lp(a) 偏高</div><div class="kn-sub">遺傳決定，篩檢率 &lt;5%</div></div>
+    <div class="kn-card"><div class="kn-val">≥50 mg/dL</div><div class="kn-label">Lp(a) 高風險門檻</div><div class="kn-sub">≈125 nmol/L</div></div>
+  </div>
+</div>
+
+<!-- FOUR DEFENSES -->
+<div class="section">
+  <h2>🛡️ 四道防線：中年男性的高階排雷清單</h2>
+  <p>這是貼文最有價值的部分。重點不在「全部都驗」，而在理解每項檢查回答什麼問題、適合什麼人。下面我按證據強度逐項拆解。</p>
+
+  <div class="defense">
+    <div class="medal">🥇</div>
+    <div>
+      <h3>第一防線：冠狀動脈鈣化指數 CAC Score</h3>
+      <p>不打顯影劑、躺幾分鐘照低劑量 CT，直接看冠狀動脈裡有沒有「長石頭」。<strong>CAC = 0 是強力的安心訊號</strong>，預示未來心血管事件率極低；CAC &gt; 0 則代表已有亞臨床動脈硬化，可重新分類風險。</p>
+      <p style="color:#9a3412;"><strong>需要修正的細節：</strong>指引（ACC/AHA、ESC/EAS）主要推薦 CAC 用在 <strong>40-75 歲、無症狀、且傳統公式算出來是「中等／臨界風險」</strong>的人身上——因為它最能把這群「灰色地帶」的人往上或往下重新分類。對 45 歲以下、低風險者，指引使用較保守。所以 46 歲的你若傳統風險偏低，CAC 仍可能有資訊價值（尤其有早發家族史時），但它不是「人人都該照」的萬靈丹。</p>
+    </div>
+  </div>
+
+  <div class="defense">
+    <div class="medal">🥈</div>
+    <div>
+      <h3>第二防線：脂蛋白a Lp(a)，一生至少驗一次</h3>
+      <p>這項主張現在<strong>完全站得住腳</strong>。2026 年 3 月 13 日剛發布的 ACC/AHA 多學會血脂新指引，明確建議<strong>所有成年人一生至少檢測一次 Lp(a)</strong>。Lp(a) 由遺傳決定、生活型態幾乎改變不了，所以驗一次通常就夠（雖有新研究對「一次是否足夠」提出質疑，但仍屬少數意見）。</p>
+      <p>Lp(a) ≥ 50 mg/dL（≈125 nmol/L）約對應 1.4 倍長期心臟病或中風風險；達 250 nmol/L 則至少 2 倍。它無法靠飲食運動降低，但若驗出偏高，臨床上會更積極控制其他可改變因子（尤其 LDL-C）。</p>
+    </div>
+  </div>
+
+  <div class="defense">
+    <div class="medal">🥉</div>
+    <div>
+      <h3>第三防線：用 ApoB 補強傳統膽固醇</h3>
+      <p>傳統 LDL-C 算的是膽固醇「總重量」，ApoB 數的是致動脈硬化顆粒的「總數量」——每一顆 LDL、VLDL、Lp(a) 都帶一個 ApoB。當三酸甘油酯偏高或顆粒偏小時，LDL-C 可能低估真實風險，此時 ApoB 更準。2026 新指引也把 ApoB 納入更明確的角色。對你而言，ApoB 是「LDL 之外再加一層確認」，不是取代基礎血脂。</p>
+    </div>
+  </div>
+
+  <div class="defense">
+    <div class="medal">🏅</div>
+    <div>
+      <h3>第四防線：hs-CRP 抓出隱形發炎之火</h3>
+      <p>高敏 C 反應蛋白反映全身性發炎程度。發炎被認為會讓軟斑塊更不穩定、更容易破裂。<strong>注意定位：</strong>hs-CRP 是「風險增強因子」，不是診斷工具；單次升高也可能來自感染或近期運動，需排除急性因素後再解讀。它補充而非取代前三項。</p>
+    </div>
+  </div>
+</div>
+
+<!-- EVIDENCE BREAKDOWN -->
+<div class="section" style="padding-top:0;">
+  <h2>🔬 證據強度分析</h2>
+  <p>把貼文的每個主張攤開來分級，方便你判斷哪些直接行動、哪些保留：</p>
+  <table>
+    <thead>
+      <tr><th>主張</th><th>證據分級</th><th>說明</th></tr>
+    </thead>
+    <tbody>
+      <tr class="optimal-row">
+        <td>成人一生至少驗一次 Lp(a)</td>
+        <td><span class="tier-badge evidence-strong">Strong</span></td>
+        <td>2026 ACC/AHA 多學會指引明文建議普遍篩檢</td>
+      </tr>
+      <tr>
+        <td>年輕 MI 機轉常為軟斑塊破裂／侵蝕、非阻塞性</td>
+        <td><span class="tier-badge evidence-moderate">Moderate</span></td>
+        <td>病理學與 OCT/IVUS 影像支持；但機制較異質（含 SCAD、痙攣）</td>
+      </tr>
+      <tr>
+        <td>CAC 可重新分類無症狀者心血管風險</td>
+        <td><span class="tier-badge evidence-strong">Strong</span></td>
+        <td>MESA 等大型世代研究；但主要適用「中等風險」者</td>
+      </tr>
+      <tr>
+        <td>ApoB 在特定情境優於 LDL-C</td>
+        <td><span class="tier-badge evidence-moderate">Moderate</span></td>
+        <td>高三酸甘油酯／顆粒不一致時更準；指引角色提升中</td>
+      </tr>
+      <tr>
+        <td>hs-CRP 反映斑塊不穩定風險</td>
+        <td><span class="tier-badge evidence-moderate">Moderate</span></td>
+        <td>風險增強因子，非診斷；須排除急性發炎</td>
+      </tr>
+      <tr>
+        <td>CAC 自費「約數千元」等具體價格</td>
+        <td><span class="tier-badge evidence-limited">Limited</span></td>
+        <td>各院所差異大，未經查證，請以實際報價為準</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- LIFESTYLE -->
+<div class="section" style="padding-top:0;">
+  <h2>🏃 日常護心：拔掉火山引信的生活鐵律</h2>
+  <p>貼文的生活建議都屬於高槓桿的基本功，且與運動健身者的目標高度重疊：</p>
+  <div class="box box-key">
+    <div class="box-header">⚠️ 四條保命基本功</div>
+    <div class="box-body">
+      <strong>睡眠是天然的降壓藥</strong>：睡眠不足會驅動交感神經與發炎，正是刺破斑塊的常見幕後推手。<br><br>
+      <strong>遠離香菸與電子菸</strong>：抽菸讓血管內皮急性發炎，是誘發年輕 MI（尤其斑塊侵蝕型）最常被點名的實體引信。<br><br>
+      <strong>重量訓練 + Zone 2 有氧</strong>：增加下肢肌肉改善胰島素阻抗，微喘有氧訓練心臟耐受度、促進微血管增生。這對你既有的阻力訓練習慣是順勢加分。<br><br>
+      <strong>血壓壓在 130/80 以下</strong>：較嚴格的血壓標準有實證支持，慢性高壓對血管壁是日積月累的傷害。
+    </div>
+  </div>
+  <div class="box box-individual">
+    <div class="box-header">👤 個人差異提醒</div>
+    <div class="box-body">這些是「人群層級」的建議。Lp(a) 高的人即使生活完美仍可能早發 MI——這正是為何要先驗一次釐清底牌；反之，CAC = 0 的低風險者不需要對每個邊際指標焦慮。先用檢查定位自己屬於哪一群，再決定積極程度。</div>
+  </div>
+</div>
+
+<!-- STRATEGIC IMPLICATIONS -->
+<div class="section" style="padding-top:0;">
+  <h2>🧭 應用啟示</h2>
+  <div class="obj-grid">
+    <div class="objective-item"><span class="num">🥗 營養應用</span><div class="txt">既有高蛋白飲食不變；若 ApoB／LDL 偏高，優先減少飽和脂肪、增加可溶性纖維與不飽和脂肪來源</div></div>
+    <div class="objective-item"><span class="num">🏋️ 訓練調整</span><div class="txt">維持阻力訓練，每週加入 2-3 次 Zone 2（微喘可對話強度）30-45 分鐘，兼顧心肺與胰島素敏感度</div></div>
+    <div class="objective-item"><span class="num">💊 補充劑決策</span><div class="txt">先驗血再決定。若三酸甘油酯偏高，omega-3 可考慮；不要在沒數據下盲目堆疊「護心」補充劑</div></div>
+    <div class="objective-item"><span class="num">📈 追蹤指標</span><div class="txt">一次性：Lp(a)。基線＋定期：ApoB、hs-CRP、血壓、HbA1c。視風險與醫師建議考慮 CAC</div></div>
+  </div>
+</div>
+
+<!-- KEY TAKEAWAYS -->
+<div class="section" style="padding-top:0;">
+  <h2>💎 學習重點總結</h2>
+  <div class="obj-grid">
+    <div class="objective-item"><span class="num">KEY-01</span><div class="txt">「運動心電圖正常」≠ 安全。它主要偵測阻塞性病灶，對僅 30-40% 狹窄的軟斑塊幾乎看不到</div></div>
+    <div class="objective-item"><span class="num">KEY-02</span><div class="txt">Lp(a) 是遺傳定的底牌，一生驗一次（已是 2026 指引建議），高就更積極控其他因子</div></div>
+    <div class="objective-item"><span class="num">KEY-03</span><div class="txt">CAC 最適合「中等風險灰色地帶」者做風險重分類；不是人人必照，但有早發家族史時價值高</div></div>
+    <div class="objective-item"><span class="num">KEY-04</span><div class="txt">基本功（睡眠、戒菸、阻力＋有氧、控血壓）才是 80% 的保護力，進階檢查是在其上做精準定位</div></div>
+  </div>
+</div>
+
+<!-- PRACTICE -->
+<div class="section" style="padding-top:0;">
+  <h2>✍️ 練習題（先想再看答案）</h2>
+  <style>
+  .question-accordion { border: 1px solid #cbd5e1; border-radius: 10px; margin-bottom: 0.9rem; overflow: hidden; }
+  .question-header { padding: 0.9rem 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; background: #f8fafc; list-style: none; font-size: 0.92rem; }
+  .question-header::-webkit-details-marker { display: none; }
+  .question-number { font-family: 'Source Code Pro', monospace; font-weight: 600; color: #059669; }
+  .question-type { font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.45rem; border-radius: 4px; }
+  .question-text { flex: 1; }
+  .question-answer { padding: 1rem 1.2rem; background: #fff; border-top: 1px solid #e2e8f0; font-size: 0.9rem; }
+  .question-answer p { margin-bottom: 0.6rem; }
+  </style>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q1</span>
+      <span class="question-type" style="background:#d1fae5;color:#065f46;">證據評估題</span>
+      <span class="question-text">朋友說「我去年運動心電圖完全正常，所以我的心臟沒問題。」這個推論的盲點在哪？</span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>參考答案：</strong></p>
+      <p>運動心電圖主要偵測「阻塞性」病灶造成的缺血——血管要塞到相當程度、運動時血流不夠用，心電圖才會變化。但年輕 MI 的常見元兇是僅造成 30-40% 狹窄的軟斑塊或斑塊侵蝕，平常血流綽綽有餘，壓力測試完全正常。</p>
+      <p>正常的運動心電圖能排除「目前明顯阻塞」，但無法排除「未來可能破裂的不穩定斑塊」。要看後者需要 CAC 或進階影像（如 CCTA），加上 Lp(a)、ApoB、hs-CRP 等風險指標。</p>
+    </div>
+  </details>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q2</span>
+      <span class="question-type" style="background:#fef3c7;color:#92400e;">決策判斷題</span>
+      <span class="question-text">46 歲、無慢性病、傳統血脂正常。在這四項進階檢查中，哪一項最該優先做，為什麼？</span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>參考答案：</strong></p>
+      <p>優先做 <strong>Lp(a)</strong>。理由有三：(1) 它是 2026 指引明確建議所有成人都該做的普遍篩檢，證據等級最高；(2) 一生只需驗一次，CP 值高；(3) 它由遺傳決定、傳統血脂正常也可能偏高，正好能解釋「為何沒三高卻仍可能早發 MI」這個核心疑問。</p>
+      <p>ApoB、hs-CRP 可在同次抽血一併驗。CAC 則視傳統風險與家族史再決定——若你傳統風險偏低且無早發家族史，它的增量價值較不確定，可與醫師討論。</p>
+    </div>
+  </details>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q3</span>
+      <span class="question-type" style="background:#e0e7ff;color:#3730a3;">機制原理題</span>
+      <span class="question-text">為什麼「發炎」與「睡眠不足」會被連到斑塊破裂這件事上？</span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>參考答案：</strong></p>
+      <p>軟斑塊的危險在於那層薄薄的纖維帽。全身性發炎會活化會分解纖維帽基質的酵素、削弱帽的結構強度，使它更易破裂；發炎也讓血液更易凝結。睡眠不足與長期高壓會驅動交感神經活性與發炎反應，等於替「衝破薄帽」這個動作加柴火。</p>
+      <p>這也是為何 hs-CRP（發炎指標）被當成風險增強因子，以及為何充足睡眠被形容成「天然降壓藥」——它們作用在斑塊穩定度這條共同路徑上。</p>
+    </div>
+  </details>
+</div>
+
+<!-- BOTTOM LINE -->
+<div class="bottom-line" style="background:linear-gradient(135deg,#ecfdf5,#f0fdfa);margin:2rem;padding:1.5rem;border-radius:12px;border-left:4px solid #059669;">
+  <div class="bottom-line-header" style="font-weight:700;color:#064e3b;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;font-size:1.1rem;">🎯 我的行動結論</div>
+  <div class="bottom-line-item" style="margin-bottom:1rem;">
+    <div class="bottom-line-label" style="font-weight:600;color:#047857;font-size:0.85rem;margin-bottom:0.25rem;">✔ 核心洞察</div>
+    <div class="bottom-line-text" style="font-size:0.95rem;line-height:1.7;color:#334155;">「沒有三高」不等於血管乾淨。我既有的阻力訓練與飲食控制已涵蓋 80% 的保護力，真正缺的是一次「看底牌」的進階檢查——尤其 Lp(a) 這張遺傳牌，是我目前完全沒有的資訊。</div>
+  </div>
+  <div class="bottom-line-item" style="margin-bottom:1rem;">
+    <div class="bottom-line-label" style="font-weight:600;color:#047857;font-size:0.85rem;margin-bottom:0.25rem;">📈 本週應用</div>
+    <div class="bottom-line-text" style="font-size:0.95rem;line-height:1.7;color:#334155;">安排一次抽血，同次驗 <strong>Lp(a)（一生一次）+ ApoB + hs-CRP</strong>，並量基線血壓（目標 &lt;130/80）。訓練上維持阻力訓練，本週起加入 2 次 Zone 2 各 30-40 分鐘。CAC 留待看完血檢與家族史後與醫師討論再決定。</div>
+  </div>
+  <div class="bottom-line-item">
+    <div class="bottom-line-label" style="font-weight:600;color:#047857;font-size:0.85rem;margin-bottom:0.25rem;">⚠ 需要驗證</div>
+    <div class="bottom-line-text" style="font-size:0.95rem;line-height:1.7;color:#334155;">貼文把年輕猝死簡化為單一「軟斑塊爆發」，實際機制更異質；CAC「人人必照」的暗示也不符指引（它最適中等風險者）。價格描述未查證，以院所實際報價為準。Lp(a) 若偏高，下一步是與醫師討論更積極的 LDL/ApoB 目標，而非自行加補充劑。</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="background:#1e293b;color:#94a3b8;padding:1.75rem 2rem;font-size:0.82rem;line-height:1.8;">
+  <p style="margin-bottom:0.5rem;"><strong style="color:#e2e8f0;">製作日期：</strong>2026-05-30</p>
+  <p style="margin-bottom:0.5rem;"><strong style="color:#e2e8f0;">免責聲明：</strong>本文件為教育性質整理，不構成醫療建議。檢驗數值需在臨床情境下解讀，單一指標異常不等於疾病，參考範圍因實驗室與族群而異。安排進階心血管篩檢或解讀結果前，請諮詢合格醫療專業人員。數值嚴重異常或出現新症狀（疲勞、體重劇變、胸悶）應儘速就醫。</p>
+  <p><strong style="color:#e2e8f0;">建議 Chat Title：</strong><span class="mono">2026-05-30 [Cardio] Young MI Prevention - CAC Lp(a) ApoB hsCRP</span></p>
+</div>
+
+</div>
+</body>
+</html>

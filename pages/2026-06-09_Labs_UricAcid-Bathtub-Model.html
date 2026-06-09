@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-date" content="2026-06-09">
+<title>尿酸的水槽模型 | 健康知識解碼</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --emerald-900:#064e3b; --emerald-800:#065f46; --emerald-700:#047857; --emerald-600:#059669; --emerald-300:#6ee7b7; --emerald-200:#a7f3d0; --emerald-50:#ecfdf5;
+  --ink:#1e293b; --slate:#334155; --slate-light:#64748b; --line:#e2e8f0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans TC',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.75;color:var(--slate);background:#f1f5f9;-webkit-font-smoothing:antialiased;}
+.doc{max-width:880px;margin:0 auto;background:#fff;box-shadow:0 4px 30px rgba(0,0,0,.08);}
+code,.mono{font-family:'Source Code Pro',monospace;}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#064e3b,#047857,#059669);color:#fff;padding:2.6rem 2rem 2.2rem;text-align:center;position:relative;overflow:hidden;}
+.header::after{content:"";position:absolute;right:-40px;bottom:-60px;width:220px;height:220px;border:14px solid rgba(255,255,255,.06);border-radius:50%;}
+.header::before{content:"";position:absolute;left:-50px;top:-50px;width:160px;height:160px;border:10px solid rgba(255,255,255,.05);border-radius:50%;}
+.header h1{font-size:1.75rem;font-weight:700;letter-spacing:.5px;margin-bottom:.5rem;position:relative;z-index:1;}
+.header .subtitle{font-size:1rem;font-weight:300;opacity:.92;max-width:620px;margin:0 auto 1.1rem;position:relative;z-index:1;}
+.tag-row{display:flex;gap:.45rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.tag{font-size:.72rem;font-weight:600;padding:.28rem .65rem;border-radius:999px;}
+.tag-labs{background:#fed7aa;color:#9a3412;} .tag-nutri{background:#bbf7d0;color:#14532d;} .tag-evidence{background:#fde68a;color:#92400e;} .tag-recovery{background:#cffafe;color:#155e75;}
+.source-line{font-size:.74rem;opacity:.78;margin-top:1rem;position:relative;z-index:1;}
+
+/* SECTION FRAME */
+.section{padding:2rem;}
+.section-title{font-size:1.25rem;font-weight:700;color:var(--emerald-900);margin-bottom:1.1rem;display:flex;align-items:center;gap:.6rem;}
+.section-title::before{content:"";width:5px;height:1.4rem;background:linear-gradient(180deg,#047857,#6ee7b7);border-radius:3px;}
+
+/* EXECUTIVE SUMMARY */
+.exec{background:var(--emerald-50);border:1px solid var(--emerald-200);border-radius:14px;padding:1.4rem 1.5rem;}
+.exec h2{color:var(--emerald-900);font-size:1.05rem;margin-bottom:.8rem;}
+.exec p{color:var(--slate);font-size:.96rem;margin-bottom:.7rem;}
+.exec strong{color:var(--emerald-800);}
+.rating-bar{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;padding:.6rem 1rem;background:linear-gradient(135deg,#ecfdf5,#f0fdfa);border-radius:8px;flex-wrap:wrap;border:1px solid #a7f3d0;}
+.rating-score{font-weight:700;color:#065f46;font-size:1rem;}
+.rating-stars{color:#f59e0b;letter-spacing:1px;}
+.evidence-tier{font-size:.8rem;font-weight:600;padding:.2rem .5rem;border-radius:4px;}
+.evidence-moderate{background:#dbeafe;color:#1e3a8a;}
+.rating-high{font-size:.8rem;color:#047857;background:#d1fae5;padding:.2rem .5rem;border-radius:4px;}
+.rating-low{font-size:.8rem;color:#64748b;background:#f1f5f9;padding:.2rem .5rem;border-radius:4px;}
+
+/* LEARNING OBJECTIVES */
+.obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.objective-item{background:#f8fafc;border:1px solid var(--line);border-left:4px solid var(--emerald-600);border-radius:10px;padding:1rem 1.1rem;transition:transform .2s,box-shadow .2s;}
+.objective-item:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08);}
+.objective-item .num{font-family:'Source Code Pro',monospace;font-size:.78rem;color:var(--emerald-700);font-weight:600;}
+.objective-item h4{color:var(--ink);font-size:.96rem;margin:.25rem 0 .3rem;}
+.objective-item p{font-size:.84rem;color:var(--slate-light);}
+
+/* FRAMEWORK VISUAL — THE BATHTUB */
+.framework-visual{background:linear-gradient(135deg,#047857,#059669);border-radius:1rem;padding:1.6rem 1.4rem;color:#fff;margin:0;}
+.framework-title{text-align:center;font-size:1.1rem;font-weight:700;margin-bottom:1.3rem;}
+.tub-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.tub-faucet{background:rgba(255,255,255,.14);border-radius:10px;padding:.6rem .7rem;text-align:center;min-width:120px;flex:1;max-width:175px;}
+.tub-faucet .ic{font-size:1.4rem;}
+.tub-faucet .lb{font-size:.78rem;font-weight:600;margin-top:.2rem;}
+.tub-faucet .ds{font-size:.68rem;opacity:.85;line-height:1.4;}
+.tub-arrows{text-align:center;font-size:1.1rem;letter-spacing:1.5rem;opacity:.6;margin:.2rem 0 .1rem;padding-left:1.5rem;}
+.tub-tank{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.4);border-radius:8px;padding:1rem;text-align:center;max-width:430px;margin:.5rem auto;position:relative;}
+.tub-water{background:linear-gradient(180deg,rgba(110,231,183,.35),rgba(110,231,183,.6));border-radius:5px;padding:.7rem;}
+.tub-line{border-top:2px dashed #fde68a;color:#fde68a;font-size:.74rem;font-weight:600;padding-top:.25rem;margin-top:.5rem;}
+.tub-tank .lb{font-weight:700;font-size:.95rem;}
+.tub-drains{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:.7rem;}
+.tub-drain{background:rgba(0,0,0,.18);border-radius:10px;padding:.55rem .7rem;text-align:center;min-width:130px;}
+.tub-drain .lb{font-size:.78rem;font-weight:600;}
+.tub-drain .ds{font-size:.68rem;opacity:.85;}
+.tub-caption{text-align:center;font-size:.8rem;opacity:.9;margin-top:1.1rem;font-weight:300;line-height:1.6;}
+
+/* KEY NUMBERS DASHBOARD */
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.9rem;}
+.dash-card{background:var(--emerald-50);border:1px solid var(--emerald-200);border-radius:12px;padding:1.1rem;text-align:center;transition:transform .2s,box-shadow .2s;}
+.dash-card:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,.08);}
+.dash-num{font-family:'Source Code Pro',monospace;font-size:1.7rem;font-weight:600;color:var(--emerald-700);}
+.dash-unit{font-size:.95rem;color:var(--emerald-600);}
+.dash-label{font-size:.78rem;color:var(--slate-light);margin-top:.35rem;line-height:1.4;}
+
+/* TABS */
+.tab-container{margin-top:.4rem;}
+.tab-nav{display:flex;gap:.4rem;flex-wrap:wrap;border-bottom:2px solid var(--line);margin-bottom:1.3rem;}
+.tab-btn{background:none;border:none;font-family:inherit;font-size:.92rem;font-weight:600;color:var(--slate-light);padding:.6rem .9rem;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:color .2s,border-color .2s;}
+.tab-btn:hover{color:var(--emerald-700);}
+.tab-btn.active{color:var(--emerald-800);border-bottom-color:var(--emerald-600);}
+.tab-content{display:none;animation:fade .35s ease;}
+.tab-content.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.tab-content h3{font-size:1.08rem;color:var(--emerald-900);margin:1.4rem 0 .6rem;}
+.tab-content h3:first-child{margin-top:0;}
+.tab-content p{font-size:.94rem;margin-bottom:.8rem;}
+.tab-content ul{margin:0 0 .9rem 1.2rem;}
+.tab-content li{font-size:.92rem;margin-bottom:.4rem;}
+.eqn{font-family:'Source Code Pro',monospace;background:#f1f5f9;border-radius:6px;padding:.5rem .7rem;font-size:.85rem;color:var(--ink);display:inline-block;margin:.2rem 0;}
+
+/* INFO BOXES */
+.box{border-radius:10px;overflow:hidden;margin:1rem 0;border:1px solid;}
+.box-head{font-weight:700;font-size:.88rem;padding:.5rem .85rem;display:flex;align-items:center;gap:.4rem;}
+.box-body{padding:.8rem .9rem;font-size:.9rem;}
+.box-body p{margin-bottom:.5rem;} .box-body p:last-child{margin-bottom:0;}
+.box-term{border-color:#86efac;} .box-term .box-head{background:#bbf7d0;color:#14532d;} .box-term .box-body{background:#f0fdf4;}
+.box-analogy{border-color:#f9a8d4;} .box-analogy .box-head{background:#fbcfe8;color:#831843;} .box-analogy .box-body{background:#fdf2f8;}
+.box-key{border-color:#fdba74;} .box-key .box-head{background:#fed7aa;color:#9a3412;} .box-key .box-body{background:#fff7ed;}
+.box-evidence{border-color:#6ee7b7;} .box-evidence .box-head{background:#a7f3d0;color:#065f46;} .box-evidence .box-body{background:#ecfdf5;}
+.box-individual{border-color:#fca5a5;} .box-individual .box-head{background:#fecaca;color:#7f1d1d;} .box-individual .box-body{background:#fef2f2;}
+.box-lab{border-color:#fdba74;} .box-lab .box-head{background:#fed7aa;color:#9a3412;} .box-lab .box-body{background:#fff7ed;}
+.box-safety{border-color:#fda4af;} .box-safety .box-head{background:#fecdd3;color:#9f1239;} .box-safety .box-body{background:#fff1f2;}
+.box-study{border-color:#94a3b8;} .box-study .box-head{background:#cbd5e1;color:#1e293b;} .box-study .box-body{background:#f8fafc;}
+.box-nutrition{border-color:#86efac;} .box-nutrition .box-head{background:#bbf7d0;color:#14532d;} .box-nutrition .box-body{background:#f0fdf4;}
+
+.claude-note{border-color:#c4b5fd;background:#f5f3ff;border:1px dashed #c4b5fd;border-radius:10px;padding:.8rem .9rem;margin:1rem 0;font-size:.86rem;color:#4c1d95;}
+.claude-note .nh{font-weight:700;font-size:.8rem;letter-spacing:.5px;display:block;margin-bottom:.3rem;}
+
+.positive{color:#16a34a;font-weight:600;} .negative{color:#dc2626;font-weight:600;} .neutral{color:#1e3a8a;font-weight:600;}
+
+/* PATIENT TYPE CARDS */
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin:1rem 0;}
+.type-card{border-radius:12px;padding:1.1rem;border:1px solid var(--line);background:#fff;}
+.type-card .tt{font-weight:700;font-size:.98rem;margin-bottom:.4rem;}
+.type-card .td{font-size:.85rem;color:var(--slate);}
+.t-over{border-top:4px solid #dc2626;} .t-over .tt{color:#b91c1c;}
+.t-under{border-top:4px solid #d97706;} .t-under .tt{color:#b45309;}
+.t-energy{border-top:4px solid #2563eb;} .t-energy .tt{color:#1d4ed8;}
+
+/* COMPARISON */
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;}
+.vs-card{border-radius:12px;padding:1rem 1.1rem;font-size:.86rem;}
+.vs-a{background:#fef2f2;border:1px solid #fca5a5;}
+.vs-b{background:#eff6ff;border:1px solid #93c5fd;}
+.vs-card .vh{font-weight:700;margin-bottom:.5rem;font-size:.95rem;}
+.vs-a .vh{color:#b91c1c;} .vs-b .vh{color:#1d4ed8;}
+
+@media(max-width:560px){.vs-grid{grid-template-columns:1fr;}}
+
+/* ---- latter sections: tables, cards, accordion ---- */
+.dose-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.88rem;border-radius:10px;overflow:hidden;border:1px solid #d8b4fe;}
+.dose-table th{background:#f5f3ff;color:#4c1d95;text-align:left;padding:.6rem .8rem;font-size:.82rem;}
+.dose-table td{padding:.55rem .8rem;border-top:1px solid #ede9fe;}
+.dose-table tr:nth-child(even) td{background:#faf5ff;}
+.dose-table .optimal-row td{background:#ede9fe;font-weight:600;}
+.ev-table{width:100%;border-collapse:collapse;margin:.6rem 0;font-size:.86rem;}
+.ev-table th{background:#ecfdf5;color:#065f46;text-align:left;padding:.55rem .7rem;font-size:.8rem;border-bottom:2px solid #a7f3d0;}
+.ev-table td{padding:.55rem .7rem;border-bottom:1px solid #e2e8f0;vertical-align:top;}
+.et{font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:4px;white-space:nowrap;}
+.et-strong{background:#d1fae5;color:#065f46;} .et-moderate{background:#dbeafe;color:#1e3a8a;} .et-limited{background:#fef3c7;color:#92400e;} .et-prelim{background:#fed7aa;color:#9a3412;} .et-spec{background:#fecaca;color:#7f1d1d;}
+.impl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;}
+.impl-card{border-radius:12px;padding:1.1rem;border:1px solid var(--line);background:#fff;transition:transform .2s,box-shadow .2s;}
+.impl-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.1);}
+.impl-card .ih{font-weight:700;font-size:.95rem;margin-bottom:.45rem;display:flex;align-items:center;gap:.4rem;}
+.impl-card p{font-size:.85rem;color:var(--slate);}
+.impl-1{border-top:4px solid #16a34a;} .impl-1 .ih{color:#15803d;}
+.impl-2{border-top:4px solid #2563eb;} .impl-2 .ih{color:#1d4ed8;}
+.impl-3{border-top:4px solid #7c3aed;} .impl-3 .ih{color:#6d28d9;}
+.impl-4{border-top:4px solid #d97706;} .impl-4 .ih{color:#b45309;}
+.take-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;}
+.take-card{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:1.1rem;transition:transform .2s,box-shadow .2s;}
+.take-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.take-card .tn{font-family:'Source Code Pro',monospace;font-size:.78rem;color:var(--emerald-700);font-weight:600;}
+.take-card p{font-size:.9rem;margin-top:.3rem;color:var(--slate);}
+.question-accordion{border:1px solid var(--line);border-radius:10px;margin-bottom:.7rem;overflow:hidden;background:#fff;}
+.question-header{list-style:none;cursor:pointer;padding:.85rem 1rem;display:flex;align-items:center;gap:.6rem;font-weight:500;font-size:.9rem;color:var(--ink);}
+.question-header::-webkit-details-marker{display:none;}
+.question-number{font-family:'Source Code Pro',monospace;font-weight:700;color:var(--emerald-700);}
+.question-type{font-size:.7rem;font-weight:600;padding:.15rem .5rem;border-radius:4px;}
+.question-text{flex:1;}
+.accordion-icon{transition:transform .2s;color:var(--slate-light);}
+.question-accordion[open] .accordion-icon{transform:rotate(45deg);}
+.accordion-icon::before{content:"+";font-size:1.2rem;line-height:1;}
+.question-answer{padding:0 1rem 1rem;font-size:.88rem;color:var(--slate);}
+.question-answer p{margin-bottom:.5rem;}
+.bottom-line{background:linear-gradient(135deg,#ecfdf5,#f0fdfa);margin:0 2rem 2rem;padding:1.5rem;border-radius:12px;border-left:4px solid #059669;}
+.bottom-line-header{font-weight:700;color:#064e3b;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;font-size:1.1rem;}
+.bottom-line-item{margin-bottom:1rem;}
+.bottom-line-item:last-child{margin-bottom:0;}
+.bottom-line-label{font-weight:600;color:#047857;font-size:.85rem;margin-bottom:.25rem;}
+.bottom-line-text{font-size:.94rem;line-height:1.7;color:var(--slate);}
+.footer{background:#1e293b;color:#94a3b8;padding:1.8rem 2rem;font-size:.8rem;line-height:1.7;}
+.footer .ft-title{color:#e2e8f0;font-weight:600;margin-bottom:.5rem;}
+.footer .chat-title{font-family:'Source Code Pro',monospace;background:#0f172a;color:#6ee7b7;padding:.3rem .6rem;border-radius:5px;display:inline-block;margin-top:.4rem;font-size:.78rem;}
+.footer .disclaimer{font-size:.76rem;color:#64748b;margin-top:.8rem;border-top:1px solid #334155;padding-top:.8rem;}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <h1>尿酸的水槽模型</h1>
+  <p class="subtitle">為什麼治療痛風的重點不是「少吃普林」——一個把零散知識串成一致框架的代謝視角</p>
+  <div class="tag-row">
+    <span class="tag tag-labs">Labs · 代謝指標</span>
+    <span class="tag tag-nutri">Nutrition</span>
+    <span class="tag tag-evidence">Evidence</span>
+    <span class="tag tag-recovery">穩定 vs 波動</span>
+  </div>
+  <div class="source-line">來源：醫師衛教整理文（水槽模型 / the bathtub model）｜知識解碼文件</div>
+</header>
+
+<!-- ===== EXECUTIVE SUMMARY ===== -->
+<section class="section">
+  <div class="exec">
+    <div class="rating-bar">
+      <span class="rating-score"><span class="rating-stars">★★★★☆</span> 4.0/5</span>
+      <span class="evidence-tier evidence-moderate">證據：Moderate（方向強、部分數字偏鬆）</span>
+      <span class="rating-high">↑ 可持續性、個人適配度</span>
+      <span class="rating-low">↓ 目標相關性（非體組成核心）</span>
+    </div>
+    <h2>快速摘要</h2>
+    <p>這篇文章把痛風從「普林中毒」重新框架成一個<strong>代謝 × 物理 × 免疫</strong>的三層疾病，並用「水槽」比喻把它說清楚：尿酸是水、結晶是水垢、痛風是把水垢誤判成火災的免疫消防隊。</p>
+    <p>核心論點有三個，而且都站得住腳：<strong>（1）</strong> 對多數現代人，尿酸高不是「水龍頭開太大（吃太多普林）」，而是「排水孔變小了（腎/腸排泄不足，常源於胰島素阻抗與基因）」；<strong>（2）</strong> 痛風發作往往不是因為尿酸絕對值高，而是因為<strong>結晶環境劇烈波動</strong>（降尿酸初期、脫水、半夜、暴食/斷食切換）；<strong>（3）</strong> 論效果量，<span class="negative">藥物 &gt; 減重 &gt; 戒含糖飲料/酒 &gt; 飲食型態 &gt; 傳統低普林飲食</span>。</p>
+    <p>我獨立查核了文中最容易出錯的幾個數字（飲水復發、夜間發作、ACR 指南、DASH 效果），大致都成立，少數有需要微調的地方——已在內文以紫色註記標出。對你（精瘦、訓練量大、可能斷食）這篇最有價值的，反而不是「怕痛風」，而是理解<strong>「能量壓力型」暫時性高尿酸</strong>這個容易被誤判的型態。</p>
+  </div>
+</section>
+
+<!-- ===== LEARNING OBJECTIVES ===== -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">學習目標</h2>
+  <div class="obj-grid">
+    <div class="objective-item"><span class="num">OBJ-01</span><h4>看懂水槽模型</h4><p>用進水（4 個水龍頭）與排水（腎 2/3、腸 1/3）的框架，判斷一個人的高尿酸是「生成多」還是「排不掉」。</p></div>
+    <div class="objective-item"><span class="num">OBJ-02</span><h4>分辨三種高尿酸型</h4><p>產生過多型、排泄不足型、能量壓力型——尤其學會辨認精瘦運動者的「假性高尿酸」。</p></div>
+    <div class="objective-item"><span class="num">OBJ-03</span><h4>理解「波動」才是元凶</h4><p>為什麼降尿酸初期會發作、半夜最痛、脫水誘發——全部指向結晶穩定性被打破，而非單看數值。</p></div>
+    <div class="objective-item"><span class="num">OBJ-04</span><h4>用效果量排序介入</h4><p>不再問「有沒有效」，而是問「降多少」，把飲食、減重、藥物放進同一把尺。</p></div>
+  </div>
+</section>
+
+<!-- ===== FRAMEWORK VISUAL: THE BATHTUB ===== -->
+<section class="section" style="padding-top:0;">
+  <div class="framework-visual">
+    <div class="framework-title">🛁 水槽模型：進水 vs 排水</div>
+    <div class="tub-row">
+      <div class="tub-faucet"><div class="ic">🔄</div><div class="lb">細胞汰換</div><div class="ds">DNA/RNA 普林分解</div></div>
+      <div class="tub-faucet"><div class="ic">⚡</div><div class="lb">ATP 消耗</div><div class="ds">空腹·運動·缺氧·發炎</div></div>
+      <div class="tub-faucet"><div class="ic">🍽️</div><div class="lb">飲食普林</div><div class="ds">僅占 20–40%</div></div>
+      <div class="tub-faucet"><div class="ic">🏭</div><div class="lb">肝臟合成</div><div class="ds">de novo 普林合成</div></div>
+    </div>
+    <div class="tub-arrows">↓↓↓↓</div>
+    <div class="tub-tank">
+      <div class="tub-water">
+        <div class="lb">血中尿酸（水位）</div>
+        <div class="tub-line">— 飽和線 6.8 mg/dL：超過開始析出結晶 —</div>
+      </div>
+    </div>
+    <div class="tub-arrows" style="letter-spacing:6rem;padding-left:6rem;">↓ ↓</div>
+    <div class="tub-drains">
+      <div class="tub-drain"><div class="lb">🫘 腎臟排水孔</div><div class="ds">約 2/3｜URAT1 / GLUT9</div></div>
+      <div class="tub-drain"><div class="lb">🦠 腸道排水孔</div><div class="ds">約 1/3｜ABCG2</div></div>
+    </div>
+    <div class="tub-caption">多數人盯著「飲食水龍頭」拚命關，效果卻有限——因為真正讓水位居高不下的，常是<b>排水孔被縮小</b>（胰島素阻抗活化 URAT1 再吸收、基因排泄缺陷）。</div>
+  </div>
+</section>
+
+<!-- ===== KEY NUMBERS DASHBOARD ===== -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">關鍵數字儀表板</h2>
+  <div class="dash">
+    <div class="dash-card"><div class="dash-num">60–80<span class="dash-unit">%</span></div><div class="dash-label">每日尿酸來自<b>內源性代謝</b>（非飲食）</div></div>
+    <div class="dash-card"><div class="dash-num">6.8<span class="dash-unit">mg/dL</span></div><div class="dash-label">血中尿酸<b>飽和點</b>，超過開始結晶</div></div>
+    <div class="dash-card"><div class="dash-num">2.4<span class="dash-unit">×</span></div><div class="dash-label">夜間/清晨發作風險 vs 白天</div></div>
+    <div class="dash-card"><div class="dash-num">–46<span class="dash-unit">%</span></div><div class="dash-label">發作前 24h 飲水 ≥1920 mL 的復發下降</div></div>
+  </div>
+</section>
+
+<!-- ===== TABBED CONTENT ===== -->
+<section class="section" style="padding-top:.5rem;">
+  <h2 class="section-title">內容解析</h2>
+  <div class="tab-container">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab(event,'t1')">① 機制基礎</button>
+      <button class="tab-btn" onclick="switchTab(event,'t2')">② 分型與遺傳</button>
+      <button class="tab-btn" onclick="switchTab(event,'t3')">③ 結晶與發作</button>
+      <button class="tab-btn" onclick="switchTab(event,'t4')">④ 介入與應用</button>
+    </div>
+
+    <!-- TAB 1 -->
+    <div id="t1" class="tab-content active">
+      <h3>尿酸不是毒物，是代謝的「灰燼」</h3>
+      <p>很多人以為尿酸是吃出來的髒東西。其實它是核酸（DNA/RNA）與能量代謝的最終產物。身體每天汰換腸黏膜、血球、免疫細胞、皮膚與肝臟細胞，裡頭的普林（purine）一路被分解：</p>
+      <p class="eqn">hypoxanthine → xanthine → uric acid</p>
+      <p>最後兩步由<b>黃嘌呤氧化酶（xanthine oxidase）</b>催化——這正是 allopurinol、febuxostat 的作用靶點。</p>
+
+      <div class="box box-term">
+        <div class="box-head">📖 核心概念：尿酸的第二個來源是「能量」</div>
+        <div class="box-body">
+          <p>ATP 本身就是含腺嘌呤（adenine）的普林分子。當你空腹、劇烈運動、缺氧、發炎、大量耗能時，ATP 被快速拆解：</p>
+          <p class="eqn">ATP → ADP → AMP → IMP → hypoxanthine → xanthine → uric acid</p>
+          <p>所以尿酸也可以看成<b>「ATP 被大量燒掉之後留下的代謝灰燼」</b>。這對運動量大、常斷食的人特別重要（見 Tab ②）。</p>
+        </div>
+      </div>
+
+      <div class="box box-key">
+        <div class="box-head">⚠️ 一個常被忽略的事實</div>
+        <div class="box-body"><p>人體每日尿酸約 <b>60–80% 來自內源性代謝，只有 20–40% 來自飲食</b>。換句話說，你不可能單靠飲食把尿酸從 10 降到 5——這在生理上做不到。「少吃豆腐、少吃香菇尿酸就會正常」這種期待，本來就不合理。</p></div>
+      </div>
+
+      <h3>飲食的四條路：果糖和酒精，比普林危險得多</h3>
+      <p>飲食確實影響尿酸，但有四條路，重要性差很多：</p>
+      <ul>
+        <li><b>① 直接吃普林</b>（內臟、小魚乾、沙丁魚、濃肉湯）：短期上升，但只約 <span class="neutral">0.5–1 mg/dL</span>，是影響因素，不是最大因素。</li>
+        <li><b>② 果糖（最被低估）</b>：進肝後被果糖激酶快速代謝，大量消耗 ATP → AMP 上升 → 尿酸。重點是它<b>不含普林卻升尿酸</b>，這就是含糖飲料、高果糖玉米糖漿成為痛風風險因子的原因。</li>
+        <li><b>③ 酒精（雙重打擊）</b>：代謝產生乳酸堵住排水孔（與尿酸競爭腎小管排泄）＋ 增加 ATP 消耗。啤酒更糟，額外再加普林，幾乎三重攻擊。</li>
+        <li><b>④ 暴飲暴食</b>：大量熱量 → 胰島素上升 → 肝臟脂質新生（de novo lipogenesis）→ ATP 壓力 → 尿酸上升。此時尿酸是「能量過剩的訊號」，不是普林的訊號。</li>
+      </ul>
+
+      <div class="box box-lab">
+        <div class="box-head">🧪 隱形的第五條路：高胰島素血症</div>
+        <div class="box-body"><p>高胰島素會<b>活化 URAT1</b>，讓腎臟把已經排出的尿酸再吸收回來——直接把排水孔縮小。這就是為什麼肥胖、高三酸甘油酯、代謝症候群的人，尿酸常常高。痛風與其說是「吃出來的」，不如說常是<b>代謝症候群的一個表現</b>。</p></div>
+      </div>
+
+      <div class="claude-note">
+        <span class="nh">🔍 我的獨立查核</span>
+        「果糖經 ATP 耗竭升尿酸」「酒精經乳酸競爭抑制排泄」「胰島素活化 URAT1」這三條機制在文獻中都屬於成熟共識（Strong–Moderate）。文中「飲食普林貢獻 ~0.5–1 mg/dL」與大型痛風飲食研究的量級一致，可信。
+      </div>
+    </div>
+
+    <!-- TAB 2 -->
+    <div id="t2" class="tab-content">
+      <h3>三種高尿酸的人</h3>
+      <p>若接受水槽模型，門診大多數高尿酸患者可分成三型——而最後一型最常被誤判。</p>
+      <div class="types">
+        <div class="type-card t-over"><div class="tt">🔴 產生過多型</div><div class="td">高普林、果糖、酒精、細胞快速分解——<b>水龍頭開太大</b>。真正「全開」的少見：腫瘤溶解症候群、化療、骨髓增生疾病、嚴重乾癬、一次性大量果糖。</div></div>
+        <div class="type-card t-under"><div class="tt">🟡 排泄不足型</div><div class="td">胰島素阻抗、腎功能下降、基因（ABCG2、URAT1）——<b>排水孔太小</b>。臨床上最大宗。</div></div>
+        <div class="type-card t-energy"><div class="tt">🔵 能量壓力型</div><div class="td">長時間空腹、生酮、高訓練量、脫水、ATP turnover 高——<b>水龍頭被「耗能」打開</b>。最容易被誤判。</div></div>
+      </div>
+
+      <h3>同樣尿酸高，其實是兩種病</h3>
+      <div class="vs-grid">
+        <div class="vs-card vs-a"><div class="vh">A 先生（排水孔堵塞型）</div>尿酸 9，BMI 32，TG 300，HbA1c 6.4，天天喝飲料。典型代謝症候群驅動。</div>
+        <div class="vs-card vs-b"><div class="vh">B 先生（ATP 消耗型）</div>尿酸 8，BMI 22，HbA1c 5.2，TG 60，每週跑 80 公里、16:8 斷食、體脂 11–13%。</div>
+      </div>
+      <p>只看數字，兩人幾乎一樣；用水槽模型看，根本是兩種病。對 B 這種<b>瘦、運動多、血糖血脂漂亮</b>的人，與其急著套「代謝症候群型痛風」，不如先想到：空腹、低碳、酮體（β-hydroxybutyrate、acetoacetate）與乳酸競爭排泄，加上運動後脫水造成的<b>暫時性高尿酸</b>。</p>
+
+      <div class="box box-study">
+        <div class="box-head">📋 臨床怎麼分辨：標準化重測</div>
+        <div class="box-body"><p>抽血前 48–72 小時：不劇烈運動、不喝酒、不過度斷食、正常吃碳水、補足水分、早上抽血；同時看 Cr/eGFR、BUN/Cr、尿比重、尿酮、尿 pH，必要時加驗 24 小時尿尿酸或尿酸/肌酐比。標準化後明顯下降 → 支持能量壓力型；仍 &gt;8–9 mg/dL → 認真考慮基因型、腎排泄型與結石風險。</p></div>
+      </div>
+
+      <h3>排水孔大小，出生時就決定了一半</h3>
+      <p>這是近十年亞洲痛風研究最大的轉變。血中尿酸濃度的遺傳度（heritability）約 <b>40–70%</b>，痛風本身也有很強的家族聚集性。</p>
+      <ul>
+        <li><b>ABCG2</b>（對台灣/漢人最重要）：負責腸道與部分腎臟排泄。常見變異 <span class="mono">rs2231142（Q141K）</span> 功能下降者，痛風風險大幅上升，且傾向<b>早發、易生痛風石</b>。</li>
+        <li><b>SLC2A9（GLUT9）</b> 與 <b>URAT1（SLC22A12）</b>：後者正是 benzbromarone、lesinurad 等排尿酸藥的靶點。</li>
+      </ul>
+
+      <div class="box box-individual">
+        <div class="box-head">👤 個人差異：基因決定脆弱性，環境決定是否表現</div>
+        <div class="box-body"><p>B 先生那種「瘦、不喝酒、運動多卻尿酸 9」的人，很可能不是代謝症候群型，而是 <b>ABCG2 主導的排泄缺陷型</b>——天生排水孔就小。就像有人天生 LDL 高、天生易高血壓：基因換不了，但系統負荷可以改變。</p></div>
+      </div>
+
+      <div class="claude-note">
+        <span class="nh">🔍 我的獨立查核</span>
+        遺傳度 40–70%、ABCG2 rs2231142(Q141K) 為漢人主要風險變異、與早發及痛風石相關——皆為基因組關聯研究（GWAS）的穩固結論（Strong）。台灣若考慮使用 allopurinol，ACR 另建議東南亞/漢人族群先驗 HLA-B*5801（降低嚴重過敏風險），這點文中未提，補充給你。
+      </div>
+    </div>
+
+    <!-- TAB 3 -->
+    <div id="t3" class="tab-content">
+      <h3>高尿酸 ≠ 痛風：一個三層疾病</h3>
+      <p>很多人尿酸 10 一輩子沒事，有些人 7.5 就發作。為什麼？因為痛風是三層疊加的疾病：</p>
+      <ul>
+        <li><b>第一層 代謝層</b>：尿酸升高（生成多或排泄不足）。</li>
+        <li><b>第二層 物理層</b>：尿酸在血中本是溶解狀態，但有上限——約 <b>6.8 mg/dL</b>。超過後開始析出單鈉尿酸鹽結晶（monosodium urate, MSU），就像糖加太多會結晶。結晶偏好<b>低溫、末梢、血流慢</b>的位置，所以腳趾最常見（全身最冷的地方之一）。</li>
+        <li><b>第三層 免疫層</b>：結晶可能默默存在多年沒症狀，直到免疫系統「發現」它。</li>
+      </ul>
+      <div class="box box-term">
+        <div class="box-head">📖 核心概念：發作是一場免疫事件</div>
+        <div class="box-body"><p>巨噬細胞吞噬 MSU → 啟動 <b>NLRP3 發炎體（inflammasome）</b> → Caspase-1 → 大量釋放 <b>IL-1β</b> → 中性球湧入 → 紅腫熱痛。所以現代風濕科說：痛風不是單純的「尿酸病」，而是<b>由代謝異常驅動、由結晶觸發、由先天免疫執行的自體發炎疾病（autoinflammatory disease）</b>。</p></div>
+      </div>
+
+      <h3>痛風真正怕的，是「波動」</h3>
+      <p>如果接受結晶模型，許多臨床怪現象一次說通——它們都指向同一件事：<b>結晶環境的快速改變，而不只是尿酸絕對值</b>。</p>
+      <ul>
+        <li><b>為什麼開始吃降尿酸藥反而發作？</b> 尿酸下降 → 穩定的結晶開始溶解 → 表面破碎 → 微小碎片暴露 → NLRP3 活化。降尿酸初期發作常<b>不是治療失敗，反而代表治療正在生效</b>。</li>
+        <li><b>為什麼脫水會誘發？</b> 血液濃縮 + 尿量下降 + 排泄減少，結晶更易形成。</li>
+        <li><b>為什麼半夜最容易發作？</b> 夜間發作風險約為白天的兩倍，推測與夜間輕度脫水、關節溫度下降、皮質醇下降有關。</li>
+        <li><b>為什麼暴食、斷食、生酮都可能發作？</b> 它們都讓尿酸、乳酸、滲透壓、發炎一起劇烈變動。</li>
+      </ul>
+
+      <div class="box box-key">
+        <div class="box-head">⚠️ 預防第一原則：不是「完美飲食」，而是「別劇烈波動」</div>
+        <div class="box-body"><p>避免「今天暴食、明天斷食、後天生酮、第四天聚餐喝酒」這種極端切換。對排水孔本來就小的基因型患者尤其重要。這和你常談的<b>臨界（criticality）與適應區（adaptive zone）</b>是同一回事——身體喜歡的從來不是極端，而是穩定的適應。</p></div>
+      </div>
+
+      <h3>尿酸降到 5 以下還在痛風？</h3>
+      <p>這確實常見，並非治療失敗：</p>
+      <ul>
+        <li>你抽血看到的是<b>血液裡</b>的尿酸，真正作怪的是<b>關節裡</b>沉積多年的結晶。血液是河流，關節是河床；降了水位，河床的沉積物還在。</li>
+        <li>即使尿酸達標，痛風仍可能持續發作<b>約 12–18 個月</b>，之後頻率才逐漸下降——結晶溶解速度遠慢於尿酸下降速度。</li>
+        <li>急性發作期間，發炎甚至會讓血中尿酸暫時降到正常範圍，所以<b>正常尿酸不能排除痛風</b>。</li>
+      </ul>
+      <div class="claude-note">
+        <span class="nh">🔍 我的獨立查核（兩處微調）</span>
+        夜間 2.4×（Boston Online Gout Study, case-crossover）與飲水 ≥1920 mL 降 ~46% 復發都查證屬實。但「達標後仍發作 <b>12–18 個月</b>」是<b>近似值</b>：RCT 數據顯示發作高峰落在開始治療後 0–12 個月（停預防後 6–12 月又一波），確切「12–18」這個區間證據偏軟，方向正確、數字別當精確值。
+      </div>
+    </div>
+
+    <!-- TAB 4 -->
+    <div id="t4" class="tab-content">
+      <h3>到底哪個方法最有效？（依效果量排序）</h3>
+      <p>很多文章只看「有沒有顯著」，卻不看「降多少」。用效果量（effect size）排序才有意義：</p>
+      <table class="dose-table">
+        <thead><tr><th>介入</th><th>大約降幅</th><th>量級</th></tr></thead>
+        <tbody>
+          <tr class="optimal-row"><td>🔴 降尿酸藥物（allopurinol / febuxostat）</td><td>2–5 mg/dL 以上</td><td>最大</td></tr>
+          <tr><td>🔴 減重（尤其代謝症候群型，減 5–10% 體重）</td><td>常降 1–2 mg/dL，甚至更多</td><td>大</td></tr>
+          <tr><td>🟡 戒含糖飲料（手搖飲、汽水）</td><td>個別差異大</td><td>中–大</td></tr>
+          <tr><td>🟡 戒酒（尤其啤酒）</td><td>個別差異大</td><td>中–大</td></tr>
+          <tr><td>🟡 DASH / 地中海飲食</td><td>平均約 0.25 mg/dL，高基線可達 ~1.0</td><td>小–中</td></tr>
+          <tr><td>⚪ 傳統全面低普林飲食</td><td>約 0.5–1 mg/dL</td><td>小–中</td></tr>
+        </tbody>
+      </table>
+      <p>直觀對比：一個尿酸 10 的人——低普林飲食或許降到 9，減重到 8，DASH 到 7.5，而<b>藥物可能直接到 5 甚至以下</b>。所以對反覆發作、有痛風石、尿酸很高者，藥物仍是效果量最大的手段。</p>
+
+      <div class="claude-note">
+        <span class="nh">🔍 我的獨立查核（DASH 數字校正）</span>
+        原文寫 DASH「約 0.3–1.3 mg/dL」。實際 meta-analysis（4 RCT, n=590）<b>平均只降 ~0.25 mg/dL</b>；只有在<b>基線尿酸偏高（≥6）</b>的次族群才看到 0.8–1.0 mg/dL 的較大降幅。方向（基線越高、降幅越大）正確，但上緣 1.3 略為樂觀，已在表中改為「平均 ~0.25，高基線可達 ~1.0」。
+      </div>
+
+      <h3>DASH 與地中海飲食為什麼有效？（不是因為普林低）</h3>
+      <p>關鍵在於它們同時作用在尿酸系統最重要的<b>兩個控制點</b>：</p>
+      <div class="vs-grid">
+        <div class="vs-card vs-a"><div class="vh">關小水龍頭（降生成）</div>減少果糖負荷 → 降低 ATP 壓力；改善脂肪肝（MASLD 常與高尿酸並存）。</div>
+        <div class="vs-card vs-b"><div class="vh">打開排水孔（增排泄）</div>高纖低精製糖 → 改善胰島素阻抗 → URAT1 活性下降 → 腎排泄增加；低脂乳製品具觀察到的保護作用。</div>
+      </div>
+      <p>所以近代痛風指南越來越像「<b>把痛風當代謝疾病管理</b>」，而不是「把痛風當普林中毒管理」。這兩個世界觀完全不同。</p>
+
+      <h3>台灣版的實際做法</h3>
+      <div class="box box-nutrition">
+        <div class="box-head">🥗 不必執著橄欖油酪梨鮭魚，台灣人可以這樣做</div>
+        <div class="box-body">
+          <p><b>蛋白質</b>：魚、雞肉、豆腐、豆乾、毛豆、蛋、乳製品輪流。（豆類雖含普林，但大型流行病學研究<b>未發現增加痛風風險</b>——豆腐、香菇、菠菜、蘆筍其實被冤枉了。）</p>
+          <p><b>主食</b>：地瓜、糙米、燕麥、五穀飯為主，不必完全禁白飯。<b>蔬菜</b>：每餐至少兩碗。<b>水果</b>：每天約兩份——是水果，不是果汁。</p>
+          <p><b>飲料（最重要）</b>：戒手搖飲對尿酸的幫助，可能大於戒豆腐。<b>水分</b>：看尿液顏色維持淡黃即可；但運動量大、流汗多、體脂低的人比一般人更易輕度脫水，要特別留意。</p>
+          <p><b>運動</b>：規律優於極端。超馬、長時間空腹跑、高溫訓練可能造成 ATP 大量消耗與暫時性尿酸上升——待在<b>適應區</b>而非過載區。</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== EVIDENCE BREAKDOWN ===== -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">證據強度分析</h2>
+  <p style="font-size:.92rem;margin-bottom:.6rem;">這篇文章的整體可信度高，核心框架（代謝 × 物理 × 免疫）有堅實的生理基礎。下表把文中主要主張按證據等級分級，並標出我獨立調降或補充之處：</p>
+  <table class="ev-table">
+    <thead><tr><th>主張</th><th>證據等級</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>尿酸 60–80% 內源性；飽和點 ~6.8 mg/dL；腎 2/3、腸 1/3 排泄</td><td><span class="et et-strong">Strong</span></td><td>生理學共識</td></tr>
+      <tr><td>果糖/酒精/胰島素 → 升尿酸或抑制排泄的機制</td><td><span class="et et-strong">Strong</span></td><td>機制＋流行病學一致</td></tr>
+      <tr><td>遺傳度 40–70%；ABCG2 Q141K 為漢人主要風險變異</td><td><span class="et et-strong">Strong</span></td><td>GWAS 穩固結論</td></tr>
+      <tr><td>MSU 結晶經 NLRP3 / IL-1β 觸發發作</td><td><span class="et et-strong">Strong</span></td><td>免疫學共識</td></tr>
+      <tr><td>降尿酸藥效果量最大；ACR 目標 &lt;6、預防 3–6 個月</td><td><span class="et et-strong">Strong</span></td><td>RCT＋指南</td></tr>
+      <tr><td>夜間發作 2.4×；飲水 ≥1920 mL 降 ~46% 復發</td><td><span class="et et-moderate">Moderate</span></td><td>case-crossover（觀察性，不證因果）</td></tr>
+      <tr><td>DASH/地中海降尿酸</td><td><span class="et et-moderate">Moderate</span></td><td>平均效果小（~0.25），高基線較明顯</td></tr>
+      <tr><td>達標後仍發作「12–18 個月」</td><td><span class="et et-limited">Limited</span></td><td>方向對，確切月數偏軟</td></tr>
+      <tr><td>高纖維 → 腸道菌 → ABCG2 排泄改善</td><td><span class="et et-prelim">Preliminary</span></td><td>文中已自承「證據較新、強度不足」</td></tr>
+      <tr><td>足部保暖/補水穩定結晶微環境</td><td><span class="et et-limited">Limited</span></td><td>生理合理、臨床有經驗，無高品質試驗</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== WHO BENEFITS / WHO SKIPS ===== -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">適用族群分析</h2>
+  <div class="types">
+    <div class="type-card t-over"><div class="tt">✅ 最受用</div><div class="td">代謝症候群型（肥胖、高 TG、高血糖、天天飲料）；有家族史/早發/痛風石的基因型；反覆發作者。這套「當代謝病管理」的觀點直接適用。</div></div>
+    <div class="type-card t-energy"><div class="tt">⚖️ 部分受用（需調整）</div><div class="td">精瘦、高訓練量、可能斷食者（也就是你）。重點不是「怕痛風」，而是<b>辨識能量壓力型</b>、避免被誤判與過度治療。</div></div>
+    <div class="type-card t-under"><div class="tt">⏸️ 別過度</div><div class="td">無症狀、單次輕微偏高、無風險因子者。指南通常<b>不建議無症狀高尿酸直接用藥</b>（除非痛風石、反覆發作、影像破壞或特定高風險）。</div></div>
+  </div>
+</section>
+
+<!-- ===== SAFETY ===== -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">安全性與用藥重點</h2>
+  <div class="box box-safety">
+    <div class="box-head">🛡️ 用藥與決策的關鍵安全點</div>
+    <div class="box-body">
+      <p><b>降尿酸藥需醫師處方</b>，且初期反而會誘發發作 → 指南建議同時給 colchicine 或 NSAID <b>預防 3–6 個月</b>，目標尿酸 &lt;6 mg/dL。</p>
+      <p><b>關於痛風石的 &lt;5 mg/dL 目標</b>：這其實是 <b>EULAR</b> 的建議；ACR 2020 多採全體 &lt;6（雖也認可更低有助加速溶解痛風石）。原文把 &lt;5 歸給 ACR，屬小出入。</p>
+      <p><b>allopurinol</b>：漢人/東南亞族群建議先驗 <b>HLA-B*5801</b>，以降低嚴重皮膚過敏（SCAR）風險。</p>
+      <p><b>極端飲食</b>（長斷食、生酮）在易感者可能誘發發作，不應被當成「降尿酸手段」。</p>
+      <p><b>何時找醫師</b>：數值嚴重偏離正常、新出現關節紅腫熱痛、或反覆發作。本文件為衛教整理，非醫療建議。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STRATEGIC IMPLICATIONS ===== -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">應用啟示</h2>
+  <div class="impl-grid">
+    <div class="impl-card impl-1"><div class="ih">🥗 日常飲食</div><p>把焦點從「怕普林食物」移到真正的負荷：<b>含糖飲料與酒精</b>。好消息是這兩項本來就不利減脂——降尿酸和體組成目標同向，不衝突。</p></div>
+    <div class="impl-card impl-2"><div class="ih">🏋️ 訓練調整</div><p>長空腹跑、超長有氧、高溫訓練會讓 ATP 大量耗竭 → 暫時性尿酸上升。硬訓練日<b>刻意補水到尿液淡黃</b>，待在適應區；單次賽後高讀數別過度解讀。</p></div>
+    <div class="impl-card impl-3"><div class="ih">💊 補充劑決策</div><p>沒有補充劑能取代上述槓桿。你在用的 <b>creatine 不會顯著升尿酸</b>；維生素 C 有輕微排尿酸作用但效果小。別為了尿酸去堆新東西。</p></div>
+    <div class="impl-card impl-4"><div class="ih">📊 追蹤指標</div><p>若要驗尿酸，<b>標準化抽血</b>（前 48–72h 不大訓練/不長空腹/不喝酒、補水、晨起）；看趨勢＋eGFR、TG、HbA1c 的脈絡，而非單一數字。</p></div>
+  </div>
+</section>
+
+<!-- ===== KEY TAKEAWAYS ===== -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">學習重點總結</h2>
+  <div class="take-grid">
+    <div class="take-card"><span class="tn">KEY-01</span><p><b>飲食天花板有限</b>：尿酸 60–80% 內源性，飲食只占 20–40%。光靠飲食無法把 10 降到 5。</p></div>
+    <div class="take-card"><span class="tn">KEY-02</span><p><b>排水孔 &gt; 水龍頭</b>：多數人尿酸高是排泄不足（胰島素阻抗、基因），不是吃太多普林。</p></div>
+    <div class="take-card"><span class="tn">KEY-03</span><p><b>波動 &gt; 絕對值</b>：發作來自結晶穩定性被打破。避免暴食/斷食/生酮的極端切換、避免脫水。</p></div>
+    <div class="take-card"><span class="tn">KEY-04</span><p><b>用效果量選擇</b>：藥物 &gt; 減重 &gt; 戒糖飲/酒 &gt; 飲食型態 &gt; 低普林飲食。別把力氣花在最小的那格。</p></div>
+  </div>
+</section>
+
+<!-- ===== PRACTICE ===== -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">練習題（先想再看答案）</h2>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q1</span>
+      <span class="question-type" style="background:#d1fae5;color:#065f46;">證據評估</span>
+      <span class="question-text">「發作前 24h 飲水 ≥1920 mL，復發降 46%」是什麼研究設計？能證明因果嗎？</span>
+      <span class="accordion-icon"></span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>參考答案：</strong>這來自 Boston Online Gout Study 的 <b>case-crossover（病例交叉）</b>設計——拿同一人「發作前」與「沒發作時」的飲水量比較，能很好地控制個體間差異。</p>
+      <p>但它本質仍是<b>觀察性研究</b>，受回憶偏誤與反向因果影響（例如發作前不舒服而少喝水）。機制上補水降尿酸濃度、利排泄是合理的，方向可信；但「降 46%」這個精確數字不能當成隨機試驗等級的因果證據。等級：<b>Moderate</b>。</p>
+    </div>
+  </details>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q2</span>
+      <span class="question-type" style="background:#dbeafe;color:#1e3a8a;">應用情境</span>
+      <span class="question-text">你跑完一場馬拉松、當天又 16:8 斷食，隔天健檢尿酸 8.5。怎麼解讀？</span>
+      <span class="accordion-icon"></span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>參考答案：</strong>先別急著貼「代謝症候群型痛風」標籤。馬拉松（ATP 大量耗竭）＋ 斷食（酮體與乳酸競爭排泄）＋ 賽後脫水（血液濃縮）——這是典型的<b>能量壓力型暫時性高尿酸</b>。</p>
+      <p>正確做法是<b>標準化重測</b>：48–72h 不大訓練、不斷食、正常吃碳水、補足水、晨起再抽，同時看 eGFR 與尿比重。若回落，多半是暫時現象；若仍 &gt;8–9，再認真考慮基因型（你若精瘦無代謝症候群，ABCG2 排泄缺陷是合理懷疑）。</p>
+    </div>
+  </details>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q3</span>
+      <span class="question-type" style="background:#fef3c7;color:#92400e;">決策判斷</span>
+      <span class="question-text">尿酸 6.8、偶爾冬天發作的人，「冬天足部保暖」值不值得做？</span>
+      <span class="accordion-icon"></span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>參考答案：</strong>值得做，但要擺對位置。保暖維持關節溫度、減少局部結晶析出，<b>生理合理、零成本、零副作用</b>——對這種臨界邊緣、偶發的人或許有點幫助。</p>
+      <p>但它的<b>效果量很小</b>，屬「Limited 證據」，不能取代真正的槓桿（戒含糖飲料/酒、必要時減重或用藥）。一句話：對尿酸 6.5–7 偶發者保暖是加分項；對尿酸 10、滿是結晶的人，保暖救不了滿出來的水槽。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ===== BOTTOM LINE ===== -->
+<div class="bottom-line">
+  <div class="bottom-line-header">🎯 我的行動結論</div>
+  <div class="bottom-line-item">
+    <div class="bottom-line-label">✔ 核心洞察</div>
+    <div class="bottom-line-text">痛風不是普林中毒，而是「結晶穩定性被打破、再被免疫系統觸發」的事件。對我來說，這套<b>「穩定 &gt; 極端」</b>的原則，和我平常談的訓練適應、恢復、HRV、自律神經是<b>同一個邏輯</b>——身體要的是穩定的適應，不是劇烈波動。尿酸只是這個原則在代謝系統上的又一個版本。</div>
+  </div>
+  <div class="bottom-line-item">
+    <div class="bottom-line-label">📈 本週應用</div>
+    <div class="bottom-line-text">把注意力從「怕豆腐香菇」移開，鎖定真正的負荷：這週<b>戒掉含糖飲料與酒精類的尿酸負擔</b>（本來就利於減脂，一石二鳥）。硬訓練日或長空腹日，<b>刻意補水到尿液維持淡黃</b>。若近期要健檢，抽血前 <b>48–72 小時不安排大訓練量＋長空腹＋酒精</b>，拿到一個乾淨的基線數字。</div>
+  </div>
+  <div class="bottom-line-item">
+    <div class="bottom-line-label">⚠ 需要驗證</div>
+    <div class="bottom-line-text">文中較弱的兩條路要打折看：<b>飲水誘發</b>為觀察性（Moderate）、<b>腸道菌→ABCG2 排泄</b>證據新而薄（Preliminary）；<b>DASH 平均只降 ~0.25 mg/dL</b>，高基線才明顯。若我曾有偏高讀數，做<b>一次標準化重測</b>並對照 eGFR/TG/HbA1c，看是暫時性（能量壓力型）還是真的排泄缺陷，<b>3 個月後</b>再回看趨勢即可判斷。</div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="ft-title">📄 文件資訊</div>
+  <div>製作日期：2026-06-09｜分類：Labs（代謝指標）／Evidence／Nutrition｜語言：繁體中文（技術詞保留英文）</div>
+  <div style="margin-top:.6rem;">建議 Chat Title：</div>
+  <span class="chat-title">2026-06-09 [Labs] Uric Acid - Bathtub Model &amp; Crystal Stability</span>
+  <div class="disclaimer">
+    本文件為教育與知識整理，<b>不構成醫療建議</b>。實施任何重大改變或考慮用藥前，請諮詢合格醫療專業人員。檢驗數值需在臨床情境下解讀，單一指標異常不等於疾病，參考範圍因實驗室與族群而異。文中部分機制（腸道菌、補水誘發、保暖等）證據強度不一，已於內文以紫色註記標出，讀者可自行衡量。
+  </div>
+</footer>
+
+</div>
+
+<script>
+function switchTab(evt, tabId){
+  const c = evt.currentTarget.closest('.tab-container');
+  c.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));
+  c.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>

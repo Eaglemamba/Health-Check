@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-date" content="2026-05-27">
+<title>膽固醇的進化史 — LDL → ApoB → Remnant 三次革命解讀</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f1f5f9; color: #1e293b; line-height: 1.7; padding: 2rem 1rem; }
+  .container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+
+  /* ─── HEADER ─── */
+  .header { background: linear-gradient(135deg, #064e3b, #047857, #059669); color: white; padding: 3rem 2rem 2.5rem; text-align: center; position: relative; }
+  .header::before { content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 6px; background: linear-gradient(180deg, #047857, #6ee7b7); border-radius: 0 3px 3px 0; }
+  .doc-tags { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .doc-tag { padding: 0.3rem 0.85rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; }
+  .tag-labs { background: #fed7aa; color: #9a3412; }
+  .tag-evidence { background: #fde68a; color: #92400e; }
+  .tag-cardio { background: #fecaca; color: #7f1d1d; }
+  .header h1 { font-size: 1.9rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+  .header .subtitle { font-size: 1rem; opacity: 0.9; font-weight: 300; max-width: 750px; margin: 0 auto; line-height: 1.6; }
+  .header .source { margin-top: 1rem; font-size: 0.8rem; opacity: 0.75; font-family: 'Source Code Pro', monospace; }
+
+  /* ─── EXECUTIVE SUMMARY ─── */
+  .exec-summary { background: #ecfdf5; padding: 2rem; border-left: 5px solid #047857; }
+  .exec-title { font-size: 1.1rem; font-weight: 700; color: #064e3b; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.5rem; }
+  .rating-bar { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; padding: 0.6rem 1rem; background: white; border-radius: 8px; flex-wrap: wrap; border: 1px solid #a7f3d0; }
+  .rating-score { font-weight: 700; color: #065f46; font-size: 1rem; }
+  .rating-stars { color: #f59e0b; letter-spacing: 1px; }
+  .evidence-tier { font-size: 0.78rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 4px; }
+  .evidence-strong { background: #d1fae5; color: #065f46; }
+  .rating-high { font-size: 0.78rem; color: #047857; background: #d1fae5; padding: 0.2rem 0.55rem; border-radius: 4px; }
+  .rating-low { font-size: 0.78rem; color: #64748b; background: #f1f5f9; padding: 0.2rem 0.55rem; border-radius: 4px; }
+  .exec-content { color: #334155; font-size: 0.95rem; line-height: 1.75; }
+  .exec-content p { margin-bottom: 0.7rem; }
+  .exec-content strong { color: #064e3b; }
+
+  /* ─── SECTIONS ─── */
+  .section { padding: 2rem; border-bottom: 1px solid #e2e8f0; }
+  .section-title { font-size: 1.35rem; font-weight: 700; color: #064e3b; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid #a7f3d0; display: flex; align-items: center; gap: 0.5rem; }
+  .section-subtitle { font-size: 1.1rem; font-weight: 600; color: #047857; margin: 1.5rem 0 0.85rem; }
+
+  /* ─── OBJECTIVES ─── */
+  .objectives { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .objective-item { background: #f0fdf4; padding: 1.1rem; border-radius: 10px; border: 1px solid #a7f3d0; transition: transform 0.2s, box-shadow 0.2s; }
+  .objective-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .objective-num { font-family: 'Source Code Pro', monospace; font-size: 0.78rem; color: #047857; font-weight: 600; margin-bottom: 0.4rem; }
+  .objective-text { font-size: 0.92rem; color: #1e293b; line-height: 1.55; }
+
+  /* ─── KEY NUMBERS DASHBOARD ─── */
+  .key-numbers { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+  .number-card { background: white; padding: 1.1rem; border-radius: 8px; text-align: center; border-top: 3px solid #059669; }
+  .number-value { font-family: 'Source Code Pro', monospace; font-size: 1.6rem; font-weight: 700; color: #047857; line-height: 1.2; }
+  .number-label { font-size: 0.78rem; color: #475569; margin-top: 0.4rem; line-height: 1.4; }
+  .number-context { font-size: 0.7rem; color: #94a3b8; margin-top: 0.3rem; }
+
+  /* ─── FRAMEWORK VISUAL ─── */
+  .framework-visual { background: linear-gradient(135deg, #047857, #059669); border-radius: 1rem; padding: 1.75rem; color: white; margin: 1.5rem 0; }
+  .framework-title { text-align: center; font-size: 1.15rem; font-weight: 700; margin-bottom: 1.5rem; }
+  .framework-steps { display: flex; justify-content: center; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+  .framework-step { text-align: center; min-width: 110px; flex: 1; max-width: 160px; }
+  .framework-icon { font-size: 1.6rem; margin-bottom: 0.5rem; width: 3.2rem; height: 3.2rem; background: rgba(255,255,255,0.18); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; font-family: 'Source Code Pro', monospace; font-weight: 700; }
+  .framework-label { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .framework-desc { font-size: 0.72rem; opacity: 0.9; line-height: 1.4; }
+  .framework-arrow { font-size: 1.4rem; color: rgba(255,255,255,0.7); }
+
+  /* ─── INFO BOXES ─── */
+  .info-box { margin: 1.25rem 0; border-radius: 10px; overflow: hidden; border: 1px solid; }
+  .box-header { padding: 0.6rem 1rem; font-size: 0.88rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+  .box-content { padding: 1rem 1.1rem; font-size: 0.93rem; line-height: 1.7; color: #334155; }
+  .box-content p { margin-bottom: 0.5rem; }
+  .box-content p:last-child { margin-bottom: 0; }
+  .box-content ul { margin: 0.4rem 0 0.4rem 1.2rem; }
+  .box-content li { margin-bottom: 0.3rem; }
+  .box-content strong { color: #1e293b; }
+
+  .box-term { border-color: #86efac; background: #f0fdf4; }
+  .box-term .box-header { background: #bbf7d0; color: #14532d; }
+
+  .box-analogy { border-color: #f9a8d4; background: #fdf2f8; }
+  .box-analogy .box-header { background: #fbcfe8; color: #831843; }
+
+  .box-key { border-color: #fdba74; background: #fff7ed; }
+  .box-key .box-header { background: #fed7aa; color: #9a3412; }
+
+  .box-evidence { border-color: #6ee7b7; background: #ecfdf5; }
+  .box-evidence .box-header { background: #a7f3d0; color: #065f46; }
+
+  .box-individual { border-color: #fca5a5; background: #fef2f2; }
+  .box-individual .box-header { background: #fecaca; color: #7f1d1d; }
+
+  .box-lab { border-color: #fdba74; background: #fff7ed; }
+  .box-lab .box-header { background: #fed7aa; color: #9a3412; }
+
+  .box-safety { border-color: #fda4af; background: #fff1f2; }
+  .box-safety .box-header { background: #fecdd3; color: #9f1239; }
+
+  .box-study { border-color: #94a3b8; background: #f8fafc; }
+  .box-study .box-header { background: #cbd5e1; color: #1e293b; }
+
+  .box-dose { border-color: #c4b5fd; background: #f5f3ff; }
+  .box-dose .box-header { background: #ddd6fe; color: #4c1d95; }
+
+  /* ─── PATIENT CARDS ─── */
+  .patient-grid { display: grid; gap: 1rem; margin: 1.25rem 0; }
+  .patient-card { background: white; border-left: 4px solid; border-radius: 8px; padding: 1.1rem 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
+  .patient-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .patient-card.patient-A { border-color: #16a34a; }
+  .patient-card.patient-B { border-color: #dc2626; }
+  .patient-card.patient-C { border-color: #ea580c; }
+  .patient-card.patient-D { border-color: #ca8a04; }
+  .patient-card.patient-E { border-color: #7c3aed; }
+  .patient-header { font-weight: 700; font-size: 1rem; color: #1e293b; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .patient-badge { font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; }
+  .badge-A { background: #d1fae5; color: #065f46; }
+  .badge-B { background: #fee2e2; color: #991b1b; }
+  .badge-C { background: #ffedd5; color: #9a3412; }
+  .badge-D { background: #fef3c7; color: #854d0e; }
+  .badge-E { background: #ede9fe; color: #5b21b6; }
+  .patient-body { font-size: 0.9rem; color: #475569; line-height: 1.65; }
+  .patient-stats { font-family: 'Source Code Pro', monospace; font-size: 0.82rem; color: #1e293b; background: #f8fafc; padding: 0.5rem 0.75rem; border-radius: 5px; margin: 0.5rem 0; }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-table-wrap { overflow-x: auto; margin: 1.25rem 0; border-radius: 10px; border: 1px solid #cbd5e1; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 700px; }
+  .compare-table th { background: #047857; color: white; padding: 0.7rem 0.85rem; text-align: left; font-weight: 600; font-size: 0.82rem; }
+  .compare-table td { padding: 0.65rem 0.85rem; border-bottom: 1px solid #e2e8f0; color: #334155; }
+  .compare-table tr:nth-child(even) td { background: #f8fafc; }
+  .compare-table tr:hover td { background: #ecfdf5; }
+  .compare-table .num { font-family: 'Source Code Pro', monospace; font-weight: 600; }
+  .risk-low { color: #16a34a; font-weight: 600; }
+  .risk-high { color: #dc2626; font-weight: 600; }
+  .risk-med { color: #ea580c; font-weight: 600; }
+  .risk-amb { color: #7c3aed; font-weight: 600; }
+
+  /* ─── TABS ─── */
+  .tab-container { margin: 1.5rem 0; }
+  .tab-nav { display: flex; gap: 0.25rem; border-bottom: 2px solid #d1fae5; flex-wrap: wrap; }
+  .tab-btn { background: none; border: none; padding: 0.7rem 1.1rem; font-size: 0.9rem; font-weight: 600; color: #64748b; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-family: inherit; margin-bottom: -2px; }
+  .tab-btn:hover { color: #047857; }
+  .tab-btn.active { color: #064e3b; border-bottom-color: #047857; }
+  .tab-content { display: none; padding-top: 1.25rem; }
+  .tab-content.active { display: block; }
+
+  /* ─── EVIDENCE BADGES ─── */
+  .ev-badge { display: inline-block; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; margin-right: 0.3rem; }
+  .ev-strong { background: #d1fae5; color: #065f46; }
+  .ev-moderate { background: #dbeafe; color: #1e3a8a; }
+  .ev-limited { background: #fef3c7; color: #92400e; }
+  .ev-preliminary { background: #fed7aa; color: #9a3412; }
+  .ev-speculative { background: #fecaca; color: #7f1d1d; }
+
+  /* ─── IMPLICATIONS GRID ─── */
+  .implications-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+  .impl-card { background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.1rem; border-top: 3px solid #059669; transition: transform 0.2s, box-shadow 0.2s; }
+  .impl-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+  .impl-icon { font-family: 'Source Code Pro', monospace; font-size: 0.78rem; color: #047857; font-weight: 600; margin-bottom: 0.4rem; }
+  .impl-title { font-weight: 700; color: #064e3b; margin-bottom: 0.5rem; font-size: 1rem; }
+  .impl-text { font-size: 0.87rem; color: #475569; line-height: 1.6; }
+
+  /* ─── TAKEAWAYS ─── */
+  .takeaways-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .takeaway-card { background: linear-gradient(135deg, #ecfdf5, #f0fdfa); border: 1px solid #a7f3d0; border-radius: 10px; padding: 1.1rem; transition: transform 0.2s, box-shadow 0.2s; }
+  .takeaway-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+  .takeaway-num { font-family: 'Source Code Pro', monospace; font-size: 0.78rem; color: #047857; font-weight: 600; margin-bottom: 0.4rem; }
+  .takeaway-title { font-weight: 700; color: #064e3b; margin-bottom: 0.4rem; font-size: 0.95rem; }
+  .takeaway-text { font-size: 0.85rem; color: #475569; line-height: 1.55; }
+
+  /* ─── ACCORDION (PRACTICE) ─── */
+  .question-accordion { background: white; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 0.85rem; overflow: hidden; }
+  .question-header { padding: 0.95rem 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; list-style: none; }
+  .question-header::-webkit-details-marker { display: none; }
+  .question-header:hover { background: #f8fafc; }
+  .question-number { font-family: 'Source Code Pro', monospace; font-weight: 700; color: #047857; font-size: 0.85rem; }
+  .question-type { font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; }
+  .question-text { flex: 1; font-size: 0.92rem; color: #1e293b; font-weight: 500; min-width: 200px; }
+  .accordion-icon { color: #94a3b8; font-family: 'Source Code Pro', monospace; }
+  .question-accordion[open] .accordion-icon::before { content: '−'; }
+  .question-accordion:not([open]) .accordion-icon::before { content: '+'; }
+  .question-answer { padding: 0 1.1rem 1.1rem; font-size: 0.9rem; color: #475569; line-height: 1.7; border-top: 1px dashed #e2e8f0; padding-top: 0.85rem; }
+  .question-answer p { margin-bottom: 0.5rem; }
+  .question-answer strong { color: #064e3b; }
+
+  /* ─── BOTTOM LINE ─── */
+  .bottom-line { background: linear-gradient(135deg, #ecfdf5, #f0fdfa); margin: 2rem; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #059669; }
+  .bottom-line-header { font-weight: 700; color: #064e3b; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; }
+  .bottom-line-item { margin-bottom: 1rem; }
+  .bottom-line-item:last-child { margin-bottom: 0; }
+  .bottom-line-label { font-weight: 600; color: #047857; font-size: 0.85rem; margin-bottom: 0.25rem; }
+  .bottom-line-text { font-size: 0.95rem; line-height: 1.7; color: #334155; }
+
+  /* ─── FOOTER ─── */
+  .footer { background: #1e293b; color: #94a3b8; padding: 2rem; text-align: center; font-size: 0.85rem; }
+  .footer-chat-title { font-family: 'Source Code Pro', monospace; color: #6ee7b7; background: rgba(110,231,183,0.08); padding: 0.5rem 1rem; border-radius: 6px; display: inline-block; margin-top: 0.85rem; font-size: 0.82rem; }
+  .footer-disclaimer { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #334155; font-size: 0.78rem; opacity: 0.7; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+  /* ─── METAPHOR ICON ─── */
+  .metaphor-icon { display: inline-block; font-family: 'Source Code Pro', monospace; font-weight: 700; background: #047857; color: white; padding: 0.1rem 0.45rem; border-radius: 4px; font-size: 0.8rem; margin-right: 0.3rem; }
+
+  @media (max-width: 768px) {
+    body { padding: 1rem 0.5rem; }
+    .section { padding: 1.5rem 1.25rem; }
+    .header { padding: 2rem 1.25rem; }
+    .header h1 { font-size: 1.5rem; }
+    .bottom-line { margin: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ─── HEADER ─── -->
+  <div class="header">
+    <div class="doc-tags">
+      <span class="doc-tag tag-cardio">Cardiovascular</span>
+      <span class="doc-tag tag-labs">Lipidology</span>
+      <span class="doc-tag tag-evidence">Evidence Synthesis</span>
+    </div>
+    <h1>膽固醇的進化史</h1>
+    <div class="subtitle">從 LDL 到 ApoB 到 Remnant Cholesterol — 脂質學三次革命的演化、五個病人的真實故事、與 LMHR 表型的爭議</div>
+    <div class="source">SOURCE: 禾峰診所 王峰醫師 / Lipidology Evolution Essay · BUILT: 2026-05-27</div>
+  </div>
+
+  <!-- ─── EXECUTIVE SUMMARY ─── -->
+  <div class="exec-summary">
+    <div class="exec-title">📋 Executive Summary</div>
+    <div class="rating-bar">
+      <span class="rating-score"><span class="rating-stars">★★★★★</span> 4.6/5</span>
+      <span class="evidence-tier evidence-strong">證據: Strong (主流) + Limited (LMHR 部分)</span>
+      <span class="rating-high">↑ 證據整合, 臨床可行動性</span>
+      <span class="rating-low">↓ 篩檢成本未討論</span>
+    </div>
+    <div class="exec-content">
+      <p>過去三十年,脂質學經歷三次典範轉移:<strong>LDL 中心 → ApoB 中心 → Remnant 中心</strong>。每次轉變不是推翻前者,而是補上前者沒看見的盲點。</p>
+      <p>對中階體組成優化者而言,這篇文章的關鍵價值在於三件事:(1) <strong>LDL 仍是基礎</strong>,不要被「LDL 不重要」的網路言論誤導;(2) <strong>Remnant-C 可以從健檢報告免費自算</strong>(TC − HDL − LDL),≥30 mg/dL 就是警訊;(3) <strong>Lp(a) 一生至少測一次</strong>,因為基因藏的暗礁吃低碳跑步都救不了。</p>
+      <p>LMHR(精瘦肌量超反應者)這群採用低碳/生酮飲食、LDL 飆高但代謝健康的人,目前科學界<strong>沒有長期結局資料</strong>。2025 年支持 LMHR 安全性的 Soto-Mota 研究已遭撤稿,這部分必須誠實面對。</p>
+    </div>
+  </div>
+
+  <!-- ─── LEARNING OBJECTIVES ─── -->
+  <div class="section">
+    <div class="section-title">🎯 學習目標</div>
+    <div class="objectives">
+      <div class="objective-item">
+        <div class="objective-num">OBJ-01</div>
+        <div class="objective-text">用「大船小船 / 燃料 / 旗子 / 隱形戰艦 / 暗礁」五個比喻,建立脂蛋白系統的直覺地圖</div>
+      </div>
+      <div class="objective-item">
+        <div class="objective-num">OBJ-02</div>
+        <div class="objective-text">理解 LDL-C、ApoB、Remnant-C、Lp(a) 四個指標各自衡量的物理意義與不可互相取代的原因</div>
+      </div>
+      <div class="objective-item">
+        <div class="objective-num">OBJ-03</div>
+        <div class="objective-text">學會用免費公式 Remnant-C = TC − HDL − LDL 從健檢報告自算隱形戰艦,並判讀警報閾值</div>
+      </div>
+      <div class="objective-item">
+        <div class="objective-num">OBJ-04</div>
+        <div class="objective-text">辨識 LDL-ApoB 不一致(discordance)的兩種情境:風險被低估(C 型)vs 風險被高估(D 型)</div>
+      </div>
+      <div class="objective-item">
+        <div class="objective-num">OBJ-05</div>
+        <div class="objective-text">建立暴露時間(LDL × years)為核心的累積暴露觀念,理解早期介入為何效益最大</div>
+      </div>
+      <div class="objective-item">
+        <div class="objective-num">OBJ-06</div>
+        <div class="objective-text">客觀評估 LMHR 表型的證據狀態,以及 Soto-Mota 撤稿事件對「低碳飲食 LDL 升高安全嗎」這個問題的影響</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── KEY NUMBERS DASHBOARD ─── -->
+  <div class="section">
+    <div class="section-title">📊 關鍵數字儀表板</div>
+    <div class="key-numbers">
+      <div class="number-card">
+        <div class="number-value">30</div>
+        <div class="number-label">Remnant-C 警報線 (mg/dL)</div>
+        <div class="number-context">JACC 2025 韓國 430 萬人研究</div>
+      </div>
+      <div class="number-card">
+        <div class="number-value">1.83</div>
+        <div class="number-label">CV 死亡風險 HR</div>
+        <div class="number-context">LDL&lt;100 但 Remnant ≥30 的年輕族群</div>
+      </div>
+      <div class="number-card">
+        <div class="number-value">20%</div>
+        <div class="number-label">糖尿病族群 ASCVD 可歸因</div>
+        <div class="number-context">Remnant 升高的人口可歸因比例</div>
+      </div>
+      <div class="number-card">
+        <div class="number-value">~20%</div>
+        <div class="number-label">遺傳性高 Lp(a) 盛行率</div>
+        <div class="number-context">比多數人想像的常見</div>
+      </div>
+      <div class="number-card">
+        <div class="number-value">295k</div>
+        <div class="number-label">UK Biobank 樣本數</div>
+        <div class="number-context">Sniderman 2024 ApoB-LDL discordance 研究</div>
+      </div>
+      <div class="number-card">
+        <div class="number-value">9.3 yr</div>
+        <div class="number-label">韓國研究追蹤中位數</div>
+        <div class="number-context">史上最大 Remnant 縱貫研究</div>
+      </div>
+      <div class="number-card">
+        <div class="number-value">&lt;1.5</div>
+        <div class="number-label">TG/HDL 安全比值</div>
+        <div class="number-context">&gt;3 = 小船海 + 隱形戰艦警報</div>
+      </div>
+      <div class="number-card">
+        <div class="number-value">1 次</div>
+        <div class="number-label">Lp(a) 一生測量次數</div>
+        <div class="number-context">2026 ACC/AHA 建議</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FRAMEWORK VISUAL: 三次革命 ─── -->
+  <div class="section">
+    <div class="section-title">🧭 三次革命架構</div>
+    <div class="framework-visual">
+      <div class="framework-title">脂質學的演化路徑:不是取代,而是疊加</div>
+      <div class="framework-steps">
+        <div class="framework-step">
+          <div class="framework-icon">R1</div>
+          <div class="framework-label">LDL 中心</div>
+          <div class="framework-desc">1990s–2010s · 認識大船小船</div>
+        </div>
+        <div class="framework-arrow">→</div>
+        <div class="framework-step">
+          <div class="framework-icon">R2</div>
+          <div class="framework-label">ApoB 中心</div>
+          <div class="framework-desc">2015–2020s · 開始數旗子</div>
+        </div>
+        <div class="framework-arrow">→</div>
+        <div class="framework-step">
+          <div class="framework-icon">R3</div>
+          <div class="framework-label">Remnant 中心</div>
+          <div class="framework-desc">2022–現在 · 揪出隱形戰艦</div>
+        </div>
+        <div class="framework-arrow">+</div>
+        <div class="framework-step">
+          <div class="framework-icon">Lp(a)</div>
+          <div class="framework-label">家族遺傳暗礁</div>
+          <div class="framework-desc">一直被遺忘的角色</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FIVE METAPHORS ─── -->
+  <div class="section">
+    <div class="section-title">🚢 五個比喻:一張完整的血管地圖</div>
+
+    <div class="info-box box-analogy">
+      <div class="box-header"><span class="metaphor-icon">①</span> 大船小船 = LDL 與 LDL-C</div>
+      <div class="box-content">
+        <p>血管是河,膽固醇是貨物,LDL 顆粒是裝著貨物的船。但船分兩種:</p>
+        <ul>
+          <li><strong>大船(大顆粒 LDL):</strong>體積大、密度低、跑得慢、不容易卡進血管壁</li>
+          <li><strong>小船(小密 LDL, sdLDL):</strong>體積小、密度高、數量多、最容易擠進血管內皮</li>
+        </ul>
+        <p>健檢報告上的 <strong>LDL-C</strong> 量的是「所有船上載運的膽固醇總重量」——但它<strong>不會告訴你船是大是小,也不會告訴你有幾艘</strong>。兩個人都是 LDL-C 180:一個可能是兩艘大船,一個是十艘小船。危險度差很多。</p>
+      </div>
+    </div>
+
+    <div class="info-box box-analogy">
+      <div class="box-header"><span class="metaphor-icon">②</span> 船上的燃料 = 三酸甘油酯(TG)</div>
+      <div class="box-content">
+        <p>每艘船除了載膽固醇,還載著燃料——這就是 <strong>TG(三酸甘油酯)</strong>,身體運送能量的方式,本身不是敵人。</p>
+        <p>但 <strong>燃料過量會製造兩種兇手</strong>:</p>
+        <ul>
+          <li><strong>製造隱形戰艦:</strong>肝臟為運走多餘燃料,輸出大量 VLDL 大船;沿途燃料被抽走、膽固醇沒走 → 變成「殘粒」</li>
+          <li><strong>把大船改造成小船:</strong>身體把大船拆解成多艘 sdLDL → 整片血管變成小船海</li>
+        </ul>
+        <p><strong>TG 不是直接的兇手,但它的過量會「製造」兇手</strong>。最有用的快速指標是 <span style="font-family:'Source Code Pro',monospace; background:#f5f3ff; padding:0.1rem 0.4rem; border-radius:3px;">TG ÷ HDL</span>:&lt; 1.5 安全 / &gt; 3 警報。</p>
+      </div>
+    </div>
+
+    <div class="info-box box-analogy">
+      <div class="box-header"><span class="metaphor-icon">③</span> 船頭的旗子 = ApoB</div>
+      <div class="box-content">
+        <p><strong>每一艘致動脈硬化的脂蛋白船,船頭都掛著同一面旗子——ApoB(載脂蛋白 B)。</strong>每艘船只掛一面。所以數旗子,就知道船的總數。</p>
+        <ul>
+          <li><strong>LDL-C</strong> = 貨物的「總重」(濃度)</li>
+          <li><strong>ApoB</strong> = 船的「總數」(數量)</li>
+          <li>撞壞血管的,是<strong>船的數量,不是貨物的</strong></li>
+        </ul>
+        <p>注意:Lp(a) 也是一艘船,也掛 ApoB 旗,所以會被算進 ApoB 總數。</p>
+      </div>
+    </div>
+
+    <div class="info-box box-analogy">
+      <div class="box-header"><span class="metaphor-icon">④</span> 隱形戰艦 = Remnant Cholesterol</div>
+      <div class="box-content">
+        <p>肝臟造出 VLDL 大船,船上載大量燃料 + 少量膽固醇。一路上加油站(LPL)把燃料抽走,膽固醇留在船上沒人動。當燃料抽光,這艘船就變成「<strong>殘粒(Remnant)</strong>」——燃料用完、膽固醇被高度濃縮。</p>
+        <ul>
+          <li><strong>隱形:</strong>健檢報告沒這一行</li>
+          <li><strong>戰艦:</strong>一艘殘粒攜帶的膽固醇可達 LDL 數十倍</li>
+          <li><strong>不需氧化就能撞牆</strong>——bypass 血管壁防線</li>
+          <li>引發發炎的效率比 LDL 還高</li>
+        </ul>
+        <p>但最可怕的是——<strong>它出現在你的健檢報告裡,只是你沒看到</strong>:</p>
+        <div style="font-family:'Source Code Pro',monospace; background:#f5f3ff; padding:0.75rem 1rem; border-radius:6px; margin-top:0.6rem; font-size:0.9rem; border-left:3px solid #7c3aed;">
+          Remnant-C = 總膽固醇 − HDL − LDL<br>
+          ≥ 30 mg/dL → 警報 · ≥ 50 → 顯著高風險
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box box-analogy">
+      <div class="box-header"><span class="metaphor-icon">⑤</span> 家族遺傳的暗礁 = Lp(a)</div>
+      <div class="box-content">
+        <p>你一出生就帶來、河床裡埋著的暗礁——<strong>Lp(a)(Lipoprotein little a)</strong>。</p>
+        <ul>
+          <li><strong>基因決定:</strong>變化幅度很小</li>
+          <li><strong>飲食運動都動不了它:</strong>低碳沒用、運動沒用、減肥沒用</li>
+          <li><strong>Statin 對它效果差:</strong>就算 LDL 降到完美,Lp(a) 還在那裡</li>
+          <li><strong>不檢驗看不到:</strong>一般健檢不會列,要主動加驗</li>
+          <li><strong>一生通常驗一次就有參考價值</strong></li>
+        </ul>
+        <p>它船頭也掛 ApoB,所以會被計入 ApoB 總數。<strong>如果 Lp(a) 高,所有「我代謝健康所以沒事」的論述都被推翻</strong>——這是基因給你的。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FIVE PATIENTS ─── -->
+  <div class="section">
+    <div class="section-title">👥 診間裡的五個病人</div>
+    <p style="color:#475569; margin-bottom:1.25rem; font-size:0.93rem;">這五個比喻會用在五個真實病人身上。先把人介紹給你,等下整篇文章會反覆回到他們。</p>
+
+    <div class="patient-grid">
+      <div class="patient-card patient-A">
+        <div class="patient-header">A 女士 <span class="patient-badge badge-A">整體低風險</span> <span style="font-size:0.78rem; color:#64748b;">25 歲 / BMI 21 / 代謝健康</span></div>
+        <div class="patient-stats">TC 160 · LDL 70 · TG 45 · HDL 60</div>
+        <div class="patient-body">燃料少 ✓ · 旗子少 ✓ · 無隱形戰艦 ✓ · 以大船為主。整體低風險,仍建議測一次 Lp(a) 排除暗礁。</div>
+      </div>
+
+      <div class="patient-card patient-B">
+        <div class="patient-header">B 先生 <span class="patient-badge badge-B">明確高風險</span> <span style="font-size:0.78rem; color:#64748b;">45 歲 / BMI 32 / 高血壓 + 糖尿病</span></div>
+        <div class="patient-stats">TC 250 · LDL 180 · TG 180 · HDL 35 · TG/HDL = 5.14</div>
+        <div class="patient-body">燃料過量 · 旗子多 · 隱形戰艦在血管裡 · 以小船為主。門診常見的代謝失調、心血管高風險典型。LDL 與 ApoB 一致地高——第一次革命已足夠提示積極介入。</div>
+      </div>
+
+      <div class="patient-card patient-C">
+        <div class="patient-header">C 先生 <span class="patient-badge badge-C">風險被低估</span> <span style="font-size:0.78rem; color:#64748b;">52 歲 / BMI 26 / 中階主管 / 加班外食</span></div>
+        <div class="patient-stats">TC 210 · LDL 120(沒紅字) · TG 200(微紅) · HDL 32 · Remnant 58 ⚠️ · ApoB ~130</div>
+        <div class="patient-body">燃料過量 · ApoB 比 LDL 預期的多 · 隱形戰艦藏在「沒紅字」報告裡。<strong>「沒紅字」是陷阱</strong>——這類病人 LDL 風險被嚴重低估,真實 ASCVD 風險高於表面。</div>
+      </div>
+
+      <div class="patient-card patient-D">
+        <div class="patient-header">D 女士 <span class="patient-badge badge-D">風險可能被高估</span> <span style="font-size:0.78rem; color:#64748b;">32 歲 / BMI 22 / 運動健康族</span></div>
+        <div class="patient-stats">TC 230 · LDL 150 · TG 40 · HDL 65</div>
+        <div class="patient-body">燃料少 ✓ · ApoB 比 LDL 預期的少 · 無隱形戰艦 ✓ · 以大船為主。LDL 風險「可能被高估」是合理推測——但<strong>不等於沒有風險</strong>。仍須加驗 Lp(a)、看家族史與 CAC。</div>
+      </div>
+
+      <div class="patient-card patient-E">
+        <div class="patient-header">E 先生 <span class="patient-badge badge-E">LMHR / 證據不足</span> <span style="font-size:0.78rem; color:#64748b;">30 歲 / 體脂 11% / 馬拉松 / 低碳飲食</span></div>
+        <div class="patient-stats">TC 280 · LDL 200(紅字!) · TG 40(完美) · HDL 80(超高)</div>
+        <div class="patient-body">燃料極少 ✓ · ApoB 偏多但以大船為主 · 無隱形戰艦 ✓。<strong>「身體健康得不得了、但膽固醇飆得嚇人」</strong>的低碳/生酮族群。長期結局資料尚不足,科學界仍在累積證據。</div>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="section-subtitle">五個病人對照表:同樣 LDL,意義完全不同</div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>病人</th>
+            <th>年齡 / 背景</th>
+            <th>LDL</th>
+            <th>TG</th>
+            <th>HDL</th>
+            <th>ApoB(旗子)</th>
+            <th>Remnant</th>
+            <th>風險判讀</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>A 女士</strong></td>
+            <td>25 / 健康</td>
+            <td class="num">70</td>
+            <td class="num">45</td>
+            <td class="num">60</td>
+            <td>少</td>
+            <td>無</td>
+            <td class="risk-low">✓ 整體低風險</td>
+          </tr>
+          <tr>
+            <td><strong>B 先生</strong></td>
+            <td>45 / 糖尿 + 高血壓</td>
+            <td class="num">180</td>
+            <td class="num">180</td>
+            <td class="num">35</td>
+            <td>多</td>
+            <td>有 ⚠️</td>
+            <td class="risk-high">⚠ 明確高風險</td>
+          </tr>
+          <tr>
+            <td><strong>C 先生</strong></td>
+            <td>52 / 代謝症候群</td>
+            <td class="num">120</td>
+            <td class="num">200</td>
+            <td class="num">32</td>
+            <td>多(&gt; LDL 預期)</td>
+            <td>有 ⚠️</td>
+            <td class="risk-med">⚠ 風險被 LDL 低估</td>
+          </tr>
+          <tr>
+            <td><strong>D 女士</strong></td>
+            <td>32 / 健康運動</td>
+            <td class="num">150</td>
+            <td class="num">40</td>
+            <td class="num">65</td>
+            <td>少(&lt; LDL 預期)</td>
+            <td>無</td>
+            <td class="risk-amb">⚡ 風險可能被高估</td>
+          </tr>
+          <tr>
+            <td><strong>E 先生</strong></td>
+            <td>30 / LMHR</td>
+            <td class="num">200</td>
+            <td class="num">40</td>
+            <td class="num">80</td>
+            <td>偏多(以大船為主)</td>
+            <td>無</td>
+            <td class="risk-amb">❓ 證據不足</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box box-key">
+      <div class="box-header">⚠️ 一張表讀完的核心訊息</div>
+      <div class="box-content">
+        <p>同樣是 LDL 數字,在不同人身上意義完全不同:</p>
+        <ul>
+          <li>LDL 70 的 A 女士 跟 LDL 200 的 E 先生,風險完全不同</li>
+          <li>LDL 120 的 C 先生(沒紅字),卻可能比 LDL 150 的 D 女士(紅字)風險更高</li>
+          <li>而且這五個人<strong>都應該至少測一次 Lp(a)</strong>——因為它可能藏在任何一個人身上</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── THREE REVOLUTIONS — TABBED ─── -->
+  <div class="section">
+    <div class="section-title">⚙️ 三次革命:演化的細節</div>
+
+    <div class="tab-container">
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab(event, 'tab-r1')">R1 · LDL 中心</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-r2')">R2 · ApoB 中心</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-r3')">R3 · Remnant 中心</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-lpa')">+ Lp(a) 暗礁</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-time')">+ 暴露時間</button>
+      </div>
+
+      <!-- R1: LDL CENTRIC -->
+      <div id="tab-r1" class="tab-content active">
+        <div class="section-subtitle">第一次革命:LDL 中心(1990s–2010s)</div>
+        <p style="color:#475569; margin-bottom:1rem;">過去三十年主流醫學的核心訊息:「LDL 是壞膽固醇,把它降下來,就能減少心肌梗塞和中風。」——這個訊息至今仍然成立。</p>
+
+        <div class="info-box box-evidence">
+          <div class="box-header"><span class="ev-badge ev-strong">Strong</span> LDL 因果性的四層證據鏈</div>
+          <div class="box-content">
+            <ul>
+              <li><strong>機制證據:</strong>動物實驗、體外培養、人體斑塊組織學</li>
+              <li><strong>流行病學證據:</strong>Framingham、ARIC、MESA、Copenhagen 等覆蓋數百萬人世代研究</li>
+              <li><strong>介入性證據:</strong>Statin 數十個大型 RCT(4S、HPS、JUPITER、IMPROVE-IT、FOURIER、ODYSSEY OUTCOMES)</li>
+              <li><strong>基因學證據:</strong>PCSK9、HMGCR、LDLR、NPC1L1 基因變異——終身較低 LDL,終身較少 ASCVD</li>
+            </ul>
+            <p style="margin-top:0.7rem;">2017 年 EAS 共識聲明:「LDL is causally linked to ASCVD beyond reasonable doubt」——意思是<strong>科學上定案了</strong>。</p>
+          </div>
+        </div>
+
+        <div class="info-box box-term">
+          <div class="box-header">📖 大船與小船:LDL 的第一層精緻化</div>
+          <div class="box-content">
+            <p>並不是所有 LDL 都一樣危險。小密 LDL(sdLDL)幾乎總是伴隨代謝症候群:</p>
+            <ul>
+              <li>高 TG(燃料過量)</li>
+              <li>低 HDL</li>
+              <li>胰島素阻抗</li>
+              <li>脂肪肝</li>
+              <li>高度發炎</li>
+            </ul>
+            <p>這就是為什麼 B 先生的 LDL 比 A 女士的 LDL 危險很多倍——<strong>不只是濃度的問題,更是船的種類問題</strong>。</p>
+          </div>
+        </div>
+
+        <div class="info-box box-key">
+          <div class="box-header">⚠️ 第一次革命留下的問題</div>
+          <div class="box-content">
+            <p>當醫學界把 LDL 降到歷史新低之後,他們發現一個令人不安的現象——<strong>很多病人 LDL 達標了,還是會發生心肌梗塞和中風</strong>。</p>
+            <p>這就是「殘餘心血管風險」的問題——也是觸發第二次革命的關鍵。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- R2: ApoB CENTRIC -->
+      <div id="tab-r2" class="tab-content">
+        <div class="section-subtitle">第二次革命:ApoB 中心(2015–2020s)— 開始數旗子</div>
+        <p style="color:#475569; margin-bottom:1rem;">每個致動脈硬化的脂蛋白顆粒(LDL、VLDL、IDL、Lp(a)、remnant)船頭<strong>只掛一面 ApoB 旗子</strong>。數旗子等於精確數出有多少艘船正在你的血管裡撞牆。</p>
+
+        <div class="info-box box-evidence">
+          <div class="box-header"><span class="ev-badge ev-strong">Strong</span> Sniderman 2024 · UK Biobank 295,544 人</div>
+          <div class="box-content">
+            <p>2024 年發表於 European Heart Journal,中位追蹤 10.9 年,分析無 ASCVD 且未服 statin 個體:</p>
+            <ul>
+              <li>在固定 LDL-C 水準下,<strong>ApoB 的變異性很大</strong></li>
+              <li>ApoB 提供 LDL-C 之外的額外 ASCVD 風險預測資訊</li>
+              <li>ApoB &gt; LDL 預期的組(discordantly high):MACE HR 1.06</li>
+              <li>ApoB &lt; LDL 預期的組(discordantly low):MACE HR 0.91</li>
+            </ul>
+            <p style="margin-top:0.6rem;"><strong>結論:</strong>當 LDL 與 ApoB 不一致時,ApoB 比 LDL 更接近真實風險。</p>
+          </div>
+        </div>
+
+        <div class="info-box box-term">
+          <div class="box-header">📖 用五個病人理解 ApoB</div>
+          <div class="box-content">
+            <ul>
+              <li><strong>B 先生</strong>(LDL 180、ApoB 一致地多):LDL 跟 ApoB 講同一個故事 — 沒新意見</li>
+              <li><strong>C 先生</strong>(LDL 120、ApoB 130):ApoB 揭穿 LDL — 沒紅字但 ApoB 告訴你風險被低估</li>
+              <li><strong>D 女士</strong>(LDL 150、ApoB 偏低):ApoB 反過來幫 D 女士辯護 — 看起來高但船沒那麼多</li>
+              <li><strong>E 先生</strong>(LDL 200、ApoB 偏多但大船為主):兩個都高,意義最爭議</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-box box-key">
+          <div class="box-header">⚠️ 學界共識的轉變</div>
+          <div class="box-content">
+            <ul>
+              <li><strong>2024 NLA Expert Clinical Consensus:</strong>「ApoB 在 ASCVD 風險評估上優於 LDL-C」</li>
+              <li><strong>2026 ACC/AHA Dyslipidemia Guideline:</strong>進一步提高 ApoB 在殘餘風險評估中的臨床地位</li>
+            </ul>
+            <p style="margin-top:0.6rem;"><strong>核心訊息:</strong>ApoB 是真正的因果計量單位;當 LDL 與 ApoB 不一致時,ApoB 比 LDL 更接近真實風險。但即使加上 ApoB,仍有殘餘風險未被解釋——引出第三次革命。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- R3: REMNANT CENTRIC -->
+      <div id="tab-r3" class="tab-content">
+        <div class="section-subtitle">第三次革命:Remnant 中心(2022 至今)— 揪出隱形戰艦</div>
+
+        <div class="info-box box-evidence">
+          <div class="box-header"><span class="ev-badge ev-strong">Strong</span> 因果性證據鏈</div>
+          <div class="box-content">
+            <ul>
+              <li><strong>2024 雙向 Mendelian Randomization:</strong>用基因學方法直接證明 Remnant 與心血管疾病是因果關係</li>
+              <li><strong>2024 Wadström 研究(Copenhagen):</strong>糖尿病患者中,<strong>~20% 的 ASCVD 事件可歸因於 Remnant 升高</strong></li>
+              <li><strong>2021 Quispe(EHJ):</strong>即使 LDL 與 ApoB 都達標,Remnant 仍能獨立預測心血管事件</li>
+              <li><strong>2021 EAS 共識聲明:</strong>正式將 Remnant 列為 ASCVD 殘餘風險的核心驅動因子</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-box box-key">
+          <div class="box-header">🔥 2025 年最震撼:韓國 430 萬人 9.3 年追蹤(JACC)</div>
+          <div class="box-content">
+            <p><strong>Jung HN, et al. (2025) JACC</strong> — 史上最大 Remnant 縱貫研究。</p>
+            <p>最震撼的發現:在 20–39 歲、<strong>LDL-C &lt; 100 mg/dL(完美達標)但 Remnant-C ≥ 30 mg/dL</strong> 的年輕成人中:</p>
+            <ul>
+              <li>心肌梗塞風險:<strong>HR 1.24</strong></li>
+              <li>缺血性中風風險:<strong>HR 1.29</strong></li>
+              <li>心血管死亡風險:<strong>HR 1.83</strong>(增加近一倍)</li>
+            </ul>
+            <p style="margin-top:0.6rem;">這意味著:<strong>即使 LDL 完美達標,只要 Remnant ≥ 30,心血管死亡風險仍會增加近一倍</strong>。而且這個數字健檢報告早就有了——TC − HDL − LDL 拿計算機就能算。</p>
+          </div>
+        </div>
+
+        <div class="info-box box-term">
+          <div class="box-header">📖 用五個病人理解 Remnant</div>
+          <div class="box-content">
+            <ul>
+              <li><strong>B 先生</strong>(Remnant 高):代謝失調已完整呈現,隱形戰艦在意料之中</li>
+              <li><strong>C 先生</strong>(Remnant 高):藏在「沒紅字」報告裡 — 這就是為什麼 C 先生風險比 LDL 顯示的高</li>
+              <li><strong>D 女士</strong>(Remnant 低):雷達清空</li>
+              <li><strong>E 先生</strong>(Remnant 低):這是 LMHR 的「呼吸空間」 — 沒有隱形戰艦,但 ApoB 仍然多</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lp(a) -->
+      <div id="tab-lpa" class="tab-content">
+        <div class="section-subtitle">家族遺傳的暗礁:一個被忽略太久的角色</div>
+        <p style="color:#475569; margin-bottom:1rem;">Lp(a) 不算「革命」,但它是一個被忽略太久的角色。</p>
+
+        <div class="info-box box-individual">
+          <div class="box-header">👤 為什麼 Lp(a) 重要?</div>
+          <div class="box-content">
+            <ul>
+              <li><strong>~20% 的人有遺傳性高 Lp(a)</strong>——比你想的常見</li>
+              <li>直接增加心肌梗塞、中風、主動脈瓣鈣化的風險</li>
+              <li><strong>Statin 對它沒效</strong>——降 LDL 不會降 Lp(a)</li>
+              <li><strong>飲食運動對它沒效</strong>——再健康也降不下來</li>
+              <li>專門藥物研發中(antisense oligonucleotides、siRNA)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-box box-lab">
+          <div class="box-header">🧪 誰需要特別檢驗 Lp(a)?</div>
+          <div class="box-content">
+            <ul>
+              <li>有家族心血管病史(尤其早發 ASCVD)</li>
+              <li>本人已發生過心肌梗塞 / 中風</li>
+              <li>LDL 高但找不到代謝原因(像 D 女士這種)</li>
+              <li><strong>2026 ACC/AHA 指引:每個成人一生至少測一次</strong></li>
+            </ul>
+            <p style="margin-top:0.6rem;"><strong>一句話濃縮:</strong>Lp(a) 是你血管裡一輩子都在,但你不檢驗就不會發現的東西。一生測一次就夠。</p>
+          </div>
+        </div>
+
+        <div class="info-box box-key">
+          <div class="box-header">⚠️ 對五個病人的意義</div>
+          <div class="box-content">
+            <ul>
+              <li><strong>A 女士:</strong>健康年輕,仍建議測一次(暗礁可能藏著)</li>
+              <li><strong>B 先生:</strong>能告訴你「他的高風險裡有多少是基因加碼」</li>
+              <li><strong>C 先生:</strong>除了 ApoB、Remnant,Lp(a) 也應該驗</li>
+              <li><strong>D 女士:</strong><strong>最該驗的一個</strong>——因為她 LDL 高但其他都正常,如果 Lp(a) 也高,所有「代謝健康所以沒事」的論述都被推翻</li>
+              <li><strong>E 先生(LMHR):</strong><strong>也最該驗</strong>——同樣理由</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIME EXPOSURE -->
+      <div id="tab-time" class="tab-content">
+        <div class="section-subtitle">時間維度:累積暴露的真實意義</div>
+
+        <div class="info-box box-analogy">
+          <div class="box-header">💡 水滴穿石:動脈硬化的真正本質</div>
+          <div class="box-content">
+            <p>一滴水沒事。每天滴。滴 30 年,石頭就被打穿了。動脈硬化也是這樣——ApoB 顆粒每天撞血管壁一點點,你完全沒感覺。但每天撞、每天撞、撞 30 年——血管就被打穿了。</p>
+            <p>醫學上有個類似概念叫「<strong>pack-years(包年)</strong>」——抽菸的人不是某天抽一包菸出事,而是 20 年每天抽一包這種長期累積才出事。LDL 也一樣:</p>
+            <div style="font-family:'Source Code Pro',monospace; background:white; padding:0.8rem 1rem; border-radius:6px; margin:0.6rem 0; text-align:center; border:1px solid #f9a8d4; font-size:0.95rem;">
+              ASCVD 風險 ≈ ApoB 流量 × 暴露時間
+            </div>
+            <p>不是某一天的 LDL 數字,而是「<strong>這個數字維持了多少年</strong>」。</p>
+          </div>
+        </div>
+
+        <div class="info-box box-evidence">
+          <div class="box-header"><span class="ev-badge ev-strong">Strong</span> Ference 的核心訊息</div>
+          <div class="box-content">
+            <p>「LDL exposure 是『面積』,不是『點』。降越早,降越久,效果越大。」</p>
+            <p><strong>具體例子:</strong></p>
+            <ul>
+              <li>天生 PCSK9 基因變異者,LDL 從出生就比一般人低 30 mg/dL——<strong>終身 ASCVD 風險降低 50–80%</strong></li>
+              <li>50 歲才開始 statin 把 LDL 從 160 降到 70 的人,只能減少未來的暴露,<strong>不能消除過去 50 年的累積</strong></li>
+            </ul>
+            <p style="margin-top:0.6rem;">這就是為什麼<strong>早期介入比晚期介入更有效</strong>——水滴穿石的關鍵,不是「水滴大不大」,而是「水滴了多少年」。</p>
+          </div>
+        </div>
+
+        <div class="info-box box-individual">
+          <div class="box-header">👤 對 E 先生(LMHR)的關鍵意義</div>
+          <div class="box-content">
+            <p>E 先生現在 30 歲、CAC = 0、代謝完美、沒有 Remnant——但他面對的真正問題,不是「現在」,而是「<strong>20–30 年後</strong>」。</p>
+            <p>如果他從 30 歲到 65 歲都維持 LDL 200,這 35 年累積的水滴量是巨大的。</p>
+            <p>這就是為什麼「<strong>LMHR 現在沒事」不能等於「LMHR 終身沒事」</strong>——目前科學界對這群人的長期結局還沒有足夠資料。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ─── LMHR CONTROVERSY ─── -->
+  <div class="section">
+    <div class="section-title">🔬 LMHR 表型:目前最大的爭議</div>
+
+    <div class="info-box box-term">
+      <div class="box-header">📖 LMHR 是什麼?</div>
+      <div class="box-content">
+        <p><strong>LMHR(Lean Mass Hyper-Responder,精瘦肌量超反應者)</strong>= 採用低碳/生酮飲食的精瘦運動者,出現以下組合:</p>
+        <ul>
+          <li>LDL 飆到 200 以上(紅字!)</li>
+          <li>HDL 超高(60–100+)</li>
+          <li>TG 極低(&lt; 70)</li>
+          <li>BMI 正常或偏低、體脂低、代謝完全健康</li>
+          <li>沒有 Remnant(隱形戰艦)</li>
+        </ul>
+        <p style="margin-top:0.6rem;">說真的——這群人是「<strong>身體健康得不得了、但膽固醇飆得嚇人</strong>」的那種人。</p>
+      </div>
+    </div>
+
+    <div class="info-box box-safety">
+      <div class="box-header">🛡️ Soto-Mota 撤稿事件:LMHR 派必須誠實面對的一頁</div>
+      <div class="box-content">
+        <p>2025 年中,LMHR 派最重要的縱貫研究 <strong>Soto-Mota et al. 「Plaque Begets Plaque, ApoB Does Not」(JACC Advances 2025)</strong> 被作者與期刊聯合撤稿。</p>
+        <p style="background:white; padding:0.7rem 1rem; border-radius:6px; border-left:3px solid #dc2626; font-size:0.88rem; margin:0.6rem 0;">JACC Advances 官方撤稿聲明:「方法學疑慮影響數據可靠性,所識別的錯誤過大,無法以勘誤修正。」</p>
+        <p><strong>撤稿代表什麼?</strong></p>
+        <ul>
+          <li>✗ 這篇<strong>特定研究</strong>的方法學瑕疵</li>
+          <li>✗ 數據處理 / 統計方法 / 樣本選擇上有問題</li>
+          <li>✓ <strong>不代表「LMHR 假說錯誤」</strong></li>
+          <li>✓ 只代表「這篇特定研究的數據不可靠」</li>
+        </ul>
+        <p style="margin-top:0.6rem;">但這帶來重要的學術後果:<strong>Soto-Mota 2025 不能再作為支持 LMHR 安全性的有效證據</strong>。</p>
+      </div>
+    </div>
+
+    <div class="info-box box-evidence">
+      <div class="box-header"><span class="ev-badge ev-limited">Limited</span> 撤稿後 LMHR 派的真實證據基礎</div>
+      <div class="box-content">
+        <ul>
+          <li>✗ Soto-Mota 2025 縱貫研究(撤稿)</li>
+          <li>✓ Budoff 2024 KETO 橫斷研究(n = 80,未撤稿)</li>
+          <li>✓ 一系列 case reports 與小型觀察</li>
+        </ul>
+        <p style="margin-top:0.6rem;">這個證據體量,確實不足以挑戰主流共識——<strong>但也不等於 LMHR 假說已被推翻</strong>。</p>
+      </div>
+    </div>
+
+    <div class="info-box box-key">
+      <div class="box-header">⚠️ LMHR 的真實處境:一句話帶過</div>
+      <div class="box-content">
+        <p><strong>目前科學界還沒有答案。</strong>長期高品質追蹤資料還不夠多,證據還在累積中,結論還是空白的——這需要時間。</p>
+        <p>可以確定的是:LMHR <strong>不是「沒風險」,也不是「跟代謝症候群一樣高風險」</strong>——他們處在一個目前無法精確量化的中間地帶。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── EVIDENCE BREAKDOWN ─── -->
+  <div class="section">
+    <div class="section-title">🔬 證據強度總表</div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>主張</th>
+            <th>證據等級</th>
+            <th>關鍵依據</th>
+            <th>效應規模</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>LDL-C 是 ASCVD 的因果因子</td>
+            <td><span class="ev-badge ev-strong">Strong</span></td>
+            <td>2017 EAS 共識;機制 + 流行病學 + RCT + 孟德爾隨機化四層證據</td>
+            <td>大型 RCT 一致顯示降 LDL 降事件</td>
+          </tr>
+          <tr>
+            <td>ApoB 在 LDL-ApoB 不一致時優於 LDL</td>
+            <td><span class="ev-badge ev-strong">Strong</span></td>
+            <td>Sniderman 2024 UK Biobank n=295,544;2024 NLA 共識</td>
+            <td>discordance 帶來顯著風險差異(HR 1.06 vs 0.91)</td>
+          </tr>
+          <tr>
+            <td>Remnant-C 是獨立 ASCVD 因果因子</td>
+            <td><span class="ev-badge ev-strong">Strong</span></td>
+            <td>JACC 2025 韓國 430 萬人;Quispe 2021;2024 雙向 MR</td>
+            <td>Remnant ≥30 + LDL&lt;100 → CV 死亡 HR 1.83</td>
+          </tr>
+          <tr>
+            <td>Lp(a) 增加 ASCVD 與主動脈瓣鈣化</td>
+            <td><span class="ev-badge ev-strong">Strong</span></td>
+            <td>多項基因學研究與大型世代;2026 ACC/AHA 指引建議</td>
+            <td>建議成人一生至少測一次</td>
+          </tr>
+          <tr>
+            <td>累積暴露(LDL × years)是真正驅動因子</td>
+            <td><span class="ev-badge ev-strong">Strong</span></td>
+            <td>PCSK9 基因變異研究;Ference 一系列分析</td>
+            <td>終身較低 LDL 30 mg/dL → ASCVD 降 50–80%</td>
+          </tr>
+          <tr>
+            <td>LMHR 長期心血管安全</td>
+            <td><span class="ev-badge ev-limited">Limited</span></td>
+            <td>Budoff 2024(n=80,橫斷);無長期 RCT 或大型世代</td>
+            <td>無法量化;Soto-Mota 已撤稿</td>
+          </tr>
+          <tr>
+            <td>低碳/生酮飲食 LDL 升高 = 良性</td>
+            <td><span class="ev-badge ev-preliminary">Preliminary</span></td>
+            <td>機制推論 + 小樣本觀察;未經長期結局驗證</td>
+            <td>不能用於臨床決策</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ─── CLINICAL FRAMEWORK ─── -->
+  <div class="section">
+    <div class="section-title">🏥 臨床整合框架:五個病人,五種處置</div>
+
+    <div class="implications-grid">
+      <div class="impl-card">
+        <div class="impl-icon">CASE-A</div>
+        <div class="impl-title">A 女士 · 觀察 + 維持</div>
+        <div class="impl-text">
+          1. 確認生活型態維持<br>
+          2. 建議測一次 Lp(a)(一生只要一次)<br>
+          3. 5 年後再驗一次血脂
+        </div>
+      </div>
+      <div class="impl-card">
+        <div class="impl-icon">CASE-B</div>
+        <div class="impl-title">B 先生 · 積極介入</div>
+        <div class="impl-text">
+          1. LDL 與 ApoB 一致地高,第一次革命已夠用<br>
+          2. Statin / ezetimibe / PCSK9i 階梯介入<br>
+          3. 同步控制血壓、血糖、體重、戒菸<br>
+          4. 加驗 Lp(a)
+        </div>
+      </div>
+      <div class="impl-card">
+        <div class="impl-icon">CASE-C</div>
+        <div class="impl-title">C 先生 · 補驗 + 加強</div>
+        <div class="impl-text">
+          1. 加驗 ApoB → 確認船數<br>
+          2. 算 Remnant-C → 確認殘餘<br>
+          3. 加驗 Lp(a) → 排除基因加碼<br>
+          4. 雖無紅字仍考慮 statin + 生活型態<br>
+          5. 密切追蹤
+        </div>
+      </div>
+      <div class="impl-card">
+        <div class="impl-icon">CASE-D</div>
+        <div class="impl-title">D 女士 · 個別化評估</div>
+        <div class="impl-text">
+          1. 加驗 ApoB → 確認真的偏低<br>
+          2. <strong>加驗 Lp(a)(最重要)</strong><br>
+          3. 看家族史、血壓、抽菸、發炎<br>
+          4. 考慮 CAC 看結構性現況<br>
+          5. 若都正常 → 不立刻用藥,長期密切追蹤
+        </div>
+      </div>
+      <div class="impl-card">
+        <div class="impl-icon">CASE-E</div>
+        <div class="impl-title">E 先生(LMHR)· 多軸動態</div>
+        <div class="impl-text">
+          1. <strong>測 Lp(a)(最重要)</strong><br>
+          2. 算 Remnant-C → 確認真的沒有<br>
+          3. 測 hs-CRP → 確認發炎背景<br>
+          4. 做 CAC(0 → 動態追蹤 / 100 → 積極介入)<br>
+          5. 每年追蹤 ApoB、Remnant、hs-CRP<br>
+          6. 與醫師討論是否吃 statin
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box box-safety">
+      <div class="box-header">🛡️ 重要原則</div>
+      <div class="box-content">
+        <p>大多數門診病人是 <strong>B 先生型</strong>——LDL 與 ApoB 一致地高,代謝症候群明顯。對這群人,LDL 仍是非常好的指標,把它控制下來確實能預防心血管疾病。<strong>我們不能說 LDL 不重要</strong>。</p>
+        <p>但 C / D / E 三型存在,提醒我們:當 LDL 與其他指標不一致時,要做更完整的評估,而不是只看一個數字。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── KEY TAKEAWAYS ─── -->
+  <div class="section">
+    <div class="section-title">💎 學習重點總結</div>
+    <div class="takeaways-grid">
+      <div class="takeaway-card">
+        <div class="takeaway-num">KEY-01</div>
+        <div class="takeaway-title">LDL 仍是基礎,但不是全部</div>
+        <div class="takeaway-text">大多數人 LDL 與 ApoB 一致,LDL 仍是最重要、最便宜的第一線指標。但約 20–30% 的人 LDL 跟真實風險「對不上」——需要 ApoB、Remnant、Lp(a) 補位。</div>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-num">KEY-02</div>
+        <div class="takeaway-title">Remnant 是健檢報告裡免費的隱藏訊息</div>
+        <div class="takeaway-text">公式:TC − HDL − LDL。≥ 30 mg/dL 警報、≥ 50 顯著高風險。JACC 2025 證實:即使 LDL &lt; 100 完美,Remnant ≥ 30 的年輕人 CV 死亡風險仍增加近一倍。</div>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-num">KEY-03</div>
+        <div class="takeaway-title">Lp(a) 一生至少測一次</div>
+        <div class="takeaway-text">基因決定、飲食運動降不了、statin 對它沒效。約 20% 人帶有遺傳性高 Lp(a)。2026 ACC/AHA 指引建議每個成人一生至少測一次——它是吃低碳跑步都救不了的暗礁。</div>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-num">KEY-04</div>
+        <div class="takeaway-title">暴露時間決定面積,早降比晚降有效</div>
+        <div class="takeaway-text">ASCVD 風險 ≈ ApoB × 暴露時間。PCSK9 基因低 LDL 終身者風險降 50–80%;50 歲才開始 statin 只能減少未來的累積。LMHR 的真正問題不是「現在」,是 30 年後。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PRACTICE ─── -->
+  <div class="section">
+    <div class="section-title">📝 練習題(Active Recall)</div>
+    <p style="color:#475569; margin-bottom:1rem; font-size:0.9rem;">先想再點開答案 — 這樣記得最牢。</p>
+
+    <details class="question-accordion">
+      <summary class="question-header">
+        <span class="question-number">Q1</span>
+        <span class="question-type" style="background:#dbeafe; color:#1e3a8a;">應用情境題</span>
+        <span class="question-text">你拿到自己的健檢報告:TC 195、HDL 50、LDL 115、TG 150。Remnant-C 是多少?要警報嗎?</span>
+        <span class="accordion-icon"></span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>計算:</strong>Remnant-C = TC − HDL − LDL = 195 − 50 − 115 = <strong>30 mg/dL</strong>。</p>
+        <p><strong>判讀:</strong>剛好踩到 JACC 2025 韓國研究的警報線。雖然 LDL 115 看起來「沒嚴重紅字」、TG 150 也只是邊緣,但隱形戰艦已經達到警報水位。</p>
+        <p><strong>下一步:</strong>(1) 看 TG/HDL 比 = 150/50 = 3.0,接近小船海警戒線;(2) 加驗 ApoB 看船的真實數量;(3) 加驗 Lp(a) 排除基因加碼;(4) 生活型態介入優先處理 TG(減少精製碳水、增加 Omega-3、規律有氧)。</p>
+      </div>
+    </details>
+
+    <details class="question-accordion">
+      <summary class="question-header">
+        <span class="question-number">Q2</span>
+        <span class="question-type" style="background:#d1fae5; color:#065f46;">證據評估題</span>
+        <span class="question-text">朋友看到 IG 貼文說「低碳飲食讓 LDL 飆高是好事,因為都是大船」,你怎麼回應?</span>
+        <span class="accordion-icon"></span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>核心回應:</strong>這是 LMHR 表型的假說,目前科學界<strong>沒有長期結局資料</strong>支持這個說法是安全的。</p>
+        <p><strong>具體論點:</strong></p>
+        <ul>
+          <li>(1) 「大船比較安全」確實有道理,但<strong>大船仍然是船,船頭仍掛 ApoB 旗</strong>。船數多,撞牆機率仍存在。</li>
+          <li>(2) 2025 年支持 LMHR 安全性最重要的 Soto-Mota 研究<strong>已遭撤稿</strong>(方法學瑕疵)。</li>
+          <li>(3) 累積暴露原則:就算現在 CAC = 0,從 30 歲到 65 歲都維持 LDL 200 的 35 年累積是巨大的。</li>
+          <li>(4) 撤稿不代表 LMHR 假說錯——但也不代表「LDL 200 沒事」可以做為個人決策依據。</li>
+        </ul>
+        <p><strong>建議行動:</strong>如果朋友是 LMHR 型,測 Lp(a)、算 Remnant-C、做 CAC,跟醫師討論 — 不要靠 IG 貼文做決策。</p>
+      </div>
+    </details>
+
+    <details class="question-accordion">
+      <summary class="question-header">
+        <span class="question-number">Q3</span>
+        <span class="question-type" style="background:#fef3c7; color:#92400e;">決策判斷題</span>
+        <span class="question-text">為什麼 D 女士(LDL 150 但 ApoB 偏低)「最該測 Lp(a)」?</span>
+        <span class="accordion-icon"></span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>核心邏輯:</strong>D 女士的 LDL 高,但代謝完全健康——這是個「找不到代謝原因的 LDL 升高」典型情境。</p>
+        <p><strong>為什麼 Lp(a) 是關鍵?</strong></p>
+        <ul>
+          <li>(1) D 女士的健康生活型態無法解釋為何 LDL 偏高 → 提示可能有基因因素</li>
+          <li>(2) Lp(a) 是基因決定的暗礁,代謝再好也抵消不了</li>
+          <li>(3) <strong>如果 Lp(a) 也高,所有「代謝健康所以沒事」的論述都被推翻</strong>——她其實是高風險族群</li>
+          <li>(4) 如果 Lp(a) 正常,搭配 ApoB 偏低、Remnant 為零、家族史乾淨,風險被高估的推測就站得住腳</li>
+        </ul>
+        <p><strong>關鍵原則:</strong>Lp(a) 是「翻轉整個評估」的指標——而且一生只要驗一次。對 D 女士這類「無法用代謝解釋的 LDL 升高」族群,投資報酬率最高。</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ─── BOTTOM LINE ─── -->
+  <div class="bottom-line">
+    <div class="bottom-line-header">🎯 我的行動結論</div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">✔ 核心洞察</div>
+      <div class="bottom-line-text">脂質學從「看一個數字(LDL)」進化到「看一組數字(LDL + ApoB + Remnant + Lp(a) + 暴露時間)」。對中階體組成優化者而言,過度關注 HDL/TG 的「代謝健康指標」可能讓我忽略了 Remnant 與 Lp(a) 這兩個「藏在報告裡或根本沒驗」的關鍵指標。LDL 仍然是基礎,但不是全部。</div>
+    </div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">📈 本週應用</div>
+      <div class="bottom-line-text">
+        (1) 翻出最近一次健檢報告,用公式 <strong>Remnant-C = TC − HDL − LDL</strong> 自算 — 如果 ≥ 30 mg/dL,下次健檢加驗 ApoB 並重新評估飲食的精製碳水比例。<br>
+        (2) 算 <strong>TG / HDL 比值</strong> — 應該 &lt; 1.5;若 &gt; 2 表示代謝彈性正在下降,優先處理而非追加補充劑。<br>
+        (3) 下次健檢主動加驗 <strong>Lp(a)</strong> — 一生只要驗一次,投資報酬率極高。<br>
+        (4) 把這四個數字(LDL、ApoB、Remnant、Lp(a))當成「年度血管儀表板」,每年比較一次趨勢,不只看單次數字。
+      </div>
+    </div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">⚠ 需要驗證</div>
+      <div class="bottom-line-text">
+        <strong>證據限制:</strong>JACC 2025 韓國研究是東亞族群,效應大小不一定完美外推。LMHR 的長期結局資料目前確實空白,Soto-Mota 撤稿後支持「低碳 LDL 升高 = 良性」的證據體量很弱。<br>
+        <strong>個人追蹤:</strong>若我目前 Remnant 在邊緣值,3 個月後重驗看趨勢,而非單次決策;若 Lp(a) 高,則整個風險評估框架需翻新,要找心血管專科討論早期介入策略。<br>
+        <strong>不該做的事:</strong>不要因為「LDL 不是全部」就忽略 LDL,也不要因為「LMHR 假說」就放心讓 LDL 飆到 200。
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <div class="footer">
+    <div>製作日期:2026-05-27</div>
+    <div style="margin-top:0.5rem;">內容來源:禾峰診所 王峰醫師 · 脂質學三次革命整理</div>
+    <div class="footer-chat-title">2026-05-27 [Labs] Cholesterol Evolution - LDL ApoB Remnant Decipher</div>
+    <div class="footer-disclaimer">
+      本文件為教育性質整理,不構成醫療建議。實施任何重大改變前,請諮詢合格醫療專業人員。檢驗數值需在臨床情境下解讀;單一指標異常不等於疾病,參考範圍因實驗室和族群而異。Statin 與其他降脂藥物的開立與停用,必須由醫師個別評估。
+    </div>
+  </div>
+
+
+</div>
+<script>
+function switchTab(evt, tabId) {
+  const container = evt.currentTarget.closest('.tab-container');
+  container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>

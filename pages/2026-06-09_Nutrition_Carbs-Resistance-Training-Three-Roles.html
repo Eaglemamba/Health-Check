@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-date" content="2026-06-09">
+<title>重訓需要多少碳水？拆解爆紅說法</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.75; color: #1e293b; background: #f1f5f9; padding: 1.5rem;
+}
+.doc { max-width: 880px; margin: 0 auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+code, .mono { font-family: 'Source Code Pro', monospace; }
+
+/* ---- Header ---- */
+.header { background: linear-gradient(135deg, #064e3b, #047857, #059669); color: #fff; padding: 2.5rem 2rem; text-align: center; position: relative; }
+.header::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, #047857, #6ee7b7); }
+.header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.5px; }
+.header .subtitle { font-size: 1rem; font-weight: 300; opacity: 0.92; }
+.tag-row { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+.tag { font-size: 0.75rem; font-weight: 500; padding: 0.25rem 0.7rem; border-radius: 999px; }
+.tag-nutrition { background: #bbf7d0; color: #14532d; }
+.tag-training { background: #dbeafe; color: #1e3a8a; }
+.tag-evidence { background: #fde68a; color: #92400e; }
+.source-line { font-size: 0.78rem; opacity: 0.8; margin-top: 0.9rem; }
+
+/* ---- Section base ---- */
+.section { padding: 2rem; }
+.section h2 { font-size: 1.3rem; color: #064e3b; margin-bottom: 1.1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #a7f3d0; display: flex; align-items: center; gap: 0.5rem; }
+.section h3 { font-size: 1.08rem; color: #065f46; margin: 1.3rem 0 0.6rem; }
+.section p { margin-bottom: 0.8rem; }
+.section ul { margin: 0.5rem 0 0.9rem 1.3rem; }
+.section li { margin-bottom: 0.4rem; }
+
+/* ---- Executive Summary ---- */
+.exec { background: #ecfdf5; border-top: 1px solid #a7f3d0; border-bottom: 1px solid #a7f3d0; }
+.exec h2 { color: #064e3b; border-bottom-color: #6ee7b7; }
+.exec .lead { font-size: 1.02rem; color: #334155; }
+.rating-bar { display: flex; align-items: center; gap: 1rem; margin: 1.2rem 0 0.4rem; padding: 0.6rem 1rem; background: linear-gradient(135deg, #ecfdf5, #f0fdfa); border-radius: 8px; flex-wrap: wrap; border: 1px solid #a7f3d0; }
+.rating-score { font-weight: 700; color: #065f46; font-size: 1rem; }
+.rating-stars { color: #f59e0b; letter-spacing: 1px; }
+.evidence-tier { font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.evidence-moderate { background: #dbeafe; color: #1e3a8a; }
+.rating-high { font-size: 0.8rem; color: #047857; background: #d1fae5; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.rating-low { font-size: 0.8rem; color: #64748b; background: #f1f5f9; padding: 0.2rem 0.5rem; border-radius: 4px; }
+
+/* ---- Objectives ---- */
+.obj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.objective-item { background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+.objective-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.objective-item .num { font-family: 'Source Code Pro', monospace; font-weight: 600; color: #059669; font-size: 0.85rem; }
+.objective-item .txt { font-size: 0.92rem; color: #334155; margin-top: 0.3rem; }
+
+/* ---- Framework Visual ---- */
+.framework-visual { background: linear-gradient(135deg, #047857, #059669); border-radius: 1rem; padding: 1.6rem; color: white; margin: 0.5rem 0 0.5rem; }
+.framework-title { text-align: center; font-size: 1.12rem; font-weight: 700; margin-bottom: 0.4rem; }
+.framework-sub { text-align: center; font-size: 0.82rem; opacity: 0.85; margin-bottom: 1.4rem; }
+.framework-steps { display: flex; justify-content: center; align-items: stretch; gap: 0.8rem; flex-wrap: wrap; }
+.framework-step { text-align: center; flex: 1; min-width: 150px; max-width: 230px; background: rgba(255,255,255,0.12); border-radius: 0.8rem; padding: 1rem 0.8rem; }
+.framework-icon { font-size: 1.6rem; width: 3.2rem; height: 3.2rem; background: rgba(255,255,255,0.2); border-radius: 0.7rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.6rem; }
+.framework-step .role { font-weight: 700; font-size: 0.98rem; margin-bottom: 0.3rem; }
+.framework-step .verdict { font-size: 0.8rem; opacity: 0.92; line-height: 1.5; }
+.framework-step .badge { display: inline-block; margin-top: 0.5rem; font-size: 0.7rem; padding: 0.1rem 0.5rem; border-radius: 999px; background: rgba(255,255,255,0.22); }
+
+/* ---- Key Numbers Dashboard ---- */
+.dash { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.9rem; }
+.dash-card { background: #ecfdf5; border: 1px solid #86efac; border-radius: 10px; padding: 1rem; text-align: center; }
+.dash-num { font-family: 'Source Code Pro', monospace; font-size: 1.5rem; font-weight: 600; color: #047857; }
+.dash-label { font-size: 0.78rem; color: #475569; margin-top: 0.3rem; line-height: 1.4; }
+
+/* ---- Tabs ---- */
+.tab-container { margin-top: 0.5rem; }
+.tab-nav { display: flex; gap: 0.4rem; flex-wrap: wrap; border-bottom: 2px solid #d1fae5; margin-bottom: 1.3rem; }
+.tab-btn { font-family: inherit; font-size: 0.9rem; font-weight: 500; padding: 0.6rem 1rem; border: none; background: none; color: #64748b; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.15s, border-color 0.15s; }
+.tab-btn:hover { color: #059669; }
+.tab-btn.active { color: #047857; border-bottom-color: #047857; font-weight: 700; }
+.tab-content { display: none; animation: fade 0.25s ease; }
+.tab-content.active { display: block; }
+@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* ---- Info boxes ---- */
+.box { border-radius: 10px; overflow: hidden; margin: 1rem 0; border: 1px solid; }
+.box-head { padding: 0.5rem 0.9rem; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 0.45rem; }
+.box-body { padding: 0.8rem 0.9rem; font-size: 0.92rem; line-height: 1.7; }
+.box-key { border-color: #fdba74; } .box-key .box-head { background: #fed7aa; color: #9a3412; } .box-key .box-body { background: #fff7ed; }
+.box-evidence { border-color: #6ee7b7; } .box-evidence .box-head { background: #a7f3d0; color: #065f46; } .box-evidence .box-body { background: #ecfdf5; }
+.box-analogy { border-color: #f9a8d4; } .box-analogy .box-head { background: #fbcfe8; color: #831843; } .box-analogy .box-body { background: #fdf2f8; }
+.box-individual { border-color: #fca5a5; } .box-individual .box-head { background: #fecaca; color: #7f1d1d; } .box-individual .box-body { background: #fef2f2; }
+.box-study { border-color: #94a3b8; } .box-study .box-head { background: #cbd5e1; color: #1e293b; } .box-study .box-body { background: #f8fafc; }
+.box-flag { border-color: #fdba74; } .box-flag .box-head { background: #fef3c7; color: #92400e; } .box-flag .box-body { background: #fffbeb; }
+
+.self-note { font-size: 0.84rem; color: #92400e; background: #fffbeb; border-left: 3px solid #f59e0b; padding: 0.4rem 0.7rem; margin: 0.6rem 0; border-radius: 4px; }
+.self-note b { color: #b45309; }
+
+/* ---- Evidence tier inline badges ---- */
+.tier { font-size: 0.72rem; font-weight: 600; padding: 0.12rem 0.45rem; border-radius: 4px; white-space: nowrap; }
+.t-strong { background: #d1fae5; color: #065f46; }
+.t-moderate { background: #dbeafe; color: #1e3a8a; }
+.t-limited { background: #fef3c7; color: #92400e; }
+.t-prelim { background: #fed7aa; color: #9a3412; }
+
+/* ---- Tables ---- */
+.tbl-wrap { overflow-x: auto; margin: 1rem 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+thead th { background: #f0fdf4; color: #14532d; font-weight: 600; }
+.dose-tbl thead th { background: #faf5ff; color: #4c1d95; }
+.dose-tbl { border: 1px solid #d8b4fe; border-radius: 8px; overflow: hidden; }
+.optimal-row { background: #f5f3ff; }
+.optimal-row td { font-weight: 600; color: #4c1d95; }
+.mono-cell { font-family: 'Source Code Pro', monospace; }
+
+/* ---- Who benefits ---- */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.split-card { border-radius: 10px; padding: 1rem; }
+.split-yes { background: #f0fdf4; border: 1px solid #86efac; }
+.split-no { background: #f8fafc; border: 1px solid #cbd5e1; }
+.split-card h4 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+.split-yes h4 { color: #14532d; } .split-no h4 { color: #475569; }
+.split-card ul { margin-left: 1.1rem; font-size: 0.88rem; }
+
+/* ---- Strategic cards ---- */
+.strat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
+.strat-card { border-radius: 12px; padding: 1.1rem; border: 1px solid; transition: transform 0.2s, box-shadow 0.2s; }
+.strat-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.strat-card .ico { font-size: 1.4rem; }
+.strat-card h4 { font-size: 0.98rem; margin: 0.4rem 0; }
+.strat-card p { font-size: 0.88rem; margin: 0; color: #334155; }
+.sc-diet { background: #f0fdf4; border-color: #86efac; } .sc-diet h4 { color: #14532d; }
+.sc-train { background: #eff6ff; border-color: #93c5fd; } .sc-train h4 { color: #1e3a8a; }
+.sc-supp { background: #faf5ff; border-color: #d8b4fe; } .sc-supp h4 { color: #581c87; }
+.sc-track { background: #fff7ed; border-color: #fdba74; } .sc-track h4 { color: #9a3412; }
+
+/* ---- Takeaways ---- */
+.take-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
+.take-card { background: #f0fdf4; border: 1px solid #86efac; border-left: 4px solid #059669; border-radius: 10px; padding: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+.take-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+.take-card .num { font-family: 'Source Code Pro', monospace; color: #059669; font-weight: 600; }
+.take-card .txt { font-size: 0.92rem; margin-top: 0.3rem; color: #334155; }
+
+/* ---- Practice accordion ---- */
+.question-accordion { border: 1px solid #d1fae5; border-radius: 10px; margin-bottom: 0.8rem; overflow: hidden; }
+.question-header { list-style: none; cursor: pointer; padding: 0.9rem 1rem; display: flex; align-items: center; gap: 0.6rem; background: #f0fdf4; flex-wrap: wrap; }
+.question-header::-webkit-details-marker { display: none; }
+.question-number { font-family: 'Source Code Pro', monospace; font-weight: 600; color: #047857; }
+.question-type { font-size: 0.72rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 4px; }
+.question-text { flex: 1; min-width: 200px; font-size: 0.92rem; color: #1e293b; }
+.accordion-icon { margin-left: auto; color: #059669; transition: transform 0.2s; }
+.question-accordion[open] .accordion-icon { transform: rotate(45deg); }
+.accordion-icon::before { content: "+"; font-size: 1.2rem; }
+.question-answer { padding: 0.9rem 1rem; font-size: 0.9rem; line-height: 1.75; background: #fff; border-top: 1px solid #d1fae5; }
+.question-answer p { margin-bottom: 0.5rem; }
+
+/* ---- Bottom line ---- */
+.bottom-line { background: linear-gradient(135deg, #ecfdf5, #f0fdfa); margin: 2rem; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #059669; }
+.bottom-line-header { font-weight: 700; color: #064e3b; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; }
+.bottom-line-item { margin-bottom: 1rem; }
+.bottom-line-item:last-child { margin-bottom: 0; }
+.bottom-line-label { font-weight: 600; color: #047857; font-size: 0.85rem; margin-bottom: 0.25rem; }
+.bottom-line-text { font-size: 0.95rem; line-height: 1.7; color: #334155; }
+
+/* ---- Footer ---- */
+.footer { background: #1e293b; color: #94a3b8; padding: 1.6rem 2rem; font-size: 0.8rem; line-height: 1.7; }
+.footer .disclaimer { border-left: 3px solid #475569; padding-left: 0.8rem; margin-bottom: 0.8rem; }
+.footer .chat-title { color: #cbd5e1; font-family: 'Source Code Pro', monospace; font-size: 0.78rem; }
+
+@media (max-width: 600px) {
+  body { padding: 0.5rem; }
+  .section { padding: 1.3rem; }
+  .split { grid-template-columns: 1fr; }
+  .bottom-line { margin: 1rem; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <h1>重訓到底需不需要碳水？</h1>
+    <div class="subtitle">把「重訓沒燒多少碳水」這句爆紅說法，用最新研究講完整</div>
+    <div class="tag-row">
+      <span class="tag tag-nutrition">Nutrition 營養</span>
+      <span class="tag tag-training">Training 訓練</span>
+      <span class="tag tag-evidence">Evidence 證據評估</span>
+    </div>
+    <div class="source-line">來源：科普整理文（引 Henselmans 2026 / King 2022 / Qiao 2026 等）｜整理日期 2026-06-09</div>
+  </div>
+
+  <!-- ===== EXECUTIVE SUMMARY ===== -->
+  <div class="section exec">
+    <h2>📌 快速摘要</h2>
+    <p class="lead">這篇文章拆解了一個爆紅說法：「重訓其實沒燒多少碳水，所以不用吃那麼多碳水。」結論不是「碳水沒用」，而是它<strong>問錯了問題</strong>。碳水在訓練裡有三種完全不同的角色，混在一起談就會得出太武斷的結論。核心立場：<strong>真正讓你長肌肉的是訓練、蛋白質、總熱量；碳水比較像「讓你練得順、恢復得快」的後勤補給</strong>，而你需要多少，取決於整個訓練系統，不是「有沒有在重訓」。</p>
+
+    <div class="rating-bar">
+      <span class="rating-score"><span class="rating-stars">★★★★☆</span> 4.0/5</span>
+      <span class="evidence-tier evidence-moderate">證據：Moderate（增肌議題為低確定性）</span>
+      <span class="rating-high">↑ 個人適配, 目標相關</span>
+      <span class="rating-low">↓ 可行動性（結論偏「看情況」）</span>
+    </div>
+    <p style="font-size:0.82rem; color:#64748b; margin-top:0.4rem;">這篇的最大價值在「框架清晰、誠實標證據強度」，而非給你一個能照抄的數字。它把方向性結論（多半成立）和具體克數（多半未定）分得很乾淨——正合你的閱讀標準。</p>
+  </div>
+
+  <!-- ===== LEARNING OBJECTIVES ===== -->
+  <div class="section">
+    <h2>🎯 學習目標</h2>
+    <div class="obj-grid">
+      <div class="objective-item">
+        <div class="num">OBJ 01</div>
+        <div class="txt">能說清楚「碳水的三種角色」，並判斷一個碳水主張到底在回答哪一個問題。</div>
+      </div>
+      <div class="objective-item">
+        <div class="num">OBJ 02</div>
+        <div class="txt">分辨「目前沒看到差別」與「已證明沒差」——以及為什麼短期、低確定性研究撐不起後者。</div>
+      </div>
+      <div class="objective-item">
+        <div class="num">OBJ 03</div>
+        <div class="txt">依自己的訓練量、有無有氧、空腹與否，抓一個碳水起點並用身體訊號微調。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FRAMEWORK VISUAL ===== -->
+  <div class="section" style="padding-top:0;">
+    <div class="framework-visual">
+      <div class="framework-title">碳水的三種角色（這篇文章的核心拆法）</div>
+      <div class="framework-sub">同一個「碳水」，回答三個不同的問題，答案完全不同</div>
+      <div class="framework-steps">
+        <div class="framework-step">
+          <div class="framework-icon">🔘</div>
+          <div class="role">① 長肌肉的開關？</div>
+          <div class="verdict">不是。蛋白質與總熱量吃夠後，再拉高碳水不會多長肌肉。</div>
+          <span class="badge">低確定性 · 短期</span>
+        </div>
+        <div class="framework-step">
+          <div class="framework-icon">⚡</div>
+          <div class="role">② 當下表現？</div>
+          <div class="verdict">看你吃飽沒。吃飽做短課表沒差；空腹或長課表（&gt;45 min）較有感。</div>
+          <span class="badge">總量效應穩</span>
+        </div>
+        <div class="framework-step">
+          <div class="framework-icon">🚚</div>
+          <div class="role">③ 後勤補給？</div>
+          <div class="verdict">是，這才是重點。讓你多做幾組、恢復快；耐力運動更是關鍵。</div>
+          <span class="badge">方向明確</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KEY NUMBERS DASHBOARD ===== -->
+  <div class="section" style="padding-top:0;">
+    <h2>📊 關鍵數字儀表板</h2>
+    <div class="dash">
+      <div class="dash-card">
+        <div class="dash-num">~34 / 21</div>
+        <div class="dash-label">3 組深蹲耗能（大卡，男/女）<br>注意：只是 3 組，不是整場課表</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num">3–5</div>
+        <div class="dash-label">這 3 組真正靠「碳水」燒掉的大卡</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num">~500 g</div>
+        <div class="dash-label">全身肝醣總儲量——但不是平均使用</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num">45 min</div>
+        <div class="dash-label">課表時長分界：超過此長度，補碳較有感</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num">1.6 → 2.2</div>
+        <div class="dash-label">蛋白質 g/kg：接近最佳 → 幾乎涵蓋所有人</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TABBED CONTENT ===== -->
+  <div class="section">
+    <h2>📖 內容拆解</h2>
+    <div class="tab-container">
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab(event,'tab1')">一、拆解爆紅說法</button>
+        <button class="tab-btn" onclick="switchTab(event,'tab2')">二、碳水的三種角色</button>
+        <button class="tab-btn" onclick="switchTab(event,'tab3')">三、生酮與該吃多少</button>
+      </div>
+
+      <!-- TAB 1 -->
+      <div id="tab1" class="tab-content active">
+        <h3>那個爆紅的說法，到底在講什麼</h3>
+        <p>說法來自健身科學作者 Menno Henselmans。他引用一份研究（Qiao 等人，2026，<span class="mono">J Strength Cond Res</span>），讓有訓練的人做「3 組、每組 5 下、80% 最大重量」的深蹲，量能量消耗。結果：男生約 <strong>34</strong> 大卡、女生約 <strong>21</strong> 大卡，其中靠碳水燒掉的只有 <strong>3–5</strong> 大卡；加上全身本來就存著約 500 公克肝醣（肌肉裡立即可用的油箱）。</p>
+
+        <div class="box box-key">
+          <div class="box-head">⚠️ 最容易被誤會的一點</div>
+          <div class="box-body">34 大卡是「3 組深蹲這一個動作」的數字，<strong>不是一整場課表</strong>。練滿一小時、好幾個動作，照樣燒掉幾百大卡。重點不是「重訓不耗能」，而是「靠碳水燒掉的那一小塊很少」。</div>
+        </div>
+
+        <h3>他說的，哪裡是對的</h3>
+        <ul>
+          <li><strong>重訓「靠碳水」燒的能量真的不多。</strong>大重量、低次數靠的是肌肉裡立即可用的爆發能量（撐幾秒），不是碳水。</li>
+          <li><strong>蛋白質與總熱量吃夠後，再拉高碳水比例本身不會多長肌肉。</strong>他打倒的是「狂吃碳水就自動變壯」這個迷思——而這迷思本來就該倒。</li>
+        </ul>
+
+        <div class="box box-study">
+          <div class="box-head">📋 那個耗能數字怎麼看</div>
+          <div class="box-body">Qiao 2026 是單一機械力學/代謝研究，且是史密斯機深蹲這一個動作。當「為什麼重訓直接燒的碳水很少」的<strong>說明性數字</strong>很好用，但別把「34 大卡」當成普世精確值——換動作、換訓練量就不同。文章對「這只是 3 組」的提醒做得很到位。</div>
+          <div class="self-note"><b>我的獨立標註：</b>原文把這個數字當佐證而非結論，處理得當；維持「圖解用、不外推」的定位即可。</div>
+        </div>
+
+        <h3>但他其實只回答了「一個問題」</h3>
+        <p>他問的是：「多吃碳水，會不會<strong>直接</strong>讓肌肉長更多？」但碳水在訓練裡扮演三種完全不同的角色，把它們混在一起談，就會得出「碳水沒用」這種太武斷的結論。下一頁逐一拆開。</p>
+      </div>
+
+      <!-- TAB 2 -->
+      <div id="tab2" class="tab-content">
+        <h3>① 它是「長肌肉的開關」嗎？——不是 <span class="tier t-limited">證據：Limited（低確定性）</span></h3>
+        <p>Henselmans 自己在 2026 年也發表了一篇集合多項研究的大型分析（<span class="mono">Sports Medicine</span>）：在蛋白質與熱量固定的前提下，碳水吃多吃少，<strong>長出來的肌肉量沒有明顯差別</strong>。</p>
+        <div class="box box-evidence">
+          <div class="box-head">🔬 但兩件事一定要一起講</div>
+          <div class="box-body">
+            <ul style="margin-bottom:0;">
+              <li>這個結論的<strong>確定性偏低</strong>——研究作者自己就這樣標（low certainty of evidence）。</li>
+              <li>大多只追蹤<strong>兩個多月</strong>，時間太短，看不出長期會不會有差。</li>
+            </ul>
+            <p style="margin:0.6rem 0 0;">所以正確說法是：<strong>「目前還沒看到差別」</strong>，而不是「已經證明沒差」。這兩句差很多。</p>
+          </div>
+        </div>
+        <div class="self-note"><b>我的獨立標註（證據獨立性）：</b>把這個說法帶紅的人，跟做出這篇 meta-analysis 的，是<strong>同一位作者（Henselmans）</strong>。這不等於利益衝突，方法也通過了敏感度分析；但「主張來源」與「證據來源」並非彼此獨立，看待「碳水不重要」這個敘事時值得記在心上。等其他團隊的長期、嚴格控熱量研究出來，確定性才會真正提高。</div>
+
+        <h3>② 它影響「你當下這場練得好不好」嗎？——看你吃飽沒 <span class="tier t-moderate">證據：Moderate</span></h3>
+        <p>關鍵分界是<strong>空腹 vs 吃飽</strong>。King 等人 2022（<span class="mono">Sports Medicine</span>，21 篇研究、226 人）發現：補碳水對<strong>整場訓練總量</strong>有小而穩定的提升，而且在<strong>空腹（≥8 小時）</strong>或<strong>長課表（&gt;45 分鐘）</strong>時看起來更有感。</p>
+        <div class="box box-analogy">
+          <div class="box-head">💡 一句話記法</div>
+          <div class="box-body">吃飽做短課表，補碳沒差；空腹或長課表，補碳比較有用。</div>
+        </div>
+        <div class="box box-flag">
+          <div class="box-head">🔬 我的獨立標註：別把「誰更受益」講得太死</div>
+          <div class="box-body">原文把「空腹/長課表更受益」講得相當篤定。要小心：2026 年的更新分析確認「對<strong>總訓練量</strong>的整體效應是小幅但穩健、<strong>高確定性</strong>」，但<strong>分組（空腹 vs 吃飽、長 vs 短）的交互作用檢定並不顯著</strong>。<br>白話：碳水能提升整場訓練量這件事很穩；但「特別是空腹/長課表的人才受益」這個更細的切分，統計上沒被牢牢證實，比較像方向性線索。對你（多半吃過東西、課表中等）來說，補碳的單次效益大概率不大。</div>
+        </div>
+
+        <h3>③ 它是整個訓練的「後勤補給」嗎？——是，這才是重點 <span class="tier t-moderate">證據：方向明確</span></h3>
+        <p><strong>(1) 肌肉的油箱是「一塊一塊」見底的。</strong>很多人以為「全身還有 500 公克，哪會不夠」，但油箱不是平均用的。連續狂操同一塊肌肉（像狂練腿），那塊肌肉某些<strong>快縮纖維（type II）</strong>的肝醣可能掉到只剩三、四成。全身還有，不代表正在工作的那塊沒空。</p>
+        <div class="box box-study">
+          <div class="box-head">📋 證據細節</div>
+          <div class="box-body">Henselmans 2026 自己也提到：每肌群 ≤10 組的訓練，通常肝醣只掉 ≤40%，不足以拖垮表現；但更高訓練量下，type II 纖維的局部耗竭確實被觀察到。所以這比較像「<strong>可能的機制</strong>」，還不等於「就一定長更多肌肉」，科學家還在討論——但這正是為什麼「全身平均還很多」不能一句話帶過。</div>
+        </div>
+        <p><strong>(2) 它不直接長肌肉，但讓你「練得更穩、恢復更快」。</strong>碳水真正幫上忙的，是讓你多做幾組、隔天恢復好、練起來沒那麼痛苦。</p>
+        <p><strong>(3) 如果你做耐力運動，碳水的幫助非常確定。</strong>跑步、打球、格鬥這類運動，碳水能讓你撐更久、表現更好，這點幾乎沒有爭議。<span class="tier t-strong">證據：Strong（高確定性）</span></p>
+      </div>
+
+      <!-- TAB 3 -->
+      <div id="tab3" class="tab-content">
+        <h3>那……乾脆走「低碳／生酮」呢？ <span class="tier t-limited">證據：Limited</span></h3>
+        <ul>
+          <li><strong>想增肌：</strong>生酮配重訓，拿來「邊減脂邊保肌」可行；但要全力衝增肌，常輸給碳水吃得夠的組別。提醒：這些研究<strong>人數少、時間短</strong>（多在 5 篇上下、合計約百人量級），別看得太死。</li>
+          <li><strong>想顧表現：</strong>低量短時影響不大；高量長時、或減脂後重新補碳水時，碳水夠比較有利。</li>
+          <li><strong>常見誤會：</strong>生酮初期掉的「肌肉」，很多其實是肝醣帶走的<strong>水分</strong>，不是真的肌肉流失。</li>
+        </ul>
+        <div class="box box-individual">
+          <div class="box-head">👤 白話結論</div>
+          <div class="box-body">生酮拿來「邊減脂邊保肌」可行；要全力衝增肌，碳水別壓得太低、通常比較穩。</div>
+        </div>
+
+        <h3>所以，到底要吃多少碳水？</h3>
+        <p>先講最重要的一句：<strong>目前沒有研究能定出「最低需求量」。</strong>下方表格只是運動營養學常見的實務參考範圍，不是標準答案——把它當<strong>起點</strong>，再依精神、恢復、睡眠、跑步配速微調。（完整劑量表見下一節）</p>
+        <ul>
+          <li>大方向很確定：有跑步、或訓練量大的人，碳水需求明顯比「只做輕量重訓」的人高。</li>
+          <li>蛋白質：約每公斤 <strong>1.6 g</strong> 接近最佳，<strong>2.2 g</strong> 幾乎涵蓋所有人。</li>
+          <li>碳水給高一點，不是為了「多長肌肉」，而是讓你練得順、恢復得好（而且碳水也算熱量，太省有時連「熱量夠」都湊不滿）。</li>
+        </ul>
+
+        <h3>每個人需要的碳水，差很多</h3>
+        <p>同樣 70 公斤的兩個人：<strong>A</strong> 一週重訓 2 次、不太做有氧 → 碳水需求偏低；<strong>B</strong> 一週重訓 6 次、還跑 50 公里 → 碳水需求高了一個量級。這兩個人的答案根本不是同一回事。</p>
+        <div class="box box-key">
+          <div class="box-head">⚠️ 怎麼判斷你夠不夠？</div>
+          <div class="box-body">碳水太少時，<strong>第一個出問題的通常不是肌肉，而是</strong>：跑步配速掉、睡眠變差、整天提不起勁、長距離恢復變慢。沒有這些訊號，就代表你目前大致夠用。有人每天 150 g 就練得很好，有人要 300 g 才有感——很正常，不代表誰吃錯。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== EVIDENCE BREAKDOWN ===== -->
+  <div class="section">
+    <h2>🔬 證據強度分析</h2>
+    <p style="font-size:0.92rem;">原文引用的研究品質落差很大，這也是它最值得學的地方——它沒有用「耐力運動的強證據」去替「增肌議題的弱證據」背書。下表是把各主張按證據強度分層：</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>主張</th><th>主要證據</th><th>強度</th></tr></thead>
+        <tbody>
+          <tr><td>碳水「直接」多長肌肉效果有限</td><td>Henselmans 2026 meta（作者自評低確定性、追蹤多在 ~2 個月）</td><td><span class="tier t-limited">Limited</span></td></tr>
+          <tr><td>耐力運動表現靠碳水</td><td>長年一致的運動營養證據</td><td><span class="tier t-strong">Strong</span></td></tr>
+          <tr><td>補碳提升整場訓練「總量」</td><td>King 2022（21 篇/226 人）＋ 2026 更新（整體效應高確定性）</td><td><span class="tier t-moderate">Moderate→Strong</span></td></tr>
+          <tr><td>「空腹/長課表」特別受益</td><td>分組訊號存在，但交互作用檢定不顯著</td><td><span class="tier t-limited">Limited</span></td></tr>
+          <tr><td>生酮可減脂保肌、純增肌可能不利</td><td>少數小型短期 RCT/meta（n≈百人量級）</td><td><span class="tier t-limited">Limited</span></td></tr>
+          <tr><td>type II 纖維局部肝醣耗竭</td><td>機制＋部分高訓練量觀察</td><td><span class="tier t-prelim">Preliminary</span></td></tr>
+          <tr><td>最佳碳水量高度個體化</td><td>實務觀察＋無最低需求量研究</td><td><span class="tier t-moderate">方向明確</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== DOSE-RESPONSE TABLE ===== -->
+  <div class="section" style="padding-top:0;">
+    <h2>📊 碳水實務參考範圍（非標準答案）</h2>
+    <div class="tbl-wrap">
+      <table class="dose-tbl">
+        <thead><tr><th>你是哪一種人</th><th>每天碳水</th><th>換算（70 kg）</th></tr></thead>
+        <tbody>
+          <tr><td>一般重訓、量不大</td><td class="mono-cell">2–4 g/kg</td><td class="mono-cell">約 140–280 g</td></tr>
+          <tr><td>重訓量很大、很操</td><td class="mono-cell">4–5 g/kg</td><td class="mono-cell">約 280–350 g</td></tr>
+          <tr class="optimal-row"><td>又重訓又跑步</td><td class="mono-cell">3.7–5.1 g/kg</td><td class="mono-cell">約 260–360 g</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.84rem; color:#64748b;">把它當起點，再依感覺微調。蛋白質另計（約 1.6–2.2 g/kg）。這些是常見實務範圍，不是經實證定出的「需求量」。</p>
+  </div>
+
+  <!-- ===== WHO BENEFITS / WHO SKIPS ===== -->
+  <div class="section" style="padding-top:0;">
+    <h2>👥 誰該把碳水拉高？誰可以放輕鬆？</h2>
+    <div class="split">
+      <div class="split-card split-yes">
+        <h4>✓ 碳水拉高，較可能有感</h4>
+        <ul>
+          <li>同時在做耐力運動（跑步、球類、格鬥）</li>
+          <li>訓練量很大、單一肌群高組數</li>
+          <li>常空腹訓練，或課表超過 45 分鐘</li>
+          <li>正在增肌、需要碳水來湊足熱量盈餘</li>
+        </ul>
+      </div>
+      <div class="split-card split-no">
+        <h4>～ 碳水高低，差別不大</h4>
+        <ul>
+          <li>訓練量中等、課表短（吃飽進場）</li>
+          <li>只看「碳水能不能直接多長肌肉」</li>
+          <li>蛋白質與總熱量已經吃夠</li>
+          <li>減脂期、刻意壓低熱量（低碳反而易控）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SAFETY ===== -->
+  <div class="section" style="padding-top:0;">
+    <h2>🛡️ 安全與適用提醒</h2>
+    <div class="box box-individual">
+      <div class="box-head">👤 個別狀況</div>
+      <div class="box-body">極低碳／生酮對特定族群（孕婦、未成年、有飲食失調史、特定慢性病或服藥者）有風險，不應自行採用。出現月經週期改變、持續疲勞、體重劇變或睡眠異常，應諮詢醫師而非自行調整。</div>
+    </div>
+  </div>
+
+  <!-- ===== STRATEGIC IMPLICATIONS ===== -->
+  <div class="section" style="padding-top:0;">
+    <h2>🧭 應用啟示</h2>
+    <div class="strat-grid">
+      <div class="strat-card sc-diet">
+        <div class="ico">🥗</div>
+        <h4>日常飲食</h4>
+        <p>先鎖死蛋白質（1.6–2.2 g/kg）與總熱量；碳水從表格抓起點，不必為了「增肌」硬塞，但也別為了趕流行壓太低。</p>
+      </div>
+      <div class="strat-card sc-train">
+        <div class="ico">🏋️</div>
+        <h4>訓練調整</h4>
+        <p>課表 &gt;45 min 或空腹練、或當天有跑步，練前留一點碳水比較保險；中等課表吃飽進場，不必特別補。</p>
+      </div>
+      <div class="strat-card sc-supp">
+        <div class="ico">💊</div>
+        <h4>補充劑決策</h4>
+        <p>「練前補碳/高碳粉」對中等課表的單次效益有限，不是必需品。把預算優先放在蛋白質與總熱量達標。</p>
+      </div>
+      <div class="strat-card sc-track">
+        <div class="ico">🧪</div>
+        <h4>追蹤指標</h4>
+        <p>不是看體重，而是看：跑步配速、訓練最後幾組的續航、睡眠、整天精神、長距離後恢復速度。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KEY TAKEAWAYS ===== -->
+  <div class="section" style="padding-top:0;">
+    <h2>💡 學習重點</h2>
+    <div class="take-grid">
+      <div class="take-card"><div class="num">KEY 01</div><div class="txt">長肌肉的三主角是<strong>訓練刺激、蛋白質、總熱量</strong>。碳水不是主角，是後勤補給。</div></div>
+      <div class="take-card"><div class="num">KEY 02</div><div class="txt">「沒看到差別」≠「證明沒差」。增肌的碳水 meta 是<strong>低確定性、短期</strong>，別當定論。</div></div>
+      <div class="take-card"><div class="num">KEY 03</div><div class="txt">碳水提升整場訓練量這件事很穩；但「空腹/長課表才特別受益」的細分，統計上沒被坐實。</div></div>
+      <div class="take-card"><div class="num">KEY 04</div><div class="txt">你需要多少碳水，看的是<strong>整週訓練系統</strong>（量、勤、有無有氧、累不累、練前吃沒），不是「有沒有在重訓」。</div></div>
+    </div>
+  </div>
+
+  <!-- ===== PRACTICE ===== -->
+  <div class="section" style="padding-top:0;">
+    <h2>✍️ 練習題（先想，再點開）</h2>
+
+    <details class="question-accordion">
+      <summary class="question-header">
+        <span class="question-number">Q1</span>
+        <span class="question-type" style="background:#d1fae5;color:#065f46;">證據評估題</span>
+        <span class="question-text">有人引用「碳水多寡對肌肉量沒影響」的 meta-analysis，主張增肌完全不用管碳水。你會怎麼挑這個推論的毛病？</span>
+        <span class="accordion-icon"></span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>參考答案：</strong></p>
+        <p>至少三點。其一，該 meta 作者自評<strong>確定性偏低</strong>，且追蹤多在兩個多月，是「目前沒看到差別」而非「證明沒差」。其二，它回答的是「碳水<em>直接</em>增肌」這一個窄問題，沒涵蓋碳水透過訓練量、恢復、能否持續所產生的<strong>間接</strong>影響。其三，把這說法帶紅的人與做這篇 meta 的是同一位作者，主張與證據來源不獨立——不是說它錯，而是該等其他團隊的長期嚴格研究再下定論。</p>
+      </div>
+    </details>
+
+    <details class="question-accordion">
+      <summary class="question-header">
+        <span class="question-number">Q2</span>
+        <span class="question-type" style="background:#dbeafe;color:#1e3a8a;">應用情境題</span>
+        <span class="question-text">你早上空腹、要做一場 60 分鐘的腿日大課表；隔天傍晚是吃飽後的 40 分鐘上肢小課表。兩天的練前碳水策略有何不同？</span>
+        <span class="accordion-icon"></span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>參考答案：</strong></p>
+        <p>腿日符合<strong>空腹＋長課表（&gt;45 min）＋高組數同肌群</strong>三個條件，最可能從練前留一些碳水中受益（撐住最後幾組、減少局部肝醣耗竭影響），值得吃一點再練。隔天的上肢日是<strong>吃飽＋短課表</strong>，補不補碳對單次表現差別不大，順其自然即可。重點是把策略花在最可能有回報的那一場。</p>
+      </div>
+    </details>
+
+    <details class="question-accordion">
+      <summary class="question-header">
+        <span class="question-number">Q3</span>
+        <span class="question-type" style="background:#fef3c7;color:#92400e;">決策判斷題</span>
+        <span class="question-text">你目前蛋白質達標、訓練穩定、睡眠 OK，正考慮把碳水從 200 g 拉到 300 g「衝增肌」。值不值得？</span>
+        <span class="accordion-icon"></span>
+      </summary>
+      <div class="question-answer">
+        <p><strong>參考答案：</strong></p>
+        <p>單純為「直接多長肌肉」而拉碳，證據不支持，回報大概率很低。<strong>但有兩個情境下值得考慮</strong>：(1) 你同時在跑步/做大量有氧，或訓練量明顯增加，後勤需求變高；(2) 你在增肌、總熱量湊不滿，多的碳水剛好補上盈餘。若以上都不成立、又沒有「配速掉、恢復差、沒精神」的訊號，就不必動——這 100 g 比較像沒回報的成本（也可能讓增肌期不必要的脂肪增加）。</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== BOTTOM LINE ===== -->
+  <div class="bottom-line">
+    <div class="bottom-line-header">🎯 我的行動結論</div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">✔ 核心洞察</div>
+      <div class="bottom-line-text">對我（中階、基本功已就位）來說，碳水不是增肌的槓桿——訓練、蛋白質、總熱量才是，這些我已經在做。碳水的真正定位是「讓我練得順、恢復快」的後勤補給。所以問題不該是「要不要多吃碳水」，而是「我整週的訓練系統，後勤需求有多大」。</div>
+    </div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">📈 本週應用</div>
+      <div class="bottom-line-text">依目前訓練量抓一個碳水起點（量不大 2–4 g/kg、量大或有跑步 ~4–5 g/kg），不為「增肌」硬加。練前策略只花在高槓桿場次：空腹或 &gt;45 min 的大課表留一點碳水，中等課表吃飽進場即可。追蹤的不是體重，而是：訓練尾段續航、睡眠、整天精神、（若有跑步）配速與長距離恢復。</div>
+    </div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">⚠ 需要驗證</div>
+      <div class="bottom-line-text">「增肌不靠碳水」是低確定性、短期、且主張與證據同源的結論，別當鐵律。「空腹/長課表特別受益」的細分統計上未坐實，當方向參考即可。實作上用 2–4 週觀察：若碳水區間內沒有配速掉、恢復差、提不起勁，代表目前夠用；出現這些訊號再往上加。</div>
+    </div>
+  </div>
+
+  <!-- ===== EXTENDED LEARNING ===== -->
+  <div class="section" style="padding-top:0;">
+    <h2>🔗 延伸學習</h2>
+    <div class="split">
+      <div class="split-card split-yes">
+        <h4>追蹤指標</h4>
+        <ul>
+          <li>訓練最後幾組的續航感（主觀，但敏感）</li>
+          <li>有跑步者：固定路線配速與心率</li>
+          <li>睡眠時數/品質、晨間精神</li>
+          <li>大重量日後的恢復速度（隔天痠痛/表現）</li>
+        </ul>
+      </div>
+      <div class="split-card split-no">
+        <h4>連到我的目標</h4>
+        <ul>
+          <li>體組成優化 = 訓練×蛋白質×熱量先到位</li>
+          <li>碳水是「保住訓練量與恢復」的支援角色</li>
+          <li>減脂期：低碳易控熱量，配阻力訓練保肌</li>
+          <li>避免把弱證據（增肌碳水）當強建議執行</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <div class="disclaimer">本文件為教育性質整理，不構成醫療建議。實施任何重大飲食或訓練改變前，請諮詢合格醫療專業人員。極低碳／生酮、激進熱量限制等做法對特定族群有風險，不應自行採用。</div>
+    <div class="disclaimer">證據強度標示為整理者依現有文獻的判斷，部分主張（如增肌與碳水關係）確定性偏低，未來研究可能改變結論。</div>
+    <div>整理日期：2026-06-09</div>
+    <div class="chat-title">建議 Chat Title：2026-06-09 [Nutrition] Carbs &amp; Resistance Training - Three Roles</div>
+  </div>
+
+</div>
+
+<script>
+function switchTab(evt, tabId) {
+  const container = evt.currentTarget.closest('.tab-container');
+  container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>

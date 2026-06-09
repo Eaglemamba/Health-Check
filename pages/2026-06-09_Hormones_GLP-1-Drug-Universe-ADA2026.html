@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-date" content="2026-06-09">
+<title>GLP-1 藥物宇宙 ── ADA 2026 兩條戰線解析</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans TC',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.75;color:#1e293b;background:#f1f5f9;}
+.wrap{max-width:920px;margin:0 auto;background:#fff;box-shadow:0 1px 40px rgba(0,0,0,0.06);}
+code,.mono{font-family:'Source Code Pro',monospace;}
+
+/* Header */
+.header{background:linear-gradient(135deg,#064e3b,#047857,#059669);color:#fff;padding:2.6rem 2rem 2.2rem;text-align:center;position:relative;}
+.header::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:5px;background:linear-gradient(90deg,#047857,#6ee7b7);}
+.header .eyebrow{font-size:.8rem;letter-spacing:3px;color:#a7f3d0;font-weight:500;text-transform:uppercase;}
+.header h1{font-size:1.95rem;font-weight:700;margin:.6rem 0 .4rem;line-height:1.3;}
+.header .sub{font-size:1rem;color:#d1fae5;font-weight:300;}
+.tag-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:1.1rem;}
+.tag{font-size:.72rem;font-weight:600;padding:.25rem .7rem;border-radius:20px;}
+.tag-horm{background:#e9d5ff;color:#581c87;}
+.tag-evid{background:#fde68a;color:#92400e;}
+.tag-body{background:#bbf7d0;color:#14532d;}
+.src{font-size:.74rem;color:#a7f3d0;margin-top:.9rem;}
+
+/* Section scaffolding */
+section{padding:2rem;}
+.sec-title{font-size:1.3rem;font-weight:700;color:#064e3b;margin-bottom:.3rem;display:flex;align-items:center;gap:.6rem;}
+.sec-title::before{content:"";width:6px;height:1.4rem;background:linear-gradient(180deg,#047857,#6ee7b7);border-radius:3px;}
+.sec-lead{color:#475569;font-size:.95rem;margin-bottom:1.3rem;}
+
+/* Executive summary */
+.exec{background:#ecfdf5;border:1px solid #a7f3d0;border-radius:14px;padding:1.5rem;margin:2rem;}
+.exec h2{font-size:1.05rem;color:#064e3b;margin-bottom:.6rem;}
+.exec p{color:#334155;font-size:.95rem;}
+.rating-bar{display:flex;align-items:center;gap:.7rem;margin-top:1.1rem;padding:.6rem 1rem;background:linear-gradient(135deg,#ffffff,#f0fdfa);border-radius:8px;flex-wrap:wrap;border:1px solid #a7f3d0;}
+.rating-score{font-weight:700;color:#065f46;font-size:1rem;}
+.rating-stars{color:#f59e0b;letter-spacing:1px;}
+.evidence-tier{font-size:.78rem;font-weight:600;padding:.2rem .55rem;border-radius:4px;}
+.evidence-moderate{background:#dbeafe;color:#1e3a8a;}
+.rating-high{font-size:.76rem;color:#047857;background:#d1fae5;padding:.2rem .55rem;border-radius:4px;}
+.rating-low{font-size:.76rem;color:#64748b;background:#f1f5f9;padding:.2rem .55rem;border-radius:4px;}
+
+/* Objectives */
+.obj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.obj{background:#f0fdf4;border:1px solid #86efac;border-radius:12px;padding:1.1rem;transition:transform .2s,box-shadow .2s;}
+.obj:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,.08);}
+.obj .n{font-family:'Source Code Pro',monospace;font-size:.8rem;color:#059669;font-weight:600;}
+.obj .t{font-weight:600;color:#14532d;margin:.3rem 0;font-size:.95rem;}
+.obj .d{font-size:.85rem;color:#475569;}
+
+/* Framework visual */
+.framework{background:linear-gradient(135deg,#047857,#059669);border-radius:16px;padding:1.6rem;color:#fff;}
+.fw-title{text-align:center;font-size:1.1rem;font-weight:700;margin-bottom:1.3rem;}
+.fw-rows{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+.fw-card{flex:1;min-width:240px;background:rgba(255,255,255,.12);border-radius:12px;padding:1.1rem;}
+.fw-card .lab{font-size:.74rem;letter-spacing:2px;color:#a7f3d0;font-weight:600;}
+.fw-card .h{font-size:1.05rem;font-weight:700;margin:.25rem 0 .5rem;}
+.fw-card .q{font-size:.9rem;color:#ecfdf5;line-height:1.6;}
+
+/* Dashboard */
+.dash{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.kn{background:#ecfdf5;border:1px solid #86efac;border-radius:12px;padding:1.1rem .8rem;text-align:center;}
+.kn .v{font-family:'Source Code Pro',monospace;font-size:1.55rem;font-weight:600;color:#047857;}
+.kn .v.neg{color:#dc2626;}
+.kn .l{font-size:.78rem;color:#475569;margin-top:.3rem;line-height:1.45;}
+
+/* Table */
+.tbl-scroll{overflow-x:auto;border-radius:12px;border:1px solid #cbd5e1;}
+table.cmp{border-collapse:collapse;width:100%;min-width:760px;font-size:.83rem;}
+table.cmp th{background:#064e3b;color:#fff;padding:.7rem .6rem;text-align:left;font-weight:600;font-size:.8rem;}
+table.cmp td{padding:.7rem .6rem;border-bottom:1px solid #e2e8f0;vertical-align:top;color:#334155;}
+table.cmp tr:nth-child(even) td{background:#f8fafc;}
+table.cmp .drug{font-weight:700;color:#064e3b;}
+table.cmp .mono{font-family:'Source Code Pro',monospace;font-weight:600;}
+.pill{display:inline-block;font-size:.68rem;font-weight:600;padding:.12rem .45rem;border-radius:10px;white-space:nowrap;}
+.p-approved{background:#d1fae5;color:#065f46;}
+.p-p3{background:#dbeafe;color:#1e3a8a;}
+.p-p2{background:#fed7aa;color:#9a3412;}
+.note-mine{color:#9a3412;font-size:.78rem;}
+
+/* Info boxes */
+.box{border-radius:12px;overflow:hidden;margin:1.1rem 0;border:1px solid;}
+.box .bh{padding:.55rem .9rem;font-weight:600;font-size:.9rem;display:flex;gap:.45rem;align-items:center;}
+.box .bc{padding:.9rem;font-size:.9rem;line-height:1.7;}
+.box-key{border-color:#fdba74;}.box-key .bh{background:#fed7aa;color:#9a3412;}.box-key .bc{background:#fff7ed;}
+.box-evidence{border-color:#6ee7b7;}.box-evidence .bh{background:#a7f3d0;color:#065f46;}.box-evidence .bc{background:#ecfdf5;}
+.box-individual{border-color:#fca5a5;}.box-individual .bh{background:#fecaca;color:#7f1d1d;}.box-individual .bc{background:#fef2f2;}
+.box-safety{border-color:#fda4af;}.box-safety .bh{background:#fecdd3;color:#9f1239;}.box-safety .bc{background:#fff1f2;}
+.box-supp{border-color:#d8b4fe;}.box-supp .bh{background:#e9d5ff;color:#581c87;}.box-supp .bc{background:#faf5ff;}
+
+/* Mechanism spectrum (signature) */
+.spectrum{margin:1.4rem 0;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px;padding:1.4rem 1.2rem;}
+.spec-bar{height:14px;border-radius:8px;background:linear-gradient(90deg,#dc2626,#f59e0b,#10b981);margin:.5rem 0 1.1rem;position:relative;}
+.spec-ends{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:#334155;margin-bottom:.2rem;}
+.spec-stops{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;}
+.spec-stop{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:.8rem;}
+.spec-stop .top{font-weight:700;font-size:.85rem;color:#064e3b;}
+.spec-stop .drug{font-family:'Source Code Pro',monospace;font-size:.8rem;color:#047857;margin:.2rem 0;}
+.spec-stop .d{font-size:.8rem;color:#475569;}
+
+ul.clean{list-style:none;}
+ul.clean li{position:relative;padding-left:1.3rem;margin-bottom:.5rem;font-size:.92rem;color:#334155;}
+ul.clean li::before{content:"▸";position:absolute;left:0;color:#059669;font-weight:700;}
+.rx{color:#0f766e;font-weight:600;}
+
+@media(max-width:680px){
+.obj-grid,.dash{grid-template-columns:1fr 1fr;}
+.spec-stops{grid-template-columns:1fr;}
+.header h1{font-size:1.5rem;}
+section{padding:1.4rem;}.exec{margin:1.4rem;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="eyebrow">Health Library · ADA 2026 Decode</div>
+  <h1>從一支週針，到一整個藥物宇宙</h1>
+  <div class="sub">GLP-1 的下一代：便利性 × 機轉，兩條平行戰線</div>
+  <div class="tag-row">
+    <span class="tag tag-horm">Hormones</span>
+    <span class="tag tag-evid">Evidence Literacy</span>
+    <span class="tag tag-body">Body Composition 連結</span>
+  </div>
+  <div class="src">來源整理：ADA 2026 Scientific Sessions（6/5–6/8，紐奧良）｜各藥廠 2025–2026 臨床發布｜經獨立查證與修正</div>
+</div>
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="exec">
+  <h2>快速摘要</h2>
+  <p>GLP-1 的療效已逼近天花板，戰場因此移到兩條軸線：<strong>「用得久」（便利性：口服每日 vs 月針一次）</strong>與<strong>「用得巧」（機轉：每多一個受體，解一個不同的問題）</strong>。這份文件把八支藥放進同一張表，重點不在「誰瘦最多」，而在兩個可遷移的判讀能力：如何拆穿「跨試驗直接相減」的行銷陷阱，以及為什麼「減哪種組織」比「減幾公斤」更重要。對已執行基本功、非用藥對象的你，這是一份<strong>地圖與識讀</strong>，不是選藥指南。</p>
+  <div class="rating-bar">
+    <span class="rating-score"><span class="rating-stars">★★★☆☆</span> 3.4/5</span>
+    <span class="evidence-tier evidence-moderate">證據：Moderate（從已上市到 Phase 2b 全光譜）</span>
+    <span class="rating-high">↑ 證據誠實度、代謝品質視角</span>
+    <span class="rating-low">↓ 可行動性、個人適配度</span>
+  </div>
+</div>
+
+<!-- LEARNING OBJECTIVES -->
+<section>
+  <div class="sec-title">學習目標</div>
+  <div class="obj-grid">
+    <div class="obj"><div class="n">OBJ-01</div><div class="t">讀懂兩條戰線</div><div class="d">分清「便利性」與「機轉」是兩個獨立的決勝點，不會把口服三藥誤當成同一場比賽。</div></div>
+    <div class="obj"><div class="n">OBJ-02</div><div class="t">拆穿跨試驗陷阱</div><div class="d">看到「減重 X%」標題時，能自動追問族群、療程、對照組、是主要終點還是亞組。</div></div>
+    <div class="obj"><div class="n">OBJ-03</div><div class="t">連結體組成</div><div class="d">把「保肌 + 減內臟脂肪」這個藥物新賽道，對應回自己訓練與蛋白攝取的既有原則。</div></div>
+  </div>
+</section>
+
+<!-- FRAMEWORK VISUAL -->
+<section style="padding-top:0;">
+  <div class="framework">
+    <div class="fw-title">2026 的 GLP-1：兩條平行戰線</div>
+    <div class="fw-rows">
+      <div class="fw-card">
+        <div class="lab">戰線一 · CONVENIENCE</div>
+        <div class="h">怎麼用得久？</div>
+        <div class="q">命題不是「哪個口服藥贏」，而是兩種典範對決：<strong>每天吞一顆 vs 一個月打一針</strong>。減重藥最大的敵人從來不是藥效不足，而是停藥後復胖——可近性與順從性才是真天花板。</div>
+      </div>
+      <div class="fw-card">
+        <div class="lab">戰線二 · MECHANISM</div>
+        <div class="h">怎麼用得巧？</div>
+        <div class="q">每多加一個受體標的，是為了解一個不同的問題。賽道被拉成一條光譜：一端<strong>最大療效</strong>、一端<strong>最佳耐受</strong>，中間是<strong>代謝品質</strong>（減內臟脂肪、保肌肉）。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY NUMBERS -->
+<section style="padding-top:0;">
+  <div class="sec-title">關鍵數字</div>
+  <div class="dash">
+    <div class="kn"><div class="v">28.3%</div><div class="l">retatrutide 80 週減重（史上 Phase 3 最高，主要終點）</div></div>
+    <div class="kn"><div class="v">~12%</div><div class="l">orforglipron 口服最高劑量減重（已上市）</div></div>
+    <div class="kn"><div class="v neg">−63%</div><div class="l">survodutide 肝脂下降（代謝品質代表）</div></div>
+    <div class="kn"><div class="v">2 條</div><div class="l">戰線：便利性 × 機轉，療效不再是唯一賽道</div></div>
+  </div>
+</section>
+
+<!-- MASTER COMPARISON TABLE -->
+<section style="padding-top:0;">
+  <div class="sec-title">全景對照表</div>
+  <div class="sec-lead">八支藥放進同一張表方便理解，<strong>但減重數字絕對不可橫向相減</strong>——族群、療程、對照組全都不同（見後方證據解析）。「我的證據註記」為查證後的獨立修正。</div>
+  <div class="tbl-scroll">
+  <table class="cmp">
+    <thead><tr>
+      <th>藥物</th><th>機轉</th><th>給藥</th><th>減重</th><th>狀態</th><th>關鍵試驗</th><th>我的證據註記</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="drug">Orforglipron<br><span style="font-weight:400;color:#64748b;">Lilly</span></td>
+        <td>GLP-1<br>口服小分子</td><td>口服每日</td>
+        <td class="mono">~12%</td>
+        <td><span class="pill p-approved">已核准</span></td>
+        <td>ATTAIN-1/2<br>NEJM・Lancet</td>
+        <td class="note-mine">⚠ 來源稱「啟動申請」已過時：2026/4/1 已獲 FDA 核准上市（Foundayo），免冷藏、不限飲食。</td>
+      </tr>
+      <tr>
+        <td class="drug">Elecoglipron<br><span style="font-weight:400;color:#64748b;">AZ／Eccogene</span></td>
+        <td>GLP-1<br>口服小分子</td><td>口服每日</td>
+        <td class="mono">待完整</td>
+        <td><span class="pill p-p2">→ Phase 3</span></td>
+        <td>VISTA／SOLSTICE<br>Lancet</td>
+        <td class="note-mine">VISTA（肥胖，n=310，75mg）達標，ADA 2026 首次揭曉並已宣布進 Phase 3。</td>
+      </tr>
+      <tr>
+        <td class="drug">MET-097i<br><span style="font-weight:400;color:#64748b;">Pfizer（原 Metsera）</span></td>
+        <td>GLP-1<br>超長效</td><td>每月一針</td>
+        <td class="mono">~10–14%</td>
+        <td><span class="pill p-p2">Phase 2b</span></td>
+        <td>VESPER-1／3</td>
+        <td class="note-mine">⚠ 14.1% 是「每週劑量」(VESPER-1) 數字；真正賣點「每月一針」(VESPER-3) 約 10–12.3%。半衰期約 15–16 天。</td>
+      </tr>
+      <tr>
+        <td class="drug">Retatrutide<br><span style="font-weight:400;color:#64748b;">Lilly</span></td>
+        <td>GIP／GLP-1／<br>glucagon 三重</td><td>每週一針</td>
+        <td class="mono">28.3%</td>
+        <td><span class="pill p-p3">Phase 3</span></td>
+        <td>TRIUMPH-1</td>
+        <td class="note-mine">⚠ 28.3% 為 80 週主要終點；30.3% 僅是 BMI≥35 亞組的 104 週延伸值，非頭條。仍為試驗中。</td>
+      </tr>
+      <tr>
+        <td class="drug">Survodutide<br><span style="font-weight:400;color:#64748b;">Boehringer／Zealand</span></td>
+        <td>glucagon／<br>GLP-1 雙重</td><td>每週一針</td>
+        <td class="mono">~16.6%</td>
+        <td><span class="pill p-p3">Phase 3</span></td>
+        <td>SYNCHRONIZE-1<br>NEJM</td>
+        <td class="note-mine">內臟脂 −34%、肝脂 −63.1%。FDA MASH 突破性認定。⚠ MASLD 數據登 Nature Medicine（非 NEJM）；TFDA 認定我無法獨立證實。</td>
+      </tr>
+      <tr>
+        <td class="drug">CagriSema<br><span style="font-weight:400;color:#64748b;">Novo Nordisk</span></td>
+        <td>amylin＋<br>GLP-1</td><td>每週一針</td>
+        <td class="mono">14.2%／22.7%</td>
+        <td><span class="pill p-p3">Phase 3</span></td>
+        <td>REIMAGINE／<br>REDEFINE</td>
+        <td class="note-mine">糖尿病 14.2%（REIMAGINE 2，全劑量勝 sema）；肥胖 22.7%（REDEFINE 1），未達 Novo 自訂 ≥25% 目標。</td>
+      </tr>
+      <tr>
+        <td class="drug">Petrelintide<br><span style="font-weight:400;color:#64748b;">Zealand</span></td>
+        <td>amylin 單方</td><td>每週一針</td>
+        <td class="mono">雙位數</td>
+        <td><span class="pill p-p2">→ Phase 3</span></td>
+        <td>ZUPREME-1</td>
+        <td class="note-mine">42 週雙位數減重，腸胃道副作用率近似安慰劑（主打耐受性）。2026 下半進 Phase 3。</td>
+      </tr>
+      <tr>
+        <td class="drug">Amycretin<br><span style="font-weight:400;color:#64748b;">Novo Nordisk</span></td>
+        <td>GLP-1＋amylin<br>單分子</td><td>口服／注射</td>
+        <td class="mono">顯著</td>
+        <td><span class="pill p-p2">Phase 2</span></td>
+        <td>—</td>
+        <td class="note-mine">降糖、減重皆顯著，2026 進 Phase 3。早期資料，證據等級低。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 戰線一 -->
+<section>
+  <div class="sec-title">戰線一｜便利性：每天一顆 vs 每月一針</div>
+  <div class="sec-lead">先更正一個常見誤解：這條線常被講成「三個口服藥對決」，其實不對。真正的命題是兩種典範——<strong>口服每日 vs 注射每月</strong>——哪一種更能讓人長期用下去。</div>
+
+  <div class="box box-supp">
+    <div class="bh">💊 口服每日陣營</div>
+    <div class="bc">
+      <strong>Orforglipron（Lilly）</strong>是進度最快的：小分子、免冷藏、不限飲食、隨時可吃。我查證後的重點修正——<strong>它已不是「申請中」，而是 2026/4/1 已獲 FDA 核准、商品名 Foundayo、實際上市</strong>。減重約 12%（最高劑量、72 週），定位是「不是更有效，而是更好取得、更易融入日常」。<br><br>
+      <strong>Elecoglipron（AZ／Eccogene）</strong>緊追在後：VISTA（肥胖）與 SOLSTICE（糖尿病）兩項 Phase 2b 在 ADA 2026 揭曉並登 Lancet，已宣布推進 Phase 3。
+    </div>
+  </div>
+
+  <div class="box box-key">
+    <div class="bh">💉 每月一針陣營</div>
+    <div class="bc">
+      <strong>MET-097i（Pfizer，原 Metsera）</strong>半衰期約 15–16 天，主打「一個月只要想到一次」，直擊長期順從性。<br><br>
+      但這裡有個常被混淆的數字陷阱：新聞常引用的 <span class="mono">14.1%</span> 是 <strong>每週劑量</strong>（VESPER-1）的結果；它真正的賣點「每月一針」（VESPER-3）目前約 <span class="mono">10–12.3%</span>。賣點不是更瘦，是更不容易忘記打。仍為 Phase 2b。
+    </div>
+  </div>
+
+  <p style="font-size:.93rem;color:#334155;">為什麼這條線重要？因為真實世界的停藥率高得驚人。口服免冷鏈降低取得門檻，月針降低「忘記打」的門檻——<span class="rx">對絕大多數人，能不能撐下去比多瘦 2% 更決定結果。</span></p>
+</section>
+
+<!-- 戰線二 -->
+<section style="padding-top:0;">
+  <div class="sec-title">戰線二｜機轉：多受體分工的取捨光譜</div>
+  <div class="sec-lead">關鍵不是「誰瘦最多」，而是每多加一個受體標的，是為了解一個不同的問題。</div>
+
+  <ul class="clean">
+    <li><strong>GIP</strong> → 加大減重、改善耐受</li>
+    <li><strong>Glucagon（昇糖素）</strong> → 升能耗、直接降肝脂</li>
+    <li><strong>Amylin（胰澱素）</strong> → 增飽足，且腸胃道副作用接近安慰劑</li>
+  </ul>
+
+  <div class="spectrum">
+    <div class="spec-ends"><span>← 最大療效</span><span>最佳耐受 →</span></div>
+    <div class="spec-bar"></div>
+    <div class="spec-stops">
+      <div class="spec-stop"><div class="top">最大療效</div><div class="drug">Retatrutide（三重）</div><div class="d">28.3% 減重，史上 Phase 3 最高；代價是較強的副作用訊號（如感覺異常）。</div></div>
+      <div class="spec-stop"><div class="top">代謝品質</div><div class="drug">Survodutide（雙重）</div><div class="d">看點不是體重，是「減哪種脂肪」：內臟脂 −34%、肝脂 −63.1%、瘦體幾乎守住。</div></div>
+      <div class="spec-stop"><div class="top">最佳耐受</div><div class="drug">Petrelintide（amylin 單方）</div><div class="d">雙位數減重，副作用率近似安慰劑——若成立，解掉 GLP-1 最大的停藥原因。</div></div>
+    </div>
+  </div>
+
+  <p style="font-size:.93rem;color:#334155;">中間這段「代謝品質」對你最有意義：survodutide 的故事是<span class="rx">減重不再等於減體重，而是減對的組織</span>——這正是體組成優化的核心邏輯，只是換成了藥理版本。CagriSema 與 amycretin 則走 amylin 路線，用飽足與耐受換長期可用性。</p>
+</section>
+
+<style>
+.impl-grid,.take-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.impl{border-radius:12px;padding:1.1rem;border:1px solid;transition:transform .2s,box-shadow .2s;}
+.impl:hover,.take:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.1);}
+.impl .ih{font-weight:700;font-size:.95rem;margin-bottom:.4rem;display:flex;gap:.4rem;align-items:center;}
+.impl .ic{font-size:.88rem;line-height:1.65;}
+.i-diet{background:#f0fdf4;border-color:#86efac;}.i-diet .ih{color:#14532d;}.i-diet .ic{color:#3f6212;}
+.i-read{background:#fffbeb;border-color:#fcd34d;}.i-read .ih{color:#92400e;}.i-read .ic{color:#78350f;}
+.i-track{background:#fff7ed;border-color:#fdba74;}.i-track .ih{color:#9a3412;}.i-track .ic{color:#7c2d12;}
+.i-rx{background:#faf5ff;border-color:#d8b4fe;}.i-rx .ih{color:#581c87;}.i-rx .ic{color:#6b21a8;}
+.take{background:#ecfdf5;border:1px solid #a7f3d0;border-radius:12px;padding:1.1rem;transition:transform .2s,box-shadow .2s;}
+.take .th{font-weight:700;color:#065f46;font-size:.95rem;margin-bottom:.3rem;}
+.take .tc{font-size:.88rem;color:#334155;line-height:1.65;}
+.question-accordion{border:1px solid #cbd5e1;border-radius:10px;margin-bottom:.8rem;overflow:hidden;}
+.question-header{cursor:pointer;list-style:none;padding:.9rem 1rem;display:flex;align-items:center;gap:.6rem;background:#f8fafc;font-weight:600;font-size:.9rem;color:#1e293b;flex-wrap:wrap;}
+.question-header::-webkit-details-marker{display:none;}
+.question-number{font-family:'Source Code Pro',monospace;color:#047857;font-weight:700;}
+.question-type{font-size:.68rem;font-weight:600;padding:.15rem .5rem;border-radius:10px;}
+.question-text{flex:1;min-width:180px;}
+.accordion-icon::after{content:"＋";color:#059669;font-weight:700;}
+details[open] .accordion-icon::after{content:"−";}
+.question-answer{padding:1rem;background:#fff;font-size:.9rem;line-height:1.7;color:#334155;border-top:1px solid #e2e8f0;}
+.bottom-line{background:linear-gradient(135deg,#ecfdf5,#f0fdfa);margin:2rem;padding:1.5rem;border-radius:14px;border-left:5px solid #059669;}
+.bottom-line-header{font-weight:700;color:#064e3b;margin-bottom:1rem;font-size:1.15rem;}
+.bottom-line-item{margin-bottom:1rem;}
+.bottom-line-item:last-child{margin-bottom:0;}
+.bottom-line-label{font-weight:600;color:#047857;font-size:.85rem;margin-bottom:.25rem;}
+.bottom-line-text{font-size:.93rem;line-height:1.75;color:#334155;}
+.tier-row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.6rem 0 1rem;}
+.tier-badge{font-size:.74rem;font-weight:600;padding:.2rem .6rem;border-radius:6px;}
+.t-strong{background:#d1fae5;color:#065f46;}.t-mod{background:#dbeafe;color:#1e3a8a;}.t-lim{background:#fef3c7;color:#92400e;}.t-pre{background:#fed7aa;color:#9a3412;}
+@media(max-width:680px){.impl-grid,.take-grid{grid-template-columns:1fr;}}
+</style>
+
+<!-- EVIDENCE BREAKDOWN -->
+<section>
+  <div class="sec-title">證據解析｜這篇文章最重要的一課</div>
+  <div class="sec-lead">原文最值得稱讚的地方，是它自己就強調「不同試驗不可橫向比較」。這正是這份文件想讓你帶走的核心識讀能力。</div>
+
+  <div class="box box-evidence">
+    <div class="bh">🔬 為什麼「28% > 22.7% > 16.6%」是假排序</div>
+    <div class="bc">
+      這三個數字分別來自<strong>不同族群</strong>（有無糖尿病、基線 BMI 不同）、<strong>不同療程</strong>（28 / 68 / 76 / 80 週）、<strong>不同對照組</strong>，以及不同的統計估計量（estimand）。把它們相減，就像比較「跑 5K 的人」與「跑全馬的人」誰比較快——單位根本不一致。每次看到減重排行榜，先問四件事：<strong>族群？療程幾週？對照組是誰？是主要終點還是亞組？</strong>
+    </div>
+  </div>
+
+  <p style="font-size:.93rem;color:#334155;margin-bottom:.4rem;"><strong>查證後我對原文的獨立修正（David 你重視這個）：</strong></p>
+  <ul class="clean">
+    <li><strong>Orforglipron 已上市，非「啟動申請」</strong>：原文這點已過時。它在 2026/4/1 已獲 FDA 核准（Foundayo）並在售。這是整篇最關鍵的時效修正。</li>
+    <li><strong>Retatrutide 的 30.3% 被放大了</strong>：80 週主要終點是 28.3%；30.3% 只是 BMI≥35 亞組延伸到 104 週的數字。原文「最高達 30.3%」技術上沒錯，但容易讓人誤以為是頭條成績。</li>
+    <li><strong>MET-097i 的 14.1% 張冠李戴</strong>：那是「每週劑量」的數字；它真正的賣點「每月一針」目前約 10–12.3%。用週劑量的成績去賣月針，是最容易被忽略的混淆。</li>
+    <li><strong>Survodutide「肌肉幾乎不流失」略為美化</strong>：實際是瘦體流失約佔總組織變化的 10–11%（很低、很漂亮，但不是零）。另外 MASLD 數據登的是 Nature Medicine，不是 NEJM；台灣 TFDA 突破性認定我無法獨立查證，請當作原文說法。</li>
+  </ul>
+
+  <div class="tier-row">
+    <span class="tier-badge t-strong">Strong：orforglipron(已上市)、retatrutide、survodutide、CagriSema(Phase 3／頂刊)</span>
+    <span class="tier-badge t-lim">Limited：MET-097i、elecoglipron、petrelintide(Phase 2b)</span>
+    <span class="tier-badge t-pre">Preliminary：amycretin(Phase 2 早期)</span>
+  </div>
+</section>
+
+<!-- WHO BENEFITS / SKIPS -->
+<section style="padding-top:0;">
+  <div class="sec-title">適用族群｜不是所有人都該關心「選哪支」</div>
+  <div class="impl-grid">
+    <div class="box box-supp" style="margin:0;">
+      <div class="bh">✅ 真正的對象</div>
+      <div class="bc">臨床肥胖、第二型糖尿病、MASH／脂肪肝患者；針頭恐懼或冷鏈不便者（口服占優）；容易忘記打針者（月針占優）。對這群人，「選哪種給藥方式能長期維持」是真實且重要的決策。</div>
+    </div>
+    <div class="box box-individual" style="margin:0;">
+      <div class="bh">⏭ 對你（中階、執行基本功）</div>
+      <div class="bc">你不是這份文件的用藥對象。對你而言它是<strong>識讀與地圖</strong>，不是行動清單。真正可遷移的，是「保肌邏輯」與「拆穿跨試驗話術」，而不是任何一支藥。把優化基本功的精力，繼續放在蛋白、訓練、睡眠上。</div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section style="padding-top:0;">
+  <div class="sec-title">安全性與務必保留的幾點</div>
+  <div class="box box-safety">
+    <div class="bh">🛡️ 不會因「口服／月針／多受體」自動消失的風險</div>
+    <div class="bc">
+      <ul class="clean" style="margin:0;">
+        <li>所有 GLP-1 共通的<strong>腸胃道副作用</strong>（噁心、嘔吐、腹瀉）。</li>
+        <li><strong>停藥後復胖</strong>與<strong>肌肉流失</strong>——這正是阻力訓練+足量蛋白在任何減重情境都重要的原因。</li>
+        <li>Retatrutide 的<strong>感覺異常（paresthesia）</strong>安全訊號（原文稱 12mg 約 20.9% vs 安慰劑 0.7%，數字依原文）。</li>
+        <li><strong>多數藥物長期心血管／腎臟結局尚未定論</strong>；多項仍為 Phase 2／2b，CagriSema 也未達 Novo 自訂目標。</li>
+        <li>多為研究中產品，可能與慢性病藥物交互作用；非臨床適應症者不應自行尋藥使用。</li>
+      </ul>
+      <p style="margin-top:.6rem;"><strong>何時找醫師：</strong>用藥相關不適、體重劇變、新出現症狀，或考慮是否屬於臨床適應症族群時，交給合格醫療專業人員評估。</p>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGIC IMPLICATIONS -->
+<section style="padding-top:0;">
+  <div class="sec-title">應用啟示</div>
+  <div class="impl-grid">
+    <div class="impl i-diet"><div class="ih">🥗 飲食與訓練</div><div class="ic">無論藥物或非藥物，減重期都要靠<strong>蛋白 1.6–2.2 g/kg + 阻力訓練</strong>保住瘦體。survodutide 的「保肌」只是把這件事藥理化——你早就在做的，繼續做好。</div></div>
+    <div class="impl i-read"><div class="ih">🔍 數字識讀</div><div class="ic">看到任何「減重 X%」標題，先問：族群？療程幾週？對照組？主要終點還是亞組？學會這四問，就免疫於大半行銷話術。</div></div>
+    <div class="impl i-track"><div class="ih">📊 追蹤指標</div><div class="ic">代謝品質 &gt; 體重數字。若日後追蹤成效（自己或親友），以<strong>腰圍／體組成／內臟脂肪</strong>為主，別被體重計綁架。</div></div>
+    <div class="impl i-rx"><div class="ih">💊 用藥決策框架</div><div class="ic">若情境真的相關：先分清這是<strong>便利性</strong>問題還是<strong>機轉</strong>問題，再看是否已有適應症；多為試驗中、長期結局未定，務必交給醫師。</div></div>
+  </div>
+</section>
+
+<!-- KEY TAKEAWAYS -->
+<section style="padding-top:0;">
+  <div class="sec-title">學習重點總結</div>
+  <div class="take-grid">
+    <div class="take"><div class="th">① 療效到頂，戰場轉移</div><div class="tc">決勝點從「瘦多少」變成「撐得住嗎（便利性）」與「減對組織嗎（機轉）」。</div></div>
+    <div class="take"><div class="th">② 數字不可橫向相減</div><div class="tc">族群、療程、對照組全不同。排行榜是錯覺，四問才是真相。</div></div>
+    <div class="take"><div class="th">③ 減對的組織 &gt; 減幾公斤</div><div class="tc">內臟脂肪、肝脂、保肌——代謝品質才是高價值目標，與體組成邏輯一致。</div></div>
+    <div class="take"><div class="th">④ 復胖與肌肉流失不會消失</div><div class="tc">不因口服、月針或多受體而自動解決；基本功仍是地基。</div></div>
+  </div>
+</section>
+
+<!-- PRACTICE -->
+<section style="padding-top:0;">
+  <div class="sec-title">練習題（先想再點開）</div>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q1</span>
+      <span class="question-type" style="background:#d1fae5;color:#065f46;">證據評估題</span>
+      <span class="question-text">為什麼不能說「retatrutide 28% &gt; CagriSema 22.7% &gt; survodutide 16.6%」就是療效排序？</span>
+      <span class="accordion-icon"></span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>參考答案：</strong>因為這三個數字的「單位」不一致。族群不同（retatrutide 與 CagriSema 的肥胖數字來自無糖尿病者，survodutide 16.6% 又是另一族群），療程不同（68 / 76 / 80 週），對照組與統計估計量也不同。把它們相減等於拿不同尺規量出來的數字硬比。正確做法是各自對照自己的試驗條件，而非排名。</p>
+    </div>
+  </details>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q2</span>
+      <span class="question-type" style="background:#dbeafe;color:#1e3a8a;">應用情境題</span>
+      <span class="question-text">你看到「survodutide 保肌」很興奮——這對你的訓練實務有什麼可遷移啟示？</span>
+      <span class="accordion-icon"></span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>參考答案：</strong>機轉不同，原則相同：任何快速減重期都要靠足量蛋白（1.6–2.2 g/kg）+ 阻力訓練來保住瘦體，藥物只是把這件事藥理化。對你這不是用藥訊號，而是「減重期更要練、更要吃夠蛋白」的再確認；並且判讀成效時看腰圍／體組成，而非單看體重計。</p>
+    </div>
+  </details>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q3</span>
+      <span class="question-type" style="background:#fef3c7;color:#92400e;">決策判斷題</span>
+      <span class="question-text">親友問「口服 orforglipron 和月針 MET-097i 哪個比較好」，你會怎麼幫他想？</span>
+      <span class="accordion-icon"></span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>參考答案：</strong>先點破這是「便利性」問題，不是「療效」問題。orforglipron 已上市、口服每日、約 12%；MET-097i 仍 Phase 2b、月針、月劑量約 10–12%。決策關鍵是「哪種給藥方式他最能長期維持」與「是否已有臨床適應症」，而不是單看減重數字——而且這必須由醫師評估，不是朋友之間定案。</p>
+    </div>
+  </details>
+</section>
+
+<!-- BOTTOM LINE -->
+<div class="bottom-line">
+  <div class="bottom-line-header">🎯 我的行動結論</div>
+  <div class="bottom-line-item">
+    <div class="bottom-line-label">✔ 核心洞察</div>
+    <div class="bottom-line-text">療效已到天花板，真正的天花板是「能不能長期用下去」與「減的是哪種組織」。對已執行基本功、非用藥對象的我，最有價值的不是選哪支藥，而是兩個可遷移原則：任何快速減重都要靠阻力訓練 + 足量蛋白保肌；以及學會拆穿「跨試驗直接相減」的話術。</div>
+  </div>
+  <div class="bottom-line-item">
+    <div class="bottom-line-label">📈 本週應用</div>
+    <div class="bottom-line-text">不需要任何用藥行動。把「代謝品質 &gt; 體重數字」內化：維持 1.6–2.2 g/kg 蛋白與每週阻力訓練不變。讀到任何「減重 X%」標題，先問四件事——族群、療程週數、對照組、主要終點還是亞組。若日後追蹤體重變化，以腰圍／體組成為準。</div>
+  </div>
+  <div class="bottom-line-item">
+    <div class="bottom-line-label">⚠ 需要驗證</div>
+    <div class="bottom-line-text">多數新藥長期心血管／腎臟結局未定論；停藥復胖與肌肉流失不會因口服／月針／多受體消失。survodutide「保肌」實為瘦體流失約佔總組織變化 10–11%（低但非零）；TFDA 突破性認定我無法獨立證實，當作原文說法看待。</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="background:#1e293b;color:#94a3b8;padding:1.8rem 2rem;font-size:.8rem;line-height:1.7;">
+  <p style="margin-bottom:.6rem;"><strong style="color:#e2e8f0;">製作日期：</strong>2026-06-09｜<strong style="color:#e2e8f0;">建議 Chat Title：</strong>2026-06-09 [Hormones] GLP-1 Next-Gen - Convenience vs Mechanism</p>
+  <p><strong style="color:#cbd5e1;">免責聲明：</strong>本文件為教育性質整理，不構成醫療建議。文中藥物多為研究中（investigational）產品，療效與安全性尚未定論；實施任何用藥決定前，請與你的醫師討論。減重數字來自不同試驗，族群、療程與對照組皆異，<strong>不可直接相減比較</strong>。</p>
+</div>
+
+</div>
+</body>
+</html>

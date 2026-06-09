@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-date" content="2026-05-31">
+<title>好膽固醇的進化史：從 HDL-C 到 HDL 功能性</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.75; color: #1e293b; background: #f1f5f9; padding: 1rem;
+}
+.container { max-width: 920px; margin: 0 auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #064e3b, #047857, #059669);
+    color: #fff; padding: 2.5rem 2rem; text-align: center; position: relative;
+}
+.header::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(110,231,183,0.15), transparent 50%);
+}
+.header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.6rem; position: relative; line-height: 1.4; }
+.header .subtitle { font-size: 1rem; font-weight: 300; opacity: 0.92; position: relative; max-width: 640px; margin: 0 auto; }
+.tag-row { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.2rem; flex-wrap: wrap; position: relative; }
+.tag { font-size: 0.78rem; font-weight: 600; padding: 0.25rem 0.7rem; border-radius: 999px; }
+.tag-labs { background: #fed7aa; color: #9a3412; }
+.tag-nutrition { background: #bbf7d0; color: #14532d; }
+.tag-training { background: #dbeafe; color: #1e3a8a; }
+.tag-evidence { background: #fde68a; color: #92400e; }
+.source-info { font-size: 0.78rem; opacity: 0.8; margin-top: 1rem; position: relative; font-family: 'Source Code Pro', monospace; }
+
+/* Section base */
+.section { padding: 2rem; }
+.section-title {
+    font-size: 1.3rem; font-weight: 700; color: #064e3b; margin-bottom: 1.2rem;
+    padding-left: 0.9rem; border-left: 5px solid; border-image: linear-gradient(180deg, #047857, #6ee7b7) 1;
+}
+
+/* Executive summary */
+.exec-summary { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 1.5rem; margin: 2rem; }
+.exec-summary h2 { font-size: 1.15rem; color: #064e3b; margin-bottom: 0.8rem; }
+.exec-summary p { color: #334155; font-size: 0.97rem; }
+.rating-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; padding: 0.6rem 1rem; background: linear-gradient(135deg, #ecfdf5, #f0fdfa); border-radius: 8px; flex-wrap: wrap; border: 1px solid #a7f3d0; }
+.rating-score { font-weight: 700; color: #065f46; font-size: 1rem; }
+.rating-stars { color: #f59e0b; letter-spacing: 1px; }
+.evidence-tier { font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.evidence-moderate { background: #dbeafe; color: #1e3a8a; }
+.rating-high { font-size: 0.8rem; color: #047857; background: #d1fae5; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.rating-low { font-size: 0.8rem; color: #64748b; background: #f1f5f9; padding: 0.2rem 0.5rem; border-radius: 4px; }
+
+/* Learning objectives */
+.objectives-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.objective-item { background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 1.1rem; transition: transform 0.2s, box-shadow 0.2s; }
+.objective-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.objective-item .num { font-family: 'Source Code Pro', monospace; font-weight: 600; color: #047857; font-size: 0.8rem; }
+.objective-item p { margin-top: 0.4rem; font-size: 0.92rem; color: #334155; }
+
+/* Key numbers dashboard */
+.dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+.stat-card { background: #ecfdf5; border: 1px solid #86efac; border-radius: 10px; padding: 1.2rem; text-align: center; }
+.stat-card .value { font-family: 'Source Code Pro', monospace; font-size: 1.6rem; font-weight: 600; color: #047857; }
+.stat-card .value.negative { color: #dc2626; }
+.stat-card .label { font-size: 0.8rem; color: #475569; margin-top: 0.3rem; }
+
+/* Framework visual */
+.framework-visual { background: linear-gradient(135deg, #047857, #059669); border-radius: 1rem; padding: 1.8rem 1.5rem; color: white; margin: 1.5rem 0; }
+.framework-title { text-align: center; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; }
+.framework-steps { display: flex; justify-content: center; align-items: stretch; gap: 0.6rem; flex-wrap: wrap; }
+.framework-step { text-align: center; min-width: 110px; max-width: 140px; flex: 1; }
+.framework-icon { font-size: 1.6rem; width: 3.5rem; height: 3.5rem; background: rgba(255,255,255,0.2); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; }
+.framework-step .fname { font-weight: 700; font-size: 0.9rem; }
+.framework-step .fdesc { font-size: 0.75rem; opacity: 0.9; margin-top: 0.2rem; }
+.framework-arrow { display: flex; align-items: center; color: rgba(255,255,255,0.7); font-size: 1.3rem; }
+
+/* Tabs */
+.tab-container { margin: 1rem 0; }
+.tab-nav { display: flex; gap: 0.4rem; flex-wrap: wrap; border-bottom: 2px solid #d1fae5; margin-bottom: 1.5rem; }
+.tab-btn { background: #f0fdf4; border: 1px solid #d1fae5; border-bottom: none; color: #047857; padding: 0.6rem 1rem; font-size: 0.88rem; font-weight: 600; border-radius: 8px 8px 0 0; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.tab-btn:hover { background: #d1fae5; }
+.tab-btn.active { background: linear-gradient(135deg, #047857, #059669); color: #fff; border-color: #047857; }
+.tab-content { display: none; animation: fadeIn 0.3s; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+.content-block { margin-bottom: 1.6rem; }
+.content-block h3 { font-size: 1.1rem; color: #065f46; margin-bottom: 0.6rem; }
+.content-block p { margin-bottom: 0.7rem; color: #334155; font-size: 0.95rem; }
+.content-block ul { margin: 0.5rem 0 0.9rem 1.3rem; }
+.content-block li { margin-bottom: 0.35rem; font-size: 0.94rem; color: #334155; }
+strong { color: #064e3b; }
+.en-term { font-family: 'Source Code Pro', monospace; font-size: 0.9em; color: #047857; }
+
+/* Info boxes */
+.box { border-radius: 10px; margin: 1.2rem 0; overflow: hidden; border: 1px solid; }
+.box-header { padding: 0.55rem 1rem; font-weight: 700; font-size: 0.92rem; display: flex; align-items: center; gap: 0.5rem; }
+.box-body { padding: 0.9rem 1rem; font-size: 0.92rem; }
+.box-body ul { margin-left: 1.2rem; }
+.box-analogy { border-color: #f9a8d4; }
+.box-analogy .box-header { background: #fbcfe8; color: #831843; }
+.box-analogy .box-body { background: #fdf2f8; }
+.box-evidence { border-color: #6ee7b7; }
+.box-evidence .box-header { background: #a7f3d0; color: #065f46; }
+.box-evidence .box-body { background: #ecfdf5; }
+.box-key { border-color: #fdba74; }
+.box-key .box-header { background: #fed7aa; color: #9a3412; }
+.box-key .box-body { background: #fff7ed; }
+.box-individual { border-color: #fca5a5; }
+.box-individual .box-header { background: #fecaca; color: #7f1d1d; }
+.box-individual .box-body { background: #fef2f2; }
+.box-study { border-color: #94a3b8; }
+.box-study .box-header { background: #cbd5e1; color: #1e293b; }
+.box-study .box-body { background: #f8fafc; }
+.box-safety { border-color: #fda4af; }
+.box-safety .box-header { background: #fecdd3; color: #9f1239; }
+.box-safety .box-body { background: #fff1f2; }
+
+/* Tables */
+.tbl-wrap { overflow-x: auto; margin: 1.2rem 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #065f46; color: #fff; font-weight: 600; }
+tr:nth-child(even) td { background: #f8fafc; }
+.optimal-row td { background: #ecfdf5 !important; font-weight: 600; }
+td .pos { color: #16a34a; font-weight: 600; }
+td .neg { color: #dc2626; font-weight: 600; }
+
+/* Strategic implications cards */
+.impl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.impl-card { border-radius: 10px; padding: 1.2rem; transition: transform 0.2s, box-shadow 0.2s; }
+.impl-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+.impl-card h4 { font-size: 0.95rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+.impl-card p { font-size: 0.88rem; }
+.impl-nutrition { background: #f0fdf4; border: 1px solid #86efac; } .impl-nutrition h4 { color: #14532d; }
+.impl-training { background: #eff6ff; border: 1px solid #93c5fd; } .impl-training h4 { color: #1e3a8a; }
+.impl-supplement { background: #faf5ff; border: 1px solid #d8b4fe; } .impl-supplement h4 { color: #581c87; }
+.impl-lab { background: #fff7ed; border: 1px solid #fdba74; } .impl-lab h4 { color: #9a3412; }
+
+/* Takeaways */
+.takeaway-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.takeaway-card { background: linear-gradient(135deg, #f0fdf4, #ecfdf5); border: 1px solid #86efac; border-radius: 10px; padding: 1.2rem; transition: transform 0.2s, box-shadow 0.2s; }
+.takeaway-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.takeaway-card .tk-num { font-family: 'Source Code Pro', monospace; font-size: 1.4rem; font-weight: 600; color: #047857; }
+.takeaway-card p { font-size: 0.9rem; color: #334155; margin-top: 0.4rem; }
+
+/* Practice accordion */
+.question-accordion { border: 1px solid #d1fae5; border-radius: 10px; margin-bottom: 0.8rem; overflow: hidden; }
+.question-header { padding: 1rem; background: #f0fdf4; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; font-weight: 500; list-style: none; flex-wrap: wrap; }
+.question-header::-webkit-details-marker { display: none; }
+.question-number { font-family: 'Source Code Pro', monospace; font-weight: 600; color: #047857; }
+.question-type { font-size: 0.72rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 4px; }
+.question-text { flex: 1; min-width: 200px; font-size: 0.92rem; color: #334155; }
+.accordion-icon::after { content: '▼'; font-size: 0.7rem; color: #047857; transition: transform 0.2s; }
+details[open] .accordion-icon::after { transform: rotate(180deg); display: inline-block; }
+.question-answer { padding: 1rem; background: #fff; border-top: 1px solid #d1fae5; font-size: 0.92rem; color: #334155; }
+.question-answer p { margin-bottom: 0.5rem; }
+
+/* Bottom line */
+.bottom-line { background: linear-gradient(135deg, #ecfdf5, #f0fdfa); margin: 2rem; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #059669; }
+.bottom-line-header { font-weight: 700; color: #064e3b; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; }
+.bottom-line-item { margin-bottom: 1rem; }
+.bottom-line-item:last-child { margin-bottom: 0; }
+.bottom-line-label { font-weight: 600; color: #047857; font-size: 0.85rem; margin-bottom: 0.25rem; }
+.bottom-line-text { font-size: 0.95rem; line-height: 1.7; color: #334155; }
+
+/* Footer */
+.footer { background: #1e293b; color: #94a3b8; padding: 2rem; font-size: 0.82rem; }
+.footer .disclaimer { margin-bottom: 0.8rem; line-height: 1.6; }
+.footer .chat-title { font-family: 'Source Code Pro', monospace; color: #6ee7b7; background: rgba(110,231,183,0.1); padding: 0.5rem 0.8rem; border-radius: 6px; display: inline-block; margin-top: 0.5rem; font-size: 0.8rem; }
+.footer .meta { margin-top: 1rem; opacity: 0.7; }
+
+@media (max-width: 600px) {
+    .section, .exec-summary, .bottom-line { padding: 1.3rem; margin: 1.3rem; }
+    .header h1 { font-size: 1.35rem; }
+    .framework-arrow { transform: rotate(90deg); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+    <h1>好膽固醇的進化史</h1>
+    <p class="subtitle">從 HDL-C → HDL 功能性 → ApoA-I 與 CEC：為什麼「好膽固醇高」不一定是好事，運動如何升級你的救援艦隊</p>
+    <div class="tag-row">
+        <span class="tag tag-labs">Labs</span>
+        <span class="tag tag-nutrition">Nutrition</span>
+        <span class="tag tag-training">Training</span>
+        <span class="tag tag-evidence">Evidence</span>
+    </div>
+    <p class="source-info">來源：科普長文整理 · 脂質學 / 心血管預防 · 中階健康識讀</p>
+</div>
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="exec-summary">
+    <div class="rating-bar">
+        <span class="rating-score"><span class="rating-stars">★★★★☆</span> 4.0/5</span>
+        <span class="evidence-tier evidence-moderate">證據: Moderate</span>
+        <span class="rating-high">↑ 目標相關性, 可持續性</span>
+        <span class="rating-low">↓ 可行動性（指標台灣難測）</span>
+    </div>
+    <h2>快速摘要</h2>
+    <p>這篇文章的核心顛覆是：<strong>HDL-C 這個數字本身可能不是因果保護因子</strong>，而比較像「相關指標」。真正保護血管的是 HDL 的<strong>功能</strong>——能不能把斑塊裡的廢膽固醇拉回肝臟（CEC）、能不能抗氧化抗發炎（PON1）。多個拉高 HDL-C 的藥物試驗失敗、Mendelian randomization 顯示基因性高 HDL 沒有預期保護，都指向同一結論。好消息是：<strong>生活型態（運動 > 原型食物/橄欖油 > 減重/戒菸 > 睡眠）</strong>能同時升級 HDL 的數量與品質，而藥物做不到。它們的共同下游方向都是降低系統性發炎與氧化壓力。</p>
+</div>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="section">
+    <h2 class="section-title">學習目標</h2>
+    <div class="objectives-grid">
+        <div class="objective-item">
+            <span class="num">01</span>
+            <p>分清 HDL-C（濃度）、HDL-P（顆粒數）、ApoA-I（功能）、CEC（戰鬥力）四個層次代表什麼，以及為什麼單看 HDL-C 不夠。</p>
+        </div>
+        <div class="objective-item">
+            <span class="num">02</span>
+            <p>理解「HDL 越高越好」為何被挑戰——從 CETP 抑制劑試驗到 Mendelian randomization 的證據鏈。</p>
+        </div>
+        <div class="objective-item">
+            <span class="num">03</span>
+            <p>掌握升級 HDL 功能的生活型態介入排序，以及它們共同的上游機轉（降發炎/抗氧化）。</p>
+        </div>
+    </div>
+</div>
+
+<!-- KEY NUMBERS DASHBOARD -->
+<div class="section">
+    <h2 class="section-title">關鍵數字儀表板</h2>
+    <div class="dashboard">
+        <div class="stat-card">
+            <div class="value negative">+36%</div>
+            <div class="label">HDL &gt;97 的男性全因死亡率（vs HDL 60，丹麥研究）</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">2&times;</div>
+            <div class="label">血脂漂亮但不運動者的心血管死亡風險（Farrell 2017）</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">+6.2%</div>
+            <div class="label">高量+高強度運動組的 CEC 提升（STRRIDE-PD）</div>
+        </div>
+        <div class="stat-card">
+            <div class="value">≥150 min</div>
+            <div class="label">每週有效運動劑量門檻（中等強度）</div>
+        </div>
+    </div>
+</div>
+
+<!-- FRAMEWORK VISUAL -->
+<div class="section">
+    <h2 class="section-title">救援艦隊：五個層次的進化</h2>
+    <div class="framework-visual">
+        <div class="framework-title">從「橡膠材積」到「真實戰鬥力」</div>
+        <div class="framework-steps">
+            <div class="framework-step">
+                <div class="framework-icon">🛟</div>
+                <div class="fname">HDL-C</div>
+                <div class="fdesc">橡膠總材積<br>（看不出戰力）</div>
+            </div>
+            <div class="framework-arrow">→</div>
+            <div class="framework-step">
+                <div class="framework-icon">🛥️</div>
+                <div class="fname">HDL-P</div>
+                <div class="fdesc">船艦數量<br>（顆粒數）</div>
+            </div>
+            <div class="framework-arrow">→</div>
+            <div class="framework-step">
+                <div class="framework-icon">🚩</div>
+                <div class="fname">ApoA-I</div>
+                <div class="fdesc">旗幟<br>（身分+召集）</div>
+            </div>
+            <div class="framework-arrow">→</div>
+            <div class="framework-step">
+                <div class="framework-icon">⚔️</div>
+                <div class="fname">CEC</div>
+                <div class="fdesc">戰鬥力<br>（外流能力）</div>
+            </div>
+            <div class="framework-arrow">→</div>
+            <div class="framework-step">
+                <div class="framework-icon">🦠</div>
+                <div class="fname">PON1</div>
+                <div class="fdesc">武器<br>（抗氧化）</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TABBED CONTENT -->
+<div class="section">
+    <h2 class="section-title">完整內容</h2>
+    <div class="tab-container">
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab(event, 'tab-metaphor')">五個比喻</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-clinical')">診間情境</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-hypothesis')">HDL 假說轉折</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-exercise')">運動升級</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-beyond')">運動之外</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-limits')">誠實邊界</button>
+        </div>
+
+        <!-- TAB 1: METAPHORS -->
+        <div id="tab-metaphor" class="tab-content active">
+            <div class="content-block">
+                <h3>五個比喻，一張救援艦隊地圖</h3>
+                <p>如果 LDL 是血管裡撞壞血管的「大船小船」，那 HDL 就是負責清理戰場、把廢膽固醇運回母港的「救援艦隊」。但這支艦隊的戰力，藏在血脂報告永遠看不到的地方。</p>
+            </div>
+
+            <div class="box box-analogy">
+                <div class="box-header">🛟 比喻一：橡膠材積 — HDL-C</div>
+                <div class="box-body">
+                    <p>HDL-C 是河面上「所有救生器材使用的橡膠/泡棉總材積」。兩個人都是 HDL-C 50，但一個可能是 100 艘配備齊全的救生艇，另一個可能是 1 萬個破舊的單人救生圈——橡膠材積一樣，救援能力差百倍。這就是「越高越好」會被挑戰的根本原因。</p>
+                </div>
+            </div>
+
+            <div class="box box-analogy">
+                <div class="box-header">🛥️ 比喻二：船艦數量 — HDL-P（顆粒數）</div>
+                <div class="box-body">
+                    <p>真正的「船艦總數」要看 <span class="en-term">HDL-P (HDL particle number)</span>。HDL-C 與 HDL-P 不一定一致——有人 HDL-C 高但船少且大艘，有人 HDL-C 中等但船很多艘。在某些情境下，HDL-P 比 HDL-C 更能預測心血管事件。</p>
+                </div>
+            </div>
+
+            <div class="box box-analogy">
+                <div class="box-header">🚩 比喻三：旗幟 — ApoA-I</div>
+                <div class="box-body">
+                    <p>每艘救生艇上升著一面旗幟：<span class="en-term">ApoA-I</span>。它與 LDL 端的「船舷編號 ApoB」完全不同——ApoB 不可交換、是計數工具；ApoA-I 可在不同救生艇間調動、是功能召集。它有三個功能：</p>
+                    <ul>
+                        <li><strong>身分識別</strong>：肝臟看到 ApoA-I 才知道可以接收廢膽固醇</li>
+                        <li><strong>結構支撐</strong>：成熟 HDL 顆粒約 70% 蛋白質是 ApoA-I，它就是船骨</li>
+                        <li><strong>功能召集</strong>：旗幟升起，水手（PON1、LCAT、PLTP 等酵素）才上船報到</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box box-analogy">
+                <div class="box-header">⚔️ 比喻四：戰鬥力 — CEC（膽固醇外流能力）</div>
+                <div class="box-body">
+                    <p><span class="en-term">CEC (Cholesterol Efflux Capacity)</span> 是艦隊能不能真的衝到斑塊現場、把巨噬細胞肚子裡的廢膽固醇拉出來、運回肝臟的實際能力。在許多研究中，它比 HDL-C 更接近真實保護作用。</p>
+                </div>
+            </div>
+
+            <div class="box box-study">
+                <div class="box-header">📋 CEC 的證據累積</div>
+                <div class="box-body">
+                    <ul>
+                        <li><strong>Dallas Heart Study（2014, NEJM, n=2924）</strong>：CEC 與心血管事件呈反向關係，<strong>獨立於 HDL-C 濃度</strong>——HDL-C 一樣時，CEC 高的人風險明顯較低。</li>
+                        <li><strong>2021 系統性回顧 + meta-analysis</strong>：支持 CEC 是比 HDL-C 更好的預測指標。</li>
+                        <li><strong>但要誠實</strong>：PREVEND（2017）等研究發現校正後關係減弱或消失。CEC 仍是發展中的指標，不是定論。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box box-analogy">
+                <div class="box-header">🦠 比喻五：水手與武器 — PON1 與抗發炎能力</div>
+                <div class="box-body">
+                    <p>最重要的武器是 <span class="en-term">PON1 (Paraoxonase 1)</span>——它抑制 LDL 氧化、阻止單核球分化為巨噬細胞、防止泡沫細胞形成、促進膽固醇外流。它是救生艇上的「滅火器 + 戰術武器」。</p>
+                    <p>反直覺的細節：過去以為 HDL2（大顆粒）比 HDL3（小顆粒）好，但近十年發現真正在前線打仗的是 <strong>HDL3 小武裝艇</strong>（PON1 主要黏在 HDL3 上）。HDL2 大運輸艦負責物流，HDL3 武裝小艇負責戰鬥——健康艦隊兩者都需要。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: CLINICAL SCENARIOS -->
+        <div id="tab-clinical" class="tab-content">
+            <div class="content-block">
+                <h3>診間裡的四個情境</h3>
+                <p>把五個比喻串起來，看看相同的 HDL-C 數字在不同人身上意義如何天差地別。</p>
+            </div>
+            <div class="tbl-wrap">
+            <table>
+                <thead>
+                    <tr><th>情境</th><th>背景</th><th>HDL-C</th><th>ApoA-I（旗幟）</th><th>HDL 功能</th><th>判讀</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>F</strong></td><td>久坐過重</td><td>50</td><td>低</td><td>低</td><td>⚠️ 橡膠材積看似正常，艦隊有名無實</td></tr>
+                    <tr><td><strong>G</strong></td><td>代謝症候群早期</td><td>55</td><td>中</td><td>開始受損</td><td>⚠️ 數字看似還好，代謝背景正在惡化</td></tr>
+                    <tr class="optimal-row"><td><strong>H</strong></td><td>規律運動</td><td>58</td><td>高</td><td>高</td><td>✅ 三維度同時升級</td></tr>
+                    <tr><td><strong>I</strong></td><td>LMHR</td><td>85（極高）</td><td>高</td><td>推估高</td><td>❓ 救援艦隊強，但敵方艦隊也龐大</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="box box-key">
+                <div class="box-header">⚠️ 核心訊息</div>
+                <div class="box-body">
+                    <p>單看 HDL-C 會把<strong>情境 F</strong>（HDL 50 + 不運動 → 不夠安全）跟<strong>情境 H</strong>（HDL 58 + 規律運動 → 相對安全）混為一談——但真實風險恰好相反。情境 I 是上一篇的 LMHR（精瘦肌量超反應者），HDL 高且功能可能也高，但 LDL/ApoB 同時也高，長期結局仍不明朗。HDL-C 必須結合「整體代謝背景」與「生活型態」才有意義。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: HDL HYPOTHESIS -->
+        <div id="tab-hypothesis" class="tab-content">
+            <div class="content-block">
+                <h3>為什麼「HDL 越高越好」被挑戰</h3>
+                <p>過去 30 年主流訊息是「把 HDL 升上去就能減少心肌梗塞」。但這在大規模藥物試驗中遇到挑戰。</p>
+            </div>
+
+            <div class="box box-study">
+                <div class="box-header">📋 CETP 抑制劑的曲折故事</div>
+                <div class="box-body">
+                    <p><span class="en-term">CETP（膽固醇酯轉移蛋白）</span>負責「走私交易」——把 HDL 上的膽固醇酯換到 LDL 上。理論上抑制它，HDL 就會上升：</p>
+                    <ul>
+                        <li><strong>Torcetrapib（2006）</strong>：HDL 上升 72%，<span class="neg">死亡率反而增加 60%</span>，試驗中止（脫靶效應致血壓上升）</li>
+                        <li><strong>Dalcetrapib（2012）</strong>：HDL 大幅上升，事件沒減少，中止</li>
+                        <li><strong>Evacetrapib（2017）</strong>：HDL +130%、LDL −37%，但事件 <span class="neg">0% 減少</span>，中止</li>
+                        <li><strong>Anacetrapib（REVEAL, 2017）</strong>：HDL +100%，事件確實 <span class="pos">減少 9%（HR 0.91, p=0.004）</span>，但效益太小，藥廠主動放棄上市</li>
+                    </ul>
+                    <p>故事比「全部失敗」複雜：Anacetrapib 證明 HDL 通路不是完全沒用，但效益遠不及 statin 降 LDL。</p>
+                </div>
+            </div>
+
+            <div class="box box-evidence">
+                <div class="box-header">🔬 真正的轉折：Mendelian Randomization</div>
+                <div class="box-body">
+                    <p>2012 年 Lancet（Voight et al.）用基因學方法分析帶有「基因變異使 HDL 終身偏高」的人——結果這些人<strong>並沒有獲得預期的心血管保護</strong>。意思是 HDL-C 數字本身可能不是因果性保護因子，比較像「相關指標」。</p>
+                    <p><strong>但注意</strong>：這不代表「HDL 系統沒用」。後續研究發現功能性指標（ApoA-I、HDL-P、CEC）的因果性比 HDL-C 強。簡單說：「HDL-C 數字越高越好」不對，但「HDL 系統很重要」仍成立。</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <p>為什麼這些藥物效果有限？因為它們主要<strong>造了更多救生艇，但沒讓救生艇能打仗</strong>——ApoA-I 沒明顯增加（旗幟沒升）、PON1 沒增強（武器沒升級）、CEC 沒顯著提升（戰鬥力沒進步），甚至可能造出「充氣式假救生艇」。</p>
+            </div>
+        </div>
+
+        <!-- TAB 4: EXERCISE -->
+        <div id="tab-exercise" class="tab-content">
+            <div class="content-block">
+                <h3>運動如何「三維度同時升級」救援艦隊</h3>
+                <p>目前科學界累積最多證據、最強的單一介入，是規律運動——它能同時改善橡膠材積、船艦數量、旗幟密度、武器系統與戰鬥力。</p>
+            </div>
+
+            <div class="box box-study">
+                <div class="box-header">📋 Cho 2023（韓國中年女性，高強度 vs 久坐）</div>
+                <div class="box-body">
+                    <div class="tbl-wrap">
+                    <table>
+                        <thead><tr><th>維度</th><th>變化</th><th>艦隊比喻</th></tr></thead>
+                        <tbody>
+                            <tr><td>HDL-C 與 ApoA-I</td><td class="pos">上升</td><td>材積增加、旗幟升起</td></tr>
+                            <tr><td>HDL2 顆粒大小</td><td class="pos">↑ 2.1 倍</td><td>大型運輸艦升級</td></tr>
+                            <tr><td>HDL3 顆粒大小</td><td class="pos">↑ 1.2 倍</td><td>武裝小艇保留機動性</td></tr>
+                            <tr><td>PON1 活性</td><td class="pos">顯著上升</td><td>武器系統升級</td></tr>
+                            <tr><td>HDL 抗氧化能力</td><td class="pos">顯著上升</td><td>滅火能力提升</td></tr>
+                            <tr><td>LDL 顆粒大小</td><td class="pos">↑ 1.5 倍</td><td>小船改造回大船</td></tr>
+                            <tr><td>LDL 氧化程度</td><td class="pos">↓ 40%</td><td>起火的船減少</td></tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <p style="margin-top:0.6rem;"><strong>注意</strong>：Cho 2023 是橫斷面研究（比較不同運動量的女性），不是 RCT，存在選擇偏差可能。但類似結果在多份運動介入研究中重複出現。</p>
+                </div>
+            </div>
+
+            <div class="box box-evidence">
+                <div class="box-header">🔬 劑量很重要：STRRIDE-PD 試驗</div>
+                <div class="box-body">
+                    <p>針對前驅糖尿病患者的 6 個月 RCT，比較不同運動量與強度：</p>
+                    <ul>
+                        <li>只有<strong>高量+高強度</strong>組：HDL-C +3 mg/dL、<span class="pos">CEC 顯著增加 6.2%</span></li>
+                        <li>其他低劑量組：CEC <span class="neg">完全沒進步，甚至下降 2.4–8.4%</span></li>
+                    </ul>
+                    <p>這告訴我們「散步式運動」不夠。研究觀察到的有效劑量：每週至少 150 分鐘中等強度有氧（Zone 2 慢跑/騎車，心率約 105–120 bpm 持續維持），加入 HIIT 會進一步提升 CEC。也呼應 Farrell 2017——只有 Moderate to High CRF 才能在每個 TG/HDL 四分位都提供保護。</p>
+                </div>
+            </div>
+
+            <div class="box box-individual">
+                <div class="box-header">👤 但個體差異存在</div>
+                <div class="box-body">
+                    <p>HDL 對運動的反應，個體差異可達 30–40%。有些人運動 6 個月 HDL 功能改善明顯，有些人努力一樣卻幾乎沒動。這不代表運動沒用——運動的好處遠超過 HDL 一項——但代表不能用「HDL 數字有沒有改善」當作運動是否有效的唯一指標。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: BEYOND EXERCISE -->
+        <div id="tab-beyond" class="tab-content">
+            <div class="content-block">
+                <h3>運動之外的實證方法（按證據強度排序）</h3>
+                <p>運動是最強的，但不是唯一的。如果膝蓋不好、年紀太大或太忙，還有其他路徑。</p>
+            </div>
+
+            <div class="box box-evidence">
+                <div class="box-header">🥈 第二強：原型食物 + 橄欖油 + 多酚</div>
+                <div class="box-body">
+                    <p><strong>PREDIMED 試驗</strong>（n=296 子分析，1 年）：每天 4 湯匙以上初榨橄欖油的組別，CEC 顯著提升、HDL 酯化能力提升、抗氧化能力上升。關鍵是橄欖油多酚（oleuropein、hydroxytyrosol）直接保護 HDL 不被氧化、維持 PON1 活性。</p>
+                    <p><strong>重點不在某個菜系名字</strong>，而在共通元素：原型食物 + 抗氧化成分豐富 + 健康油脂 + 減少加工食品。深海魚 ↑PON1、豆類 ↑PON1/↓CETP、全穀類 ↑CEC、堅果 ↑抗氧化、深色蔬果/可可/綠茶 ↑PON1。</p>
+                    <p><strong>少吃同等重要</strong>：減少反式脂肪（破壞 HDL 結構）、添加糖與精製碳水（升 TG 啟動 CETP 走私）、加工肉品（促發炎）。</p>
+                </div>
+            </div>
+
+            <div class="box box-key">
+                <div class="box-header">⚠️ 橄欖油選購與使用提醒</div>
+                <div class="box-body">
+                    <p>市售特級初榨橄欖油標示混亂、造假問題在國際上都存在。挑選可注意：有產地與壓榨日期、深色玻璃瓶、酸度 &lt; 0.8%、第三方認證——不需買最貴的，中價位來源可靠就夠。多酚在高溫下會被破壞，建議涼拌、低溫煎、淋醬，油炸或大火快炒會失去大部分功效。</p>
+                </div>
+            </div>
+
+            <div class="box box-study">
+                <div class="box-header">🥉 第三強：減重（BMI 偏高者）+ 戒菸</div>
+                <div class="box-body">
+                    <p><strong>減重</strong>（STAMPEDE, n=90, 5 年）：減重後 ApoA-I 交換速率與 CEC 顯著提升。2024 研究（n=62）減重 1 年：HDL-C +29.6%、TG −30%、CEC 持續線性上升。不一定要手術——生活型態減重 5–10% 即可見顯著效果（STAMPEDE 生活型態組平均減重 10.5%）。</p>
+                    <p><strong>戒菸</strong>（Iwaoka 2014, n=32, 12 週）：HDL-C、ApoA-I、次類分布<strong>都沒變</strong>，但 CEC 與抗發炎指數<strong>顯著改善</strong>。溝通價值極大：「戒菸不會讓你 HDL 數字變漂亮，但會讓你的救援艦隊真正能打仗。」機制：CO 直接氧化 HDL、尼古丁與焦油抑制 ABCA1 受體阻斷膽固醇外流。</p>
+                </div>
+            </div>
+
+            <div class="box box-study">
+                <div class="box-header">🏅 第四強：睡眠品質與晝夜節律</div>
+                <div class="box-body">
+                    <p>OSA 患者研究（n=92）：所有 CEC 指標下降，ABCA1 介導的 CEC 在嚴重 OSA 更低，PON 活性與 ApoA-I 較低、hsCRP 較高。睡眠剝奪降低 ABCA1 表現、增加 20–30% 自由脂肪酸、減少保護型大顆粒 HDL。關鍵因素：睡 7–9 小時且連續、固定就寢起床（含週末）、社交時差 &gt; 1 小時就影響代謝。睡眠是艦隊的「夜間整補時段」。</p>
+                </div>
+            </div>
+
+            <div class="box box-individual">
+                <div class="box-header">❌ 一個必須誠實說的「沒用清單」</div>
+                <div class="box-body">
+                    <ul>
+                        <li><strong>魚油（EPA/DHA）補充品</strong>：對 HDL 功能證據不足，主要作用是降 TG</li>
+                        <li><strong>高劑量菸鹼酸</strong>：讓 SAA（假旗幟）增加 3 倍，CEC 沒改善</li>
+                        <li><strong>薑黃素、白藜蘆醇補充品</strong>：機制研究有，人體 RCT 證據薄弱</li>
+                        <li><strong>HDL 萃取補充品</strong>：偽科學</li>
+                        <li><span class="pos">唯一有部分人體 RCT 證據的營養素</span>：橄欖油多酚——但應透過真實食物，不是膠囊</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box box-key">
+                <div class="box-header">💊 藥物的現實</div>
+                <div class="box-body">
+                    <p>目前<strong>沒有任何藥物能「三維度同時升級」HDL</strong>：Statin 升 HDL-C 5–10% 但 ABCA1 介導的 CEC 反而下降；Niacin 升 HDL-C 16% 但 SAA ×3、CEC 沒改善（AIM-HIGH、HPS2-THRIVE 證實臨床無效）；Fibrate 對 CEC 不一致；CETP 抑制劑效益遠不及預期。功能升級仍須靠生活型態。<strong>但這不代表 statin 沒用</strong>——它降 LDL/apoB 的效益遠大於對 HDL 的小負面影響，仍是降低心血管風險最重要的藥物之一，只是價值不在 HDL 端。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: HONEST LIMITS -->
+        <div id="tab-limits" class="tab-content">
+            <div class="content-block">
+                <h3>科學的誠實邊界</h3>
+                <p>這套「比喻系統」能幫助理解，但 HDL 真實的生物學遠比比喻複雜。</p>
+            </div>
+            <div class="box box-individual">
+                <div class="box-header">👤 五個必須誠實說的限制</div>
+                <div class="box-body">
+                    <ul>
+                        <li><strong>① 指標難測</strong>：CEC、PON1、ApoA-I 等在台灣大部分醫院仍無法測量。本文目的不是叫你加驗，而是理解「為什麼單一數字不夠」。</li>
+                        <li><strong>② 個體差異大</strong>：同樣運動，有些人 CEC 改善 10%，有些人幾乎沒進步。運動的好處遠超過 HDL 一項（血壓、血糖、體組成、認知、情緒、睡眠）。</li>
+                        <li><strong>③ CEC 仍發展中</strong>：Dallas Heart Study 支持，但 PREVEND 等結果不完全一致。是當前最好的假說之一，不是定論。</li>
+                        <li><strong>④ 「降低系統性發炎」是方向性描述</strong>，不是精確因果機制。5 年後可能有更精準說法。</li>
+                        <li><strong>⑤ 比喻的局限</strong>：生物分子沒有「意圖」。ApoA-I 不會主動「升旗集合水手」，只是物理化學上恰好有疏水區段能結合磷脂與酵素。比喻是橋樑，不是真相本身。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box box-evidence">
+                <div class="box-header">🔬 關鍵整合：所有有效方法都在做同一件事</div>
+                <div class="box-body">
+                    <p>所有能升級 HDL 功能的方法，共同方向都是<strong>降低系統性發炎與氧化壓力</strong>：運動 ↓發炎/↑粒線體功能；原型食物/橄欖油/多酚 ↑抗氧化；減重 ↓促發炎細胞激素；戒菸 ↓CO 氧化；睡眠 ↓CRP/↑ABCA1。</p>
+                    <p>這解釋了為什麼藥物直接「拉高 HDL-C」效果有限——它們繞過上游因果路徑（系統性發炎），只動了一個下游標記。生活型態之所以有效，是因為它們直接作用於上游。</p>
+                </div>
+            </div>
+
+            <div class="box box-key">
+                <div class="box-header">⚠️ 時間維度：功能升級才是真資產</div>
+                <div class="box-body">
+                    <p>LDL 的損害是累積的，HDL 的保護也是累積的——但 HDL 保護不在「HDL-C 數字」裡，而在「每艘船的引擎、武器、旗幟、水手」的長期投資裡。一個 25 歲就規律運動 + 原型食物 + 不抽菸 + 睡好的人，到 55 歲擁有的不是「30 年的 HDL-C 數字」，而是 30 年累積、反映在 PON1/CEC/顆粒分布/ApoA-I 更新速度上的整體代謝健康——這是任何藥物無法快速重建的。越早越好、越久越好：你建立的不是數字，是一個會自己進化的系統。</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- EVIDENCE BREAKDOWN -->
+<div class="section">
+    <h2 class="section-title">證據強度分析</h2>
+    <div class="tbl-wrap">
+    <table>
+        <thead><tr><th>主張</th><th>證據來源</th><th>證據等級</th></tr></thead>
+        <tbody>
+            <tr><td>HDL-C 數字本身非因果保護因子</td><td>Mendelian randomization（Lancet 2012）+ 多個 CETP 試驗失敗</td><td>Strong</td></tr>
+            <tr><td>HDL &gt;97 mg/dL 死亡率反升（U 形）</td><td>丹麥大型世代研究（Madsen 2017, n&gt;5萬）</td><td>Moderate–Strong（觀察性）</td></tr>
+            <tr class="optimal-row"><td>運動升級 HDL 功能（CEC/PON1）</td><td>STRRIDE-PD RCT + Cho 2023 橫斷面 + 多份介入研究</td><td>Moderate</td></tr>
+            <tr><td>橄欖油多酚改善 HDL 功能</td><td>PREDIMED 子分析 RCT（n=296）</td><td>Moderate（單一試驗族群）</td></tr>
+            <tr><td>戒菸改善 CEC（不改數字）</td><td>Iwaoka 2014（n=32，小樣本）</td><td>Limited</td></tr>
+            <tr><td>CEC 為優於 HDL-C 的預測指標</td><td>Dallas Heart Study 支持 / PREVEND 不一致</td><td>Limited–Moderate（爭議中）</td></tr>
+            <tr><td>魚油/薑黃素/白藜蘆醇改善 HDL 功能</td><td>機制研究為主，人體 RCT 不足</td><td>Preliminary</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<!-- STRATEGIC IMPLICATIONS -->
+<div class="section">
+    <h2 class="section-title">應用啟示</h2>
+    <div class="impl-grid">
+        <div class="impl-card impl-nutrition">
+            <h4>🥗 日常飲食</h4>
+            <p>初榨橄欖油涼拌/低溫煎；每週 2–3 次富 Omega-3 魚；主食部分換糙米/五穀；豆類、深色蔬果、綠茶常駐。減反式脂肪、添加糖、精製碳水、加工肉。</p>
+        </div>
+        <div class="impl-card impl-training">
+            <h4>🏋️ 訓練調整</h4>
+            <p>有效劑量是門檻：每週 ≥150 分鐘中等強度（Zone 2，心率約 105–120 bpm 持續）。加入 HIIT 進一步提升 CEC。散步式運動不足以驅動全艦隊升級。</p>
+        </div>
+        <div class="impl-card impl-supplement">
+            <h4>💊 補充劑決策</h4>
+            <p>魚油、菸鹼酸、薑黃素、白藜蘆醇、HDL 萃取物對 HDL 功能證據不足。多酚透過真實食物攝取而非膠囊。不要為了「拉高 HDL」買補充品。</p>
+        </div>
+        <div class="impl-card impl-lab">
+            <h4>🧪 追蹤指標</h4>
+            <p>不要單看 HDL-C。結合 TG/HDL 比值、ApoB、hsCRP、空腹血糖、腰圍與生活型態整體判讀。CEC/PON1 台灣多數醫院尚無法測，用運動能力與 CRF 推估。</p>
+        </div>
+    </div>
+</div>
+
+<!-- KEY TAKEAWAYS -->
+<div class="section">
+    <h2 class="section-title">學習重點總結</h2>
+    <div class="takeaway-grid">
+        <div class="takeaway-card">
+            <div class="tk-num">01</div>
+            <p>HDL-C 是「橡膠材積」，不是「戰鬥力」。50 與 70 在不同人身上意義不同——重點是它與其他指標、生活型態的整體背景。</p>
+        </div>
+        <div class="takeaway-card">
+            <div class="tk-num">02</div>
+            <p>「HDL-C 越高越好」被 Mendelian randomization 與 CETP 試驗挑戰，但「HDL 系統很重要」仍成立——功能性指標（CEC/ApoA-I）的因果性比 HDL-C 強。</p>
+        </div>
+        <div class="takeaway-card">
+            <div class="tk-num">03</div>
+            <p>升級 HDL 功能靠「生活型態組合拳」：運動最強，其次原型食物/橄欖油/多酚、減重、戒菸、好睡眠。藥物做不到三維度同時升級。</p>
+        </div>
+        <div class="takeaway-card">
+            <div class="tk-num">04</div>
+            <p>所有有效方法的共同上游是降低系統性發炎與氧化壓力。把 HDL 當成「會進化的系統」，不是「要追求的數字」。</p>
+        </div>
+    </div>
+</div>
+
+<!-- PRACTICE -->
+<div class="section">
+    <h2 class="section-title">練習題（先思考再展開）</h2>
+
+    <details class="question-accordion">
+        <summary class="question-header">
+            <span class="question-number">Q1</span>
+            <span class="question-type" style="background:#d1fae5;color:#065f46">證據評估題</span>
+            <span class="question-text">某朋友健檢 HDL-C 高達 88，很得意說「我心血管一定沒問題」。根據本文，你會怎麼回應這個推論的問題？</span>
+            <span class="accordion-icon"></span>
+        </summary>
+        <div class="question-answer">
+            <p><strong>參考答案：</strong></p>
+            <p>HDL-C 高不等於保護。三個層次的問題：(1) 丹麥大型研究顯示 HDL &gt;97 反而死亡率上升（U 形），極高未必好。(2) Mendelian randomization 顯示基因性高 HDL 沒有預期保護，HDL-C 比較像相關指標而非因果保護因子。(3) 數字高不代表功能（CEC/PON1）高——可能是一堆「沒戰鬥力的破救生圈」。更重要的是要看整體背景：他的 LDL/ApoB、TG、發炎指標、生活型態如何？若他是 LMHR（HDL 高但 LDL 也高），長期結局其實不明朗。</p>
+        </div>
+    </details>
+
+    <details class="question-accordion">
+        <summary class="question-header">
+            <span class="question-number">Q2</span>
+            <span class="question-type" style="background:#dbeafe;color:#1e3a8a">應用情境題</span>
+            <span class="question-text">你想透過運動改善 HDL 功能，目前習慣是每天飯後散步 30 分鐘。根據 STRRIDE-PD，這樣夠嗎？該怎麼調整？</span>
+            <span class="accordion-icon"></span>
+        </summary>
+        <div class="question-answer">
+            <p><strong>參考答案：</strong></p>
+            <p>大概不夠。STRRIDE-PD 發現只有「高量+高強度」組 CEC 才顯著提升 6.2%，低劑量組甚至下降。散步強度通常達不到驅動 CEC 升級所需的劑量。具體調整：把部分散步升級為 Zone 2（心率約 105–120 bpm 持續維持的慢跑或快走/騎車），累積每週 ≥150 分鐘中等強度，再每週加入 1–2 次 HIIT。評估期至少 3–6 個月。但記得個體差異達 30–40%，不要只用 HDL 數字判斷成效——運動的整體好處遠超過 HDL 這一項。</p>
+        </div>
+    </details>
+
+    <details class="question-accordion">
+        <summary class="question-header">
+            <span class="question-number">Q3</span>
+            <span class="question-type" style="background:#fef3c7;color:#92400e">決策判斷題</span>
+            <span class="question-text">看完文章後你考慮買魚油補充品來「改善 HDL」。這是好決策嗎？機會成本是什麼？</span>
+            <span class="accordion-icon"></span>
+        </summary>
+        <div class="question-answer">
+            <p><strong>參考答案：</strong></p>
+            <p>不是針對 HDL 功能的好決策。魚油（EPA/DHA）對 HDL 功能改善證據不足，主要作用是降 TG。若目標是升級 HDL 功能，唯一有部分人體 RCT 證據的營養素是橄欖油多酚，而且該透過真實食物攝取。機會成本：花在魚油的錢與注意力，不如投資在更高證據等級的介入（運動、原型食物、睡眠、戒菸）。這正是紅旗之一——在沒釘好基本盤前先優化邊際 5%。當然，若你是為了「降 TG」或「心血管事件預防」（高純度 EPA 有其證據），那是另一個問題，不要把目標混淆。</p>
+        </div>
+    </details>
+</div>
+
+<!-- BOTTOM LINE -->
+<div class="bottom-line">
+    <div class="bottom-line-header">🎯 我的行動結論</div>
+    <div class="bottom-line-item">
+        <div class="bottom-line-label">✔ 核心洞察</div>
+        <div class="bottom-line-text">這篇接續了我的 ApoB/LDL 知識庫，補上 HDL 端：HDL-C 是「相關指標」不是「因果保護」，跟我已建立的「ApoB 才是真正計數工具」邏輯一致——數字漂亮 ≠ 安全。真正的資產是 HDL 功能（CEC/PON1），而這正好是我已在做的阻力訓練 + Zone 2 + 原型食物飲食的下游受益點。</div>
+    </div>
+    <div class="bottom-line-item">
+        <div class="bottom-line-label">📈 本週應用</div>
+        <div class="bottom-line-text">確認我的有氧劑量達到「有效門檻」而非「散步式」：每週累積 ≥150 分鐘 Zone 2（心率 105–120 bpm 持續維持），並排入 1–2 次 HIIT。飲食端做一個單一變數調整——把日常烹調油固定換成可靠來源的特級初榨橄欖油，且只用於涼拌/低溫/淋醬（不油炸）。下次抽血時，把 TG/HDL 比值與 hsCRP 一起看，而不是只盯 HDL-C 數字。</div>
+    </div>
+    <div class="bottom-line-item">
+        <div class="bottom-line-label">⚠ 需要驗證</div>
+        <div class="bottom-line-text">關鍵證據限制：CEC/PON1 在台灣多數醫院測不到，所以我無法直接驗證「功能」是否升級，只能用 CRF（運動能力）與 TG/HDL、hsCRP 等代理指標推估。個體差異達 30–40%，所以即使 HDL-C 不動也不代表介入無效。Cho 2023 是橫斷面、PREDIMED 是單一族群、戒菸研究 n 很小——這些都是 Moderate 至 Limited 等級，方向可信但效應量別過度期待。3–6 個月後用代理指標趨勢評估，不要用單次 HDL-C 數字下結論。</div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div class="disclaimer"><strong>免責聲明：</strong>本文件為教育性質整理，不構成醫療建議。檢驗數值需在臨床情境下解讀，單一指標異常不等於疾病，參考範圍因實驗室與族群而異。請勿因 HDL 高低而放鬆或恐慌、請勿自行停藥。實施任何重大改變前，請諮詢合格醫療專業人員；每個人的代謝狀態、家族史、生活型態都不同。</div>
+    <div>建議 Chat Title：</div>
+    <span class="chat-title">2026-05-31 [Labs] HDL Function - CEC ApoA-I vs HDL-C</span>
+    <div class="meta">製作日期：2026-05-31 · 分類：Labs / 脂質學 · 證據等級：Moderate（4.0/5）</div>
+</div>
+
+</div>
+<script>
+function switchTab(evt, tabId) {
+    const container = evt.currentTarget.closest('.tab-container');
+    container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    evt.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>

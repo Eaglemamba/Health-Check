@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-date" content="2026-06-03">
+<title>7 個減脂作弊碼 — 證據分級拆解 | Health Habits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f1f5f4;
+  color: #1f2937;
+  line-height: 1.7;
+  font-size: 16px;
+}
+.container { max-width: 960px; margin: 2rem auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(6,78,59,0.10); }
+.mono { font-family: 'Source Code Pro', monospace; }
+.positive { color: #16a34a; font-weight: 600; }
+.negative { color: #dc2626; font-weight: 600; }
+.neutral { color: #1e3a8a; font-weight: 600; }
+
+/* ===== HEADER ===== */
+header { background: linear-gradient(135deg, #064e3b, #047857, #059669); color: #fff; padding: 2.6rem 2rem 2.2rem; text-align: center; position: relative; }
+header::after { content: ""; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 120px; height: 4px; background: linear-gradient(90deg, #6ee7b7, #047857); border-radius: 4px; }
+header h1 { font-size: 1.75rem; font-weight: 700; line-height: 1.4; margin-bottom: 0.8rem; }
+header .subtitle { font-size: 0.95rem; color: #d1fae5; font-weight: 300; max-width: 640px; margin: 0 auto 1.1rem; }
+.tag-row { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.9rem; }
+.tag { font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.7rem; border-radius: 99px; letter-spacing: 0.3px; }
+.tag-bodycomp { background: #bbf7d0; color: #14532d; }
+.tag-nutrition { background: #bbf7d0; color: #14532d; }
+.tag-evidence { background: #fde68a; color: #92400e; }
+.tag-supplement { background: #e9d5ff; color: #581c87; }
+.source-line { font-size: 0.78rem; color: #a7f3d0; font-family: 'Source Code Pro', monospace; }
+
+/* ===== SECTION ===== */
+section { padding: 1.8rem 2rem; border-bottom: 1px solid #ecfdf5; }
+.section-title { font-size: 1.25rem; font-weight: 700; color: #064e3b; margin-bottom: 1.1rem; display: flex; align-items: center; gap: 0.6rem; }
+.section-title::before { content: ""; width: 5px; height: 1.3rem; background: linear-gradient(180deg, #047857, #6ee7b7); border-radius: 4px; }
+.section-intro { color: #475569; font-size: 0.95rem; margin-bottom: 1.2rem; }
+
+/* ===== EXEC SUMMARY + RATING BAR ===== */
+.exec { background: #ecfdf5; }
+.rating-bar { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.1rem; padding: 0.6rem 1rem; background: linear-gradient(135deg, #ecfdf5, #f0fdfa); border-radius: 8px; flex-wrap: wrap; border: 1px solid #a7f3d0; }
+.rating-score { font-weight: 700; color: #065f46; font-size: 1rem; font-family: 'Source Code Pro', monospace; }
+.rating-stars { color: #f59e0b; letter-spacing: 1px; }
+.evidence-tier { font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 4px; }
+.evidence-strong { background: #d1fae5; color: #065f46; }
+.evidence-moderate { background: #dbeafe; color: #1e3a8a; }
+.evidence-limited { background: #fef3c7; color: #92400e; }
+.evidence-preliminary { background: #fed7aa; color: #9a3412; }
+.evidence-speculative { background: #fecaca; color: #7f1d1d; }
+.rating-high { font-size: 0.78rem; color: #047857; background: #d1fae5; padding: 0.2rem 0.55rem; border-radius: 4px; }
+.rating-low { font-size: 0.78rem; color: #64748b; background: #f1f5f9; padding: 0.2rem 0.55rem; border-radius: 4px; }
+.exec-text { color: #334155; font-size: 0.97rem; line-height: 1.85; }
+.exec-text strong { color: #064e3b; }
+
+/* ===== LEARNING OBJECTIVES ===== */
+.obj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.objective-item { background: #f0fdf4; border: 1px solid #86efac; border-radius: 12px; padding: 1.1rem; transition: transform 0.2s, box-shadow 0.2s; }
+.objective-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.obj-num { font-family: 'Source Code Pro', monospace; font-weight: 600; color: #059669; font-size: 0.85rem; margin-bottom: 0.4rem; }
+.obj-text { font-size: 0.9rem; color: #1f2937; line-height: 1.65; }
+
+/* ===== FRAMEWORK VISUAL ===== */
+.framework-visual { background: linear-gradient(135deg, #047857, #059669); border-radius: 1rem; padding: 1.6rem; color: white; margin: 0.4rem 0 0; }
+.framework-title { text-align: center; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.4rem; }
+.framework-steps { display: flex; justify-content: center; align-items: stretch; gap: 0.6rem; flex-wrap: wrap; }
+.framework-step { text-align: center; flex: 1; min-width: 150px; max-width: 230px; background: rgba(255,255,255,0.08); border-radius: 0.75rem; padding: 1rem 0.8rem; }
+.framework-icon { font-size: 1.6rem; width: 3.2rem; height: 3.2rem; background: rgba(255,255,255,0.18); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.6rem; }
+.framework-step h4 { font-size: 0.95rem; margin-bottom: 0.35rem; }
+.framework-step p { font-size: 0.78rem; color: #d1fae5; line-height: 1.55; }
+.framework-arrow { display: flex; align-items: center; color: #6ee7b7; font-size: 1.4rem; font-weight: 700; }
+
+/* ===== KEY NUMBERS DASHBOARD ===== */
+.dash-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; }
+.dash-card { background: #ecfdf5; border: 1px solid #86efac; border-radius: 12px; padding: 1.1rem 0.9rem; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+.dash-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(5,150,105,0.12); }
+.dash-num { font-family: 'Source Code Pro', monospace; font-size: 1.5rem; font-weight: 600; color: #047857; line-height: 1.1; }
+.dash-label { font-size: 0.78rem; color: #475569; margin-top: 0.5rem; line-height: 1.5; }
+
+/* ===== TABS ===== */
+.tab-container { margin-top: 0.3rem; }
+.tab-nav { display: flex; gap: 0.4rem; flex-wrap: wrap; border-bottom: 2px solid #d1fae5; margin-bottom: 1.4rem; }
+.tab-btn { background: none; border: none; padding: 0.7rem 1.1rem; font-family: inherit; font-size: 0.9rem; font-weight: 500; color: #64748b; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.2s; border-radius: 6px 6px 0 0; }
+.tab-btn:hover { color: #047857; background: #f0fdf4; }
+.tab-btn.active { color: #064e3b; font-weight: 700; border-bottom-color: #059669; background: #ecfdf5; }
+.tab-content { display: none; animation: fadeIn 0.3s ease; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== CONTENT CARDS ===== */
+.tactic { border: 1px solid #d1fae5; border-radius: 14px; padding: 1.3rem 1.4rem; margin-bottom: 1.4rem; background: #fff; }
+.tactic-head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.9rem; }
+.tactic-badge { font-family: 'Source Code Pro', monospace; font-weight: 600; color: #fff; background: linear-gradient(135deg, #047857, #059669); width: 2rem; height: 2rem; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+.tactic-title { font-size: 1.08rem; font-weight: 700; color: #065f46; }
+.tactic-en { font-size: 0.78rem; color: #94a3b8; font-family: 'Source Code Pro', monospace; }
+.tactic p { font-size: 0.93rem; color: #374151; margin-bottom: 0.7rem; }
+
+/* ===== INFO BOXES ===== */
+.box { border-radius: 10px; margin: 0.9rem 0; overflow: hidden; border: 1px solid; }
+.box-header { padding: 0.5rem 0.95rem; font-weight: 700; display: flex; gap: 0.45rem; align-items: center; font-size: 0.86rem; }
+.box-body { padding: 0.8rem 0.95rem; font-size: 0.9rem; line-height: 1.78; color: #334155; background: #fff; }
+.box-body strong { color: #064e3b; }
+.box-key { border-color: #fdba74; } .box-key .box-header { background: #fed7aa; color: #9a3412; } .box-key .box-body { background: #fff7ed; }
+.box-analogy { border-color: #f9a8d4; } .box-analogy .box-header { background: #fbcfe8; color: #831843; } .box-analogy .box-body { background: #fdf2f8; }
+.box-dose { border-color: #c4b5fd; } .box-dose .box-header { background: #ddd6fe; color: #4c1d95; } .box-dose .box-body { background: #f5f3ff; }
+.box-evidence { border-color: #6ee7b7; } .box-evidence .box-header { background: #a7f3d0; color: #065f46; } .box-evidence .box-body { background: #ecfdf5; }
+.box-effect { border-color: #5eead4; } .box-effect .box-header { background: #99f6e4; color: #134e4a; } .box-effect .box-body { background: #f0fdfa; }
+.box-individual { border-color: #fca5a5; } .box-individual .box-header { background: #fecaca; color: #7f1d1d; } .box-individual .box-body { background: #fef2f2; }
+.box-training { border-color: #93c5fd; } .box-training .box-header { background: #bfdbfe; color: #1e3a8a; } .box-training .box-body { background: #eff6ff; }
+.box-nutrition { border-color: #86efac; } .box-nutrition .box-header { background: #bbf7d0; color: #14532d; } .box-nutrition .box-body { background: #f0fdf4; }
+.box-supplement { border-color: #d8b4fe; } .box-supplement .box-header { background: #e9d5ff; color: #581c87; } .box-supplement .box-body { background: #faf5ff; }
+.box-lab { border-color: #fdba74; } .box-lab .box-header { background: #fed7aa; color: #9a3412; } .box-lab .box-body { background: #fff7ed; }
+.box-safety { border-color: #fda4af; } .box-safety .box-header { background: #fecdd3; color: #9f1239; } .box-safety .box-body { background: #fff1f2; }
+.box-study { border-color: #94a3b8; } .box-study .box-header { background: #cbd5e1; color: #1e293b; } .box-study .box-body { background: #f8fafc; }
+
+/* ===== TABLES ===== */
+.table-wrap { overflow-x: auto; margin: 0.5rem 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+th { background: #064e3b; color: #fff; padding: 0.6rem 0.7rem; text-align: left; font-weight: 600; font-size: 0.82rem; }
+td { padding: 0.6rem 0.7rem; border-bottom: 1px solid #e2e8f0; color: #374151; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.dose-table .optimal-row td { background: #f5f3ff; font-weight: 500; }
+.dose-table .optimal-row td:first-child { border-left: 3px solid #8b5cf6; }
+.tier-badge { font-size: 0.72rem; font-weight: 600; padding: 0.15rem 0.45rem; border-radius: 4px; white-space: nowrap; }
+
+/* ===== TWO COLUMN ===== */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.col-box { border-radius: 12px; padding: 1.1rem; }
+.col-benefit { background: #f0fdf4; border: 1px solid #86efac; }
+.col-skip { background: #fef2f2; border: 1px solid #fca5a5; }
+.col-box h4 { font-size: 0.95rem; margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.4rem; }
+.col-benefit h4 { color: #14532d; }
+.col-skip h4 { color: #7f1d1d; }
+.col-box ul { list-style: none; }
+.col-box li { font-size: 0.88rem; padding: 0.35rem 0 0.35rem 1.2rem; position: relative; line-height: 1.6; color: #374151; }
+.col-benefit li::before { content: "✓"; position: absolute; left: 0; color: #16a34a; font-weight: 700; }
+.col-skip li::before { content: "✕"; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
+
+/* ===== STRATEGIC IMPLICATIONS ===== */
+.impl-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.impl-card { border-radius: 12px; padding: 1.2rem; border: 1px solid; transition: transform 0.2s, box-shadow 0.2s; }
+.impl-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.impl-card h4 { font-size: 0.98rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.45rem; }
+.impl-card p { font-size: 0.88rem; line-height: 1.7; color: #374151; }
+.impl-nutrition { background: #f0fdf4; border-color: #86efac; } .impl-nutrition h4 { color: #14532d; }
+.impl-training { background: #eff6ff; border-color: #93c5fd; } .impl-training h4 { color: #1e3a8a; }
+.impl-supplement { background: #faf5ff; border-color: #d8b4fe; } .impl-supplement h4 { color: #581c87; }
+.impl-lab { background: #fff7ed; border-color: #fdba74; } .impl-lab h4 { color: #9a3412; }
+
+/* ===== TAKEAWAYS ===== */
+.take-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.take-card { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 1.2rem; transition: transform 0.2s, box-shadow 0.2s; }
+.take-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(5,150,105,0.12); }
+.take-num { font-family: 'Source Code Pro', monospace; color: #059669; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.4rem; }
+.take-card p { font-size: 0.9rem; color: #1f2937; line-height: 1.7; }
+.take-card strong { color: #064e3b; }
+
+/* ===== PRACTICE ACCORDION ===== */
+.question-accordion { border: 1px solid #d1fae5; border-radius: 10px; margin-bottom: 0.8rem; overflow: hidden; }
+.question-header { padding: 0.9rem 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; background: #f0fdf4; list-style: none; font-size: 0.9rem; }
+.question-header::-webkit-details-marker { display: none; }
+.question-number { font-family: 'Source Code Pro', monospace; font-weight: 600; color: #047857; }
+.question-type { font-size: 0.72rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 4px; }
+.question-text { flex: 1; min-width: 200px; color: #1f2937; font-weight: 500; }
+.accordion-icon { color: #059669; font-weight: 700; transition: transform 0.2s; }
+details[open] .accordion-icon { transform: rotate(45deg); }
+.accordion-icon::after { content: "+"; }
+.question-answer { padding: 1rem; background: #fff; border-top: 1px solid #d1fae5; font-size: 0.9rem; line-height: 1.8; color: #334155; }
+.question-answer strong { color: #064e3b; }
+
+/* ===== BOTTOM LINE ===== */
+.bottom-line { background: linear-gradient(135deg, #ecfdf5, #f0fdfa); margin: 0; padding: 1.6rem; border-radius: 12px; border-left: 4px solid #059669; }
+.bottom-line-header { font-weight: 700; color: #064e3b; margin-bottom: 1.1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.12rem; }
+.bottom-line-item { margin-bottom: 1.1rem; }
+.bottom-line-item:last-child { margin-bottom: 0; }
+.bottom-line-label { font-weight: 600; color: #047857; font-size: 0.88rem; margin-bottom: 0.3rem; }
+.bottom-line-text { font-size: 0.93rem; line-height: 1.78; color: #334155; }
+
+/* ===== FOOTER ===== */
+footer { background: #1e293b; color: #94a3b8; padding: 1.8rem 2rem; font-size: 0.82rem; line-height: 1.7; }
+footer .foot-meta { font-family: 'Source Code Pro', monospace; color: #cbd5e1; margin-bottom: 0.8rem; }
+footer .disclaimer { border-left: 3px solid #475569; padding-left: 0.9rem; margin-bottom: 0.7rem; }
+footer .chat-title { background: #0f172a; border-radius: 8px; padding: 0.7rem 0.9rem; font-family: 'Source Code Pro', monospace; color: #6ee7b7; font-size: 0.8rem; margin-top: 0.8rem; }
+
+@media (max-width: 720px) {
+  .obj-grid, .dash-grid, .impl-grid, .take-grid, .two-col { grid-template-columns: 1fr; }
+  .framework-arrow { transform: rotate(90deg); }
+  header h1 { font-size: 1.4rem; }
+  section { padding: 1.4rem 1.2rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="tag-row">
+    <span class="tag tag-bodycomp">BodyComp</span>
+    <span class="tag tag-nutrition">Nutrition</span>
+    <span class="tag tag-supplement">Supplement</span>
+    <span class="tag tag-evidence">Evidence</span>
+  </div>
+  <h1>7 個減脂「作弊碼」<br>把網紅清單拆成證據分級的行動指南</h1>
+  <p class="subtitle">一份方向正確、可行動性極高，但證據參差的戰術清單。我們逐條標出哪些有 RCT 支撐、哪些只是 n=1 個案或行銷誇大。</p>
+  <p class="source-line">來源：Dan Go《High Performance Journal》｜2026-06-02｜"7 Fat Loss Cheat Codes I Wish I Knew At 26"</p>
+</header>
+
+<!-- ===== EXECUTIVE SUMMARY ===== -->
+<section class="exec">
+  <div class="section-title">快速摘要</div>
+  <div class="rating-bar">
+    <span class="rating-score"><span class="rating-stars">★★★☆☆</span> 3.4/5</span>
+    <span class="evidence-tier evidence-moderate">證據：Moderate（混合）</span>
+    <span class="rating-high">↑ 可行動性、目標相關性</span>
+    <span class="rating-low">↓ 證據品質、個人適配度</span>
+  </div>
+  <p class="exec-text">
+    這篇文章把 20 年教練經驗濃縮成 7 個減脂戰術，骨幹是三件事：<strong>吃得飽（飽足感工程）、動得多（NEAT）、找出瓶頸（行為）</strong>。可行動性極高、方向也對，但證據品質參差不齊：核心戰術（蛋白質、NEAT）有紮實證據；飽足感戰術（湯、psyllium、高蛋白早餐）是中等證據；內臟脂肪戰術（resistant starch）只有小型短期試驗。
+    更值得警惕的是，全文<strong>大量以單一客戶個案（n=1）當作證據</strong>，並出現「psyllium 等於天然 Ozempic」「resistant starch 比多數介入更快減脂」這類誇大語句。
+    對一個已經做好蛋白質、阻力訓練、睡眠的中階者，這份清單的<strong>邊際價值並不平均</strong>——#1／#5／#6 你大概早就在做，真正的新槓桿集中在飽足感工程（#2／#3／#4）與「找出瓶頸」（#7）。
+  </p>
+</section>
+
+<!-- ===== LEARNING OBJECTIVES ===== -->
+<section>
+  <div class="section-title">學習目標</div>
+  <div class="obj-grid">
+    <div class="objective-item">
+      <div class="obj-num">OBJ-01</div>
+      <div class="obj-text">區分這 7 個戰術中，哪些有 RCT／meta-analysis 支持，哪些只是 n=1 個案或機制推論。</div>
+    </div>
+    <div class="objective-item">
+      <div class="obj-num">OBJ-02</div>
+      <div class="obj-text">把「吃得飽」的飽足感槓桿（湯、可溶性纖維、高蛋白早餐）轉成具體劑量與時機。</div>
+    </div>
+    <div class="objective-item">
+      <div class="obj-num">OBJ-03</div>
+      <div class="obj-text">用 Theory of Constraints 找出自己減脂的「單一瓶頸」，把火力集中在最高槓桿的一個習慣。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FRAMEWORK VISUAL ===== -->
+<section>
+  <div class="section-title">核心框架：三層槓桿模型</div>
+  <p class="section-intro">這 7 個戰術看似零散，其實落在三個層次。讀的時候，問自己：「我的瓶頸在哪一層？」</p>
+  <div class="framework-visual">
+    <div class="framework-title">把減脂從「意志力遊戲」變成「系統設計」</div>
+    <div class="framework-steps">
+      <div class="framework-step">
+        <div class="framework-icon">🍲</div>
+        <h4>飽足感工程</h4>
+        <p>蛋白質、纖維、湯品讓你「自然吃更少」，不靠硬扛飢餓。戰術 1 · 2 · 3 · 6</p>
+      </div>
+      <div class="framework-arrow">→</div>
+      <div class="framework-step">
+        <div class="framework-icon">🔬</div>
+        <h4>代謝槓桿</h4>
+        <p>內臟脂肪、NEAT、餐後血糖——鏡子裡看不到的部分。戰術 4 · 5</p>
+      </div>
+      <div class="framework-arrow">→</div>
+      <div class="framework-step">
+        <div class="framework-icon">🎯</div>
+        <h4>行為瓶頸</h4>
+        <p>找出並移除阻礙一切的「那一個」習慣。戰術 7</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY NUMBERS DASHBOARD ===== -->
+<section>
+  <div class="section-title">關鍵數字儀表板</div>
+  <div class="dash-grid">
+    <div class="dash-card">
+      <div class="dash-num">20–30%</div>
+      <div class="dash-label">蛋白質的 TEF（消化就燒掉的熱量）<br>碳水 5–10%、脂肪 0–3%</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-num">1.6–2.2</div>
+      <div class="dash-label">蛋白質目標 g/kg/日<br>（≈ Dan Go 的 0.7–1.0 g/lb）</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-num">20%</div>
+      <div class="dash-label">餐前喝低熱量湯，單餐總熱量↓<br>（Flood &amp; Rolls 2007，n=60，急性）</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-num">40g</div>
+      <div class="dash-label">抗性澱粉試驗劑量／日<br>（內臟脂肪↓；僅 n=19~37 小型試驗）</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TABBED CONTENT ===== -->
+<section>
+  <div class="section-title">逐條拆解（7 個戰術 × 證據分級）</div>
+  <div class="tab-container">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab(event,'t1')">飽足感與蛋白質</button>
+      <button class="tab-btn" onclick="switchTab(event,'t2')">代謝與內臟脂肪</button>
+      <button class="tab-btn" onclick="switchTab(event,'t3')">行為瓶頸</button>
+    </div>
+
+    <!-- TAB 1 -->
+    <div id="t1" class="tab-content active">
+
+      <div class="tactic">
+        <div class="tactic-head">
+          <div class="tactic-badge">1</div>
+          <div>
+            <div class="tactic-title">多吃蛋白質</div>
+            <div class="tactic-en">Eat More Protein</div>
+          </div>
+        </div>
+        <p>蛋白質是唯一一個「一邊建造身體、一邊靠消化自己燒熱量」的巨量營養素。它同時做四件事：高 TEF、提升飽足感、減脂期保留瘦體組織、可能增加全天自發活動。</p>
+        <div class="box box-effect">
+          <div class="box-header">📈 效應量：TEF（食物熱效應）</div>
+          <div class="box-body">蛋白質 <strong>20–30%</strong>（身體要花這麼多熱量才能處理它）vs 碳水 5–10% vs 脂肪 0–3%。原文這組數字正確。長期累積下，光是把碳水/脂肪換成蛋白質，就有一點「免費」的能量赤字。</div>
+        </div>
+        <div class="box box-evidence">
+          <div class="box-header">🔬 證據品質：Strong（核心）／ Moderate（過量聲明）</div>
+          <div class="box-body">
+            蛋白質對飽足與保肌的證據是 <strong>Strong</strong>。但原文引用 Bill Campbell／Joey Antonio 的「過量攝取蛋白質不會像同熱量碳水/脂肪那樣增脂」屬 <strong>Moderate→Limited</strong>。代表性研究 Antonio 2014（n=30 阻力訓練者，吃 4.4 g/kg、8 週，體組成無顯著變化）。
+            限制：樣本小、自陳飲食、短期；而且最可能的解釋是——受試者<strong>根本吃不到/維持不了那個熱量盈餘</strong>（蛋白質飽足感太強、TEF 太高，淨熱量並非真的過量）。能量平衡仍然成立。
+          </div>
+        </div>
+        <div class="box box-nutrition">
+          <div class="box-header">🥗 營養應用</div>
+          <div class="box-body">目標 <strong>1.6–2.2 g/kg/日</strong>（= 0.7–1.0 g/lb），每餐約 0.4 g/kg 以打到 leucine threshold。正確解讀是「蛋白質讓你在盈餘下少增脂更容易」，<strong>不是「蛋白質豁免熱力學、可以無限吃」</strong>。對中階者：這是地基，不是新發現——你大概已經在做。</div>
+        </div>
+      </div>
+
+      <div class="tactic">
+        <div class="tactic-head">
+          <div class="tactic-badge">2</div>
+          <div>
+            <div class="tactic-title">餐前吃 2 大匙洋車前子殼</div>
+            <div class="tactic-en">Psyllium Husk Before Meals</div>
+          </div>
+        </div>
+        <p>可溶性纖維在胃裡吸水形成凝膠，延緩胃排空、刺激胃壁伸張受器發出「飽了」的訊號。原文說它觸發 GLP-1、「跟 Ozempic 走同一條飽足路徑」。</p>
+        <div class="box box-supplement">
+          <div class="box-header">💊 補充劑評估：Moderate（飽足）／ Strong（降血脂）</div>
+          <div class="box-body">
+            飽足／延緩胃排空：<strong>Moderate</strong>。降血脂（降 LDL）：<strong>Strong</strong>（有 FDA 認可的健康聲明）。
+            GLP-1 部分確實存在——psyllium 會「溫和、短暫」提升 GLP-1／PYY，但幅度遠小於藥物（藥物直接活化受器）。把它說成「天然 Ozempic」是<strong>行銷誇大</strong>。實際減重效應溫和：約 <strong>1.3 kg／8–12 週</strong>，獨立於熱量限制。它是「飲食輔助」，不是 GLP-1 藥物的替代品。
+          </div>
+        </div>
+        <div class="box box-dose">
+          <div class="box-header">📊 劑量計算</div>
+          <div class="box-body">正面試驗最常見的方案是「<strong>最大那一餐前 ~5g</strong>」。Dan Go 的 2 大匙（約 10g+）偏高；劑量越高越要配足夠水。可從 5g 起，視耐受度調整。</div>
+        </div>
+        <div class="box box-safety">
+          <div class="box-header">🛡️ 安全警示</div>
+          <div class="box-body"><strong>一定要配大量水並快速喝完</strong>——凝膠在食道膨脹有嗆噎／阻塞風險。會與藥物吸收互相干擾，與其他口服藥<strong>間隔至少 2–4 小時</strong>；服用降血糖藥者需監測血糖，使用前先諮詢藥師。</div>
+        </div>
+      </div>
+
+      <div class="tactic">
+        <div class="tactic-head">
+          <div class="tactic-badge">3</div>
+          <div>
+            <div class="tactic-title">晚餐前先喝湯</div>
+            <div class="tactic-en">Drink Soup Before Dinner</div>
+          </div>
+        </div>
+        <p>湯的液體體積把胃撐開、在主餐到達前就觸發飽足訊號。原文宣稱可減少約 20% 總熱量。</p>
+        <div class="box box-evidence">
+          <div class="box-header">🔬 證據品質：Moderate</div>
+          <div class="box-body">這個 20% 來自 <strong>Flood &amp; Rolls 2007（n=60）</strong>：餐前喝低熱量湯使單餐總熱量↓約 20%（134 kcal）。數字真實，但這是<strong>急性、單餐、實驗室、正常體重受試者</strong>的數據；是否轉成長期的持續熱量赤字（後續餐次會不會補回來）並未證實。</div>
+        </div>
+        <div class="box box-key">
+          <div class="box-header">⚠️ 重點警示：關鍵限制條件</div>
+          <div class="box-body">效果<strong>只在「低熱量密度」的清湯／蔬菜湯成立</strong>。濃湯、勾芡、奶油湯、玉米濃湯反而加熱量、抵消甚至倒打。原文「中式餐點普遍高熱量、重鈉重醬重碳水」是過度概化——重點不是哪一國菜，而是那碗湯本身的熱量密度。</div>
+        </div>
+      </div>
+
+      <div class="tactic">
+        <div class="tactic-head">
+          <div class="tactic-badge">6</div>
+          <div>
+            <div class="tactic-title">用蛋白質 + 纖維為一天打頭陣</div>
+            <div class="tactic-en">Front-Load Protein &amp; Fiber</div>
+          </div>
+        </div>
+        <p>高蛋白、高纖早餐抑制 ghrelin（飢餓素）數小時，降低後續整天的食慾。Dan Go 的「GLOP」：300g 低脂希臘優格 + 1 匙乳清 + 1 大匙 psyllium + 100g 冷凍水果。</p>
+        <div class="box box-evidence">
+          <div class="box-header">🔬 證據品質：Moderate</div>
+          <div class="box-body">
+            高蛋白早餐抑制 ghrelin、降低後續食慾：<strong>Moderate</strong>。但「從第一個小時就在長肌肉」是<strong>誇大</strong>——MPS 看的是「全日蛋白質總量 + 分配」，不是字面上「早上第一小時」。
+            而且早餐吃不吃 vs 全日總熱量，後者影響更大；高蛋白早餐的主要價值在<strong>食慾管理</strong>，不是某種神奇的代謝開關。
+          </div>
+        </div>
+        <div class="box box-nutrition">
+          <div class="box-header">🥗 營養應用</div>
+          <div class="box-body">GLOP 結構合理（高蛋白 + 高纖 + 微量營養素），是穩健的早餐模板。對中階者：你大概已有類似習慣——把它當「降低整天食慾的前置動作」即可，別期待它本身有額外的增肌魔力。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAB 2 -->
+    <div id="t2" class="tab-content">
+
+      <div class="tactic">
+        <div class="tactic-head">
+          <div class="tactic-badge">4</div>
+          <div>
+            <div class="tactic-title">在飲食中加入抗性澱粉</div>
+            <div class="tactic-en">Add Resistant Starch</div>
+          </div>
+        </div>
+        <p>抗性澱粉不在小腸被消化，直達大腸被好菌發酵，產生短鏈脂肪酸（SCFA），改善胰島素敏感性與代謝訊號。原文以一位「外表瘦、但 DEXA 顯示內臟脂肪高」的客戶（TOFI 情境）為例。</p>
+        <div class="box box-evidence">
+          <div class="box-header">🔬 證據品質：Limited → Preliminary（針對強聲明）</div>
+          <div class="box-body">
+            兩個<strong>小型 crossover RCT</strong> 支持：2019《Scientific Reports》（n=19 正常體重，40g/日 4 週，內臟+皮下脂肪顯著↓）；2024《Nature Metabolism》（n=37 過重/肥胖，40g/日 8 週，約 −3kg 體重 + 胰島素敏感性↑，機制與腸道菌 <em>B. adolescentis</em> 增加有關）。
+            但原文「<strong>比多數飲食介入更快</strong>減內臟脂肪」是過度延伸——這些是小樣本、短期試驗，研究者自己列出的限制就包括高劑量、短追蹤、樣本小。方向有意思，但別當成已定論。
+          </div>
+        </div>
+        <div class="box box-individual">
+          <div class="box-header">👤 個人差異 / 耐受性</div>
+          <div class="box-body">40g/日在「自由生活」情境常引起<strong>脹氣／腹瀉</strong>——上述研究是在嚴格控制飲食下回報無不良反應，現實中未必。實務上<strong>從 ~10g 起、逐步往上</strong>。全食物來源：煮過放涼的米／馬鈴薯、青香蕉；原文客戶用青香蕉粉（較易達標、較省事）。</div>
+        </div>
+        <div class="box box-study">
+          <div class="box-header">📋 研究細節：別忽略的設計風險</div>
+          <div class="box-body">這類 crossover 試驗若<strong>洗脫期不足</strong>會有殘留效應（carryover effect），理論上可能扭曲甚至反轉結果。小型短期試驗的結論應保守看待——這正是 Limited 等級的意義。</div>
+        </div>
+      </div>
+
+      <div class="tactic">
+        <div class="tactic-head">
+          <div class="tactic-badge">5</div>
+          <div>
+            <div class="tactic-title">把「死時間」變成有氧</div>
+            <div class="tactic-en">Turn Dead Time Into Cardio (NEAT)</div>
+          </div>
+        </div>
+        <p>把原本久坐的時間（會議、追劇）改成走路或踩飛輪。原文客戶 Chris 從每日 2,000–4,000 步起步，16 週掉了 20 lbs，附帶壓力下降、睡眠變好、HbA1c 改善。</p>
+        <div class="box box-evidence">
+          <div class="box-header">🔬 證據品質：Strong</div>
+          <div class="box-body">NEAT（非運動性活動產熱）是每日能量消耗中<strong>變異最大、最被低估</strong>的一塊；餐後散步明確能鈍化餐後血糖。客戶 Chris 是 n=1 個案，但底層原理（增加日常活動 → 提高 TDEE + 改善代謝）非常紮實。這是全清單中證據與實用性都最高的一條。</div>
+        </div>
+        <div class="box box-training">
+          <div class="box-header">🏋️ 訓練應用</div>
+          <div class="box-body">會議改走路會議、追劇時踩飛輪、晚餐後 20 分鐘散步。連鎖效益：壓力↓ → 夜間進食↓ → 食物選擇變好 → 血糖↓。這是<strong>「免意志力」的被動熱量</strong>。對中階者：你大概知道 NEAT 重要，但「知道」和「每天 8,000–10,000 步」之間是執行落差，不是知識落差。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAB 3 -->
+    <div id="t3" class="tab-content">
+
+      <div class="tactic">
+        <div class="tactic-head">
+          <div class="tactic-badge">7</div>
+          <div>
+            <div class="tactic-title">找出你的瓶頸，然後修好它</div>
+            <div class="tactic-en">Find Your Bottleneck &amp; Fix It</div>
+          </div>
+        </div>
+        <p>原文壓軸，也是「everyone needs, almost no one does」的那一條。Dan Go 自己的瓶頸是夜間進食（8–10pm）；他訂了一條規則：平日週末都不在 6pm 後進食，沒有例外。之後減脂「幾乎自動」。</p>
+        <div class="box box-analogy">
+          <div class="box-header">💡 比喻說明：限制理論</div>
+          <div class="box-body">Theory of Constraints：每個系統都有「<strong>一個</strong>」瓶頸限制產出。修好瓶頸，整個系統就動起來；在瓶頸以外到處加產能，什麼都不會變。減脂也一樣——你可以訓練得很好、白天吃得很乾淨，然後在 8–10pm 之間悄悄把它全抵消掉。</div>
+        </div>
+        <div class="box box-key">
+          <div class="box-header">⚠️ 重點警示：這是「移除」而非「增加」</div>
+          <div class="box-body">這是全文<strong>最高槓桿、也最違反直覺</strong>的一條：它靠移除一個阻礙（不是疊加第 8 個介入）。問自己：「如果只能戒掉一個習慣，哪個會讓其他一切變簡單？」週末酒精？下午零食？跳過早餐導致晚上暴食？把火力<strong>全部集中在那一個</strong>。</div>
+        </div>
+        <div class="box box-evidence">
+          <div class="box-header">🔬 證據品質：Speculative（作為證據）／ 高價值（作為策略）</div>
+          <div class="box-body">作為「證據」它是 n=1 + 行為框架（<strong>Speculative tier</strong>）；「6pm 後不吃」本質是 time-restricted eating，而 TRE 的減重效益主要來自<strong>總熱量下降</strong>，不是進食時間本身的魔法。但作為「<strong>依從性診斷工具</strong>」，找出並移除你最大的單一漏洞，是極高價值的後設策略——它不需要證據，因為它本來就是要你去做自己的 n=1 實驗。</div>
+        </div>
+        <div class="box box-individual">
+          <div class="box-header">👤 個人差異：剛性規則的風險</div>
+          <div class="box-body">對<strong>有飲食失調史者</strong>，「沒有例外、不准協商」的剛性禁食規則可能觸發失調傾向。瓶頸思維是對的，但「移除瓶頸」不一定要用最嚴格的禁令——個人化比規則本身更重要。</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== EVIDENCE BREAKDOWN ===== -->
+<section>
+  <div class="section-title">證據強度總表</div>
+  <p class="section-intro">把 7 個戰術放在一起看，證據品質的落差就一目了然。可行動性高 ≠ 證據強。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>戰術</th><th>核心聲明</th><th>證據等級</th><th>主要限制</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td><td>多吃蛋白質</td><td>TEF↑ / 飽足↑ / 保肌</td>
+          <td><span class="tier-badge evidence-strong">Strong</span><br><span class="tier-badge evidence-moderate">過量聲明 Moderate</span></td>
+          <td>過量研究樣本小、自陳飲食、可能根本沒真的吃到盈餘</td>
+        </tr>
+        <tr>
+          <td>2</td><td>Psyllium 餐前</td><td>飽足↑ / 降血脂</td>
+          <td><span class="tier-badge evidence-moderate">Moderate</span><br><span class="tier-badge evidence-strong">血脂 Strong</span></td>
+          <td>「天然 Ozempic」誇大；實際減重溫和（~1.3kg）</td>
+        </tr>
+        <tr>
+          <td>3</td><td>餐前喝湯</td><td>單餐熱量↓ 20%</td>
+          <td><span class="tier-badge evidence-moderate">Moderate</span></td>
+          <td>急性單餐、需低熱量密度湯、長期未證實</td>
+        </tr>
+        <tr>
+          <td>4</td><td>抗性澱粉 40g</td><td>內臟脂肪↓ / 胰島素↑</td>
+          <td><span class="tier-badge evidence-limited">Limited</span> → <span class="tier-badge evidence-preliminary">Preliminary</span></td>
+          <td>小樣本短期；「比多數介入更快」過度延伸；GI 耐受</td>
+        </tr>
+        <tr>
+          <td>5</td><td>NEAT / 死時間有氧</td><td>TDEE↑ / 血糖↓</td>
+          <td><span class="tier-badge evidence-strong">Strong</span></td>
+          <td>個案 n=1，但原理紮實（清單最佳）</td>
+        </tr>
+        <tr>
+          <td>6</td><td>蛋白纖維早餐</td><td>ghrelin↓ / 食慾↓</td>
+          <td><span class="tier-badge evidence-moderate">Moderate</span></td>
+          <td>「第一小時長肌肉」誇大；全日總量更重要</td>
+        </tr>
+        <tr>
+          <td>7</td><td>找出瓶頸</td><td>移除單一最大漏洞</td>
+          <td><span class="tier-badge evidence-speculative">Speculative</span><br>（策略價值高）</td>
+          <td>n=1 行為框架；剛性規則需個人化</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== DOSE-RESPONSE TABLE ===== -->
+<section>
+  <div class="section-title">劑量 - 時機對照表</div>
+  <p class="section-intro">把模糊的「多吃一點」「餐前喝湯」換成可執行的數字。紫色高亮列是有試驗支撐的代表劑量。</p>
+  <div class="table-wrap">
+    <table class="dose-table">
+      <thead>
+        <tr><th>介入</th><th>起始劑量</th><th>常見/試驗劑量</th><th>時機</th><th>注意</th></tr>
+      </thead>
+      <tbody>
+        <tr class="optimal-row">
+          <td>Psyllium</td><td>5g</td><td>5–10g</td><td>最大那一餐前約 30 分鐘</td><td>配 ≥1 大杯水快速喝完；與口服藥間隔 2–4h</td>
+        </tr>
+        <tr>
+          <td>抗性澱粉</td><td>~10g</td><td>40g（試驗劑量）</td><td>餐前/隨餐</td><td>從低劑量漸增，避免脹氣腹瀉</td>
+        </tr>
+        <tr>
+          <td>蛋白質</td><td>—</td><td>1.6–2.2 g/kg/日</td><td>全日分配（每餐約 0.4 g/kg）</td><td>地基，非新發現</td>
+        </tr>
+        <tr>
+          <td>餐前湯</td><td>—</td><td>一碗低熱量密度清湯</td><td>主餐前 10–15 分鐘</td><td>濃湯/勾芡/奶油湯無效甚至倒打</td>
+        </tr>
+        <tr>
+          <td>NEAT</td><td>現況 +2,000 步</td><td>8,000–10,000 步/日</td><td>全天 + 餐後散步</td><td>會議改走路；追劇踩飛輪</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== WHO BENEFITS / WHO SKIPS ===== -->
+<section>
+  <div class="section-title">適用族群分析</div>
+  <p class="section-intro">不是每條對每個人都有同樣價值。對「已執行基本功的中階者」，邊際價值集中在特定幾條。</p>
+  <div class="two-col">
+    <div class="col-box col-benefit">
+      <h4>邊際價值高</h4>
+      <ul>
+        <li>食慾控制是瓶頸的人 → 飽足戰術（湯、psyllium、高蛋白早餐）</li>
+        <li>久坐者 → NEAT 是最高槓桿、最低成本的一條</li>
+        <li>外表瘦但內臟脂肪偏高（TOFI）→ 抗性澱粉 + NEAT，針對鏡子看不到的部分</li>
+        <li>任何程度 → 「找出瓶頸」的後設策略</li>
+      </ul>
+    </div>
+    <div class="col-box col-skip">
+      <h4>邊際價值低 / 需謹慎</h4>
+      <ul>
+        <li>已吃足蛋白質、規律阻力訓練、睡眠 OK 的中階者 → #1/#5/#6 多半在做</li>
+        <li>飲食失調史者 → 避免「6pm 後不吃」這類剛性禁食規則</li>
+        <li>慢性病服藥者 → psyllium 會干擾藥物吸收，先諮詢</li>
+        <li>腸胃敏感者 → 40g 抗性澱粉直接上會很不舒服</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SAFETY ===== -->
+<section>
+  <div class="section-title">安全性與交互作用</div>
+  <div class="box box-safety">
+    <div class="box-header">🛡️ 安全警示總覽</div>
+    <div class="box-body">
+      <strong>Psyllium：</strong>嗆噎/食道阻塞風險——務必配水快喝；與口服藥（尤其降血糖藥、需固定吸收的藥）間隔 2–4 小時，並監測血糖。<br>
+      <strong>抗性澱粉 40g：</strong>脹氣、腹瀉、腹脹常見；務必漸進加量。<br>
+      <strong>「6pm 後不吃」：</strong>飲食失調史者勿採用「沒有例外」的剛性規則；服用需隨餐藥物者需考量進食窗口。<br>
+      <strong>一般：</strong>本文件為教育性質整理，不構成醫療建議；重大飲食/補充劑改變前請諮詢合格專業人員。
+    </div>
+  </div>
+</section>
+
+<!-- ===== STRATEGIC IMPLICATIONS ===== -->
+<section>
+  <div class="section-title">應用啟示</div>
+  <div class="impl-grid">
+    <div class="impl-card impl-nutrition">
+      <h4>🥗 日常飲食</h4>
+      <p>蛋白質維持 1.6–2.2 g/kg。在「最可能吃過量那一餐」前，加一個<strong>免意志力的飽足前置</strong>：一碗低熱量密度清湯，或 5g psyllium 配大杯水。早餐高蛋白高纖打頭陣，把它當「降低整天食慾」的開場，而非增肌魔法。</p>
+    </div>
+    <div class="impl-card impl-training">
+      <h4>🏋️ 訓練調整</h4>
+      <p>真正的槓桿不是換訓練法，是 <strong>NEAT</strong>。目標每日 8,000–10,000 步；會議改走路、餐後散步 10–20 分鐘。阻力訓練是保肌地基（已在做），NEAT 才是這份清單對你最被低估的加成。</p>
+    </div>
+    <div class="impl-card impl-supplement">
+      <h4>💊 補充劑決策</h4>
+      <p><strong>Psyllium</strong>（降血脂 + 飽足，雙重證據，CP 值高）值得納入。<strong>抗性澱粉</strong>（青香蕉粉）可試，但從 ~10g 起、別直接 40g。一個原則：<strong>別把任何天然纖維當成 GLP-1 藥物的替代品</strong>。</p>
+    </div>
+    <div class="impl-card impl-lab">
+      <h4>🧪 追蹤指標</h4>
+      <p>用<strong>體組成（DEXA/體脂）+ 腰圍</strong>（內臟脂肪代理）評估，而不是每日體重。代謝面看空腹胰島素/HOMA-IR、HbA1c；若有 CGM，看餐後血糖對 NEAT 與飽足前置的反應。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY TAKEAWAYS ===== -->
+<section>
+  <div class="section-title">學習重點總結</div>
+  <div class="take-grid">
+    <div class="take-card">
+      <div class="take-num">KEY 01</div>
+      <p><strong>方向對，證據參差。</strong>7 個戰術可行動性極高，但別把 n=1 客戶個案和「天然 Ozempic」當成 RCT。可行動性高 ≠ 證據強。</p>
+    </div>
+    <div class="take-card">
+      <div class="take-num">KEY 02</div>
+      <p><strong>飽足感工程 = 免意志力的赤字。</strong>湯、纖維、蛋白質讓你「自然吃更少」，比硬扛飢餓更可持續——這是整份清單真正的共同主線。</p>
+    </div>
+    <div class="take-card">
+      <div class="take-num">KEY 03</div>
+      <p><strong>內臟脂肪看不見。</strong>外表瘦不代表代謝健康；抗性澱粉 + NEAT 針對的是鏡子裡看不到、但 DEXA 與血檢看得到的部分。</p>
+    </div>
+    <div class="take-card">
+      <div class="take-num">KEY 04</div>
+      <p><strong>找出瓶頸 &gt; 到處優化。</strong>最高槓桿是移除你最大的單一漏洞，不是疊加第 8 個介入。先別優化那 5%，先抓住那一個破口。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRACTICE ===== -->
+<section>
+  <div class="section-title">練習題（先想再點開）</div>
+  <p class="section-intro">主動回想（Active Recall）：先在腦中作答，再展開參考答案。</p>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q1</span>
+      <span class="question-type" style="background:#d1fae5;color:#065f46">證據評估題</span>
+      <span class="question-text">文章說「阻力訓練者過量攝取蛋白質不會像同熱量碳水/脂肪那樣增脂」。你能據此「無限吃蛋白質都不會胖」嗎？</span>
+      <span class="accordion-icon"></span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>不行。</strong>這類研究（如 Antonio 2014，n=30）確實顯示阻力訓練者吃 4.4 g/kg、理論熱量盈餘下體組成沒變化，方向支持「蛋白質改變能量平衡的方程式」。</p>
+      <p>但限制有二：（1）樣本小、自陳飲食、短期；（2）最可能的解釋是受試者<strong>根本吃不到/維持不了那個盈餘</strong>——蛋白質飽足感太強、TEF 太高，實際淨熱量並非真的過量。能量平衡仍然成立。</p>
+      <p><strong>正確解讀：</strong>蛋白質讓「在熱量盈餘下少增脂」更容易，不是「蛋白質豁免熱力學」。</p>
+    </div>
+  </details>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q2</span>
+      <span class="question-type" style="background:#dbeafe;color:#1e3a8a">應用情境題</span>
+      <span class="question-text">你已吃 2 g/kg 蛋白質、規律阻力訓練、睡 7 小時。這份清單哪幾條對你邊際價值最高？哪幾條是「早就在做」？</span>
+      <span class="accordion-icon"></span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>早就在做（邊際價值低）：</strong>#1 蛋白質、#5 NEAT（原理你懂）、#6 高蛋白早餐——這些是地基。</p>
+      <p><strong>真正的新槓桿：</strong>#2 psyllium / #3 餐前湯（若你的瓶頸是晚餐吃太多，這是免意志力的飽足前置）；#4 抗性澱粉（若 DEXA 顯示內臟脂肪偏高）；#7 瓶頸診斷（對任何程度都高價值）。</p>
+      <p><strong>關鍵：</strong>對你而言這份清單不是 4.5/5，而是 3 分多——因為一半是你已執行的基本功。這就是「邊際效用」框架的意義：同一篇文章，對新手和對你的價值不一樣。</p>
+    </div>
+  </details>
+
+  <details class="question-accordion">
+    <summary class="question-header">
+      <span class="question-number">Q3</span>
+      <span class="question-type" style="background:#fef3c7;color:#92400e">決策判斷題</span>
+      <span class="question-text">朋友看到「psyllium 是天然 Ozempic」，想停掉醫師開的 GLP-1 藥物改吃洋車前子殼。你會怎麼說？</span>
+      <span class="accordion-icon"></span>
+    </summary>
+    <div class="question-answer">
+      <p><strong>不該替換。</strong>psyllium 確實會「溫和、短暫」提升內源性 GLP-1/PYY，並透過凝膠延緩胃排空增加飽足，還有紮實的降血脂證據。</p>
+      <p>但：（1）幅度<strong>遠小於藥物</strong>（藥物直接活化受器，效應強得多）；（2）實際減重僅約 1.3 kg / 8–12 週；（3）停用處方藥是<strong>醫療決策</strong>，必須由醫師評估。</p>
+      <p><strong>結論：</strong>psyllium 是「飲食輔助」，不是 GLP-1 藥物的替代品。把行銷比喻當成藥理等價是危險的。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ===== BOTTOM LINE ===== -->
+<section>
+  <div class="bottom-line">
+    <div class="bottom-line-header">🎯 我的行動結論</div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">✔ 核心洞察</div>
+      <div class="bottom-line-text">這份清單的真正價值不在任何單一戰術，而在「<strong>飽足感工程</strong>」這個框架——把減脂從「硬扛飢餓的意志力遊戲」變成「設計環境讓自己自然少吃」。對已經做好蛋白質/訓練/睡眠的我，基本功不是瓶頸；進食量的「最後一哩」（晚餐/夜間）才可能是。</div>
+    </div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">📈 本週應用</div>
+      <div class="bottom-line-text">選一個飽足前置做<strong>單變數實驗</strong>：在最可能吃過量那餐前 10–15 分鐘，要嘛一碗低熱量密度清湯，要嘛 5g psyllium 配一大杯水。其他全部不變，連續 2 週，記錄那一餐的主觀飽足與份量。若想加抗性澱粉，青香蕉粉<strong>從 ~10g 起，別直接 40g</strong>。</div>
+    </div>
+    <div class="bottom-line-item">
+      <div class="bottom-line-label">⚠ 需要驗證</div>
+      <div class="bottom-line-text">證據參差：湯的 20% 是急性單餐數據（後續餐次可能補回）、psyllium 減重溫和、抗性澱粉只有小型短期試驗。對我個人，真正的測量不是「這篇有沒有道理」，而是「對我的進食量與體組成有沒有用」：用<strong>腰圍 + DEXA/體脂（季度）</strong>而非每日體重評估；2–4 週看主觀飽足與晚餐份量，8–12 週看體組成趨勢。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="foot-meta">製作日期：2026-06-03　|　Health Habits Decipher　|　來源：Dan Go, High Performance Journal (2026-06-02)</div>
+  <div class="disclaimer">本文件為教育性質整理，不構成醫療建議。實施任何重大改變前，請諮詢合格醫療專業人員。</div>
+  <div class="disclaimer">補充劑（psyllium、抗性澱粉）可能與藥物產生交互作用、引起腸胃反應。服用慢性病藥物者，使用前請諮詢藥師或醫師。剛性禁食規則不適用於有飲食失調史者。</div>
+  <div class="disclaimer">證據等級為本文件對原文引用研究的評估，採 Strong / Moderate / Limited / Preliminary / Speculative 五級制；單一指標或單一研究不應單獨驅動決策。</div>
+  <div class="chat-title">建議 Chat Title：2026-06-03 [BodyComp] Fat Loss Tactics - Satiety Metabolic Behavioral Levers</div>
+</footer>
+
+</div>
+<script>
+function switchTab(evt, tabId) {
+  const container = evt.currentTarget.closest('.tab-container');
+  container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>
