@@ -22,5 +22,7 @@
 | 2026-06-08 | [健康槓桿層級（leverage hierarchy）](2026-06-08-health-leverage-hierarchy.md) |
 | 2026-06-08 | [最小有效劑量阻力訓練（含握力 + VO2max 觸發）](2026-06-08-minimum-effective-dose-resistance-training.md) |
 | 2026-06-08 | [修復自律神經（HRV）：RCT 分層介入清單](2026-06-08-autonomic-recovery-rct-review.md) |
+| 2026-06-11 | [目標重設、Recomp 判讀協定與菁英級健檢 workup](2026-06-11-recomp-target-reframe-and-workup-protocol.md) |
+| 2026-06-11 | [Recomp 重訓菜單 — 每週 1 次與 2 次版本](2026-06-11-recomp-resistance-program-1x-2x.md) |
 
 [← 回 articles/](../)
