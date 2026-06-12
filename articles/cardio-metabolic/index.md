@@ -26,5 +26,6 @@
 | 2026-06-11 | [Recomp 重訓菜單 — 每週 1 次與 2 次版本](2026-06-11-recomp-resistance-program-1x-2x.md) |
 | 2026-06-12 | [2 練執行 SOP — 場館、Readiness Gate、練後免疫與練後營養](2026-06-12-training-execution-recovery-gate-and-post-workout-sop.md) |
 | 2026-06-12 | [增肌目標、速度上限與 FFMI 軌跡（含肌力 vs 肌肥大）](2026-06-12-muscle-gain-targets-ffmi-trajectory-and-training-style.md) |
+| 2026-06-12 | [肌力追蹤與握力訓練（含握力 30kg 發現）](2026-06-12-strength-tracking-grip-training-and-handgrip-finding.md) |
 
 [← 回 articles/](../)
