@@ -21,6 +21,7 @@
 | 2026-06-09 | [糞便 / 纖維 / 腸道通過時間觀察](2026-06-09-stool-fiber-transit-observation.md) |
 | 2026-06-12 | [綠拿鐵 RCT 證據審查與建議配方](2026-06-12-green-smoothie-rct-review.md) |
 | 2026-06-12 | [全家 FamilyMart 蛋白質快查與選購決策](2026-06-12-familymart-protein-reference.md) |
+| 2026-06-12 | [doki poke 外食點餐指南（個人化最佳碗）](2026-06-12-poke-bowl-ordering-guide.md) |
 | — | [7-11 營養參考](711-nutrition-reference.md) |
 | — | [糖代謝](sugar-metabolism.md) |
 
