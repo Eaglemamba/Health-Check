@@ -1,6 +1,6 @@
 # 綠葉植化素策略 — Kale、菠菜與晨間優格飲整合方案
 
-*個人化蔬菜處方 due diligence。配對閱讀：[2026-05-25 morning smoothie protocol](2026-05-25-morning-smoothie-protocol.md)、[2026-05-28 flaxseed RCT deep dive](2026-05-28-flaxseed-rct-deep-dive.md)*
+*個人化蔬菜處方 due diligence。配對閱讀：[2026-05-25 morning smoothie protocol](2026-05-25-morning-smoothie-protocol.md)、[2026-05-28 flaxseed RCT deep dive](2026-05-28-flaxseed-rct-deep-dive.md)、[2026-06-12 綠拿鐵 RCT 審查](2026-06-12-green-smoothie-rct-review.md)*
 
 **建立日期**：2026-05-29
 **驅動問題**：psyllium + 亞麻 + 奇亞籽的纖維量已達標，但「蔬菜」攝取仍偏低。綠葉的植化素是否能填補晨間優格飲組合無法替代的營養缺口？Kale 是否值得納入？對既有口味與腎鈣化點史是否安全？
