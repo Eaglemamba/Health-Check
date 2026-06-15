@@ -888,6 +888,7 @@ window.HC_DATA = {
   // ===== Timeline / months =====
   // 6-month plan baseline + monthly weight targets (linear 70 → 65 kg over 6 months)
   // Start: 2026-03-17 (Day 0, baseline 70.0 kg) → End: 2026-09-17 (M6, target 65.0 kg)
+  // Body-fat scale transition: M0–M3 (→6/17) = Tanita; M4–M6 (6/17→) = Huiye 8-electrode (re-baselined; BF ~-1.7% / VFL ~-6 vs Tanita)
   milestoneStart: { date: "3/17", fullDate: "2026-03-17", weight: 70.0, bodyFat: 21.5, visceralFat: 10.5, waist: 84, label: { en: "Baseline", zh: "基準" } },
   months: [
     { num: 1, date: "4/17", fullDate: "2026-04-17", weight: 69.2, bodyFat: 21.0, visceralFat: 9.5, waist: 83,
@@ -899,15 +900,15 @@ window.HC_DATA = {
     { num: 3, date: "6/17", fullDate: "2026-06-17", weight: 67.5, bodyFat: 19.0, visceralFat: 8.5, waist: 82,
               ttl: { en: "Wall sit ramp", zh: "靠牆深蹲進展" },
               body: { en: "Hold time 60 s, sodium < 1,500 mg, Body Battery ≥ 65.", zh: "撐 60 秒、鈉 < 1,500 mg、身體電量 ≥ 65。" } },
-    { num: 4, date: "7/17", fullDate: "2026-07-17", weight: 66.7, bodyFat: 17.5, visceralFat: 8.0, waist: 81,
+    { num: 4, date: "7/17", fullDate: "2026-07-17", weight: 66.7, bodyFat: 16.5, visceralFat: 3, waist: 81,
               ttl: { en: "First labs + resistance", zh: "首次回診 + 重訓上路" },
-              body: { en: "BP, lipids, UA recheck. Resistance training Phase 1 settled, BF target needs lean preservation.", zh: "血壓、血脂、尿酸複檢。重訓 Phase 1 穩定，BF 目標靠 lean preservation 達成。" } },
-    { num: 5, date: "8/17", fullDate: "2026-08-17", weight: 65.8, bodyFat: 16.0, visceralFat: 7.5, waist: 80,
+              body: { en: "BP, lipids, UA recheck. Resistance Phase 1 settled. NOTE: body-fat scale switched to Huiye 8-electrode after 6/17 — BF/VFL re-baselined to new scale (offset vs old Tanita: BF ~-1.7%, VFL ~-6).", zh: "血壓、血脂、尿酸複檢。重訓 Phase 1 穩定。註：6/17 後改用輝葉八電極，體脂/內臟脂肪重設新尺（vs 舊 Tanita 偏移：體脂約 −1.7%、內臟約 −6）。" } },
+    { num: 5, date: "8/17", fullDate: "2026-08-17", weight: 65.8, bodyFat: 15.5, visceralFat: 2, waist: 80,
               ttl: { en: "Optimize", zh: "優化" },
-              body: { en: "Hold 90–120 s, intervals in walks, weight ~66 kg.", zh: "撐 90–120 秒、走路間歇、體重 ~66 kg。" } },
-    { num: 6, date: "9/17", fullDate: "2026-09-17", weight: 65.0, bodyFat: 15.0, visceralFat: 7.0, waist: 79,
+              body: { en: "Hold 90–120 s, intervals in walks, weight ~66 kg. BF 15.5% (Huiye scale).", zh: "撐 90–120 秒、走路間歇、體重 ~66 kg。體脂 15.5%（輝葉新尺）。" } },
+    { num: 6, date: "9/17", fullDate: "2026-09-17", weight: 65.0, bodyFat: 15.0, visceralFat: 2, waist: 79,
               ttl: { en: "Goal check", zh: "目標檢視" },
-              body: { en: "65 kg target, BF 15%, BP 120/75, all four markers in range.", zh: "65 kg、體脂 15%、血壓 120/75、四項指標達標。" } },
+              body: { en: "65 kg, BF 15% (Huiye scale), VFL 2, BP 120/75, all markers in range.", zh: "65 kg、體脂 15%（輝葉新尺）、內臟脂肪 2、血壓 120/75、四項指標達標。" } },
   ],
 
   // ===== Safety =====
