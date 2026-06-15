@@ -54,8 +54,8 @@ window.HC_DATA = {
   markers: [
     {
       sys: "heart", name: { en: "Blood Pressure", zh: "血壓" },
-      val: "122/72", unit: "mmHg",
-      delta: { en: "W24 weekly avg (4 days) · target met (<130) · last 119/74 (6/11)", zh: "W24 週均（4 天）· 已達標 (<130) · 最新 119/74 (6/11)" },
+      val: "124/73", unit: "mmHg",
+      delta: { en: "W24 weekly avg (5 days) · target met (<130) · last 128/78 (6/14)", zh: "W24 週均（5 天）· 已達標 (<130) · 最新 128/78 (6/14)" },
       cadence: { en: "Daily · weekly avg", zh: "每日 · 週均" },
       status: "ok",
     },
@@ -942,17 +942,17 @@ window.HC_DATA = {
   tracker: {
     // [SBP, DBP] — gaps filled with prior reading
     bp: [
-      [114,67], [114,67], [119,70], [113,70], [117,69], [118,74], [123,75], [121,75], [120,71], [129,72], [122,71], [119,74], [119,74], [119,74],
+      [114,67], [119,70], [113,70], [117,69], [118,74], [123,75], [121,75], [120,71], [129,72], [122,71], [119,74], [119,74], [128,78], [128,78],
     ],
     // daily weight (kg)
-    weight: [66.8, 67, 67.2, 67.2, 66.7, 66.6, 66.2, 67.2, 66.8, 66.9, 66.7, 66.3, 66.5, 66.5],
+    weight: [67, 67.2, 67.2, 66.7, 66.6, 66.2, 67.2, 66.8, 66.9, 66.7, 66.3, 66.5, 66.4, 66.5],
     // Garmin Sleep Score
-    sleep:  [66, 79, 80, 79, 76, 73, 75, 67, 81, 70, 59, 55, 78, 61],
+    sleep:  [79, 80, 79, 76, 73, 75, 67, 81, 70, 59, 55, 78, 51, 61],
     // Body Battery waking
-    bb:     [55, 69, 71, 53, 41, 40, 39, 29, 41, 56, 37, 32, 54, 27],
+    bb:     [69, 71, 53, 41, 40, 39, 29, 41, 56, 37, 32, 54, 22, 27],
     // SpO2 nightly nadir % (last 14 days, parallel to bp/weight/sleep/bb).
     // Earlier nights null until sync_data_js.py backfills; banner only uses trailing values.
-    spo2Nadir: [91, 86, 89, 87, 92, 94, 85, null, 90, 87, 87, 91, 88, 88],
+    spo2Nadir: [86, 89, 87, 92, 94, 85, null, 90, 87, 87, 91, 88, null, 88],
   },
 
   // ===== Running — started 2026-04-26 =====
