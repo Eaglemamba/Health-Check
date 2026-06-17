@@ -299,7 +299,10 @@ body:not(.zh) [data-zh]{display:none!important}
 <div class="form-group"><label><span data-en>LDL (mg/dL)</span><span data-zh>LDL 壞膽固醇 (mg/dL)</span></label><input type="number" id="ldl" step="1"></div>
 <div class="form-group"><label><span data-en>HDL (mg/dL)</span><span data-zh>HDL 好膽固醇 (mg/dL)</span></label><input type="number" id="hdl" step="1" oninput="calcTcHdl()"></div>
 </div>
-<div class="form-group"><label><span data-en>TC/HDL Ratio (auto)</span><span data-zh>TC/HDL 比值（自動計算）</span></label><input type="number" id="tc_hdl_ratio" readonly style="max-width:calc(50% - 6px)"></div>
+<div class="form-row">
+<div class="form-group"><label><span data-en>TC/HDL Ratio (auto)</span><span data-zh>TC/HDL 比值（自動計算）</span></label><input type="number" id="tc_hdl_ratio" readonly></div>
+<div class="form-group"><label><span data-en>Non-HDL-C (auto)</span><span data-zh>Non-HDL-C 非高密度膽固醇（自動計算）</span></label><input type="number" id="non_hdl_c" readonly></div>
+</div>
 </div>
 </details>
 
@@ -670,6 +673,13 @@ const INDICATORS = {
       male:   { green: [null, 4.0], yellow: [4.0, 5.0], orange: [5.0, 6.0], red: [6.0, null] },
       female: { green: [null, 4.0], yellow: [4.0, 5.0], orange: [5.0, 6.0], red: [6.0, null] }
     }, ref: '< 5.0'
+  },
+  non_hdl_c: {
+    label: 'Non-HDL-C (TC-HDL)', unit: 'mg/dL', cat: 'lipids', type: 'numeric', dir: 'lower-better', tier: 1, computed: true,
+    ranges: {
+      male:   { green: [null, 130], yellow: [130, 160], orange: [160, 190], red: [190, null] },
+      female: { green: [null, 130], yellow: [130, 160], orange: [160, 190], red: [190, null] }
+    }, ref: '< 130 mg/dL (optimal < 100)'
   },
 
   // ── Serum & Inflammation ─────────────────────────
@@ -1309,7 +1319,7 @@ const SAMPLE_DATA = {
   alp: 59, ast: 38, alt: 22,
   bun: 14, uric_acid: 8.9, creatinine: 1.05,
   glucose: 90, hba1c: 5.9,
-  tc: 191, tg: 103, ldl: 154, hdl: 39, tc_hdl_ratio: 4.9,
+  tc: 191, tg: 103, ldl: 154, hdl: 39, tc_hdl_ratio: 4.9, non_hdl_c: 152,
   tsh: 1.956, hscrp: 0.142, hbsag: 0.27,
   afp: 3.2,
   urine_sg: 1.018, urine_ph: 6.0,
@@ -1391,6 +1401,16 @@ function calcTcHdl() {
     colorField('tc_hdl_ratio');
   } else {
     el.value = '';
+  }
+  // Non-HDL-C = TC - HDL (atherogenic-particle proxy; stable, immune to direct-LDL artifact)
+  const nh = document.getElementById('non_hdl_c');
+  if (nh) {
+    if (tc > 0 && hdl > 0) {
+      nh.value = Math.round(tc - hdl);
+      colorField('non_hdl_c');
+    } else {
+      nh.value = '';
+    }
   }
 }
 
@@ -2372,7 +2392,7 @@ function loadSampleData() {
   calcEGFR();
 
   // Restore sample values for computed fields (lab-reported values override auto-calc)
-  ['egfr', 'bmi', 'tc_hdl_ratio'].forEach(id => {
+  ['egfr', 'bmi', 'tc_hdl_ratio', 'non_hdl_c'].forEach(id => {
     if (SAMPLE_DATA[id] !== undefined) document.getElementById(id).value = SAMPLE_DATA[id];
   });
 
@@ -2776,7 +2796,7 @@ function handleJSON(input) {
       calcBMI(); calcTcHdl(); calcEGFR();
 
       // Restore explicit values for computed fields (override auto-calc)
-      ['egfr', 'bmi', 'tc_hdl_ratio'].forEach(id => {
+      ['egfr', 'bmi', 'tc_hdl_ratio', 'non_hdl_c'].forEach(id => {
         if (data[id] !== undefined) document.getElementById(id).value = data[id];
       });
 

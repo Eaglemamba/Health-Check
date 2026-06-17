@@ -34,6 +34,8 @@
   "hdl": 48,
   "ldl_hdl_ratio": 2.63,
   "tc_hdl_ratio": 3.73,
+  "non_hdl_c": 131,
+  "remnant_tg5": 20.4,
   "uric_acid": 8.3,
   "free_t4": 1.20,
   "hbsag": "negative",

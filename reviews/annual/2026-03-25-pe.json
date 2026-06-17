@@ -49,6 +49,8 @@
   "hdl": 39,
   "ldl_hdl_ratio": 3.95,
   "tc_hdl_ratio": 4.9,
+  "non_hdl_c": 152,
+  "remnant_tg5": 20.6,
   "uric_acid": 8.9,
   "hscrp": 0.142,
   "tsh": 1.956,

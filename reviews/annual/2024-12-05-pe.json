@@ -66,6 +66,8 @@
   "hdl": 46,
   "ldl_hdl_ratio": 3.11,
   "tc_hdl_ratio": 4.5,
+  "non_hdl_c": 161,
+  "remnant_tg5": 16.0,
 
   "hbsag": 0.57,
   "vitamin_d": 30.4,
