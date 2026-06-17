@@ -676,10 +676,12 @@ const INDICATORS = {
   },
   non_hdl_c: {
     label: 'Non-HDL-C (TC-HDL)', unit: 'mg/dL', cat: 'lipids', type: 'numeric', dir: 'lower-better', tier: 1, computed: true,
+    // Personalized to David's high-risk status (HTN + prediabetes + low HDL + ECG abnormalities):
+    // green = ESC/EAS 2019 high-risk goal < 100; general ATP III desirable line < 130 sits in the yellow band.
     ranges: {
-      male:   { green: [null, 130], yellow: [130, 160], orange: [160, 190], red: [190, null] },
-      female: { green: [null, 130], yellow: [130, 160], orange: [160, 190], red: [190, null] }
-    }, ref: '< 130 mg/dL (optimal < 100)'
+      male:   { green: [null, 100], yellow: [100, 130], orange: [130, 160], red: [160, null] },
+      female: { green: [null, 100], yellow: [100, 130], orange: [130, 160], red: [160, null] }
+    }, ref: '< 100 mg/dL (personal high-risk goal, ESC/EAS 2019); general desirable < 130 (ATP III)'
   },
 
   // ── Serum & Inflammation ─────────────────────────

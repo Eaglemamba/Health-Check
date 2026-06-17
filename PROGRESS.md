@@ -68,7 +68,7 @@
 | 2026-03 | 191 | 103 | 154 | 39 | **152** 🟡 | 21 |
 
 - **主追蹤指標改用 Non-HDL-C（= TC − HDL）**：捕捉所有致動脈硬化顆粒（LDL+VLDL+Remnant ≈ ApoB），且只用 TC/HDL 兩個穩定檢驗，**不受 direct-LDL 假象干擾**。分級：<130 理想／130–159 略高／160–189 邊緣高／190–219 高。
-- **目標 <130**（David 風險組合：HTN + 糖尿病前期 + 低 HDL + ECG 缺氧/LVH/雙心房擴大 → 非一般人標準；stretch <100）。現況 **152（略高）**，較谷底 188 改善 36，**尚差 ~22 未達標**。
+- **個人目標 <100**（ESC/EAS 2019 高風險目標；David = HTN + 糖尿病前期 + 低 HDL + ECG 缺氧/LVH/雙心房擴大，至少高風險）；**一般達標線 <130**（ATP III 高風險目標，= LDL 目標 +30）。現況 **152**：距個人目標 <100 尚差 ~52、距 <130 差 ~22；較谷底 188 已改善 36。**analyzer 綠燈已收緊至 <100**（131–159 一般雖屬「desirable」但對 David 仍非達標）。
 - **⚠️ direct-LDL 偏高警訊**：2025/2026 報告 LDL 為 direct 檢驗，**持續高於 Friedewald 計算值**（2026 報告 154 vs 計算 ~131）→ 疑 **small dense LDL 偏多**；下次抽血建議加驗 **ApoB / LDL-P**。`Remnant = TC−HDL−LDL` 因 direct-LDL 會算出負值（2026 = −2），**改用 TG/5**。
 - **Non-HDL-C ≈ LDL + Remnant**：152 裡 Remnant 僅 21 → 絕大部分是 LDL 在撐，主戰場仍是**降 LDL**（見 `articles/2026-05-26-ldl-lowering-strategy.md`）。3 個月回測若 Non-HDL >130 或 LDL >160 → 認真談 statin。
 
