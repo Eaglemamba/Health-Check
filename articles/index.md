@@ -7,7 +7,7 @@
 | 資料夾 | 主題 | 篇數 |
 |--------|------|------|
 | [osa-sleep/](osa-sleep/) | OSA / SpO2 / 睡眠 | 12 |
-| [diet-nutrition/](diet-nutrition/) | 飲食 / 補充品 / 營養 | 8 |
+| [diet-nutrition/](diet-nutrition/) | 飲食 / 補充品 / 營養 | 9 |
 | [cardio-metabolic/](cardio-metabolic/) | 心血管 / 代謝 / 訓練 | 6 |
 | [skin-aesthetics/](skin-aesthetics/) | 臉部保養 / 美學 | 2 |
 | [checkups/](checkups/) | 健檢報告 / 健康管理服務 | 3 |
@@ -15,7 +15,7 @@
 ## 留根目錄的「目前生效指南」
 
 - [2026-03-25-supplement-guide.md](2026-03-25-supplement-guide.md) — 補充品指南（data.js source of truth）
-- [2026-03-25-mackay-checkup-addons.md](2026-03-25-mackay-checkup-addons.md) — 馬偕健檢加測
+- [2026-09-17-mackay-checkup-addons.md](2026-09-17-mackay-checkup-addons.md) — 馬偕健檢加測（6M，目前生效；前版 3/25 已歸檔 archive/）
 
 ## 規劃中分類 + 分類規則
 

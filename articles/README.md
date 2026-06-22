@@ -13,7 +13,7 @@
 | 檔案 | 說明 |
 |------|------|
 | `2026-03-25-supplement-guide.md` | 目前生效補充品指南；`data.js` source-of-truth |
-| `2026-03-25-mackay-checkup-addons.md` | 目前生效健檢加測清單 |
+| `2026-09-17-mackay-checkup-addons.md` | 目前生效健檢加測清單（6M；前版 3/25 已移 archive/） |
 
 依「新健檢報告納入規則」，這兩份隨健檢改版而更新，前版移至 `archive/`。
 
@@ -23,7 +23,7 @@
 OSA 調查、姿勢療法、設備決策、診斷敘事、肌功能訓練、累積傷害修復、HR coupling、Sims 姿勢、被蓋頭 rebreathing、穿戴血氧可信度、深睡 HRV、過敏性鼻炎行動計畫。
 
 ### `diet-nutrition/` — 飲食 / 補充品 / 營養
-尿酸日式 protocol、creatine/glycine 評估、晨間 smoothie、醋實證、7-11 營養參考、糖代謝、FDA/SSA health claims、**五色植化素光譜實證 review（2026-06-08，v2 RCT-first：定向原始 RCT 檢索 + confirm/refute 雙 panel）**。
+尿酸日式 protocol、creatine/glycine 評估、晨間 smoothie、醋實證、7-11 營養參考、糖代謝、FDA/SSA health claims、**五色植化素光譜實證 review（2026-06-08，v2 RCT-first：定向原始 RCT 檢索 + confirm/refute 雙 panel）**、**早餐 smoothie 食材農藥清洗逐項實證（2026-06-22，八路平行 agent 查證；接觸/系統 × 皮吃不吃雙軸）**。
 
 ### `cardio-metabolic/` — 心血管 / 代謝 / 訓練
 體重停滯診斷、Z2/RHR 分析、上坡 Z2 健走、HRV 心血管風險、AHA 心臟習慣、生理軸綜覽、**健康槓桿排序（2026-06-08，證據分層 + provenance 標註 + 2 處自我更正）**、**最小有效劑量阻力訓練（2026-06-08，每週 1 次全身 60 分；strength 第 2 篇後移 strength-resistance/）**。
