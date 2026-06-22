@@ -20,7 +20,7 @@
 ## 資料夾
 
 ### `osa-sleep/` — OSA / SpO2 / 睡眠
-OSA 調查、姿勢療法、設備決策、診斷敘事、肌功能訓練、累積傷害修復、HR coupling、Sims 姿勢、被蓋頭 rebreathing、穿戴血氧可信度、深睡 HRV、過敏性鼻炎行動計畫。
+OSA 調查、姿勢療法、設備決策、診斷敘事、肌功能訓練、累積傷害修復、HR coupling、Sims 姿勢、被蓋頭 rebreathing、穿戴血氧可信度、深睡 HRV、過敏性鼻炎行動計畫、**攜帶式氧氣與氧氣保健實證回顧（2026-06-22，omax-hv50 緣起；醫療氧療 vs 休閒吸氧）**。
 
 ### `diet-nutrition/` — 飲食 / 補充品 / 營養
 尿酸日式 protocol、creatine/glycine 評估、晨間 smoothie、醋實證、7-11 營養參考、糖代謝、FDA/SSA health claims、**五色植化素光譜實證 review（2026-06-08，v2 RCT-first：定向原始 RCT 檢索 + confirm/refute 雙 panel）**、**早餐 smoothie 食材農藥清洗逐項實證（2026-06-22，八路平行 agent 查證；接觸/系統 × 皮吃不吃雙軸）**。
