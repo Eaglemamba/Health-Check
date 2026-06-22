@@ -1941,9 +1941,9 @@ window.HC_DATA = {
         { href: "articles/2026-03-25-supplement-guide.md",
           en: "Supplement Guide (data.js source of truth)",
           zh: "補充品指南（data.js source of truth）" },
-        { href: "articles/2026-03-25-mackay-checkup-addons.md",
-          en: "Mackay Checkup Add-ons",
-          zh: "馬偕健檢加測項目" },
+        { href: "articles/2026-09-17-mackay-checkup-addons.md",
+          en: "Mackay Checkup Add-ons (6M)",
+          zh: "馬偕健檢加測項目（6M）" },
       ],
     },
     current: {

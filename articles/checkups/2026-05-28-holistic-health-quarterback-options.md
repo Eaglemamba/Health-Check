@@ -1,6 +1,6 @@
 # 全人健康 quarterback 服務選項 — 美 / 台對照與決策
 
-*跨領域(飲食/運動/睡眠/美容)的整合型健康管理服務 due diligence。配對閱讀：[`2026-03-25-mackay-checkup-addons.md`](../2026-03-25-mackay-checkup-addons.md)*
+*跨領域(飲食/運動/睡眠/美容)的整合型健康管理服務 due diligence。配對閱讀：[`2026-03-25-mackay-checkup-addons.md`](../archive/2026-03-25-mackay-checkup-addons.md)*
 
 **建立日期**：2026-05-28
 **問題背景**：自我管理健康系統(本 repo)達到一定深度後，何時值得引入外部專業 quarterback？哪些服務真正提供「內到外、飲食/運動/睡眠/美容」全包覆？
@@ -151,4 +151,4 @@
 ---
 
 *Filed: articles/checkups/2026-05-28-holistic-health-quarterback-options.md*
-*配對：[`2026-03-25-mackay-checkup-addons.md`](../2026-03-25-mackay-checkup-addons.md)、[`2026-06-17-predicted-checkup-report.md`](2026-06-17-predicted-checkup-report.md)*
+*配對：[`2026-03-25-mackay-checkup-addons.md`](../archive/2026-03-25-mackay-checkup-addons.md)、[`2026-06-17-predicted-checkup-report.md`](2026-06-17-predicted-checkup-report.md)*

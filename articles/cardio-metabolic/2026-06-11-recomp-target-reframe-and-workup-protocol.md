@@ -191,7 +191,7 @@
 - Mandsager K et al. 2018, *JAMA Netw Open* — CRF/VO₂max 與全因死亡
 - FitzGerald JD et al. 2020, ACR 痛風指引（UA 目標 < 6.0）；Stamp LK et al. 2020 — 酸櫻桃痛風 RCT null
 - AASLD 2023 — MASLD/FIB-4 篩查
-- 內部交叉引用：[health-leverage-hierarchy](2026-06-08-health-leverage-hierarchy.md)、[body-composition-regression-tracking](2026-06-04-body-composition-regression-tracking.md)、[visceral-fat-reduction-rct-review](2026-06-05-visceral-fat-reduction-rct-review.md)、[minimum-effective-dose-resistance-training](2026-06-08-minimum-effective-dose-resistance-training.md)、[autonomic-recovery-rct-review](2026-06-08-autonomic-recovery-rct-review.md)、`articles/2026-03-25-mackay-checkup-addons.md`
+- 內部交叉引用：[health-leverage-hierarchy](2026-06-08-health-leverage-hierarchy.md)、[body-composition-regression-tracking](2026-06-04-body-composition-regression-tracking.md)、[visceral-fat-reduction-rct-review](2026-06-05-visceral-fat-reduction-rct-review.md)、[minimum-effective-dose-resistance-training](2026-06-08-minimum-effective-dose-resistance-training.md)、[autonomic-recovery-rct-review](2026-06-08-autonomic-recovery-rct-review.md)、`articles/archive/2026-03-25-mackay-checkup-addons.md`
 
 ---
 

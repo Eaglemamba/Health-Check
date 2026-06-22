@@ -49,7 +49,7 @@ reports/
   archive/                  # 一次性歷史回顧（Garmin 8 年完整 + 睡眠分析及圖表，2026-04-18-20）
 articles/                   # 前瞻性指南與專題分析（依主題分資料夾，2026-05-28 起）
   2026-03-25-supplement-guide.md       # 目前生效補充品指南（留根，data.js source-of-truth）
-  2026-03-25-mackay-checkup-addons.md  # 目前生效健檢加測（留根）
+  2026-09-17-mackay-checkup-addons.md  # 目前生效健檢加測（6M，留根；前版 3/25 已移 archive/）
   osa-sleep/                # OSA / SpO2 / 睡眠 / 姿勢療法 / 肌功能訓練
   diet-nutrition/           # 補充品評估 / 尿酸 / 飲食 / smoothie / 營養參考
   cardio-metabolic/         # 體重停滯 / Z2 訓練 / HRV / 心血管 / 生理軸
@@ -107,7 +107,7 @@ analyzer.html               # 年度健檢數據獨立分析頁（仍為 vanilla
 | `oral-dental/` | 口腔微生物 ↔ 系統發炎、牙周-心血管軸、口腔器具（與 OSA mouthguard 銜接） | 第二階 |
 | `environmental/` | 空氣品質、淨水、塑膠/BPA、黴菌、EMF、內分泌干擾物 | 第二階 |
 
-**例外（留根目錄）**：`2026-03-25-supplement-guide.md` 與 `2026-03-25-mackay-checkup-addons.md` 為「目前生效指南」，依「新健檢報告納入規則」留在 `articles/` 根目錄（前者亦為 `data.js` source-of-truth）。
+**例外（留根目錄）**：`2026-03-25-supplement-guide.md` 與 `2026-09-17-mackay-checkup-addons.md` 為「目前生效指南」，依「新健檢報告納入規則」留在 `articles/` 根目錄（前者亦為 `data.js` source-of-truth）。
 
 **新增 article 規則**：
 1. 每篇新 article **必須**歸入最相關的既有主題資料夾，不得散落根目錄（兩份現行指南除外）。

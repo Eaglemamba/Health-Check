@@ -47,7 +47,7 @@
 
 ### 2. 報告範圍假設
 
-> **本報告以 6/17 執行 `articles/2026-03-25-mackay-checkup-addons.md` §二完整加測清單為前提。** 若實際套餐不含某項（如 ApoB / Lp(a) / HOMA-IR / CAC），該項預測作廢。
+> **本報告以 6/17 執行 `articles/archive/2026-03-25-mackay-checkup-addons.md` §二完整加測清單為前提。** 若實際套餐不含某項（如 ApoB / Lp(a) / HOMA-IR / CAC），該項預測作廢。
 
 - **A 層：抽血生化（重點）** — 可量化，文獻支持充分
 - **B 層:結構性項目（ECG / CXR / 影像 / 視力 / 聽力）** — 3 個月通常不足以逆轉，且多數本次未必排程
@@ -178,7 +178,7 @@
 
 ## 三、C 層：首測 addons 預測（無 baseline，僅文獻區間）
 
-依 `2026-03-25-mackay-checkup-addons.md` §二，預期加測項目與預測：
+依 `archive/2026-03-25-mackay-checkup-addons.md` §二，預期加測項目與預測：
 
 | 項目 | 文獻區間估計 | Δ vs 3/25 | 信心 | 判讀依據 |
 |---|---|:---:|---|---|
@@ -273,7 +273,7 @@
 - [ ] 6/16 晚：22:00 前就寢
 - [ ] 6/17 晨：空腹 ≥ 10 hr；不吃 Psyllium；可正常水分補充
 - [ ] 6/17 晨：抽血前 5 分鐘靜坐後再量 BP（取第二次）
-- [ ] 6/17 晨：列印 `articles/2026-03-25-mackay-checkup-addons.md` §二清單帶去確認加測項
+- [ ] 6/17 晨：列印 `articles/archive/2026-03-25-mackay-checkup-addons.md` §二清單帶去確認加測項
 
 ---
 
