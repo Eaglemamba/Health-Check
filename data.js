@@ -33,22 +33,27 @@ window.HC_DATA = {
     currentWaistDate: "6/9",
   },
 
-  // ===== OSA red-flag banner =====
-  // Threshold from CLAUDE.md: SpO2 nadir < 88% for >= 3 consecutive nights -> PSG.
-  // streak auto-computed from tracker.spo2Nadir (trailing). minAlert: show banner; minUrgent: escalate copy.
+  // ===== OSA red-flag banner — RETIRED 2026-06-29 =====
+  // 2026-06-29: medical-grade fingertip (transmittance) continuous pulse-oximetry at hospital
+  // showed overnight SpO2 completely FLAT — no real desaturations. The Garmin wrist (reflectance)
+  // "nadir < 88% / T90 18.4%" readings that drove this banner were largely artifact / over-read.
+  // Hypoxia premise retracted. psgStatus forced to "done" so the banner never renders
+  // (components-core.jsx returns null when psgStatus === "done"). Light sleep now reattributed to
+  // cognitive/behavioral arousal (nocturnal US-market checking) + autonomic tone — NOT airway hypoxia.
+  // See articles/osa-sleep/2026-06-29-spo2-fingertip-oximetry-correction.md.
   osaAlert: {
     threshold: 88,
     minAlert: 3,
     minUrgent: 5,
-    psgStatus: "pending", // pending | booked | done
-    psgStatusLabel: { en: "PSG appointment", zh: "PSG 預約" },
-    title:    { en: "OSA red flag",
-                zh: "OSA 紅旗" },
-    body:     { en: "SpO2 nadir < 88% for %N consecutive nights (CLAUDE.md threshold: 3). Book PSG today.",
-                zh: "SpO2 夜間最低 < 88% 連續 %N 晚（門檻：3 晚）。今日預約 PSG。" },
-    urgent:   { en: "URGENT — %N consecutive nights well past the 3-night threshold. PSG today, no further delay.",
-                zh: "極度緊急 — 連 %N 晚遠超 3 晚門檻。今日預約 PSG，不可再延。" },
-    cta:      { en: "Mark PSG booked", zh: "標記 PSG 已預約" },
+    psgStatus: "done", // pending | booked | done — "done" = resolved by fingertip oximetry, banner suppressed
+    psgStatusLabel: { en: "Overnight oximetry", zh: "夜間血氧監測" },
+    title:    { en: "Nocturnal hypoxia ruled out",
+                zh: "夜間缺氧已排除" },
+    body:     { en: "Hospital fingertip oximetry overnight SpO2 flat — no desaturations. Garmin red flag retracted.",
+                zh: "醫院指尖血氧整夜平穩、無掉氧；Garmin 紅旗已撤回。" },
+    urgent:   { en: "Hospital fingertip oximetry overnight SpO2 flat — no desaturations. Garmin red flag retracted.",
+                zh: "醫院指尖血氧整夜平穩、無掉氧；Garmin 紅旗已撤回。" },
+    cta:      { en: "Resolved", zh: "已釐清" },
   },
 
   markers: [
@@ -62,9 +67,9 @@ window.HC_DATA = {
     {
       sys: "sleep", name: { en: "Sleep Score", zh: "睡眠分數" },
       val: "78", unit: "Garmin",
-      delta: { en: "5/4 · OSA flag: T90 18.4% (severe)", zh: "5/4 · OSA 紅旗：T90 18.4%（重度）" },
+      delta: { en: "Hypoxia ruled out (fingertip oximetry 6/29) · light sleep → nocturnal arousal", zh: "缺氧已排除（指尖血氧 6/29）· 淺眠 → 夜間認知喚醒" },
       cadence: { en: "Daily · Garmin", zh: "每日 · Garmin" },
-      status: "warn",
+      status: "ok",
     },
     {
       sys: "weight", name: { en: "Weight", zh: "體重" },
@@ -123,7 +128,7 @@ window.HC_DATA = {
         ["Garmin (W17)", "Body Battery 56.7 · RHR 56–61"],
         ["BP (W18 avg)", "124/72 mmHg · meets <130 general · LVH-target <125/75 borderline"],
         ["Weight (5/2 Sat)", "67.8 kg · 20.2% BF · VFL 9.5"],
-        ["OSA flag", "T90 18.4% on 5/4 · POSA trial 5/5–5/8 · driving LVH/biatrial progression"],
+        ["Sleep (corrected 6/29)", "Garmin SpO2 desat was artifact — fingertip oximetry flat, hypoxia ruled out · light sleep → nocturnal cognitive arousal (US-market checking) + autonomic tone"],
         ["Running", "Started 4/26 — building base"],
         ["Current supps", "Omega-3 4g, hibiscus, D3K2, cherry, Mg, citrulline, psyllium 10g"],
         ["Discontinued", "NOW EGCG (AST 27→38, stopped 4/21)"],
@@ -135,7 +140,7 @@ window.HC_DATA = {
         ["Garmin（W17）", "身體電量 56.7 · RHR 56–61"],
         ["血壓（W18 週均）", "124/72 mmHg · 一般 <130 達標 · LVH 目標 <125/75 仍邊緣"],
         ["體重（5/2 週六）", "67.8 公斤 · 體脂 20.2% · 內臟 9.5"],
-        ["OSA 紅旗", "5/4 T90 18.4% · 體位治療試驗 5/5–5/8 · 持續推進 LVH / 雙心房擴大"],
+        ["睡眠（6/29 校正）", "Garmin SpO2 掉氧為 artifact — 指尖血氧整夜平穩、缺氧已排除 · 淺眠 → 夜間認知喚醒（看美股）+ 自律神經張力"],
         ["跑步", "4/26 開始，建立基礎中"],
         ["目前保健品", "Omega-3 4g、洛神花、D3K2、酸櫻桃、鎂、瓜胺酸、洋車前子 10g"],
         ["已停用", "NOW EGCG（AST 27→38，4/21 停用）"],
@@ -178,8 +183,8 @@ window.HC_DATA = {
     threeLeverages: {
       ttl: { en: "Three levers — diet vs exercise vs sleep / OSA", zh: "三條 lever — 飲食 vs 運動 vs 睡眠 / OSA" },
       intro: {
-        en: "Re-evaluated 2026-05-21 after Garmin Venu 4 28-night cohort revealed OSA as upstream driver of LVH (11 yr), BP trajectory, UA persistence, REM deficit. Sleep is NOT a co-equal third lever — it is the unique mover for LVH / REM / HRV / atrial remodeling. Diet remains dominant for LDL; exercise dominant for HDL. The mistake of past 11 years was treating sleep as a soft adjacent factor.",
-        zh: "2026-05-21 從 28 晚 Garmin Venu 4 cohort 重新評估後發現 OSA 是 LVH（11 年）/ BP 軌跡 / UA / REM 缺損的上游 driver。睡眠不是「並列的第三條 lever」— 它是 LVH / REM / HRV / 心房 remodeling 的唯一 mover。LDL 仍以飲食為主；HDL 以運動為主。過去 11 年的錯誤是把睡眠當「軟性附屬因子」。",
+        en: "⚠️ CORRECTED 2026-06-29: the table below was built on the premise that Garmin Venu 4 SpO2 desaturations were real and OSA was the upstream driver of LVH/BP/UA/REM. Hospital fingertip (transmittance) continuous oximetry showed overnight SpO2 FLAT — no desaturations — so the wrist data was largely artifact and the 'OSA as unique mover' framing is retracted. Sleep still matters, but as a behavioral/autonomic lever (nocturnal cognitive arousal — US-market checking — fragmenting sleep), NOT an anatomical hypoxia lever. The 'Sleep / OSA Tx' column below overstates effect sizes that assumed confirmed OSA; read it as the superseded hypothesis. Diet remains dominant for LDL; exercise dominant for HDL. See articles/osa-sleep/2026-06-29-spo2-fingertip-oximetry-correction.md.",
+        zh: "⚠️ 2026-06-29 校正：下表建立在「Garmin Venu 4 SpO2 掉氧為真、OSA 是 LVH/BP/UA/REM 上游 driver」的前提上。醫院指尖（透射式）連續血氧顯示整夜 SpO2 平穩、無掉氧 → 腕式資料大半為 artifact，「OSA 為唯一 mover」框架撤回。睡眠仍重要，但定位為行為/自律神經槓桿（夜間認知喚醒 — 看美股 — 切碎睡眠），非解剖性缺氧槓桿。下方「睡眠 / OSA 介入」欄高估了「假設 OSA 確診」的效應量，請當作已被取代的舊假設讀。LDL 仍以飲食為主；HDL 以運動為主。詳見 articles/osa-sleep/2026-06-29-spo2-fingertip-oximetry-correction.md。",
       },
       head: { en: ["Marker", "Diet (best)", "Exercise (best)", "Sleep / OSA Tx"],
               zh: ["指標", "飲食（最佳）", "運動（最佳）", "睡眠 / OSA 介入"] },
@@ -225,10 +230,10 @@ window.HC_DATA = {
         ttl: { en: "Effort reallocation — old vs new mental model", zh: "努力重新分配 — 舊 vs 新心智模型" },
         old: { en: "Past 11 yr: 35% diet, 35% exercise, 30% sleep (paid lip-service only). Result: LDL / BP / UA / REM stuck.",
                zh: "過去 11 年：飲食 35% effort、運動 35% effort、睡眠 30%（口頭重視，無具體 protocol）。結果：LDL / BP / UA / REM 全卡死。" },
-        new: { en: "Next 6 mo: 25% diet (maintain), 25% exercise (maintain + Zone 2), 50% sleep / OSA (positional therapy → HSAT 6/21 → PSG → CPAP/MAD if confirmed → echo / Holter / UA tracking).",
-               zh: "接下來 6 個月：飲食 25%（維持）、運動 25%（維持 + Zone 2）、睡眠 / OSA 50%（凍結期 positional therapy → HSAT 6/21 → PSG → 若確認啟動 CPAP/MAD → echo / Holter / UA 追蹤）。" },
-        takeaway: { en: "Sleep is not a co-equal third leg — it is the upstream bottleneck that has discounted all past efforts by ~50%. Unblocking the bottleneck unlocks the true effect of diet + exercise that was already in place.",
-                    zh: "睡眠不是「並列第三條腿」— 它是過去 11 年所有努力被打 50% 折扣的上游 bottleneck。解開 bottleneck，原本飲食運動的努力才自動 unlock 真正的 effect。" },
+        new: { en: "Revised 2026-06-29 after hypoxia ruled out: 35% diet (maintain), 35% exercise (recomp + Zone 2), 30% sleep — but the sleep work is now behavioral, not a CPAP/positional-equipment project: decouple bed from US-market checking (alerts/limit orders instead of waking to watch), no screens in the wake window, keep Mg 100mg + glycine for autonomic calming. No CPAP/MAD path — there is no confirmed OSA to treat.",
+               zh: "2026-06-29 缺氧排除後修正：飲食 35%（維持）、運動 35%（recomp + Zone 2）、睡眠 30% — 但睡眠工作改為行為性，不再是 CPAP/體位設備專案：把床與看美股脫鉤（用到價提醒/限價單取代醒來盯盤）、清醒窗不碰螢幕、鎂 100mg + glycine 續用安自律神經。無 CPAP/MAD 路徑 — 沒有已確診的 OSA 要治。" },
+        takeaway: { en: "The 'sleep is the upstream bottleneck discounting everything by 50%' framing was an artifact of bad wrist-SpO2 data. The real bottleneck is a controllable behavior — nocturnal market-watching arousal — not anatomy. That is better news: behavior is far more fixable than airway collapse.",
+                    zh: "「睡眠是把一切打 5 折的上游 bottleneck」這個框架，是錯誤腕式血氧資料造成的假象。真正的瓶頸是一個可控的行為 — 夜間盯盤造成的喚醒 — 不是解剖構造。這其實是好消息：行為遠比氣道塌陷好修。" },
       },
     },
   },
@@ -1553,9 +1558,9 @@ window.HC_DATA = {
           { en: "11-yr ECG LVH unconfirmed by imaging. Echo decides: true LVH (mass >115 g/m²) vs ECG-voltage false-positive. Sets baseline before any drug discussion. Holter screens for arrhythmia and silent ischemia.",
             zh: "11 年 ECG LVH 從未影像確診。Echo 決定：真 LVH（mass >115 g/m²）vs ECG 伏特偽陽。是任何藥物討論前的 baseline。Holter 篩心律不整 + 無症狀缺血。" }],
         ["2",
-          { en: "PSG (sleep study) — POSA trial result by 5/8", zh: "PSG 多項睡眠生理檢查 — POSA 試驗 5/8 收尾" },
-          { en: "T90 18.4% (severe) is independent driver of LVH + biatrial enlargement. Without fixing OSA, no BP target is sustainable; nightly desat keeps re-injuring myocardium. CPAP / MAD / surgery decision needs PSG data.",
-            zh: "T90 18.4%（重度）是 LVH + 雙心房擴大的獨立驅動因子。OSA 不修，BP 怎麼降都不持久；每晚 desat 都重新打擊心肌。CPAP / MAD / 手術選擇靠 PSG 數據。" }],
+          { en: "Sleep — hypoxia ruled out (6/29), behavioral arousal instead", zh: "睡眠 — 缺氧已排除（6/29），改為行為性喚醒" },
+          { en: "RETRACTED 2026-06-29: the 'T90 18.4% severe → drives LVH/biatrial' claim rested on Garmin wrist SpO2. Hospital fingertip continuous oximetry was FLAT — no desaturations — so nocturnal hypoxia is NOT injuring the myocardium and is no longer a cardiac-risk factor here. LVH most likely reflects long-standing BP load + genetics, not OSA. No PSG/CPAP needed for hypoxia. Residual light sleep = behavioral (nocturnal US-market checking) + autonomic; handle by stimulus control, not airway treatment.",
+            zh: "2026-06-29 撤回：「T90 18.4% 重度 → 驅動 LVH/雙心房」這個說法建立在 Garmin 腕式血氧上。醫院指尖連續血氧整夜平穩、無掉氧 → 夜間缺氧並未在打擊心肌，已非此處心血管風險因子。LVH 最可能反映長期 BP 負荷 + 基因，非 OSA。缺氧不需 PSG/CPAP。殘餘淺眠 = 行為性（夜間看美股）+ 自律神經；以刺激控制處理，非氣道治療。" }],
         ["3",
           { en: "Cardiology consult — discuss ARB / ACEi", zh: "心臟科 — 討論 ARB / ACEi" },
           { en: "RAAS blockade is the proven LVH-regression class (LIFE trial losartan: LV mass −25 g/m² over 4.8 yr; ARB ~−13% in meta vs β-blocker −6%). Lifestyle alone cannot regress 11-yr LVH. Ideally start AFTER echo confirms (so baseline mass is documented).",
@@ -1579,8 +1584,8 @@ window.HC_DATA = {
     osaCardiacMap: {
       ttl: { en: "OSA → 11-year cardiac trajectory mapping", zh: "OSA ↔ 11 年心血管時序對應" },
       intro: {
-        en: "Rebuilt 2026-05-21 from 28-night Garmin Venu 4 cohort. 5/17 forced-lateral natural experiment (T90 1.62% vs baseline 9.3%) + 11-year health-check archive merged into single causal chain. Source: articles/osa-sleep/2026-05-21-osa-damage-recovery.md.",
-        zh: "2026-05-21 從 28 晚 Venu 4 cohort 重建。5/17 強制側睡自然實驗（T90 1.62% vs baseline 9.3%）+ 11 年健檢檔案合併為單一因果鏈。詳見 articles/osa-sleep/2026-05-21-osa-damage-recovery.md。",
+        en: "⚠️ RETRACTED 2026-06-29 — kept for audit trail only. This map attributed an 11-year cardiac trajectory to OSA-driven hypoxia inferred from Garmin Venu 4 wrist SpO2. Hospital fingertip (transmittance) continuous oximetry showed overnight SpO2 FLAT — no desaturations — so the hypoxia premise (including the 5/17 'T90 1.62% vs 9.3%' contrast) is invalidated. The cardiac findings are real but should be reattributed to BP load + genetics, not OSA. Do NOT treat this causal chain as current. See articles/osa-sleep/2026-06-29-spo2-fingertip-oximetry-correction.md.",
+        zh: "⚠️ 2026-06-29 撤回 — 僅留作 audit trail。本圖把 11 年心血管軌跡歸因於由 Garmin Venu 4 腕式 SpO2 推論的 OSA 缺氧。醫院指尖（透射式）連續血氧整夜平穩、無掉氧 → 缺氧前提（含 5/17「T90 1.62% vs 9.3%」對比）失效。心血管異常為真，但應重新歸因於 BP 負荷 + 基因，非 OSA。請勿將此因果鏈當作現行結論。詳見 articles/osa-sleep/2026-06-29-spo2-fingertip-oximetry-correction.md。",
       },
       head: { en: ["Health-check finding", "OSA mechanism", "Literature", "OSA share"],
               zh: ["健檢異常", "OSA 機制", "文獻", "OSA 貢獻"] },

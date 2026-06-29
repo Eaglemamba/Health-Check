@@ -1,6 +1,7 @@
 # Health-Check 進度總覽
 
-*最後更新：2026-06-17（新增脂質衍生指標歷年序列 — Non-HDL-C 為主追蹤、目標 <130；現況 152 略高；direct-LDL 偏高疑 small dense LDL，建議加驗 ApoB）*
+*最後更新：2026-06-29（⭐ **OSA/缺氧假設撤回** — 醫院指尖透射式連續血氧整夜平穩、無掉氧，證實 Garmin 腕式 SpO2 掉氧大半為 artifact；淺眠主因重定向為夜間認知喚醒（看美股）+ 自律神經；鎂 100mg 主觀有效；白天精力回升。睡眠努力由 50% 下修並改為「行為性」而非 CPAP/設備。詳見 `articles/osa-sleep/2026-06-29-spo2-fingertip-oximetry-correction.md`）*
+*前次更新：2026-06-17（新增脂質衍生指標歷年序列 — Non-HDL-C 為主追蹤、目標 <130；現況 152 略高；direct-LDL 偏高疑 small dense LDL，建議加驗 ApoB）*
 *前次更新：2026-06-16（⭐ 目標改寫 — 體重框架退役，主 KPI 改軀幹脂肪 6.7kg/166%（輝葉八電極首測）+ LBM ≥54kg 護欄；M3 66.5/18.4% 提前達標）*
 *前次更新：2026-06-08（W24 D1，新增戒糖行為里程碑 + 重訓/肌酸/CoQ10/植物固醇 + RCT-first 植化素 review；補錄 user 自述 8 項 habit list 至 W24 weekly；⭐ 新增 Recomp 相位切換 — 主 KPI 由體重改體組成）*
 *資料範圍：2026-03-17 起，60+ daily / 10 weekly / 2 monthly / 1 annual checkup*
@@ -13,9 +14,10 @@
 |------|------|---------|
 | **M0 基線** | 2026-03-17 – 03-31 | 系統啟動；3/25 馬偕健檢揭露 HTN stage 1 + LDL 177 + HDL 39 + ECG 新增雙心房擴大 |
 | **M1 代謝下修** | 2026-04 | BP 月均 120.2 mmHg（達終極 <125 邊界）；運動下半月空白；體重 70.0 → 69.0 |
-| **M2 OSA 浮現** | 2026-04-29 起 | SpO2 連 3 晚 <88% 紅旗；過敏性鼻炎整合行動方案；Garmin 8 年回顧首次匯出 |
+| **M2 OSA 浮現**（後證實為 artifact） | 2026-04-29 起 | SpO2 連 3 晚 <88% 紅旗；過敏性鼻炎整合行動方案；Garmin 8 年回顧首次匯出 |
 | **M3 POSA 嘗試 + 凍結期** | 2026-05-01 – 05-21 | 側睡 trial、楔形枕、網球 T-shirt；HSAT 預約 6/21；HRV 下行確認 |
 | **M3 行為固化 + 證據校準** | 2026-05-22 – 06-08 | ⭐ **甜+鹹「雙重味覺 set-point 重設」（珍奶無慾望、太甜排斥、可接受乳糖甜；鐵板麵太鹹要過水）— 三個月最大轉變，preference shift 非意志力**；6/7 啟動阻力訓練（重訓胸+背 + 斜面走）+ 每日肌酸 5g；自行加 CoQ10 ubiquinol；新增植物固醇 2g（LDL）；RCT-first 植化素 review（多數「超級食物」宣稱被否決，基本功 > superfood） |
+| **M4 缺氧假設撤回** ⭐ | 2026-06-29 | **醫院指尖透射式連續血氧整夜平穩、無掉氧 → Garmin 腕式 SpO2 掉氧證實為 artifact，整套 OSA/缺氧敘事撤回**；淺眠重定向為夜間認知喚醒（看美股 21:30–04:00）+ 自律神經，鎂 100mg 主觀有效、白天精力回升；睡眠介入由「設備/CPAP」改為「行為性」 |
 
 ---
 
@@ -74,7 +76,15 @@
 
 **11 年長期軌跡（2015 → 2026）**：UA 7.8 → 8.9（恆高、最古老紅旗）；HDL 從未達 good >60；ECG LVH 26 歲起即存在；2026 新增雙心房擴大 + 前壁 ST 上升（結構性惡化）。詳見 `reviews/annual/2026-03-25.md`。
 
-### D. 睡眠與 OSA（最高優先警示）
+### D. 睡眠與 OSA（⚠️ 缺氧假設已撤回 2026-06-29；淺眠原因重定向）
+
+> **🔴 2026-06-29 重大校正 — 缺氧假設撤回。** User 至醫院做**指尖（透射式）連續血氧監測**，整夜 SpO2 **完全平穩、無掉氧**。這是醫療級參考標準，直接打臉先前所有 Garmin **腕式（反射式）** SpO2 衍生結論（nadir 80-83%、T90 7.4-18.4%、「14+ 晚 <88%」、30 min desat、wedge 75% 改善、89% silent desat）——這些**大半為 artifact / 系統性高估**，本專案 `2026-05-26-wearable-spo2-credibility-assessment.md` 早已預警腕式血氧不可作診斷。
+>
+> **新敘事（四證據自洽）**：① 指尖血氧平 → 無夜間缺氧；② 鎂甘胺酸 100mg 主觀即有效 → 起作用的是 GABA/自律神經軸（放鬆系統），非氣道；③ user 自述「想東想西、半夜起來看美股」→ 認知性 + 行為性喚醒（美股約台灣 21:30–04:00 壓在睡眠正中央：螢幕光抑制褪黑、波動拉高交感、預期性醒覺切碎睡眠）；④ 白天精力回升、沒這麼犯睏 → 反證無嚴重睡眠病理。
+>
+> **重定向結論**：淺眠 = **psychophysiological / sleep-maintenance 型（行為 + 自律神經喚醒）**，非解剖性 OSA。槓桿從「不可控的解剖（需 CPAP/設備）」變成「**高度可控的行為**」。**註**：指尖血氧只測血氧，看不到 arousal/氣流/腿動，故「完全沒有 UARS/PLMD」未經全套 PSG 排除——但缺氧驅動的整套心血管因果鏈（LVH/UA/HRV/「225 小時缺氧」）已失去基礎。詳見 `articles/osa-sleep/2026-06-29-spo2-fingertip-oximetry-correction.md`。
+>
+> **下方表格與「OSA 表型確認流程」「OSA 修復視窗」均為已被取代的歷史假設，保留作 audit trail，勿當現行結論。**
 
 | 指標 | 4 月月均 | 5/4 daily | 5/21 daily | 紅旗門檻 |
 |------|---------|-----------|-----------|---------|
@@ -99,11 +109,19 @@
 8. **2026-05-22** — 14 晚 cohort HR coupling 分析揭露 **89% silent desat**（autonomic arousal-side blunted；vagal apneic bradycardia 完整）；cycle annotation 加入 dual-panel chart，5/22 cycle 分布：C1 0% ✓（wedge effective）/ C2-C5 8.9-20.0% 🔴；user 5/22 補入 attribution 修正 — **5/22 = Level 1 only（網球腰包漏背）+ Level 1 substituted（高背枕）**，非 Level 2 fail；user-reported 醒來腳酸 → **dual-trigger model (positional + desat)** → **OSA + PLMD 共病嫌疑** → 診斷路徑升級 **PSG > HSAT**（HSAT 缺 EMG，無法測 PLMS）
 9. **2026-05-23（今日）** — 5/22 commit `9b3bc3e` 包含：daily 5/22 attribution 修正 + Sims trial article + HR coupling cycle annotation + PWA monthly targets + sw.js v21；今晚 D3 stack 用戶決定 **stack-up（Layer 1+2+3+4）** 為主路徑（楔形枕 + 高背枕 + 腰包網球 + 胸前長條抱枕），Modified Sims 為 fallback path（5 天 trial 已 article 化備援）
 
-**OSA 修復視窗**：
-- 治療後血壓、HRV、insulin sensitivity 數週 – 3 個月內回升
-- UA 預期 ↓ 0.5-1.0 mg/dL（García-Aroca 2020）
-- David demographic 仍在「最理想 reversibility candidate」區段
-- 詳見 `articles/osa-sleep/2026-05-21-osa-damage-recovery.md`
+**OSA 修復視窗**（⚠️ 已撤回，缺氧前提失效，存查）：
+- ~~治療後血壓、HRV、insulin sensitivity 數週 – 3 個月內回升~~
+- ~~UA 預期 ↓ 0.5-1.0 mg/dL（García-Aroca 2020）~~
+- ~~David demographic 仍在「最理想 reversibility candidate」區段~~
+- 詳見 `articles/osa-sleep/2026-05-21-osa-damage-recovery.md`（歷史分析，勿當現行）
+
+**睡眠新處方（2026-06-29 起，行為性）**：
+- **看盤與床脫鉤**：床上不看盤、不放手機；用**到價提醒 / 限價單**取代「醒來盯盤」→ 移除預期性醒覺的觸發
+- **清醒窗不碰螢幕**（尤其會引起情緒起伏的盤）
+- **鎂甘胺酸 100mg + Glycine 續用**：定位為自律神經/GABA 放鬆（睡眠目的維持 100mg 即可，劑量–效應已平；上修 300mg 的理由是血壓非睡眠，且過量致軟便）
+- **stimulus control**：真醒了睡不回 → 離床做無聊事，勿在床上滑盤
+- **待驗證實驗（建議跑）**：耳塞/白噪音 A/B + 鎂 100mg on/off，各 5–7 晚記主觀睡眠 → 釘死「噪音」與「鎂」兩個假設
+- **殘餘可能（缺氧已排除但未排除）**：UARS（arousal 型呼吸）/ PLMD — 僅在行為調整後仍明顯淺眠時，才考慮含 EEG+EMG 的全套 PSG
 
 ---
 
@@ -138,18 +156,22 @@
 
 **判讀**：血壓非靠單一因子或運氣，四槓桿同拉。鉀為唯一未動用的儲備，動用時機以心房 / CV 保護為觸發，而非血壓。
 
-### OSA 介入分層（5/22 更新後）
+### OSA 介入分層（5/22 版 — ⚠️ 2026-06-29 大幅退役）
 
-| Layer | 介入 | 狀態 |
+> **缺氧排除後**：以「降夜間掉氧」為理由的設備層（L2 楔形枕、L4 腰包網球、L5 胸前抱枕、fallback Sims）已**無 SpO2 根據，降級為「舒適/側睡偏好」可選項**，非治療。L6 PSG **不再為缺氧而做**（指尖血氧已答）；僅在行為調整後仍明顯淺眠、要排 UARS/PLMD 時才考慮。L7 CPAP/口腔裝置/dopaminergic **無已確診 OSA，路徑撤除**。L1 環境（洗鼻、防螨）與睡前 stack 因有獨立理由（鼻通暢、自律神經）保留。下表存查。
+
+| Layer | 介入 | 狀態（6/29 後） |
 |-------|------|------|
-| L1 | 環境（防螨枕套、洗鼻、避開塵螨） | ✓ 持續 |
-| L2 | 楔形枕（頭部 30° elevation） | ✓ 5/14 起；C1 T90 ↓ 75% 驗證；C2-C5 fidelity decay |
-| L3 | 高背枕（passive lateral bias） | ✓ 持續；5/22 仰躺時形成 45° 斜面而非完全仰 |
-| **L4** | **腰包網球（active anti-supine）** | 🆕 **5/23 D3 必背**；位置：肩胛骨之間 T4-T6（非腰部） |
-| **L5** | **胸前長條抱枕（lateral lock）** | 🆕 **5/23 D3 加入** |
-| **fallback** | **Modified Sims position** | 備案：若 L1-L5 stack 在 5/27 結算仍不足 → 啟動 5 天 trial |
-| L6 | PSG（升級自 HSAT，因 PLMD 共病嫌疑） | **預約 6/21**；要求 full PSG + EMG + iron panel |
-| L7 | CPAP / 口腔裝置 / dopaminergic | 待 PSG 結果 |
+| L1 | 環境（防螨枕套、洗鼻、避開塵螨） | ✓ 保留（獨立理由：鼻通暢、過敏） |
+| ~~L2~~ | ~~楔形枕（頭部 30° elevation）~~ | ⚪ 降為可選舒適項（C1 T90 改善為 artifact） |
+| ~~L3~~ | ~~高背枕（passive lateral bias）~~ | ⚪ 可選 |
+| ~~L4~~ | ~~腰包網球（active anti-supine）~~ | ❌ 撤除（無缺氧根據） |
+| ~~L5~~ | ~~胸前長條抱枕（lateral lock）~~ | ❌ 撤除 |
+| ~~fallback~~ | ~~Modified Sims position~~ | ❌ 撤除 |
+| ~~L6~~ | ~~PSG（缺氧驗證）~~ | ⏸️ 缺氧已答；僅殘餘淺眠排 UARS/PLMD 才考慮全套 PSG |
+| ~~L7~~ | ~~CPAP / 口腔裝置 / dopaminergic~~ | ❌ 路徑撤除（無已確診 OSA） |
+
+**新睡眠路徑（行為性，取代上表）**：看盤與床脫鉤（到價提醒/限價單）→ 清醒窗禁螢幕 → 鎂 100mg + glycine 安自律神經 → stimulus control → 耳塞/鎂 A/B 實驗驗證。詳見 §二 D「睡眠新處方」與校正文。
 
 ### 目標改寫（2026-06-16）⭐ — 體重框架退役，改軀幹脂肪 + LBM 護欄
 
@@ -195,13 +217,14 @@
 
 | 優先 | 項目 | 截止 / 排程 |
 |------|------|-----------|
-| 🔴 1 | **PSG**（升級自 HSAT）多項睡眠檢查 + EMG + iron panel / B12 / folate（5/22 PLMD 共病嫌疑） | 6/21 預約電話打給診所升級檢查項目 |
+| ⚪ 1 | ~~**PSG**（缺氧驗證）~~ → **降級**：指尖血氧已排除缺氧（6/29）。改為**先跑行為調整（看盤脫鉤）+ 耳塞/鎂 A/B**；僅在仍明顯淺眠時才考慮含 EEG+EMG 全套 PSG 排 UARS/PLMD | 行為實驗 7–14 天後再評估 |
+| 🟠 2b | 心臟科：LVH 重新歸因（BP 負荷 + 基因，非 OSA 缺氧） | 併入下方 echo + Holter 評估 |
 | 🔴 2 | 心臟超音波 + 24h Holter | 待安排（ECG 雙心房擴大新發現） |
 | 🟠 3 | 第 3 月抽血追蹤（TG/LDL/UA/hsCRP/HDL） | 5 月下旬待安排 |
 | 🟠 4 | 眼科 OCT + 視野 | 待安排（IOP 雙眼 19 + VA 下滑） |
 | 🟠 5 | HDL 救援（有氧 150 min/週 + 健康脂肪） | 持續 |
 | 🟡 6 | 耳鼻喉科聽力複檢（左耳 500/4000 Hz 未過） | 待安排 |
-| 🟡 7 | 腎臟科尿酸諮詢（febuxostat 評估） | 待 OSA 確診後再評估（OSA 治療可降 UA） |
+| 🟡 7 | 腎臟科尿酸諮詢（febuxostat 評估） | ⚠️ 原「待 OSA 確診（OSA 治療可降 UA）」前提已失效（缺氧排除）；UA 8.9 視為**體質性恆高**獨立處理，不再等睡眠 |
 
 ---
 
@@ -239,12 +262,12 @@ icons/          PWA icons（4 SVG）
 ## 六、主要學習
 
 1. **二分法格局逆轉**（2025→2026 健檢）：代謝面（LDL/TC/體脂/hsCRP）全面改善，心血管結構面（BP/ECG/CXR）反向惡化 — 兩條軸線解耦
-2. **OSA 是隱形的代謝下行驅力**：UA 11 年恆高、HDL 從未達標、HRV 偏低 — 全部可由 chronic IH 機轉解釋
-3. **wearable + 個人化資料管線**比起被動健檢能提早 3-6 個月發現問題（OSA 是典型 example：4/29 抓到 → 6/21 HSAT，常規流程從症狀到 HSAT 平均 5-7 年）
+2. **⚠️ 穿戴裝置會給「假陽性診斷」— 別把 screening 當 diagnosis**（2026-06-29 最大教訓）：腕式（反射式）SpO2 把整個 OSA/缺氧敘事撐了 2 個月（UA/HDL/HRV/LVH 全歸因 chronic IH），最後被醫院指尖（透射式）連續血氧一夜打平。**穿戴的職責是「提醒去查」，不是「下診斷」**；任何要驅動數月介入的衍生指標，動手前先用參考級儀器校準。本專案 `2026-05-26` 已預警卻仍續推，提醒「預警 ≠ 行為改變」。UA 恆高、HDL、HRV 應回歸各自獨立成因，不再硬套缺氧。
+3. **wearable + 個人化資料管線**確能提早抓訊號（4/29 SpO2 警報 → 促成 6/29 真檢查），但**正負兩面都要驗證**：它的價值在「催生一次正確的醫療級檢查」，而非自己當終點。這次的閉環（穿戴示警 → 醫院校準 → 修正認知）才是正確用法。
 4. **執行紀律高於介入新穎度**：4 月下半量化追蹤空白化是最大教訓；5 月以「凍結期 + 5 天觀察」紀律重建
 5. **重訓回歸不是補修以前的訓練量**：5/22 五年首次重訓（坐姿下拉 3×8 + Hex bar 硬舉 +20kg 3×8 + 斜坡 20min）— 0.6× BW × 8 reps 的價值大於十年前 1RM PR；27 歲拚 1RM 那段時間 UA 7.8 / ECG LVH 26 歲起 / HDL 從未達標已是 silent damage 累積期。本質差異在「資料密度 ×100」— **是用今天的系統去訓練昨天的身體**
 
 ---
 
 *Filed: PROGRESS.md（root）*
-*下次更新節點：第 3 月抽血結果 / HSAT 6/21 結果 / W22-W26 weekly close*
+*下次更新節點：第 3 月抽血結果 / 行為調整（看盤脫鉤）+ 耳塞/鎂 A/B 實驗結果 / W22-W26 weekly close*
