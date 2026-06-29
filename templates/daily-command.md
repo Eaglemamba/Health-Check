@@ -6,7 +6,8 @@
    - 再執行 `python scripts/sync_garmin_daily.py --days-back 1`（抓昨日，取得昨日全日飲水、步數等 day-level 總量供「昨日回顧」區塊）
    - 完成後讀取 `reports/daily-garmin/{今日日期}.md`（睡眠與 SpO2 數據源）並在對話中顯示給使用者確認
    - 「昨日回顧/飲水」請讀 `reports/daily-garmin/{昨日日期}.md`
-   - **SpO2 夜間趨勢**：讀取過去 7 晚 `reports/daily-garmin/*.md` 的「最低 SpO2」與「日均 SpO2」（缺檔以 `—` 表示），於對話中顯示連 3 晚 / 7 晚 < 88% 的計數，並在寫檔時填入 daily 檔案的「SpO2 夜間最低 7 晚趨勢」表格
+   - **SpO2 夜間數值（僅參考）**：讀取昨夜「最低 SpO2」與「日均 SpO2」於對話中顯示。**⚠️ 2026-06-29 起：指夾式連續血氧證實整夜平穩、無掉氧 → 腕式 SpO2 掉氧為動作 artifact、缺氧/OSA 假設撤回。不再做 < 88% 連晚計數、不觸發任何 OSA 紅旗,數值僅留參考。**
+   - **以下三項全夜 SpO2 圖表（hypnogram 條帶 / Heatmap / 7 晚疊圖）自 2026-06-29 起降為「選跑」**：OSA 表型判讀已撤回,每日 check-in **預設略過**,僅在使用者特別要求時才手動執行下列指令。
    - **SpO2 全夜圖表（含 hypnogram 條帶）**：執行 `python scripts/analyze_spo2_desats.py --chart {今日日期}` 產生當晚 epoch-level 圖表（自動存於 `reviews/daily/spo2/spo2_desat_{今日日期}.png`）；**自 2026-05-19 起**，當 Garmin sleepLevels 可用時，圖表會自動內建 2-panel 排版（上：hypnogram 條帶 Deep/Light/REM；下：SpO2 折線 + 階段背景色），用於 OSA 表型即時判讀。並執行 `python scripts/analyze_spo2_desats.py --trend` 更新整體趨勢圖（`reviews/daily/spo2/spo2_desat_trend.png`）；在 daily 檔案的 SpO2 區塊嵌入相對連結
    - **SpO2 全夜 Heatmap（28+ 晚全紀錄；自 2026-05-21 起取代 `--overlay`）**：執行 `python scripts/analyze_spo2_heatmap.py` 產生 `reviews/daily/spo2/spo2_heatmap_all_nights.png`（永久軸圖；每日重生成、不歸檔）。每一橫列 = 1 晚，x 軸入睡後分鐘，色階 SpO2 80-100%，下方副圖為每分鐘 median + IQR + 90% / 88% 紅旗線 + C1-C5 cycle bin 標記。**用途**：(1) 確認今晚在全 cohort 中的相對分位；(2) 揪 outlier 夜對照當天介入；(3) HSAT 帶診核心圖。**裝置一致性**：僅納入 Garmin Venu 4 (deviceId 3622900919)；前一台裝置（4/19-4/23 共 5 晚）自動剔除。在 daily 檔案的 SpO2 區塊嵌入該圖相對連結
    - **SpO2 × 睡眠分期 7 晚疊圖**：執行 `python scripts/analyze_spo2_desats.py --hypnogram7 {今日日期}` 產生 rolling 7 晚 hypnogram × SpO2 疊圖（檔名 `reviews/daily/spo2/spo2_hypnogram_7night_{今日日期}.png`）。每晚一列 subplot，REM/Light/Deep 背景色 + SpO2 折線。**主要用途**：判讀 OSA 主導階段是否漂移（REM-dominant vs Light-dominant vs Deep-dominant），單晚結論需用 7 晚趨勢驗證再下表型。在 daily 檔案的 SpO2 區塊嵌入該圖相對連結。同時 console 輸出 stage-stratified nadir / <90% 表，可在判讀區引用。
@@ -53,7 +54,7 @@
 - 如果 Sleep Score 連續三天 < 65，提醒檢視睡眠修復方案
 - 如果身體信號連續三天非「清」，提醒關注趨勢
 - 如果身體信號同一部位強度持續 ≥ 5，建議物理治療評估
-- **SpO2 最低 < 88%** → OSA 風險紅旗；連續 3 晚 < 88% 強烈建議 PSG 多項睡眠檢查
+- ~~**SpO2 最低 < 88%** → OSA 風險紅旗~~ **（已撤回 2026-06-29）**：腕式 SpO2 低點為動作 artifact,指夾式連續血氧已排除夜間缺氧；**不再觸發 OSA 紅旗或 PSG 建議**。淺眠改循「行為性喚醒（夜間看盤）+ 自律神經」方向(詳見校正文)
 - **昨日飲水 < 2.0L** → 警示 UA 排泄效率降低；連續 2 天 < 2.0L 本週重點關注
 - **RHR 3 天內上升 ≥ 5 bpm** 或 > 67 連續 3 天 → 發炎 / 感染前兆
 - **步數 < 5,000 連續 3 天** → UA / HbA1c 控制風險
