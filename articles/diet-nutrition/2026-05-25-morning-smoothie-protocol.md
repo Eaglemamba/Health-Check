@@ -1,6 +1,6 @@
 # Morning Smoothie Protocol（每日優格飲 SOP）
 
-**建立日期**：2026-05-25（**2026-05-27 v3 修訂**：大麥麥片 + 奇亞籽 → 亞麻籽粉 15g；**2026-06-03 v4 新增**：黃金奇異果版 + 酪梨版命名變體，見 §九；**2026-06-14 v5 新增**：豆奶羽衣甘藍藍莓版（綠飲 × 藍莓交叉版，無優格/乳清），見 §九變體 C）
+**建立日期**：2026-05-25（**2026-05-27 v3 修訂**：大麥麥片 + 奇亞籽 → 亞麻籽粉 15g；**2026-06-03 v4 新增**：黃金奇異果版 + 酪梨版命名變體，見 §九；**2026-06-14 v5 新增**：豆奶羽衣甘藍藍莓版（綠飲 × 藍莓交叉版，無優格/乳清），見 §九變體 C；**2026-06-29 v6 新增**：當令甜櫻桃季節變體 + 全櫻桃 RCT 證據與 100g 次劑量提醒，見 §十一）
 **用途**：個人早餐標準配方 + 替換矩陣 + 季節輪替表
 **對應目標**：AHA Life's Essential 8 第 1（飲食）、5（BMI）、6（LDL）、7（血糖）、8（BP）
 **相關**：傍晚綠拿鐵（葉菜版、加餐替代）與 RCT 證據 → [`2026-06-12-green-smoothie-rct-review.md`](2026-06-12-green-smoothie-rct-review.md)
@@ -53,6 +53,8 @@
 | 酸櫻桃（冷凍） | 全年 | 天然褪黑激素，**有 RCT 證據改善睡眠** |
 
 > **進階**：藍莓 20g + 桑椹 20g 雙拼 = 機制互補（BP + 血糖）
+>
+> ⚠️ **甜櫻桃 ≠ 酸櫻桃**：上表「酸櫻桃」是助眠補充品方向（褪黑激素，睡前用）。**當令甜櫻桃**（6–8 月鮮果）是另一回事，作早餐鮮果輪替的證據、劑量與雙拼建議見 **§十一**。
 
 ### 配角水果（每日 50–80g，可從以下任選）
 
@@ -282,6 +284,40 @@
 
 ---
 
+## 十一、當令甜櫻桃季節變體 + RCT 證據（2026-06-29 v6 新增）
+
+> **觸發**：6–8 月甜櫻桃盛產，問「全櫻桃要幾顆 / 每日 100g 的好處有無 RCT」。結論：**可作當令鮮果輪替，但別把它當治療劑量或尿酸主力。**
+
+### 換算（甜櫻桃一顆約 8g 整顆 / 去核 ~7g 果肉）
+
+| 去核果肉 | 顆數（約） | 糖（櫻桃 ~13g/100g） |
+|------|------|------|
+| 60g（§一主配方莓果量） | 8–9 顆 | ~8g |
+| 80g | 11 顆 | ~10g |
+| **100g（建議全櫻桃量）** | **13–14 顆** | ~13g |
+| 150g（對標藍莓 RCT 劑量） | 20 顆 | ~19–20g |
+
+### 全櫻桃的 RCT 證據（甜櫻桃 *Prunus avium*；依強度排）
+
+> **關鍵前提**：絕大多數陽性 RCT 用 **280g/天**，非 100g。100g（~13–14 顆）約研究量 1/3，屬**次劑量**，效益按比例打折。
+
+| 指標 | 證據 | 研究劑量 | 對本人意義 |
+|------|------|------|------|
+| 尿酸（急性） | Jacob 2003：健康女性 280g 甜櫻桃，5h 後血漿尿酸↓~14%（214→183 μmol/L） | 280g 空腹單次 | **保留**：受試者本來尿酸正常（~3.6 mg/dL）。本人 UA 8.9 屬高尿酸族群，**酸櫻桃在真痛風 RCT null（Stamp 2020）**，全櫻桃預期降幅有限 |
+| 發炎（IL-6 / CRP） | 42 天 pilot 每日 280g → IL-6、AGP-1 顯著↓；Jacob 2003 CRP 邊際↓ | 280g × 42 天 | 中：抗發炎是櫻桃較一致方向 |
+| 血糖（HbA1c） | 同 42 天 pilot（280g）→ HbA1c、平均血糖↓、GGT/LDH↓（護肝訊號） | 280g × 42 天 | 中：方向正向，但劑量遠高於 100g |
+| 血壓 | meta-analysis（2022）整體**無顯著效果**；僅「深色甜櫻桃 in 肥胖成人」RCT 見 SBP↓ | 變動 | **弱/不一致**：勿期待降 BP |
+| 血脂（LDL/TG） | meta-analysis 整體 **null**；僅「不健康/肥胖」次組見 LDL/TG↓ | 變動 | **弱** |
+| 睡眠 | 那是**酸櫻桃（褪黑激素）睡前**，與早上全櫻桃無關 | — | 不適用 |
+
+### 操作建議（v6）
+
+1. **首選雙拼，非全櫻桃**：`藍莓 100g + 櫻桃 50g` — 保留藍莓 150g 的 RCT 主軸（Curtis 2019 內皮/SBP）效益大半，櫻桃補多酚多樣性與當令風味，糖也低於全櫻桃 100g。
+2. **真要全櫻桃**：100g（13–14 顆）為合理上限；衝 150g（20 顆）須走酪梨骨架 + 不加其他配角水果壓糖。
+3. **去核、整顆鮮果、分裝冷凍**（盛產期囤）；**禁果汁/濃縮**（果糖升 UA + 不利減重）。
+4. **別為降尿酸而加**：UA 主力仍是飲水 + 減動物嘌呤/果糖 + 腎臟科降尿酸藥（與 §三、補充品指南一致）。
+5. **加入方式**：放莓果格（§一第 5 步），其餘配方不動。
+
 ## Sources
 
 - [Life's Essential 8 | American Heart Association](https://www.heart.org/en/healthy-living/healthy-lifestyle/lifes-essential-8)
@@ -291,3 +327,10 @@
 - Blueberry RCT: BPS-Norfolk study (Curtis PJ et al. Am J Clin Nutr. 2019)
 - Mulberry DNJ: Kimura T et al. J Agric Food Chem. 2007
 - Tart cherry sleep RCT: Howatson G et al. Eur J Nutr. 2012
+- Sweet cherry urate RCT: Jacob RA et al. Consumption of cherries lowers plasma urate in healthy women. J Nutr. 2003 (PMID 12771324)
+- Sweet cherry 42-day metabolic pilot: 280g/day, IL-6/AGP-1↓, HbA1c↓ (PMC12470207)
+- Dark sweet cherry BP RCT (obese adults): SBP↓, IFNγ↓ (PMC9920461)
+- Cherry & blood pressure meta-analysis of RCTs: Clin Nutr ESPEN 2022 (S1871402122000236) — overall null
+- Cherry & glycemic/lipid meta-analysis: (S2451847621000713)
+- Cherries for uric acid/gout systematic review: (PMC6914931)
+- Tart cherry urate null in gout: Stamp LK et al. Rheumatology 2020 (PMID 31891407)
