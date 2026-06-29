@@ -1,4 +1,4 @@
-const VERSION = 'v27-2026-06-08-weekly-dashboard-panel';
+const VERSION = 'v28-2026-06-29-sparkline-hero-osa-removed';
 const CORE = './';
 const CORE_FILES = [
   './',

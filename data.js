@@ -295,17 +295,17 @@ window.HC_DATA = {
         },
       },
       {
-        ttl: { en: "D. Sleep position", zh: "D. 睡姿" },
+        ttl: { en: "D. Sleep position (comfort / reflux)", zh: "D. 睡姿（舒適 / 逆流）" },
         items: {
           en: [
-            "Side sleep (left preferred) — supine collapses tongue base, ~50% more apnea.",
-            "Pillow behind back to prevent rolling supine.",
-            "Elevate head 15–20° — reduces airway pressure & reflux.",
+            "Side sleep (left preferred) — for comfort & possible reflux reduction. OSA/apnea rationale retired 6/29.",
+            "Pillow behind back only if it helps you stay comfortable.",
+            "Elevate head 15–20° — mainly reflux comfort.",
           ],
           zh: [
-            "側睡（左側為佳）— 仰睡使舌根後墜，呼吸暫停多 ~50%。",
-            "背後放枕頭防止翻回仰躺。",
-            "墊高床頭 15–20° — 減少呼吸道壓力與胃食道逆流。",
+            "側睡（左側為佳）— 為舒適與可能減少逆流。OSA/呼吸暫停理據 6/29 退役。",
+            "背後放枕頭，僅在有助維持舒適時。",
+            "墊高床頭 15–20° — 主要為逆流舒適。",
           ],
         },
       },
@@ -338,7 +338,7 @@ window.HC_DATA = {
         ["Sleep Score", "≥ 70 → 80", "var(--sleep)"],
         ["Body Battery (waking)", "≥ 65 → 75", "var(--metabolic)"],
         ["Deep sleep %", "> 15%", "var(--uric)"],
-        ["Pulse Ox SpO2", "stable, no dips < 90%", "var(--water)"],
+        ["HRV (overnight)", "rising · ~18 → ≥ 25 ms", "var(--heart)"],
       ],
     },
   },

@@ -36,6 +36,46 @@ const tabIcons = {
 };
 
 const sysIcons = { heart: "heart", sleep: "moon", weight: "scale", uric: "sparkle" };
+const sysHue = { heart: "var(--heart)", sleep: "var(--sleep)", weight: "var(--weight)", uric: "var(--uric)" };
+
+/* Which tracker series feeds each marker's sparkline (ported from v2, 2026-06-29) */
+const sysSeries = (sys) => {
+  const tr = D.tracker;
+  if (!tr) return null;
+  switch (sys) {
+    case "heart":  return Array.isArray(tr.bp) ? tr.bp.map(b => b[0]) : null; // systolic
+    case "sleep":  return tr.sleep;
+    case "weight": return tr.weight;
+    default:       return null; // uric — lab only, no daily series
+  }
+};
+
+/* ===== Mini sparkline (ported from v2) ===== */
+function MiniSpark({ data, color, h = 40 }) {
+  if (!data || data.length < 2) return null;
+  const w = 240;
+  const min = Math.min(...data), max = Math.max(...data);
+  const range = max - min || 1;
+  const x = (i) => (i / (data.length - 1)) * w;
+  const y = (v) => h - ((v - min) / range) * (h - 8) - 4;
+  const pts = data.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const area = `0,${h} ${pts} ${w},${h}`;
+  const lastY = y(data[data.length - 1]);
+  const gid = "sg-" + Math.random().toString(36).slice(2, 8);
+  return (
+    <svg className="mini-spark" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.16" />
+          <stop offset="100%" stopColor={color} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <polygon points={area} fill={`url(#${gid})`} stroke="none" />
+      <polyline points={pts} fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+      <circle cx={w} cy={lastY} r="3.4" fill={color} />
+    </svg>
+  );
+}
 
 /* ===== Hero ===== */
 function Hero({ lang, variant }) {
@@ -143,6 +183,8 @@ function HeroProgress({ lang }) {
 }
 
 function Marker({ m, lang }) {
+  const series = sysSeries(m.sys);
+  const hue = sysHue[m.sys];
   return (
     <div className="marker" data-system={m.sys}>
       <div className="head">
@@ -151,6 +193,11 @@ function Marker({ m, lang }) {
       </div>
       <div className="name">{t(m.name, lang)}</div>
       <div className="num">{m.val}<small>{m.unit}</small></div>
+      <div className="spark-slot">
+        {series
+          ? <MiniSpark data={series} color={hue} />
+          : <div className="spark-lab">{lang === "en" ? "Lab value · no daily trend" : "實驗室數值 · 無每日趨勢"}</div>}
+      </div>
       <div className={`delta ${m.status}`}>
         <span className="dot" />
         {t(m.delta, lang)}
@@ -174,4 +221,4 @@ function Tabs({ active, onChange, lang }) {
   );
 }
 
-Object.assign(window, { Icon, t, Hero, Tabs, tabIcons, sysIcons });
+Object.assign(window, { Icon, t, Hero, Tabs, Marker, MiniSpark, tabIcons, sysIcons, sysHue });

@@ -1122,84 +1122,9 @@ function PanelSafety({ lang }) {
         </div>
       </>)}
 
-      {sd && sd.osaCardiacMap && (<>
-        <div className="spacer-20" />
-        <div className="card" style={{borderTop: "3px solid var(--heart)"}}>
-          <div className="h3" style={{color: "var(--heart)"}}>{Tt(sd.osaCardiacMap.ttl, lang)}</div>
-          <p className="body">{Tt(sd.osaCardiacMap.intro, lang)}</p>
-          <table className="t">
-            <thead><tr>{sd.osaCardiacMap.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
-            <tbody>
-              {sd.osaCardiacMap.rows.map(([finding, mech, lit, share], i) => (
-                <tr key={i}>
-                  <td><strong>{Tt(finding, lang)}</strong></td>
-                  <td style={{fontSize: 12, lineHeight: 1.5}}>{Tt(mech, lang)}</td>
-                  <td style={{fontSize: 11, color: "var(--tl)"}}>{lit}</td>
-                  <td style={{fontSize: 12}}>{Tt(share, lang)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="callout" style={{marginTop: 8}}>
-            <strong>{lang === "en" ? "Implication: " : "意義："}</strong>{Tt(sd.osaCardiacMap.implication, lang)}
-          </div>
-        </div>
-      </>)}
-
-      {sd && sd.osaReversibility && (<>
-        <div className="spacer-20" />
-        <div className="card" style={{borderTop: "3px solid var(--heart)"}}>
-          <div className="h3" style={{color: "var(--heart)"}}>{Tt(sd.osaReversibility.ttl, lang)}</div>
-          <p className="body">{Tt(sd.osaReversibility.intro, lang)}</p>
-          <table className="t">
-            <thead><tr>{sd.osaReversibility.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
-            <tbody>
-              {sd.osaReversibility.rows.map(([marker, change, time, lit], i) => (
-                <tr key={i}>
-                  <td><strong>{Tt(marker, lang)}</strong></td>
-                  <td>{Tt(change, lang)}</td>
-                  <td style={{fontSize: 12}}>{Tt(time, lang)}</td>
-                  <td style={{fontSize: 11, color: "var(--tl)"}}>{lit}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          {sd.osaReversibility.irreversible && (
-            <div style={{marginTop: 16}}>
-              <div className="h4" style={{fontSize: 14, marginBottom: 8}}>{Tt(sd.osaReversibility.irreversible.ttl, lang)}</div>
-              <div className="grid-2">
-                {sd.osaReversibility.irreversible.items.map((item, i) => (
-                  <div key={i} className="callout warn" style={{padding: 14}}>
-                    <div style={{fontWeight: 600, fontSize: 13, marginBottom: 4}}>{Tt(item.head, lang)}</div>
-                    <div style={{fontSize: 12, lineHeight: 1.55}}>{Tt(item.body, lang)}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {sd.osaReversibility.riskComparison && (
-            <div style={{marginTop: 16}}>
-              <div className="h4" style={{fontSize: 14, marginBottom: 8}}>{Tt(sd.osaReversibility.riskComparison.ttl, lang)}</div>
-              <table className="t">
-                <thead><tr>{sd.osaReversibility.riskComparison.head[lang].map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
-                <tbody>
-                  {sd.osaReversibility.riskComparison.rows.map(([scenario, risk], i) => (
-                    <tr key={i}>
-                      <td><strong>{Tt(scenario, lang)}</strong></td>
-                      <td className="num-cell">{risk}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className="callout" style={{marginTop: 8}}>
-                <strong>{lang === "en" ? "Takeaway: " : "結論："}</strong>{Tt(sd.osaReversibility.riskComparison.takeaway, lang)}
-              </div>
-            </div>
-          )}
-        </div>
-      </>)}
+      {/* OSA Cardiac Mapping + OSA Reversibility 面板已於 2026-06-29 移除：
+          指夾式連續血氧排除缺氧，整套 OSA 因果/修復敘事撤回。
+          歷史保存於 git history 與 articles/osa-sleep/。 */}
 
       {sd && sd.uricAcidEtiology && (<>
         <div className="spacer-20" />

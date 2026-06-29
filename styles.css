@@ -334,6 +334,18 @@ button { font-family: inherit; }
   font-weight: 500; margin-left: 4px;
   letter-spacing: 0;
 }
+/* ===== Marker sparkline (ported from v2, 2026-06-29) ===== */
+.marker .spark-slot {
+  height: 40px; margin: 10px 0 8px;
+  display: flex; align-items: flex-end;
+}
+.marker .mini-spark { width: 100%; height: 100%; display: block; }
+.marker .spark-lab {
+  width: 100%; height: 100%;
+  display: flex; align-items: center;
+  font-size: 11px; color: var(--ink-3);
+  border-top: 1px dashed var(--line-2);
+}
 .marker .delta {
   margin-top: 8px;
   font-size: 12px;
