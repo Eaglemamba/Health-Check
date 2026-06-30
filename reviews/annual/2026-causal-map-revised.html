@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>健康問題因果圖 — 2026 修訂版（OSA 撤回後）</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"Segoe UI",Roboto,"Microsoft JhengHei",sans-serif;background:#0f1117;color:#e0e0e0;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#1a1f2e,#252b3b);padding:20px;text-align:center;border-bottom:1px solid #2a3045}
+.header h1{font-size:18px;color:#7eb8f7;font-weight:600}
+.header p{font-size:12px;color:#6b7c8d;margin-top:4px}
+.header .sub{font-size:11px;color:#66d19e;margin-top:6px}
+
+.legend{display:flex;gap:14px;justify-content:center;padding:12px;background:#151a27;border-bottom:1px solid #2a3045;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:#8a9bb0}
+.leg-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,0.15)}
+
+.canvas{padding:20px 12px 50px;max-width:980px;margin:0 auto}
+.layer-label{font-size:10px;font-weight:700;letter-spacing:2px;color:#4a5568;text-transform:uppercase;margin:22px 0 8px;padding:4px 0;border-top:1px dashed #2a3045}
+.row{display:flex;gap:10px;justify-content:center;margin-bottom:4px;flex-wrap:wrap}
+.arrows{display:flex;justify-content:center;padding:4px 0;color:#3a4458;font-size:16px}
+
+.node{border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .2s;position:relative;border:1px solid transparent;min-width:150px;flex:1;max-width:220px}
+.node:hover{transform:translateY(-2px);filter:brightness(1.12)}
+.node-title{font-size:12.5px;font-weight:700;margin-bottom:4px}
+.node-val{font-size:10px;opacity:.8;margin-bottom:3px;line-height:1.45}
+.node-badge{display:inline-block;font-size:9px;padding:1px 6px;border-radius:8px;background:rgba(0,0,0,.25);font-weight:600;margin-top:2px}
+
+/* retracted — greyed + strikethrough */
+.retracted{background:#16181f;border:1px dashed #444b5e;opacity:.62}
+.retracted .node-title{color:#8a92a3;text-decoration:line-through}
+.retracted .node-badge{color:#aeb6c4;background:#23262f}
+
+/* resolved / reversing — green */
+.resolved{background:#12241a;border-color:#1f5436}
+.resolved .node-title{color:#66d19e}
+.resolved .node-badge{color:#a5d6a7}
+
+/* constitutional floor — yellow */
+.floor{background:#251e0d;border-color:#6b4a00}
+.floor .node-title{color:#ffa726}
+.floor .node-badge{color:#ffcc80}
+
+/* needs medical verification — blue */
+.verify{background:#0f1f33;border-color:#2a5080;box-shadow:0 0 12px rgba(80,150,255,.18)}
+.verify .node-title{color:#7eb8f7}
+.verify .node-badge{color:#90caf9}
+
+/* markers */
+.marker{background:#1a2035;border-color:#2a4080}
+.marker .node-title{color:#7eb8f7}
+.marker .node-badge{color:#90caf9}
+.marker.good{background:#12241a;border-color:#1f5436}
+.marker.good .node-title{color:#66d19e}
+.marker.good .node-badge{color:#a5d6a7}
+.marker.lag{background:#1d2230;border-color:#39507a}
+.marker.lag .node-title{color:#9fc2ef}
+.marker.warn{background:#251e0d;border-color:#6b4a00}
+.marker.warn .node-title{color:#ffa726}
+
+.panel{background:#1a2035;border:1px solid #2a3045;border-radius:12px;padding:18px;margin:18px auto 0;max-width:760px;display:none}
+.panel.show{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.panel-title{font-size:15px;font-weight:700;margin-bottom:10px;color:#e0e0e0}
+.panel-body{font-size:13px;line-height:1.65;color:#c4ccd8}
+.panel-close{float:right;cursor:pointer;font-size:18px;color:#6b7c8d;background:none;border:none}
+.foot{max-width:980px;margin:24px auto 0;padding:0 12px;font-size:11px;color:#5a677a;line-height:1.6;text-align:center}
+.tip{text-align:center;font-size:11px;color:#5a677a;margin-top:10px}
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>健康問題因果圖 — 2026 修訂版</h1>
+    <p>更新：2026-06-29 ｜ 基線健檢 2026-03-25 ｜ 等待 2026-06-18 複檢報告（約 7/10）</p>
+    <p class="sub">✅ 大多數上游已解或反轉中 — 從「找根源」進入「驗收 + 守心臟」階段</p>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><span class="leg-dot" style="background:#444b5e"></span>已撤回（假設失效）</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#1f5436"></span>反轉中 / 已解</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#6b4a00"></span>體質地板（基因·管理）</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#2a5080"></span>待醫療確認</div>
+  </div>
+
+  <div class="canvas">
+
+    <div class="layer-label">Layer 0 · 已撤回的舊上游</div>
+    <div class="row">
+      <div class="node retracted" data-k="osa">
+        <div class="node-title">OSA / 夜間缺氧</div>
+        <div class="node-val">原假設：缺氧是 LVH/BP/UA 的共同上游</div>
+        <span class="node-badge">❌ 撤回 2026-06-29</span>
+      </div>
+    </div>
+
+    <div class="arrows">▽ 取而代之的真實上游 ▽</div>
+
+    <div class="layer-label">Layer 1 · 真實上游（現況）</div>
+    <div class="row">
+      <div class="node resolved" data-k="fructose">
+        <div class="node-title">果糖 / 含糖手搖（22 年）</div>
+        <div class="node-val">已戒含糖手搖飲 → 上游移除</div>
+        <span class="node-badge">✅ 已戒，反轉中</span>
+      </div>
+      <div class="node resolved" data-k="visceral">
+        <div class="node-title">內臟脂肪 / 胰島素阻抗</div>
+        <div class="node-val">metabolic syndrome 核心，持續下降</div>
+        <span class="node-badge">✅ 下降中</span>
+      </div>
+      <div class="node floor" data-k="genes">
+        <div class="node-title">基因 / 體質</div>
+        <div class="node-val">URAT1（UA）、HDL 偏低、LVH 傾向</div>
+        <span class="node-badge">🟡 地板·管理</span>
+      </div>
+    </div>
+
+    <div class="arrows">▽</div>
+
+    <div class="layer-label">Layer 2 · 代謝指標（軌跡）</div>
+    <div class="row">
+      <div class="node marker lag" data-k="ua">
+        <div class="node-title">尿酸 UA 8.9</div>
+        <div class="node-val">3/25 抽時珍奶未戒 → 落後指標</div>
+        <span class="node-badge">待 7/10 報告驗</span>
+      </div>
+      <div class="node marker warn" data-k="hdl">
+        <div class="node-title">HDL 39</div>
+        <div class="node-val">11 年未達標；體質 + 有氧不足</div>
+        <span class="node-badge">有氧為主槓桿</span>
+      </div>
+      <div class="node marker" data-k="ldl">
+        <div class="node-title">Non-HDL / sdLDL</div>
+        <div class="node-val">飲食 + 基因；建議加驗 ApoB</div>
+        <span class="node-badge">待 7/10 + ApoB</span>
+      </div>
+      <div class="node marker" data-k="a1c">
+        <div class="node-title">HbA1c 5.9</div>
+        <div class="node-val">隨內臟脂肪 / 胰島素改善</div>
+        <span class="node-badge">反轉中</span>
+      </div>
+      <div class="node marker good" data-k="bp">
+        <div class="node-title">血壓 BP</div>
+        <div class="node-val">近期健檢已回正</div>
+        <span class="node-badge">✅ 已回正（待報告）</span>
+      </div>
+    </div>
+
+    <div class="arrows">▽ 功能正常 ≠ 結構回正 ▽</div>
+
+    <div class="layer-label">Layer 3 · 結構 / 器官（唯一待主動確認）</div>
+    <div class="row">
+      <div class="node verify" data-k="heart">
+        <div class="node-title">心臟結構：LVH · 雙心房擴大 · 前壁 ST</div>
+        <div class="node-val">3/25 新發現。結構落後功能，BP 回正未必逆轉</div>
+        <span class="node-badge">🔵 echo + Holter</span>
+      </div>
+    </div>
+
+    <div class="arrows">▽</div>
+
+    <div class="layer-label">Layer 4 · 結局 / 風險</div>
+    <div class="row">
+      <div class="node resolved" data-k="outcome">
+        <div class="node-title">長期心血管風險</div>
+        <div class="node-val">多數上游已解 → 風險大幅下降</div>
+        <span class="node-badge">剩 AF 風險待 Holter 排除</span>
+      </div>
+    </div>
+
+    <div class="tip">▶ 點任一節點看說明</div>
+
+    <div class="panel" id="panel">
+      <button class="panel-close" onclick="document.getElementById('panel').classList.remove('show')">✕</button>
+      <div class="panel-title" id="ptitle"></div>
+      <div class="panel-body" id="pbody"></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    本圖為個人健康追蹤工作底稿，非醫療診斷。OSA 因果/修復敘事已於 2026-06-29 撤回（指尖透射式連續血氧整夜平穩、無掉氧；Garmin 腕式低點為動作 artifact）。<br>
+    歷史版本見 <code>reviews/annual/2026-causal-map.html</code>；校正依據見 <code>articles/osa-sleep/2026-06-29-spo2-fingertip-oximetry-correction.md</code>。
+  </div>
+
+<script>
+const DETAIL = {
+  osa: ["OSA / 夜間缺氧 — 已撤回", "指尖夾式（透射式）連續血氧監測顯示整夜 SpO2 平穩、無掉氧事件。先前自 2026-04-29 起由 Garmin 腕式（反射式）SpO2 撐起的整套「缺氧→LVH/BP/UA」因果鏈失效，T90/desat 數據為動作 artifact。淺眠重定向為行為/自律神經（夜間看盤喚醒）。"],
+  fructose: ["果糖 / 含糖手搖（22 年）— 已戒", "高中至工作期長期含糖手搖飲。果糖在肝臟同時走 ① KHK→尿酸、② 新生脂肪 DNL→TG↑/HDL↓、③ 胰島素阻抗，一條路解釋大半指標。已停飲 → 上游移除，數值待洗出（UA 落後最明顯）。"],
+  visceral: ["內臟脂肪 / 胰島素阻抗 — 下降中", "中央肥胖是 metabolic syndrome 核心，串起 BP、HbA1c、TG/HDL、UA。輝葉八電極軀幹脂肪為主 KPI，持續下降中 → 下游指標應跟著改善（有時間差）。"],
+  genes: ["基因 / 體質 — 地板，管理非逆轉", "URAT1/SLC2A9 使尿酸恆高、HDL 體質偏低、LVH 傾向。這類畫不出「上游箭頭」因為上游是基因 → 只能設定合理目標並維持（有氧拉 HDL、UA 控制在可接受區），不期待歸零。"],
+  ua: ["尿酸 UA 8.9 — 落後指標", "3/25 抽血時含糖手搖才剛戒（數週），8.9 仍在主動暴露尾段。屬「上游已解、數值追上來」的落後指標。真正戰報看 2026-06-18 複檢（約 7/10）。"],
+  hdl: ["HDL 39 — 體質 + 有氧", "11 年從未達 good（>60）。部分基因、部分有氧不足。主要槓桿是規律有氧（Zone 2）+ 健康脂肪，非戒糖就能拉起。"],
+  ldl: ["Non-HDL / sdLDL — 飲食 + 基因", "direct-LDL 偏高疑 small dense LDL。建議加驗 ApoB 看顆粒數。飲食（飽和脂肪）+ 基因為主；7 月複檢 >130 則與醫師討論 statin。"],
+  a1c: ["HbA1c 5.9 — 反轉中", "前期糖尿病邊緣。隨內臟脂肪下降 + 胰島素敏感度改善 + 戒糖，預期往下；7 月複檢驗證。"],
+  bp: ["血壓 — 已回正", "近期健檢 BP 已回到正常（等正式報告確認）。功能性負荷下降是好事，但下方提醒：BP 正常 ≠ 結構（LVH/心房）已逆轉。"],
+  heart: ["心臟結構 — 唯一待主動確認", "LVH、雙心房擴大、前壁 ST 為 3/25 新發現的結構/電性異常。結構落後於功能，BP 回正未必使其逆轉，且這些不是會自己洗掉的化驗數值。需要：① echo 確認真 LVH（vs 電壓偽陽）與結構是否縮回；② Holter 排查雙心房擴大帶來的 AF（心房顫動）風險；③ 解釋新 ST。拿到本次報告後安排。"],
+  outcome: ["長期心血管風險 — 大幅下降", "OSA（假）、果糖（已戒）、內臟脂肪（下降）、BP（回正）— 多數上游已處理，長期風險顯著下降。唯一未結案：心房重塑帶來的 AF 風險，待 Holter 排除。完成 echo+Holter 後即進入純維持。"],
+};
+document.querySelectorAll('.node').forEach(n => {
+  n.addEventListener('click', () => {
+    const d = DETAIL[n.dataset.k];
+    if (!d) return;
+    document.getElementById('ptitle').textContent = d[0];
+    document.getElementById('pbody').textContent = d[1];
+    const p = document.getElementById('panel');
+    p.classList.add('show');
+    p.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+});
+</script>
+</body>
+</html>
